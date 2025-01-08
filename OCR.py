@@ -1,25 +1,26 @@
-import matplotlib.pyplot as plt
+import os
+import math
+from collections import Counter
+from google.cloud import vision
+import re
 
-import keras_ocr
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'ocracle-8ab6e49a7b54.json'
 
-# keras-ocr will automatically download pretrained
-# weights for the detector and recognizer.
-pipeline = keras_ocr.pipeline.Pipeline()
+def detect_text(path):
+    """Detects text in the file."""
+    client = vision.ImageAnnotatorClient()
 
-# Get a set of three example images
-images = [
-    keras_ocr.tools.read(url) for url in [
-        'https://upload.wikimedia.org/wikipedia/commons/b/bd/Army_Reserves_Recruitment_Banner_MOD_45156284.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/e/e8/FseeG2QeLXo.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/b/b4/EUBanana-500x112.jpg'
-    ]
-]
+    with open(path, 'rb') as image_file:
+        content = image_file.read()
+    
+    image = vision.Image(content=content)
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
 
-# Each list of predictions in prediction_groups is a list of
-# (word, box) tuples.
-prediction_groups = pipeline.recognize(images)
+    if response.error.message:
+        raise Exception(f'{response.error.message}')
 
-# Plot the predictions
-fig, axs = plt.subplots(nrows=len(images), figsize=(20, 20))
-for ax, image, predictions in zip(axs, images, prediction_groups):
-    keras_ocr.tools.drawAnnotations(image=image, predictions=predictions, ax=ax)
+    return texts[0].description if texts else ''
+
+print(detect_text('image.png'))
+#
