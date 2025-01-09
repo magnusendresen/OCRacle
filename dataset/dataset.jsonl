@@ -1,0 +1,6 @@
+[
+    {
+        "input": "4 Oppgave/Oppgåve 4 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. La v1 == 8 og 2 = C 5 1 Finn konstanten c slik at vektoren 3 ligg i underrommet span (v1, v2). -25 Rund av til nærmaste heiltal. Maks poeng: 6 4/10 5 IMAX1002 og VB6040, H24",
+        "output": "La \\( v_1 = 8 \\) og \\( v_2 = \\begin{bmatrix} 5 \\\\ 1 \\end{bmatrix} \\).<br>Finn konstanten \\( c \\) slik at vektoren \\( \\begin{bmatrix} 3 \\\\ -25 \\end{bmatrix} \\) ligg i underrommet \\( \\text{span}(v_1, v_2) \\).<br>Rund av til nærmaste heiltal.<br>Maks poeng: 6"
+    },
+]
