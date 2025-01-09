@@ -1,0 +1,231 @@
+IMAX1002 og VB6040, H24
+i Forside
+Eksamensoppgåve i IMAA1002, IMAG1002, IMAT1002, VB6040 Matematikk for ingeniørfag 1
+Dato: 10.12.2024
+Fagleg kontakt:
+IMAA1002 (Ålesund)
+Elias Sandal
+IMAG1002 og VB6040 (Gjøvik)
+Anders Oulie
+IMAT1002 (Trondheim)
+Torkil Utvik Stai
+Alice Petronella Hedenlund
+Kjem til eksamenslokalet: NEI
+Hjelpemiddelkode/Tillatne hjelpemiddel:
+C: Spesifiserte trykte og handskrivne hjelpemidlar tillat. Bestemt, enkel kalkulator tillat.
+Vi spesifiserer at ingen trykte eller handskrivne hjelpemidlar er tillatne, med unntak av det vedlagte
+formelarket.
+Tillatne kalkulatorar:
+Casio FX-82CW, Casio FC 100 V2, Casio fx-82ES PLUS og Casio fx-82EX
+⚫ Citizen SR-270X og Citizen SR-270X College
+• Hewlett Packard HP30S
+ANNA INFORMASJON:
+Les oppgåvene nøye og gjer opp dine eigne meiningar. Presiser i svara kva for føresetnadar
+du har lagt til grunn i tolking/avgrensing av oppgåva.
+Fagleg kontaktperson kontaktast berre dersom det er direkte feil eller manglar i
+oppgåvesettet. Vend deg til ei eksamensvakt om du meiner det er feil eller manglar. Noter
+spørsmålet ditt på førehand.
+FAGSPESIFIKK INFORMASJON
+Handteikningar:
+I oppgåve 1, 6, 9 og 14 er det lagt opp til at du skal svare på ark. Andre oppgåver skal du svare
+direkte på i Inspera. Nedst i oppgåva finn du ein sjusifra kode. Fyll inn denne koden øvst til venstre
+på dei arka du ynskjer å levere.
+Det er tilrådd å gjere dette undervegs i eksamen. Dersom du treng tilgang til kodane etter at
+eksamenstida har gått ut, må du klikke «Sjå levering».
+Du er sjølv ansvarleg for å fylle inn riktige kodar på eventuelle handteikningsark/ark for
+handteikningar. Les difor informasjonen om omslagsarket nøye. Eksamenskontoret kan ikkje
+garantere at feilaktig utfylte ark blir lagt til svara dine.
+1/10
+IMAX1002 og VB6040, H24
+Vekting av oppgåvene:
+Det er molig å oppnå totalt 100 poeng.
+Oppgåve 5 gir maksimalt 4 poeng.
+Oppgåve 10 gir maksimalt 5 poeng.
+Oppgåve 2, 3, 4 og 12 gir maksimalt 6 poeng.
+Oppgåve 7 gir maksimalt 7 poeng.
+Oppgåve 1, 6, 8, 9 og 13 gir maksimalt 8 poeng.
+Oppgåve 11 og 14 gir maksimalt 10 poeng.
+Varslingar:
+Eventuelle beskjedar under eksamen (f.eks. ved feil i oppgåvesettet), sendes ut via varslingar
+i Inspera. Eit varsel vil dukke opp som en dialogboks på skjermen i Inspera. Du kan finne
+att varselet ved å klikke på bjølla i øvre høgre hjørne på skjermen.
+Trekk frå/avbroten eksamen:
+Dersom du ynskjer å levere blankt/avbryte eksamen, gå til «<hamburgarmenyen» i øvre høgre
+hjørne og vel «<Lever blankt». Dette kan ikkje angrast sjølv om prøven framleis er open.
+Tilgang til svara dine:
+Etter eksamen finn du svara dine under tidlegare prøver i Inspera. Merk at det kan ta ein vyrkedag
+før eventuelle handteikningar vert tilgjengelege under «tidlegare prøvar».
+1 Oppgave/Oppgåve 1
+Du skal svara på denne oppgåva på papir (med sjusifra kode) som vert skanna inn.
+Du blir gitt tre elektriske komponentar A, B og C som du ønsker å finne den elektriske
+motstanden til. Motstanden til komponent A er æ, komponent B har motstand y, og komponent C
+har motstand z. Dessverre har du ikkje tilgang til å måle motstanden av komponentane kvar for
+seg, men du har tilgang til tre forskjellige kretsar som du kan måle motstanden i.
+⚫ Krets 1 har ein motstand på 212 og har 2 av komponent A, 3 av komponent B og 4 av
+komponent C. Det vil si at vi får likninga 2x + 3y+4z = 212.
+• Krets 2 har ein motstand på 101 og har 1 av komponent A, 5 av komponent B og 0 av
+komponent C. Det vil si at vi får likninga x + 5y = 101.
+• Krets 3 har ein motstand på 1582 og har 8 av komponent A, 0 av komponent B og 4 av
+komponent C. Det vil si at vi får likninga 8x + 4x = 158.
+Løys likningssettet for å finne motstanden x, y og z til kvar av dei tre komponentane.
+Maks poeng: 8
+2/10
+IMAX1002 og VB6040, H24
+2 Oppgave/Oppgåve 2
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+[120]
+La A380
+[001]
+Kva er determinanten til matrisa A?
+det(A):
+Rund av svaret til nærmaste heiltal.
+3 Oppgave/Oppgåve 3
+Maks poeng: 6
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+[2x-3x]
+La T: R³ →→→R² være lineærtransformasjonen gitt ved T(x, y, z) =
+[2y+4z]
+Finn ei matrise A slik at T(x, y, z) = Ay
+Maks poeng: 6
+3/10
+IMAX1002 og VB6040, H24
+4 Oppgave/Oppgåve 4
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+La
+v1 = 8 og 2
+0
+C
+Finn konstanten c slik at vektoren
+3
+ligg i underrommet span(1, 2).
+-25
+C
+Rund av til nærmaste heiltal.
+Maks poeng: 6
+4/10
+5 Oppgave/Oppgåve 5
+IMAX1002 og VB6040, H24
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+Kva for ein av dei følgande er ein basis for R³?
+Vel eitt alternativ
+○ {(−1,0,0), (−1,1,1)}
+○ {(1,1,0), (0,0,2), (1, 1,2), (1, 1, 1)}
+{(1,1,0), (0,0,2), (1, 1, 2)}
+{(1,1,0), (0,1,0), (1,0,0)}
+{(1,0,0), (1,1,0), (1, 1, 1)}
+{(1,0,0), (0,1,0), (0, 0, 1), (1, 0, 1)}
+○ {(1,0,0), (1,1,2)}
+Merk at i denne oppgåva bruker vi notasjonen
+(x, y, z) = y
+6 Oppgave/Oppgåve 6
+Du skal svara på denne oppgåva på papir (med sjusifra kode) som vert skanna inn.
+La
+[1 2 3]
+A 0 1 4
+56 0
+Finn inversmatrisa A-¹.
+Maks poeng: 4
+Maks poeng: 8
+5/10
+IMAX1002 og VB6040, H24
+7 Oppgave/Oppgåve 7
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+Sjå på det komplekse talet z = 4-2i. Rund av til 2 desimalars nøyaktigheit.
+1. Kva er realdelen og kva er imaginærdelen til z?
+Re(z) =
+||, Im(z) =
+2. Skriv z på polarform. Vinklane skal være i radianar og ligge i intervallet [-π, π).
+z=
+(cos(
+)+i sin(
+3. Skriv z på eksponentialform. Vinklane skal være i radianar og ligge i intervallet [-T,T).
+exp(i
+Maks poeng: 7
+8 Oppgave/Oppgåve 8
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+La z₁ = 2+ io9 z2=5+5i. Finn den kartesiske forma til dei følgande komplekse tala.
+1.21%2=
++
+2.2122
+=
++
+3. 플
+=
++
+Rund av til eitt desimal etter komma.
+Maks poeng: 8
+6/10
+IMAX1002 og VB6040, H24
+9 Oppgave/Oppgåve 9
+Du skal svara på denne oppgåva på papir (med sjusifra kode) som vert skanna inn.
+Finn alle løysingane til likninga 2³ = 8i.
+Maks poeng: 8
+10
+Oppgave/Oppgåve 10
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+Finn verdien til integralet
+Rund av til nærmaste heiltal.
+Maks poeng: 5
+7/10
+IMAX1002 og VB6040, H24
+11 Oppgave/Oppgåve 11
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+La f(t) = t³e².
+1. Kva for eit av følgande uttrykk er f'(t)?
+Vel eitt alternativ
+f'(t)=3t³e² + t²²
+f'(t)=(3²+t³)e²
+f'(t)=2t2e+t³e²
+f'(t) = 21² et
+f'(t) = 3t²e'
+○ f'(t) = t³et
+2. Kva for ei av følgande differensiallikningar har funksjonen ƒ som ei løysing?
+Vel eitt alternativ
+Otf'(t)-2f(t)=0
+Otf'(t) - ef(t)=0
+Otf'(t) ef(t)=0
+f'(t)-3f(t)/t-f(t) = 0
+○ f'(t) — (t² — e²)f(t) = 0
+Of'(t)-3f(t)/t=0
+Maks poeng: 10
+8/10
+12
+IMAX1002 og VB6040, H24
+Oppgave/Oppgåve 12
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+Finn løysinga på initialverdiproblemet
+y(x)/(x) = e³,
+y(0) = 1.
+Vel eitt alternativ
+y(x)=√√e +1
+y(x) = √√e³ +
+○ y(x) = 3x
+y(x) = e−3x
+y(x)=√√e³ +1
+○ y(x) = ³ +
+y(x) = e-³
+Maks poeng: 6
+13 Oppgave/Oppgåve 13
+Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.
+Differensiallikninga 4y"(x) - 4y/(x) + y(x) = cos(2x) har ei partikulær løysing på
+forma yp(x) = A cos(2x) + B sin(2x).
+Finn konstantane A og B.
+A =
+B:
+Rund av til to desimal etter komma.
+Maks poeng: 8
+9/10
+IMAX1002 og VB6040, H24
+14 Oppgave/Oppgåve 14
+Du skal svara på denne oppgåva på papir (med sjusifra kode) som vert skanna inn.
+Sjå på følgende system av førsteordens differensiallikningar
+x(t)=3x1(t)x2(t),
+x2(t) = x1(t) + x2(t).
+1. Skriv systemet på matriseform, altså på forma '(t) = A. (t) kor A er ei matrise og
+z(t)= [1(t)].
+2. Finn eigenverdiane og eigenvektorane til matrisa A.
+3. Finn den generelle løysinga til systemet av differensiallikningar.
+4. Finn løysinga av systemet som tilfredsstill initialvilkåra 1(0) = 2
+og 22(0)=√√2.
+Maks poeng: 10
+10/10
