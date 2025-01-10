@@ -1,0 +1,27 @@
+5 Oppgave/Oppgave 5
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papi.
+Kva for ein av dei folgande er ein basis for R�2
+Vel eitt alternativ
+
+{(=1,0,0), (�1,1,1)}
+
+{(1,1,0), (0,0, 2), (1,1,2), (1,1, 1)}
+
+{(1,1,0), (0,0, 2), (1,1, 2)}
+
+{(1,1,0), (0,1,0), (1,0, 0)}
+
+{(1,0,0), (1, 1,0), (1,1,1)}
+
+{(1,0,0), (0, 1,0), (0,0, 1), (1,0, 1)}
+
+{(1,0,0), (1,1,2)}
+
+Merk at i denne oppgava bruker vi notasjonen
+x
+
+(x,y,z) = |y]-
+z,
+
+Maks poeng: 4

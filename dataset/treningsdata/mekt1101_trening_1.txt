@@ -1,0 +1,22 @@
+1(d)_Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En
+
+punktlast pa 30 KN virker i punkt C som angitt pa figuren.
+
+A B
+
+30 kN
+3m
+
+4m 4m
+
+d) Finn storste strekkraft og storste trykkraft i fagverket ved  bruke knutepunktsmetoden.
+
+Angi svaret i (positivt) heltall antall KN. Merk at vi kun er ute etter tallverdier.
+
+Maks. strekkraft = (50) kN
+
+Maks. trykkraft = (80) kN
+
+Merk at handberegningene du gjor for 4 lose denne oppgaven ma leveres inn.
+
+Maks poeng: 6

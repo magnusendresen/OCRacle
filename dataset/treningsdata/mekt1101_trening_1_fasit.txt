@@ -1,0 +1,9 @@
+{
+    "exam": "H24",
+    "task": "1d",
+    "topic": "Fagverk - Knutepunktsmetoden",
+    "tasktext": "Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren.<br>Finn største strekkraft og største trykkraft i fagverket ved å bruke knutepunktsmetoden.<br>Angi svaret i (positivt) heltall antall kN. Merk at vi kun er ute etter tallverdier.<br>\\( \\text{Maks. strekkraft} = \\boxed{\\phantom{0}} \\text{ kN} \\)<br>\\( \\text{Maks. trykkraft} = \\boxed{\\phantom{0}} \\text{ kN} \\)",
+    "points": 6,
+    "images": ["MEKT1101H24\\MEKT1101H24_extracted_4"],
+    "code": null
+}
