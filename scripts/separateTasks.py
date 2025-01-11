@@ -1,59 +1,34 @@
 import os
-
-def does_it_include(text):
-    keywords = {
-        "oppgave", "Oppgave", "oppgåve", "Oppgåve", 
-        "o ppgave", "O ppgave", "o ppgåve", "O ppgåve", 
-        "oppg ave", "Oppg ave", "oppg åve", "Oppg åve",
-        "OppgÃ¥ve", "Oppg Ã¥ve", "OppgÃ ¥ve", "Op pgÃ¥ve",
-        "Oppg", "oppg", "OppgÃ¥ve", "Oppg Ã¥ve", "OppgÃ ¥ve", "Op pgÃ¥ve"
-    }
-    return any(keyword in text for keyword in keywords)
-
-def binary_search(text, start, end):
-    precision = 1
-    while end - start > precision:
-        mid = (start + end) // 2
-        if does_it_include(text[start:mid]):
-            end = mid
-        else:
-            start = mid
-    return start
-
-def find_task_starts(text):
-    task_starts = [0]
-    end = 0
-    length = len(text)
-
-    while True:
-        start = binary_search(text, end, length)
-        if does_it_include(text[start:length]):
-            task_starts.append(start)
-            end = start + 1
-        else:
-            break
-
-    return task_starts
+import re
 
 def extract_tasks(text):
-    offset = 22
-    task_starts = find_task_starts(text)
+    """
+    Extracts tasks from the given text based on the keyword 'Oppgave' and its variations.
+
+    Parameters:
+        text (str): The entire content of the document as a string.
+
+    Returns:
+        list: A list of task sections as strings.
+    """
+    # Define a regex pattern to match "Oppgave" followed by a space and optional digits
+    pattern = re.compile(r"(Oppgave|oppgave|Oppgåve|oppgåve)\s*\d*")
+
+    # Find all matches for the pattern
+    matches = [match.start() for match in pattern.finditer(text)]
+
+    # If no tasks are found, return the entire text as a single task
+    if not matches:
+        return [text]
+
+    # Split the text into tasks using the matched indices
     tasks = []
-    for i in range(len(task_starts) - 1):
-        start = max(0, task_starts[i] - offset if i > 0 else task_starts[i])
-        end = task_starts[i + 1]
-        tasks.append(text[start:end])
-
-    # Adjust the first task's range by trimming from the end
-    if tasks:
-        tasks[0] = tasks[0][:-offset]
-
-    # Add the final portion from the last task start to the end of the text
-    if task_starts:
-        tasks.append(text[task_starts[-1]:])
+    for i in range(len(matches)):
+        start = matches[i]
+        end = matches[i + 1] if i + 1 < len(matches) else len(text)
+        tasks.append(text[start:end].strip())
 
     return tasks
-
 
 # Get the directory of the Python file
 current_directory = os.path.dirname(__file__)
@@ -68,6 +43,8 @@ file_path = os.path.join(current_directory, file_name)
 with open(file_path, 'r') as file:
     file_contents = file.read()
 
-
 # Example usage
-print(extract_tasks(file_contents)[18])
+tasks = extract_tasks(file_contents)
+
+# Access a specific task by index
+print(tasks[9])  # Adjust the index as needed

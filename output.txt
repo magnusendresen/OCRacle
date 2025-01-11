@@ -1,0 +1,42 @@
+Oppgåve 1 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. Du blir gitt tre elektriske komponentar A, B og C som du ønsker å finne den elektriske motstanden til. Motstanden til komponent A er æ, komponent B har motstand y, og komponent C har motstand z. Dessverre har du ikkje tilgang til å måle motstanden av komponentane kvar for seg, men du har tilgang til tre forskjellige kretsar som du kan måle motstanden i. • Krets 1 har ein motstand på 212 og har 2 av komponent A, 3 av komponent B og 4 av komponent C. Det vil si at vi får likninga 2x + 3y + 4z = 212. • Krets 2 har ein motstand på 101 og har 1 av komponent A, 5 av komponent B og 0 av komponent C. Det vil si at vi får likninga x + 5y = 101. • Krets 3 har ein motstand på 158 og har 8 av komponent A, 0 av komponent B og 4 av komponent C. Det vil si at vi får likninga 8x + 4z = 158. Løys likningssettet for å finne motstanden x, y og z til kvar av dei tre komponentane. Maks poeng: 8 \frac{2}{10}
+
+
+Oppgåve 2 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. 1 2 0 La A = 3 8 0 0 0 1 Kva er determinanten til matrisa A? det ( A ) = ☐ Rund av svaret til nærmaste heiltal. Maks poeng: 6 3
+
+
+Oppgåve 3 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. [2x - 3z La T: R³ → R² være lineærtransformasjonen gitt ved T ( x, y, z ) = [2y + 4z] x Finn ei matrise A slik at T ( x, y, z ) = A. y A = Z Maks poeng: 6 \frac{3}{10}
+
+
+Oppgåve 4 IMAX1002 og VB6040, H24 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. La [1 v1 = 8 og 2 = с Finn konstanten c slik at vektoren c = Rund av til nærmaste heiltal. L 1 3 ligg i underrommet span ( 1, 2 ) . - 25 Maks poeng: 6 \frac{4}{10}
+
+
+Oppgåve 5 IMAX1002 og VB6040, H24 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Kva for ein av dei følgande er ein basis for R³? Vel eitt alternativ ○ { ( - 1,0,0 ) , ( - 1,1,1 ) } ○ { ( 1, 1,0 ) , ( 0,0,2 ) , ( 1, 1, 2 ) , ( 1, 1, 1 ) } ○ { ( 1,1,0 ) , ( 0,0,2 ) , ( 1,1,2 ) } { ( 1,1,0 ) , ( 0,1,0 ) , ( 1,0,0 ) } ○ { ( 1,0,0 ) , ( 1,1,0 ) , ( 1, 1, 1 ) } ○ { ( 1,0,0 ) , ( 0,1,0 ) , ( 0, 0, 1 ) , ( 1,0,1 ) } ○ { ( 1,0,0 ) , ( 1, 1, 2 ) } Merk at i denne oppgåva bruker vi notasjonen ( x, y, z ) = У 6
+
+
+Oppgåve 6 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. La 1 2 3 A = 0 1 4 5 6 0 Finn inversmatrisa A - ¹. Maks poeng: 4 Maks poeng: 8 \frac{5}{10}
+
+
+Oppgåve 7 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Sjå på det komplekse talet z = 4 - 2i. Rund av til 2 desimalars nøyaktigheit. 1. Kva er realdelen og kva er imaginærdelen til z? Re ( z ) , Im ( z ) 2. Skriv z på polarform. Vinklane skal være i radianar og ligge i intervallet [ - \pi, \pi ) . x = ( cos ( ) + i sin ( 3. Skriv z på eksponentialform. Vinklane skal være i radianar og ligge i intervallet [—\pi, \pi ) . x = exp ( i Maks poeng: 7 8
+
+
+Oppgåve 8 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. La Z1 = 2 + 1 og 22 = 5 + 52. Finn den kartesiske forma til dei følgande komplekse tala. 1.21%2 = + i 2. Z1 Z2 + i 3. + i Rund av til eitt desimal etter komma. Maks poeng: 8 \frac{6}{10}
+
+
+Oppgåve 9 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. Finn alle løysingane til likninga z³ = 8i. Maks poeng: 8 10
+
+
+Oppgåve 10 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Finn verdien til integralet L²x²e²³½³ dx = | Rund av til nærmaste heiltal. Maks poeng: 5 \frac{7}{10}
+
+
+Oppgåve 11 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. La f ( t ) = t³et. 1. Kva for eit av følgande uttrykk er f' ( t ) ? Vel eitt alternativ ○ f' ( t ) = 3t³et + t² et ○ f' ( t ) = ( 3² + t³ ) et f' ( t ) = 2t²et + t³et ○ f' ( t ) = 2t² et ○ f' ( t ) = 3t² et ○ f' ( t ) = t³ et 2. Kva for ei av følgande differensiallikningar har funksjonen ƒ som ei løysing? Vel eitt alternativ Otf' ( t ) - 2f ( t ) = 0 Otf' ( t ) et f ( t ) = 0 Otf' ( t ) — et f ( t ) = 0 f' ( t ) — 3f ( t ) / t - f ( t ) = 0 f' ( t ) - ( t² — e¹ ) f ( t ) = 0 ○ f' ( t ) - 3f ( t ) / t = 0 Maks poeng: 10 \frac{8}{10}
+
+
+Oppgåve 12 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Finn løysinga på initialverdiproblemet y ( x ) y' ( x ) = e³x, Vel eitt alternativ y ( 0 ) = 1. ○ y ( x ) = \sqrt\sqrt³½³½ 6x + 1 y ( x ) = \sqrt \sqrt ³½³½³x + \frac{1}{3} y ( x ) = e³x ○ y ( x ) = e - 3x 3x ○ y ( x ) = \sqrt\sqrte³\times + 1 ○ y ( x ) = ½³½³¹² + 1} - 3x ○ y ( x ) = e - ³x Maks poeng: 6 13
+
+
+Oppgåve 13 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Differensiallikninga 4y" ( x ) - 4y' ( x ) + y ( x ) forma y ( x ) = A cos ( 2x ) + B sin ( 2x ) . = cos ( 2x ) har ei partikulær løysing på Finn konstantane A og B. A , B Rund av til to desimal etter komma. Maks poeng: 8 \frac{9}{10}
+
+
+Oppgåve 14 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. Sjå på følgande system av førsteordens differensiallikningar x1 ( t ) = 3x1 ( t ) + x2 ( t ) , x2 ( t ) = x1 ( t ) + x2 ( t ) . 1. Skriv systemet på matriseform, altså på forma ' ( t ) [x1 ( t ) ] 3 ( t ) = [21 ( 6 ) ]. 2. Finn eigenverdiane og eigenvektorane til matrisa A. . A ( t ) kor A er ei matrise og 3. Finn den generelle løysinga til systemet av differensiallikningar. 4. Finn løysinga av systemet som tilfredsstill initialvilkåra x1 ( 0 ) = 2 og x2 ( 0 ) = \sqrt2. Maks poeng: 10 \frac{10}{10}
+
+

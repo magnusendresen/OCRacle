@@ -29,15 +29,9 @@ def pdf_to_images(pdf_path):
     images = []
     for page_num in range(len(doc)):
         page = doc.load_page(page_num)
-        pix = page.get_pixmap(dpi=200)  # Increase DPI for better OCR accuracy
+        pix = page.get_pixmap(dpi=150)  # Reduced DPI for faster processing
         images.append(pix.tobytes("png"))  # Save directly as PNG byte array
     return images
-
-import re
-
-import re
-
-import re
 
 def normalize_ocr_result(text):
     # Remove unnecessary whitespace
@@ -66,7 +60,7 @@ def normalize_ocr_result(text):
     text = re.sub(r'\^(\w+)', r'^{\1}', text)  # Superscripts
 
     # Handle specific patterns (optional, based on your use case)
-    # For instance, math ranges like "1 to n" -> "1 \dots n"
+    # For instance, math ranges like "1 to n" -> "1 \\dots n"
     text = re.sub(r'(\d+)\s*to\s*(\w+)', r'\1 \\dots \2', text, flags=re.IGNORECASE)
 
     # Ensure spaces are preserved around operators
@@ -75,11 +69,19 @@ def normalize_ocr_result(text):
 
     return text
 
-def is_task_keyword(segment, task_keywords):
-    for keyword in task_keywords:
-        if keyword.lower() in segment.lower():
-            return True
-    return False
+def is_valid_task(text_segment, min_length=50):
+    """Determine if a text segment is likely a valid task based on its length."""
+    return len(text_segment) > min_length
+
+def is_excluded_page(text, exclusion_keywords, min_match=10):
+    """Check if the page should be excluded based on keywords and match count."""
+    match_count = sum(1 for keyword in exclusion_keywords if keyword.lower() in text.lower())
+    return match_count >= min_match
+
+def is_excluded_task(task, exclusion_keywords, min_match=3):
+    """Check if a task should be excluded based on keywords and match count."""
+    match_count = sum(1 for keyword in exclusion_keywords if keyword.lower() in task.lower())
+    return match_count >= min_match
 
 def extract_tasks(text):
     """
@@ -89,24 +91,26 @@ def extract_tasks(text):
         text (str): The entire content of the document as a string.
 
     Returns:
-        list: A list of task sections as strings.
+        list: A list of valid task sections as strings.
     """
     # Define a regex pattern to match "Oppgave" followed by a space and optional digits
-    pattern = re.compile(r"(Oppgave|oppgave|Oppgåve|oppgåve)\s*\d*")
+    pattern = re.compile(r"(Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d*")
 
     # Find all matches for the pattern
     matches = [match.start() for match in pattern.finditer(text)]
 
     # If no tasks are found, return the entire text as a single task
     if not matches:
-        return [text]
+        return [text] if is_valid_task(text) else []
 
     # Split the text into tasks using the matched indices
     tasks = []
     for i in range(len(matches)):
         start = matches[i]
         end = matches[i + 1] if i + 1 < len(matches) else len(text)
-        tasks.append(text[start:end].strip())
+        task = text[start:end].strip()
+        if is_valid_task(task):
+            tasks.append(task)
 
     return tasks
 
@@ -119,18 +123,42 @@ def main():
         print("No file selected.")
         return
 
+    # Keywords for excluding pages and tasks
+    exclusion_keywords = [
+        "eksamen", "kandidatnummer", "sensur", "hjelpemiddel", 
+        "informasjon", "vurdering", "beskjeder", "beskjedar",
+        "varslinger", "varslingar", "sensurfrist", "sensurfristar",
+        "varsel", "varselar", "sensurvarsel", "sensurvarselar",
+        "fagspecifik", "fagspesifikk", "oppgavesettet", "oppgåvesettet",
+        "levering", "leveringar", "poeng", "vektig", "sensurtidspunkt",
+        "kalkulator", "tillatne", "håndteikningar", "håndtegninger",
+        "kontaktperson", "kontaktinformasjon", "direkte feil", "oppgavefrister",
+        "tillatelse", "fritekstfelt"
+    ]
+
+
     # Convert PDF pages to images
     images = pdf_to_images(pdf_path)
 
     # Extract text from each image and save to a file
     with open('output.txt', 'w', encoding='utf-8') as output_file:
-        for image_content in tqdm(images, desc="Processing pages"):
+        for page_num, image_content in enumerate(tqdm(images, desc="Processing pages")):
             text = detect_text(image_content)
             text = normalize_ocr_result(text)
-            tasks = extract_tasks(text)
-            for task in tasks:
-                output_file.write(task + '\n\n\n')
+            if is_excluded_page(text, exclusion_keywords):
+                print(f"\nPage {page_num + 1} removed.")
+                continue
 
+            tasks = extract_tasks(text)
+            valid_tasks = []
+            for task_num, task in enumerate(tasks, start=1):
+                if is_excluded_task(task, exclusion_keywords):
+                    print(f"\nTask {task_num} on Page {page_num + 1} removed.")
+                else:
+                    valid_tasks.append(task)
+
+            for task in valid_tasks:
+                output_file.write(task + '\n\n\n')
 
 if __name__ == "__main__":
     main()
