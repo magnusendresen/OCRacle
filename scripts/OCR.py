@@ -6,6 +6,7 @@ from PIL import Image
 import io
 from tqdm import tqdm
 import regex as re
+from difflib import SequenceMatcher
 
 # Set Google Cloud Vision API credentials
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'ocracle-8ab6e49a7b54.json'
@@ -39,18 +40,6 @@ import re
 import re
 
 def normalize_ocr_result(text):
-    """
-    Normalize OCR results for processing into KaTeX math expressions.
-    - Removes extraneous whitespace.
-    - Converts special symbols to LaTeX-compatible equivalents.
-    - Ensures proper formatting of math components.
-
-    Args:
-        text (str): The raw OCR output from Google Vision.
-
-    Returns:
-        str: The normalized text.
-    """
     # Remove unnecessary whitespace
     text = re.sub(r'\s+', ' ', text.strip())
 
@@ -86,6 +75,11 @@ def normalize_ocr_result(text):
 
     return text
 
+def is_task_keyword(segment, task_keywords):
+    for keyword in task_keywords:
+        if keyword.lower() in segment.lower():
+            return True
+    return False
 
 def main():
     # Prompt user to select a PDF file
@@ -104,9 +98,8 @@ def main():
         for image_content in tqdm(images, desc="Processing pages"):
             text = detect_text(image_content)
             text = normalize_ocr_result(text)
-            output_file.write(text + '\n')
+            output_file.write(text + '\n\n')
 
-    print("Text extraction complete. Check 'output.txt' for the results.")
 
 if __name__ == "__main__":
     main()
