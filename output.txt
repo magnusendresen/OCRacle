@@ -1,42 +1,204 @@
-Oppgåve 1 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. Du blir gitt tre elektriske komponentar A, B og C som du ønsker å finne den elektriske motstanden til. Motstanden til komponent A er æ, komponent B har motstand y, og komponent C har motstand z. Dessverre har du ikkje tilgang til å måle motstanden av komponentane kvar for seg, men du har tilgang til tre forskjellige kretsar som du kan måle motstanden i. • Krets 1 har ein motstand på 212 og har 2 av komponent A, 3 av komponent B og 4 av komponent C. Det vil si at vi får likninga 2x + 3y + 4z = 212. • Krets 2 har ein motstand på 101 og har 1 av komponent A, 5 av komponent B og 0 av komponent C. Det vil si at vi får likninga x + 5y = 101. • Krets 3 har ein motstand på 158 og har 8 av komponent A, 0 av komponent B og 4 av komponent C. Det vil si at vi får likninga 8x + 4z = 158. Løys likningssettet for å finne motstanden x, y og z til kvar av dei tre komponentane. Maks poeng: 8 \frac{2}{10}
+1 ( a ) Fagverk a ) N - fagverk T S 0 a A B C V - fagverk P 0 D N MEKT1101 Høst 2023 M K J H P P P P P a a a a + a a + a a a a a + a a a a N M L K J Th 10121121 B E P P P P P P a a a a a a a a Figuren over syner to fagverk, eitt N - fagverk på toppen, og eitt V - fagverk i botn. Fagverka sine geometriar, lastplassering og retning er gjeve i figuren. For N - fagverket: Bestem reaksjonskreftene, uttrykt ved P. Rund av svaret ditt til 2 desimalar. Dvs, får du at A₂ = - P, skriv du - 0.13 i boksen under. Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Az = P Iz P Ax P \frac{3}{48}
 
 
-Oppgåve 2 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. 1 2 0 La A = 3 8 0 0 0 1 Kva er determinanten til matrisa A? det ( A ) = ☐ Rund av svaret til nærmaste heiltal. Maks poeng: 6 3
+1 ( b ) Fagverk b ) N - fagverk V - fagverk Th T S 0 0 B C D N M K H P P P P P P P MEKT1101 Høst 2023 a a a a + a a a a a a a a a + a + a 10121121 S B Q N M L K J D H E P P P P a a a a a a a a Figuren over syner to fagverk, eitt N - fagverk på toppen, og eitt V - fagverk i botn. Fagverka sine geometriar, lastplassering og retning er gjeve i figuren. For N - fagverket: Bestem stavkreftene NAB, NAT, NTB, NTs, uttrykt ved P. Rund av svaret ditt til 2 desimalar. Dvs, får du at NTB 1 P. skriv du - 0.58 i boksen under. \sqrt3 Angi krafta som positiv dersom du finn at den aktuelle staven står i strekk, og som negativ dersom du finn at den aktuelle staven står i trykk. Hint: nytt knutepunktsmetoden NAB P NAT P NTB P NTS P \frac{5}{48}
 
 
-Oppgåve 3 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. [2x - 3z La T: R³ → R² være lineærtransformasjonen gitt ved T ( x, y, z ) = [2y + 4z] x Finn ei matrise A slik at T ( x, y, z ) = A. y A = Z Maks poeng: 6 \frac{3}{10}
+MEKT1101 Høst 2023 For N - fagverket: Bestem stavkrafta NDE, uttrykt ved P. Rund av svaret ditt til 2 desimalar. Dvs, får du at NDE P, skriv du - 0.58 i boksen under. = \sqrt3 Angi krafta som positiv dersom du finn at den aktuelle staven står i strekk, og som negativ dersom du finn at den aktuelle staven står i trykk. Hint: nytt snittmetoden NDE P Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 15 \frac{6}{48}
 
 
-Oppgåve 4 IMAX1002 og VB6040, H24 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. La [1 v1 = 8 og 2 = с Finn konstanten c slik at vektoren c = Rund av til nærmaste heiltal. L 1 3 ligg i underrommet span ( 1, 2 ) . - 25 Maks poeng: 6 \frac{4}{10}
+1 ( c ) Fagverk c ) N - fagverk T S 0 a A B C V - fagverk P 0 D N MEKT1101 Høst 2023 M K J H P P P P P a a a a + a a + a a a a a + a a a a N M L K J Th \frac{2}{22} / 2 B E P P P P P P a a a a a a a a Figuren over syner to fagverk, eitt N - fagverk på toppen, og eitt V - fagverk i botn. I tillegg er fagverks - geometri, lastplassering - og retning er angitt i figuren. Stavane består av stålrør med dimensjonar gitt i figuren under. Tverrsnitt D = 139.7mm s = 4mm N - fagverket skal rivast, då diagonal / skråstavene måtte skiftast ut, men ein ønskjer å gjenbruke dei resterande over - og undergurtar til eit nytt V - fagverk, gjengitt i figuren over. Ein er usikker på kva for høgde av fagverket ein treng for at stavkrafta NDE,V - Fagverk undergurt i det nye V - fagverket ikkje skal verte større enn for N - fagverket. i \frac{7}{48}
 
 
-Oppgåve 5 IMAX1002 og VB6040, H24 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Kva for ein av dei følgande er ein basis for R³? Vel eitt alternativ ○ { ( - 1,0,0 ) , ( - 1,1,1 ) } ○ { ( 1, 1,0 ) , ( 0,0,2 ) , ( 1, 1, 2 ) , ( 1, 1, 1 ) } ○ { ( 1,1,0 ) , ( 0,0,2 ) , ( 1,1,2 ) } { ( 1,1,0 ) , ( 0,1,0 ) , ( 1,0,0 ) } ○ { ( 1,0,0 ) , ( 1,1,0 ) , ( 1, 1, 1 ) } ○ { ( 1,0,0 ) , ( 0,1,0 ) , ( 0, 0, 1 ) , ( 1,0,1 ) } ○ { ( 1,0,0 ) , ( 1, 1, 2 ) } Merk at i denne oppgåva bruker vi notasjonen ( x, y, z ) = У 6
+2 ( a ) a ) 5a B 2a A Tverrsnitt, del AB: 240 mm ΑΖ F 150 mm F X Tverrsnitt, del BC: 150 mm ▲ y MEKT1101 Høst 2023 ▲ Z 150 mm X y Figuren over syner ei ramme ABC som er fast innspent i punkt A, og er påført to punktlaster, kvar med storleik F med retningar som indikert i figuren. Heile ramma består av tre med fastheit fy = 30 MPa. Del AB har høgde 5a, rektangulært tverrsnitt med dimensjon 150mm x 240mm, og er orientert slik at vi får bøying om sterk akse under påverknad av lastene vist i figuren. Del BC har lengde 2a, og har et kvadratisk tverrsnitt med dimensjon 150mm x 150mm. Tverrsnittplana for kvar del er angitt på figuren. a ) Under finner du 6 ulike skisser for momentdiagrammet til ramma ABC med belastning som vist i figuren over. Angi kva for diagram ( M1, M2..., M6 ) som gjev rett form for moment som verkar i ramma ABC. ( Merk at vi her kun er ute etter forma til momentdiagrammet og strekk - / trykksiden i kvar einskild del, medan storleik på momenta i de ulike felta ikkje nødvenigvis er i skala ) . Vel eitt alternativ ○ M1 ○ M2 M3 ○ M4 ○ M5 ○ M6 \frac{9}{48}
 
 
-Oppgåve 6 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. La 1 2 3 A = 0 1 4 5 6 0 Finn inversmatrisa A - ¹. Maks poeng: 4 Maks poeng: 8 \frac{5}{10}
+M1: M3: ୮ M2: M4: MEKT1101 Høst 2023 M5: M6: Maks poeng: 4 \frac{10}{48}
 
 
-Oppgåve 7 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Sjå på det komplekse talet z = 4 - 2i. Rund av til 2 desimalars nøyaktigheit. 1. Kva er realdelen og kva er imaginærdelen til z? Re ( z ) , Im ( z ) 2. Skriv z på polarform. Vinklane skal være i radianar og ligge i intervallet [ - \pi, \pi ) . x = ( cos ( ) + i sin ( 3. Skriv z på eksponentialform. Vinklane skal være i radianar og ligge i intervallet [—\pi, \pi ) . x = exp ( i Maks poeng: 7 8
+2 ( b ) b ) 5a B 2a C A Tverrsnitt, del AB: 240 mm ▲ Z F 150 mm Tverrsnitt, del BC: MEKT1101 Høst 2023 ▲ Z 150 mm F 150 mm X 4 У X y Figuren over syner ei ramme ABC som er fast innspent i punkt A, og er påført to punktlaster, kvar med storleik F med retningar som indikert i figuren. Heile ramma består av tre med fastheit fy = 30 MPa. Del AB har høgde 5a, rektangulært tverrsnitt med dimensjon 150mm x 240mm, og er orientert slik at vi får bøying om sterk akse under påverknad av lastene vist i figuren. Del BC har lengde 2a, og har et kvadratisk tverrsnitt med dimensjon 150mm x 150mm. Tverrsnittplana for kvar del er angitt på figuren. b ) Rekn ut største moment i ramma dersom F = 5 kN, og a = 1,0 m. Rund av svaret ditt til næraste heiltal. Mmax = kNm. Maks poeng: 5 \frac{11}{48}
 
 
-Oppgåve 8 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. La Z1 = 2 + 1 og 22 = 5 + 52. Finn den kartesiske forma til dei følgande komplekse tala. 1.21%2 = + i 2. Z1 Z2 + i 3. + i Rund av til eitt desimal etter komma. Maks poeng: 8 \frac{6}{10}
+2 ( c ) c ) 5a Tverrsnitt, del AB: B 2a A 240 mm ΑΖ F 150 mm F X Tverrsnitt, del BC: 150 mm 4 У MEKT1101 Høst 2023 ▲ Z 150 mm X y Figuren over syner ei ramme ABC som er fast innspent i punkt A, og er påført to punktlaster, kvar med storleik F med retningar som indikert i figuren. Heile ramma består av tre med fastheit fy = 30 MPa. Del AB har høgde 5a, rektangulært tverrsnitt med dimensjon 150mm x 240mm, og er orientert slik at vi får bøying om sterk akse under påverknad av lastene vist i figuren. Del BC har lengde 2a, og har et kvadratisk tverrsnitt med dimensjon 150mm x 150mm. Tverrsnittplana for kvar del er angitt på figuren. max T max c ) Rekn ut største strekkspenning or og største trykkspenning of i ramma når F = 5 kN og a 1,0 m. Oppgi kvart svar med éin desimal. Fyll inn svara dine her : S max Mpa. T MPa. max Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 8 \frac{12}{48}
 
 
-Oppgåve 9 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. Finn alle løysingane til likninga z³ = 8i. Maks poeng: 8 10
+2 ( d ) d ) B 2a C F 5a ▲ ட்.. Tverrsnitt, del BC: 150 mm 4 У ▲ Z 150 mm MEKT1101 Høst 2023 Y Tverrsnitt, del AB: 240 mm 150 mm Figuren over syner ei ramme ABC som er fast innspent i punkt A, og er påført to punktlaster, kvar med storleik F med retningar som indikert i figuren. Heile ramma består av tre med fastheit fy = 30 MPa. Del AB har høgde 5a, rektangulært tverrsnitt med dimensjon 150mm x 240mm, og er orientert slik at vi får bøying om sterk akse under påverknad av lastene vist i figuren. Del BC har lengde 2a, og har et kvadratisk tverrsnitt med dimensjon 150mm x 150mm. Tverrsnittplana for kvar del er angitt på figuren. d ) Bestem den største verdien som punktlastene F kan ha før det oppstår flyt / brudd i ramma. La a = 1,0 m. Oppgi svaret i antall kN, med éin desimal. Fmax = KN. Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 5 \frac{13}{48}
 
 
-Oppgåve 10 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Finn verdien til integralet L²x²e²³½³ dx = | Rund av til nærmaste heiltal. Maks poeng: 5 \frac{7}{10}
+2 ( e ) e ) 5a B 2a A Tverrsnitt, del AB: 240 mm ΑΖ F 150 mm F X Tverrsnitt, del BC: 150 mm ▲ y MEKT1101 Høst 2023 ▲ Z 150 mm X y Figuren over syner ei ramme ABC som er fast innspent i punkt A, og er påført to punktlaster, kvar med storleik F med retningar som indikert i figuren. Heile ramma består av tre med fastheit fy = 30 MPa. Del AB har høgde 5a, rektangulært tverrsnitt med dimensjon 150mm x 240mm, og er orientert slik at vi får bøying om sterk akse under påverknad av lastene vist i figuren. Del BC har lengde 2a, og har et kvadratisk tverrsnitt med dimensjon 150mm x 150mm. Tverrsnittplana for kvar del er angitt på figuren. e ) Nemn minst to tiltak ein kan gjere for å redusere risikoen for flyt / brudd i ramma. Skriv inn ditt svar i tekstboksen under. Skriv svaret ditt her... Format ▾ | BI U \times₂ \times² | Ix | D 月 + ១ | ΣΧ \frac{14}{48}
 
 
-Oppgåve 11 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. La f ( t ) = t³et. 1. Kva for eit av følgande uttrykk er f' ( t ) ? Vel eitt alternativ ○ f' ( t ) = 3t³et + t² et ○ f' ( t ) = ( 3² + t³ ) et f' ( t ) = 2t²et + t³et ○ f' ( t ) = 2t² et ○ f' ( t ) = 3t² et ○ f' ( t ) = t³ et 2. Kva for ei av følgande differensiallikningar har funksjonen ƒ som ei løysing? Vel eitt alternativ Otf' ( t ) - 2f ( t ) = 0 Otf' ( t ) et f ( t ) = 0 Otf' ( t ) — et f ( t ) = 0 f' ( t ) — 3f ( t ) / t - f ( t ) = 0 f' ( t ) - ( t² — e¹ ) f ( t ) = 0 ○ f' ( t ) - 3f ( t ) / t = 0 Maks poeng: 10 \frac{8}{10}
+MEKT1101 Høst 2023 Words: 0 Maks poeng: 3 \frac{15}{48}
 
 
-Oppgåve 12 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Finn løysinga på initialverdiproblemet y ( x ) y' ( x ) = e³x, Vel eitt alternativ y ( 0 ) = 1. ○ y ( x ) = \sqrt\sqrt³½³½ 6x + 1 y ( x ) = \sqrt \sqrt ³½³½³x + \frac{1}{3} y ( x ) = e³x ○ y ( x ) = e - 3x 3x ○ y ( x ) = \sqrt\sqrte³\times + 1 ○ y ( x ) = ½³½³¹² + 1} - 3x ○ y ( x ) = e - ³x Maks poeng: 6 13
+3 ( a ) Statisk bestemthet L. A B 2a m 29 C MEKT1101 Høst 2023 2a Ei ramme ABCDE er påkjent ei jamt fordelt last 2q. Dimensjonar og innfesting framkjem av figuren. Bestem grada av statisk ( u ) bestemthet og angi svaret i boksen under. Feks: Dersom du meiner ramma er to ganger statisk ubestemt angir du talet 2, dersom du meiner ramma er statisk bestemt angir du talet 0, og dersom du mener ramma er to gongar statisk underbestemt angir du talet - 2. Fyll inn svaret ditt her: Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 1 \frac{16}{48}
 
 
-Oppgåve 13 Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir. Differensiallikninga 4y" ( x ) - 4y' ( x ) + y ( x ) forma y ( x ) = A cos ( 2x ) + B sin ( 2x ) . = cos ( 2x ) har ei partikulær løysing på Finn konstantane A og B. A , B Rund av til to desimal etter komma. Maks poeng: 8 \frac{9}{10}
+3 ( b ) Reaksjonskrefter flervalg Z A B a m 29 C 2a Finn reaksjonskrefter i punkt A og D, og angi alternativa du meiner er riktig under. Pass på riktig forteikn i henhold til koordinatsystemet angitt i figuren. Vel eitt alternativ A₂ = 2qa ○ A₂ = qa A₂ = 4qa A₂ = 3qa A₂ = 0 Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. MEKT1101 Høst 2023 2a \frac{17}{48}
 
 
-Oppgåve 14 Du skal svara på denne oppgåva på papir ( med sjusifra kode ) som vert skanna inn. Sjå på følgande system av førsteordens differensiallikningar x1 ( t ) = 3x1 ( t ) + x2 ( t ) , x2 ( t ) = x1 ( t ) + x2 ( t ) . 1. Skriv systemet på matriseform, altså på forma ' ( t ) [x1 ( t ) ] 3 ( t ) = [21 ( 6 ) ]. 2. Finn eigenverdiane og eigenvektorane til matrisa A. . A ( t ) kor A er ei matrise og 3. Finn den generelle løysinga til systemet av differensiallikningar. 4. Finn løysinga av systemet som tilfredsstill initialvilkåra x1 ( 0 ) = 2 og x2 ( 0 ) = \sqrt2. Maks poeng: 10 \frac{10}{10}
+MEKT1101 Høst 2023 Vel eitt alternativ ○ D₂ = 0 ○ D₂ = - 2qa D₂ = 4qa D₂ = 2qa Dz = qa Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Vel eitt alternativ ○ Ax = - qa O Ax = 0 Ax = - qa Ax = qa Ax = 9 qa Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Vel eitt alternativ ○ Dx = - qa Dx = = qa Dx = 0 ○ Dx = - qa O Dx = qa Maks poeng: 4 \frac{18}{48}
+
+
+3 ( c ) Normalkraftdiagram, flervalg MEKT1101 Høst 2023 B L. A a LU 2a 29 C 2a Finn ut kva for normalkraftdiagram som samsvarar med ramma ABCDE i figuren over. \frac{19}{48}
+
+
+ヨ C A ← ☐ →→ →0← Kva for normalkraftdiagram er riktig for ramma? + 0→ ←→ □← D F B →0 \frac{20}{48} 40 + MEKT1101 Høst 2023 → ←
+
+
+Vel eitt alternativ A D OC B ○ E LL F MEKT1101 Høst 2023 Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 4 \frac{21}{48}
+
+
+3 ( d ) Skjærkraftdiagram, flervalg MEKT1101 Høst 2023 N L A B a 2a 29 C E Finn ut kva for skjærkraftdiagram som samsvarar med ramma ABCDE i figuren over. 2a \frac{22}{48}
+
+
+↓0↑ A 口 B ↓ ↓↑ ↑↓ MEKT1101 Høst 2023 C ↑↓ D ↓↑ E ↓口 ↑↓ ↓↑ ↑↓ ↑↓ 口 LL F ↓↑ Kva for skjærkraftdiagram er riktig for ramma over? \frac{23}{48}
+
+
+Vel eitt alternativ E OF 0 B A D MEKT1101 Høst 2023 Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 5 \frac{24}{48}
+
+
+3 ( e ) Momentdiagram, flervalg B L. A a LU 2a 29 C MEKT1101 Høst 2023 Finn ut kva for momentdiagram som samsvarer med ramma ABCDE i figuren over. 2a \frac{25}{48}
+
+
+A B C D E F Kva for momentdiagram er riktig for ramma? MEKT1101 Høst 2023 \frac{26}{48}
+
+
+Vel eitt alternativ C A OB D OE F MEKT1101 Høst 2023 Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 5 \frac{27}{48}
+
+
+3 ( f ) Reaksjonskrefter2, flervalg B A X L. qa E q 2a 2a Normalkraftdiagram qa hmmm Skjærkraftdiagram ↓o 3qa Momentdiagram ↑↓ MEKT1101 Høst 2023 3qa 2qa² 2qa Finn reaksjonskrefter i punkt A og D, og angi alternativa du meiner er riktig under. Pass på riktig forteikn i henhold til koordinatsystemet angitt i figuren. \frac{28}{48}
+
+
+Vel eitt alternativ ○ A₂ = qa Az = - qa A₂ = 2qa A₂ = - 2qa A₂ = - 3qa Az = 3qa A₂ = 0 MEKT1101 Høst 2023 Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Vel eitt alternativ ○ D₂ = 2qa ○ D₂ = - 2qa D₂ = 3qa ○ D₂ = - qa Dz = = qa D₂ = 0 ○ D₂ = - 3qa Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. \frac{29}{48}
+
+
+MEKT1101 Høst 2023 Vel eitt alternativ ○ Ax = 3qa Ax = - qa Ax = qa Ax - 2qa = = Ax = 0 Ax = 2qa Ax = - 3qa Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Vel eitt alternativ ○ Dx = - qa ○ Dx = qa Dx = 0 ○ Dx = - 3qa ○ Dx = - 2qa ○ Dx = 3qa Dx = 2qa Maks poeng: 4 \frac{30}{48}
+
+
+3 ( g ) N,V,M - funksjoner, flervalg 29 B E A L.. qa 2a Skjærkraftdiagram ↓o↑ ↑↓ 2a Normalkraftdiagram qa 3qa Momentdiagram MEKT1101 Høst 2023 3qa 2qa² 2qa Det er no mogleg å berekne funksjonsuttrykk for normalkraft, skjærkraft og moment for ramma. Du skal no finne funksjonsuttrykk for normalkraft N ( x ) , skjærkraft V ( x ) og moment M ( x ) mellom B og C. La x løpe frå punkt B mot snittet, lag snitt og finn ut kva for funksjonsuttrykk under som er riktige: Velg N ( x ) du meiner er riktig: \frac{31}{48}
+
+
+MEKT1101 Høst 2023 Vel eitt eller fleire alternativ ☐ N ( x ) = 0 ☐ N ( x ) = - qa N ( x ) = 2qa N ( x ) = 4qa ☐ N ( x ) = qxa Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Velg V ( x ) du meiner er riktig: Vel eitt eller fleire alternativ V ( x ) = qx - qa V ( x ) = - 2qx + qa V ( x ) = - qx - 3qa V ( x ) = - qx + 4qa² V ( x ) = - qx + 3qa V ( x ) = 2qx - qa V ( x ) = qx + qa Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Velg M ( x ) du meiner er riktig: \frac{32}{48}
+
+
+Vel eitt eller fleire alternativ M ( x ) = qx² - qax M ( x ) = qx² — qax - qa² - □ M ( x ) = ½qx² + 4qax + \frac{1}{2}qa² M ( x ) : = qx² - 3qax + qa² M ( x ) = qx² - qax + qa² ☐ M ( x ) = qx² + qax MEKT1101 Høst 2023 Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn. Maks poeng: 3 \frac{33}{48}
+
+
+4 B 77777 L 2F FL - C M - diagram MEKT1101 Høst 2023 Figur 1 Figur 1 syner ei ramme som består av to bjelkar AB og BC med stivt hjørne i punkt B. Ramma er fastholdt med eit leddlager i punkt A, fastholdt med forskyvelig leddlager i punkt B. Alle komponentar har bøyestivhet El og aksialstivhet EA. Ramma utsettast for ei vertikal kraft \sqrt2F som peikar nedover i punktet C. Fer kjent og positiv. Geometriske mål framkjem av figuren. I tillegg er momentdiagrammet vist i figur 1. Eigenvekt kan neglisjerast. Ta kun omsyn til bøyedeformasjonar i heile oppgåva. For å redusere forskyvninga av punkt C vert det undersøkt to teknologiske løysingar i denne oppgåva. I løysing 1 påførast ei kraft Q > 0 som peikar nedover i midten av komponent AB. I løysing 2 påførast ei horisontal kraft H> 0 som peikar mot venstre ved punkt C. Desse er vist i figur 2. Løsning 1 A Q B L \sqrt2F C A \sqrt2F Løsning 2 H с B L 77777 \frac{34}{48}
+
+
+4 ( a ) a ) Statisk bestemhet a ) Vis at ramma ABC er statisk bestemt. Skriv svaret ditt her... Format ΣΧ BIU X₂ x² | x | D テ ១ | Denne oppgåva kan besvarast på papir. Start på eit nytt ark. Maks poeng: 1 Words: 0 \frac{35}{48} MEKT1101 Høst 2023
+
+
+4 ( b ) b ) elastiske linje 1 b ) Ramma er berre utsatt for den vertikale krafta \sqrt2F i punkt C. Velg riktig skisse av deformasjonsmønsteret ( elastiske linjen ) . \sqrt2F 1 L B 77777 B 77777 L \sqrt2F C Ас FL C M - diagram 4 \sqrt2F C Ac Vel eitt alternativ 77777 О Alternativ 1 О Alternativ 3 Alternativ 5 Alternativ 2 ○ Alternativ 4 2 B 77777 A \sqrt2F CAc 5 B 77777 \sqrt2F Ас MEKT1101 Høst 2023 77777 \sqrt2F с Ас Maks poeng: 2 \frac{36}{48}
+
+
+Vel eitt alternativ 5 О 16 ○ 10 1 ○ 13 14 11 3 MEKT1101 Høst 2023 Maks poeng: 2 4 ( d ) d ) d ) Når rammen berre er utsatt for den vertikale krafta \sqrt2F i punkt C, vis at den totale forskyvinga av punkt C Ac er 2FL³ 3EI B 77777 L \sqrt2F FL - с M - diagram Denne oppgåva besvarast på papir. Start på eit nytt ark. Maks poeng: 2 \frac{38}{48}
+
+
+4 ( e ) e ) B L L \sqrt2 77777 L 2 2 2 C NN MEKT1101 Høst 2023 e ) Ramma er kun utsett for den vertikale krafta Q > 0 midt på AB. Figuren syner seks alternative momentdiagram for ramma ABC. Kva for diagram er det korrekte? Begrunn svaret. Angi dessuten Mmax for M - diagrammet som ein funksjon av Q. 2 Mmax Mmax 5 3 Mmax Mmax 4 6 Mmax Mmax Denne oppgåva besvarast på papir. Start på eit nytt ark. Maks poeng: 3 \frac{39}{48}
+
+
+4 ( f ) f ) A L 22 L 2 B 2 C f ) Ramma er utsett kun for den vertikale krafta Q> 0 midt på AB. • Skisser deformasjonane av ramma. • Bestem den totale forskyvinga av punkt C Ac. Denne oppgåva besvarast på papir. Start på eit nytt ark. MEKT1101 Høst 2023 Maks poeng: 4 \frac{40}{48}
+
+
+4 ( g ) g ) \sqrt2F A 22 B L C NN MEKT1101 Høst 2023 g ) Ramma vert utsett for vertikalkrafta Q midt på AB og den vertikale kraften \sqrt2F i punkt C slik at den totale forskyvinga av punkt C Ac er lik null. Uttrykk Q som en funksjon av F. Begrunn svaret. Denne oppgåva besvarast på papir. Start på eit nytt ark. Maks poeng: 2 \frac{41}{48}
+
+
+4 ( h ) h ) A Figur 1 1m B H \sqrt2 22 m N|N \sqrt2 m M - diagram MEKT1101 Høst 2023 H H L L \sqrt2 Figur 1 syner M - diagram når rammen utsettast kun for den horisontale krafta H i punkt C. Når den horisontale krafta H og den vertikale krafta \sqrt2F påførast samstundes ( dvs løsning 2 ) , framkjem det at H må være lik . F for å oppnå den totale forskyvinga av punkt C lik 12 15\sqrt2 0. h ) I spørsmål g ) bør ein finne at Q > 5F for å få forhindra forskyving av punkt C. Med tanke på dimensjonering av tverrsnitt av ramme ABC med omsyn til bøyes penningar, kva er fordelen med løysing 2 samanlikna med løysing 1? Skriv svaret ditt her... Maks poeng: 2 \frac{42}{48}
+
+
+oppgåve 5 eller
+
+
+oppgåve 6 men ikkje begge. Svarar du begge vil berre
+
+
+oppgåve 6 bli tekne med i sluttkarakteren og
+
+
+oppgåve 5 vil bli sett bort frå. Her er
+
+
+oppgåve 5 Ein fritt opplagt stålbjelke AB med IPE140 - tverrsnitt er påkjent av eit konsentrert moment M = 20 kNm i A. Bjelken har lengde L. Elastisitetsmodulen til stål er E = 210000 MPa og flytegrensa er fy = 355 MPa. Z M C A Χ L B løysing av bjelken si differensialligning gjev oss nedbøyingsfunksjonen w ( x ) ( forskyvinga i negativ z - retning ) til bjelken: w ( x ) ML² NEI [ ( ± ) ³ - 3 ( ± ) ² + 2 ( % ) ]. TABELL 1.1 VARMVALSEDE IPE BJELKER Dimensjoner etter NS - EN 10 034 Materiale etter NS - EN 10 025 Betegnelse f.eks.: Bjelke NS - EN 10 034 IPE 200 Stål NS - EN 10 025 ..... ( Utdrag fra Stålkonstruksjoner - Profiler og formler ) Tverrsnittsdata IPE - bjelker: Dimensjoner A y - y IPE ( mål i mm ) Masse - 10 1 - 10% W - 10° i 1 - 106 z - z W - 10³ T Sy CW Hullavstand / i h b $ t r kg / m mm² mm mm mm mm mm - 10° 10 - 109 mm + mm mm³ hulldiam. ( i mm ) W₁ d 80 80 46 3,8 5.2 5 6,00 0,764 0,801 20,0 32,4 0,085 3,69 100 100 55 4,1 5.7 7 8,10 1,03 1,71 34,2 40,7 0,159 5,79 120 120 4,4 6,3 7 10,4 1,32 3,18 53.0 49,0 0,277 8,65 140 140 73 4.7 6.9 7 12.9 1,64 5,41 77,3 57,4 0,449 12.3 10,5 26 7,00 11,6 0,118 12,4 12,1 19,7 0,351 30 14,5 17,4 30,4 0,890 36 16,5 24,5 44,2 1,981 40 160 160 82 7,4 9 180 180 91 5,3 8,0 15,8 18,8 2,39 2,01 8,69 109 65.8 0,683 16,7 13,20 146 74,2 1,01 22,2 200 200 100 22,4 2.85 194 194 82,6 1,42 28,5 220 220 110 5,9 9,2 26,2 3,34 27,7 252 91,1 2,05 37,3 24,8 91,0 240 240 120 9,8 15 30,7 3,91 38,9 324 99.7 2.84 47,3 26,9 270 270 135 10,2 36,1 4,59 57.9 429 112 4.20 62,2 300 300 150 7,1 10,7 15 42,2 5,38 83,6 557 125 6.04 80,5 33,5 330 330 160 7,5 11,5 18 49.1 6,26 117,7 713 137 7,88 98,5 129 30,2 160 202 35,5 283 18.4 36,2 61,9 3,959 44 20.5 48.0 83.2 7,431 22,4 70,2 110 12,99 56 143 22,67 60 183 37,39 68 242 70,58 72 125.9 314 402 199,1 80 360 360 170 8.0 12,7 18 57,1 7.27 162,7 904 150 10,4 123 37,9 400 400 180 13.5 21 66,3 8,45 231.3 1160 165 13,2 146 39,5 450 450 190 9,4 14,6 21 77,6 9,88 337,4 1500 185 16.8 176 41,2 671 500 200 10.2 16,0 21 90,7 11,6 482,0 1930 204 21,4 214 43,1 375 510 313,6 90 514 654 490,0 96 851 106 791,0 897 1100 1249 110 550 550 210 11.1 17,2 24 600 600 220 12,0 19,0 24 106 13,4 671,2 122 15,6 920,8 2440 223 26,7 254 44.5 1240 1390 1884 116 3070 243 33.9 308 46,6 1660 1760 2846 120 .................. 13 røtene til eit andreordens polynom, ax² + bx + c = 0: \frac{43}{48}
+
+
+oppgåve 5 eller
+
+
+oppgåve 6 men ikkje begge. Svarar du begge vil berre
+
+
+oppgåve 6 bli tekne med i sluttkarakteren og
+
+
+oppgåve 5 vil bli sett bort frå. Her er
+
+
+oppgåve 5 a ) Bestem verdien av 1 ) der wer størst ( w = Wmax ) . Denne oppgåva kan besvarast på papir. Start på eit nytt ark. Maks poeng: 4
+
+
+oppgåve 5 eller
+
+
+oppgåve 6 men ikkje begge. Svarar du begge vil berre
+
+
+oppgåve 6 bli tekne med i sluttkarakteren og
+
+
+oppgåve 5 vil bli sett bort frå. Her er
+
+
+oppgåve 5 b ) Bestem den største verdien av L slik at Wmax ikkje overstrid 200 ( nytt 1 = 0.5 dersom du ikkje klarte å løyse spørsmål a ) ) . Denne oppgåva besvarast på papir. Start på eit nytt ark. Maks poeng: 3
+
+
+oppgåve 5 eller
+
+
+oppgåve 6 men ikkje begge. Svarar du begge vil berre
+
+
+oppgåve 6 bli tekne med i sluttkarakteren og
+
+
+oppgåve 5 vil bli sett bort frå. Her er
+
+
+oppgåve 6. X - 2,5 m - X L. 100 kN 150 kN 10 m B 5 m с Figuren ovenfor syner ei skisse av ein fritt opplagt bjelke med ein utkrager. Avstanden mellom opplager A og B er 10 m, og utkrager BC har lengde 5 m. Ein fullasta dumper ryggar frå A til B. Total akseltrykk frå bakhjula og forhjula er henholdsvis 150 kN og 100 kN. Akselavstanden er 2,5 m. Bjelken er laga av stålprofil IPE500, har elastisitetsmodul E = 210 000 N / mm² og tverrsnittet har 2. arealmoment I = 482 · 106 mm². Skriv naudsynt kode i Python for å svare på dei følgande Python
+
+
+oppgåve 5 eller
+
+
+oppgåve 6 men ikkje begge. Svarar du begge vil berre
+
+
+oppgåve 6 bli tekne med i sluttkarakteren og
+
+
+oppgåve 5 vil bli sett bort frå. Her er
+
+
+oppgåve 6. A 250 kN Z 10 m B 5 m с x Anta no at begge laster verkar i samme punkt ( éin last på 250 kN ) . Berekn og plot nedbøyinga av bjelken som opptrer under lasta sin posisjon. La lasta sin posisjon gå frå A til B. Det er ønskjeleg å markere på grafen kor den maksimale nedbøyinga inntreff. 12 P B A ΦΑ w ( x ) ФВ ΦΑ = Pab ( L + b ) 6L - EI Фв = Pab ( L + a ) 6L.EI + x a b w ( x ) = Pbx 6L.EI ( L² - b²x² ) , x ≤ a Skriv svaret ditt her... 1 L \frac{47}{48}
+
+
+NORGES TEKNISK - NATURVITENSKAPELIGE UNIVERSITET INSTITUTT FOR KONSTRUKSJONSTEKNIKK MEKANIKK 1 - FORMELARK Arealsenter: Ус S. SA А 1. arealmoment: S₁ = \sqrtzdA y 2. arealmoment: Steiners teorem: S. ZC A A1 S₁ = ΣA, Zi I₁ = \sqrt z² dA I, = Iy, lokal + e². A S₂ = SydA S₁ = ΣA; yi I = \sqrty² dA = I₂ Iz,lokal + e. A Hookes lov ( 1D ) : Tverrtøyning: Temperaturtøyning: σ = Εε ε₁ = - Vε ε = α· ΔΤ Torsjon: Naviers formel ( med fortegn ) : Moment - krumningsrelasjonen: Lineær ( teknisk ) bjelketeori: M x.r T = P M + Z A EI M = M y T = Gy M.L GI d4 w q ( x ) d² w M ( x ) dx4 ΕΙ dx² ΕΙ dM dV V ( x ) = q ( x ) = dx dx
+
+
+NORGES TEKNISK - NATURVITENSKAPELIGE UNIVERSITET INSTITUTT FOR KONSTRUKSJONSTEKNIKK Areal, arealsenter og 2. arealmoment: Rektangel Zyc A = bh yc = b / 2 Zc = h / 2 h b Z 3 Zc Ly I₁ = bh hb³ Iz 12 12 Ус Zc b - y Trekant A = bh / 2 Ly = 3 bh³ 36 yc = ( b + c ) / 3 Zc = h / 3 bh I₂ = b ( b² - bc + c² ) Iz 36 Rettvinklet trekant A = bh / 2 Ly = bh3 36 yc = b / 3 Zc = h / 3 hb3 I₂ = 36 Sirkel A = \pir² Halvsirkel A = \pir² / 2 I₁ = I₂ = \pir\frac{4}{4} Ip = \pir\frac{4}{2} Zc = 4r / 3\pi Zc Ly b A = 2bh / 3 Π 8 - 8 9\pi Konveks parabolsk flate yc = 3b / 8 22 0,109874 Πρ Iz = 8 이로 Zc = 2h / 5 Ус 8bh³ 3 19hb³ Ly Iz - horisontal tangent 175 480 ( Bearbeidet utdrag fra Appendiks B i Bell: Konstruksjonsmekanikk Del II - Fasthetslære ) A2 172
+
+
+NORGES TEKNISK - NATURVITENSKAPELIGE UNIVERSITET INSTITUTT FOR KONSTRUKSJONSTEKNIKK Bjelkeformler: 1 PL 3 M 5 o[E P WB OB M - P QB 3 PL PL² 2 WB OB = 3EI 2EI WB ML² = OB = 2EI ML ΕΙ WB / ов WB = PLA 8EI 10 Ив P PL UB EA 11 PL 2 + 4 \frac{1}{2} - WC PL² ΦΑ OB 16EI WC = 3 PL³ 48EI OB THE 6EI A3
+
+
+NORGES TEKNISK - NATURVITENSKAPELIGE UNIVERSITET INSTITUTT FOR KONSTRUKSJONSTEKNIKK 13 M 14 16 ML ML ΦΑ w ( x ) 3EI OB 2 6EI M ( L - x ) = ( 2Lx - 3 - x² ) 6L.EI L / 2 WC WC M + x M M - OB = 2 MI² 16EI ΦΑ = w ( x ) = ML OB = Mx 2EI 2EI ML² SEI ( L - : - x ) L / 2 WC x WC M WC 8 ΦΑ фв WC = 5pL 384EI 24EI ( Utdrag fra Appendiks C i Bell: Konstruksjonsmekanikk Del II - Fasthetslære ) A4
+
+
+TABELL 1.1 VARMVALSEDE IPE - BJELKER ( Utdrag fra Stålkonstruksjoner - Profiler og formler ) y - IN Q S Dimensjoner etter NS - EN 10 034 Materiale etter NS - EN 10 025 Betegnelse f.eks.: Bjelke NS - EN 10 034 IPE 200 Stål NS - EN 10 025 ..... 品 Tverrsnittsdata for IPE - bjelker: INSTITUTT FOR KONSTRUKSJONSTEKNIKK NORGES TEKNISK - NATURVITENSKAPELIGE UNIVERSITET Hullavstand / hulldiam. ( i mm ) W W₁ d - - - - - - N N N N N N MENS GREE - 150 160 360 170 400 180 450 190 Dimensjoner y - y IPE ( mål i mm ) I - 10 - 6 W - 10 - 3 1 I - 10 - 6 = b t r mm mm * 80 80 100 120 140 4563 160 82 91 10% NEGO SUUS * * * 5777 9922 32,4 40,7 49,0 57,4 65,8 74,2 82,6 Z - Z W - 10 - 3 91,1 99,7 112 125 137 28 RSS NO8 150 90 165 96 185 106 500 200 204 110 550 550 210 11,1 223 116 600 600 220 12,0 243 A5
+
+
+NORGES TEKNISK - NATURVITENSKAPELIGE UNIVERSITET INSTITUTT FOR KONSTRUKSJONSTEKNIKK A6 Nyttige funksjoner for Python 3 / MATLAB: Tekst i rødt erstattes med hensiktsmessig variabel, tall, tekst eller kodekommando. Python 3: Eksempel på for - løkke ved bruk av range if, elif, else Skriv ut tekst og svar Rund av tall NumPy - funksjoner: Importer numpy - biblioteket Diverse matematiske funksjoner Lag en numpy - liste Lag en numpy - liste med verdier ( antall elementer ) Lag en numpy - liste med verdier ( steglengde ) Lag en numpy - liste hvor alle elementer er 0 Lag en numpy - liste hvor alle elementer er 1 Finn minste verdi i en numpy - liste Finn indeks for minste verdi i en numpy - liste Finn største verdi i en numpy - liste Finn indeks for største verdi i en numpy - liste Summere alle tall i en numpy - liste Les tekstfil Polynomfunksjoner: Polynomene antas på formen angitt til høyre. N er polynomets grad. a inneholder polynomets koeffisienter. Tilpass et polynom til et datasett ( x,y ) Evaluer et polynom ved ønsket x - verdi ( er ) MATLAB: Eksempel på for - løkke if, elseif, else Skriv ut tekst og svar Runde av tall med ønsket presisjon Diverse matematiske funksjoner Lag array med verdier ( antall elementer ) Lag et array med verdier ( steglengde ) Lag et array hvor alle elementer er 0 Lag et array hvor alle elementer er 1 Finn minste verdi i et array Finn største verdi i et array Summere alle tall i et array Les tekstfil Polynomfunksjoner: Polynomene antas på formen angitt til høyre. N er polynomets grad. a inneholder polynomets koeffisienter. Tilpass et polynom til et datasett ( x,y ) Evaluer et polynom ved ønsket x - verdi ( er ) for i in range ( første_{indeks}, siste_{indeks} ) : if i = 1: kommandol elif i = = 2: kommando2 else: kommando3 print ( 'tekst' + str ( tall ) + 'mer_{tekst}' ) flyttall round ( tall, presisjon ) arr betyr at svar eller input er en numpy - liste ( array ) import numpy as np np.sin ( tall ) , np.cos ( tall ) , np.tan ( tall ) , np.exp ( tall ) , np.pi arr = np.array ( liste ) arr = np.linspace ( min, max, antall_{tall} ) arr = np.arange ( min, max, steglengde ) arr = np.zeros ( antall_{nuller} ) arr = np.ones ( antall_{enere} ) flyttall np.min ( arr ) heltall = np.argmin ( arr ) flyttall = np.max ( arr ) heltall = np.argmax ( arr ) flyttall np.sum ( arr ) arr = np.genfromtxt ( 'filnavn.txt' ) y ( x ) = a[0] * x * * N + a[1] * x * * ( N - 1 ) + ... + a[N] a = np.polyfit ( x, y, N ) arr = np.polyval ( a, x ) If - setninger og for - løkker avsluttes med end for i = første_{indeks}: steglengde: siste_{indeks} if i = = 1 kommando1; elseif i = = 2 kommando2; else kommando3; disp ( ['tekst', num2str ( tall ) , 'mer_{tekst}'] ) flyttall = round ( tall, presisjon ) ; sin ( tall ) , cos ( tall ) , tan ( tall ) , exp ( tall ) , pi arr linspace ( min, max, antall_{tall} ) ; arr = ( min steglengde: max ) ; arr = zeros ( antall_{rader}, antall_{kolonner} ) ; arrones ( antall_{rader}, antall_{kolonner} ) ; [min_{verdi}, indeks] = min ( arr ) ; [max_{verdi}, indeks] = max ( arr ) ; flyttall sum ( arr ) ; arr writematrix ( 'filnavn.txt' ) ; y ( x ) = a ( 1 ) * x * * N + a ( 2 ) * x * * ( N - 1 ) + ... + a ( N + 1 ) ; a polyfit ( x, y, N ) ; arr = polyval ( a, x ) ;
 
 

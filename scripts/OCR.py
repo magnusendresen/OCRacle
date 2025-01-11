@@ -73,7 +73,7 @@ def is_valid_task(text_segment, min_length=50):
     """Determine if a text segment is likely a valid task based on its length."""
     return len(text_segment) > min_length
 
-def is_excluded_page(text, exclusion_keywords, min_match=10):
+def is_excluded_page(text, exclusion_keywords, min_match=8):
     """Check if the page should be excluded based on keywords and match count."""
     match_count = sum(1 for keyword in exclusion_keywords if keyword.lower() in text.lower())
     return match_count >= min_match
@@ -109,7 +109,14 @@ def extract_tasks(text):
         start = matches[i]
         end = matches[i + 1] if i + 1 < len(matches) else len(text)
         task = text[start:end].strip()
-        if is_valid_task(task):
+
+        # Ensure the task only includes content up to "maks poeng X"
+        max_poeng_match = re.search(r'maks\s*poeng[:\s]*\d+', task, re.IGNORECASE)
+        if max_poeng_match:
+            task = task[:max_poeng_match.end()].strip()
+
+        # Only include tasks starting from "Oppgave X" and trim properly
+        if re.match(r'(Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d+', task):
             tasks.append(task)
 
     return tasks
@@ -133,7 +140,8 @@ def main():
         "levering", "leveringar", "poeng", "vektig", "sensurtidspunkt",
         "kalkulator", "tillatne", "håndteikningar", "håndtegninger",
         "kontaktperson", "kontaktinformasjon", "direkte feil", "oppgavefrister",
-        "tillatelse", "fritekstfelt"
+        "tillatelse", "fritekstfelt", "gir maksimalt", "gje maksimalt",
+        "maksimalt", "poeng", "formelark", "formelarket", "formel"
     ]
 
 
