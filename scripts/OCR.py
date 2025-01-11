@@ -81,6 +81,35 @@ def is_task_keyword(segment, task_keywords):
             return True
     return False
 
+def extract_tasks(text):
+    """
+    Extracts tasks from the given text based on the keyword 'Oppgave' and its variations.
+
+    Parameters:
+        text (str): The entire content of the document as a string.
+
+    Returns:
+        list: A list of task sections as strings.
+    """
+    # Define a regex pattern to match "Oppgave" followed by a space and optional digits
+    pattern = re.compile(r"(Oppgave|oppgave|Oppgåve|oppgåve)\s*\d*")
+
+    # Find all matches for the pattern
+    matches = [match.start() for match in pattern.finditer(text)]
+
+    # If no tasks are found, return the entire text as a single task
+    if not matches:
+        return [text]
+
+    # Split the text into tasks using the matched indices
+    tasks = []
+    for i in range(len(matches)):
+        start = matches[i]
+        end = matches[i + 1] if i + 1 < len(matches) else len(text)
+        tasks.append(text[start:end].strip())
+
+    return tasks
+
 def main():
     # Prompt user to select a PDF file
     root = Tk()
@@ -98,7 +127,9 @@ def main():
         for image_content in tqdm(images, desc="Processing pages"):
             text = detect_text(image_content)
             text = normalize_ocr_result(text)
-            output_file.write(text + '\n\n')
+            tasks = extract_tasks(text)
+            for task in tasks:
+                output_file.write(task + '\n\n\n')
 
 
 if __name__ == "__main__":
