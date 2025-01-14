@@ -2,46 +2,43 @@ import re
 import json
 
 def extract_coordinates(text):
-    task_pattern = re.compile(r"((Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d+|\d+\([a-zA-Z]\))")
     max_points_pattern = re.compile(r"Maks poeng\s*:\s*\d+")
-
-    task_key = [match.start() for match in task_pattern.finditer(text)]
     points_key = [match.end() for match in max_points_pattern.finditer(text)]
+    return points_key
 
-    return task_key, points_key
+def detect_first_task_start(text):
+    # Define possible markers that precede the first task
+    markers = [
+        "prøvar».",
+        "prøver».",
+        "tilgjengelige i arkivet",
+        "tekstverktøyet i Inspera",
+        "slike spørsmål",
+        "eksamen er passert",
+        "med InsperaScan"
+    ]
+    marker_pattern = re.compile(r"(" + "|".join(re.escape(marker) for marker in markers) + r")", re.IGNORECASE)
 
-def filejson(file):
-    with open(file, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        return data
+    match = marker_pattern.search(text)
+    if match:
+        return match.end()
+    return 0
 
 def main(text):
-    task_key, points_key = extract_coordinates(text)
+    # Detect where the first task begins
+    first_task_start = detect_first_task_start(text)
 
-    filtered_task_key = []
-    previous_end = None
+    # Extract coordinates starting from the detected first task
+    trimmed_text = text[first_task_start:]
+    points_key = extract_coordinates(trimmed_text)
 
-    for end in points_key:
-        closest_start = None
-        if previous_end is None:
-            closest_start = min([start for start in task_key if start < end], default=None)
-        else:
-            valid_starts = [start for start in task_key if previous_end <= start < end]
-            if valid_starts:
-                closest_start = min(valid_starts, key=lambda x: end - x)
-
-        if closest_start is not None:
-            filtered_task_key.append(closest_start)
-        previous_end = end
+    # Ensure filtered_task_key starts with the detected first task start
+    filtered_task_key = [first_task_start] + [first_task_start + point for point in points_key]
 
     tasks = []
-    for i in range(len(filtered_task_key)-1):
+    for i in range(len(filtered_task_key) - 1):
         tasks.append(text[filtered_task_key[i]:filtered_task_key[i+1]])
-        
 
-    # for task in tasks:
-    #     print(task)
-    #     print("\n\n")
-    # print("Filtered Task Starts:", filtered_task_key)
+    print("Filtered Task Starts:", filtered_task_key)
 
     return tasks
