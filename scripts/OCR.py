@@ -73,11 +73,6 @@ def is_valid_task(text_segment, min_length=60):
     """Determine if a text segment is likely a valid task based on its length."""
     return len(text_segment) > min_length
 
-def is_excluded_page(text, exclusion_keywords, min_match=12):
-    """Check if the page should be excluded based on keywords and match count."""
-    match_count = sum(1 for keyword in exclusion_keywords if keyword.lower() in text.lower())
-    return match_count >= min_match
-
 def is_excluded_task(task, exclusion_keywords, min_match=5):
     """Check if a task should be excluded based on keywords and match count."""
     match_count = sum(1 for keyword in exclusion_keywords if keyword.lower() in task.lower())
@@ -94,7 +89,7 @@ def extract_tasks(text):
         list: A list of valid task sections as strings.
     """
     # Define a regex pattern to match "Oppgave" followed by a space and optional digits or delopgaver like 1(a)
-    pattern = re.compile(r"((Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d*|\d+\([a-zA-Z]\)|maks\s*poeng[:\s]*\d+)")
+    pattern = re.compile(r"((Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d+|\d+\([a-zA-Z]\))")
 
     # Find all matches for the pattern
     matches = [match.start() for match in pattern.finditer(text)]
@@ -110,8 +105,8 @@ def extract_tasks(text):
         end = matches[i + 1] if i + 1 < len(matches) else len(text)
         task = text[start:end].strip()
 
-        # Only include tasks that start with "Oppgave X" or "maks poeng"
-        if re.match(r'(Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d+|maks\s*poeng[:\s]*\d+', task):
+        # Only include tasks that start with "Oppgave X" or "X(a)"
+        if re.match(r'(Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d+|\d+\([a-zA-Z]\)', task):
             if is_valid_task(task):
                 tasks.append(task)
 
@@ -126,7 +121,7 @@ def main():
         print("No file selected.")
         return
 
-    # Keywords for excluding pages and tasks
+    # Keywords for excluding tasks
     exclusion_keywords = [
         "eksamen", "kandidatnummer", "sensur", "hjelpemiddel", 
         "informasjon", "vurdering", "beskjeder", "beskjedar",
@@ -138,9 +133,9 @@ def main():
         "kontaktperson", "kontaktinformasjon", "direkte feil", "oppgavefrister",
         "tillatelse", "fritekstfelt", "gir maksimalt", "gje maksimalt",
         "maksimalt", "poeng", "formelark", "formelarket", "formel",
-        "inspera", "assessment", "eksamensopp\u00e5ve", "eksamensoppgave"
+        "inspera", "assessment", "eksamensopp\u00e5ve", "eksamensoppgave",
+        "svar", "ark", "koder", "eksamenskontoret", "utfylte"
     ]
-
 
     # Convert PDF pages to images
     images = pdf_to_images(pdf_path)
@@ -150,9 +145,6 @@ def main():
         for page_num, image_content in enumerate(tqdm(images, desc="Processing pages")):
             text = detect_text(image_content)
             text = normalize_ocr_result(text)
-            if is_excluded_page(text, exclusion_keywords):
-                print(f"\nPage {page_num + 1} removed.")
-                continue
 
             tasks = extract_tasks(text)
             valid_tasks = []
