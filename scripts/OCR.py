@@ -69,16 +69,16 @@ def normalize_ocr_result(text):
 
     return text
 
-def is_valid_task(text_segment, min_length=50):
+def is_valid_task(text_segment, min_length=60):
     """Determine if a text segment is likely a valid task based on its length."""
     return len(text_segment) > min_length
 
-def is_excluded_page(text, exclusion_keywords, min_match=8):
+def is_excluded_page(text, exclusion_keywords, min_match=12):
     """Check if the page should be excluded based on keywords and match count."""
     match_count = sum(1 for keyword in exclusion_keywords if keyword.lower() in text.lower())
     return match_count >= min_match
 
-def is_excluded_task(task, exclusion_keywords, min_match=3):
+def is_excluded_task(task, exclusion_keywords, min_match=5):
     """Check if a task should be excluded based on keywords and match count."""
     match_count = sum(1 for keyword in exclusion_keywords if keyword.lower() in task.lower())
     return match_count >= min_match
@@ -93,8 +93,8 @@ def extract_tasks(text):
     Returns:
         list: A list of valid task sections as strings.
     """
-    # Define a regex pattern to match "Oppgave" followed by a space and optional digits
-    pattern = re.compile(r"(Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d*")
+    # Define a regex pattern to match "Oppgave" followed by a space and optional digits or delopgaver like 1(a)
+    pattern = re.compile(r"((Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d*|\d+\([a-zA-Z]\)|maks\s*poeng[:\s]*\d+)")
 
     # Find all matches for the pattern
     matches = [match.start() for match in pattern.finditer(text)]
@@ -110,14 +110,10 @@ def extract_tasks(text):
         end = matches[i + 1] if i + 1 < len(matches) else len(text)
         task = text[start:end].strip()
 
-        # Ensure the task only includes content up to "maks poeng X"
-        max_poeng_match = re.search(r'maks\s*poeng[:\s]*\d+', task, re.IGNORECASE)
-        if max_poeng_match:
-            task = task[:max_poeng_match.end()].strip()
-
-        # Only include tasks starting from "Oppgave X" and trim properly
-        if re.match(r'(Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d+', task):
-            tasks.append(task)
+        # Only include tasks that start with "Oppgave X" or "maks poeng"
+        if re.match(r'(Oppgave|oppgave|Oppg\u00e5ve|oppg\u00e5ve)\s*\d+|maks\s*poeng[:\s]*\d+', task):
+            if is_valid_task(task):
+                tasks.append(task)
 
     return tasks
 
@@ -136,12 +132,13 @@ def main():
         "informasjon", "vurdering", "beskjeder", "beskjedar",
         "varslinger", "varslingar", "sensurfrist", "sensurfristar",
         "varsel", "varselar", "sensurvarsel", "sensurvarselar",
-        "fagspecifik", "fagspesifikk", "oppgavesettet", "oppgåvesettet",
+        "fagspecifik", "fagspesifikk", "oppgavesettet", "oppg\u00e5vesettet",
         "levering", "leveringar", "poeng", "vektig", "sensurtidspunkt",
-        "kalkulator", "tillatne", "håndteikningar", "håndtegninger",
+        "kalkulator", "tillatne", "h\u00e5ndteikningar", "h\u00e5ndtegninger",
         "kontaktperson", "kontaktinformasjon", "direkte feil", "oppgavefrister",
         "tillatelse", "fritekstfelt", "gir maksimalt", "gje maksimalt",
-        "maksimalt", "poeng", "formelark", "formelarket", "formel"
+        "maksimalt", "poeng", "formelark", "formelarket", "formel",
+        "inspera", "assessment", "eksamensopp\u00e5ve", "eksamensoppgave"
     ]
 
 
@@ -162,7 +159,7 @@ def main():
             for task_num, task in enumerate(tasks, start=1):
                 if is_excluded_task(task, exclusion_keywords):
                     print(f"\nTask {task_num} on Page {page_num + 1} removed.")
-                else:
+                elif is_valid_task(task):
                     valid_tasks.append(task)
 
             for task in valid_tasks:
