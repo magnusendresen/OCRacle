@@ -15,26 +15,9 @@ def filejson(file):
         data = json.load(f)
         return data
 
-if __name__ == "__main__":
-    json_data = filejson("task_cache.json")
+def main(text):
+    task_key, points_key = extract_coordinates(text)
 
-    # Ensure the input to extract_coordinates is a string
-    if isinstance(json_data, list):
-        text_data = " ".join(json_data)
-    elif isinstance(json_data, dict):
-        text_data = json.dumps(json_data)
-    else:
-        text_data = str(json_data)
-
-    task_key, points_key = extract_coordinates(text_data)
-
-    print("Task Starts (Oppgave):")
-    print(task_key)
-
-    print("Task Ends (Maks poeng):")
-    print(points_key)
-
-    # Filter task_key to ensure only closest starts remain
     filtered_task_key = []
     previous_end = None
 
@@ -51,5 +34,14 @@ if __name__ == "__main__":
             filtered_task_key.append(closest_start)
         previous_end = end
 
-    print("Filtered Task Starts (Closest to Task Ends):")
-    print(filtered_task_key)
+    tasks = []
+    for i in range(len(filtered_task_key)-1):
+        tasks.append(text[filtered_task_key[i]:filtered_task_key[i+1]])
+        
+
+    # for task in tasks:
+    #     print(task)
+    #     print("\n\n")
+    # print("Filtered Task Starts:", filtered_task_key)
+
+    return tasks
