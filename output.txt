@@ -1,18 +1,10 @@
-1 ( a ) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren. 3m A ய 4m a ) Vis at fagverket er statisk bestemt. Skriv ditt svar her Format ΣΧ B D 4m 30 kN Words: 0 Maks poeng: 3
-
-
 1 ( b ) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren. 3m A E 4m B 4m 30 kN b ) Bestem opplagerkreftene i A og E. Angi svaret i et heltall antall kN. La positiv x - akse peke mot høyre og positiv z - akse peke oppover på figuren. Angi svaret med negativt fortegn dersom du mener opplagerkreftene i x - retning peker mot venstre, eller hvis du mener opplagerkreftene i z - retning peker nedover. Ax = ( - 80 ) Az = ( 30 ) Ex = ( 80 ) Merk at håndberegningene du gjør for å løse denne oppgaven må leveres inn. Maks poeng: 3
-
 
 1 ( c ) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren. 3m E 4m c ) Hvilken eller hvilke staver er nullstaver? Velg ett alternativ: ○ Stav AE og BD Stav DE Det er ingen nullstaver ○ Stav AD og BD ○ Stav AE ○ Stav BD B D 4m 30 kN C Merk at håndberegningene eller begrunnelsene du gjør for å løse denne oppgaven må leveres inn. Maks poeng: 4
 
-
 1 ( d ) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren. 3m A E 4m B D 4m 30 kN C d ) Finn største strekkraft og største trykkraft i fagverket ved å bruke knutepunktsmetoden. Angi svaret i ( positivt ) heltall antall kN. Merk at vi kun er ute etter tallverdier. Maks. strekkraft = ( 50 ) kN Maks. trykkraft = ( 80 ) KN Merk at håndberegningene du gjør for å løse denne oppgaven må leveres inn. Maks poeng: 6
-
 
 2 ( a ) [mm] 200 87.5 25 150 25 50 50 A N - 25 75 Et sammensatt tverrsnitt har geometri som vist i figuren. z - aksen er en symmetriakse for tverrsnitts geometrien. a ) Regn ut beliggenheten til arealsenter C ( yc og zc ) . ( 0 ) mm, YC = zc = ( 130 ) mm. Merk at håndberegningene du gjør for å løse denne oppgaven må leveres inn. Maks poeng: 4
 
-
 2 ( b ) Et sammensatt tverrsnitt har geometri som vist i figuren. z - aksen er en symmetriakse for tverrsnitts geometrien. 200 mm Z 150 mm 50 mm 25 mm→ K 25 mm y 75 mm b ) Beregn tverrsnittets annet areal moment Iy. Bruk Steiners teorem Rund av svaret ditt til nærmeste heltall. Iy = ( 83 - 84 ) 106 mm². Merk at håndberegningene du gjør for å løse denne oppgaven må leveres inn. Maks poeng: 6
-
 
