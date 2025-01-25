@@ -12,6 +12,11 @@ def normalize_text(text):
         '×': '\times',  # Replace multiplication symbol with LaTeX command
         '÷': '\div',  # Replace division symbol with LaTeX command
         '=': ' = ',  # Add spacing around equals for clarity
+        '+': ' + ',  # Add spacing around plus for clarity
+        '-': ' - ',  # Add spacing around minus for clarity
+        '*': ' * ',  # Add spacing around multiplication for clarity
+        '/': ' / ',  # Add spacing around division for clarity
+        ';': ':',  # Replace semicolon with colon
         '∞': '\infty',  # Replace infinity symbol
         '∑': '\sum',  # Replace summation symbol
         '√': '\sqrt',  # Replace square root symbol
