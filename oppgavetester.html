@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KaTeX Verifier</title>
+
+  <!-- KaTeX CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+
+  <!-- KaTeX Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>KaTeX Verifier</h1>
+    <div id="task-container"></div>
+  </div>
+
+  <script>
+    // Flat string med hele oppgaven
+    const oppgaveTekst = `La \( A = \begin{bmatrix} 1 & 2 & 0 \\ 3 & 8 & 0 \\ 0 & 0 & 1 \end{bmatrix} \).<br>Hva er determinanten til matrisa \( A \)?<br>Rund av svaret til nærmeste heltall.`;
+
+    // Sett inn oppgaveteksten i containeren
+    document.getElementById("task-container").innerHTML = oppgaveTekst;
+
+    // Render KaTeX
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true }
+        ]
+      });
+    });
+  </script>
+</body>
+</html>
