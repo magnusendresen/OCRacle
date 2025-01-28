@@ -1,68 +1,116 @@
+import os
+import pandas as pd
 import numpy as np
+import random
+import re
 
-def removeRandomLetter(data, percentage):
-    for i in range(len(data)):
-        if np.random.rand() < percentage:
-            rand_index = np.random.randint(len(data[i]))
-            data[i] = data[i][:rand_index] + data[i][rand_index+1:]
-    return data
+# ---- Setup file path ----
+dataset_path = os.path.join(os.path.dirname(__file__), "..", "dataset", "dataset.dsv")
+dataset_path = os.path.normpath(dataset_path)  # Cross-platform compatibility
 
-def addRandomSpaces(data, percentage):
-    for i in range(len(data)):
-        if np.random.rand() < percentage:
-            rand_index = np.random.randint(len(data[i]))
-            data[i] = data[i][:rand_index] + ' ' + data[i][rand_index:]
-    return data
+# ---- Function: Load Dataset Without Corrupting Semicolons ----
+def load_dataset():
+    try:
+        df = pd.read_csv(dataset_path, delimiter=";", dtype=str, keep_default_na=False)  # Ensure all data remains string type
+        print(f"✅ Loaded dataset with {len(df)} rows.")
+        return df
+    except Exception as e:
+        print(f"❌ Error loading dataset: {e}")
+        exit()
 
-def misinterpretLetters(data, percentage):
-    similarCharacters = [
-        {'0', 'O', 'D', 'Q'}, {'1', 'I', 'l', '|', '!', '7'}, {'2', 'Z', '5'}, {'3', 'E', '8'},
-        {'4', 'A', 'H'}, {'5', 'S', '2'}, {'6', 'b', 'G'}, {'7', 'T', '1'}, {'8', 'B', '3'},
-        {'9', 'g', 'q', 'P'}, {'a', 'e', 'o', 'd'}, {'b', '6', 'h'}, {'c', 'k', 'e'}, {'d', 'cl', 'a'},
-        {'e', 'a', 'c'}, {'f', 't', 'r'}, {'g', '9', 'q'}, {'h', 'n', 'b'}, {'i', '1', 'j', 'l'},
-        {'j', 'i', 'y'}, {'k', 'c', 'x'}, {'l', '1', 'i'}, {'m', 'n', 'rn'}, {'n', 'm', 'h'},
-        {'o', '0', 'a'}, {'p', 'q', '9'}, {'q', 'p', 'g'}, {'r', 'n', 'f'}, {'s', '5', 'z'},
-        {'t', 'f', '7'}, {'u', 'v', 'w'}, {'v', 'u', 'y'}, {'w', 'vv', 'u'}, {'x', 'ks', 'k'},
-        {'y', 'j', 'v'}, {'z', '2', 's'}, {'A', '4', 'H'}, {'B', '8', '3'}, {'C', 'G', 'O'},
-        {'D', '0', 'O'}, {'E', '3', '8'}, {'F', 'P', 'T'}, {'G', '6', 'C'}, {'H', '4', 'A'},
-        {'I', '1', 'l'}, {'J', 'L', 'i'}, {'K', 'X', 'k'}, {'L', '1', 'J'}, {'M', 'N', 'W'},
-        {'N', 'M', 'H'}, {'O', '0', 'Q'}, {'P', 'R', '9'}, {'Q', 'O', '0'}, {'R', 'P', 'K'},
-        {'S', '5', '2'}, {'T', '7', 'F'}, {'U', 'V', 'W'}, {'V', 'U', 'Y'}, {'W', 'VV', 'M'},
-        {'X', 'K', 'ks'}, {'Y', 'V', 'j'}, {'Z', '2', 's'},{'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'A'}, {'à', 'á', 'â', 'ã', 'ä', 'å', 'a'},
-        {'È', 'É', 'Ê', 'Ë', 'E'}, {'è', 'é', 'ê', 'ë', 'e'},
-        {'Ì', 'Í', 'Î', 'Ï', 'I'}, {'ì', 'í', 'î', 'ï', 'i'},
-        {'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'O'}, {'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'o'},
-        {'Ù', 'Ú', 'Û', 'Ü', 'U'}, {'ù', 'ú', 'û', 'ü', 'u'},
-        {'Ç', 'C'}, {'ç', 'c'}, {'Ñ', 'N'}, {'ñ', 'n'}
-    ]
-    for i in range(len(data)):
-        new_string = list(data[i])
-        for k in range(len(new_string)):
-            if np.random.rand() < percentage:
-                for l in range(len(similarCharacters)):
-                    if new_string[k] in similarCharacters[l]:
-                        new_string[k] = np.random.choice(list(similarCharacters[l]))
-                        break
-        data[i] = ''.join(new_string)
-    return data
+# ---- Function: Generate a Random Task Number ----
+def generate_random_task_number():
+    number = random.randint(1, 20)  # Random number between 1 and 20
+    letter = random.choice(["", "a", "b", "c"])  # Optionally add a letter
+    return f"{number}{letter}"
 
-def simulateOCRMistakes(data, percentage):
-    data = removeRandomLetter(data, percentage)
-    data = addRandomSpaces(data, percentage)
-    data = misinterpretLetters(data, percentage)
-    return data
+# ---- Function: Replace First Task Number in a String ----
+def replace_first_task_number(text, new_task_number):
+    return re.sub(r"^\d+[a-zA-Z]?", new_task_number, text, count=1)  # Replace only the first occurrence
 
-def readCSVfile(filepath):
-    with open(filepath, 'r') as file:
-        data = file.readlines()
+# ---- Function: Remove Random Letter ----
+def remove_random_letter(text, probability):
+    text_list = list(text)
+    for i in range(len(text_list)):
+        if np.random.rand() < probability and len(text_list) > 1:
+            rand_index = np.random.randint(len(text_list))
+            text_list.pop(rand_index)
+    return "".join(text_list)
+
+# ---- Function: Add Random Spaces ----
+def add_random_spaces(text, probability):
+    text_list = list(text)
+    for i in range(len(text_list)):
+        if np.random.rand() < probability:
+            text_list.insert(i, ' ')
+    return "".join(text_list)
+
+# ---- Function: Misinterpret Letters ----
+def misinterpret_letters(text, probability):
+    similar_characters = {
+        '0': 'OQD', '1': 'Il|!7', '2': 'Z5', '3': 'E8', '4': 'AH', '5': 'S2', '6': 'bG',
+        '7': 'T1', '8': 'B3', '9': 'gqP', 'a': 'eo', 'b': '6h', 'c': 'ke', 'd': 'cla',
+        'e': 'ac', 'f': 'tr', 'g': '9q', 'h': 'nb', 'i': '1jl', 'j': 'iy', 'k': 'cx',
+        'l': '1i', 'm': 'nrn', 'n': 'mh', 'o': '0a', 'p': 'q9', 'q': 'pg', 'r': 'nf',
+        's': '5z', 't': 'f7', 'u': 'vw', 'v': 'uy', 'w': 'vv', 'x': 'ksk', 'y': 'jv', 'z': '2s'
+    }
+    
+    text_list = list(text)
+    for i in range(len(text_list)):
+        if text_list[i] in similar_characters and np.random.rand() < probability:
+            text_list[i] = random.choice(similar_characters[text_list[i]])
+    
+    return "".join(text_list)
+
+# ---- Function: Replace Numbers with Random Digits ----
+def replace_numbers_with_random(text, probability):
+    text_list = list(text)
+    for i in range(len(text_list)):
+        if text_list[i].isdigit() and np.random.rand() < probability:
+            text_list[i] = str(random.randint(1, 9))  # Replace with a random digit 1-9
+    return "".join(text_list)
+
+# ---- Function: Simulate OCR Mistakes While Keeping Task Number Intact ----
+def simulate_ocr_mistakes(text, probability):
+    text = remove_random_letter(text, probability)
+    text = add_random_spaces(text, probability)
+    text = misinterpret_letters(text, probability)
+    text = replace_numbers_with_random(text, probability)
+    return text
+
+# ---- Function: Generate Variations of an Entry ----
+def generate_variations(row):
+    variations = []
+    
+    for _ in range(5):  # Create 5 variations per original row
+        new_row = row.copy()
+        new_task_number = generate_random_task_number()  # Generate a new random task number
         
-    # Multipliser og flatt ut listen
-    data = [line.strip() for line in data] * 10
-    return data
+        # Apply OCR mistakes while ensuring the task number is intact
+        new_row["INPUT"] = replace_first_task_number(simulate_ocr_mistakes(row["INPUT"], probability=0.01), new_task_number)
+        new_row["TEXT"] = replace_first_task_number(simulate_ocr_mistakes(row["TEXT"], probability=0.01), new_task_number)
+        new_row["TASK"] = new_task_number  # Ensure TASK column matches the new number
+        
+        variations.append(new_row)
 
-formuleringer = readCSVfile('dataset/formuleringer.csv')
+    return variations
 
-resultat = simulateOCRMistakes(formuleringer, 0.5)
+# ---- Load dataset ----
+df = load_dataset()
+original_row_count = len(df)  # Store the original dataset size
 
-for line in resultat:
-    print(line)
+# ---- Generate New Augmented Data ----
+new_data = []
+for i in range(original_row_count):  # Only process original rows
+    new_data.extend(generate_variations(df.iloc[i]))
+
+# Convert to DataFrame and Append to Original
+new_df = pd.DataFrame(new_data, columns=df.columns)  # Ensure correct column structure
+df = pd.concat([df, new_df], ignore_index=True)  # Append new rows
+
+# ---- Save Back to `dataset.dsv` Without Corrupting Semicolons ----
+try:
+    df.to_csv(dataset_path, sep=";", index=False, quoting=3, encoding="utf-8")  # Quoting=3 ensures semicolons stay intact
+    print(f"✅ Successfully added {len(new_df)} new rows. Total dataset now has {len(df)} rows.")
+except Exception as e:
+    print(f"❌ Error saving dataset: {e}")
