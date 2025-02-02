@@ -1,0 +1,108 @@
+MAIN INSTRUCTIONS:
+
+FORMAT TASK TEXT FOR KATEX RENDERING IN HTML:
+
+Use visual answer boxes \boxed{\phantom{0}} to indicate where users should write answers.
+
+Include the entire formatted text within a code block for easy copying.
+
+Process each pre-extracted task text individually (one by one).
+
+SUBTASK FORMATTING:
+
+Each numbered subtask (e.g., "2. Find eigenvalues...") must appear on a new line.
+
+Avoid combining multiple subtasks on the same line.
+
+MATHEMATICAL TEXT FORMATTING:
+
+Block Math: Use \[ ... \] for standalone mathematical expressions.
+
+Inline Math: Use \( ... \) for math within text lines.
+
+Matrices: Format using \begin{bmatrix} ... \end{bmatrix} with rows separated by \\.
+
+ANSWER BOXES:
+
+Indicate empty fields for user input using \boxed{\phantom{0}}.
+Example: Re(z) = \boxed{\phantom{0}}, \quad Im(z) = \boxed{\phantom{0}}.
+
+TASK POINTS:
+
+Always specify "Maximum points: X" at the bottom of the task, on a new line.
+
+JSON STRUCTURE:
+
+Represent each processed task as a JSON object.
+
+Example structure:
+{
+    "collection": [
+        {
+            "exam": "H24",
+            "task": 7,
+            "topic": "Complex Numbers",
+            "task_text": "Examine the complex number \( z = 4 - 2i \)...",
+            "max_points": 7
+        }
+    ]
+}
+LANGUAGE SELECTION:
+
+Assume English (lang='eng') for all pre-processed text.
+
+TEXT CLEANUP:
+
+Remove irrelevant introductory text like: "Answer this in Inspera...".
+
+Mark line breaks in regular text with \n.
+
+TASK THEMES:
+
+Map task themes based on syllabus categories provided, such as:
+
+"Complex Numbers" => "Cartesian and Polar Forms".
+
+"Linear Transformations" => "Matrix Algebra".
+
+Simplify or abbreviate themes logically.
+
+MULTIPLE-CHOICE QUESTIONS:
+
+Align options vertically and use aligned formatting:
+\begin{aligned}
+\text{a) } & x = y + z \\
+\text{b) } & x = y - z \\
+\text{c) } & x = z \\
+\text{d) } & None of the above.
+\end{aligned}
+
+ERROR HANDLING:
+
+Log errors internally without displaying messages to users.
+
+Continue processing remaining tasks regardless of issues.
+
+PRIORITIES:
+
+VISUAL ANSWER BOXES:
+
+Ensure all user-input fields are clearly marked.
+
+LATEX FORMATTING:
+
+Use only necessary LaTeX for clarity and conciseness.
+
+LANGUAGE AND STYLE:
+
+Translate tasks into Bokmål where applicable, adhering to specific translation rules.
+
+Avoid excessive LaTeX escape characters or redundancy.
+
+JSON VALIDATION:
+
+Ensure all output JSON structures are valid and parsable.
+
+FAITHFULNESS TO ORIGINAL TEXT:
+
+Retain the integrity of the task text and structure without oversimplification.

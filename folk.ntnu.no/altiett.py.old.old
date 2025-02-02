@@ -1,0 +1,148 @@
+import os
+import logging
+from tkinter import Tk, filedialog
+from pdf2image import convert_from_path
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
+import pytesseract
+import fitz  # PyMuPDF
+
+# Konfigurer logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def preprocess_image_for_ocr(pil_image):
+    """
+    Enkel forbehandling for å forbedre OCR-kvaliteten:
+      1) Lim inn originalen på et hvitt 'canvas' (fjern evt. gjennomsiktighet).
+      2) Konverter til gråskala.
+      3) Filtrer vekk støy med et enkelt medianfilter.
+      4) Øk kontrasten.
+    """
+    # 1) Lag et hvitt canvas
+    canvas = Image.new("RGB", pil_image.size, (255, 255, 255))
+    canvas.paste(pil_image, (0, 0))
+
+    # 2) Konverter til gråskala
+    gray = canvas.convert("L")
+
+    # 3) Fjern litt støy
+    filtered = gray.filter(ImageFilter.MedianFilter())
+
+    # 4) Øk kontrasten
+    enhancer = ImageEnhance.Contrast(filtered)
+    contrast_enhanced = enhancer.enhance(1.0)  # Juster opp/ned for ønsket kontrast
+
+    return contrast_enhanced
+
+def pdf_to_combined_text(pdf_path, output_dir):
+    try:
+        # Åpne PDF med PyMuPDF
+        doc = fitz.open(pdf_path)
+        logging.info(f"Opened PDF file: {pdf_path}")
+
+        # Konverter PDF-sider til bilder
+        page_images = convert_from_path(pdf_path)
+        logging.info(f"Converted PDF to {len(page_images)} page images.")
+
+        # Opprett en mappe for output
+        base_name = os.path.splitext(os.path.basename(pdf_path))[0]
+        pdf_output_dir = os.path.join(output_dir, base_name)
+        os.makedirs(pdf_output_dir, exist_ok=True)
+        logging.info(f"Created output directory: {pdf_output_dir}")
+
+        # Lag en utdatafil for OCR-tekst
+        output_file_path = os.path.join(pdf_output_dir, f"{base_name}_combined.txt")
+
+        with open(output_file_path, "w", encoding="utf-8") as output_file:
+            # Midlertidige bildefiler for hver side, for ev. opprydding
+            temp_page_image_paths = []
+
+            # ---------- Del 1: OCR på PDF-sidene ----------
+            for i, page_image in enumerate(page_images):
+                temp_page_path = os.path.join(pdf_output_dir, f"temp_page_{i + 1}.png")
+                page_image.save(temp_page_path, "PNG")
+                temp_page_image_paths.append(temp_page_path)
+
+                logging.info(f"Processing OCR for page {i + 1}")
+
+                # Forbehandle bildet
+                processed_image = preprocess_image_for_ocr(page_image)
+
+                # Kjør Tesseract med litt mer optimal config
+                text = pytesseract.image_to_string(
+                    processed_image,
+                    lang='eng',
+                    config='--oem 3 --psm 6'
+                )
+
+                # Skriv resultatet for denne siden
+                output_file.write(f"--- Page {i + 1} ---\n")
+                output_file.write(text)
+                output_file.write("\n\n")
+
+            # ---------- Del 2: OCR på innstøpte bilder i PDF-en ----------
+            image_counter = 1
+            for page_num in range(len(doc)):
+                page = doc.load_page(page_num)
+                for img_index, img in enumerate(page.get_images(full=True)):
+                    xref = img[0]
+                    base_image = doc.extract_image(xref)
+                    image_bytes = base_image["image"]
+
+                    # Skipp veldig små bilder (f.eks. ikoner)
+                    if len(image_bytes) < 2048:
+                        logging.info(
+                            f"Skipped small image on page {page_num + 1}, "
+                            f"image {img_index + 1} (size: {len(image_bytes)} bytes)"
+                        )
+                        continue
+
+                    # Lagre ekstrahert bilde
+                    image_filename = f"{base_name}_extracted_{image_counter}.png"
+                    image_filepath = os.path.join(pdf_output_dir, image_filename)
+                    image_filename = os.path.basename(image_filename)  # Fjern resten av direktoriet
+                    with open(image_filepath, "wb") as img_file:
+                        img_file.write(image_bytes)
+
+                    logging.info(f"Processing OCR for extracted image {image_counter}")
+
+                    # Åpne og forbehandle det ekstraherte bildet
+                    extracted_image = Image.open(image_filepath)
+                    processed_extracted_image = preprocess_image_for_ocr(extracted_image)
+
+                    # OCR
+                    ocr_text = pytesseract.image_to_string(
+                        processed_extracted_image,
+                        lang='eng',
+                        config='--oem 3 --psm 6'
+                    )
+
+                    # Skriv OCR-resultat
+                    output_file.write(f"--- {image_filename} ---\n")
+                    output_file.write(ocr_text)
+                    output_file.write("\n\n")
+
+                    image_counter += 1
+
+            # Rydd opp midlertidige sidebilder
+            for temp_image_path in temp_page_image_paths:
+                os.remove(temp_image_path)
+                logging.info(f"Deleted temporary page image: {temp_image_path}")
+
+        logging.info(f"Combined OCR output saved to {output_file_path}")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    # Initialize Tkinter for filvalg
+    Tk().withdraw()
+    pdf_path = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")])
+    if not pdf_path:
+        logging.warning("No PDF file selected. Exiting.")
+        exit()
+
+    # Output-mappe settes til mappen hvor skriptet ligger
+    output_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Kjør prosessen
+    pdf_to_combined_text(pdf_path, output_dir)
+    logging.info("Process completed successfully.")

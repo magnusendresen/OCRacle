@@ -1,0 +1,159 @@
+INTRO (VIKTIG): Beholder her den originale introen og den kommende oppsummeringen for å sikre at alle viktigheter er med. Alt innhold nedenfor er detaljerte instruksjoner som skal hjelpe deg med å generere riktig formatert JSON-utfil fra en tekstfil (eksempelscenario for eksamen). Vær nøye med å følge retningslinjene slik at resultatet blir korrekt. 
+
+HOVEDINSTRUKSJONER:  
+Formatér oppgavetekster for KaTeX-rendering i HTML.  
+Inkluder visuelle bokser (\boxed{\phantom{0}}) for innføring der det er nødvendig, slik at det fremgår klart hvor brukeren skal skrive svar.  
+Inkluder alt i en programmeringsboks slik at brukeren lett kan kopiere.  
+Prosesser all tekst i hele dokumentet – skriv inn 3 oppgaver av gangen.  
+ALDRI bruk canvas – svar direkte i chatten med programmeringsboks.  
+
+FORMATTERINGSREGLER:  
+Sub-oppgaver:  
+- Alle nummererte deloppgaver (f.eks. "2. Finn egenverdiene ...") skal stå på hver sin linje. Hvis det er tekst før den første deloppgaven skal det også være et linjeskift før denne (f.eks. "1. Løs likningssystemet ...").  
+- Unngå at flere deloppgaver står på samme linje.  
+- ALLTID start en ny deloppgave på en ny linje.  
+- Dersom det er mangle ulike deloppgaver som åpenbart bør deles opp i ulike deler av pensum skal disse gjøres det. Da skal oppgavene kalles eksempelvis "1a", "2c", "6b", osv.
+
+Processing (JSON):  
+- Les hele tekstfilen.  
+- Kombiner resultatene til et JSON-objekt.  
+
+Tekstbehandling:  
+Vanlig tekst:  
+- Gjengi all vanlig tekst som ren tekst.  
+- Linjeskift markeres med \n.  
+- !!! VIKTIG VIKTIG VIKTIG !!! Fjern introduksjonstekster som: "Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.", "Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn.", "Rund av svaret ditt til 2 desimalar. Dvs, får du at 
+, skriv du -0.13 i boksen under.", "Merk at håndberegningene eller begrunnelsene du gjør for å løse denne oppgaven må leveres inn."m og alt annet overflødig som kun er nødvendig for teknisk gjennomførelse på eksamensdagen og er irrelevant for eksamensøving. !!! VIKTIG VIKTIG VIKTIG !!!
+
+Display-matematikk (block math):  
+- Bruk kun \[ ... \] for matematiske uttrykk på egen linje.  
+- Ingen doble \\[ \\[ eller unødvendige escape-tegn.  
+
+Inline-matematikk:  
+- Bruk \\( ... \\) for matematiske uttrykk inne i tekstlinjer.  
+
+Bokser for innføring:  
+- Bruk \boxed{\phantom{0}} for å vise tomme felter der studenten skal skrive inn svar.  
+- Eksempel: Re(z) = \boxed{\phantom{0}}, \quad Im(z) = \boxed{\phantom{0}}.  
+
+Matriser:  
+- Bruk \begin{bmatrix} ... \end{bmatrix}.  
+- Hver rad separeres med \\\\.  
+
+Poenginformasjon:  
+- "Maks poeng: X" skal stå nederst på en ny linje, etter all annen tekst.  
+- Eksempel:  
+  Finn verdien av integralet:  
+  \[  
+  \int_0^3 x^2 e^{x^2/3} \, dx = \boxed{\phantom{0}}.  
+  \]  
+  Maks poeng: 7  
+
+JSON-struktur med attributter:  
+- Hver oppgave i JSON-en skal inneholde følgende attributter:  
+  eksamen: Koden for eksamenssettet, f.eks. "H24".  
+  oppgave: Oppgavenummer, f.eks. "2".  
+  tema: Temaet for oppgaven, basert på pensumlisten som brukeren har oppgitt.  
+  oppgavetekst: LaTeX-formatert tekst for oppgaven, korrekt escaped for JSON.  
+  losning: En tom streng som placeholder for løsningsforslag. Eksempel: "losning": "".  
+  bilder: En array med filnavnene til bildefiler som er relevante for oppgaven. Hvis ingen bilder er knyttet til oppgaven, skal verdien være null.  
+
+SPESIFIKKE INSTRUKSJONER:  
+Tekstfilen:  
+- Bildetekster er alltid merket med linjer som --- <filename>.png ---.  
+
+Kobling mellom bilder og oppgaver:  
+- Nederst i tekstfila ligger OCR for bilder som skal brukes sammen med teksten, dersom teksten matcher skal bildet refereres til.
+- Pass på false positives, det er kanskje fort gjort å bare legge ved oppgave 1, 2, 3, osv. men det er ikke nødvendigvis alltid riktig.
+- Hvis teksten i bildene er relevant for en oppgave, legg til filnavnet i "bilder".  
+- Hvis det er tvil eller ingen tekst som matcher, sett "bilder": null.  
+- Bruk mer enn bare filnavnet, det er behov for directorien til bildet ettersom det ikke ligger nøyaktig samme sted.
+- ABSOLUTT IKKE bruk toppen av stinavnet f.eks. z:\\, bruk kun det som kommer etterpå, ettersom alt skjer lokalt i forhold til scriptfila som ligger øverst. IKKE GLEM Å FJERN z:\\!!
+
+Hele resultatet skal presenteres som gyldig JSON.  
+Ingen ekstra { eller [ i begynnelsen, og ingen ekstra } eller ] på slutten.  
+
+Input-output sammenligning:  
+Input (tekstfil):  
+yaml  
+Copy code  
+--- Page 1 ---  
+Oppgave 1: Løs likningssystemet ...  
+Maks poeng: 8  
+
+--- Page 3 ---  
+Oppgave 2: Bestem determinanten for matrisa ...  
+Maks poeng: 6  
+
+--- "MEKT1101H24\MEKT1101H24_extracted_1.png" ---  
+Dette er et bilde relatert til Oppgave 1.  
+
+--- "MEKT1101H24\MEKT1101H24_extracted_1.png" ---  
+Dette er et bilde relatert til Oppgave 2.  
+
+Output (JSON):  
+json  
+Copy code  
+{  
+    "eksamen": "H24",  
+    "oppgave": 1,  
+    "tema": "Ligningssystemer",  
+    "oppgavetekst": "Løs likningssystemet ...",  
+    "losning": "",  
+    "bilder": ["MEKT1101H24\MEKT1101H24_extracted_1.png"]  
+},  
+{  
+    "eksamen": "H24",  
+    "oppgave": 2,  
+    "tema": "Matriseregning",  
+    "oppgavetekst": "Bestem determinanten for matrisa ...",  
+    "losning": "",  
+    "bilder": ["MEKT1101H24\MEKT1101H24_extracted_2.png"]  
+}  
+
+Nøyaktighet:  
+- Bildetekster må kobles logisk til oppgavene, men unngå overflødige eller irrelevante koblinger.  
+- Hvis en oppgave ikke har noen tilhørende bilder, sett "bilder": null.  
+
+Når du genererer LaTeX-strenger for JSON-filer:  
+- Escape alle backslashes korrekt: Alle \ i LaTeX-strenger skal erstattes med \\ for å sikre gyldig JSON-format.  
+- Unngå ugyldige escape-sekvenser: Pass på at LaTeX-spesifikke kommandoer som inneholder backslashes (f.eks. \text, \frac) alltid dobbeltescapes.  
+- Valider syntaksen: Etter generering av JSON, kontroller at strengen er gyldig ved å forsikre deg om at den ikke inneholder uescaped spesialtegn.  
+- Oppgi korrekt escape-logikk for kontekst: For bruk i JavaScript og JSON, dobbelt-escape backslashes som \\\\ når nødvendig.  
+
+Eksempelformat:  
+{  
+    "oppgavetekst": "Finn inversmatrisen \\( A^{-1} \\)."  
+}  
+
+Temavalg:  
+- Temaet som brukes i JSON-filen må være eksakt det brukeren oppgir.  
+
+Prioriteringer:  
+- Visuelle bokser: Alle svarfelter representeres som \boxed{\phantom{0}}.  
+- LaTeX-formatering: Kun nødvendig LaTeX skal brukes, ingen overflødig formatering.  
+- Nynorsk til bokmål: Oversett nynorsk til korrekt bokmål (f.eks. "Kva for ein" → "Hvilken").  
+- Flervalgoppgaver: Venstrejuster alternativer (a, b, c, d). Eksempel:  
+  \[  
+  \begin{aligned}  
+  \text{a) } & x = y + z \\  
+  \text{b) } & x = y - z \\  
+  \text{c) } & x = z \\  
+  \text{d) } & Ingen av alternativene.  
+  \end{aligned}  
+  \]  
+
+JSON-validering:  
+- JSON-strukturen skal være gyldig, lett å parse og tro mot originalen.  
+
+Absolutt trofasthet:  
+Behold original oppgavetekst og struktur. Ingen unødvendige endringer eller forenklinger.  
+
+Husk:  
+- Skriv tre oppgaver av gangen.  
+- Bekreft at samtlige steg er fulgt: JSON, LaTeX-oppgavetekst med poeng i samme struktur som kilden, dropp Inspera-informasjon og liknende.  
+
+OPPSUMMERING (VIKTIG): Du har nå fått en fullstendig oversikt over hvordan du skal generere det kravstyrte utfil-formatet. Det er helt essensielt at du beholder struktur, escaping og innhold 100% korrekt. 
+ABSOLUTT IKKE GLEM FLERVALGSFORMATET. 
+ABSOLUTT IKKE GLEM KORREKT DIRECTORY FOR BILDER. 
+ABSOLUTT IKKE HA MED OVERFLADISK TEKST SOM IKKE ER RELEVANT FOR EKSAMENSØVING.

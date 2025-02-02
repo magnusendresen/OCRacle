@@ -1,0 +1,76 @@
+INTRO (VIKTIG): Beholder her den originale introen og den kommende oppsummeringen for å sikre at alle viktigheter er med. Alt innhold nedenfor er detaljerte instruksjoner som skal hjelpe deg med å generere riktig formatert JSON-utfil fra en tekstfil (eksempelscenario for eksamen). Vær nøye med å følge retningslinjene slik at resultatet blir korrekt.
+
+HOVEDINSTRUKSJONER:  
+Les hele tekstfilen.  
+Formatér oppgavetekster for KaTeX-rendering i HTML.
+Inkluder alt i en programmeringsboks slik at brukeren lett kan kopiere.  
+Prosesser all tekst i hele dokumentet – skriv inn 3 oppgaver av gangen.  
+Kombiner resultatene til et JSON-objekt.  
+
+
+
+Tekstbehandling:  
+    Vanlig tekst:  
+    - Gjengi all vanlig tekst som ren tekst.  
+    - Linjeskift markeres med `<br>`.  
+
+    - Fjern introduksjonstekster som:  
+    "Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir."  
+    "Merk at håndberegningene du gjør for å løse denne oppgaven må leveres inn."  
+    "Rund av svaret ditt til 2 desimalar."  
+    "Merk at håndberegningene eller begrunnelsene du gjør for å løse denne oppgaven må leveres inn."  
+    - Alt annet overflødig som kun er nødvendig for teknisk gjennomførelse på eksamensdagen og er irrelevant for eksamensøving skal også fjernes.
+
+    Sub-oppgaver:  
+    - Alle nummererte deloppgaver (f.eks. "2. Finn egenverdiene ...") skal stå på hver sin linje. Hvis det er tekst før den første deloppgaven skal det også være et linjeskift før denne (f.eks. "1. Løs likningssystemet ...").  
+    - Unngå at flere deloppgaver står på samme linje.  
+    - ALLTID start en ny deloppgave på en ny linje.  
+    - Dersom det er mange ulike deloppgaver som åpenbart bør deles opp i ulike deler av pensum skal disse gjøres det. Da skal oppgavene kalles eksempelvis "1a", "2c", "6b", osv.
+
+    Display-matematikk (block math):  
+    - Bruk kun `\[ ... \]` for matematiske uttrykk på egen linje.  
+
+    Inline-matematikk:  
+    - Bruk `\( ... \)` for matematiske uttrykk inne i tekstlinjer.  
+
+    Bokser for innføring:  
+    - Bruk `\boxed{\phantom{0}}` for å vise tomme felter der studenten skal skrive inn svar.  
+    - Eksempel: `Re(z) = \boxed{\phantom{0}}, \quad Im(z) = \boxed{\phantom{0}}.`  
+
+    Matriser:  
+    - Bruk `\begin{bmatrix} ... \end{bmatrix}`.  
+    - Hver rad separeres med `\\\\`.  
+
+Poenginformasjon:  
+- "Maks poeng: X" skal stå nederst på en ny linje, etter all annen tekst, som kommer fra maksPoeng attributten.
+
+JSON-struktur med attributter:
+
+    Hver oppgave i JSON-en skal inneholde følgende attributter:
+    eksamen: Koden for eksamenssettet, f.eks. "H24".
+    oppgave: Oppgavenummer, f.eks. "2".
+    tema: Temaet for oppgaven, basert på pensumlisten som brukeren har oppgitt.
+    oppgavetekst: LaTeX-formatert tekst for oppgaven, korrekt escaped for JSON.
+    losning: En tom streng som placeholder for løsningsforslag. Eksempel: "losning": "".
+    bilder: En array med filnavnene til bildefiler som er relevante for oppgaven. Hvis ingen bilder er knyttet til oppgaven, skal verdien være null.
+    kode: Tekst for programmering dersom det er en del av oppgaven.
+
+
+SPESIFIKKE INSTRUKSJONER:
+    Bildetekster er alltid merket med linjer som --- <filename>.png ---.
+
+Bilder:
+    Bildetekster er nærmest alltid merket med linjer som --- <folder>\\<filename>.png ---.
+    Nederst i tekstfila ligger OCR for bilder som skal brukes sammen med teksten, dersom teksten matcher skal bildet refereres til.
+    Pass på false positives. Det er kanskje fort gjort å bare legge ved oppgave 1, 2, 3, osv., men det er ikke nødvendigvis alltid riktig.
+    Hvis teksten i bildene er relevant for en oppgave, legg til filnavnet i "bilder".
+    Hvis det er tvil eller ingen tekst som matcher, sett "bilder": null.
+    Skriv inn hele filnavnet med directory slik at det er vedlagt i json-filen slik: "INGT1002H24\\INGT1002H24_extracted_1.png"
+
+OPPSUMMERING:
+Du har nå fått en fullstendig oversikt over hvordan du skal generere det kravstyrte utfil-formatet. Det er helt essensielt at du beholder struktur, escaping og innhold 100% korrekt i henhold til kilden.
+
+VIKTIGE PUNKTER:
+    Ingen overflødig tekst: Kun relevant tekst for eksamensøving skal være med.
+    KaTeX-integrasjon: Bruk riktig formatering for inline- og block-matematikk.
+    Valider JSON: Kontroller alltid for gyldig JSON-syntaks.

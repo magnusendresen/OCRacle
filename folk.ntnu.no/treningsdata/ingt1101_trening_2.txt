@@ -1,0 +1,23 @@
+7 Numerisk derivasjon
+
+Vi maler folgende verdier for hayden tilen drone:
+‘= [158, 155, 158, 163, 170, 178, 185, 189, 188, 183]
+
+Mélingene er gjot ved falgende tidspunkt:
+t= [0.2,0.4,0.6,0.8, 1.0, 1.2, 1.4, 1.6,1.8, 2.0]
+
+Viser bort fra enhetene tilh 09 €.
+
+Vi antar at dronen kun beveger seg i hayderetningen. Hva gir forroverdifferanse som en
+tiinzerming til den tidsderiverte av hayden?
+
+‘Vforover(1.0) =:
+va air bakoverdifferanse?
+
+oatovee(1.0) =
+
+Hva gir sentraldifferanse?
+
+ata (.0) =|
+
+‘Maks poeng: 6

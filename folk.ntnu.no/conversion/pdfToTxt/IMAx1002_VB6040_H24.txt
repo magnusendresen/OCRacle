@@ -1,0 +1,383 @@
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_1.png:
+IMAx1002 og VB6040, H24
+1 Forside
+
+Eksamensoppgave i IMAA1002, IMAG1002, IMAT1002, VB6040 Matematikk for ingeniorfag 1
+Dato: 10.12.2024
+
+Fagleg kontakt:
+
+IMAA1002 (Alesund)
+
+Elias Sandal
+
+IMAG1002 og VB6040 (Gjovik)
+Anders Oulie
+
+IMAT1002 (Trondheim)
+
+Torkil Utvik Stai
+
+Alice Petronella Hedenlund
+
+Kjem til eksamenslokalet: NEI
+
+Hjelpemiddelkode/Tillatne hjelpemiddel:
+C: Spesifiserte trykte og handskrivne hjelpemidlar tillat. Bestemt, enkel kalkulator tillat.
+
+Vi spesifiserer at ingen trykte eller handskrivne hjelpemidlar er tillatne, med unntak av det vedlagte
+formelarket.
+
+Tillatne kalkulatorar:
+
+e Casio FX-82CW, Casio FC100 V2, Casio fx-82ES PLUS og Casio fx-82EX
+e Citizen SR-270X og Citizen SR-270X College
+e Hewlett Packard HP30S
+
+ANNA INFORMASJON:
+
+Les oppgavene noye og gjer opp dine eigne meiningar. Presiser i svara kva for foresetnadar
+du har lagt til grunn i tolking/avgrensing av oppgava.
+
+Fagleg kontaktperson kontaktast berre dersom det er direkte feil eller manglar i
+oppgavesettet. Vend deg til ei eksamensvakt om du meiner det er feil eller manglar. Noter
+spe@rsmalet ditt pa forehand.
+
+FAGSPESIFIKK INFORMASJON
+
+Handteikningar:
+
+loppgave 1, 6,9 og 14 er det lagt opp til at du skal svare pa ark. Andre oppgaver skal du svare
+direkte pa i Inspera. Nedst i oppgava finn du ein sjusifra kode. Fyll inn denne koden gvst til venstre
+pa dei arka du ynskjer a levere.
+
+Det er tilradd a gjere dette undervegs i eksamen. Dersom du treng tilgang til kodane etter at
+eksamenstida har gatt ut, ma du klikke «Sja levering».
+
+Du er sjalv ansvarleg for a fylle inn riktige kodar pa eventuelle handteikningsark/ark for
+handteikningar. Les difor informasjonen om omslagsarket nye. Eksamenskontoret kan ikkje
+garantere at feilaktig utfylte ark blir lagt til svara dine.
+
+1/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_2.png:
+IMAx1002 og VB6040, H24
+Vekting av oppgavene:
+
+Det er molig a oppna totalt 100 poeng.
+
+Oppgave 5 gir maksimalt 4 poeng.
+
+Oppgave 10 gir maksimalt 5 poeng.
+
+Oppgave 2, 3, 4 og 12 gir maksimalt 6 poeng.
+Oppgave 7 gir maksimalt 7 poeng.
+
+Oppgave 1, 6, 8, 9 og 13 gir maksimalt 8 poeng.
+Oppgave 11 og 14 gir maksimalt 10 poeng.
+
+Varslingar:
+
+Eventuelle beskjedar under eksamen (f.eks. ved feil i oppgavesettet), sendes ut via varslingar
+i Inspera. Eit varsel vil dukke opp som en dialogboks pa skjermen i Inspera. Du kan finne
+att varselet ved a klikke pa bjglla i avre hagre hjorne pa skjermen.
+
+Trekk fra/avbroten eksamen:
+
+Dersom du ynskjer a levere blankt/avbryte eksamen, ga til «hamburgarmenyen» i @vre hegre
+hjgrne og vel «Lever blankt». Dette kan ikkje angrast sjalv om proven framleis er open.
+
+Tilgang til svara dine:
+
+Etter eksamen finn du svara dine under tidlegare prover i Inspera. Merk at det kan ta ein vyrkedag
+for eventuelle handteikningar vert tilgjengelege under «tidlegare provar».
+
+Oppgave/Oppgave 1
+
+Du skal svara pa denne oppgava pa papir (med sjusifra kode) som vert skanna inn.
+
+Du blir gitt tre elektriske komponentar A, B og C' som du gnsker a finne den elektriske
+motstanden til. Motstanden til komponent A er x, komponent B har motstand y, og komponent C’
+har motstand z. Dessverre har du ikkje tilgang til a male motstanden av komponentane kvar for
+seg, men du har tilgang til tre forskjellige kretsar som du kan male motstanden i.
+
+e Krets 1 har ein motstand pa 212 2 og har 2 av komponent A, 3 av komponent B og 4 av
+komponent C. Det vil si at vi far likninga 2x + 3y + 4z = 212.
+
+e Krets 2 har ein motstand pa 1012 og har 1 av komponent A, 5 av komponent B og 0 av
+komponent C’. Det vil si at vi far likninga x + 5y = 101.
+
+¢ Krets 3 har ein motstand pa 158 2 og har 8 av komponent A, 0 av komponent B og 4 av
+komponent C’. Det vil si at vi far likninga 8a + 4z = 158.
+
+Loys likningssettet for a finne motstanden z, y og z til kvar av dei tre komponentane.
+
+Maks poeng: 8
+
+2/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_3.png:
+IMAx1002 og VB6040, H24
+
+2 Oppgave/Oppgave 2
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+
+laA=
+
+owr
+
+2 0
+8 0
+01
+Kva er determinanten til matrisa A?
+
+det(A) =|
+
+Rund av svaret til nzermaste heiltal.
+
+Maks poeng: 6
+
+3 Oppgave/Oppgave 3
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+
+2a — 3z
+LaT: R®? —> R? veere linezertransformasjonen gitt ved T(z,y, 2) = |
+
+2y + 4z
+
+x
+Finn ei matrise A slik at T(2,y,z) =A- ]y}.
+Zz
+
+A=
+|
+|
+
+Maks poeng: 6
+
+3/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_4.png:
+IMAx1002 og VB6040, H24
+
+4 Oppgave/Oppgave 4
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+    
+La
+1 2
+V1 = 18 og Be = |Cc].
+0 5
+1
+Finn konstanten c slik at vektoren] 3 ligg i underrommet span(21, Ba).
+—25
+
+a
+
+Rund av til nzermaste heiltal.
+
+Maks poeng: 6
+
+4/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_5.png:
+IMAx1002 og VB6040, H24
+
+5 Oppgave/Oppgave 5
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+Kva for ein av dei falgande er ein basis for R°?
+Vel eitt alternativ
+
+{(—1, 0,0), (—1,1,1)}
+
+{(1,1,0), (0,0, 2), (1,1,2), (1,1, 1)}
+
+{(1,1,0), (0,0, 2), (1,1, 2)}
+
+{(1,1,0), (0,1, 0), (1,0, 0)}
+
+{(1,0,0), (1,1,0), (1,1, 1)}
+
+{(1,0,0), (0,1,0), (0,0,1), (1,0, 1)}
+
+{(1,0,0), (1,1, 2)}
+
+Merk at i denne oppgava bruker vi notasjonen
+z
+
+(z,y,2) = |y|-
+z
+
+Maks poeng: 4
+
+6 Oppgave/Oppgave 6
+
+Du skal svara pa denne oppgava pa papir (med sjusifra kode) som vert skanna inn.
+La
+
+12 3
+A=]0 1 4}.
+
+5 6 0
+
+Finn inversmatrisa A7!.
+
+Maks poeng: 8
+
+5/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_6.png:
+IMAx1002 og VB6040, H24
+
+7 Oppgave/Oppgave 7
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+
+Sja pa det komplekse talet z = 4 — 27 . Rund av til 2 desimalars nayaktigheit.
+
+1. Kva er realdelen og kva er imaginzerdelen til z?
+
+Re(z) + | Im(z) {|
+
+2. Skriv z pa polarform. Vinklane skal vere i radianar og ligge i intervallet [-7, TT).
+
+(cos )+ isin | ))
+
+3. Skriv z pa eksponentialform. Vinklane skal veere i radianar og ligge i intervallet [-7, T).
+
+)
+
+i
+
+Z=
+
+| exp(i
+
+Maks poeng: 7
+
+8 Oppgave/Oppgave 8
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+
+Laz, = 2+70g z = 5 + 51. Finn den kartesiske forma til dei falgande komplekse tala.
+
+Rund av til eitt desimal etter komma.
+
+oe.
+
+Maks poeng: 8
+
+6/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_7.png:
+IMAx1002 og VB6040, H24
+9 Oppgave/Oppgave 9
+
+Du skal svara pa denne oppgava pa papir (med sjusifra kode) som vert skanna inn.
+
+Finn alle laysingane til likninga z3 = 84.
+
+Maks poeng: 8
+
+10 Oppgave/Oppgave 10
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+Finn verdien til integralet
+
+3
+0
+
+Rund av til nzermaste heiltal.
+
+Maks poeng: 5
+
+7/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_8.png:
+IMAx1002 og VB6040, H24
+
+11 Oppgave/Oppgave 11
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+La f(t) = tet.
+1. Kva for eit av falgande uttrykk er f’(t)?
+Vel eitt alternativ
+f'(t) = 38e' + Pet
+f(t) = (P+ 8)e
+f'(t) = 2e' + Bet
+f'(t) = 2t?ef
+f'(t) = 3tet
+
+f(t) = te!
+
+2. Kva for ei av falgande differensiallikningar har funksjonen f som ei lgysing?
+
+Vel eitt alternativ
+tf'(t) — 2f(t) =0
+tf'(t) —e'f(t) =0
+tf'(t) — e' f(t) =0
+f(t) — 3f(/t-— Ff) =0
+f'()-@-e)f(t) =0
+f'(t) — 3f(t)/t =0
+
+Maks poeng: 10
+
+8/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_9.png:
+IMAx1002 og VB6040, H24
+12 Oppgave/Oppgave 12
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+
+Finn loysinga pa initialverdiproblemet
+
+y(x)y(z) =e, —-y(0) = 1.
+
+Vel eitt alternativ
+
+y(o) = [Be +1
+
+y(a) = Fe" + 5
+
+Maks poeng: 6
+
+13, Oppgave/Oppgave 13
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+
+Differensiallikninga 4y"(a) — 4y/(x) + y(x) = cos(2z) har ei partikulaer laysing pa
+forma y,(x) = Acos(2x) + Bsin(2z).
+
+Finn konstantane A og B.
+
+Rund av til to desimal etter komma.
+
+Maks poeng: 8
+
+9/10
+
+Text from z:\pdfToTxt\IMAx1002_VB6040_H24_10.png:
+IMAx1002 og VB6040, H24
+
+14 Oppgave/Oppgave 14
+Du skal svara pa denne oppgava pa papir (med sjusifra kode) som vert skanna inn.
+Sja pa folgande system av forsteordens differensiallikningar
+
+x(t) = 21(t) + 22(t).
+
+1. Skriv systemet pa matriseform, altsé pa forma #'(t) = A - Z(£) kor A er ei matrise og
+z(t
+z(t) = 1(é)).
+x2(t)
+
+2. Finn eigenverdiane og eigenvektorane til matrisa A.
+. Finn den generelle Igysinga til systemet av differensiallikningar.
+
+4. Finn laysinga av systemet som tilfredsstil initialvikara 2;(0) =2 og 22(0) = V2.
+
+Maks poeng: 10
+
+10/10
+

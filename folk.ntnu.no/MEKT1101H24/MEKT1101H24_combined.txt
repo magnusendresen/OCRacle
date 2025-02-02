@@ -1,0 +1,1196 @@
+--- Page 1 ---
+i Institutt for havromsoperasjoner og byggteknikk / Institutt for konstruksjonsteknikk / Institutt for vareproduksjon og
+byggteknikk
+Eksamensoppgave i MEKA1101/MEKT1101/MEKG1101/TKT4118/VB6046
+Eksamensdato: 5. desember 2024
+Eksamenstid (fra-til): 15:00-19:00
+Faglig kontakt: Torodd Skjerve Nord (Alesund) / Victorien Prot (Trondheim) / Per Harald Ninive (Gjovik)
+TIf.: 97 77 94 31/ 98 49 77 31/99 58 76 72
+Moter i eksamenslokalet: NEI
+Hjelpemiddelkode/Tillatte hjelpemidler: D / Ingen trykte eller handskrevne hjelpemidler tillatt. Bestemt, enkel kalkulator
+tillatt.
+ANNEN INFORMASJON:
+Skaff deg overblikk over oppgavesettet for du begynner pa besvarelsen din.
+Les oppgavene noye og gjor dine egne antagelser. Presiser i besvarelsen hvilke forutsetninger du har lagt til grunn i
+tolkning/avgrensing av oppgaven
+Faglig kontaktperson skal kun kontaktes dersom det er direkte feil eller mangler i oppgavesettet. Henvend deg til en
+eksamensvakt hvis du mistenker feil og mangler. Noter sporsmalet ditt pa forhand.
+FAGSPESIFIKK INFORMASJON
+Handtegninger:
+| en del oppgaver skal handberegninger leveres pa ark, disse oppgavene er merket tydelig. Manglende handberegninger pa
+disse oppgavene vil gi redusert uttelling selv om svaret fort inn i Inspera er rett. Andre oppgaver skal besvares direkte i
+Inspera. Nederst i oppgaven finner du en sjusifret kode. Fyll inn denne koden overst til venstre pa arkene du onsker a levere.
+Det anbefales a gjore dette underveis i eksamen. Dersom du behover tilgang til kodene etter at eksamenstiden har utlopt, ma
+du klikke «Vis besvarelse».
+Du er selv ansvarlig for a fylle inn riktige koder pa eventuelle handtegningsark. Les derfor informasjonen pa omslagsarket
+neye. Eksamenskontoret kan ikke garantere at feilaktig utfylte ark blir lagt til besvarelsen din
+Vekting av oppgavene: Maksimal uttelling er angitt for hver oppgave, oppgavesettet summerer til 100 poeng.
+oppgave 1: 16 poeng
+oppgave 2: 10 poeng
+oppgave 3: 25 poeng
+oppgave 4: 23 poeng
+oppgave 5: 16 poeng
+oppgave 6: 10 poeng
+Formelark: Formelarket finner du bakerst i oppgavesettet.
+Varslinger:
+Eventuelle beskjeder under eksamen (f.eks. ved feil i oppgavesettet), sendes ut via varslinger i Inspera. Et varsel vil dukke opp
+som en dialogboks pa skjermen. Du kan finne igjen varselet ved a klikke pa bjella overst til hayre
+Trekk fra/avbrutt eksamen:
+Dersom du onsker a levere blankt/avbryte eksamen, ga til “namburgermenyen” i ovre hayre hjorne og velg «Lever blankt»
+Dette kan ikke angres selv om proven fremdeles er apen
+Tilgang til besvarelse:
+Etter eksamen finner du besvarelsen din under tidligere prover i Inspera. Merk at det kan ta én virkedag for eventuelle
+handtegninger vil vaere tilgjengelige under «tidligere prover».
+
+
+--- Page 2 ---
+1(a) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En
+punktlast pa 30 KN virker i punkt C som angitt pa figuren.
+A B
+30 KN
+3m
+| Cc
+4m 4m
+a) Vis at fagverket er statisk bestemt
+Skriv ditt svar her
+Words: 0
+Maks poeng: 3
+
+
+--- Page 3 ---
+1(b) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En
+punktlast pa 30 KN virker i punkt C som angitt pa figuren
+A B
+30 KN
+3m
+| C
+4m 4m
+b) Bestem opplagerkreftene i A og E. Angi svaret i et heltall antall kN
+La positiv x-akse peke mot hoyre og positiv z-akse peke oppover pa figuren. Angi svaret med negativt fortegn dersom du
+mener opplagerkreftene i x-retning peker mot venstre, eller hvis du mener opplagerkreftene i z-retning peker nedover.
+Aye (-80)
+Az = (30)
+Ex = (80)
+Merk at handberegningene du gjor for a lose denne oppgaven ma leveres inn.
+Maks poeng: 3
+
+
+--- Page 4 ---
+1(c) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En
+punktlast pa 30 KN virker i punkt C som angitt pa figuren.
+A B
+30 KN
+3m
+| C
+4m 4m
+c) Hvilken eller hvilke staver er nullstaver?
+Velg ett alternativ:
+Stav AE og BD
+Stav DE
+Det er ingen nullstaver
+Stav AD og BD
+Stav AE v
+Stav BD
+Merk at handberegningene eller begrunnelsene du gjor for a lose denne oppgaven ma leveres inn.
+Maks poeng: 4
+
+
+--- Page 5 ---
+1(d) Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En
+punktlast pa 30 KN virker i punkt C som angitt pa figuren
+A B
+30 KN
+3m
+| Cc
+4m 4m
+d) Finn storste strekkraft og storste trykkraft i fagverket ved a bruke knutepunktsmetoden.
+Angi svaret i (positivt) heltall antall KN. Merk at vi kun er ute etter tallverdier.
+Maks. strekkraft = (50) KN
+Maks. trykkraft = (80) KN
+Merk at handberegningene du gjor for a lose denne oppgaven ma leveres inn.
+Maks poeng: 6
+
+
+--- Page 6 ---
+2) 200
+Pe v
+25
+A
+25 >
+Cc
+150
+Z
+P+ 28
+—.+
+. >
+75
+Et sammensatt tverrsnitt har geometri som vist i figuren
+z-aksen er en symmetriakse for tverrsnitts geometrien.
+a) Regn ut beliggenheten til arealsenter C (yc 0g Zc).
+YC (0) mm,
+2c = (130) mm.
+Merk at handberegningene du gjor for 4 lose denne oppgaven ma leveres inn.
+Maks poeng: 4
+
+
+--- Page 7 ---
+2(b) Et sammensatt tverrsnitt har geometri som vist i figuren.
+z-aksen er en symmetriakse for tverrsnitts geometrien.
+200 mm
+Z
+2p | v
+25mm
+a a
+25mm >
+AIC yy
+150 mm
+50 mm
+75mm
+b) Beregn tverrsnittets annet areal moment I,,. Bruk Steiners teorem
+Rund av svaret ditt til nzermeste heltall.
+I, = (83 - 84) -10® mm‘.
+Merk at handberegningene du gjor for a lose denne oppgaven ma leveres inn.
+Maks poeng: 6
+
+
+--- Page 8 ---
+“ H—-L/2-+- L244
+P=qL
+A ] a ) |)
+| |
+L. X e
+LITT?
+Figuren over viser en ramme ABC med stivt hjorne i B, hvor en Bjelke BD er festet til ramma gjennom et ledd i B. Det er
+benyttet forskyvelig leddlager (glidelager) i A og D, og et uforskyvelig lager i C. Ytre laster og geometri fremgar av figuren.
+Argumenter for om denne ramma er statisk underbestemt, statisk bestemt eller statisk ubestemt
+Skriv ditt svar her
+Maks poeng: 5
+
+
+--- Page 9 ---
+3(b)
+K— L/2-+—_ L722
+P=qL
+"WY dy yd du
+A Ee ) | )
+| Zz
+L X C e
+-— L ——+——__ L ——“+
+Figuren over viser en ramme ABC med stivt hjorne i B, hvor en Bjelke BD er festet til ramma gjennom et ledd i B. Det er
+benyttet forskyvelig leddlager (glidelager) i A og D, og et uforskyvelig lager i C. Ytre laster og geometri fremgar av figuren.
+Bestem reaksjonskreftene iA, C og D
+Merk at handberegningene du gjor for a lose denne oppgaven ma leveres inn.
+Velg ett alternativ
+A, =0 A, = -qL/8 A, = qL/4 A, = qL/2
+v
+Velg ett alternativ
+A,=0 A, = qL/4 A, = qL/8 A, = qL/2
+v
+Velg ett alternativ
+Cz = 3qL/2 Cz=qL/4 Cz=qL Cz = qL/10
+v
+
+
+--- Page 10 ---
+Velg ett alternativ
+Cr=0 Cr = qL/8 Cz = qL/3 Cr = qL/5
+v
+Velg ett alternativ
+Dz = 2qL Dz = qL/2 Dz=qL/A4 Dz = 2qL/3
+v
+Maks poeng: 5
+
+
+--- Page 11 ---
+“ H—-L/2-+- L244
+P af
+rere e es!
+A > | )
+L
+| z
+T77777
+-— L ——+——_ Lt ——+
+
+Figuren over viser en ramme ABC med stivt hjorne i B, hvor en Bjelke BD er festet til ramma gjennom et ledd i B. Det er
+benyttet forskyvelig leddlager (glidelager) i A og D, og et uforskyvelig lager i C. Ytre laster og geometri fremgar av figuren.
+Nedenfor finner du seks alternativer for normalkraftdiagrammet til rammen (A, B.,...., F). | diagrammene angir
+virkningssymbolet strekk eller trykk. Bestem hvilket diagram som viser rett fordeling av normalkreftene i rammen
+Merk at vi her bare er ute etter fordelingen av trykk og strekkrefter i rammen sa storrelsen pa boksene er ikke nodvendigvis
+i skala i forhold til storrelsen pa normalkreftene i hver del av rammen.
+Du skal vise hvordan du kommer frem til riktig diagram ved hjelp av handberegning.
+Merk at handberegningene du gjor for 4 lose denne oppgaven ma leveres inn.
+Velg ett alternativ:
+
+A
+
+B
+
+Cc
+
+D v
+
+E
+
+F
+
+
+--- Page 12 ---
+A B
+oO Oo
+y t
+
+C D
+O O
+¥ 4
+
+E F
+
+Maks poeng: 5
+
+
+--- Page 13 ---
+“ H—-L/2-+- L244
+P af
+eee ees!
+L
+| Zz
+L Xx C e
+terpenes
+/_—— L ——+——_ Lt —_
+
+Figuren over viser en ramme ABC med stivt hjorne i B, hvor en Bjelke BD er festet til ramma gjennom et ledd i B. Det er
+benyttet forskyvelig leddlager (glidelager) i A og D, og et uforskyvelig lager i C. Ytre laster og geometri fremgar av figuren.
+Nedenfor finner du seks alternativer for skjzerkraftdiagrammet til ramma (A, B....., F).
+Skjeerkraftdiagrammet er tegnet med virkningssymbol som angir retningen til skjaerkreftene
+Bestem hvilket diagram som viser rett fordeling av skjzerkrefter i rammen.
+Merk at vi her bare er ute etter formen, samt retning pa virkningssymbol pa skjzerkraftdiagrammet.
+Du skal vise hvordan du kommer frem til riktig diagram ved hjelp av handberegning.
+Merk at handberegningene du gjor for a lose denne oppgaven ma leveres inn.
+Velg ett alternativ:
+
+A
+
+B
+
+Cc
+
+D v
+
+E
+
+F
+
+
+--- Page 14 ---
+A B
+et cista or
+| vUF | | PUY | |
+>
+i)
+<+
+C D
+vO
+__ wr| tOy
+S “0 8
+E F
+ee
+>
+Oo
+Maks poeng: 5
+
+
+--- Page 15 ---
+H—-L/2-+- L244
+P af
+eee ees!
+A ee D
+L
+| z
+T77777
+-— L ——+——_ Lt —
+
+Figuren over viser en ramme ABC med stivt hjorne i B, hvor en Bjelke BD er festet til ramma gjennom et ledd i B. Det er
+benyttet forskyvelig leddlager (glidelager) i A og D, og et uforskyvelig lager i C. Ytre laster og geometri fremgar av figuren.
+Nedenfor finner du seks alternativer for momentdiagrammet (A, B.,...., F)
+Momentdiagrammene er tegnet pa strekksiden
+Bestem hvilket diagram som viser rett fordeling av moment i rammen.
+Merk at vi her bare er ute etter formen pa momentdiagrammet
+Du skal vise hvordan du kommer frem til riktig diagram ved hjelp av handberegning.
+Merk at handberegningene du gjor for 4 lose denne oppgaven ma leveres inn.
+Velg ett alternativ:
+
+A
+
+B
+
+Cc
+
+D
+
+E v
+
+F
+
+
+--- Page 16 ---
+Sails
+sr |oP
+= |=
+
+
+--- Page 17 ---
+4 Figuren viser en T-formet mast som er satt sammen av trebjelker med massive, kvadratiske tverrsnitt.
+Tverrsnittdimensjonene fremgar av figuren
+Masten er fast innspent i punkt C. To like store punktlaster F angriper som anvist i punkt A og D.
+Bruddspenningen i trematerialet er fy = 30 MPa.
+Tverrsnitt, del ABD:
+2a 2a
++ +
+5 A B D
+—> 50mm
++
+F 50 mm
+5a
+4
+Cc [ x
+Tverrsnitt, del BC: [ } 75mm
++
+75mm
+
+
+--- Page 18 ---
+4(a) a) Bestem den riktige formen pa M-diagrammet.
+1: vi 2: a
+
+Velg ett alternativ:
+Alternativ 2
+Alternativ 6
+Alternativ 3 v
+Alternativ 5
+Alternativ 4
+Alternativ 1
+
+Merk at handberegningene eller begrunnelsene du gjor for a lose denne oppgaven ma leveres inn.
+
+Maks poeng: 5
+
+
+--- Page 19 ---
+4(b) b) Bestem boyemomentene i punkt B og C uttrykt ved F og a.
+Merk at handberegningene du gjor for a lose denne oppgaven ma leveres inn.
+Boyemoment Mz i punkt B er lik
+Velg ett alternativ:
+7Fa
+0
+4Fa
+2Fa v
+5Fa
+Fa
+Boyemoment Mc i punkt C er lik:
+Velg ett alternativ
+Fa
+9Fa
+2Fa
+0
+5Fa
+7Fa v
+Maks poeng: 5
+
+
+--- Page 20 ---
+4(c) c) Anta F = 250 N og a = 1,0 m. Hvor i konstruksjonen oppstar storste boyespenning?
+Merk at handberegningene du gjor for 4 lose denne oppgaven ma leveres inn.
+Velg ett alternativ:
+Like til venstre for punkt B (i del AB)
+Punkt D
+Punkt A
+Rett i underkant av punkt B (i del BC)
+Punkt C v
+Like til hayre for punkt B (i del BD)
+Maks poeng: 5
+4(d) d) Beregn storste boyespenning i konstruksjonen dersom F = 250N og
+a= 1,0m. Angi svaret med 1 desimals noyaktighet
+oM = (24.8 - 25.0) MPa
+Merk at handberegningene du gjor for a lose denne oppgaven ma leveres inn.
+Maks poeng: 5
+4(e) e) Hva blir storste verdi som punktlastene F kan ha uten at bruddspenningen (fy = 30 MPa) overskrides? Anta fortsatt at a =
+1,0 m.
+Avrund svaret til nazermeste heltall antall newton (N)
+Fnar = (297 - 302) N.
+Merk at handberegningene du gjor for 4 lose denne oppgaven ma leveres inn.
+Maks poeng: 3
+
+
+--- Page 21 ---
+5 En ramme ABC er pakjent av en kraft Pi C som vist pa figuren. Rammeelementene (AB og BC) har lengde
+L og boyestivhet EJ. Momentdiagrammet er oppgitt.
+L
+M-di
++. SSS—(—(—s—r:? iagram FL
+A B A B
+: ,
+EI L X FL
+F
+—owne Cc
+
+
+--- Page 22 ---
+5(a) a) Velg riktig skisse av deformasjonsmonsteret (elastiske linjen).
+FE
+Velg ett alternativ:
+Alternativ 5 v
+Alternativ 4
+Alternativ 6
+Alternativ 1
+Alternativ 3
+Alternativ 2
+Maks poeng: 4
+
+
+--- Page 23 ---
+5(b) b) Hva blir vertikalforskyvningen av punkt B? Bruk elementzerbjelkemetoden
+FL3 FL3 FL3 FL3 FL3 FLS
+We = 0 WB = 357 We = FET We = BF] We = 33aF] We = T6RT We = 4eF]
+0e8e8 080880 @
+Velg ett alternativ:
+Alternativ 7
+Alternativ 4
+Alternativ 6
+Alternativ 1
+Alternativ 3 v
+Alternativ 2
+Alternativ 5
+Merk at handberegningene og argumentasjonen du gjor for 4 lose denne oppgaven ma leveres inn.
+Maks poeng: 5
+5(c) cc) Hva er rotasjonsvinkelen i punkt B?
+bp =0 by =e bp = te by = te bn =< by =e
+El 2El 6E! 16E] 3E1
+ee 8 8 8 @
+Velg ett alternativ:
+Alternativ 1
+Alternativ 6
+Alternativ 2 v
+Alternativ 5
+Alternativ 3
+Alternativ 4
+Merk at handberegningene og argumentasjonen du gjor for a lose denne oppgaven ma leveres inn.
+Maks poeng: 4
+
+
+--- Page 24 ---
+5(d) d) Beregn horisontalforskyvningen av punkt C.
+Skriv ditt svar her
+Words: 0
+Merk at handberegningene og argumentasjonen du gjor for 4 lose denne oppgaven ma leveres inn.
+Maks poeng: 3
+
+
+--- Page 25 ---
+6(a) p
+Zz
+L EEE 1=0,03m
+y b=3m
+Ss
+z Lint DS
+#—d=2,5 m—? n a n b |
+! ;
+eel SS PL’ (4(2)° 3(2 ub
+= = Wmidt 7 4( ) 3( ) , as
+P_bak=2 kN P_front=1 KN 48E1 L L 2
+L=4m
+«IM 3 3
+PL bys wb L
+Witt = agp («( i) 3, )) ary
+Oppgaven besvares direkte i Inspera
+Trondheim kommune har sendt ut et varsel om kommende gravearbeid utenfor boligen din. | innkjorselen din kommer det
+til a vaere en lang og dypt grop som er 4 meter bred. For at du og andre skal kunne benytte innkjarselen sa legges det ned
+en stalplate, som er 4 m lang, 3 m bred og 3 cm tykk, over gropa. Du ser pa den tynne stalplata og er nysgjerrig pa hvor
+mye nedbeyning som kommer til a oppsta nar du skal kjore over den. Du har ikke lzert plateteori som undervises i TKT4134
+Mekanikk 4, men du bestemmer deg for a forenkle problemet og benytter bjelketeori istedenfor.
+Da du fikk varselingen fra kommunen lagde du en skisse av problemet og en detaljert kode som beregner og plotter
+nedboyningen pa midten av plata som funksjon av posisjonen til forhjulene. Platens E-modul er 210 GPa 0g boyes om
+svak akse.
+Du viser na koden til en venn, en stund etter du skrev koden. Samtidig som du viser koden til vennen din oppdager du
+noen feil i koden.
+a) Koden inneholder 3 feil. Bruk svarboksen nedenfor til 4 fore opp linjenummerne du mener det er feil pa, hva
+som er galt og forsla korrigert kode for disse linjene. Feilene er ikke syntaksfeil.
+
+
+--- Page 26 ---
+1 ## Importer nédvendige biblioteker
+2 import numpy as np
+3
+4 ## Definerer konstanter
+5 L = 4 # Lengde av stdlplate [m]
+6 b = 3000 # Bredde av stdélplate [mm]
+7 h = 30 # Héyde av stdlplate [mm]
+8 E = 210000 # E-modul stdél [N/mm*2]
+9 I = h*b**3/12 # 2. Areal moment [mm*4]
+1@
+11 P_front = 10000 # Last frontaksling [N]
+12 P_bak = 20000 # Last bakaksling [NJ
+13 d = 2500 # Avstand mellom akslingene [mm]
+14
+15 wcl = P_front * L**3 / (48*°E*I) # Nedbéyningskoeffisient for P_front
+16 wc2 = P_bak * L**3 / (48*E*I) # Nedbéyningskoeffisient for P_bak
+17
+18 ## Diskretisering
+19 pos_for = np.linspace(@, L+d, 1000) # forakslingens posisjon
+2@ pos_bak = pos_for - d # bakakslingens posisjon
+21 w_midt = np.zeros_like(pos_for) # tomt array for nedbéyning
+22
+23) # 222
+24 for i in range(len(pos_for)):
+25 if pos_for[i} <= L/2:
+26 w_midt[i] = wc1*(4*(pos_for[i]/L)**3 - 3*pos_for[i]/L)
+27 elif pos_for[i] > L/2 and pos_for[i] <= d:
+28 w_midt[i] = wc1*(4*((L-pos_for[i])/L)**3 - 3*(L-pos_for[i])/L)
+29 elif pos_for[i} <= L:
+30 w_midt[i] = wc1*(4*((L-pos_for[i])/L)**3 - 3*(L-pos_for[i])/L) + wc2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+31 elif pos_for[i] > L and pos_bak{i] <= L/2:
+32 w_midt[i] = wc2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+33 else:
+34 w_midt[i] = wc2*(4*((L-pos_bak[i])/L)**3 - 3*(L-pos_bak[i])/L)
+35
+36 # Finner stérst nedbéyning og tilhérende posisjon
+37 maks_nedbéyning pos = pos_for[np.argmin(w_midt)] # Forhjulets posisjon ved stérst nedbéyning
+38 maks_nedbéyning = np.min(w_midt) # Stérst nedbéyning
+39
+4@ ## Plotter og printer resultatet
+41 plt.figure(figsize=(12, 4), dpi=200)
+42 plt.title("Nedbéyning(midt) som funksjon av forhjulenes posisjon", fontsize=15)
+43 plt.plot(pos_for, w_midt)
+44 plt.plot(maks_nedb¢yning pos, maks_nedbéyning, marker="0", color="red”)
+45 plt.xlabel("Forhjulenes posisjon [mm]", fontsize=12)
+46 plt.ylabel(r"$w_{midt}$ [mm]", fontsize=12)
+47 plt.grid()
+48 plt.show()
+49 print(
+se “Maks nedb¢yning er {:.1f} mm nar forhjulene er {:.2f} m p& veg over st&lplata”
+51 - format (-maks_nedbéyning, maks_nedb¢yning_pos/ 1000)
+52 )
+Figuren nedenfor viser plottet som koden lager nar den er feilfri.
+Nedbgayning(midt) som funksjon av forhjulenes posisjon
+0.0 J It I It { it
+25 1 1 1
+5.0 { 1 { 1 { 1 {
+E ons : : :
+E
+= 10.0 { 1 t 1 { 1 {
+é
+Fis | i u
+15.0 7 7 7
+“175 1 i" ¢
+3 1000 2000 3000 4000 5000 6000
+Forhiulenes posision [mm]
+
+
+--- Page 27 ---
+Skriv ditt svar her, dvs. feilene i Python-koden, inkl. hvilken linje hver feil befinner seg, og angi korrigert kode.
+Maks poeng: 5
+
+
+--- Page 28 ---
+6(b) Pp
+z
+tL EES 1-0,03 m
+y b=3m es A
+eS  —
+Ae
+#—d=2,5m—¥ | a } b |
+| L !
+! ;
+el Ss) PI (a(*) 3(*) us
+Wmidt “ , as
+P_bak=2 kN K P_front=1 kN A mitt 48ET OAL L 2
+L=4m
+=°™IP 3 3
+PL bys 7b L
+Weide = ag py (4( i) 34 )) » a> 4
+Oppgaven besvares direkte i Inspera
+Trondheim kommune har sendt ut et varsel om kommende gravearbeid utenfor boligen din. | innkjarselen din kommer det
+til a vaere en lang og dypt grop som er 4 meter bred. For at du og andre skal kunne benytte innkjorselen sa legges det ned
+en stalplate, som er 4 m lang, 3 m bred og 3 cm tykk, over gropa. Du ser pa den tynne stalplata og er nysgjerrig pa hvor
+mye nedbayning som kommer til a oppsta nar du skal kjore over den. Du har ikke lzert plateteori som undervises i
+TKT4134 Mekanikk 4, men du bestemmer deg for a forenkle problemet og benytter bjelketeori istendenfor.
+Da du fikk varselingen fra kommunen lagde du en skisse av problemet og en detaljert kode som beregner og plotter
+nedbeyningen pa midten av plata som funksjon av posisjonen til forhjulene. Platens E-modul er 210 GPa og boyes om
+svak akse.
+Du viser na koden til en venn, en stund etter du skrev koden. Vennen din ser over den detaljerte koden og stopper pa linje
+23 hvor det star #???. Der er det ingen forklaring pa hva som skjer med for-lakken og vennen din sper deg "hva gjor koden
+her"?
+b) Forklar logikken og koden i for-lokken. Benytt svarboksene nedenfor.
+
+
+--- Page 29 ---
+1 ## Importer nédvendige biblioteker
+
+2 import numpy as np
+
+3
+
+4 ## Definerer konstanter
+
+5 L = 4 # Lengde av stdélplate [m]
+
+6 b = 3000 # Bredde av stélplate [mm]
+
+7 h = 30 # Héyde av stélplate [mm]
+
+8 E = 210000 # E-modul stdl [N/mm*2]
+
+9 I = h*b**3/12 # 2. Areal moment [mm*4]
+
+18
+
+11 P_front = 10000 # Last frontaksling [N]
+
+12 P_bak = 20000 # Last bakaksling [N]
+
+13 d = 2500 # Avstand melLom akslingene [mm]
+
+14
+
+15 wel = P_front * L**3 / (48*E*I) # Nedbéyningskoeffisient for P_front
+16 wce2 = P_bak * L**3 / (48*E*I) # Nedbéyningskoeffisient for P_bak
+
+17
+
+18 ## Diskretisering
+
+19 pos_for = np.linspace(@, L+d, 1000) # forakslingens posisjon
+
+2@ pos_bak = pos for - d # bakakslingens posisjon
+
+21 w_midt = np.zeros like(pos_for) # tomt array for nedbéyning
+
+22
+
+23| # 222
+
+24 for i in range(len(pos_for)):
+
+25 if pos_for[i] <= L/2:
+
+26 w_midt[i] = wcl*(4*(pos_for[i]/L)**3 - 3*pos_for[i]/L)
+
+27 elif pos_for[i] > L/2 and pos_for[i] <= d:
+
+28 w_midt[i] = wc1*(4*((L-pos_for[i])/L)**3 - 3*(L-pos_for[i])/L)
+29 elif pos_for[i] <= L:
+
+30 w_midt[i] = wc1*(4*((L-pos_for[i])/L)**3 - 3*(L-pos_for[i])/L) + wc2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+31 elif pos for[i] > L and pos_bak[{i] <= L/2:
+
+32 w_midt[i] = wc2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+
+33 else:
+
+34 w_midt[i] = wc2*(4*((L-pos_bak[i])/L)**3 - 3*(L-pos_bak[{i])/L)
+35
+
+36 # Finner stérst nedbéyning og tilh@rende posisjon
+
+37 maks_nedb¢yning pos = pos_for[np.argmin(w_midt)] # Forhjulets posisjon ved stérst nedbéyning
+38 maks_nedbdyning = np.min(w_midt) # Stérst nedbéyning
+
+39
+
+4@ ## Plotter og printer resultatet
+
+41 plt.figure(figsize=(12, 4), dpi=200)
+
+42 plt.title("“Nedbéyning(midt) som funksjon av forhjulenes posisjon", fontsize=15)
+43 plt.plot(pos_for, w_midt)
+
+44 plt.plot(maks_nedbéyning pos, maks_nedbdyning, marker="o0", color="red”)
+45 plt.xlabel("Forhjulenes posisjon [mm]", fontsize=12)
+
+46 plt.ylabel(r"$w_{midt}$ [mm]", fontsize=12)
+
+47 plt.grid()
+
+48 plt.show()
+
+49 print(
+
+se “Maks nedbéyning er {:.1f} mm nar forhjulene er {:.2f} m p& veg over st&lplata”
+51 . format(-maks_nedbéyning, maks_nedbgyning_pos/1000)
+
+52 )
+
+Figuren nedenfor viser plottet som koden lager nar den er feilfri.
+
+
+--- Page 30 ---
+Nedboyning(midt) som funksjon av forhjulenes posisjon
+
+0.0
+
+-25
+
+-5.0
+
+Es
+
+S
+
+= -10.0
+
+Eas
+
+-15.0
+
+“175
+
+0 1000 2000 3000 4000 5000 6000
+Forhiulenes posision [mm]
+Forklar linje 25 og 26
+Forklar linje 27 og 28
+Forklar linje 29 og 30
+Forklar linje 31 og 32
+Forklar linje 33 og 34
+Maks poeng: 5
+i
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_1.png ---
+A B
+- NB 30 KN
+Lt | C
+[>
+4m 4m
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_2.png ---
+A B
+- NB 30 KN
+Lt | C
+[>
+4m 4m
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_3.png ---
+A B
+- NB 30 KN
+Lt | C
+[>
+4m 4m
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_4.png ---
+A B
+- NB 30 KN
+Lt | C
+[>
+4m 4m
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_5.png ---
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_6.png ---
+vA
+=
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_7.png ---
+F—-L/2-+ - L241
+Pat
+Whit yy dui
+A ee) |)
+ZS B Z\
+L
+| Z
+C
+L, x ven
+yr
+rR— L —— +. L — “I
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_8.png ---
+F—-L/2-+ - L241
+Pat
+Whit yy dui
+A ee) |)
+ZS B Z\
+L
+| Z
+C
+L, x ven
+yr
+rR— L —— +. L — “I
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_9.png ---
+F—-L/2-+ - L241
+Pat
+Whit yy dui
+A ee) |)
+ZS B Z\
+L
+| Z
+C
+L, x ven
+yr
+rR— L —— +. L — “I
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_10.png ---
+A B
+im oO
+Y t
+Cc D
+oO a
+v +
+E F
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_11.png ---
+F—-L/2-+ - L241
+Pat
+Whit yy dui
+A ee) |)
+ZS B Z\
+L
+| Z
+C
+L, x ven
+yr
+rR— L —— +. L — “I
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_12.png ---
+A B
+<a por Ot [a
+LF] miar7 ey]
+>
+Oo
+Cc D
+Aree
+‘Qi pay 8
+E F
+_—iy [yor] 40
+>
+Oo
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_13.png ---
+F—-L/2-+ - L241
+Pat
+Whit yy dui
+A ee) |)
+ZS B Z\
+L
+| Z
+C
+L, x ven
+yr
+rR— L —— +. L — “I
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_14.png ---
+ual eae
+|=
+pe |=p
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_15.png ---
+Tverrsnitt, del ABD:
+2a 2a
+MM —_  —>
+A B
+=x ’ Cit 50mm
+<_>
+F 50 mm
+5a
+Z
+C [ Xx
+
+Tverrsnitt, del BC: | | 75mm
+<>
+75mm
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_16.png ---
+it
+a
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_17.png ---
+in
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_18.png ---
+hdd
+eh ee]
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_19.png ---
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_20.png ---
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_21.png ---
+|
+a
+{\ {mice 7D
+[> 4 ot
+rN A a via = geur(4(4) ~2(4)) at
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_22.png ---
+1 ## Importer nédvendige biblioteker
+
+2 import numpy as np
+
+3
+
+4 #i# Definerer konstanter
+
+5 L = 4 # Lengde av stalplate [m]
+
+6 b = 3000 # Bredde av stalplate [mm]
+
+7 h = 30 # Hoyde av stélplate [mm]
+
+8 E = 210000 # E-modul stél [N/mn*2]
+
+9 1 = h*b**3/12 # 2. Areal moment [mm4]
+
+10
+
+11 P_front = 10000 # Last frontaksling [NJ
+
+12 P_bak = 20000 # Last bakaksling [N]
+
+13 d = 2500 # Avstand meLlom akslingene [mn]
+
+14
+
+15 wel = P_front * L**3 / (48*€*I) # Nedbdyningskoeffisient for P_front
+16 we2 = P_bak * L**3 / (48*E*I) # Nedbdyningskoeffisient for P_bak
+
+17
+
+18 ## Diskretisering
+
+19 pos_for = np.linspace(®, L+d, 1000) # forakslingens posisjon
+
+20 pos_bak = pos_for - d # bakaksLingens posisjon
+
+21 wmidt = np.zeros_like(pos_for) # tomt array for nedbéyning
+
+22
+
+23 # 22?
+
+24 for i in range(len(pos_for)):
+
+25. if pos_for[i] <= L/2:
+
+26 w_midt[i] = wel*(4*(pos_for[4]/L)**3 - 3*pos_for[i]/L)
+
+27 elif pos_for[i] > L/2 and pos_for[i] <= d:
+
+28 w_midt[i] = wel*(4*((L-pos_for[i])/L)**3 - 3*(L-pos_for[i])/L)
+29 elif pos_for[i] <= L:
+
+30 w_midt[i] = wel*(4*((L-pos_for[i])/L)"*3 - 3*(L-pos_for[i])/L) + we2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+31 elif pos_for[i] > L and pos_bak[i] <= L/2:
+
+32 w_midt[i] = we2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+
+33 else:
+
+34 w_midt[i] = we2*(4*((L-pos_bak[i])/L)**3 - 3*(L-pos_bak[i])/L)
+35
+
+36 # Finner stérst nedbéyning og tilhérende posisjon
+
+37 maks_nedbéyning pos = pos_for[np.argmin(w_midt)] # Forhjulets posisjon ved stérst nedbéyning
+38 maks_nedbéyning = np.min(w_midt) # Stérst nedbéyning
+
+39
+
+40 ## Plotter og printer resultatet
+
+41 plt.figure(figsize=(12, 4), dpi-200)
+
+42. plt.title("Nedbéyning(midt) som funksjon av forhjulenes posisjon", fontsize=15)
+43. plt.plot(pos_for, w_midt)
+
+44 plt.plot(maks_nedbéyning pos, maks_nedbéyning, marker="o", color="red")
+45 plt.xlabel("Forhjulenes posisjon [mm]", fontsize=12)
+
+46 plt.ylabel(r"$u_{midt}$ [mm]", fontsize-12)
+
+47 plt.grid()
+
+48 plt.show()
+
+49. print(
+
+50 “Maks nedbéyning er {:.1f} mm nr forhjulene er {:.2f} m p& veg over st8lplata”
+51. format(-maks_nedbéyning, maks_nedbéyning_pos/1000)
+
+52)
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_23.png ---
+Nedbgyning(midt) som funksjon av forhjulenes posisjon
+
+0.0
+
+—2.5
+
+—5.0
+
+‘¢ 7.5
+&
+
+4% -10.0
+E
+
+= -12.5
+
+—15.0
+
+-17.5
+
+0 1000 2000 3000 4000 5000 6000
+Forhjulenes posision [mm]
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_24.png ---
+|
+a
+{\ {mice 7D
+[> 4 ot
+rN A a via = geur(4(4) ~2(4)) at
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_25.png ---
+1 ## Importer nédvendige biblioteker
+
+2 import numpy as np
+
+3
+
+4 #i# Definerer konstanter
+
+5 L = 4 # Lengde av stalplate [m]
+
+6 b = 3000 # Bredde av stalplate [mm]
+
+7 h = 30 # Hoyde av stélplate [mm]
+
+8 E = 210000 # E-modul stél [N/mn*2]
+
+9 1 = h*b**3/12 # 2. Areal moment [mm4]
+
+10
+
+11 P_front = 10000 # Last frontaksling [NJ
+
+12 P_bak = 20000 # Last bakaksling [N]
+
+13 d = 2500 # Avstand meLlom akslingene [mn]
+
+14
+
+15 wel = P_front * L**3 / (48*€*I) # Nedbdyningskoeffisient for P_front
+16 we2 = P_bak * L**3 / (48*E*I) # Nedbdyningskoeffisient for P_bak
+
+17
+
+18 ## Diskretisering
+
+19 pos_for = np.linspace(®, L+d, 1000) # forakslingens posisjon
+
+20 pos_bak = pos_for - d # bakaksLingens posisjon
+
+21 wmidt = np.zeros_like(pos_for) # tomt array for nedbéyning
+
+22
+
+23 # 22?
+
+24 for i in range(len(pos_for)):
+
+25. if pos_for[i] <= L/2:
+
+26 w_midt[i] = wel*(4*(pos_for[4]/L)**3 - 3*pos_for[i]/L)
+
+27 elif pos_for[i] > L/2 and pos_for[i] <= d:
+
+28 w_midt[i] = wel*(4*((L-pos_for[i])/L)**3 - 3*(L-pos_for[i])/L)
+29 elif pos_for[i] <= L:
+
+30 w_midt[i] = wel*(4*((L-pos_for[i])/L)"*3 - 3*(L-pos_for[i])/L) + we2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+31 elif pos_for[i] > L and pos_bak[i] <= L/2:
+
+32 w_midt[i] = we2*(4*(pos_bak[i]/L)**3 - 3*pos_bak[i]/L)
+
+33 else:
+
+34 w_midt[i] = we2*(4*((L-pos_bak[i])/L)**3 - 3*(L-pos_bak[i])/L)
+35
+
+36 # Finner stérst nedbéyning og tilhérende posisjon
+
+37 maks_nedbéyning pos = pos_for[np.argmin(w_midt)] # Forhjulets posisjon ved stérst nedbéyning
+38 maks_nedbéyning = np.min(w_midt) # Stérst nedbéyning
+
+39
+
+40 ## Plotter og printer resultatet
+
+41 plt.figure(figsize=(12, 4), dpi-200)
+
+42. plt.title("Nedbéyning(midt) som funksjon av forhjulenes posisjon", fontsize=15)
+43. plt.plot(pos_for, w_midt)
+
+44 plt.plot(maks_nedbéyning pos, maks_nedbéyning, marker="o", color="red")
+45 plt.xlabel("Forhjulenes posisjon [mm]", fontsize=12)
+
+46 plt.ylabel(r"$u_{midt}$ [mm]", fontsize-12)
+
+47 plt.grid()
+
+48 plt.show()
+
+49. print(
+
+50 “Maks nedbéyning er {:.1f} mm nr forhjulene er {:.2f} m p& veg over st8lplata”
+51. format(-maks_nedbéyning, maks_nedbéyning_pos/1000)
+
+52)
+
+
+--- z:\MEKT1101H24\MEKT1101H24_extracted_26.png ---
+Nedbgyning(midt) som funksjon av forhjulenes posisjon
+
+0.0
+
+—2.5
+
+—5.0
+
+‘¢ 7.5
+&
+
+4% -10.0
+E
+
+= -12.5
+
+—15.0
+
+-17.5
+
+0 1000 2000 3000 4000 5000 6000
+Forhjulenes posision [mm]
+
+

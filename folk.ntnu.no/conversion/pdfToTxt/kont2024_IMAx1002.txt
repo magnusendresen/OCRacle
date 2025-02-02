@@ -1,0 +1,464 @@
+--- Page 1 ---
+IMAx1002 utsatt eksamen S2024
++ Forside
+
+Institutt for matematiske fag
+
+Utsatt eksamen i IMAA1002, IMAG1002 og IMAT1002 Matematikk for ingeniorfag 1
+Eksamensdato: 07.08.2024
+
+Eksamenstid (fra-til): 09:00 - 13:00
+
+Hjelpemiddelkode/Tillatte hjelpemidler:
+C: Spesifiserte trykte og handskrevne hjelpemidler tillatt. Bestemt, enkel kalkulator tillatt.
+
+Vi spesifiserer at ingen trykte eller handskrevne hjelpemidler er tillatt, med unntak av det vedlagte
+formelarket.
+
+Tillatte kalkulatorer:
+
+« Casio FX-82CW, Casio FC100 V2, Casio fx-82ES PLUS og Casio fx-82EX
+« Citizen SR-270X og Citizen SR-270X College
+« Hewlett Packard HP30S
+
+Faglig kontakt under eksamen:
+Anders Oulie
+Mobil: 414 33 354, kontor: 611 35201
+
+Faglig kontakt moter i eksamenslokalet: Nei
+ANNEN INFORMASJON:
+Skaff deg overblikk over oppgavesettet for du begynner pa besvarelsen din.
+
+Les oppgavene noye, gjar dine egne antagelser og presiser i besvarelsen hvilke forutsetninger du
+har lagt til grunn i tolkning/avgrensing av oppgaven. Faglig kontaktperson skal kun kontaktes
+dersom det er direkte feil eller mangler i oppgavesettet.
+
+Henvend deg til en eksamensvakt hvis du mistenker feil og mangler. Noter gjerne spgrsmalet ditt
+pa forhand.
+
+Handtegninger:
+
+| oppgave 1, 2, 8 og 14 er det lagt opp til A besvare pa ark. Andre oppgaver skal besvares direkte i
+Inspera. Nederst i oppgaven finner du en sjusifret kode. Fyll inn denne koden gverst til venstre pa
+arkene du gnsker a levere. Det anbefales a gjare dette underveis i eksamen. Dersom du behaver
+tilgang til kodene etter at eksamenstiden har utlapt, ma du klikke «Vis besvarelse».
+
+Vekting av oppgavene:
+
+Det er mulig a oppna totalt 100 poeng.
+Oppgave 3 og 4 gir maksimalt 5 poeng.
+Oppgave 5 gir maksimalt 2 poeng.
+Oppgave 6, 7 og 13 gir maksimalt 4 poeng.
+Oppgave 9 gir maksimalt 6 poeng.
+
+1/15
+
+
+--- Page 2 ---
+IMAx1002 utsatt eksamen S2024
+Resten av oppgavene gir maksimalt 10 poeng hver.
+
+Varslinger: Hvis det oppstar behov for a gi beskjeder til kandidatene underveis i eksamen (f.eks.
+ved feil i oppgavesettet), vil dette bli gjort via varslinger i Inspera. Et varsel vil dukke opp som en
+dialogboks pa skjermen. Du kan finne igjen varselet ved a klikke pa bjella verst til hayre.
+
+Trekk fra/avbrutt eksamen: Blir du syk under eksamen, eller av andre grunner gnsker a levere
+blankt/avbryte eksamen, ga til “hamburgermenyen” i gvre hayre hjgrne og velg «Lever blankt».
+Dette kan ikke angres selv om preven fremdeles er apen.
+
+Tilgang til besvarelse: Etter eksamen finner du besvarelsen din i arkivet i Inspera. Merk at det
+kan ta én virkedag for eventuelle handtegninger vil vzere tilgjengelige i arkivet.
+
+Oppgave 1
+
+Denne oppgaven skal besvares pa papir (med sjusifret kode) som skannes inn.
+
+Los det linezere likningssystemet ved Gausseliminasjon.
+
+Maks poeng: 10
+
+Oppgave 2
+
+Denne deloppgaven skal besvares pa papir (med sjusifret kode) som skannes inn.
+
+coed —sind
+£, hver A{s} = .
+
+En linezer transformasjon er gitt ved T(Z) = Af — .
+
+Transformasjonen medfgrer at vektoren Z roteres en vinkel ¢ mot klokka ( dersom # > {1 ).
+
+Finn inversmatrisen, A71( .
+
+Maks poeng: 10
+
+2/15
+
+
+--- Page 3 ---
+IMAx1002 utsatt eksamen S2024
+3 Oppgave 3
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+1 3 4 —-1
+laA= og B= .
+
+Regn ut matriseproduktet A” B.
+
+Maks poeng: 5
+
+4 Oppgave 4
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+Mengdene .” = { {i} Al og # = { 2
+
+a
+
+3) [1] ; 3
+| |<} er begge basiser for R*.
+
+Fgrstnevnte ( .*” ) kalles gjerne standardbasis.
+= F
+
+La v=
+La
+
+skrevet i standardbasisen . . Hva blir koordinatene til vektoren i basisen & ?
+a
+
+Maks poeng: 5
+
+3/15
+
+
+--- Page 4 ---
+IMAx1002 utsatt eksamen S2024
+
+5 Oppgave 5
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar pa papir.
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+Vektorlikningen
+
+1 2 1 4 Q
+wy, ]1] t+ae)1) +e.]/2) +24)/3) = [oO
+1 a Bi 2 0
+
+kan skrives om som en matriselikning A& = fi. Finn matrise A.
+
+A=
+
+Maks poeng: 2
+
+4/15
+
+
+--- Page 5 ---
+IMAx1002 utsatt eksamen S2024
+
+6 Oppgave 6
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+Finn en basis for nullrommet til det homogene likningssystemet som tilsvarer vektorlikningen
+
+1 2 1 4 O
+ay |l] tae)l) +a5]2) +24)3) = [oO
+1 a & 2 0)
+
+Merk! Dette er samme likningssettet som i oppgave 5.
+
+Velg alle vektorene som til sammen danner en basis for nullrommet.
+
+5/15
+
+
+--- Page 6 ---
+IMAx1002 utsatt eksamen S2024
+Velg ett eller flere alternativer
+
+bho
+
+| denne deloppgaven far du trekk i poeng dersom du velger vektorer som ikke hgrer til basisen,
+men det er ikke mulig a fa mindre enn 0 poeng totalt pa oppgaven.
+
+Maks poeng: 4
+
+6/15
+
+
+--- Page 7 ---
+IMAx1002 utsatt eksamen S2024
+7 Oppgave 7
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+| oppgave 5 har du skrevet vektorlikningen
+
+1 2 1 4 q
+wy |1) tag)l) +ae5]2) +a4)3) = [oO
+1 fi 3 al [o
+
+om til en matriselikning A# = i. Finn en basis for kolonnerommet til A.
+
+Obs! Det kan veere flere riktige svar.
+
+7/15
+
+
+--- Page 8 ---
+IMAx1002 utsatt eksamen S2024
+Velg ett eller flere alternativer
+
+|
+
+cs
+
+bo
+
+i
+
+fae)
+
+L
+
+f
+
+wv? oo oh
+—-
+
+F
+L
+—_
+2
+L
+eo bs
+—,
+
+| | | |
+Go b2
+| |
+_s ~s
+
+yl] 72] 4
+aeap 2 4 Bi) d
+iG 2
+yi] yi] 4
+4 mi) 3
+Ps
+rio
+Uy sy
+
+| denne deloppgaven far du trekk i poeng dersom du velger et sett som ikke utgjar en basis for
+kolonnerommet, men det er ikke mulig a fa mindre enn 0 poeng totalt pa oppgaven.
+
+Maks poeng: 4
+
+8/15
+
+
+--- Page 9 ---
+IMAx1002 utsatt eksamen S2024
+
+8 Oppgave 8
+Denne deloppgaven skal besvares pa papir (med sjusifret kode) som skannes inn.
+Laz= et,
+1) Tegn et punkt som representerer z i det komplekse planet.
+2) Identifiser modulusen og argumentet til z.
+3) Skriv z pa polarform.
+
+4) Skriv z pa normalform, dvs, pa formen a + &.
+
+5) Regn ut 24.
+
+Maks poeng: 10
+
+9/15
+
+
+--- Page 10 ---
+IMAx1002 utsatt eksamen S2024
+
+2 Oppgave 9
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+Laz= &— 24 0g w = 2+ 4 veere to komplekse tall.
+
+1) Regn ut z « w og oppgi svaret pa normalform, dvs « + &. Oppgi svar korrekt avrundet til 1
+desimal.
+
+2) Regn ut = og oppgi svaret pa normalform, dvs a + &¢. Oppgi svar korrekt avrundet til 1
+desimal.
+
+4— + 4.
+w
+
+3) Regn ut (z + w} « Z og oppgi svaret pa normalform, dvs a + &¢. Oppgi svar korrekt avrundet til
+1 desimal.
+
+ee
+
+Notasjon: z er det komplekse konjugatet til z.
+
+Maks poeng: 6
+
+10/15
+
+
+--- Page 11 ---
+IMAx1002 utsatt eksamen S2024
+10 Oppgave 10
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+1) Finn den generelle Igsningen til den falgende differensiallikningen: 4° — ¥
+
+Velg ett alternativ
+
+yle}) = weos(a} tC
+
+ylel=asine + C
+
+yle) = —casle}+C
+
+2) _Differensiallikningen <3)’ — 24 = «x* har den generelle lasningen ya} = 2? (In{a} + C}.
+L@s initialverdiproblemet
+xy — 2y = 27, y(1) = 0.
+
+11/15
+
+
+--- Page 12 ---
+IMAx1002 utsatt eksamen S2024
+
+Velg ett alternativ
+
+os =
+eS “
+i i
+T T
+= —
+a 8
+we Sake
+3 3
+a =
+ar =
+ca] N
+
+Maks poeng: 10
+
+12/15
+
+
+--- Page 13 ---
+IMAx1002 utsatt eksamen S2024
+
+Oppgave 11
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+1) Finn den generelle Igsningen til den folgende differensiallikningen:
+af” — Be’ +4y = 0.
+
+Velg ett alternativ:
+
+CY ets Oy ete
+
+Cy ee + Cre*
+
+2*(C) caste) + Cy sinfa))
+
+;
+
+(C7 cos(s) + Cy sin{w))
+
+e*(C) cos(a) + Cy sin(Sx))
+
+f
+
+eye, cos{+/Se} + Cz sin(o/S
+
+2) Differensiallikningen 4; — 24,’ — 3 = fl har den generelle losningen 4 = Cye*" + Cge7*. Finn
+I@sningen til det falgende initialverdiproblemet:
+
+y” — 3g — 3 = 0, y(0) = 1,y (0) = 1.
+
+13/15
+
+
+--- Page 14 ---
+IMAx1002 utsatt eksamen S2024
+
+Velg ett alternativ
+
+fon Se ~~
+yle;= e+e"
+
+Maks poeng: 10
+
+12 Oppgave 12
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+1 ‘$ -12 3
+
+1) Ero = | 2] enegenvektor til A = | -2 ( }? Hvis ja, med hvilken egenverdi?
+] -4 4 -8
+
+Skriv inn —&&& dersom @ ikke er en egenvektor til A, og skriv inn tilhorende egenverdi ellers.
+
+A=
+2 “$ -12 3
+
+2) Eri = |1}enegenvektor til A = | —2 ~~ ff | ? Hvis ja, med hvilken egenverdi?
+1 -4 9 -8
+
+Skriv inn —5& dersom @ ikke er en egenvektor til A, og skriv inn tilhorende egenverdi ellers.
+
+ll
+
+Maks poeng: 10
+
+14/15
+
+
+--- Page 15 ---
+13
+
+14
+
+IMAx1002 utsatt eksamen S2024
+
+Oppgave 13
+
+Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger pa papir.
+
+Vi vet at # er en egenvektor til matrisen A med tilhgrende egenverdi —1, og at 21 er en
+egenveKtor til matrisen A med tilhgrende egenverdi 2.
+
+1) Uttrykket 3A% + 2Aw kan forenkles til & «d+ ky « i, hvor ky og &z er heltall. Finn verdien
+
+2) Uttrykket 7.449 — A*ai kan ogsa forenkles til 71 » 3 + sg - @, hvor 10g * er heltall. Finn
+verdien til #73; og #g.
+
+Maks poeng: 4
+
+Oppgave 14
+
+Denne deloppgaven skal besvares pa papir (med sjusifret kode) som skannes inn.
+
+Diagonaliser den falgende matrisen:
+
+—2 1 0
+A=j)0 1 8
+o oOo 2
+
+dvs finn en inverterbar matrise ( og en diagonal matrise © slik at A = CDC--.
+
+Maks poeng: 10
+
+15/15
+
+

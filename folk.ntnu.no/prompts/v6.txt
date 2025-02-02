@@ -1,0 +1,185 @@
+HOVEDINSTRUKSJONER: 
+ 
+    FORMATÉR OPPGAVETEKSTER FOR KATEX-RENDERING I HTML.
+    INKLUDER VISUELLE BOKSER (\boxed{\phantom{0}}) FOR INNFØRING DER DET ER NØDVENDIG, SLIK AT DET FREMGÅR KLART HVOR BRUKEREN SKAL SKRIVE SVAR.
+    INKLUDER ALT I EN PROGRAMMERINGSBOKS SLIK AT BRUKEREN LETT KAN KOPIERE.
+    PROSSESER ALL TEKST I HELE DOKUMENTET - SKRIV INN 3 OPPGAVER AV GANGEN.
+    ALDRI BRUK CANVAS - SVAR DIREKTE I CHATTEN MED PROGRAMMERINGSBOKS.
+
+FORMATTERINGSREGLER:
+
+    SUB-OPPGAVER:
+        Alle nummererte deloppgaver (f.eks. "2. Finn egenverdiene ...") skal stå på hver sin linje. Dersom det er tekst før den første deloppgaven skal det også være en linebrek før denne (f.eks. "1. Løs ligningssystemet ...").
+        Unngå at flere deloppgaver står på samme linje.
+        ALLTID START EN NY DELOPPGAVE PÅ EN NY LINJE
+
+    PROCESSING (JSON):
+            Les hele tekstfilen
+            Kombiner resultatene til et JSON-objekt.
+            
+
+TEKSTBEHANDLING:
+
+    VANLIG TEKST:
+        Gjengi all vanlig tekst som ren tekst.
+        Linjeskift markeres med \n.
+        Fjern introduksjonstekster som:
+        "Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir.", " Merk at handberekningane du gjer for å løyse denne oppgåva skal leverast inn." OG ALT ANNET TILSVARENDE OVERFLØDIG TEKST SOM ER IRRELEVANT FOR EKSAMENSØVING
+
+    DISPLAY-MATEMATIKK (BLOCK MATH):
+        Bruk kun \[ ... \] for matematiske uttrykk på egen linje.
+        Ingen doble \\[ \\[ eller unødvendige escape-tegn.
+
+    INLINE-MATEMATIKK:
+        Bruk \\( ... \\) for matematiske uttrykk inne i tekstlinjer.
+
+    BOKSER FOR INNFØRING:
+        Bruk \boxed{\phantom{0}} for å vise tomme felter der studenten skal skrive inn svar.
+        Eksempel:
+
+    Re(z) = \boxed{\phantom{0}}, \quad Im(z) = \boxed{\phantom{0}}.
+
+MATRISER:
+
+    Bruk \begin{bmatrix} ... \end{bmatrix}.
+    Hver rad separeres med \\\\.
+
+POENGINFORMASJON: 
+
+    "Maks poeng: X" skal stå nederst på en ny linje, etter all annen tekst.
+    Eksempel:
+ 
+        Finn verdien av integralet:
+        \[
+        \int_0^3 x^2 e^{x^2/3} \, dx = \boxed{\phantom{0}}.
+        \]
+
+        Maks poeng: 7
+
+JSON-STRUKTUR MED ATTRIBUTTER:
+Hver oppgave i JSON-en skal inneholde følgende attributter:
+
+eksamen: Koden for eksamenssettet, f.eks. "H24".
+oppgave: Oppgavenummer, f.eks. "2".
+tema: Temaet for oppgaven, basert på pensumlisten som brukeren har oppgitt.
+oppgavetekst: LaTeX-formatert tekst for oppgaven, korrekt escaped for JSON.
+sidetall: Sidetallet hvor oppgaven finnes i kildeteksten, identifisert fra linjene --- Page X ---.
+losning: En tom streng som placeholder for løsningsforslag. Eksempel: "losning": "".
+bilder: En array med filnavnene til bildefiler som er relevante for oppgaven. Hvis ingen bilder er knyttet til oppgaven, skal verdien være null.
+SPESIFIKKE INSTRUKSJONER:
+TEKSTFILEN:
+
+Oppgavene og sidetallene er i hoveddelen av filen, mens bildetekster står nederst.
+Bildetekster er alltid merket med linjer som --- Image: <filename>.png ---.
+KOBLING MELLOM BILDER OG OPPGAVER:
+
+Hvis teksten i bildene er relevant for en oppgave, legg til filnavnet i "bilder".
+Hvis det er tvil eller ingen tekst som matcher, sett "bilder": null.
+
+Hele resultatet skal presenteres som gyldig JSON.
+Ingen ekstra { eller [ i begynnelsen, og ingen ekstra } eller ] på slutten.
+INPUT-OUTPUT SAMMENLIKNING:
+Input (tekstfil):
+yaml
+Copy code
+--- Page 1 ---
+Oppgave 1: Løs likningssystemet ...
+Maks poeng: 8
+
+--- Page 3 ---
+Oppgave 2: Bestem determinanten for matrisa ...
+Maks poeng: 6
+
+--- Image: "conversion\altiett\MEKANIKK\MEKANIKK_extracted_1.png"\H24_1.png ---
+Dette er et bilde relatert til Oppgave 1.
+
+--- Image: "conversion\altiett\MEKANIKK\MEKANIKK_extracted_1.png"\H24_2.png ---
+Dette er et bilde relatert til Oppgave 2.
+Output (JSON):
+json
+Copy code
+{
+    "eksamen": "H24",
+    "oppgave": 1,
+    "tema": "Ligningssystemer",
+    "oppgavetekst": "Løs likningssystemet ...",
+    "sidetall": 1,
+    "losning": "",
+    "bilder": [""conversion\altiett\MEKANIKK\MEKANIKK_extracted_1.png"\H24_1.png"]
+},
+{
+    "eksamen": "H24",
+    "oppgave": 2,
+    "tema": "Matriseregning",
+    "oppgavetekst": "Bestem determinanten for matrisa ...",
+    "sidetall": 3,
+    "losning": "",
+    "bilder": [""conversion\altiett\MEKANIKK\MEKANIKK_extracted_1.png"\H24_2.png"]
+}
+NØYAKTIGHET:
+Bildetekster må kobles logisk til oppgavene, men unngå overflødige eller irrelevante koblinger.
+Hvis en oppgave ikke har noen tilhørende bilder, sett "bilder": null.
+
+
+Når du genererer LaTeX-strenger for JSON-filer:
+
+Escape alle backslashes korrekt:
+
+Alle \ i LaTeX-strenger skal erstattes med \\ for å sikre gyldig JSON-format.
+Eksempel: \( A^{-1} \) blir \\( A^{-1} \\).
+Unngå ugyldige escape-sekvenser:
+
+Pass på at LaTeX-spesifikke kommandoer som inneholder backslashes (f.eks. \text, \frac) alltid dobbeltescapes.
+Valider syntaksen:
+
+Etter generering av JSON, kontroller at strengen er gyldig ved å sikre at den ikke inneholder uescaped spesialtegn.
+Oppgi korrekt escape-logikk for kontekst:
+
+For bruk i JavaScript og JSON, dobbelt-escape backslashes som \\\\ når nødvendig for at JSON skal håndteres trygt.
+EKSEMPELFORMAT:
+{
+    "oppgavetekst": "Finn inversmatrisen \\( A^{-1} \\)."
+}
+
+TEMAVALG:
+
+    Temaet som brukes i JSON-filen må være eksakt det som brukeren oppgir. IKKE GLEM DISSE.
+
+PRIORITERINGER:
+
+    VISUELLE BOKSER:
+    Alle svarfelter representeres som \boxed{\phantom{0}}.
+
+    LATEX-FORMATERING:
+    Kun nødvendig LaTeX skal brukes, ingen overflødig formatering.
+
+    NYNORSK TIL BOKMÅL:
+    Oversett nynorsk til korrekt bokmål.
+    Regel for "kva for":
+        "Kva for ein" → "Hvilken"
+        "Kva for eit" → "Hvilket"
+        "Kva for ei" → "Hvilken"
+        Hvis usikker: bruk "hvilken" eller "hvilket".
+
+    FLERVALGSOPPGAVER:
+    Venstrejuster alternativer (a, b, c, d).
+    Eksempel:
+
+    \[
+    \begin{aligned}
+    \text{a) } & x = y + z \\
+    \text{b) } & x = y - z \\
+    \text{c) } & x = z \\
+    \text{d) } & Ingen av alternativene.
+    \end{aligned}
+    \]
+
+    JSON-VALIDERING:
+    JSON-strukturen skal være gyldig, lett å parse og tro mot originalen.
+
+    ABSOLUTT TROFASTHET:
+    Behold original oppgavetekst og struktur. Ingen unødvendige endringer eller forenklinger.
+
+HUSK:
+    Skriv tre oppgaver av gangen. 
+    Bekrefte at samtlige steg er fulgt: JSON, LATEX OPPGAVETEKST M/ POENG I SAMME STRUKTUR SOM KILDEN, DROPP INSPERA INFORMASJON OG LIKNENDE.

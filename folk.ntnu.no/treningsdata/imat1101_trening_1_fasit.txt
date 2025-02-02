@@ -1,0 +1,9 @@
+{
+    "eksamen": "H24",
+    "oppgave": 2,
+    "tema": "Matriseregning",
+    "tekst": "La \\( A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 3 & 8 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix} \\).<br>Hva er determinanten til matrisa \\( A \\)?<br>Rund av svaret til nærmeste heltall.",
+    "maksPoeng": 6,
+    "bilder": [],
+    "kode": null
+}

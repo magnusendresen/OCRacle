@@ -1,0 +1,83 @@
+FORMATÉR OPPGAVETEKSTER OG LØSNINGSFORSLAG FOR KATEX-RENDERING I HTML. UTFØR PERFEKT OG TROFAST TIL ORIGINALEN. FØLG ALLE REGLER. IKKE GJØR FEIL.
+
+1. VANLIG TEKST:
+   - All vanlig tekst pakkes ut som **ren tekst**, linjeskift angis som `\n`.
+   - **FJERN** alt av introduksjonstekst som:  
+     "Du skal svara på denne oppgåva i Inspera. Du skal ikkje leggja ved utrekningar på papir."
+   - Ikke bruk noen LaTeX-formater for vanlig tekst (f.eks. \textit{} eller \textbf{}).
+
+2. DISPLAY-MATEMATIKK:
+   - Bruk kun `\[ ... \]` for matematiske uttrykk som skal stå på egen linje.
+   - INGEN doble `\\[ \\[` eller unødvendige escape-tegn.
+   **EKSEMPEL:**  
+   ```latex
+   \[
+   \mathbf{v}_1 = \begin{bmatrix} 1 \\ 8 \\ 0 \end{bmatrix}, \quad \mathbf{v}_2 = \begin{bmatrix} 2 \\ c \\ 5 \end{bmatrix}.
+   \]
+
+    INLINE-MATEMATIKK:
+        Små matematiske uttrykk pakkes inn i \\( ... \\) for plassering i løpende tekst.
+        IKKE bruk LaTeX for tekstformatering, kun for matematiske symboler og uttrykk. EKSEMPEL:
+
+Finn konstanten \( c \) slik at \( \mathbf{v}_1 \) og \( \mathbf{v}_2 \) danner et underrom.
+
+MATRISER:
+
+    Matriser skrives med \begin{bmatrix} ... \end{bmatrix}.
+    Hver rad skilles med \\\\. EKSEMPEL:
+
+\[
+\mathbf{x}(t) = \begin{bmatrix} x_1(t) \\ x_2(t) \end{bmatrix}.
+\]
+
+POENGINFORMASJON:
+
+    Skriv "Maks poeng: X" som vanlig tekst på en ny linje. Bruk ingen LaTeX-formatering. EKSEMPEL:
+
+    Maks poeng: 6
+
+    SPRÅKBEHANDLING (NYNORSK → BOKMÅL):
+        Oversett all nynorsk tekst til bokmål med presisjon.
+        Behold betydningen nøyaktig. Ikke forenkle.
+
+JSON-STRUKTUR:
+
+Bruk flat JSON-struktur som følger:
+
+{
+    "samling": [
+        {
+            "eksamen": "H24",
+            "oppgave": 4,
+            "tema": "Lineær algebra",
+            "oppgavetekst": "La\n\\[\n\\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 8 \\\\ 0 \\end{bmatrix}, \\quad \\mathbf{v}_2 = \\begin{bmatrix} 2 \\\\ c \\\\ 5 \\end{bmatrix}.\n\\]\nFinn konstanten \\( c \\) slik at vektoren\n\\[\n\\begin{bmatrix} 1 \\\\ 3 \\\\ -25 \\end{bmatrix}\n\\]\nligger i underrommet \\( \\text{span}(\\mathbf{v}_1, \\mathbf{v}_2) \\).\nMaks poeng: 6"
+        }
+    ]
+}
+
+KVALITETSKONTROLL:
+
+    FJERN INTRODUKSJONSTEKST:
+        Ingen linjer som "Du skal svara på denne oppgåva ..." skal inkluderes.
+
+    VALID JSON:
+        JSON-strukturen skal være gyldig og lett å parse.
+
+    LATEX-FORMATERING:
+        Bruk kun LaTeX for nødvendige matematiske symboler og strukturer som , , og \begin{bmatrix}.
+        Ikke bruk noen tekstformateringsfunksjoner som \textit{}, \begin{enumerate}, eller lignende.
+
+    NYNORSK TIL BOKMÅL:
+        Oversett feilfritt og presist.
+
+    ABSOLUTT TROFASTHET:
+        Gjengivelsen skal være helt nøyaktig uten forenkling, utelatelse eller omskrivning.
+
+PRIORITERINGER:
+
+    FEILFRI LATEX-KODE.
+    FJERN INTRODUKSJONSTEKST.
+    TROFASTHET TIL ORIGINALEN.
+    KORREKT JSON-STRUKTUR FOR KATEX-RENDERING.
+
+UTFØR PERFEKT. BRUK REGELSETTET UTEN UNNTAK.

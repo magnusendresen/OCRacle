@@ -1,0 +1,11 @@
+[
+    {
+        "eksamen": "H24",
+        "oppgave": 5,
+        "tema": "Vektorrom og basis",
+        "oppgavetekst": "Hvilket av de følgende er en basis for \\( \\mathbb{R}^3 \\)?<br>Velg ett alternativ:<br>\\[\\begin{aligned}\\text{a) } & \\{(-1, 0, 0), (-1, 1, 1)\\} \\\\\\text{b) } & \\{(1, 1, 0), (0, 0, 2), (1, 1, 2), (1, 1, 1)\\} \\\\\\text{c) } & \\{(1, 1, 0), (0, 0, 2), (1, 1, 2)\\} \\\\\\text{d) } & \\{(1, 1, 0), (0, 1, 0), (1, 0, 0)\\} \\\\\\text{e) } & \\{(1, 0, 0), (1, 1, 0), (1, 1, 1)\\} \\\\\\text{f) } & \\{(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 0, 1)\\} \\\\\\text{g) } & \\{(1, 0, 0), (1, 1, 2)\\}\\end{aligned}\\]<br>Merk at i denne oppgaven bruker vi notasjonen:<br>\\[ (x, y, z) = \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix} \\].",
+        "maksPoeng": 4,
+        "bilder": null,
+        "kode": null
+    }
+]

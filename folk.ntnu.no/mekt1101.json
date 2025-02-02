@@ -1,0 +1,102 @@
+[
+    {
+        "eksamen": "H24",
+        "oppgave": "1a",
+        "tema": "Statikk - Fagverk",
+        "oppgavetekst": "Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren.<br>Vis at fagverket er statisk bestemt.",
+        "maksPoeng": 3,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_1.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "1b",
+        "tema": "Statikk - Opplagerkrefter",
+        "oppgavetekst": "Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren.<br>Bestem opplagerkreftene i A og E. Angi svaret i et heltall antall kN.<br>La positiv x-akse peke mot høyre og positiv z-akse peke oppover på figuren. Angi svaret med negativt fortegn dersom du mener opplagerkreftene i x-retning peker mot venstre, eller hvis du mener opplagerkreftene i z-retning peker nedover.",
+        "maksPoeng": 3,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_2.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "1c",
+        "tema": "Statikk - Nullstaver",
+        "oppgavetekst": "Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren.<br>Hvilken eller hvilke staver er nullstaver?<br>Velg ett alternativ:<br>- Stav AE og BD<br>- Stav DE<br>- Det er ingen nullstaver<br>- Stav AD og BD<br>- Stav AE<br>- Stav BD",
+        "maksPoeng": 4,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_3.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "1d",
+        "tema": "Statikk - Strekk- og Trykkrefter",
+        "oppgavetekst": "Figuren viser et fagverk ABCDE. Fagverket er festet til en vegg via et fastlager i punkt A og et glidelager i punkt E. En punktlast på 30 kN virker i punkt C som angitt på figuren.<br>Finn største strekkraft og største trykkraft i fagverket ved å bruke knutepunktsmetoden.<br>Angi svaret i (positivt) heltall antall kN. Merk at vi kun er ute etter tallverdier.",
+        "maksPoeng": 6,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_4.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "2a",
+        "tema": "Tverrsnitt - Arealsenter",
+        "oppgavetekst": "Et sammensatt tverrsnitt har geometri som vist i figuren.<br>z-aksen er en symmetriakse for tverrsnittsgeometrien.<br>Regn ut beliggenheten til arealsenter C \\( (y_c, z_c) \\).<br>\\( y_c = \\boxed{\\phantom{0}} \\text{ mm}, \\quad z_c = \\boxed{130} \\text{ mm} \\).",
+        "maksPoeng": 4,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_5.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "2b",
+        "tema": "Tverrsnitt - Steiner's Teorem",
+        "oppgavetekst": "Et sammensatt tverrsnitt har geometri som vist i figuren.<br>z-aksen er en symmetriakse for tverrsnittsgeometrien.<br>Beregn tverrsnittets annet areal moment \\( I_{z,z} \\). Bruk Steiners teorem.<br>Rund av svaret ditt til nærmeste heltall.<br>\\( I_{z,z} = \\boxed{83-84} \\times 10^6 \\text{ mm}^4 \\).",
+        "maksPoeng": 6,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_6.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "5a",
+        "tema": "Deformasjonsanalyse",
+        "oppgavetekst": "En ramme ABC er påvirket av en kraft \\( P \\) i C som vist på figuren. Rammeelementene (AB og BC) har lengde \\( L \\) og bøyestivhet \\( EJ \\). Momentdiagrammet er oppgitt.<br>Velg riktig skisse av deformasjonsmønsteret (elastiske linjen).<br>Velg ett alternativ:<br>- Alternativ 5<br>- Alternativ 4<br>- Alternativ 6<br>- Alternativ 1<br>- Alternativ 3<br>- Alternativ 2",
+        "maksPoeng": 4,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_17.png", "MEKT1101H24\\MEKT1101H24_extracted_18.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "5b",
+        "tema": "Bjelketeori - Vertikalforskyvning",
+        "oppgavetekst": "Hva blir vertikalforskyvningen av punkt B? Bruk elementærbjelkemetoden.<br>Velg ett alternativ:<br>- \\( W_B = 0 \\)<br>- \\( W_B = \\frac{FL^3}{8EJ} \\)<br>- \\( W_B = \\frac{FL^3}{16EJ} \\)<br>- \\( W_B = \\frac{3FL^3}{8EJ} \\)<br>- \\( W_B = \\frac{FL^3}{4EJ} \\)<br>- \\( W_B = \\frac{FL^3}{6EJ} \\)<br>- \\( W_B = \\frac{FL^3}{3EJ} \\)",
+        "maksPoeng": 5,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_17.png", "MEKT1101H24\\MEKT1101H24_extracted_18.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "5c",
+        "tema": "Bjelketeori - Rotasjonsvinkel",
+        "oppgavetekst": "Hva er rotasjonsvinkelen i punkt B?<br>Velg ett alternativ:<br>- \\( \\beta_B = 0 \\)<br>- \\( \\beta_B = \\frac{FL^2}{3EJ} \\)<br>- \\( \\beta_B = \\frac{FL^2}{8EJ} \\)<br>- \\( \\beta_B = \\frac{FL^2}{16EJ} \\)<br>- \\( \\beta_B = \\frac{FL^2}{6EJ} \\)<br>- \\( \\beta_B = \\frac{FL^2}{2EJ} \\)",
+        "maksPoeng": 4,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_17.png", "MEKT1101H24\\MEKT1101H24_extracted_18.png"],
+        "kode": null
+    },
+    {
+        "eksamen": "H24",
+        "oppgave": "5d",
+        "tema": "Bjelketeori - Horisontalforskyvning",
+        "oppgavetekst": "Beregn horisontalforskyvningen av punkt C.",
+        "maksPoeng": 3,
+        "losning": "",
+        "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_17.png", "MEKT1101H24\\MEKT1101H24_extracted_18.png"],
+        "kode": null
+    }
+]

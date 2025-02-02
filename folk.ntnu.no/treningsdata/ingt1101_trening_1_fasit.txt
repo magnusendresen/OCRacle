@@ -1,0 +1,9 @@
+{
+    "eksamen": "H24",
+    "oppgave": 4,
+    "tema": "Lister og indekser",
+    "oppgavetekst": "Hver rad nedenfor har et kall til funksjonene ovenfor. Skriv i tekstfeltet hva svaret blir. Flyttall avrundes til én desimal:<br>print(f\"f1(temperatures):.1f\") skriver ut: \\( \\boxed{\\phantom{0}} \\)<br>print(f\"f2(temperatures):.1f\") skriver ut: \\( \\boxed{\\phantom{0}} \\)<br>print(f\"f3(temperatures):.1f\") skriver ut: \\( \\boxed{\\phantom{0}} \\)<br>print(f\"f4(temperatures):.1f\") skriver ut: \\( \\boxed{\\phantom{0}} \\)<br>print(f\"f5(temperatures)\") skriver ut: \\( \\boxed{\\phantom{0}} \\)<br>print(f\"f6(temperatures)\") skriver ut: \\( \\boxed{\\phantom{0}} \\)",
+    "maksPoeng": 6,
+    "bilder": null,
+    "kode": "temperatures = [15.5, 17.2, 16.8, 14.9, 18.3, 19.0, 16.5]\n\ndef f1(temps):\n    return sum(temps) / len(temps)\n\ndef f2(temps):\n    return sum(temps[:3]) / len(temps[:3])\n\ndef f3(temps):\n    return sum(temps[-4:]) / len(temps[-4:])\n\ndef f4(temps):\n    return max(temps)\n\ndef f5(temps):\n    return temps[::-1]\n\ndef f6(temps):\n    result = []\n    for temp in temps:\n        if temp > 17:\n            result.append(temp)\n    return result"
+}

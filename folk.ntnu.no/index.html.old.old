@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emnevelger</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+  />
+  <!-- KaTeX CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+  />
+
+  <!-- KaTeX Scripts -->
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"
+  ></script>
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"
+  ></script>
+
+  <style>
+    body {
+      background-color: #ffffff; /* Changed from cream to white */
+      color: #333;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    .subject {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .subject:hover {
+      transform: scale(1.05);
+    }
+    .tab-buttons button {
+      margin: 0 5px;
+    }
+    .task {
+      margin-top: 20px;
+    }
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .btn.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    img {
+      max-width: 40%;
+      margin-bottom: 20px;
+      margin-left: 3%;
+      display: block;
+    }
+    pre {
+        background-color: #dddddd; /* Light gray background */
+        padding: 10px;
+        border-radius: 5px;
+        font-family: "Courier New", Courier, monospace; /* Monospace font */
+        overflow-x: auto; /* Horizontal scroll for long lines */
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Page (Subject Selection) -->
+  <div id="main-page" class="container text-center">
+    <h1 class="mb-4">Velg et Emne</h1>
+    <div id="subject-container" class="row g-3">
+      <!-- Subjects will be dynamically added here -->
+    </div>
+  </div>
+
+  <!-- Task Page (After Selecting a Subject) -->
+  <div id="task-page" class="container" style="display: none;">
+    <button class="btn btn-secondary mb-3" onclick="goBack()">
+      Tilbake
+    </button>
+    <h1 id="subject-title" class="mb-4">Task Selector</h1>
+
+    <!-- Tab Buttons -->
+    <div class="d-flex justify-content-center mb-3">
+      <button id="exam-tab" class="btn btn-primary me-2 active">
+        Eksamenssett
+      </button>
+      <button id="theme-tab" class="btn btn-outline-primary">
+        Temaer
+      </button>
+    </div>
+
+    <!-- Dropdown Menus -->
+    <select id="exam-dropdown" class="form-select mb-3 active">
+      <option value="">-- Select an Eksamenssett --</option>
+    </select>
+    <select id="theme-dropdown" class="form-select mb-3" style="display: none;">
+      <option value="">-- Select a Tema --</option>
+    </select>
+
+    <!-- Task Container -->
+    <div id="task-container"></div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+      <button id="prev-task" class="btn btn-secondary disabled">
+        Forrige Oppgave
+      </button>
+      <select id="task-selector" class="form-select w-auto"></select>
+      <button id="next-task" class="btn btn-secondary disabled">
+        Neste Oppgave
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /****************************************
+     *     SUBJECTS CONFIGURATION
+     ****************************************/
+    let subjects = [
+      { name: "IMAT1002", file: "imat1002.json" },
+      { name: "INGT1002", file: "ingt1002.json" },
+      { name: "MEKT1101", file: "mekt1101.json" }
+    ];
+
+    /****************************************
+     *     GLOBAL STATE (now using let)
+     ****************************************/
+    let currentSubjectName = "";
+    let currentTasks = [];
+    let currentTaskIndex = 0;
+    let currentTab = "exam";
+
+    /****************************************
+     *     DOM REFERENCES
+     ****************************************/
+    let subjectContainer = document.getElementById("subject-container");
+    let mainPage = document.getElementById("main-page");
+    let taskPage = document.getElementById("task-page");
+    let subjectTitle = document.getElementById("subject-title");
+
+    let examTab = document.getElementById("exam-tab");
+    let themeTab = document.getElementById("theme-tab");
+    let examDropdown = document.getElementById("exam-dropdown");
+    let themeDropdown = document.getElementById("theme-dropdown");
+
+    let taskContainer = document.getElementById("task-container");
+    let prevTaskButton = document.getElementById("prev-task");
+    let nextTaskButton = document.getElementById("next-task");
+    let taskSelector = document.getElementById("task-selector");
+
+    /****************************************
+     *     INITIAL SETUP
+     ****************************************/
+    // Create subject cards
+    subjects.forEach((subject) => {
+      let subjectDiv = document.createElement("div");
+      subjectDiv.className = "col-md-4";
+      subjectDiv.innerHTML = `
+        <div class="card subject p-3 text-white bg-primary">
+          <div class="card-body">
+            <h5 class="card-title">${subject.name}</h5>
+          </div>
+        </div>
+      `;
+      subjectDiv.addEventListener("click", () => handleSubjectClick(subject));
+      subjectContainer.appendChild(subjectDiv);
+    });
+
+    // Tab button click events
+    examTab.addEventListener("click", () => {
+      if (currentTab !== "exam") {
+        currentTab = "exam";
+        switchTab("exam");
+      }
+    });
+
+    themeTab.addEventListener("click", () => {
+      if (currentTab !== "theme") {
+        currentTab = "theme";
+        switchTab("theme");
+      }
+    });
+
+    // Dropdown change events
+    examDropdown.addEventListener("change", handleExamChange);
+    themeDropdown.addEventListener("change", handleThemeChange);
+
+    // Navigation button events
+    prevTaskButton.addEventListener("click", showPrevTask);
+    nextTaskButton.addEventListener("click", showNextTask);
+    taskSelector.addEventListener("change", onTaskSelectorChange);
+
+    /****************************************
+     *     EVENT HANDLERS
+     ****************************************/
+    function handleSubjectClick(subject) {
+      // Always fetch the JSON on subject click
+      currentSubjectName = subject.name;
+
+      fetch(subject.file, { cache: "no-store" }) 
+        // ^ 'no-store' hint to not use the browser cache
+        .then((response) => response.json())
+        .then((data) => {
+          displaySubjectTasks(subject.name, data);
+        })
+        .catch((error) => console.error("Error loading subject tasks:", error));
+    }
+
+    function handleExamChange() {
+      let selectedExam = examDropdown.value;
+      if (!selectedExam) {
+        // If user unselects exam, clear tasks
+        currentTasks = [];
+        updateTaskDisplay();
+        return;
+      }
+
+      // Filter tasks by 'eksamen'
+      currentTasks = currentTasksAll.filter((t) => t.eksamen === selectedExam);
+      currentTaskIndex = 0;
+      updateTaskDisplay();
+      resetTaskSelector();
+    }
+
+    function handleThemeChange() {
+      let selectedTheme = themeDropdown.value;
+      if (!selectedTheme) {
+        // If user unselects theme, clear tasks
+        currentTasks = [];
+        updateTaskDisplay();
+        return;
+      }
+
+      // Filter tasks by 'tema'
+      currentTasks = currentTasksAll.filter((t) => t.tema === selectedTheme);
+      currentTaskIndex = 0;
+      updateTaskDisplay();
+      resetTaskSelector();
+    }
+
+    function showPrevTask() {
+      if (currentTaskIndex > 0) {
+        currentTaskIndex--;
+        updateTaskDisplay();
+      }
+    }
+
+    function showNextTask() {
+      if (currentTaskIndex < currentTasks.length - 1) {
+        currentTaskIndex++;
+        updateTaskDisplay();
+      }
+    }
+
+    function onTaskSelectorChange() {
+      currentTaskIndex = parseInt(taskSelector.value, 10);
+      updateTaskDisplay();
+    }
+
+    /****************************************
+     *     CORE FUNCTIONS
+     ****************************************/
+    // We'll keep a separate array that holds ALL tasks from the JSON
+    // so that we can re-filter by exam or theme at any time.
+    let currentTasksAll = [];
+
+    function displaySubjectTasks(subjectName, tasks) {
+      // Show task page
+      mainPage.style.display = "none";
+      taskPage.style.display = "block";
+      subjectTitle.textContent = subjectName;
+
+      // Save all tasks for this subject
+      currentTasksAll = tasks.slice(); // copy
+      currentTasks = [];
+      currentTaskIndex = 0;
+
+      // Reset dropdowns
+      examDropdown.innerHTML = `<option value="">-- Select an Eksamenssett --</option>`;
+      themeDropdown.innerHTML = `<option value="">-- Select a Tema --</option>`;
+
+      // Populate exam and theme dropdowns
+      let uniqueExams = [...new Set(tasks.map((t) => t.eksamen))];
+      let uniqueThemes = [...new Set(tasks.map((t) => t.tema))];
+
+      uniqueExams.forEach((exam) => {
+        let option = document.createElement("option");
+        option.value = exam;
+        option.textContent = exam;
+        examDropdown.appendChild(option);
+      });
+
+      uniqueThemes.forEach((theme) => {
+        let option = document.createElement("option");
+        option.value = theme;
+        option.textContent = theme;
+        themeDropdown.appendChild(option);
+      });
+
+      // Initially no tasks selected (user must pick exam or theme)
+      updateTaskDisplay();
+    }
+
+    function updateTaskDisplay() {
+      if (currentTasks.length > 0) {
+        let task = currentTasks[currentTaskIndex];
+
+        // Bytt ut \n med <br> for riktig visning av linjeskift
+        let formattedText = task.oppgavetekst.replace(/\n/g, '<br>');
+
+        taskContainer.innerHTML = `
+          <div class="task">
+            <h3>Oppgave ${task.oppgave} - ${task.tema}</h3>
+            ${task.bilder && task.bilder.length > 0 ? task.bilder.map(bilde => `<img src="${bilde}" alt="Tilhørende bilde for oppgave ${task.oppgave}">`).join('') : ''}
+            <p><br>${formattedText}</p>
+            <p><strong>Maks poeng:</strong> ${task.maks_poeng}</p>
+          </div>
+        `;
+
+        // Render KaTeX
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: "\\[", right: "\\]", display: true },
+            { left: "\\(", right: "\\)", display: false }
+          ]
+        });
+
+        // Build task selector
+        taskSelector.innerHTML = "";
+        currentTasks.forEach((_, index) => {
+          let option = document.createElement("option");
+          option.value = index;
+          option.textContent = `${index + 1}`;
+          if (index === currentTaskIndex) {
+            option.selected = true;
+          }
+          taskSelector.appendChild(option);
+        });
+
+        // Enable/disable navigation buttons
+        prevTaskButton.classList.toggle("disabled", currentTaskIndex === 0);
+        nextTaskButton.classList.toggle(
+          "disabled",
+          currentTaskIndex === currentTasks.length - 1
+        );
+      } else {
+        taskContainer.innerHTML = `<p>Ingen oppgaver tilgjengelig. Velg et eksamenssett eller tema.</p>`;
+        taskSelector.innerHTML = "";
+        prevTaskButton.classList.add("disabled");
+        nextTaskButton.classList.add("disabled");
+      }
+    }
+
+    // Escape HTML characters to safely display code
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function resetTaskSelector() {
+      taskSelector.selectedIndex = 0;
+    }
+
+    // Switch between exam or theme tab
+    function switchTab(tab) {
+      if (tab === "exam") {
+        examTab.classList.add("active");
+        themeTab.classList.remove("active");
+        examDropdown.style.display = "block";
+        themeDropdown.style.display = "none";
+
+        // Clear tasks shown
+        taskContainer.innerHTML = "";
+        currentTasks = [];
+        resetTaskSelector();
+      } else if (tab === "theme") {
+        themeTab.classList.add("active");
+        examTab.classList.remove("active");
+        themeDropdown.style.display = "block";
+        examDropdown.style.display = "none";
+
+        // Clear tasks shown
+        taskContainer.innerHTML = "";
+        currentTasks = [];
+        resetTaskSelector();
+      }
+    }
+
+    // Go back to main page
+    function goBack() {
+      taskPage.style.display = "none";
+      mainPage.style.display = "block";
+      taskContainer.innerHTML = "";
+      examDropdown.value = "";
+      themeDropdown.value = "";
+
+      // Reset current tasks
+      currentTasks = [];
+      currentTasksAll = [];
+      currentTaskIndex = 0;
+      resetTaskSelector();
+    }
+  </script>
+</body>
+</html>

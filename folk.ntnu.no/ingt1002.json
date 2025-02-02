@@ -1,0 +1,12 @@
+[
+    {
+        "eksamen": "H24",
+        "oppgave": 7,
+        "tema": "Numerisk derivasjon",
+        "oppgavetekst": "Vi måler følgende verdier for høyden til en drone:<br>\\[ h = [153, 155, 158, 163, 170, 178, 185, 189, 188, 183] \\]<br>Målingene er gjort ved følgende tidspunkt:<br>\\[ t = [0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0] \\]<br>Vi ser bort fra enhetene til \\( h \\) og \\( t \\).<br>Vi antar at dronen kun beveger seg i høyderetningen. Hva gir foroverdifferanse som en tilnærming til den tidsderiverte av høyden?<br>\\( v_{\\text{forover}}(1.0) = \\boxed{\\phantom{0}} \\)<br>Hva gir bakoverdifferanse?<br>\\( v_{\\text{bakover}}(1.0) = \\boxed{\\phantom{0}} \\)<br>Hva gir sentraldifferanse?<br>\\( v_{\\text{sentral}}(1.0) = \\boxed{\\phantom{0}} \\)",
+        "maksPoeng": 6,
+        "bilder": null,
+        "kode": null
+      }
+      
+]

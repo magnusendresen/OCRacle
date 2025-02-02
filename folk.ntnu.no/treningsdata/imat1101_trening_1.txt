@@ -1,0 +1,15 @@
+2 Oppgave/Oppgave 2
+
+Du skal svara pa denne oppgava i Inspera. Du skal ikkje leggia ved utrekningar pa papir.
+12 0
+
+laA=]3 8 0
+001
+
+Kva er determinanten til matrisa A?
+
+det(A) +]
+
+Rund av svaret til nzermaste heiltal.
+
+Maks poeng: 6

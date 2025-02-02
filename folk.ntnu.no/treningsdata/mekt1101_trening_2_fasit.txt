@@ -1,0 +1,9 @@
+{
+    "eksamen": "H24",
+    "oppgave": "5a",
+    "tema": "Deformasjonsmønster - Elastiske linjer",
+    "oppgavetekst": "Velg riktig skisse av deformasjonsmønsteret (elastiske linjen).<br>\nVelg ett alternativ:<br>\n\\( \\text{Alternativ 1} \\)<br>\n\\( \\text{Alternativ 2} \\)<br>\n\\( \\text{Alternativ 3} \\)<br>\n\\( \\text{Alternativ 4} \\)<br>\n\\( \\text{Alternativ 5} \\)<br>\n\\( \\text{Alternativ 6} \\)",
+    "maksPoeng": 6,
+    "bilder": ["MEKT1101H24\\MEKT1101H24_extracted_18"],
+    "kode": null
+}     
