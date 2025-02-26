@@ -5,49 +5,60 @@ import json
 import tkinter as tk
 from tkinter import simpledialog
 
-# Cache file to store the last 5 results persistently
+# ✅ Cache-fil for å lagre de siste 5 resultatene
 CACHE_FILE = 'task_cache.json'
 
-# Load cache from file if it exists
+# ✅ Last inn cache fra fil om den eksisterer
 def load_cache():
     if os.path.exists(CACHE_FILE):
         with open(CACHE_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            cache = json.load(f)
+            return cache
     return []
 
-# Save cache to file
+# ✅ Lagre cache til fil
 def save_cache(cache):
     with open(CACHE_FILE, 'w', encoding='utf-8') as f:
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
 def main(rawtext):
-    # Initialize cache
+    """Håndterer cache og lar brukeren velge lagrede resultater."""
+    print("\n[INFO] Sjekker cache...\n")
+
+    # ✅ Initialiser cache
     task_cache = load_cache()
 
     if rawtext and rawtext != []:
-        # Add the new result to the cache
+        # ✅ Legg til nytt resultat i cache
         task_cache.append(rawtext)
+        
+        # ✅ Begrens cache til 5 elementer
         if len(task_cache) > 5:
             task_cache.pop(0)
-        save_cache(task_cache)
-    else:
-        root = tk.Tk()
-        root.withdraw()  # Hide the main Tkinter window
 
+        save_cache(task_cache)
+        print(f"[INFO] Nytt resultat lagret i cache. Antall elementer: {len(task_cache)}.\n")
+
+    else:
+        # ✅ Håndtering av cache hvis ingen nytt input
         if task_cache:
+            print(f"[INFO] {len(task_cache)} resultater funnet i cache.")
+            root = tk.Tk()
+            root.withdraw()  # ✅ Skjul Tkinter-vinduet
+
             choice = simpledialog.askinteger(
                 "Input",
-                "Choose a number between 1 and 5 to select a cached result (1=most recent, 5=oldest):",
+                "Velg et tall mellom 1 og 5 for å hente et tidligere lagret resultat (1 = nyeste, 5 = eldste):",
                 minvalue=1,
                 maxvalue=min(5, len(task_cache))
             )
 
             if choice and 1 <= choice <= len(task_cache):
-                # Adjust for most recent to oldest
                 rawtext = task_cache[-choice]
+                print(f"[INFO] Hentet oppgave {choice} fra cache.\n")
             else:
-                print("Invalid choice or no cached results available.")
+                print("[WARNING] Ugyldig valg. Ingen oppgave valgt fra cache.\n")
         else:
-            print("Cache is empty. No results available to select.")
+            print("[WARNING] Cache er tom.\n")
 
     return rawtext

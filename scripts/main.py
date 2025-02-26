@@ -1,8 +1,7 @@
 import ocrpdf
-import taskseparation
 import cachetask
 import textnormalization
-import gptapi
+import deepseekapi
 
 # Step 1: Run OCR PDF to get raw text
 rawtext = ocrpdf.main()
@@ -14,7 +13,7 @@ rawtext = textnormalization.normalize_text(rawtext)
 rawtext = cachetask.main(rawtext)
 
 # Step 4: Process tasks using taskseparation
-tasks = gptapi.main(rawtext)
+tasks = deepseekapi.main(rawtext)
 # tasks = taskseparation.main(rawtext)
 
 # Step 5: Write the tasks to an output file
