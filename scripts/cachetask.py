@@ -1,64 +1,61 @@
 import ocrpdf
-import taskseparation
 import os
 import json
 import tkinter as tk
 from tkinter import simpledialog
 
-# ✅ Cache-fil for å lagre de siste 5 resultatene
+# Cache file to store the last 5 results
 CACHE_FILE = 'task_cache.json'
 
-# ✅ Last inn cache fra fil om den eksisterer
+# Load cache from file if it exists
 def load_cache():
     if os.path.exists(CACHE_FILE):
         with open(CACHE_FILE, 'r', encoding='utf-8') as f:
-            cache = json.load(f)
-            return cache
+            return json.load(f)
     return []
 
-# ✅ Lagre cache til fil
+# Save cache to file
 def save_cache(cache):
     with open(CACHE_FILE, 'w', encoding='utf-8') as f:
         json.dump(cache, f, ensure_ascii=False, indent=2)
 
 def main(rawtext):
-    """Håndterer cache og lar brukeren velge lagrede resultater."""
-    print("\n[INFO] Sjekker cache...\n")
+    """Handles cache and allows the user to select stored results."""
+    print("\n[INFO] Checking cache...\n")
 
-    # ✅ Initialiser cache
+    # Initialize cache
     task_cache = load_cache()
 
     if rawtext and rawtext != []:
-        # ✅ Legg til nytt resultat i cache
+        # Add new result to cache
         task_cache.append(rawtext)
         
-        # ✅ Begrens cache til 5 elementer
+        # Limit cache to 5 entries
         if len(task_cache) > 5:
             task_cache.pop(0)
 
         save_cache(task_cache)
-        print(f"[INFO] Nytt resultat lagret i cache. Antall elementer: {len(task_cache)}.\n")
-
+        print(f"[INFO] New result stored in cache. Total entries: {len(task_cache)}.\n")
     else:
-        # ✅ Håndtering av cache hvis ingen nytt input
+        # Handle cache if no new input is provided
         if task_cache:
-            print(f"[INFO] {len(task_cache)} resultater funnet i cache.")
+            print(f"[INFO] {len(task_cache)} results found in cache.")
             root = tk.Tk()
-            root.withdraw()  # ✅ Skjul Tkinter-vinduet
+            root.withdraw()  # Hide Tkinter window
 
             choice = simpledialog.askinteger(
                 "Input",
-                "Velg et tall mellom 1 og 5 for å hente et tidligere lagret resultat (1 = nyeste, 5 = eldste):",
+                "Select a number between 1 and 5 to retrieve a previously stored result (1 = newest, 5 = oldest):",
                 minvalue=1,
                 maxvalue=min(5, len(task_cache))
             )
 
             if choice and 1 <= choice <= len(task_cache):
                 rawtext = task_cache[-choice]
-                print(f"[INFO] Hentet oppgave {choice} fra cache.\n")
+                print(f"[INFO] Retrieved task {choice} from cache.\n")
             else:
-                print("[WARNING] Ugyldig valg. Ingen oppgave valgt fra cache.\n")
+                print("[WARNING] Invalid choice. No task selected from cache.\n")
         else:
-            print("[WARNING] Cache er tom.\n")
+            print("[WARNING] Cache is empty.\n")
 
     return rawtext

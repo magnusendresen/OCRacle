@@ -1,0 +1,23 @@
+# Core dependencies
+numpy
+pandas
+pdf2image
+Pillow
+PyPDF2
+pytesseract
+regex
+torch
+tqdm
+transformers
+
+# Google Cloud Vision dependencies
+google-cloud-vision
+protobuf  # Required for Google APIs
+
+# PDF processing
+PyMuPDF  # Includes fitz
+
+# Other necessary libraries
+openai
+requests
+scipy

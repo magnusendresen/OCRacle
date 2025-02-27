@@ -1,27 +1,27 @@
 import os
 import time
-from openai import OpenAI  # Bruker OpenAI SDK for DeepSeek
+from openai import OpenAI  # Using OpenAI SDK for DeepSeek
 
-# Hent API-nøkkel fra miljøvariabler
+# Retrieve API key from environment variables
 api_key = os.getenv("DEEPSEEK_API_KEY")
 if not api_key:
     raise ValueError("API key not found in environment variables.")
 
-# Initialiser DeepSeek-klienten
+# Initialize DeepSeek client
 client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
-# Kostnadsberegning per 1000 tokens (NOK)
-COST_PER_1000_TOKENS_NOK = 0.01
+# Cost estimation for DeepSeek API requests
+usd_per_1m_input_tokens = 0.27
+usd_per_1m_output_tokens = 1.10
 
 MODEL_NAME = "deepseek-chat"
-total_cost = 0  # Variabel for å akkumulere total kostnad
+total_cost = 0  # Variable to accumulate total cost
 
-# ✅ Print at API-forbindelsen er vellykket
-print("[INFO] Successfully made contact with DeepSeek API!\n")
+print("[DEEPSEEK] Successfully connected to API!")
 
 def prompt_to_text(prompt, max_retries=3, max_tokens=1000):
-    """Sender forespørsel til DeepSeek, viser token-bruk og beregner kostnad."""
-    global total_cost  # Sørger for at vi oppdaterer den globale kostnadsvariabelen
+    """Sends a request, displays token usage, and calculates cost."""
+    global total_cost  # Ensure the global cost variable is updated
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
@@ -37,56 +37,51 @@ def prompt_to_text(prompt, max_retries=3, max_tokens=1000):
                 output_tokens = response.usage.completion_tokens
                 total_tokens = response.usage.total_tokens
 
-                # Beregn kostnad for denne forespørselen
-                request_cost = (total_tokens / 1000) * COST_PER_1000_TOKENS_NOK
-                total_cost += request_cost  # Akkumuler kostnaden
+                # Calculate the cost for this request
+                request_cost = (input_tokens * usd_per_1m_input_tokens + output_tokens * usd_per_1m_output_tokens) / 1e6
+                total_cost += request_cost  # Accumulate cost
 
-                # Print tokenforbruk og kostnad
-                print(f"[INFO] Input tokens: {input_tokens}, Output tokens: {output_tokens}, "
-                      f"Total tokens: {total_tokens}, Cost: {request_cost:.4f} NOK, Total Cost: {total_cost:.4f} NOK")
+                print(f"[DEEPSEEK] Token usage - Input: {input_tokens}, Output: {output_tokens}, Total: {total_tokens}, "
+                f"Cost: {request_cost:.4f} USD, Cumulative Cost: {total_cost:.4f} USD")
+
 
                 return result_text, total_tokens
             
-            print(f"[ERROR] Ugyldig respons fra DeepSeek (forsøk {attempt+1}/{max_retries}). Prøver på nytt...")
+            print(f"[ERROR] Invalid response (attempt {attempt+1}/{max_retries}). Retrying...")
         except Exception as e:
-            print(f"[ERROR] Feil ved forespørsel til DeepSeek: {e} (forsøk {attempt+1}/{max_retries})")
+            print(f"[ERROR] Request failed: {e} (attempt {attempt+1}/{max_retries})")
             time.sleep(2)
     
-    return "", 0  # Returnerer tom respons hvis alle forsøk feiler
+    return "", 0  # Return empty response if all attempts fail
 
 def main(text):
-    """Hovedfunksjon som ekstraherer oppgaver fra en gitt tekst."""
-    global total_cost  # Sikrer at total kostnad oppdateres
+    """Main function that extracts tasks from a given text."""
+    global total_cost  # Ensure total cost is updated
 
-    nonchalant = "Ikke forklar hva du gjør, bare gjør det."
+    nonchalant = "Do not explain what you are doing, just do it."
 
-    test = 100
-    while test > 30:
+    while True:
         response, tokens_used = prompt_to_text(
-            f"{nonchalant} Hvor mange oppgaver er det i denne teksten? Svar kun med ett tall:"
+            f"{nonchalant} How many tasks are in this text? Answer with a single number only: {text}"
         )
         try:
-            test = int(response)
+            amount = int(response)
+            if amount > 0:
+                break
         except ValueError:
-            print("[ERROR] DeepSeek returnerte ikke et gyldig tall, prøver igjen...")
-            continue
+            print("[ERROR] Invalid number returned, retrying...")
 
-    amount = test
-
-    # ✅ Print antall oppgaver i eksamenssettet før prosessering starter
-    print(f"\n[INFO] Antall oppgaver funnet i eksamenssettet: {amount}\n")
+    print(f"[DEEPSEEK] Number of tasks found: {amount}")
 
     tasks = []
     instructions = [
-        ("Hva er oppgave ", "?: Skriv all tekst knyttet til oppgaven rett fra råteksten, ikke løs oppgaven."),
-        ("Fjern all tekst knyttet til Inspera og eksamensgjennomførelse: ", ""),
-        ("Oversett oppgaven til norsk bokmål: ", ""),
-        ("Skriv all teksten over på en enkelt linje (ingen newlines): ", "")
+        ("What is task ", "?: Write all text related to the task directly from the raw text, do not solve the task."),
+        ("Remove all text related to Inspera and exam administration: ", ""),
+        ("Translate the task to Norwegian Bokmål: ", ""),
+        ("Write all text above on a single line (no newlines): ", "")
     ]
 
     for i in range(amount):
-        print(f"\n[INFO] Task {i+1} started processing...")  # ✅ Ny print for start
-
         task_valid = False
         while not task_valid:
             task = text
@@ -94,29 +89,25 @@ def main(text):
                 response, tokens_used = prompt_to_text(nonchalant + prefix + str(i+1) + suffix + task)
                 task = response
                 if not task:
-                    print(f"[ERROR] Ingen respons fra DeepSeek for oppgave {i+1}, prøver på nytt...")
+                    print(f"[ERROR] No response for task {i+1}, retrying...")
                     break
 
             test = ""
             while test not in ["0", "1"]:
                 response, tokens_used = prompt_to_text(
-                    f"{nonchalant} PASS PÅ AT DU KUN SVARER MED 0 ELLER 1 HER!!! Svar 1 hvis dette er en gyldig oppgave, ellers 0: {task}"
+                    f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! Answer 1 if this is a valid task, otherwise 0: {task}"
                 )
                 test = response.strip()
 
                 if test not in ["0", "1"]:
-                    print(f"[ERROR] DeepSeek returnerte ikke en gyldig boolean for oppgave {i+1}, prøver igjen...")
+                    print(f"[ERROR] Invalid boolean for task {i+1}, retrying...")
 
             if test == "0":
-                print(f"[WARNING] Oppgave {i+1} ble ikke godkjent, prøver på nytt...")
+                print(f"[WARNING] Task {i+1} was not approved, retrying...")
                 continue
 
             tasks.append(task)
             task_valid = True
 
-        print(f"[INFO] Task {i+1} finished processing.")  # ✅ Ny print for slutt
-
-    # ✅ Print total kostnad etter all prosessering
-    print(f"\n[INFO] Endelig total kostnad for hele eksamenssettet: {total_cost:.4f} NOK\n")
-
+    print(f"[DEEPSEEK] Final total cost: {total_cost:.4f} USD")
     return tasks
