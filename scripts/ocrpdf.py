@@ -8,7 +8,7 @@ from tqdm import tqdm
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'ocracle-8ab6e49a7b54.json'
 
 # Confirm API connection
-print("\n[INFO] Successfully connected to Google Vision API!\n")
+print("\n[GOOGLE] Successfully connected to Google Vision API!\n")
 
 def detect_text(image_content):
     """Use Google Vision API to extract text from an image."""

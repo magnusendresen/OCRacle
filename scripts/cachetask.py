@@ -21,7 +21,7 @@ def save_cache(cache):
 
 def main(rawtext):
     """Handles cache and allows the user to select stored results."""
-    print("\n[INFO] Checking cache...\n")
+    print("\n[INFO] Checking cache...")
 
     # Initialize cache
     task_cache = load_cache()
@@ -35,7 +35,7 @@ def main(rawtext):
             task_cache.pop(0)
 
         save_cache(task_cache)
-        print(f"[INFO] New result stored in cache. Total entries: {len(task_cache)}.\n")
+        print(f"[INFO] New result stored in cache. Total entries: {len(task_cache)}.")
     else:
         # Handle cache if no new input is provided
         if task_cache:
