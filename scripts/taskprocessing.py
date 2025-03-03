@@ -77,7 +77,7 @@ async def process_task(task_number, ocr_text, exam):
         # Step 1: Ekstraher oppgavetekst (tekst, isNum=False)
         prompttotext.current_step.set("Step 1")
         task_output = await prompttotext.async_prompt_to_text(
-            f"{nonchalant} What is task {prompttotext.current_task.get()}? Write all text related to the task directly from the raw text. Include how many maximum points you can get. Do not solve the task. {ocr_text}",
+            f"{nonchalant} What is task {prompttotext.current_task.get()}? Write only all text related directly to that one task from the raw text. Include how many maximum points you can get. Do not solve the task. {ocr_text}",
             max_tokens=1000,
             isNum=False,
             maxLen=2000

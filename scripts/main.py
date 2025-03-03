@@ -17,6 +17,6 @@ tasks = taskprocessing.main(rawtext)
 # tasks = taskseparation.main(rawtext)
 
 # Step 5: Write the tasks to an output file
-with open('output.txt', 'w', encoding='utf-8') as f:
-    for task in tasks:
-        f.write(task + '\n\n')
+# with open('output.txt', 'w', encoding='utf-8') as f:
+#     for task in tasks:
+#         f.write(task + '\n\n')

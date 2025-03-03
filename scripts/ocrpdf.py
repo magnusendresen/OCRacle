@@ -1,17 +1,17 @@
 import os
-import fitz  # For handling PDF files
+import fitz  # For PDF-håndtering
+import asyncio
 from google.cloud import vision
 from tkinter import Tk, filedialog
 from tqdm import tqdm
 
-# Set Google Cloud Vision API credentials
+# Sett Google Cloud Vision API credentials
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'ocracle-8ab6e49a7b54.json'
 
-# Confirm API connection
 print("\n[GOOGLE] Successfully connected to Google Vision API!\n")
 
 def detect_text(image_content):
-    """Use Google Vision API to extract text from an image."""
+    """Bruk Google Vision API for å trekke ut tekst fra et bilde."""
     try:
         client = vision.ImageAnnotatorClient()
         image = vision.Image(content=image_content)
@@ -34,7 +34,7 @@ def detect_text(image_content):
         return ""
 
 def pdf_to_images(pdf_path):
-    """Convert PDF pages to images for OCR processing."""
+    """Konverter PDF-sider til bilder (PNG) for OCR-prosessering."""
     try:
         doc = fitz.open(pdf_path)
         images = []
@@ -44,8 +44,8 @@ def pdf_to_images(pdf_path):
         
         for page_num in range(total_pages):
             page = doc.load_page(page_num)
-            pix = page.get_pixmap(dpi=150)  # Adjust DPI as needed
-            images.append(pix.tobytes("png"))  # Store as PNG byte array
+            pix = page.get_pixmap(dpi=300)  # Juster DPI etter behov
+            images.append(pix.tobytes("png"))
         
         print("[INFO] All pages have been converted to images.\n")
         return images
@@ -53,34 +53,35 @@ def pdf_to_images(pdf_path):
         print(f"[ERROR] Failed to convert PDF to images: {e}")
         return []
 
-def main():
-    """Main function handling file selection, PDF conversion, and OCR processing."""
-    # User selects a PDF file
-    root = Tk()
-    root.withdraw()  # Hide main window
-    pdf_path = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")])
+async def async_detect_text(image_content):
+    """Asynkron wrapper for detect_text ved hjelp av asyncio.to_thread."""
+    return await asyncio.to_thread(detect_text, image_content)
 
+async def main_async():
+    """Asynkron hovedfunksjon for å la brukeren velge en PDF-fil, konvertere den til bilder og hente ut tekst asynkront."""
+    root = Tk()
+    root.withdraw()  # Skjul hovedvinduet
+    pdf_path = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")])
+    
     if not pdf_path:
         print("[INFO] No file selected. Exiting...")
         return ""
-
+    
     print(f"\n[INFO] Selected file: {os.path.basename(pdf_path)}\n")
-
-    # Convert PDF to images
+    
     images = pdf_to_images(pdf_path)
     if not images:
         print("[ERROR] No images could be generated from the PDF. Exiting...")
         return ""
-
-    # Start text extraction from images
+    
     print("[INFO] Starting text extraction from PDF pages...\n")
     
-    all_text = ""
-    for page_num, image_content in enumerate(tqdm(images, desc="Processing pages")):
-        print(f"\n[INFO] Processing page {page_num + 1} of {len(images)}...")
-        text = detect_text(image_content)
-        all_text += f"{text} "
-        print(f"[INFO] Page {page_num + 1} completed.\n")
-
+    tasks = [async_detect_text(image) for image in images]
+    results = await asyncio.gather(*tasks)
+    
+    all_text = " ".join(results)
     print("\n[INFO] Text extraction complete! Returning collected text.\n")
     return all_text
+
+def main():
+    return asyncio.run(main_async())
