@@ -24,20 +24,20 @@ total_cost = 0  # Global variabel for akkumulert kostnad
 
 print("[DEEPSEEK] Successfully connected to DeepSeekAPI!\n")
 
-# Hjelpefunksjoner
 def isNumber(a):
     return a.strip().isnumeric()
 
 def isType(a, b):
     return type(a) == b
 
-def prompt_to_text(prompt, max_tokens=1000, isNum=True):
+def prompt_to_text(prompt, max_tokens=1000, isNum=True, maxLen=None):
     """
     Synkron funksjon som sender API-kall, beregner tokenbruk og kostnad.
     Prøver opp til 3 ganger til et gyldig svar mottas.
-    Dersom isNum er True, sjekkes det med isNumber at svaret er numerisk,
-    og konverteres til int hvis det er gyldig.
-    Hvis prompten feiler etter 3 forsøk, returneres None.
+    Dersom isNum er True, sjekkes det at svaret er numerisk og konverteres til int.
+    Dersom maxLen er angitt og lengden på resultatet (etter strip) overstiger denne,
+    skrives "Exceeded max letters" og loopen fortsetter.
+    Returnerer None dersom prompten feiler etter 3 forsøk.
     """
     global total_cost
     task_id = current_task.get()
@@ -62,6 +62,9 @@ def prompt_to_text(prompt, max_tokens=1000, isNum=True):
             )
             if response.choices:
                 result_text = response.choices[0].message.content.strip()
+                if maxLen is not None and len(result_text) > maxLen:
+                    print(f"{prefix}[ERROR] Exceeded max letters. (attempt {attempt}/{max_attempts})")
+                    continue
                 if isNum:
                     if not isNumber(result_text):
                         print(f"{prefix}[ERROR] Expected numeric result. (attempt {attempt}/{max_attempts})")
@@ -69,14 +72,11 @@ def prompt_to_text(prompt, max_tokens=1000, isNum=True):
                     result_text = int(result_text)
                 input_tokens = response.usage.prompt_tokens
                 output_tokens = response.usage.completion_tokens
-
                 request_cost = (input_tokens * usd_per_1m_input_tokens +
                                 output_tokens * usd_per_1m_output_tokens) / 1e6
                 total_cost += request_cost
-
                 print(f"{prefix}Tokens in: {input_tokens:02d}, Tokens out: {output_tokens:02d}")
                 return result_text
-
             print(f"{prefix}[ERROR] Invalid response. (attempt {attempt}/{max_attempts})")
         except:
             print(f"{prefix}[ERROR] Request failed. (attempt {attempt}/{max_attempts})")
@@ -84,9 +84,9 @@ def prompt_to_text(prompt, max_tokens=1000, isNum=True):
     print(f"{prefix}[ERROR] Prompt failed after {max_attempts} attempts.")
     return None
 
-async def async_prompt_to_text(prompt, max_tokens=1000, isNum=True):
+async def async_prompt_to_text(prompt, max_tokens=1000, isNum=True, maxLen=None):
     """
     Asynkron wrapper for prompt_to_text med propagasjon av context variables.
     """
     ctx = contextvars.copy_context()
-    return await asyncio.to_thread(ctx.run, prompt_to_text, prompt, max_tokens, isNum)
+    return await asyncio.to_thread(ctx.run, prompt_to_text, prompt, max_tokens, isNum, maxLen)

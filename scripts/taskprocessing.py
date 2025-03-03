@@ -4,32 +4,58 @@ from dataclasses import dataclass, field
 from typing import Optional, List
 
 @dataclass
-class TaskResult:
-    eksamen: Optional[str] = None
-    oppgave: Optional[int] = None
-    tema: Optional[str] = None
-    tekst: Optional[str] = None
-    maksPoeng: Optional[int] = None
-    bilder: List[str] = field(default_factory=list)
-    kode: Optional[str] = None
+class Exam:
+    version: Optional[str] = None
+    task: Optional[int] = None
+    subject: Optional[str] = None
+    text: Optional[str] = None
+    points: Optional[int] = None
+    images: List[str] = field(default_factory=list)
+    code: Optional[str] = None
+    amount: Optional[int] = None
 
     def __str__(self):
-        return f"Oppgave {self.oppgave}: {self.tekst} (Maks poeng: {self.maksPoeng})"
+        return f"Task {self.task}: {self.text} (Points: {self.points})"
 
-async def get_amount(ocr_text):
+async def get_exam_info(ocr_text):
     """
-    Henter antallet oppgaver fra OCR-teksten.
-    Forventet svar er numerisk (isNum=True) og konverteres i prompt_to_text.
+    Henter informasjon fra eksamens-ocr.
+    Returnerer antall oppgaver (taskAmount).
+    Også subject code og exam version hentes og printes.
     """
     nonchalant = "Do not explain what you are doing, just do it."
-    response = await prompttotext.async_prompt_to_text(
+
+    exam = Exam()
+    
+    exam.subject = await prompttotext.async_prompt_to_text(
+        f"{nonchalant} What is the subject code for this exam? Respond only with the singular formatted subject code (e.g., IFYT1000, IMAT2022). {ocr_text}",
+        max_tokens=1000,
+        isNum=False,
+        maxLen=10
+    )
+    print(f"[DEEPSEEK] | Subject code found: {exam.subject}\n")
+
+    exam.version = await prompttotext.async_prompt_to_text(
+        f"{nonchalant} What exam edition is this exam? Respond only with the singular formatted exam edition (e.g., Høst 2023, Vår 2022). {ocr_text}",
+        max_tokens=1000,
+        isNum=False,
+        maxLen=12
+    )
+    print(f"[DEEPSEEK] | Exam version found: {exam.version}\n")
+
+
+    exam.amount = await prompttotext.async_prompt_to_text(
         f"{nonchalant} How many tasks are in this text? Answer with a single number only: {ocr_text}",
         max_tokens=1000,
-        isNum=True
+        isNum=True,
+        maxLen=2
     )
-    return response
+    print(f"[DEEPSEEK] | Number of tasks found: {exam.amount}\n")
 
-async def process_task(task_number, ocr_text):
+
+    return exam
+
+async def process_task(task_number, ocr_text, exam):
     """
     Prosesserer én oppgave gjennom 4 steg:
       1. Ekstraher oppgavetekst.
@@ -37,84 +63,87 @@ async def process_task(task_number, ocr_text):
       3. Fjern irrelevant tekst.
       4. Valider oppgaven.
       
-    Hvis et hvilket som helst steg feiler (dvs. prompttotext returnerer None),
-    avsluttes prosesseringen for denne oppgaven, og funksjonen returnerer et TaskResult
-    med kun oppgavenummer satt (dette legges til i listen med feilede oppgaver).
-    Dersom valid_response (Step 4) ikke er lik 1, prøves hele oppgaven på nytt.
+    Hvis et steg (unntatt validering) feiler (prompttotext returnerer None), markeres oppgaven som feilet
+    ved å returnere et Exam med kun task satt.
+    Dersom valideringen (Step 4) ikke gir 1, prøves oppgaven på nytt.
+    Returnerer et Exam med gyldig data når oppgaven er godkjent.
     """
     prompttotext.current_task.set(f"{task_number:02d}")
     nonchalant = "Do not explain what you are doing, just do it."
     
     while True:
-        # Step 1: Ekstraher oppgavetekst (forvent tekst, isNum=False)
+        task = exam
+        
+        # Step 1: Ekstraher oppgavetekst (tekst, isNum=False)
         prompttotext.current_step.set("Step 1")
         task_output = await prompttotext.async_prompt_to_text(
             f"{nonchalant} What is task {prompttotext.current_task.get()}? Write all text related to the task directly from the raw text. Include how many maximum points you can get. Do not solve the task. {ocr_text}",
             max_tokens=1000,
-            isNum=False
+            isNum=False,
+            maxLen=2000
         )
         if task_output is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 1. Skipping task.")
-            return TaskResult(oppgave=task_number)
+            return Exam(task=task_number)
         
-        # Step 2: Finn ut hvor mange maks poeng (forvent numerisk svar, isNum=True)
+        # Step 2: Finn ut hvor mange maks poeng (numerisk, isNum=True)
         prompttotext.current_step.set("Step 2")
         point = await prompttotext.async_prompt_to_text(
             f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH A NUMBER!!! How many points can you get for task {prompttotext.current_task.get()}? Only reply with the number of points, nothing else. {task_output}",
             max_tokens=1000,
-            isNum=True
+            isNum=True,
+            maxLen=2
         )
         if point is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 2. Skipping task.")
-            return TaskResult(oppgave=task_number)
+            return Exam(task=task_number)
         
-        # Step 3: Fjern irrelevant tekst (forvent tekst, isNum=False)
+        # Step 3: Fjern irrelevant tekst (tekst, isNum=False)
         prompttotext.current_step.set("Step 3")
         task_output_clean = await prompttotext.async_prompt_to_text(
             f"{nonchalant} Remove all text related to Inspera and exam administration, keep only what is necessary for solving the task: {task_output}",
             max_tokens=1000,
-            isNum=False
+            isNum=False,
+            maxLen=2000
         )
         if task_output_clean is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 3. Skipping task.")
-            return TaskResult(oppgave=task_number)
+            return Exam(task=task_number)
         task_output = task_output_clean
         
-        # Step 4: Valider oppgaven (forvent numerisk svar, isNum=True)
+        # Step 4: Valider oppgaven (numerisk, isNum=True)
         prompttotext.current_step.set("Step 4")
         valid_response = await prompttotext.async_prompt_to_text(
             f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! Answer 1 if this is a valid task, otherwise 0: {task_output}",
             max_tokens=1000,
-            isNum=True
+            isNum=True,
+            maxLen=1
         )
         if valid_response is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 4. Skipping task.")
-            return TaskResult(oppgave=task_number)
+            return Exam(task=task_number)
         if valid_response == 0:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | Task not approved. Retrying task.")
-            continue  # Prøver hele oppgaven på nytt dersom den ikke blir godkjent.
+            continue
         elif valid_response == 1:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | Task approved.")
-            return TaskResult(oppgave=task_number, tekst=task_output, maksPoeng=point)
+            return Exam(task=task_number, text=task_output, points=point)
 
 async def main_async(ocr_text):
     """
     Asynkron hovedfunksjon som prosesserer et antall oppgaver parallelt.
     """
-    amount = await get_amount(ocr_text)
-    print(f"[DEEPSEEK] Number of tasks found: {amount}\n")
+    exam = await get_exam_info(ocr_text)
     print(f"[DEEPSEEK] Started Step 1 for all tasks")
-    tasks = [asyncio.create_task(process_task(i, ocr_text)) for i in range(1, amount + 1)]
+    tasks = [asyncio.create_task(process_task(i, ocr_text, exam)) for i in range(1, exam.amount + 1)]
     results = await asyncio.gather(*tasks)
     
-    # Lag en liste med oppgavenumre for de oppgavene som feilet (hvor tekst er None)
-    failed_tasks = [res.oppgave for res in results if res.tekst is None]
-    # Lag en liste med poeng for de oppgavene som ble behandlet
-    points = [res.maksPoeng for res in results if res.tekst is not None]
+    failed_tasks = [res.task for res in results if res.text is None]
+    points = [res.points for res in results if res.text is not None]
     
     for res in results:
-        if res.tekst is not None:
-            print(f"Result for task {res.oppgave:02d}: {res.tekst}  (Points: {res.maksPoeng})\n")
+        if res.text is not None:
+            print(f"Result for task {res.task:02d}: {res.text}  (Points: {res.points})\n")
     print(f"[DEEPSEEK] Failed tasks: {failed_tasks}")
     print(f"[DEEPSEEK] Points for tasks: {points}")
     print(f"[DEEPSEEK] Final total cost: {prompttotext.total_cost:.4f} USD")
