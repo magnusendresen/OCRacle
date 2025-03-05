@@ -2,6 +2,7 @@ import asyncio
 import prompttotext
 from dataclasses import dataclass, field
 from typing import Optional, List
+from copy import deepcopy
 
 @dataclass
 class Exam:
@@ -19,16 +20,16 @@ class Exam:
 
 async def get_exam_info(ocr_text):
     """
-    Henter informasjon fra eksamens-ocr.
-    Returnerer antall oppgaver (taskAmount).
-    Også subject code og exam version hentes og printes.
+    Henter informasjon fra eksamens-OCR.
+    Returnerer et exam-objekt som fungerer som mal for alle oppgaver,
+    med subject, version og antall oppgaver (amount) satt.
     """
     nonchalant = "Do not explain what you are doing, just do it."
 
     exam = Exam()
     
     exam.subject = await prompttotext.async_prompt_to_text(
-        f"{nonchalant} What is the subject code for this exam? Respond only with the singular formatted subject code (e.g., IFYT1000, IMAT2022). {ocr_text}",
+        f"{nonchalant} What is the subject code for this exam? Respond only with the singular formatted subject code (e.g., IFYT1000, IMAT2022). In some cases the code wil have redundant letters and/or numbers with variations, in those cases write IMAX20XX instead. {ocr_text}",
         max_tokens=1000,
         isNum=False,
         maxLen=10
@@ -36,13 +37,12 @@ async def get_exam_info(ocr_text):
     print(f"[DEEPSEEK] | Subject code found: {exam.subject}\n")
 
     exam.version = await prompttotext.async_prompt_to_text(
-        f"{nonchalant} What exam edition is this exam? Respond only with the singular formatted exam edition (e.g., Høst 2023, Vår 2022). {ocr_text}",
+        f"{nonchalant} What exam edition is this exam? Respond only with the singular formatted exam edition (e.g., Høst 2023, Vår 2022). S20XX means Sommer 20XX. {ocr_text}",
         max_tokens=1000,
         isNum=False,
         maxLen=12
     )
     print(f"[DEEPSEEK] | Exam version found: {exam.version}\n")
-
 
     exam.amount = await prompttotext.async_prompt_to_text(
         f"{nonchalant} How many tasks are in this text? Answer with a single number only: {ocr_text}",
@@ -51,7 +51,6 @@ async def get_exam_info(ocr_text):
         maxLen=2
     )
     print(f"[DEEPSEEK] | Number of tasks found: {exam.amount}\n")
-
 
     return exam
 
@@ -71,9 +70,11 @@ async def process_task(task_number, ocr_text, exam):
     prompttotext.current_task.set(f"{task_number:02d}")
     nonchalant = "Do not explain what you are doing, just do it."
     
+    # Lag en kopi av exam-objektet for denne oppgaven slik at vi bruker et unikt objekt for hver task.
+    task = deepcopy(exam)
+    task.task = task_number
+    
     while True:
-        task = exam
-        
         # Step 1: Ekstraher oppgavetekst (tekst, isNum=False)
         prompttotext.current_step.set("Step 1")
         task_output = await prompttotext.async_prompt_to_text(
@@ -84,7 +85,7 @@ async def process_task(task_number, ocr_text, exam):
         )
         if task_output is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 1. Skipping task.")
-            return Exam(task=task_number)
+            return task
         
         # Step 2: Finn ut hvor mange maks poeng (numerisk, isNum=True)
         prompttotext.current_step.set("Step 2")
@@ -96,7 +97,7 @@ async def process_task(task_number, ocr_text, exam):
         )
         if point is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 2. Skipping task.")
-            return Exam(task=task_number)
+            return task
         
         # Step 3: Fjern irrelevant tekst (tekst, isNum=False)
         prompttotext.current_step.set("Step 3")
@@ -108,7 +109,7 @@ async def process_task(task_number, ocr_text, exam):
         )
         if task_output_clean is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 3. Skipping task.")
-            return Exam(task=task_number)
+            return task
         task_output = task_output_clean
         
         # Step 4: Valider oppgaven (numerisk, isNum=True)
@@ -121,32 +122,37 @@ async def process_task(task_number, ocr_text, exam):
         )
         if valid_response is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 4. Skipping task.")
-            return Exam(task=task_number)
+            return task
         if valid_response == 0:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | Task not approved. Retrying task.")
             continue
         elif valid_response == 1:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | Task approved.")
-            return Exam(task=task_number, text=task_output, points=point)
+            task.text = task_output
+            task.points = point
+            return task
 
 async def main_async(ocr_text):
     """
     Asynkron hovedfunksjon som prosesserer et antall oppgaver parallelt.
     """
-    exam = await get_exam_info(ocr_text)
-    print(f"[DEEPSEEK] Started Step 1 for all tasks")
-    tasks = [asyncio.create_task(process_task(i, ocr_text, exam)) for i in range(1, exam.amount + 1)]
+    exam_template = await get_exam_info(ocr_text)
+    print(f"[DEEPSEEK] | Started processing all tasks")
+    tasks = [
+        asyncio.create_task(process_task(i, ocr_text, exam_template))
+        for i in range(1, exam_template.amount + 1)
+    ]
     results = await asyncio.gather(*tasks)
-    
+
     failed_tasks = [res.task for res in results if res.text is None]
     points = [res.points for res in results if res.text is not None]
-    
+
     for res in results:
         if res.text is not None:
             print(f"Result for task {res.task:02d}: {res.text}  (Points: {res.points})\n")
-    print(f"[DEEPSEEK] Failed tasks: {failed_tasks}")
-    print(f"[DEEPSEEK] Points for tasks: {points}")
-    print(f"[DEEPSEEK] Final total cost: {prompttotext.total_cost:.4f} USD")
+    print(f"[DEEPSEEK] | Failed tasks: {failed_tasks}")
+    print(f"[DEEPSEEK] | Points for tasks: {points}")
+    print(f"[DEEPSEEK] | Final total cost: {prompttotext.total_cost:.4f} USD")
     return results
 
 def main(ocr_text):

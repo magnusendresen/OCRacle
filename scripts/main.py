@@ -2,6 +2,7 @@ import ocrpdf
 import cachetask
 import textnormalization
 import taskprocessing
+import objecttojson
 
 # Step 1: Run OCR PDF to get raw text
 rawtext = ocrpdf.main()
@@ -14,7 +15,9 @@ rawtext = cachetask.main(rawtext)
 
 # Step 4: Process tasks using taskseparation
 tasks = taskprocessing.main(rawtext)
-# tasks = taskseparation.main(rawtext)
+
+# Step 5: Write the objects to the json file
+objecttojson.main(tasks)
 
 # Step 5: Write the tasks to an output file
 # with open('output.txt', 'w', encoding='utf-8') as f:

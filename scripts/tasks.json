@@ -1,0 +1,122 @@
+[
+    {
+        "version": "Sommer 2024",
+        "task": 1,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 1 (10 Poeng)**  \n\na) Gitt funksjonen \\( f(x, y) = 2y^2 - x - 1 \\). Finn verdiane til dei partiellderiverte i punktet \\( (1, 1) \\).  \n\\[\n\\frac{\\partial f}{\\partial x}(1, 1) = \\quad \\frac{\\partial f}{\\partial y}(1, 1) = \\quad \\frac{\\partial f}{\\partial x}(x, y) \\bigg|_{(1,1)} = \\quad \\frac{\\partial f}{\\partial y}(x, y) \\bigg|_{(1,1)} = \\quad \\square\n\\]  \n\nb) Gitt funksjonen \\( g(x, y) = \\sin(x^2 + y^2 + 2x) \\). Finn verdiane til dei partiellderiverte i punktet \\( (0, 0) \\). Angi svara med 2 desimalar.  \n\\[\n\\frac{\\partial g}{\\partial x}(0, 0) = \\quad \\frac{\\partial g}{\\partial y}(0, 0) = \\quad \\frac{\\partial g}{\\partial x}(x, y) \\bigg|_{(0,0)} = \\quad \\frac{\\partial g}{\\partial y}(x, y) \\bigg|_{(0,0)} = \\quad \\square\n\\]",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 2,
+        "subject": "IMAX20XX",
+        "text": "Graf 1:  \n2. 1 2 0 -2 -1 0 1 2  \n\nGraf 2:  \n-1· +  \n\nGraf 3:  \n1 2 1 0 -2 -1 0 1 -1  \n\nGraf 4:  \n-2 N N N + 0.8 0.6 0.4 0.2 0 -2 2 -2 -0.2 -0.4 -0.6 -0.8  \n\nGraf 5:  \n0.8 0.6 90 0.4 0.2 0 -2 1 0 1 2  \n\nFunksjon 1: f1(x, y) = x + y  \nFunksjon 2: f2(x, y) = -xy  \nFunksjon 3: f3(x, y) = sin(x - y)  \nFunksjon 4: f4(x, y) = sin(2x² + 2y²)  \nFunksjon 5: f5(x, y) = exp(-2x² - 2y²)  \n\nFinn dei som passar saman:  \nf4  \nf2  \nf3  \nf5  \nf1  \n\nGraf 1  \nGraf 5  \nGraf 3  \nGraf 2  \nGraf 4",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 3,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 3 (10 Poeng)**  \n\nKonturplottet til funksjonen \\( f(x, y) \\) er avbilda under.  \n\na) Finn forteiknet til den retningsderiverte i punktet \\( (1,1) \\) i retning øst \\( (1, 0) \\).  \nVel eitt alternativ:  \n- Null  \n- Positiv  \n- Kan ikkje finnes ut frå plottet  \n- Negativ  \n\nb) I kva for ei retning peiker gradienten \\( \\nabla f(1, 1) \\)?  \nVel eitt alternativ:  \n- SON \\( (0,1) \\)  \n- S \\( (0, -1) \\)  \n- E \\( (1,0) \\)  \n- W \\( (-1,0) \\)",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 4,
+        "subject": "IMAX20XX",
+        "text": "Finn det globale maksimum og det globale minimum til funksjonen  \n\\[ f(x, y) = 2x² - 3xy - y² + 2x + y - 1 \\]  \ni området avgrensa av \\( 0 \\leq x \\leq 1 \\) og \\( 0 \\leq y \\leq 1 \\).",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 5,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 5 (10 Poeng)**  \n\nGrafen til funksjonen \\( f(x, y) = \\log(1 + x^2 + 2y^2) \\) er avbilda under.  \n\na) Finn lineariseringa, også kalla det første ordens taylorpolynomet, av \\( f(x, y) \\) rundt punktet \\( (1, 1) \\).  \nVel eitt alternativ:  \n- \\( f(x, y) \\approx -\\log(4) - x - y \\)  \n- \\( f(x, y) \\approx 4 - x - y \\)  \n- \\( f(x, y) \\approx 4 - \\frac{1}{2}(x - 1) - \\frac{1}{2}(y - 1) \\)  \n- \\( f(x, y) \\approx 4 - \\frac{1}{2}(x - 1) - (y - 1) \\)  \n- \\( f(x, y) \\approx -\\log(4) - \\frac{1}{2}(x - 1) - \\frac{1}{2}(y - 1) \\)  \n- \\( f(x, y) \\approx -\\log(4) - \\frac{1}{2}(x - 1) - (y - 1) \\)  \n\nb) Anta at \\( f(x, y) \\) representerer høgdeforskjellen i meter frå toppen av eit fjell (slik at \\( f \\) er lik null ved toppen). Vi begynnar i punktet \\( (\\sqrt{3}, 1) \\) og beveger oss opp mot toppen \\( (0, 0) \\). Hugs at stigninga til \\( f \\) i punktet \\( (x, y) \\) er gitt som lengda av gradienten \\( \\sqrt{\\left(\\frac{\\partial f}{\\partial x}\\right)^2 + \\left(\\frac{\\partial f}{\\partial y}\\right)^2} \\).  \n\nKva for ein av dei følgande påstandane stemmer?  \nVel eitt alternativ:  \n- Stigninga er alltid mindre enn \\( \\frac{1}{2} \\) på veg mot toppen frå startpunktet \\( (\\sqrt{3}, 1) \\).  \n- Stigninga må være \\( \\frac{1}{2} \\) eit sted mellom startpunktet \\( (\\sqrt{3}, 1) \\) og toppen av fjellet.  \n- Det vil være mogleg å ta ein rute mot toppen frå startpunktet \\( (\\sqrt{3}, 1) \\) slik at stigninga aldri vil være nøyaktig \\( \\frac{1}{2} \\).  \n- Stigninga er alltid større enn \\( \\frac{1}{2} \\) på veg mot toppen frå startpunktet \\( (\\sqrt{3}, 1) \\).",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 6,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 6 (8 Poeng)**  \n\nLa \\( f(t) = \\begin{cases} \n0 & t \\in [-1, 0) \\\\ \n1 & t \\in [0, 1) \n\\end{cases} \\) på intervallet \\((-1, 1)\\). La \\( C e^{2\\pi j t} \\) være den komplekse fourierrekkja til den periodiske utvidinga av \\( f \\). Hint: Hugs at \\( j = \\sqrt{-1} \\).  \n\na) Kva er perioden \\( T \\) for den komplekse fourierrekkja?  \nVel eitt alternativ:  \n- \\( 2\\pi \\)  \n- \\( 1 \\)  \n- \\( 2 \\)  \n- \\( \\pi \\)  \n\nb) Kva er verdien til \\( c_0 \\)?  \nVel eitt alternativ:  \n- \\( c_0 = 1 \\)  \n- \\( c_0 = -1 \\)  \n- \\( c_0 = 0 \\)  \n- \\( c_0 = \\frac{1}{2} \\)  \n- \\( c_0 = 2 \\)  \n\nc) Kva er verdien til \\( c_1 \\)?  \nVel eitt alternativ:  \n- \\( c_1 = j \\)  \n- \\( c_1 = \\frac{j}{\\pi} \\)  \n- \\( c_1 = \\frac{j}{2\\pi} \\)  \n- \\( c_1 = 0 \\)  \n\nd) Kva er verdien til \\( c_{-2} \\)?  \nVel eitt alternativ:  \n- \\( c_{-2} = \\frac{j}{\\pi} \\)  \n- \\( c_{-2} = 0 \\)  \n- \\( c_{-2} = \\frac{j}{2\\pi} \\)  \n- \\( c_{-2} = \\frac{j}{\\pi} \\)",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 7,
+        "subject": "IMAX20XX",
+        "text": "7 Oppgave 7  \n\nLa \\( f(t) = t \\) for \\( 0 \\leq t < 2 \\).  \n\na) Kva er perioden \\( L \\) til den periodiske utvidinga?  \n\nb) La \\( \\frac{a_0}{2} + \\sum_{n=1}^{\\infty} \\left( a_n \\cos\\left(\\frac{2\\pi n t}{L}\\right) + b_n \\sin\\left(\\frac{2\\pi n t}{L}\\right) \\right) \\) være fourierrekkja til \\( f \\). Finn fourierkoeffisientane \\( a_0 \\), \\( a_n \\) og \\( b_n \\) når \\( n = 1, 2, 3, \\dots \\)  \n\nHint: Hugs at delvis integrasjon seiar at \\( \\int_a^b u(t) v'(t) \\, dt = u(t) v(t) \\big|_a^b - \\int_a^b u'(t) v(t) \\, dt \\).",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 8,
+        "subject": "IMAX20XX",
+        "text": "Oppgave 8  \na)  \n- \\( a_0 = 0 \\)  \n- \\( a_1 = 4 \\)  \n- \\( b_2 = -2 \\)  \n\nb)  \n\\[ \\int_0^1 f(t)^2 \\, dt = 44 \\]",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 9,
+        "subject": "IMAX20XX",
+        "text": "a) La \\( F(w) \\) være fouriertransformasjonen til  \n\\[  \nf(t) =  \n\\begin{cases}  \n0, & \\text{for } t < 0, \\\\  \ne^{t}j, & \\text{for } 0 < t \\leq 2\\pi, \\\\  \n0, & \\text{for } t > 2\\pi.  \n\\end{cases}  \n\\]  \nDa er \\( F(0) = \\) \\(\\boxed{}\\) \\(+\\) \\(\\boxed{}\\) \\(j\\). Angi svaret korrekt avrunda til 3 desimalar.  \n\nb) La \\( g(t) = e^{3t}je^{t^2} \\). Finn verdien \\( \\mathcal{F}\\{g(t)\\}(5) = \\) \\(\\boxed{}\\) \\(+\\) \\(\\boxed{}\\) \\(j\\). Angi svaret korrekt avrunda til 3 desimalar.  \n\nc) La \\( h(t) = u(t) - 11\\delta(t - 1) \\), kor \\( u(t) \\) er einingssprang-funksjonen og \\( \\delta(t) \\) er dirac-delta-funksjonen. Beregn \\( \\mathcal{F}\\{h'(t)\\}(w) \\) og finn \\( \\mathcal{F}\\{h'(t)\\}(\\pi) = \\) \\(\\boxed{}\\) \\(+\\) \\(\\boxed{}\\) \\(j\\). Angi svaret korrekt avrunda til 3 desimalar.",
+        "points": 6,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 10,
+        "subject": "IMAX20XX",
+        "text": "La \\( f(t) = 2u(t)e^{-4t} \\), der \\( u(t) \\) er enhetssprang-funksjonen (eller Heaviside-funksjonen)  \n\\[  \nu(t) =  \n\\begin{cases}  \n0, & \\text{dersom } t < 0, \\\\  \n1, & \\text{dersom } t \\geq 0.  \n\\end{cases}  \n\\]  \nFinn \\( \\mathcal{F}\\{f(t)\\}(0) = \\) + j og \\( \\mathcal{F}\\{f * f(t)\\}(0) = \\) + j. Angi svaret med 2 desimalers nøyaktighet.",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 11,
+        "subject": "IMAX20XX",
+        "text": "11 Oppgave 11  \n\nDu er gitt følgande kode:  \n1 import numpy as np  \n2 from numpy import fft  \n3  \n4 sampling_interval = 0.01  \n5 x = np.array (0, 2, sampling_interval)  \n6 f = np.exp (-2*x)  \n7  \n8 f_dft = fft.fft (f)  \n9 omega = fft.fftfreq (f.size, sampling_interval)  \n\na) Kva er prøvefrekvensen? Det vil si kor mange prøver som blir tatt per sekund.  \nVel eitt alternativ  \n100  \n200  \n0.2  \n0.01  \n0.005  \n\nb) Kva for eit alternativ vil gi oss ei approksimering av F{f} (1) (opp til multiplikasjon med ein konstant)?  \nVel eitt alternativ  \n○ f[x = 1]  \n○ f_dft[omega = 1]  \n○ f_dft[x = 1]  \n○ f[omega = 1]",
+        "points": 4,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 12,
+        "subject": "IMAX20XX",
+        "text": "Oppgave 12  \nVi skal finne nokon av elementa i den diskrete fouriertransformasjonen (DFT) av sekvensen ƒ[k] = 2, 0, 1, 0, 0, 0, 0, 0. Her er f[0] = 2, ƒ[1] = 0, ƒ[2] = 1, ƒ[3] = 0, ƒ[4] = 0, f[5] = 0, f[6] = 0, og f[7] = 0.  \nAngi svaret korrekt avrunda til 3 desimalar.  \nF[0] = D{f[k]}[0] = + j,  \nF[1] = D{ƒ[k]}[1] = + j,  \nF[7] = D{f[k]}[7] = + j.",
+        "points": 6,
+        "images": [],
+        "code": null,
+        "amount": 12
+    }
+]

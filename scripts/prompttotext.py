@@ -75,7 +75,7 @@ def prompt_to_text(prompt, max_tokens=1000, isNum=True, maxLen=None):
                 request_cost = (input_tokens * usd_per_1m_input_tokens +
                                 output_tokens * usd_per_1m_output_tokens) / 1e6
                 total_cost += request_cost
-                print(f"{prefix}Tokens in: {input_tokens:02d}, Tokens out: {output_tokens:02d}")
+                print(f"{prefix}Tokens in: {input_tokens:04d}, Tokens out: {output_tokens:04d}")
                 return result_text
             print(f"{prefix}[ERROR] Invalid response. (attempt {attempt}/{max_attempts})")
         except:
