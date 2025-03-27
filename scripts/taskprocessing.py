@@ -1,5 +1,4 @@
 import asyncio
-import prompttotext
 from dataclasses import dataclass, field
 from typing import Optional, List
 from copy import deepcopy
