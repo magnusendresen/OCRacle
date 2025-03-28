@@ -1,21 +1,29 @@
 #include "ProgressBar.h"
 #include <iostream>
+#include <thread>
+#include <windows.h>
 
 ProgressBar::ProgressBar(TDT4102::AnimationWindow& win)
     : progressPercent(0.0), progressDone(false), window(win) {}
 
 void ProgressBar::init() {
+    // Grå bakgrunn for hele baren (startverdi)
     window.draw_rectangle(Pos, width, height, TDT4102::Color::gray);
 }
 
 void ProgressBar::setCount(double percent) {
+    // Tegn bakgrunn først (grå stripe)
     window.draw_rectangle(Pos, width, height, TDT4102::Color::gray);
+
+    // Tegn grønn del basert på 'percent'
     int filled = static_cast<int>(width * percent);
     window.draw_rectangle(Pos, filled, height, TDT4102::Color::green);
 }
-/*
+
 void ProgressBar::calculateProgress() {
+    // Start en bakgrunnstråd
     std::thread([this]() {
+        // Finn path til progress.txt i scripts-mappen
         char buffer[MAX_PATH];
         GetModuleFileNameA(NULL, buffer, MAX_PATH);
         std::filesystem::path exePath = buffer;
@@ -24,32 +32,24 @@ void ProgressBar::calculateProgress() {
         std::filesystem::path progressPath = scriptDir / "progress.txt";
 
         while (true) {
+            // Les 1 tegn fra progress.txt (f.eks. '0' .. '9')
             std::ifstream progressFile(progressPath);
-            std::string progressString;
-            SIZE_T val = 0, max = 1, len = 0;
-
             if (progressFile.is_open()) {
-                std::getline(progressFile, progressString);
-                len = progressString.length();
-                val = 0;
-                for (char c : progressString) {
-                    if (c >= '1' && c <= '4') {
-                        val += static_cast<SIZE_T>(c - '0');
-                    }
-                }
-                max = len * 4;
-                if (max > 0) {
-                    progressPercent = static_cast<double>(val) / static_cast<double>(max);
+                char levelChar = '0';
+                progressFile.get(levelChar);
+                if (levelChar >= '0' && levelChar <= '9') {
+                    int level = levelChar - '0';  // 0..9
+                    progressPercent = level / 9.0; // 0.0..1.0
                 }
             }
 
-            if (val >= max && max > 0) {
+            // Hvis vi nådde 1.0 => 100%
+            if (progressPercent >= 1.0) {
                 progressDone = true;
                 break;
             }
-
-            Sleep(1000);
+            // Sov litt før neste sjekk
+            Sleep(200);
         }
     }).detach();
 }
-*/

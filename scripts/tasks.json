@@ -138,5 +138,35 @@
         "images": [],
         "code": null,
         "amount": 1
+    },
+    {
+        "version": "H24",
+        "task": 1,
+        "subject": "IMAX20XX",
+        "text": "Oppgave 1 ...",
+        "points": 5,
+        "images": [],
+        "code": "",
+        "amount": 3
+    },
+    {
+        "version": "H24",
+        "task": 2,
+        "subject": "IMAX20XX",
+        "text": "Oppgave 2 ...",
+        "points": 5,
+        "images": [],
+        "code": "",
+        "amount": 3
+    },
+    {
+        "version": "H24",
+        "task": 3,
+        "subject": "IMAX20XX",
+        "text": "Oppgave 3 ...",
+        "points": 5,
+        "images": [],
+        "code": "",
+        "amount": 3
     }
 ]

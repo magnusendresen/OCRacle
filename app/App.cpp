@@ -1,11 +1,11 @@
 #include "App.h"
-#include "widgets/Button.h"
-#include "widgets/TextBox.h"
+#include "widgets/Button.h"   // Fra TDT4102-biblioteket
+#include "widgets/TextBox.h"  // Fra TDT4102-biblioteket
 
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-#include <synchapi.h>
+#include <synchapi.h>  // Sleep / SleepEx
 #include <windows.h>
 #include <commdlg.h>
 #include <thread>
@@ -22,38 +22,41 @@ App::App(const std::string& windowName)
         calculateWindowWidth(),
         calculateWindowHeight(),
         windowName
-    } {
+    }
+{
+    // Sett bakgrunnsfarge og kall GUI-setup
+    setBackgroundColor(TDT4102::Color::light_gray);
     GUI();
 }
 
-int App::calculateMonitorWidth() { return GetSystemMetrics(SM_CXSCREEN); }
+int App::calculateMonitorWidth()  { return GetSystemMetrics(SM_CXSCREEN); }
 int App::calculateMonitorHeight() { return GetSystemMetrics(SM_CYSCREEN); }
-int App::calculateWindowWidth() { return calculateMonitorWidth() * 3 / 4; }
-int App::calculateWindowHeight() { return calculateMonitorHeight() * 3 / 4; }
-int App::calculateWindowPosX() { return (calculateMonitorWidth() - calculateWindowWidth()) / 2; }
-int App::calculateWindowPosY() { return (calculateMonitorHeight() - calculateWindowHeight()) / 2; }
+int App::calculateWindowWidth()   { return calculateMonitorWidth() * 3 / 4; }
+int App::calculateWindowHeight()  { return calculateMonitorHeight() * 3 / 4; }
+int App::calculateWindowPosX()    { return (calculateMonitorWidth() - calculateWindowWidth()) / 2; }
+int App::calculateWindowPosY()    { return (calculateMonitorHeight() - calculateWindowHeight()) / 2; }
 
 void App::GUI() {
-    setBackgroundColor(TDT4102::Color::light_gray);
-
+    // Knapp for å velge fil
     auto* pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
     pdfButton->setCallback([this]() {
         pdfHandling();
     });
-
     add(*pdfButton);
 }
 
 void App::pdfHandling() {
+    // For å kunne skrive æøå i console
     SetConsoleOutputCP(CP_UTF8);
 
+    // Legg til to 'TextBox'-widgets for illustrasjon
     auto* deepseek = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   DeepSeek");
     auto* googlevision = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   Google Vision");
     add(*deepseek);
     add(*googlevision);
 
+    // Dialog for å velge PDF
     wchar_t filePath[MAX_PATH] = L"";
-
     OPENFILENAMEW ofn = {};
     ofn.lStructSize = sizeof(ofn);
     ofn.lpstrFile = filePath;
@@ -65,14 +68,17 @@ void App::pdfHandling() {
         return;
     }
 
+    // Konverter til UTF-8
     int utf8_len = WideCharToMultiByte(CP_UTF8, 0, filePath, -1, nullptr, 0, nullptr, nullptr);
-    std::string selectedFile(static_cast<size_t>(utf8_len), 0);
+    std::string selectedFile(static_cast<size_t>(utf8_len), '\0');
     WideCharToMultiByte(CP_UTF8, 0, filePath, -1, &selectedFile[0], utf8_len, nullptr, nullptr);
-    selectedFile.pop_back();  // Fjern null-terminator
+    if (!selectedFile.empty() && selectedFile.back() == '\0') {
+        selectedFile.pop_back(); // Fjern null-terminator om nødvendig
+    }
 
-    std::cout << "Valgt fil: " << selectedFile << std::endl;
+    std::cout << "[INFO] Valgt fil: " << selectedFile << std::endl;
 
-    // Finn script-mappe
+    // Finn /scripts-mappe (for Python)
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
     std::filesystem::path exePath = buffer;
@@ -80,15 +86,17 @@ void App::pdfHandling() {
     std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
     std::filesystem::current_path(scriptDir);
 
-    std::cout << "scriptDir: " << scriptDir << std::endl;
+    std::cout << "[INFO] scriptDir: " << scriptDir << std::endl;
 
     // Skriv filsti til dir.txt
-    std::ofstream dirFile(scriptDir / "dir.txt", std::ios::binary);
-    dirFile << selectedFile;
-    dirFile.close();
+    {
+        std::ofstream dirFile(scriptDir / "dir.txt", std::ios::binary);
+        dirFile << selectedFile;
+    }
 
-    // Start Python-script
+    // Start Python-script i en bakgrunnstråd
     std::thread([]() {
+        // Kall Python. Evt. "python main.py" eller "py main.py"
         std::system("py main.py");
     }).detach();
 }

@@ -13,10 +13,10 @@ public:
     // Konstruktør
     App(const std::string& windowName);
 
-    // Oppsett av GUI
+    // Oppsett av GUI (knapper, etc.)
     void GUI();
 
-    // Filvalg og Python-kall
+    // Velg PDF og start Python-script i bakgrunnstråd
     void pdfHandling();
 
     // Globale GUI-konstanter for layout
