@@ -1,4 +1,5 @@
 #pragma once
+
 #include "AnimationWindow.h"
 #include <windows.h>
 #include <commdlg.h>
@@ -9,25 +10,26 @@
 
 class App : public TDT4102::AnimationWindow {
 public:
-    App(int x, int y, int width, int height)
-        : TDT4102::AnimationWindow{x, y, width, height, "App"} {
-            // GUI();
-            GUI();
-        }
+    // Konstruktør
+    App(const std::string& windowName);
 
-    static int calculateMonitorWidth() { return GetSystemMetrics(SM_CXSCREEN); }
-
-    static int calculateMonitorHeight() { return GetSystemMetrics(SM_CYSCREEN); }
-
-    static int calculateWindowWidth() { return calculateMonitorWidth() * 3/4; }
-
-    static int calculateWindowHeight() { return calculateMonitorHeight() * 3/4; }
-
-    static int calculateWindowPosX() { return (calculateMonitorWidth() - calculateWindowWidth()) / 2; }
-
-    static int calculateWindowPosY() { return (calculateMonitorHeight() - calculateWindowHeight()) / 2; }
-
+    // Oppsett av GUI
     void GUI();
 
+    // Filvalg og Python-kall
     void pdfHandling();
+
+    // Globale GUI-konstanter for layout
+    static unsigned int buttonWidth;
+    static unsigned int buttonHeight;
+    static int pad;
+
+private:
+    // Hjelpefunksjoner for vindusstørrelse og posisjon
+    static int calculateMonitorWidth();
+    static int calculateMonitorHeight();
+    static int calculateWindowWidth();
+    static int calculateWindowHeight();
+    static int calculateWindowPosX();
+    static int calculateWindowPosY();
 };

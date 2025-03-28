@@ -3,6 +3,12 @@ import time
 import asyncio
 import contextvars
 from openai import OpenAI  # Using OpenAI SDK for DeepSeek
+import builtins
+
+original_print = builtins.print
+def print(*args, **kwargs):
+    kwargs.setdefault("flush", True)
+    return original_print(*args, **kwargs)
 
 # Context variables for task-ID og processing step
 current_task = contextvars.ContextVar("current_task", default="")

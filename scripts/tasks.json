@@ -118,5 +118,25 @@
         "images": [],
         "code": null,
         "amount": 12
+    },
+    {
+        "version": "S20XX",
+        "task": 1,
+        "subject": "IMAX20XX",
+        "text": "```python\ndef multiply(a, b):\n    return a * b\n```",
+        "points": 1,
+        "images": [],
+        "code": null,
+        "amount": 1
+    },
+    {
+        "version": "Sommer 20XX",
+        "task": 1,
+        "subject": "IMAX20XX",
+        "text": "```python\ndef multiply(a, b):\n    return a * b\n```",
+        "points": 1,
+        "images": [],
+        "code": null,
+        "amount": 1
     }
 ]

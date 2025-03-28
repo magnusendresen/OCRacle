@@ -1,17 +1,23 @@
-#include "AnimationWindow.h"
-#include <windows.h>
-#include <iostream>
-#include <cstdlib>
-#include <locale>
-#include <codecvt>
-
 #include "App.h"
-
+#include "ProgressBar.h"
+#include <iostream>
+#include <thread>
+#include "windows.h"
+// #include <thread>
+ProgressBar* progressBar_ptr = nullptr;
 
 int main() {
+    App myApp("OCRacle - med ProgressBar");
+    ProgressBar progressBar(myApp);
+    progressBar_ptr = &progressBar;
 
-    App window(App::calculateWindowPosX(), App::calculateWindowPosY(), App::calculateWindowWidth(), App::calculateWindowHeight());
-    window.wait_for_close();
+    progressBar.init();
+
+    // progressBar.calculateProgress();
+
+    // progressBar.setCount(0.4);
+    
+    myApp.wait_for_close();
 
     return 0;
 }

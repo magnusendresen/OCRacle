@@ -1,7 +1,19 @@
 import asyncio
+import prompttotext
 from dataclasses import dataclass, field
 from typing import Optional, List
 from copy import deepcopy
+from pathlib import Path
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+# Progress.txt-plassering
+progress_file = Path(__file__).resolve().parent / "progress.txt"
+
+# Oppgave-status-sporing (default til steg 1)
+from collections import defaultdict
+task_status = defaultdict(lambda: 1)
 
 @dataclass
 class Exam:
@@ -18,15 +30,9 @@ class Exam:
         return f"Task {self.task}: {self.text} (Points: {self.points})"
 
 async def get_exam_info(ocr_text):
-    """
-    Henter informasjon fra eksamens-OCR.
-    Returnerer et exam-objekt som fungerer som mal for alle oppgaver,
-    med subject, version og antall oppgaver (amount) satt.
-    """
     nonchalant = "Do not explain what you are doing, just do it."
-
     exam = Exam()
-    
+
     exam.subject = await prompttotext.async_prompt_to_text(
         f"{nonchalant} What is the subject code for this exam? Respond only with the singular formatted subject code (e.g., IFYT1000, IMAT2022). In some cases the code wil have redundant letters and/or numbers with variations, in those cases write IMAX20XX instead. {ocr_text}",
         max_tokens=1000,
@@ -36,45 +42,32 @@ async def get_exam_info(ocr_text):
     print(f"[DEEPSEEK] | Subject code found: {exam.subject}\n")
 
     exam.version = await prompttotext.async_prompt_to_text(
-        f"{nonchalant} What exam edition is this exam? Respond only with the singular formatted exam edition (e.g., Høst 2023, Vår 2022). S20XX means Sommer 20XX. {ocr_text}",
+        f"{nonchalant} What exam edition is this exam? Respond only with the singular formatted exam edition (e.g., H\u00f8st 2023, V\u00e5r 2022). S20XX means Sommer 20XX. {ocr_text}",
         max_tokens=1000,
         isNum=False,
         maxLen=12
     )
     print(f"[DEEPSEEK] | Exam version found: {exam.version}\n")
 
-    exam.amount = await prompttotext.async_prompt_to_text(
+    exam.amount = int(await prompttotext.async_prompt_to_text(
         f"{nonchalant} How many tasks are in this text? Answer with a single number only: {ocr_text}",
         max_tokens=1000,
         isNum=True,
         maxLen=2
-    )
+    ))
     print(f"[DEEPSEEK] | Number of tasks found: {exam.amount}\n")
 
     return exam
 
 async def process_task(task_number, ocr_text, exam):
-    """
-    Prosesserer én oppgave gjennom 4 steg:
-      1. Ekstraher oppgavetekst.
-      2. Finn ut hvor mange maks poeng oppgaven har.
-      3. Fjern irrelevant tekst.
-      4. Valider oppgaven.
-      
-    Hvis et steg (unntatt validering) feiler (prompttotext returnerer None), markeres oppgaven som feilet
-    ved å returnere et Exam med kun task satt.
-    Dersom valideringen (Step 4) ikke gir 1, prøves oppgaven på nytt.
-    Returnerer et Exam med gyldig data når oppgaven er godkjent.
-    """
     prompttotext.current_task.set(f"{task_number:02d}")
     nonchalant = "Do not explain what you are doing, just do it."
-    
-    # Lag en kopi av exam-objektet for denne oppgaven slik at vi bruker et unikt objekt for hver task.
+
     task = deepcopy(exam)
     task.task = task_number
-    
+
     while True:
-        # Step 1: Ekstraher oppgavetekst (tekst, isNum=False)
+        task_status[task_number] = 1
         prompttotext.current_step.set("Step 1")
         task_output = await prompttotext.async_prompt_to_text(
             f"{nonchalant} What is task {prompttotext.current_task.get()}? Write only all text related directly to that one task from the raw text. Include how many maximum points you can get. Do not solve the task. {ocr_text}",
@@ -85,8 +78,8 @@ async def process_task(task_number, ocr_text, exam):
         if task_output is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 1. Skipping task.")
             return task
-        
-        # Step 2: Finn ut hvor mange maks poeng (numerisk, isNum=True)
+
+        task_status[task_number] = 2
         prompttotext.current_step.set("Step 2")
         point = await prompttotext.async_prompt_to_text(
             f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH A NUMBER!!! How many points can you get for task {prompttotext.current_task.get()}? Only reply with the number of points, nothing else. {task_output}",
@@ -97,8 +90,8 @@ async def process_task(task_number, ocr_text, exam):
         if point is None:
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 2. Skipping task.")
             return task
-        
-        # Step 3: Fjern irrelevant tekst (tekst, isNum=False)
+
+        task_status[task_number] = 3
         prompttotext.current_step.set("Step 3")
         task_output_clean = await prompttotext.async_prompt_to_text(
             f"{nonchalant} Remove all text related to Inspera and exam administration, keep only what is necessary for solving the task: {task_output}",
@@ -110,8 +103,8 @@ async def process_task(task_number, ocr_text, exam):
             print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 3. Skipping task.")
             return task
         task_output = task_output_clean
-        
-        # Step 4: Valider oppgaven (numerisk, isNum=True)
+
+        task_status[task_number] = 4
         prompttotext.current_step.set("Step 4")
         valid_response = await prompttotext.async_prompt_to_text(
             f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! Answer 1 if this is a valid task, otherwise 0: {task_output}",
@@ -131,12 +124,26 @@ async def process_task(task_number, ocr_text, exam):
             task.points = point
             return task
 
+async def print_task_status(exam_template):
+    while True:
+        status_array = [str(task_status[i]) for i in range(1, exam_template.amount + 1)]
+        status_str = ''.join(status_array)
+        print(f"[STATUS] | {status_str}")
+        try:
+            with open(progress_file, "w", encoding="utf-8") as f:
+                f.write(status_str)
+                f.flush()
+            print(f"[STATUS] | Wrote {status_str} to progress.txt")
+        except Exception as e:
+            print(f"[ERROR] Could not write progress.txt: {e}")
+        await asyncio.sleep(5)
+
 async def main_async(ocr_text):
-    """
-    Asynkron hovedfunksjon som prosesserer et antall oppgaver parallelt.
-    """
     exam_template = await get_exam_info(ocr_text)
     print(f"[DEEPSEEK] | Started processing all tasks")
+
+    asyncio.create_task(print_task_status(exam_template))
+
     tasks = [
         asyncio.create_task(process_task(i, ocr_text, exam_template))
         for i in range(1, exam_template.amount + 1)
@@ -155,8 +162,4 @@ async def main_async(ocr_text):
     return results
 
 def main(ocr_text):
-    """
-    Synkron wrapper for den asynkrone hovedfunksjonen.
-    Importeres og kalles fra et annet skript.
-    """
     return asyncio.run(main_async(ocr_text))
