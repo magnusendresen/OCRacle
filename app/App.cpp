@@ -9,11 +9,14 @@
 #include <windows.h>
 #include <commdlg.h>
 #include <thread>
+#include "ProgressBar.h"
 
 // Definisjon av statiske variabler
 unsigned int App::buttonWidth = 200;
 unsigned int App::buttonHeight = 100;
 int App::pad = 20;
+
+extern ProgressBar* progressBar_ptr;  // Ingen ny definisjon!
 
 App::App(const std::string& windowName)
     : TDT4102::AnimationWindow{
@@ -46,6 +49,14 @@ void App::GUI() {
 }
 
 void App::pdfHandling() {
+
+    Sleep(1000);
+
+    std::cout << "Handling PDF..." << std::endl;
+
+    progressBar_ptr->calculateProgress();
+
+
     // For å kunne skrive æøå i console
     SetConsoleOutputCP(CP_UTF8);
 
@@ -97,6 +108,16 @@ void App::pdfHandling() {
     // Start Python-script i en bakgrunnstråd
     std::thread([]() {
         // Kall Python. Evt. "python main.py" eller "py main.py"
-        std::system("py main.py");
-    }).detach();
+        std::system("start powershell -Command \"python main.py\""); 
+    }).detach();    
 }
+
+// void App::animate(window) {
+//     while (true) {
+//         if (progressBar_ptr->progress != progressBar_ptr->prevProgress) {
+//             progressBar_ptr->setCount(progressBar_ptr->progress);
+//             progressBar_ptr->prevProgress = progressBar_ptr->progress;
+//             window.next_frame();
+//         }
+//     }
+// }

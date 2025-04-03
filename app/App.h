@@ -8,6 +8,9 @@
 #include <locale>
 #include <codecvt>
 
+extern int nextFrame;
+extern double progress;
+
 class App : public TDT4102::AnimationWindow {
 public:
     // Konstruktør
@@ -18,6 +21,8 @@ public:
 
     // Velg PDF og start Python-script i bakgrunnstråd
     void pdfHandling();
+
+    void animate();
 
     // Globale GUI-konstanter for layout
     static unsigned int buttonWidth;

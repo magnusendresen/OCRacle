@@ -1,39 +1,39 @@
 #include "App.h"
 #include "ProgressBar.h"
+#include <iostream>
 #include <thread>
-#include <windows.h>
+#include "windows.h"
+#include <atomic>
+#include <thread>
+
+ProgressBar* progressBar_ptr = nullptr;
+int nextFrame = false;
+
+double progress = 0.0;
+double prevProgress = 0.0;
+int fileSum = 0;
+std::size_t fileLen = 0;
+std::atomic<bool> progressDone = false;
+
+int i = 0;
 
 int main() {
-    // Opprett hovedvindu
     App myApp("OCRacle - med ProgressBar");
+    progressBar_ptr = new ProgressBar(myApp); 
 
-    // Hvorvidt vi vil beholde bakgrunnen mellom hver frame:
-    // (false = slett gammel tegning hver runde)
-    myApp.keep_previous_frame(false);
+    // Oppdater til neste bilde
 
-    // Opprett progressbaren
-    ProgressBar progressBar(myApp);
-    progressBar.init();             // Tegn første "grå ramme"
-
-    // Start bakgrunnstråden som bare leser av progress.txt
-    progressBar.calculateProgress(); 
-
-    // Kjør «evighetsløkke» selv, i stedet for myApp.wait_for_close()
+    progressBar_ptr->setCount(0.0);
+    
+    std::cout << "Starting while loop..." << std::endl;
     while (!myApp.should_close()) {
-        // Les av nåværende fremdrift (0.0 til 1.0)
-        double p = progressBar.progressPercent.load();
-
-        // Tegn progress (samt grå bakgrunn på nytt)
-        progressBar.setCount(p);
-
-        // Hvis vi er i mål, «låser» vi baren på 100%
-        if (progressBar.progressDone.load()) {
-            progressBar.setCount(1.0);
-        }
-
-        // Neste frame — tegner GUI (widgets), håndterer eventer
+        progressBar_ptr->setCount(progress);
         myApp.next_frame();
+        if (i > 50) {
+            std::cout << progress << std::endl;
+            i = 0;
+        }
+        i++;
     }
-
     return 0;
 }

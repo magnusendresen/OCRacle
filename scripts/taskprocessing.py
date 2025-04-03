@@ -1,133 +1,178 @@
 import asyncio
-import time
-from pathlib import Path
-from typing import List
+import prompttotext
 from dataclasses import dataclass, field
+from typing import Optional, List
+from copy import deepcopy
+from pathlib import Path
+import sys
 
-# For enkelhet: Global variabel for antall oppgaver + global step-teller
-exam_amount = 0
-globalSteps = 0  # Antall fullførte del-steg, for alle oppgaver til sammen
-steps_per_task = 4  # F.eks. 4 steg per oppgave
+sys.stdout.reconfigure(encoding='utf-8')
+
+# Progress.txt-plassering
+progress_file = Path(__file__).resolve().parent / "progress.txt"
+
+# Oppgave-status-sporing (default til steg 1)
+from collections import defaultdict
+task_status = defaultdict(lambda: 1)
+exam_amount = 0  # Global verdi for antall oppgaver
 
 @dataclass
 class Exam:
-    version: str = ""
-    task: int = 0
-    subject: str = ""
-    text: str = ""
-    points: int = 0
+    version: Optional[str] = None
+    task: Optional[int] = None
+    subject: Optional[str] = None
+    text: Optional[str] = None
+    points: Optional[int] = None
     images: List[str] = field(default_factory=list)
-    code: str = ""
-    amount: int = 0
+    code: Optional[str] = None
+    amount: Optional[int] = None
 
-def write_progress(level: int):
-    """
-    Skriver 'level' (0–9) til progress.txt
-    """
-    script_dir = Path(__file__).resolve().parent
-    progress_file = script_dir / "progress.txt"
-    try:
-        with open(progress_file, "w", encoding="utf-8") as f:
-            f.write(str(level))
-    except Exception as e:
-        print(f"[ERROR] Could not write to progress.txt: {e}")
+    def __str__(self):
+        return f"Task {self.task}: {self.text} (Points: {self.points})"
 
-async def continuous_status_updater():
-    """
-    Mens oppgaver prosesseres, oppdaterer denne total progress (0-9).
-    Kjøres i bakgrunn, stopper når vi har nådd 9 (altså 100%).
-    """
-    global globalSteps
-
-    while True:
-        # Hvor langt har vi kommet i sum?
-        total_needed = exam_amount * steps_per_task
-        fraction = 0.0
-        if total_needed > 0:
-            fraction = globalSteps / total_needed
-        level = min(int(fraction * 9.999), 9)
-
-        # Skriv til progress.txt
-        write_progress(level)
-
-        # Er vi i mål?
-        if level == 9:  # 100%
-            break
-
-        await asyncio.sleep(1)
-
-async def get_exam_info(ocr_text: str) -> Exam:
-    """
-    Hent basisinfo (antall oppgaver, subject, etc.)
-    Tilpass til din AI/DeepSeek/regex.
-    """
+async def get_exam_info(ocr_text):
+    global exam_amount
+    nonchalant = "Do not explain what you are doing, just do it."
     exam = Exam()
-    exam.amount = 3        # F.eks. 3 oppgaver
-    exam.subject = "IMAX20XX"
-    exam.version = "H24"
+
+    exam.subject = await prompttotext.async_prompt_to_text(
+        f"{nonchalant} What is the subject code for this exam? Respond only with the singular formatted subject code (e.g., IFYT1000, IMAT2022). In some cases the code wil have redundant letters and/or numbers with variations, in those cases write IMAX20XX instead. {ocr_text}",
+        max_tokens=1000,
+        isNum=False,
+        maxLen=10
+    )
+    print(f"[DEEPSEEK] | Subject code found: {exam.subject}\n")
+
+    exam.version = await prompttotext.async_prompt_to_text(
+        f"{nonchalant} What exam edition is this exam? Respond only with the singular formatted exam edition (e.g., H\u00f8st 2023, V\u00e5r 2022). S20XX means Sommer 20XX. {ocr_text}",
+        max_tokens=1000,
+        isNum=False,
+        maxLen=12
+    )
+    print(f"[DEEPSEEK] | Exam version found: {exam.version}\n")
+
+    exam.amount = int(await prompttotext.async_prompt_to_text(
+        f"{nonchalant} How many tasks are in this text? Answer with a single number only: {ocr_text}",
+        max_tokens=1000,
+        isNum=True,
+        maxLen=2
+    ))
+    exam_amount = exam.amount
+    print(f"[DEEPSEEK] | Number of tasks found: {exam.amount}\n")
+
     return exam
 
-async def process_task(task_number: int, exam_template: Exam, rawtext: str):
-    """
-    Prosesser én oppgave. Øk globalSteps for hver "del-steg" i denne funksjonen.
-    """
-    global globalSteps
+def write_status_to_file():
+    status_str = ''.join(str(task_status[i]) for i in range(1, exam_amount + 1))
+    if not hasattr(write_status_to_file, "last_status") or status_str != write_status_to_file.last_status:
+        print(f"[STATUS] | {status_str}")
+        try:
+            with open(progress_file, "w", encoding="utf-8") as f:
+                f.write(status_str)
+                f.flush()
+            print(f"[STATUS] | Wrote {status_str} to progress.txt")
+            write_status_to_file.last_status = status_str
+        except Exception as e:
+            print(f"[ERROR] Could not write progress.txt: {e}")
 
-    # Step 1
-    # ... kjør AI, prompt osv. ...
-    time.sleep(0.5)
-    globalSteps += 1  # Ferdig med del-steg 1 for denne oppgaven
+async def alternating_status_writer():
+    while exam_amount == 0:
+        await asyncio.sleep(0.1)
 
-    # Step 2
-    time.sleep(0.5)
-    globalSteps += 1
+    while True:
+        write_status_to_file()
+        await asyncio.sleep(2)
 
-    # Step 3
-    time.sleep(0.5)
-    globalSteps += 1
+async def print_task_status_loop():
+    await alternating_status_writer()
 
-    # Step 4
-    time.sleep(0.5)
-    globalSteps += 1
+async def process_task(task_number, ocr_text, exam):
+    prompttotext.current_task.set(f"{task_number:02d}")
+    nonchalant = "Do not explain what you are doing, just do it."
 
-    # Returner fullført oppgave
-    return Exam(
-        version=exam_template.version,
-        subject=exam_template.subject,
-        task=task_number,
-        text=f"Oppgave {task_number} ...",
-        points=5,
-        amount=exam_template.amount
-    )
+    task = deepcopy(exam)
+    task.task = task_number
 
-async def main_async(rawtext: str):
-    global exam_amount, globalSteps
+    while True:
+        task_status[task_number] = 1
+        prompttotext.current_step.set("Step 1")
+        task_output = await prompttotext.async_prompt_to_text(
+            f"{nonchalant} What is task {prompttotext.current_task.get()}? Write only all text related directly to that one task from the raw text. Include how many maximum points you can get. Do not solve the task. {ocr_text}",
+            max_tokens=1000,
+            isNum=False,
+            maxLen=2000
+        )
+        if task_output is None:
+            print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 1. Skipping task.")
+            return task
 
-    # Sett tellerne til 0 hver gang (i tilfelle gjentatte kall)
-    globalSteps = 0
+        task_status[task_number] = 2
+        prompttotext.current_step.set("Step 2")
+        point = await prompttotext.async_prompt_to_text(
+            f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH A NUMBER!!! How many points can you get for task {prompttotext.current_task.get()}? Only reply with the number of points, nothing else. {task_output}",
+            max_tokens=1000,
+            isNum=True,
+            maxLen=2
+        )
+        if point is None:
+            print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 2. Skipping task.")
+            return task
 
-    # Hent info om eksamen
-    exam_template = await get_exam_info(rawtext)
-    exam_amount = exam_template.amount  # antall oppgaver
+        task_status[task_number] = 3
+        prompttotext.current_step.set("Step 3")
+        task_output_clean = await prompttotext.async_prompt_to_text(
+            f"{nonchalant} Remove all text related to Inspera and exam administration, keep only what is necessary for solving the task: {task_output}",
+            max_tokens=1000,
+            isNum=False,
+            maxLen=2000
+        )
+        if task_output_clean is None:
+            print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 3. Skipping task.")
+            return task
+        task_output = task_output_clean
 
-    # Sett i gang en bakgrunnsoppgave som jevnlig skriver progress
-    status_task = asyncio.create_task(continuous_status_updater())
+        task_status[task_number] = 4
+        prompttotext.current_step.set("Step 4")
+        valid_response = await prompttotext.async_prompt_to_text(
+            f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! Answer 1 if this is a valid task, otherwise 0: {task_output}",
+            max_tokens=1000,
+            isNum=True,
+            maxLen=1
+        )
+        if valid_response is None:
+            print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | FAILED at Step 4. Skipping task.")
+            return task
+        if valid_response == 0:
+            print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | Task not approved. Retrying task.")
+            continue
+        elif valid_response == 1:
+            print(f"[DEEPSEEK] [TASK {prompttotext.current_task.get()}] | Task approved.")
+            task.text = task_output
+            task.points = point
+            return task
 
-    # Kjør alle oppgaver parallelt
-    tasks = []
-    for i in range(1, exam_amount + 1):
-        tasks.append(asyncio.create_task(process_task(i, exam_template, rawtext)))
+async def main_async(ocr_text):
+    exam_template = await get_exam_info(ocr_text)
+    print(f"[DEEPSEEK] | Started processing all tasks")
 
-    # Vent på at alle oppgaver fullføres
+    asyncio.create_task(print_task_status_loop())
+
+    tasks = [
+        asyncio.create_task(process_task(i, ocr_text, exam_template))
+        for i in range(1, exam_template.amount + 1)
+    ]
     results = await asyncio.gather(*tasks)
 
-    # Vent på at status-oppdaterer er ferdig
-    await status_task
+    failed_tasks = [res.task for res in results if res.text is None]
+    points = [res.points for res in results if res.text is not None]
 
+    for res in results:
+        if res.text is not None:
+            print(f"Result for task {res.task:02d}: {res.text}  (Points: {res.points})\n")
+    print(f"[DEEPSEEK] | Failed tasks: {failed_tasks}")
+    print(f"[DEEPSEEK] | Points for tasks: {points}")
+    print(f"[DEEPSEEK] | Final total cost: {prompttotext.total_cost:.4f} USD")
     return results
 
-def main(rawtext: str):
-    """
-    Kalles synkront fra main.py
-    """
-    return asyncio.run(main_async(rawtext))
+def main(ocr_text):
+    return asyncio.run(main_async(ocr_text))

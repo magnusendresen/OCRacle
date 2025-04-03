@@ -9,9 +9,14 @@ import sys
 # Sørg for UTF-8 utskrift i terminalen
 sys.stdout.reconfigure(encoding='utf-8')
 
+# Hent sti til Google API-nøkkelfilen fra miljøvariabel
+json_path = os.getenv("OCRACLE_JSON_PATH")
+if not json_path or not os.path.exists(json_path):
+    raise FileNotFoundError(f"[ERROR] JSON path not found or invalid: {json_path}")
+
 # Sett Google Cloud Vision API credentials
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'ocracle-8ab6e49a7b54.json'
-print("\n[GOOGLE] Successfully connected to Google Vision API!\n")
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
+print(f"\n[GOOGLE] Successfully connected to Google Vision API using:\n{json_path}\n")
 
 def detect_text(image_content):
     try:
