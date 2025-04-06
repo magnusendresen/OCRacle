@@ -2,171 +2,171 @@
     {
         "version": "Sommer 2024",
         "task": 1,
-        "subject": "IMAX20XX",
-        "text": "**Oppgave 1 (10 Poeng)**  \n\na) Gitt funksjonen \\( f(x, y) = 2y^2 - x - 1 \\). Finn verdiane til dei partiellderiverte i punktet \\( (1, 1) \\).  \n\\[\n\\frac{\\partial f}{\\partial x}(1, 1) = \\quad \\frac{\\partial f}{\\partial y}(1, 1) = \n\\]  \n\nb) Gitt funksjonen \\( g(x, y) = \\sin(x^2 + y^2 + 2x) \\). Finn verdiane til dei partiellderiverte i punktet \\( (0, 0) \\). Angi svara med 2 desimalar.  \n\\[\n\\frac{\\partial g}{\\partial x}(0, 0) = \\quad \\frac{\\partial g}{\\partial y}(0, 0) = \n\\]",
-        "points": 10,
+        "subject": "IFYKJA1000",
+        "text": "**Task 01:**  \n\nOrdne følgende atomer fra minste til største atomisk radius.  \n\nMinste  \nH  \nCOO  \nNi  \nCu  \nPd  \nStørste  \n\nMaks poeng: 2",
+        "points": 5,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 2,
-        "subject": "IMAX20XX",
-        "text": "**Oppgave 2 (10 Poeng)**  \n\nKva for ein funksjon høyrer saman med kva for ein graf (konturplott)?  \n\n**Graf 1:**  \n2. 1 2 0 -2 -1 0 1 2  \n\n**Graf 2:**  \n-1· +  \n\n**Graf 3:**  \n1 2 1 0 -2 -1 0 1 -1  \n\n**Graf 4:**  \n0.8 0.6 90 0.4 0.2 0 -2 1 0 1 2  \n\n**Graf 5:**  \n-2 - -0.2 -0.4 -0.6 -0.8  \n\n**Funksjon 1:**  \nf1(x, y) = x + y  \n\n**Funksjon 2:**  \nf2(x, y) = -xy  \n\n**Funksjon 3:**  \nf3(x, y) = sin(x - y)  \n\n**Funksjon 4:**  \nf4(x, y) = sin(2x² + 2y²)  \n\n**Funksjon 5:**  \nf5(x, y) = exp(-2x² - 2y²)  \n\nFinn dei som passar saman:  \nf4  \nf2  \nf3  \nf5  \nf1  \n\n**Graf 1**  \n**Graf 5**  \n**Graf 3**  \n**Graf 2**  \n**Graf 4**",
-        "points": 10,
+        "subject": "IFYKJA1000",
+        "text": "**Task 02:**  \n\n**a)**  \nVelg ett alternativ:  \n- Brom tilhører gruppe 7 og alle grunnstoff i gruppe 7 har 7 elektroner i ytre elektronskall  \n\n**b)**  \nVelg ett alternativ:  \n- [Ar] 3d10 4s2 4p5  \n\n**c)**  \nVelg ett alternativ:  \n- NaBr",
+        "points": 3,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 3,
-        "subject": "IMAX20XX",
-        "text": "3 Oppgave 3  \n\nKonturplottet til funksjonen f(x, y) er avbilda under.  \n\nJ  \n2.0  \n1.8  \n1.6  \n- 1.6  \n1.4  \n1.2  \n1.4  \n- 0.8  \n1.2  \n- 1.0  \n0.8  \n0  \n0.5  \n1  \n1.5  \nI  \n0.6  \n0.4  \n0.2  \n\na) Finn forteiknet til den retningsderiverte i punktet (1,1) i retning øst (1, 0).  \nVel eitt alternativ  \nNull  \nPositiv  \nKan ikkje finnes ut frå plottet  \nNegativ  \n\nb) I kva for ei retning peiker gradienten Vƒ(1, 1)?  \nVel eitt alternativ  \nSON (0,1)  \n○ S (0, -1)  \n○ E (1,0)  \n○ W (-1,0)",
-        "points": 10,
+        "subject": "IFYKJA1000",
+        "text": null,
+        "points": null,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 4,
-        "subject": "IMAX20XX",
-        "text": "**Oppgave 4 (10 Poeng)**  \nFinn det globale maksimum og det globale minimum til funksjonen  \n\\[ f(x, y) = 2x² - 3xy - y² + 2x + y - 1 \\]  \ni området avgrensa av \\( 0 \\leq x \\leq 1 \\) og \\( 0 \\leq y \\leq 1 \\).",
-        "points": 10,
+        "subject": "IFYKJA1000",
+        "text": "**4**  \n120,7 g C2H5OH forbrennes i en 2L beholder som inneholder 22,9 atm O2 med temperatur 25° C.  \n\na) Balanser følgende reaksjon:  \nC2H5OH + O2 → CO2 + H2O  \n\nb) Bruk den ideelle gassloven for å beregne antall mol O2 beholderen inneholder.  \n\nc) Beregn massen til hvert molekyl som er igjen i beholderen etter forbrenning.  \nHvis du ikke fikk til den forrige oppgaven, kan du anta at beholderen inneholder 2 mol O2 ved starten.  \n\nSkriv ditt svar her",
+        "points": 8,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 5,
-        "subject": "IMAX20XX",
-        "text": "5 Oppgave 5  \n\nGrafen til funksjonen \\( f(x, y) = \\log(1 + x^2 + 2y^2) \\) er avbilda under.  \n\na) Finn lineariseringa, også kalla det første ordens taylorpolynomet, av \\( f(x, y) \\) rundt punktet \\( (1, 1) \\).  \nVel eitt alternativ:  \n- \\( f(x, y) \\approx -\\log(4) - x - y \\)  \n- \\( f(x, y) \\approx 4 - x - y \\)  \n- \\( f(x, y) \\approx 4 - \\frac{1}{2}(x - 1) - \\frac{1}{2}(y - 1) \\)  \n- \\( f(x, y) \\approx -\\log(4) - \\frac{1}{2}(x - 1) - \\frac{1}{2}(y - 1) \\)  \n- \\( f(x, y) \\approx -\\log(4) - \\frac{1}{2}(x - 1) - (y - 1) \\)  \n\nb) Anta at \\( f(x, y) \\) representerer høgdeforskjellen i meter frå toppen av eit fjell (slik at \\( f \\) er lik null ved toppen). Vi begynnar i punktet \\( (\\sqrt{3}, 1) \\) og beveger oss opp mot toppen \\( (0, 0) \\). Hugs at stigninga til \\( f \\) i punktet \\( (x, y) \\) er gitt som lengda av gradienten \\( \\sqrt{\\left(\\frac{\\partial f}{\\partial x}\\right)^2 + \\left(\\frac{\\partial f}{\\partial y}\\right)^2} \\).  \n\nKva for ein av dei følgande påstandane stemmer?  \nVel eitt alternativ:  \n- Stigninga er alltid mindre enn \\( \\frac{1}{2} \\) på veg mot toppen frå startpunktet \\( (\\sqrt{3}, 1) \\).  \n- Stigninga må vere \\( \\frac{1}{2} \\) eit sted mellom startpunktet \\( (\\sqrt{3}, 1) \\) og toppen av fjellet.  \n- Det vil vere mogleg å ta ein rute mot toppen frå startpunktet \\( (\\sqrt{3}, 1) \\) slik at stigninga aldri vil vere nøyaktig \\( \\frac{1}{2} \\).  \n- Stigninga er alltid større enn \\( \\frac{1}{2} \\) på veg mot toppen frå startpunktet \\( (\\sqrt{3}, 1) \\).",
-        "points": 10,
+        "subject": "IFYKJA1000",
+        "text": "**5**  \nGitt følgende likevektsreaksjon:  \n2NOCI (g) ⇌ 2NO (g) + Cl2 (g)  \n1,00 mol NOCI ble plassert i en 2,00 L beholder og oppvarmet til 227°C inntil systemet nådde likevekt. Innholdet i beholderen ble deretter analysert og funnet å inneholde 0,056 mol Cl2.  \n\na) Beregn likevektskonstanten K ved denne temperaturen.  \n\nb) Anta en ny situasjon der 1 mol NOCI er plassert i en 2L beholder som allerede inneholder 1 mol Cl2. Bruk konstanten beregnet i a) for å beregne antall mol NO dannet.",
+        "points": 8,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 6,
-        "subject": "IMAX20XX",
-        "text": "**Oppgave 6 (8 Poeng)**  \n\nLa \\( f(t) = \\begin{cases} \n0 & t \\in [-1, 0) \\\\ \n1 & t \\in [0, 1) \n\\end{cases} \\) på intervallet \\((-1, 1)\\). La \\( \\sum_{k=-\\infty}^{\\infty} c_k e^{2\\pi j k t} \\) være den komplekse fourierrekkja til den periodiske utvidinga av \\( f \\).  \nHint: Hugs at \\( j^2 = -1 \\).  \n\na) Kva er perioden \\( T \\) for den komplekse fourierrekkja?  \nVel eitt alternativ:  \n- \\( 2\\pi \\)  \n- \\( 1 \\)  \n- \\( 2 \\)  \n- \\( \\pi \\)  \n\nb) Kva er verdien til \\( c_0 \\)?  \nVel eitt alternativ:  \n- \\( c_0 = 1 \\)  \n- \\( c_0 = -1 \\)  \n- \\( c_0 = 0 \\)  \n- \\( c_0 = \\frac{1}{2} \\)  \n- \\( c_0 = 2 \\)  \n\nc) Kva er verdien til \\( c_1 \\)?  \nVel eitt alternativ:  \n- \\( c_1 = j \\)  \n- \\( c_1 = \\frac{j}{\\pi} \\)  \n- \\( c_1 = \\frac{j}{2\\pi} \\)  \n- \\( c_1 = 0 \\)  \n\nd) Kva er verdien til \\( c_{-2} \\)?  \nVel eitt alternativ:  \n- \\( c_{-2} = \\frac{j}{\\pi} \\)  \n- \\( c_{-2} = 0 \\)  \n- \\( c_{-2} = \\frac{j}{2\\pi} \\)  \n- \\( c_{-2} = \\frac{j}{\\pi} \\)",
-        "points": 8,
+        "subject": "IFYKJA1000",
+        "text": "**Task 06:**  \n\n**Hvor mange m/s² tilsvarer en akselerasjon på 1,0 km/h²?**  \nVelg ett alternativ:  \n○ 1,3 · 10⁴ m/s²  \n○ 0,28 m/s²  \n○ 7,7 · 10⁻⁵ m/s²  \n○ 5,8 m/s²  \n○ 2,8 m/s²",
+        "points": 7,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 7,
-        "subject": "IMAX20XX",
-        "text": "7 Oppgave 7  \nOppgåve 7 (10 Poeng)  \n\nLa \\( f(t) = t \\) for \\( 0 \\leq t < 2 \\).  \n\na) Vi skal finne fourierrekkja av funksjonen \\( f \\). Kva er perioden \\( L \\) til den periodiske utvidinga?  \n\nb) La \\( \\frac{a_0}{2} + \\sum_{n=1}^{\\infty} \\left( a_n \\cos\\left(\\frac{2\\pi n t}{L}\\right) + b_n \\sin\\left(\\frac{2\\pi n t}{L}\\right) \\right) \\) være fourierrekkja til \\( f \\). Finn fourierkoeffisientane \\( a_0 \\), \\( a_n \\) og \\( b_n \\) når \\( n = 1, 2, 3, \\dots \\)  \n\nHint: Hugs at delvis integrasjon seiar at \\( \\int u(t) v'(t) \\, dt = u(t) v(t) \\big|_a^b - \\int u'(t) v(t) \\, dt \\).",
-        "points": 10,
+        "subject": "IFYKJA1000",
+        "text": "**Task 07:**  \n\n**Figuren under viser akselerasjonsgrafen a(t) for en som løper 100 m.**  \n\n**Hvilken påstand om løperens bevegelse er riktig?**  \n\nVelg ett alternativ:  \n- Løperen løper med jevnt økende fart fra start til mål.  \n- Løperen akselererer opp til en maksimal fart, som holdes konstant til målstreken.  \n- Løperen holder tilnærmet konstant fart gjennom hele løpet.  \n- Løperen starter med en viss maksimal fart, som så avtar mot mål.  \n- Løperen akselererer opp til en maksimal fart, men farten dabber av mot målstreken.",
+        "points": 2,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 8,
-        "subject": "IMAX20XX",
-        "text": "8 Oppgave 8  \nOppgåve 8 (8 Poeng)  \n\nLa \\( f(t) = 4 \\cos(2\\pi t) + 2 \\cos(4\\pi t) - 2 \\sin(4\\pi t) + 8 \\sin(8\\pi t) \\), som har periode \\( L = 1 \\).  \n\na) Da har vi at fourierkoeffisientane \\( a_0 \\), \\( a_1 \\), og \\( b_2 \\) er:  \n- \\( a_0 = \\)  \n- \\( a_1 = \\)  \n- \\( b_2 = \\)  \n\nb) Kva er integralet for \\( \\int_{0}^{1} f(t)^2 \\, dt \\)?  \n\\( \\int_{0}^{1} f(t)^2 \\, dt = \\)",
-        "points": 8,
+        "subject": "IFYKJA1000",
+        "text": "**Task 08:**  \n\nEn pil skytes med horisontal startfart \\( v_0 = 90 \\, \\text{m/s} \\) mot en vegg i horisontal avstand \\( x = 50 \\, \\text{m} \\) fra skytteren. Bestem den vertikale avstanden \\( \\Delta y \\) mellom siktelinja (startfarten) og punktet der pilen treffer veggen, dersom pilen betraktes som en punktpartikkel og vi neglisjerer luftmotstand.  \n\nVelg ett alternativ:  \n○ \\( \\Delta y = 1,5 \\, \\text{m} \\)  \n● \\( \\Delta y = 0,050 \\, \\text{m} \\)  \n○ \\( \\Delta y = 0,20 \\, \\text{m} \\)  \n○ \\( \\Delta y = 1,8 \\, \\text{m} \\)  \n○ \\( \\Delta y = 0,56 \\, \\text{m} \\)",
+        "points": 2,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 9,
-        "subject": "IMAX20XX",
-        "text": "a) La F(w) være fouriertransformasjonen til  \n0, for t < 0,  \nf(t) = e^{it}, for 0 < t ≤ 2π,  \n0, for t > 2π.  \nDa er F(0) = + j. Angi svaret korrekt avrunda til 3 desimalar.  \n\nb) La g(t) = e^{3t}je^{t^2}. Finn verdien F{g(t)}(5) til 3 desimalar. = + j. Angi svaret korrekt avrunda.  \n\nc) La h(t) = u(t) – 11δ(t - 1), kor u(t) er einingssprang-funksjonen og δ(t) er dirac-delta-funksjonen. Berekn F{h'(t)}(w) og finn F{h'(t)}(π) = + j. Angi svaret korrekt avrunda til 3 desimalar.",
-        "points": 6,
+        "subject": "IFYKJA1000",
+        "text": "**Task 09:**  \n\nEn kloss med masse *m* glir med konstant fart nedover et skråplan med helningsvinkel *θ* = 30°. Klossens fart er såpass liten at luftmotstand kan neglisjeres.  \n\n*v = konstant*  \n*m*  \n*μₖ*  \n*θ*  \n\nHva er glidefriksjonstallet *μₖ* mellom klossen og underlaget?  \n\nVelg ett alternativ:  \n- *μₖ* = 0,50  \n- *μₖ* = 0,58  \n- *μₖ* = 0,87  \n- *μₖ* = 1,0  \n- Avhenger av tallverdien til massen *m*",
+        "points": 2,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 10,
-        "subject": "IMAX20XX",
-        "text": "La \\( f(t) = 2u(t)e^{-4t} \\), der \\( u(t) \\) er enhetssprang-funksjonen (eller Heaviside-funksjonen)  \n\\[  \nu(t) = \\begin{cases}  \n0, & \\text{hvis } t < 0, \\\\  \n1, & \\text{hvis } t \\geq 0.  \n\\end{cases}  \n\\]  \nFinn \\( \\mathcal{F}\\{f(t)\\}(0) = \\) + \\( j \\) og \\( \\mathcal{F}\\{f * f(t)\\}(0) = \\) + \\( j \\). Angi svaret med 2 desimalers nøyaktighet.",
-        "points": 8,
+        "subject": "IFYKJA1000",
+        "text": "**Task 10:**  \n\nEn ball kastes loddrett oppover med en viss startfart vo i punkt A, kommer til et høyeste punkt C og faller ned igjen til utgangspunktet. Luftmotstanden på ballen er proporsjonal med kvadratet av ballens fart. Tyngdeakselerasjonen g kan antas konstant under ballens bevegelse. Figuren under viser ballen i 5 ulike punkter A - E i banen (bevegelsen er rettlinjet, men banen er tegnet svakt parabelformet for å lettere identifisere ulike punkt i banen).  \n\nC  \nB  \nD  \nA  \nE  \n\nI hvilket punkt er absoluttverdien av ballens akselerasjon størst?  \n\nVelg ett alternativ:  \n○ A (like etter at ballen er kastet)  \n○ B (midtveis til toppen, på vei opp)  \n○ C (toppunktet)  \n○ D (midtveis til toppen, på vei ned)  \n○ E (like før ballen er tilbake til utgangspunktet)",
+        "points": 2,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 11,
-        "subject": "IMAX20XX",
-        "text": "11 Oppgave 11  \nOppgåve 11 (4 Poeng)  \n\nDu er gitt følgande kode:  \n1 import numpy as np  \n2 from numpy import fft  \n3  \n4 sampling_{interval} = 0.01  \n5 x = np.array(0, 2, sampling_{interval})  \n6 f = np.exp(-2*x)  \n7  \n8 f_dft = fft.fft(f)  \n9 omega = fft.fftfreq(f.size, sampling_{interval})  \n\na) Kva er prøvefrekvensen? Det vil si kor mange prøver som blir tatt per sekund.  \nVel eitt alternativ:  \n100  \n200  \n0.2  \n0.01  \n0.005  \n\nb) Kva for eit alternativ vil gi oss ei approksimering av F{f}(1) (opp til multiplikasjon med ein konstant)?  \nVel eitt alternativ:  \n○ f[x = 1]  \n○ f_{dft}[omega = 1]  \n○ f_{dft}[x = 1]  \n○ f[omega = 1]",
-        "points": 4,
+        "subject": "IFYKJA1000",
+        "text": "**Task 11:**  \n\n**a) Vis at farten til vogna i det laveste punktet i loopen (punkt A) er v = √(6gR).**  \n\n**b) Tegn kreftene som virker på vogna i det øverste punktet i loopen (punkt C) og bestem absoluttverdien av normalkrafta fra underlaget på vogna, uttrykt ved vognas tyngde G.**  \n\n**c) I hvilke(t) punkt A–D i loopen er absoluttverdien av vognas bane-/tangentielle akselerasjon aₖ størst? Svaret må begrunnes kort i form av en illustrerende figur.**  \n\n**d) Etter å ha passert loopen fortsetter vogna i oppoverbakke med toppunkt i E, som vist på figuren over. Tegn en figur som viser kreftene på vogna i E, for to ulike scenarier:**  \n**i) Vogna har kontakt med underlaget over bakketoppen.**  \n**ii) Vogna mister akkurat kontakten med underlaget i punkt E.**",
+        "points": 15,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
         "version": "Sommer 2024",
         "task": 12,
-        "subject": "IMAX20XX",
-        "text": "Oppgave 12  \nVi skal finne nokon av elementa i den diskrete fouriertransformasjonen (DFT) av sekvensen ƒ[k] = 2, 0, 1, 0, 0, 0, 0, 0. Her er f[0] = 2, ƒ[1] = 0, ƒ[2] = 1, ƒ[3] = 0, ƒ[4] = 0, f[5] = 0, f[6] = 0, og f[7] = 0.  \nAngi svaret korrekt avrunda til 3 desimalar.  \nF[0] = D{f[k]}[0] = + j,  \nF[1] = D{ƒ[k]}[1] = + j,  \nF[7] = D{f[k]}[7] = + j.",
-        "points": 6,
+        "subject": "IFYKJA1000",
+        "text": "**Task 12:**  \n\n**Figuren viser fem ulike punkter i et strikkhopp, der en person med masse m slipper seg fra ro og faller loddrett nedover. Strikken kan antas å følge Hookes lov med fjærkonstant k, og har lengden / i ustrukket / slapp tilstand. Forlengelsen av strikken er æ. Vi ser bort fra luftmotstand.**  \n\n**g↓**  \n1 **k**  \n**A (x = 0)**  \n**m**  \n**B (kx < mg)**  \n**C (kx = mg)**  \n**D (kx > mg)**  \n**E (laveste punkt)**  \n\n**I hvilket punkt er absoluttverdien av hopperens fart maksimal?**  \n\n**Velg ett alternativ:**  \n- A  \n- B  \n- C  \n- D  \n- E",
+        "points": 2,
         "images": [],
         "code": null,
-        "amount": 12
+        "amount": 17
     },
     {
-        "version": "S20XX",
-        "task": 1,
-        "subject": "IMAX20XX",
-        "text": "```python\ndef multiply(a, b):\n    return a * b\n```",
-        "points": 1,
+        "version": "Sommer 2024",
+        "task": 13,
+        "subject": "IFYKJA1000",
+        "text": "**Task 13:**  \n\nEt kvadratisk legeme består av 4 tynne, homogene stenger, hver med masse m og lengde L. Legemet kan rotere om en akse gjennom legemets massesenter som står vinkelrett på legemet.  \n\nBestem legemets treghetsmoment I om aksen.  \n\nVelg ett alternativ:  \n○ \\( I = 4mL^2 \\)  \n○ \\( I = mL^2 \\)  \n○ \\( I = \\frac{1}{2}mL^2 \\)  \n○ \\( I = \\frac{1}{3}mL^2 \\)  \n○ \\( I = 2mL^2 \\)",
+        "points": 2,
         "images": [],
         "code": null,
-        "amount": 1
+        "amount": 17
     },
     {
-        "version": "Sommer 20XX",
-        "task": 1,
-        "subject": "IMAX20XX",
-        "text": "```python\ndef multiply(a, b):\n    return a * b\n```",
-        "points": 1,
+        "version": "Sommer 2024",
+        "task": 14,
+        "subject": "IFYKJA1000",
+        "text": "**Task 14:**  \n\na) En sykkel har hjul med diameter 0,74 m. Hvor mange omdreininger per minutt roterer hjulet med når sykkelen triller med fart på 10 m/s i forhold til underlaget, og hjulet ruller uten å gli?  \n\nVelg ett alternativ:  \n- Ca. 23  \n- Ca. 50  \n- Ca. 258  \n- Ca. 480  \n- Ca. 980  \n\nb) Grafen under viser vinkelhastigheten ω(t) for akselen på en batteridrevet drill fra den startes ved t = 0:  \n\nHvilken av grafene A–E under viser riktig graf for drillens vinkelakselerasjon α(t)?  \n\nVelg ett alternativ:  \n- A  \n- B  \n- C  \n- D  \n- E",
+        "points": 4,
         "images": [],
         "code": null,
-        "amount": 1
+        "amount": 17
     },
     {
-        "version": "H24",
-        "task": 1,
-        "subject": "IMAX20XX",
-        "text": "Oppgave 1 ...",
-        "points": 5,
+        "version": "Sommer 2024",
+        "task": 15,
+        "subject": "IFYKJA1000",
+        "text": "**Task 15:**  \n\nA homogeneous, solid cylinder with mass \\( M \\) and radius \\( R \\) rolls without slipping down an inclined plane with an angle \\( \\theta = 30^\\circ \\). The speed is low enough that air resistance can be neglected.  \n\na) Draw the forces acting on the cylinder as it rolls down the inclined plane. For full credit, the forces must be labeled, and their relative magnitudes must be reasonable.  \n\nb) Show that the acceleration of the cylinder down the inclined plane is \\( a = \\frac{2}{3}g \\sin \\theta \\).  \n\nc) How long does it take for the cylinder to roll down the inclined plane if the length of the plane is \\( \\Delta x = 1.0 \\, \\text{m} \\) and the cylinder starts from rest?  \n\nd) The cylinder starts at \\( x = 0 \\) at \\( t = 0 \\). Sketch the position graph \\( x(t) \\), velocity graph \\( v(t) \\), and acceleration graph \\( a(t) \\). For full credit, the shape of each graph must be clear. All three graphs can be sketched in the same diagram without axis units.  \n\ne) The cylinder then \"races\" a thin-walled cylindrical shell (a ring) with the same mass \\( M \\) and radius \\( R \\). Both objects are released simultaneously from rest at the same starting point and roll a distance \\( \\Delta x = 1.0 \\, \\text{m} \\) down the inclined plane.  \n\ni) Which object reaches the bottom first? Briefly justify your answer (either with a qualitative argument or a calculation).  \n\nii) What is the time difference \\( \\Delta t \\) between the arrivals of the two objects?",
+        "points": 15,
         "images": [],
-        "code": "",
-        "amount": 3
+        "code": null,
+        "amount": 17
     },
     {
-        "version": "H24",
-        "task": 2,
-        "subject": "IMAX20XX",
-        "text": "Oppgave 2 ...",
-        "points": 5,
+        "version": "Sommer 2024",
+        "task": 16,
+        "subject": "IFYKJA1000",
+        "text": "**Task 16:**  \n\nEn homogen terning med sidekant h flyter i utgangspunktet i ro i et kar med vann som har dybde 2h. I utgangspunktet flyter terningen slik at h ligger under vannoverflaten. Terningen presses deretter nedover i vannet, helt til den nederste sidekanten er i kontakt med bunnen av karet.  \n\n**Startsituasjon**  \n**Sluttsituasjon**  \n\nHvilken av grafene A - E viser oppdriften FB på terningen som funksjon av dybden til den nederste sidekanten? Enhetene på aksene i figuren er ikke tegnet i riktig skala.  \n\n**Maks poeng: 2**",
+        "points": 2,
         "images": [],
-        "code": "",
-        "amount": 3
+        "code": null,
+        "amount": 17
     },
     {
-        "version": "H24",
-        "task": 3,
-        "subject": "IMAX20XX",
-        "text": "Oppgave 3 ...",
-        "points": 5,
+        "version": "Sommer 2024",
+        "task": 17,
+        "subject": "IFYKJA1000",
+        "text": "**Task 17:**  \n\nOlje med massetetthet 9,0 · 10² kg/m³ skal tappes fra et reservoar på havbunnen gjennom et vertikalt rør med lengde L = 1,1 km og diameter D = 0,20 m. Trykket i reservoaret i det tappingen starter er P₁ = 1,0 · 10⁷ Pa, og oljen er tilnærmet i ro idet den kommer inn i røret. På overflaten kommer oljen ut i luft der lufttrykket er p₀ = 1,0 · 10⁵ Pa.  \n\n**a)** Vis at væskefarten ut av røret ved overflaten er v = 20 m/s når vi neglisjerer alle former for tap.  \n\n**b)** Bestem volumstrømmen i røret.  \n\n**c)** Trykket i reservoaret vil reduseres etter hvert som olje tappes ut. Hva er trykket i reservoaret når oljestrømmen stopper opp?  \n\n**d)** Røret har ruhet ε = 0,040 mm, og oljen har dynamisk viskositet η = 2,5 · 10⁻³ Pa·s. På grunn av rørfriksjon måles væskefarten i røret til v = 10 m/s. Bestem friksjonsfaktoren f for væskestrømmen i røret.  \n\n**e)** Beregn tapshøyden h_f på grunn av rørfriksjon under samme forutsetninger som i oppgave d). Forklar kort hva tapshøyden representerer.  \n\n**Maks poeng: 15**",
+        "points": 15,
         "images": [],
-        "code": "",
-        "amount": 3
+        "code": null,
+        "amount": 17
     }
 ]

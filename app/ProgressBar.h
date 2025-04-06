@@ -8,17 +8,14 @@
 
 extern int nextFrame;
 extern double progress;
-extern double prevProgress;
-
-extern bool DeepSeek;
-extern bool GoogleVision;
+extern double progress2;
 
 class ProgressBar {
 public:
     ProgressBar(TDT4102::AnimationWindow& win);
 
     // Tegner grønn fremdriftsindikator
-    void setCount(double percent);
+    void setCount(double percent, int xPos, int yPos);
 
     // Leser progress.txt i bakgrunnstråd og oppdaterer global progress
     void calculateProgress();

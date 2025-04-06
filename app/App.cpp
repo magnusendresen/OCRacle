@@ -1,16 +1,5 @@
 #include "App.h"
 #include "Color.h"
-#include "widgets/Button.h"   // Fra TDT4102-biblioteket
-#include "widgets/TextBox.h"  // Fra TDT4102-biblioteket
-
-#include <iostream>
-#include <fstream>
-#include <filesystem>
-#include <synchapi.h>  // Sleep / SleepEx
-#include <windows.h>
-#include <commdlg.h>
-#include <thread>
-#include "ProgressBar.h"
 
 // Definisjon av statiske variabler
 unsigned int App::buttonWidth = 200;
@@ -30,6 +19,7 @@ App::App(const std::string& windowName)
 {
     // Sett bakgrunnsfarge og kall GUI-setup
     setBackgroundColor(TDT4102::Color::light_gray);
+
     GUI();
 }
 
@@ -46,11 +36,28 @@ int App::calculateWindowPosY()    { return (calculateMonitorHeight() - calculate
 
 void App::GUI() {
     // Knapp for å velge fil
-    auto* pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
+
+    pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
+    googlevision = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
+    deepseek = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
+    examSubject = new TDT4102::TextBox({pad*14, pad*2}, buttonWidth, buttonHeight, "   Subject: ");
+    examVersion = new TDT4102::TextBox({pad*14, pad*3}, buttonWidth, buttonHeight, "   Version: ");
+    examAmount = new TDT4102::TextBox({pad*14, pad*4}, buttonWidth, buttonHeight, "   Amount: ");
+
+    googlevision->setTextColor(TDT4102::Color::white);
+    deepseek->setTextColor(TDT4102::Color::white);
+    pdfButton->setLabelColor(TDT4102::Color::white);
     pdfButton->setCallback([this]() {
         pdfHandling();
     });
+
     add(*pdfButton);
+    add(*googlevision);
+    add(*deepseek);
+
+    add(*examSubject);
+    add(*examVersion);
+    add(*examAmount);
 }
 
 /*
@@ -70,10 +77,6 @@ void App::pdfHandling() {
     SetConsoleOutputCP(CP_UTF8);
 
     // Legg til to 'TextBox'-widgets for illustrasjon
-    auto* deepseek = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   DeepSeek");
-    auto* googlevision = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   Google Vision");
-    add(*deepseek);
-    add(*googlevision);
 
     
 
@@ -129,8 +132,7 @@ void App::pdfHandling() {
 
 void App::calculateProgress() {
     std::cout << "\n\n\n Starting progress calculation... \n\n\n" << std::endl;
-
-    std::thread([]() {
+    std::thread([this]() {
         char buffer[MAX_PATH];
         GetModuleFileNameA(NULL, buffer, MAX_PATH);
         std::filesystem::path exePath = buffer;
@@ -156,21 +158,65 @@ void App::calculateProgress() {
         
                     std::ifstream file(progressPath);
                     if (file.is_open()) {
+                        
                         std::string line;
-                        std::string ocrLine, taskLine;
+                        std::string ocrLine, taskLine, googlevisionLine, deepseekLine, examSubjectLine, examVersionLine, examAmountLine;
                         int currentLine = 1;
-                        // Les filen linje for linje og lagre linje 2 og 4
+
                         while (std::getline(file, line)) {
-                            if (currentLine == 2) {
+                            if (currentLine == 1) {
+                                googlevisionLine = line;
+                            } else if (currentLine == 2) {
                                 ocrLine = line;
-                                // googlevision.setColor()
+                            } else if (currentLine == 3) {
+                                deepseekLine = line;
                             } else if (currentLine == 4) {
                                 taskLine = line;
+                            } else if (currentLine == 5) {
+                                examSubjectLine = line;
+                            } else if (currentLine == 6) {
+                                examVersionLine = line;
+                            } else if (currentLine == 7) {
+                                examAmountLine = line;
+                            } else if (currentLine == 8) {
+                                break; // Vi har lest de nødvendige linjene
                             }
                             currentLine++;
                         }
+
+                        if (!googlevisionLine.empty()) {
+                            for (char c : googlevisionLine) {
+                                // Hvis linja inneholder 1, så blir knappen grønn
+                                if (c == '1') {
+                                    googlevision->setBoxColor(TDT4102::Color::green);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!deepseekLine.empty()) {
+                            for (char c : deepseekLine) {
+                                // Hvis linja inneholder 1, så blir knappen grønn
+                                if (c == '1') {
+                                    deepseek->setBoxColor(TDT4102::Color::green);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!examSubjectLine.empty()) {
+                            examSubject->setText("Subject:"+examSubjectLine);
+                        }
+
+                        if (!examVersionLine.empty()) {
+                            examVersion->setText("Version:"+examVersionLine);
+                        }
+
+                        if (!examAmountLine.empty()) {
+                            examAmount->setText("Amount:"+examAmountLine);
+                        }
         
-                        double progressFraction = 0.0;
+                        double ocrProgress = 0.0;
                         // Beregn OCR-progresjonen fra linje 2
                         if (!ocrLine.empty()) {
                             int sum = 0;
@@ -182,12 +228,16 @@ void App::calculateProgress() {
                                 }
                             }
                             if (count > 0) {
-                                progressFraction = static_cast<double>(sum) / static_cast<double>(count);
+                                ocrProgress = static_cast<double>(sum) / count;
                             }
                         }
         
-                        // Dersom OCR-prosessen er fullført, bytt til oppgaveprogresjonen fra linje 4
-                        if (progressFraction >= 1.0 && !taskLine.empty()) {
+                        // Oppdater progress med OCR-progresjonen
+                        progress = ocrProgress;
+                        std::cout << "OCR Progress: " << progress << std::endl;
+        
+                        // Dersom OCR-prosessen er fullført, oppdater progress2 med oppgaveprogresjonen fra linje 4
+                        if (ocrProgress >= 1.0 && !taskLine.empty()) {
                             int sum = 0;
                             int count = 0;
                             for (char c : taskLine) {
@@ -196,13 +246,16 @@ void App::calculateProgress() {
                                     count++;
                                 }
                             }
+                            count *= 4;
+                            double taskProgress = 0.0;
                             if (count > 0) {
-                                progressFraction = static_cast<double>(sum) / static_cast<double>(count);
+                                taskProgress = static_cast<double>(sum) / count;
                             }
+                            // Oppdater progress2 manuelt etter at OCR er ferdig
+                            progress2 = taskProgress;
+                            std::cout << "Task Progress: " << progress2 << std::endl;
                         }
-                        progress = progressFraction;
                     }
-                    std::cout << "Progress: " << progress << std::endl;
                 }
                 Sleep(200);
             } else {
@@ -211,4 +264,5 @@ void App::calculateProgress() {
         }                
     }).detach();
 }
+
 
