@@ -22,7 +22,7 @@ public:
     // Velg PDF og start Python-script i bakgrunnstråd
     void pdfHandling();
 
-    void animate();
+    void calculateProgress();
 
     // Globale GUI-konstanter for layout
     static unsigned int buttonWidth;

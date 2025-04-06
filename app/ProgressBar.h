@@ -8,6 +8,10 @@
 
 extern int nextFrame;
 extern double progress;
+extern double prevProgress;
+
+extern bool DeepSeek;
+extern bool GoogleVision;
 
 class ProgressBar {
 public:

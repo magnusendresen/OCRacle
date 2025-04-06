@@ -4,11 +4,30 @@ import asyncio
 import contextvars
 from openai import OpenAI  # Using OpenAI SDK for DeepSeek
 import builtins
+from pathlib import Path
 
-original_print = builtins.print
-def print(*args, **kwargs):
-    kwargs.setdefault("flush", True)
-    return original_print(*args, **kwargs)
+# Definer sti for progress.txt
+progress_file = Path(__file__).resolve().parent / "progress.txt"
+
+def update_progress_line3(value="1"):
+    """
+    Oppdaterer kun linje 3 i progress.txt med den angitte verdien.
+    """
+    try:
+        if progress_file.exists():
+            with open(progress_file, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+        else:
+            lines = []
+        if len(lines) < 3:
+            lines += ["\n"] * (3 - len(lines))
+        # Linje 3 er indeks 2
+        lines[2] = f"{value}\n"
+        with open(progress_file, "w", encoding="utf-8") as f:
+            f.writelines(lines)
+        print(f"[STATUS] | Updated line 3 of {progress_file} with '{value}'")
+    except Exception as e:
+        print(f"[ERROR] Could not update line 3 in {progress_file}: {e}")
 
 # Context variables for task-ID og processing step
 current_task = contextvars.ContextVar("current_task", default="")
@@ -29,6 +48,8 @@ MODEL_NAME = "deepseek-chat"
 total_cost = 0  # Global variabel for akkumulert kostnad
 
 print("[DEEPSEEK] Successfully connected to DeepSeekAPI!\n")
+# Oppdaterer progress.txt linje 3 med "1" når DeepSeek er kobla til.
+update_progress_line3("1")
 
 def isNumber(a):
     return a.strip().isnumeric()

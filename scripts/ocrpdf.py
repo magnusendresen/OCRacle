@@ -18,6 +18,56 @@ if not json_path or not os.path.exists(json_path):
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
 print(f"\n[GOOGLE] Successfully connected to Google Vision API using:\n{json_path}\n")
 
+# Definer sti for progress.txt
+progress_file = Path(__file__).resolve().parent / "progress.txt"
+
+# Tømmer hele progress.txt ved oppstart
+with open(progress_file, "w", encoding="utf-8") as f:
+    f.write("")
+
+def update_progress_line1(value="1"):
+    """
+    Oppdaterer kun linje 1 i progress.txt med den angitte verdien.
+    (Her brukes linje 1 til å vise Google Vision API-status.)
+    """
+    try:
+        if progress_file.exists():
+            with open(progress_file, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+        else:
+            lines = []
+        if len(lines) < 1:
+            lines = ["\n"]
+        lines[0] = f"{value}\n"
+        with open(progress_file, "w", encoding="utf-8") as f:
+            f.writelines(lines)
+        print(f"[STATUS] | Updated line 1 of {progress_file} with '{value}'")
+    except Exception as e:
+        print(f"[ERROR] Could not update line 1 in {progress_file}: {e}")
+
+def update_progress_line2(value):
+    """
+    Oppdaterer kun linje 2 i progress.txt med den angitte verdien.
+    (Her skrives en tallrekke som indikerer hvor mange sider som er prosessert.)
+    """
+    try:
+        if progress_file.exists():
+            with open(progress_file, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+        else:
+            lines = []
+        if len(lines) < 2:
+            lines += ["\n"] * (2 - len(lines))
+        lines[1] = f"{value}\n"
+        with open(progress_file, "w", encoding="utf-8") as f:
+            f.writelines(lines)
+        print(f"[STATUS] | Updated line 2 of {progress_file} with '{value}'")
+    except Exception as e:
+        print(f"[ERROR] Could not update line 2 in {progress_file}: {e}")
+
+# Sett opp Google Vision API-status (linje 1)
+update_progress_line1("1")
+
 def detect_text(image_content):
     try:
         client = vision.ImageAnnotatorClient()
@@ -57,8 +107,15 @@ def pdf_to_images(pdf_path):
         print(f"[ERROR] Failed to convert PDF to images: {e}")
         return []
 
-async def async_detect_text(image_content):
-    return await asyncio.to_thread(detect_text, image_content)
+async def process_image(index, image, ocr_progress):
+    """
+    Utfører OCR på én side, oppdaterer global progress og skriver status til linje 2.
+    """
+    result = await asyncio.to_thread(detect_text, image)
+    ocr_progress[index] = 1  # Merk at siden er ferdig prosessert
+    progress_str = "".join(str(x) for x in ocr_progress)
+    update_progress_line2(progress_str)
+    return result
 
 async def main_async():
     # Les PDF-sti fra dir.txt
@@ -82,9 +139,16 @@ async def main_async():
         print("[ERROR] No images could be generated from the PDF. Exiting...")
         return ""
 
+    # Initialiser en liste for OCR-status: 0 = ikke prosessert, 1 = prosessert
+    ocr_progress = [0] * len(images)
+    update_progress_line2("".join(str(x) for x in ocr_progress))  # Oppdaterer med initial status
+
     print("[INFO] Starting text extraction from PDF pages...\n")
 
-    tasks = [async_detect_text(image) for image in images]
+    tasks = [
+        asyncio.create_task(process_image(i, image, ocr_progress))
+        for i, image in enumerate(images)
+    ]
     results = await asyncio.gather(*tasks)
 
     all_text = " ".join(results)
