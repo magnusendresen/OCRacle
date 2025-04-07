@@ -38,6 +38,9 @@ public:
     TDT4102::TextBox *examVersion;
     TDT4102::TextBox *examAmount;
 
+    TDT4102::TextBox *ProgressBar1;
+    TDT4102::TextBox *ProgressBar2;
+
     // Globale GUI-konstanter for layout
     static unsigned int buttonWidth;
     static unsigned int buttonHeight;

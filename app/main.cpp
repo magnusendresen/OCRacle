@@ -16,18 +16,13 @@ int fileSum2 = 0;
 std::size_t fileLen = 0;
 std::atomic<bool> progressDone = false;
 
-bool DeepSeek = false;
-bool GoogleVision = false;
-
 int main() {
     App myApp("OCRacle - med ProgressBar");
-    progressBar_ptr = new ProgressBar(myApp); 
-    progressBar_ptr2 = new ProgressBar(myApp);
-    
     std::cout << "Starting while loop..." << std::endl;
+    
     while (!myApp.should_close()) {
-        progressBar_ptr->setCount(progress, App::pad*14, App::pad*7);
-        progressBar_ptr2->setCount(progress2, App::pad*14,App::pad*12);
+        progressBar_ptr->setCount(progress);
+        progressBar_ptr2->setCount(progress2);
         myApp.next_frame();
     }
     return 0;

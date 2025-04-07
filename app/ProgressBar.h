@@ -12,17 +12,17 @@ extern double progress2;
 
 class ProgressBar {
 public:
-    ProgressBar(TDT4102::AnimationWindow& win);
+    ProgressBar(TDT4102::AnimationWindow& win, int xPos, int yPos, std::string Title);
 
     // Tegner grønn fremdriftsindikator
-    void setCount(double percent, int xPos, int yPos);
+    void setCount(double percent);
 
-    // Leser progress.txt i bakgrunnstråd og oppdaterer global progress
-    void calculateProgress();
+    std::string Title;
+    int xPos;
+    int yPos;
 
 private:
     TDT4102::AnimationWindow& window;
     const int width  = 800;
     const int height = 40;
-    const TDT4102::Point Pos = {280, 40};
 };

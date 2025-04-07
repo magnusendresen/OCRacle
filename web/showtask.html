@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>MathJax TeX Test Page</title>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
+  <title>MathJax TeX Test Page</title>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
 </head>
 <body>
-Solve the following equations:
+<div id="content"></div>
 
-1. Simplify the expression \( (x + 2)(x - 3) \).
-$$ (x + 2)(x - 3) = x^2 - x - 6 $$
+<script type="text/javascript">
+  const mathContent = `
+    Solve the following equations:<br><br>
 
-2. Expand and simplify \( (2x - 1)(x + 4) \).
-$$ (2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4 $$
+    1. Simplify the expression \\( (x + 2)(x - 3) \\).<br>
+    $$ (x + 2)(x - 3) = x^2 - x - 6 $$<br><br>
 
-3. Factorize \( x^2 + 5x + 6 \).
-$$ x^2 + 5x + 6 = (x + 2)(x + 3) $$
+    2. Expand and simplify \\( (2x - 1)(x + 4) \\).<br>
+    $$ (2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4 $$<br><br>
 
-4. Solve for \( x \) in the equation \( x^2 - 9 = 0 \).
-$$ x^2 - 9 = 0 \implies (x - 3)(x + 3) = 0 \implies x = 3 \text{ or } x = -3 $$
+    3. Factorize \\( x^2 + 5x + 6 \\).<br>
+    $$ x^2 + 5x + 6 = (x + 2)(x + 3) $$<br><br>
 
-5. Simplify the expression \( (3x + 2)(x - 5) \).
-$$ (3x + 2)(x - 5) = 3x^2 - 15x + 2x - 10 = 3x^2 - 13x - 10 $$
+    4. Solve for \\( x \\) in the equation \\( x^2 - 9 = 0 \\).<br>
+    $$ x^2 - 9 = 0 \\implies (x - 3)(x + 3) = 0 \\implies x = 3 \\text{ or } x = -3 $$<br><br>
+
+    5. Simplify the expression \\( (3x + 2)(x - 5) \\).<br>
+    $$ (3x + 2)(x - 5) = 3x^2 - 15x + 2x - 10 = 3x^2 - 13x - 10 $$
+  `;
+
+  document.getElementById("content").innerHTML = mathContent;
+
+  // Vent til MathJax er klar og kjør rendring
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']] },
+    startup: {
+      ready: () => {
+        MathJax.startup.defaultReady();
+        MathJax.typeset();
+      }
+    }
+  };
+</script>
 </body>
 </html>

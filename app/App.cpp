@@ -7,6 +7,9 @@ unsigned int App::buttonHeight = 100;
 int App::pad = 20;
 
 extern ProgressBar* progressBar_ptr;  // Ingen ny definisjon!
+extern ProgressBar* progressBar_ptr2;  // Ingen ny definisjon!
+extern App* myApp_ptr;
+
 
 App::App(const std::string& windowName)
     : TDT4102::AnimationWindow{
@@ -40,12 +43,14 @@ void App::GUI() {
     pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
     googlevision = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
     deepseek = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
-    examSubject = new TDT4102::TextBox({pad*14, pad*2}, buttonWidth, buttonHeight, "   Subject: ");
-    examVersion = new TDT4102::TextBox({pad*14, pad*3}, buttonWidth, buttonHeight, "   Version: ");
-    examAmount = new TDT4102::TextBox({pad*14, pad*4}, buttonWidth, buttonHeight, "   Amount: ");
+    
+    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth*3/2, buttonHeight / 2, "   Subject: ");
+    examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*3/2, buttonHeight/2, "   Version: ");
+    examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth*3/2, buttonHeight/2, "   Amount: ");
 
-    googlevision->setTextColor(TDT4102::Color::white);
-    deepseek->setTextColor(TDT4102::Color::white);
+    progressBar_ptr = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*8, "PDF processing"); 
+    progressBar_ptr2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*12, "Task processing");
+
     pdfButton->setLabelColor(TDT4102::Color::white);
     pdfButton->setCallback([this]() {
         pdfHandling();
@@ -122,7 +127,7 @@ void App::pdfHandling() {
     // Start Python-script i en bakgrunnstråd
     std::thread([]() {
         // Kall Python. Evt. "python main.py" eller "py main.py"
-        std::system("start powershell -Command \"python main.py\""); 
+        std::system("start /min powershell -Command \"python main.py\""); 
     }).detach();    
 }
 
@@ -189,6 +194,7 @@ void App::calculateProgress() {
                                 // Hvis linja inneholder 1, så blir knappen grønn
                                 if (c == '1') {
                                     googlevision->setBoxColor(TDT4102::Color::green);
+                                    googlevision->setTextColor(TDT4102::Color::white);
                                     break;
                                 }
                             }
@@ -199,21 +205,31 @@ void App::calculateProgress() {
                                 // Hvis linja inneholder 1, så blir knappen grønn
                                 if (c == '1') {
                                     deepseek->setBoxColor(TDT4102::Color::green);
+                                    deepseek->setTextColor(TDT4102::Color::white);
+
                                     break;
                                 }
                             }
                         }
 
                         if (!examSubjectLine.empty()) {
-                            examSubject->setText("Subject:"+examSubjectLine);
+                            examSubject->setBoxColor(TDT4102::Color::green);
+                            examSubject->setText("Subject: "+examSubjectLine);
+                            examSubject->setTextColor(TDT4102::Color::white);
                         }
 
                         if (!examVersionLine.empty()) {
-                            examVersion->setText("Version:"+examVersionLine);
+                            examVersion->setBoxColor(TDT4102::Color::green);
+                            examVersion->setText("Version: "+examVersionLine);
+                            examVersion->setTextColor(TDT4102::Color::white);
+
                         }
 
                         if (!examAmountLine.empty()) {
-                            examAmount->setText("Amount:"+examAmountLine);
+                            examAmount->setBoxColor(TDT4102::Color::green);
+                            examAmount->setText("Tasks: "+examAmountLine);
+                            examAmount->setTextColor(TDT4102::Color::white);
+
                         }
         
                         double ocrProgress = 0.0;
