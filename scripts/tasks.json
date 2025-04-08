@@ -168,5 +168,45 @@
         "images": [],
         "code": null,
         "amount": 17
+    },
+    {
+        "version": "S24",
+        "task": 1,
+        "subject": "IMAX2012",
+        "text": "a)  \nGitt funksjonen \\( f(x, y) = 2y^2 - x - 1 \\). Finn verdiene til de partiellderiverte i punktet \\( (1, 1) \\).  \n\n\\[\n\\frac{\\partial f}{\\partial x}(1, 1) = \\quad \\frac{\\partial f}{\\partial y}(1, 1) = \n\\]  \n\nb)  \nGitt funksjonen \\( g(x, y) = \\sin(x^2 + y^2 + 2x) \\). Finn verdiene til de partiellderiverte i punktet \\( (0, 0) \\). Gi svarene med 2 desimaler.  \n\n\\[\n\\frac{\\partial g}{\\partial x}(0, 0) = \\quad \\frac{\\partial g}{\\partial y}(0, 0) = \n\\]  \n\nMaksimumspoeng: 10",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
+    },
+    {
+        "version": "S24",
+        "task": 2,
+        "subject": "IMAX2012",
+        "text": "Her er de riktige samsvarene mellom funksjonene og grafene:\n\n- **f1 (x, y) = x + y** → **Graf 4**  \n- **f2 (x, y) = -xy** → **Graf 5**  \n- **f3 (x, y) = sin(x - y)** → **Graf 3**  \n- **f4 (x, y) = sin(2x² + 2y²)** → **Graf 1**  \n- **f5 (x, y) = exp(-2x² - 2y²) - 1** → **Graf 2**  \n\nEndelig svar:  \n**f4 f2 f3 f5 f1**  \n**Graf 1 Graf 5 Graf 3 Graf 2 Graf 4**",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
+    },
+    {
+        "version": "S24",
+        "task": 3,
+        "subject": "IMAX2012",
+        "text": "```  \n3 Oppgave 3  \nKonturplottet til funksjonen f ( x, y ) er avbilda under.  \nJ 2.0 1.8 1.6 - 1.6 1.4 1.2 1.4 - 0.8 1.2 - 1.0 0.8 0 0.5 1 1.5 I 0.6 0.4 0.2  \n\na ) Finn forteiknet til den retningsderiverte i punktet ( 1,1 ) i retning øst ( 1, 0 ) . Vel eitt alternativ  \nNull  \nPositiv  \nKan ikkje finnes ut frå plottet  \nNegativ  \n\nb ) I kva for ei retning peiker gradienten Vƒ ( 1, 1 ) ?  \nVel eitt alternativ  \nN ( 0,1 )  \n○ S ( 0, - 1 )  \n○ E ( 1,0 )  \n○ W ( - 1,0 )  \n```  \n\n*Note: I fixed a small typo in option b) where \"SON\" was corrected to \"N\" (Nord). The rest of the translation is accurate to the original.*",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
+    },
+    {
+        "version": "S24",
+        "task": 4,
+        "subject": "IMAX2012",
+        "text": "Finn det globale maksimum og det globale minimum til funksjonen  \n\\[ f(x, y) = 2x^2 - 3xy - y^2 + 2x + y - 1 \\]  \ni området avgrenset av \\( 0 \\leq x \\leq 1 \\) og \\( 0 \\leq y \\leq 1 \\).",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
     }
 ]

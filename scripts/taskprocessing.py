@@ -13,13 +13,13 @@ progress_file = Path(__file__).resolve().parent / "progress.txt"
 task_status = defaultdict(lambda: 0)
 exam_amount = 0
 
-nonchalant = "Do not explain what you are doing, just do it."
+nonchalant = "DONT EVER EXPLAIN OR SAY WHAT YOU ARE DOING. JUST DO AS YOU ARE TOLD AND RESPOND WITH WHAT IS ASKED FROM YOU. "
 task_process_instructions = [
     {
         "instruction": (
             f"{nonchalant} What is task number {{task_number}}? "
             "Write only all text related directly to that one task from the raw text. "
-            "Include how many maximum points you can get. Do not solve the task."
+            "Include how many maximum points you can get. Do not solve the task: "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -28,7 +28,7 @@ task_process_instructions = [
     {
         "instruction": (
             f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH A NUMBER!!! "
-            "How many points can you get for task {task_number}? Only reply with the number of points, nothing else."
+            "How many points can you get for this task? Only reply with the number of points, nothing else: "
         ),
         "max_tokens": 1000,
         "isNum": True,
@@ -37,7 +37,7 @@ task_process_instructions = [
     {
         "instruction": (
             f"{nonchalant} Remove all text related to Inspera and exam administration, "
-            "keep only what is necessary for solving the task."
+            "keep only what is necessary for solving the task: "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -45,15 +45,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            f"{nonchalant} Translate the task to norwegian bokmål. Keep everything else."
-        ),
-        "max_tokens": 1000,
-        "isNum": False,
-        "maxLen": 2000
-    },
-    {
-        "instruction": (
-            f"{nonchalant} Translate the task to norwegian bokmål if it is not already in norwegian bokmål."
+            f"{nonchalant} Translate this task text from norwegian bokmål or english to norwegian bokmål, do not change anything else."
+            "If it is already in norwegian bokmål respond with the exact same text: "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -62,11 +55,11 @@ task_process_instructions = [
     {
         "instruction": (
             f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
-            "Answer 1 if this is a valid task that could be in an exam and that can be logically solved, otherwise 0."
+            "Answer 1 if this is a valid task that could be in an exam and that can be logically solved, otherwise 0:"
         ),
         "max_tokens": 1000,
         "isNum": True,
-        "maxLen": 1
+        "maxLen": 2
     }
 ]
 
@@ -162,53 +155,79 @@ async def get_exam_info(ocr_text):
     return exam
 
 async def process_task(task_number, ocr_text, exam):
-    result = str(ocr_text)
     task_exam = deepcopy(exam)
 
     while True:
-        task_output = None
+        task_output = str(ocr_text)
         points = None
+        valid = 0
 
-        print("\n\n\n\n WHILE LOOP STARTED \n\n\n\n")
+        # Loop for alle steg
+        for i in range(len(task_process_instructions)):
 
-        for i in range(5):
-            step_info = task_process_instructions[i]
-            instruction_text = step_info["instruction"].format(task_number=f"{task_number:02d}") + str(result)
-
-            task_output = str(
-                await prompttotext.async_prompt_to_text(
-                    instruction_text,
-                    max_tokens=step_info["max_tokens"],
-                    isNum=step_info["isNum"],
-                    maxLen=step_info["maxLen"]
+            # Initiell innhenting av oppgavetekst
+            if i == 0:
+                task_output = str(
+                    await prompttotext.async_prompt_to_text(
+                        task_process_instructions[i]["instruction"].format(task_number=f"{task_number}") + task_output,
+                        max_tokens=task_process_instructions[i]["max_tokens"],
+                        isNum=task_process_instructions[i]["isNum"],
+                        maxLen=task_process_instructions[i]["maxLen"]
+                    )
                 )
-            )
+            
+            # Innhenting av poeng
+            elif i == 1:
+                points = int(
+                    await prompttotext.async_prompt_to_text(
+                        task_process_instructions[i]["instruction"] + task_output,
+                        max_tokens=task_process_instructions[i]["max_tokens"],
+                        isNum=task_process_instructions[i]["isNum"],
+                        maxLen=task_process_instructions[i]["maxLen"]
+                    )
+                )
+            
+            # Oppdatering av oppgavetekst
+            elif not i == len(task_process_instructions) - 1:
+                task_output = str(
+                    await prompttotext.async_prompt_to_text(
+                        task_process_instructions[i]["instruction"] + task_output,
+                        max_tokens=task_process_instructions[i]["max_tokens"],
+                        isNum=task_process_instructions[i]["isNum"],
+                        maxLen=task_process_instructions[i]["maxLen"]
+                    )
+                )
+
+            # Validering av oppgava
+            else:
+                valid = int(
+                    await prompttotext.async_prompt_to_text(
+                        task_process_instructions[i]["instruction"] + task_output,
+                        max_tokens=task_process_instructions[i]["max_tokens"],
+                        isNum=task_process_instructions[i]["isNum"],
+                        maxLen=task_process_instructions[i]["maxLen"]
+                    )
+                )
+                
+
             print("\n\n\n\n" + task_output + "\n\n\n\n")
 
+            # Oppdatering av progress.txt til c++
             task_status[task_number] = i + 1
             update_progress_file()
+            
 
-            if i == 0:
-                result = task_output
-            elif i == 1:
-                points = int(task_output) if task_output.isdigit() else 0
-            elif i == len(task_process_instructions) - 1:
-                valid = int(task_output) if task_output.isdigit() else 0
-                if valid == 0:
-                    print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task not approved. Retrying...\n")
-                    break
-                else:
-                    task_exam.text = task_output
-                    task_exam.points = points
-                    task_status[task_number] = 6
-                    update_progress_file()
-                    print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task approved.\n")
-                    return task_exam
-            else:
-                result = task_output
+        # Behandling av valideringsboolean
+        if valid == 0:
+            print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task not approved. Retrying...\n")
+            return None
         else:
+            task_exam.task = task_number
             task_exam.text = task_output
             task_exam.points = points
+            task_status[task_number] = 6
+            update_progress_file()
+            print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task approved.\n")
             return task_exam
 
 async def main_async(ocr_text):

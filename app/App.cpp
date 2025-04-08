@@ -258,7 +258,7 @@ void App::calculateProgress() {
                                     count++;
                                 }
                             }
-                            count *= 7;
+                            count *= 5;
                             double taskProgress = 0.0;
                             if (count > 0) {
                                 taskProgress = static_cast<double>(sum) / count;
