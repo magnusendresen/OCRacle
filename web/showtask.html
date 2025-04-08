@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MathJax TeX Test Page</title>
+  <title>MathJax Task 17</title>
   <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
   </script>
@@ -11,27 +11,25 @@
 
 <script type="text/javascript">
   const mathContent = `
-    Solve the following equations:<br><br>
+    <strong>Task 17:</strong><br><br>
 
-    1. Simplify the expression \\( (x + 2)(x - 3) \\).<br>
-    $$ (x + 2)(x - 3) = x^2 - x - 6 $$<br><br>
+    Olje med massetetthet \\( \\rho = 9{,}0 \\cdot 10^2 \\, \\text{kg/m}^3 \\) skal tappes fra et reservoar på havbunnen gjennom et vertikalt rør med lengde \\( L = 1{,}1 \\, \\text{km} \\) og diameter \\( D = 0{,}20 \\, \\text{m} \\). Trykket i reservoaret i det tappingen starter er \\( P_1 = 1{,}0 \\cdot 10^7 \\, \\text{Pa} \\), og oljen er tilnærmet i ro idet den kommer inn i røret. På overflaten kommer oljen ut i luft der lufttrykket er \\( p_0 = 1{,}0 \\cdot 10^5 \\, \\text{Pa} \\).<br><br>
 
-    2. Expand and simplify \\( (2x - 1)(x + 4) \\).<br>
-    $$ (2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4 $$<br><br>
+    <strong>a)</strong> Vis at væskefarten ut av røret ved overflaten er \\( v = 20 \\, \\text{m/s} \\) når vi neglisjerer alle former for tap.<br><br>
 
-    3. Factorize \\( x^2 + 5x + 6 \\).<br>
-    $$ x^2 + 5x + 6 = (x + 2)(x + 3) $$<br><br>
+    <strong>b)</strong> Bestem volumstrømmen i røret.<br><br>
 
-    4. Solve for \\( x \\) in the equation \\( x^2 - 9 = 0 \\).<br>
-    $$ x^2 - 9 = 0 \\implies (x - 3)(x + 3) = 0 \\implies x = 3 \\text{ or } x = -3 $$<br><br>
+    <strong>c)</strong> Trykket i reservoaret vil reduseres etter hvert som olje tappes ut. Hva er trykket i reservoaret når oljestrømmen stopper opp?<br><br>
 
-    5. Simplify the expression \\( (3x + 2)(x - 5) \\).<br>
-    $$ (3x + 2)(x - 5) = 3x^2 - 15x + 2x - 10 = 3x^2 - 13x - 10 $$
+    <strong>d)</strong> Røret har ruhet \\( \\varepsilon = 0{,}040 \\, \\text{mm} \\), og oljen har dynamisk viskositet \\( \\eta = 2{,}5 \\cdot 10^{-3} \\, \\text{Pa} \\cdot \\text{s} \\). På grunn av rørfriksjon måles væskefarten i røret til \\( v = 10 \\, \\text{m/s} \\). Bestem friksjonsfaktoren \\( f \\) for væskestrømmen i røret.<br><br>
+
+    <strong>e)</strong> Beregn tapshøyden \\( h_f \\) på grunn av rørfriksjon under samme forutsetninger som i oppgave d). Forklar kort hva tapshøyden representerer.<br><br>
+
+    <strong>Maks poeng: 15</strong>
   `;
 
   document.getElementById("content").innerHTML = mathContent;
 
-  // Vent til MathJax er klar og kjør rendring
   window.MathJax = {
     tex: { inlineMath: [['\\(', '\\)']] },
     startup: {

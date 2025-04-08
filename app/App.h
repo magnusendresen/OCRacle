@@ -14,6 +14,7 @@
 #include <locale>
 #include <codecvt>
 #include <synchapi.h>  // Sleep / SleepEx
+#include <map>
 #include <thread>
 
 extern int nextFrame;

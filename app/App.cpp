@@ -135,6 +135,18 @@ void App::pdfHandling() {
 -----------------------------------------------------------------------
 */
 
+
+std::string ocrLine, taskLine, googlevisionLine, deepseekLine, examSubjectLine, examVersionLine, examAmountLine;
+const std::map<int, std::string*> ProgressLineMap = {
+    {1, &googlevisionLine},
+    {2, &ocrLine},
+    {3, &deepseekLine},
+    {4, &taskLine},
+    {5, &examSubjectLine},
+    {6, &examVersionLine},
+    {7, &examAmountLine}
+};
+
 void App::calculateProgress() {
     std::cout << "\n\n\n Starting progress calculation... \n\n\n" << std::endl;
     std::thread([this]() {
@@ -165,28 +177,12 @@ void App::calculateProgress() {
                     if (file.is_open()) {
                         
                         std::string line;
-                        std::string ocrLine, taskLine, googlevisionLine, deepseekLine, examSubjectLine, examVersionLine, examAmountLine;
-                        int currentLine = 1;
-
-                        while (std::getline(file, line)) {
-                            if (currentLine == 1) {
-                                googlevisionLine = line;
-                            } else if (currentLine == 2) {
-                                ocrLine = line;
-                            } else if (currentLine == 3) {
-                                deepseekLine = line;
-                            } else if (currentLine == 4) {
-                                taskLine = line;
-                            } else if (currentLine == 5) {
-                                examSubjectLine = line;
-                            } else if (currentLine == 6) {
-                                examVersionLine = line;
-                            } else if (currentLine == 7) {
-                                examAmountLine = line;
-                            } else if (currentLine == 8) {
-                                break; // Vi har lest de nødvendige linjene
+                        
+                        for (int i = 1; i <= 7; i++) {
+                            std::getline(file, line);
+                            if (ProgressLineMap.find(i) != ProgressLineMap.end()) {
+                                *ProgressLineMap.at(i) = line;
                             }
-                            currentLine++;
                         }
 
                         if (!googlevisionLine.empty()) {
@@ -262,7 +258,7 @@ void App::calculateProgress() {
                                     count++;
                                 }
                             }
-                            count *= 4;
+                            count *= 7;
                             double taskProgress = 0.0;
                             if (count > 0) {
                                 taskProgress = static_cast<double>(sum) / count;

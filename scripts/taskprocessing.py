@@ -21,12 +21,11 @@ task_status = defaultdict(lambda: 0)
 exam_amount = 0  # Oppdateres når vi vet hvor mange oppgaver (amount)
 
 # Instruksjoner for steg-prosessering av hver oppgave
-# Her kan du legge til/fjerne steg som du vil.
 nonchalant = "Do not explain what you are doing, just do it."
 task_process_instructions = [
     {
         "instruction": (
-            f"{nonchalant} What is task {{task_number}}? "
+            f"{nonchalant} What is task number {{task_number}}? "
             "Write only all text related directly to that one task from the raw text. "
             "Include how many maximum points you can get. Do not solve the task."
         ),
@@ -54,6 +53,14 @@ task_process_instructions = [
     },
     {
         "instruction": (
+            f"{nonchalant} Translate the task to norwegian bokmål. Keep everything else."
+        ),
+        "max_tokens": 1000,
+        "isNum": False,
+        "maxLen": 2000
+    },
+    {
+        "instruction": (
             f"{nonchalant} Translate the task to norwegian bokmål if it is not already in norwegian bokmål."
         ),
         "max_tokens": 1000,
@@ -63,7 +70,7 @@ task_process_instructions = [
     {
         "instruction": (
             f"{nonchalant} MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
-            "Answer 1 if this is a valid task that has all the contents needed to could be logically solved, otherwise 0."
+            "Answer 1 if this is a valid task that could be in an exam and that can be logically solved, otherwise 0."
         ),
         "max_tokens": 1000,
         "isNum": True,
@@ -79,7 +86,7 @@ task_process_instructions = [
 @dataclass
 class Exam:
     version: Optional[str] = None
-    task: Optional[int] = None
+    task: Optional[str] = None
     subject: Optional[str] = None
     text: Optional[str] = None
     points: Optional[int] = None
@@ -161,7 +168,7 @@ async def get_exam_info(ocr_text):
         f"{nonchalant} What is the subject code for this exam? "
         f"Respond only with the singular formatted subject code (e.g., IFYT1000, IMAT2022). "
         f"In some cases the code will have redundant letters/numbers with variations, "
-        f"in those cases write IMAX20XX instead. {ocr_text}",
+        f"in those cases write e.g. IMAX20XX instead. {ocr_text}",
         max_tokens=1000,
         isNum=False,
         maxLen=10
@@ -183,12 +190,16 @@ async def get_exam_info(ocr_text):
 
     # Step: Amount
     amount_str = await prompttotext.async_prompt_to_text(
-        f"{nonchalant} How many tasks are in this text? Answer with a single number only: {ocr_text}",
+        f"{nonchalant} How many tasks are in this text? "
+        f"Answer with a single number only. "
+        f"Here is the text: {ocr_text}",
         max_tokens=1000,
         isNum=True,
         maxLen=2
     )
-    exam.amount = int(amount_str) if amount_str else 0
+    # Merk: For testing har du hardkodet exam.amount = 5
+    exam.amount = 5 if not amount_str else int(amount_str)
+
     print(f"[DEEPSEEK] | Number of tasks found: {exam.amount}\n")
     write_exam_info_line(6, str(exam.amount))
 
@@ -203,26 +214,20 @@ async def get_exam_info(ocr_text):
 ##########################
 
 async def process_task(task_number, ocr_text, exam):
-    """
-    Kjører en while-løkke som gjentar seg selv helt til den siste instruksjonen (validering) gir 1.
-    - For hvert steg i `task_process_instructions` (1–5) kjører vi en prompt.
-    - For nest siste steg lagrer vi output i henholdsvis 'task_output' eller 'points'.
-    - For siste steg (validering = 0/1), fortsetter løkken ved 0, og avslutter ved 1.
-    
-    Koden er asynkron, så Oppgave 1 venter ikke på Oppgave 2. 
-    """
-    # Vi lager en kopi av exam-objektet for denne oppgaven
+    # Sett resultatet til ocr-teksten som utgangspunkt
+    result = ocr_text
     task_exam = deepcopy(exam)
-    task_exam.task = task_number
 
     while True:  # Gjenta inntil valideringssteget (siste instruksjon) svarer 1
-        task_output = None  # Tekstlig innhold for denne runden
+        task_output = None  # Tekstlig innhold for denne oppgaven
         points = None       # Antall poeng, hentes i steg 2
 
         for i, step_info in enumerate(task_process_instructions, start=1):
             # Bytt ut placeholder {task_number} i instruksjonen
-            instruction_text = step_info["instruction"].format(task_number=f"{task_number:02d}")
-            
+            instruction_text = step_info["instruction"].format(task_number=f"{task_number:02d}") + result
+
+            print("\n\n\n\n" + instruction_text + "\n\n\n\n")
+
             # Kall promptfunksjonen
             result = await prompttotext.async_prompt_to_text(
                 instruction_text,
@@ -231,49 +236,34 @@ async def process_task(task_number, ocr_text, exam):
                 maxLen=step_info["maxLen"]
             )
 
-            if result is None:
-                # Hvis None, feilet prompt. Oppgaven avbrytes
-                print(f"[DEEPSEEK] [TASK {task_number:02d}] | FAILED at step {i}. Skipping task.")
-                task_exam.text = None
-                return task_exam
-
-            # Oppdater status for denne oppgaven til "steg i" (1–5)
+            # Oppdater status for denne oppgaven til "steg i"
             task_status[task_number] = i
             update_progress_file()
 
-            # Hvis ikke siste steg, behandler vi output:
-            #   Steg 1: Oppgavetekst
-            #   Steg 2: Poeng
-            #   Steg 3: Renset tekst
-            #   Steg 4: Oversatt tekst
-            #   Steg 5: Validering (0/1)
-            if i == 1:
-                # Steg 1: Tekst
-                task_output = result
-            elif i == 2:
-                # Steg 2: Poeng
-                points = result  # Tekstlig tall (siden isNum=True)
-            elif i == 3 or i == 4:
-                # Steg 3 & 4: Oppdaterer oppgavetekst
-                task_output = result
-            elif i == 5:
-                # Siste steg: Validering
+            # Steg 2: Antall poeng
+            if i == 2:
+                task_exam.points = result
+
+            # VALIDERINGSSTEG: Bruker i == len(task_process_instructions)
+            elif i == len(task_process_instructions):
                 valid = int(result) if result.isdigit() else 0
                 if valid == 0:
                     print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task not approved. Retrying from first step...\n")
-                    break  # Avbryt for-løkke, men while-løkka fortsetter
+                    break  # Avbryt for-løkka, gå tilbake i while-løkka
                 else:
-                    # Gyldig oppgave
+                    # Gyldig oppgave, sett endelig tekst
                     task_exam.text = task_output
-                    task_exam.points = points
-                    task_status[task_number] = 5
+                    task_status[task_number] = 6
                     update_progress_file()
                     print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task approved.\n")
                     return task_exam
+
+            # For oppdatering av oppgavetekst ved alle andre steg
+            else:
+                task_output = result
+
         else:
-            # Hvis vi fullførte for-løkka uten `break`, da er vi ferdig
-            # (Skjer om det ikke finnes en validering i siste steg, men det gjør det her.)
-            # Returner oppgaven likevel
+            # Hvis vi kom hit uten break (dvs. ingen validering), returner det vi har
             task_exam.text = task_output
             task_exam.points = points
             return task_exam
@@ -288,7 +278,7 @@ async def main_async(ocr_text):
     Asynkron hovedfunksjon som:
       1) Henter exam-info (subject, version, amount).
       2) Lager async tasks for hver oppgave.
-      3) Hver oppgave kjører sine 5 steg uavhengig av andres.
+      3) Kjør stegvis prosessering av hver oppgave.
       4) Samler resultater og skriver ut.
     """
     exam_template = await get_exam_info(ocr_text)
@@ -308,9 +298,9 @@ async def main_async(ocr_text):
     points = [res.points for res in results if res.text is not None]
 
     # Skriv ut resultater
-    for res in results:
+    for idx, res in enumerate(results, start=1):
         if res.text is not None:
-            print(f"Result for task {res.task:02d}: {res.text}\n   (Points: {res.points})\n")
+            print(f"Result for task {idx:02d}: {res.text}\n   (Points: {res.points})\n")
 
     print(f"[DEEPSEEK] | Failed tasks: {failed_tasks}")
     print(f"[DEEPSEEK] | Points for tasks: {points}")
