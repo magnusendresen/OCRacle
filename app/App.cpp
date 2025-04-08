@@ -127,7 +127,7 @@ void App::pdfHandling() {
     // Start Python-script i en bakgrunnstråd
     std::thread([]() {
         // Kall Python. Evt. "python main.py" eller "py main.py"
-        std::system("start /min powershell -Command \"python main.py\""); 
+        std::system("start /min powershell -Command \"python main.py; pause\""); 
     }).detach();    
 }
 
@@ -178,7 +178,7 @@ void App::calculateProgress() {
                         
                         std::string line;
                         
-                        for (int i = 1; i <= 7; i++) {
+                        for (int i = 1; i <= static_cast<int>(ProgressLineMap.size()); i++) {
                             std::getline(file, line);
                             if (ProgressLineMap.find(i) != ProgressLineMap.end()) {
                                 *ProgressLineMap.at(i) = line;
