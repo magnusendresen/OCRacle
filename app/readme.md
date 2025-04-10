@@ -33,6 +33,24 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
 - `taskprocessing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
 - `objecttojson.py` – lagrer oppgaveobjektene til `tasks.json`
 
+# Eksempel av prompting i taskprocessing.py:
+```
+What is task number {task_number}?
+Write only all text related directly to that one task from the raw text.
+Include how many maximum points you can get. Do not solve the task: {text}
+```
+```
+How many points can you get for this task? Only reply with the number of points, nothing else: {text}
+```
+```
+Remove all text related to Inspera and exam administration, keep only what is necessary for solving the task: {text}
+```
+```
+Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else: {text}
+```
+```
+Answer 1 if this is a valid task that could be in an exam and that can be logically solved, otherwise 0: {text}
+```
 ---
 
 ## Bruk av KI-verktøy
@@ -44,6 +62,7 @@ Verktøyene er brukt til:
 - Forklaringer på konsepter i C++
 - Kodekritikk og testmetoder
 - Tips til forbedring og forenkling av implementasjon
+- Formattering og utseende av readme.md
 
 ---
 
