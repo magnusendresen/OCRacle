@@ -1,50 +1,64 @@
-# OCRacle - prossesering og sortering av eksamensoppgaver, for bedre eksamensøving
+# OCRacle – prosessering og sortering av eksamensoppgaver, for bedre eksamensøving
 
-Programmet er et brukersnitt laget i C++ for et allerede påbegynt prosjekt skrevet i Python. Det kommuniseres mellom programmeringsspåkene enkelt ved skriving og lesing av tekstfiler, ettersom nødvendig informasjon delt mellom språkene er minimal. C++ styrer alt visuelt med AnimationWindow, og all behandling av pdf og tekst gjøres i Python ved bruk av Google Vision og DeepSeek API.
+Programmet er et brukergrensesnitt laget i C++ for et allerede påbegynt prosjekt skrevet i Python. Kommunikasjonen mellom språkene skjer enkelt via skriving og lesing av tekstfiler, ettersom den nødvendige informasjonen som deles er minimal. C++ styrer alt visuelt med AnimationWindow, mens all behandling av PDF og tekst gjøres i Python ved bruk av Google Vision og DeepSeek API.
 
-I 'dir.txt' skrives directorien til pdf-filen valgt i AnimationWindow interfacen, som deretter leses av python-programmet. 
+I `dir.txt` skrives banen til PDF-filen valgt i AnimationWindow-vinduet, som deretter leses av Python-programmet.  
+I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et i AnimationWindow hver gang C++ oppdager en endring i filen:
+- Status på tilkobling til API-ene Google Vision og DeepSeek  
+- Fremdrift for OCR (optical character recognition) og AI-behandling  
+- Eksamensinformasjon (emnekode, versjon, antall oppgaver)
 
-I 'progress.txt' skrives følgende informasjon fra Python, som oppdaterer interfacen i AnimationWindow hver gang C++ oppdager en endring i fila:
-- Vellykket tilkobling til APIen til Google Vision og DeepSeek, 
-- Status på OCR (optical character recognition) av PDF og AI-behandling av tekst
-- Eksamensinformasjon (emne, utgivelse, antall oppgaver)
+---
 
-Klassen App arver fra animationwindow og har følgende funksjonalitet:
-- pdfHandling() for popup-vindu som lar brukeren velge pdf
-- calculateProgress() som overvåker progress.txt og oppdaterer GUI og variablene til ProgressBar
-- startTimer() og stopTimer() som styrer en timer som viser hvor lenge eksamenssett-prosseseringa har kjørt
-- samt. diverse statiske variabler for GUI og pekere til elementene som er lagt til
+## C++-delen
 
-Klassen ProgressBar styrer progressbarene i vinduet og har følgende funksjonalitet:
-- setCount()
-- variabelen progress som oppdateres
+### Klassen `App` arver fra `AnimationWindow` og har følgende funksjoner:
+- `pdfHandling()` – viser et popup-vindu for valg av PDF-fil
+- `calculateProgress()` – overvåker `progress.txt` og oppdaterer GUI og progress-variabler
+- `startTimer()` og `stopTimer()` – viser hvor lenge prosesseringen har kjørt
+- Statiske GUI-variabler og pekere til elementene som vises i vinduet
 
-I Python-delen av prosjektet er følgende skript med:
-- ocrpdf.py som bruker Google Vision API til å behandle pdf-en som bilder og lese den til tekst
-- textnormalization.py som rydder i merkelige symboler og artifacts som kan oppstå ved OCR
-- cachetask.py som ble brukt i utviklingdelen av prosjektet for å slippe å gjøre pdf-behandling, og heller gå direkte på OCR-resultatet med DeepSeek
-- prompttotext.py som tar inn en prompt fra DeepSeek og returnerer et svar
-- taskprocessing.py som stegvis går gjennom en rekke prompts og tar teksten fra OCR-en og omgjør til objekter
-- objecttojson.py som skriver objektene til json-filen tasks.json
+### Klassen `ProgressBar`:
+- Har funksjonen `setCount()` som tegner fremdrift
+- Har en `progress`-variabel som kontrollerer fremdriften
 
-Når det kommer til bruk av AI er det hyppig brukt i samtlige deler av prosjektet, det er derimot ingenting av koden i det ferdige prosjektet som er direkte skrevet av AI. Det er utelukkende brukt til følgende:
-- Forståelse av prosjektet
-- Problemløsning og brainstorming
-- Forklaring av konsepter i C++
-- Kritikk av kode
-- Testing av metoder og kode
+---
 
+## Python-skriptene
 
-Følgende includes er brukt i C++:
-- AnimationWindow.h
-- ProgressBar.h
-- string
-- chrono
-- thread
-- widgets/TextBox.h
-- widgets/Button.h
-- App.h
-- iostream
-- windows.h
-- map
-- atomic
+- `ocrpdf.py` – bruker Google Vision API til å lese PDF som bilder og hente tekst
+- `textnormalization.py` – renser opp unødvendige symboler etter OCR
+- `cachetask.py` – brukt under utvikling for å teste DeepSeek uten ny OCR
+- `prompttotext.py` – sender prompts til DeepSeek og henter svar
+- `taskprocessing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
+- `objecttojson.py` – lagrer oppgaveobjektene til `tasks.json`
+
+---
+
+## Bruk av KI-verktøy
+
+AI har vært brukt hyppig i alle faser av prosjektet, men **ingen kode i det ferdige prosjektet er direkte skrevet av KI**.  
+Verktøyene er brukt til:
+- Forståelse av prosjektet og spesifikasjoner
+- Brainstorming og problemløsning
+- Forklaringer på konsepter i C++
+- Kodekritikk og testmetoder
+- Tips til forbedring og forenkling av implementasjon
+
+---
+
+## Inkluderte biblioteker og headers i C++
+
+```cpp
+AnimationWindow.h
+ProgressBar.h
+string
+chrono
+thread
+widgets/TextBox.h
+widgets/Button.h
+App.h
+iostream
+windows.h
+map
+atomic
