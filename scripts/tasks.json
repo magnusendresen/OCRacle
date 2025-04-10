@@ -208,5 +208,375 @@
         "images": [],
         "code": null,
         "amount": 4
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 1,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave nummer 1:**  \n\n**Oppgave 1 (10 Poeng)**  \n\na) Gitt funksjonen \\( f(x, y) = 3x^2 + 2y - 4 \\). Finn verdiene til de partiellderiverte i punktet \\( (1, 1) \\).  \n\n\\[\n\\frac{\\partial f}{\\partial x}(1, 1) = 6\n\\]  \n\n\\[\n\\frac{\\partial f}{\\partial y}(1, 1) = 2\n\\]  \n\nb) Gitt funksjonen \\( g(x, y) = \\sqrt{\\sqrt{\\sqrt{x^4 + 2x^2y + 2xy^2 + 3}}} \\), \\( x \\geq 0 \\), \\( y \\geq 0 \\). Finn verdiene til de partiellderiverte i punktet \\( (1, 2) \\). Angi svarene med 2 desimaler.  \n\n\\[\n\\frac{\\partial g}{\\partial x}(1, 2) = 0.21\n\\]  \n\n\\[\n\\frac{\\partial g}{\\partial y}(1, 2) = 0.14\n\\]",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 2,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 2 (10 Poeng)**  \n\nLa \\( f(x, y) = 8xy - 2x^2 - y^2 \\).  \n\na) Finn de kritiske punktene til funksjonen \\( f \\).  \n\nb) Klassifiser de kritiske punktene til funksjonen \\( f \\). Med andre ord, avgjør om de kritiske punktene er sadelpunkter, lokale maksimumspunkter, lokale minimumspunkter, eller ingen av delene.",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 3,
+        "subject": "IMAX20XX",
+        "text": "Her er den oppryddete versjonen av oppgaven, der vi kun beholder den nødvendige informasjonen for å løse den:  \n\n**Oppgave 3 (10 poeng)**  \n\nGitt funksjonen:  \n\\[ f(x, y) = 3x^2 - 2xy + 2y^2 \\]  \n\n**a)** Finn gradienten i punktet \\((x, y) = (1, 1)\\).  \n\\[ \\nabla f(1,1) = \\_\\_\\_ \\mathbf{i} + \\_\\_\\_ \\mathbf{j} \\]  \n\n**b)** Starter vi i punktet \\((1, 1)\\) og beveger oss i retningen \\(\\mathbf{u} = \\frac{1}{\\sqrt{5}} \\mathbf{i} + \\frac{2}{\\sqrt{5}} \\mathbf{j}\\), finn den retningsderiverte.  \n\\[ D_{\\mathbf{u}}f(1, 1) = \\_\\_\\_ \\]  \n\n**c)** Figuren under viser nivåkurver for funksjonen \\(f\\). I tillegg viser figuren en tangentlinje til nivåkurven i et valgt punkt. I hvilken retning vil gradientvektoren peke i det punktet?  \n\n- **Alternativ 1:** Gradientvektoren i punktet vil være parallell med tangentlinjen.  \n- **Alternativ 2:** Gradientvektoren i punktet vil være vinkelrett på tangentlinjen.  \n- **Alternativ 3:** Retningen til gradientvektoren i punktet er verken parallell eller vinkelrett på tangentlinjen.  \n\n**Svar:** Alternativ ___ (skriv enten 1, 2 eller 3 i svarfeltet).  \n\n**Maksimum poeng: 10**",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 4,
+        "subject": "IMAX20XX",
+        "text": "Her er den oppryddete versjonen av oppgaven, der vi bare beholder det som er nødvendig for å løse den:  \n\n---  \n\n**Oppgave 4 (10 poeng)**  \n\nKoble hver funksjon til den tilsvarende grafen (A, B, C, D, E).  \n\n- Funksjonen \\( f(x, y) = \\cos(xy) \\) samsvarer med figur:  \n- Funksjonen \\( f(x, y) = y^2 - x^2 \\) samsvarer med figur:  \n- Funksjonen \\( f(x, y) = \\frac{1}{1 + x^2y^2} \\) samsvarer med figur:  \n- Funksjonen \\( f(x, y) = x \\cdot e^{-x^2 - y^2} \\) samsvarer med figur:  \n- Funksjonen \\( f(x, y) = x^2 - y^2 \\) samsvarer med figur:  \n\n**Maksimum poeng: 10**  \n\n---  \n\n(Merk: Den opprinnelige teksten inneholdt plassholder-symboler og uklar formatering. Den oppryddete versjonen beholder kun det essensielle problemstillingen.)",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 5,
+        "subject": "IMAX20XX",
+        "text": "Her er den oppryddete versjonen av oppgaven med kun det nødvendige matematiske innholdet:\n\n---\n\n**Oppgave 5 (10 poeng)**  \n\nLa \\( f(x) = \\tan x \\), der \\( -\\frac{\\pi}{2} < x < \\frac{\\pi}{2} \\).  \n\na) Finn verdiene til \\( f' \\) og \\( f'' \\) i punktet \\( x = \\frac{1}{4} \\). Gi svarene korrekt avrundet til 3 desimaler.  \n\n\\[\nf'\\left( \\frac{1}{4} \\right) = \\quad \\quad f''\\left( \\frac{1}{4} \\right) =\n\\]  \n\nb) Konstruer 2. ordens Taylor-polynom \\( P_2(x) \\) sentrert i \\( x = \\frac{1}{4} \\) for funksjonen \\( f \\). Bruk \\( P_2(x) \\) til å tilnærme verdien av \\( \\tan\\left( \\frac{1}{4} + 0.1 \\right) \\). Gi svaret korrekt avrundet til 3 desimaler.  \n\n\\[\n\\tan\\left( \\frac{1}{4} + 0.1 \\right) \\approx P_2\\left( \\frac{1}{4} + 0.1 \\right) =\n\\]  \n\n--- \n\nLa meg vite om du vil at jeg skal løse oppgaven også.",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 6,
+        "subject": "IMAX20XX",
+        "text": "**6**  \n\n**a)** Hva er sant om funksjonen \\( f(t) = \\sin^2(t) \\)? Velg ett alternativ:  \n○ Funksjonen er verken jevn eller odde.  \n○ Funksjonen \\( f \\) er ikke periodisk.  \n○ Funksjonen \\( f \\) er jevn.  \n○ Funksjonen \\( f \\) er odde.  \n\n**b)** La \\( \\frac{a_0}{2} + \\sum_{n=1}^{\\infty} (a_n \\cos(nt) + b_n \\sin(nt)) \\) være Fourierrekken til \\( f \\). Hva er \\( a_0 \\)? Velg ett alternativ:  \n○ \\( \\frac{1}{2} \\)  \n○ \\( 1 \\)  \n○ \\( -\\frac{1}{\\pi} \\)  \n○ \\( -\\frac{1}{2} \\)  \n\n**c)** Hva er \\( b_1 \\)? Velg ett alternativ:  \n○ \\( \\frac{8}{14} \\)  \n○ \\( 1 \\)  \n○ \\( -2 \\)  \n○ \\( 0 \\)  \n○ \\( 2 \\)  \n○ \\( -1 \\)  \n\n**d)** Hva er \\( a_1 \\)? Hint: Bruk variabelbytte \\( u(t) = \\sin(t) \\). Velg ett alternativ:  \n○ \\( 0 \\)  \n○ \\( -1 \\)  \n○ \\( 1 \\)  \n○ \\( \\frac{1}{\\pi} \\)  \n○ \\( -\\frac{1}{\\pi} \\)  \n○ \\( \\frac{9}{14} \\)  \n\nMaks poeng: 8",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 7,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 7 (8 Poeng)**  \n\nLa \\( f(t) = 3 \\) for \\( 0 < t < 2 \\).  \n\na) Hva er perioden \\( L \\)?  \n\nb) La \\( \\frac{a_0}{2} + \\sum_{n=1}^{\\infty} a_n \\cos\\left(\\frac{2\\pi n t}{L}\\right) \\) være den jevne fourierrekken til \\( f \\). Finn fourierkoffisientene \\( a_0 \\) og \\( a_n \\) når \\( n = 1, 2, 3, \\ldots \\).  \n\nc) La \\( \\sum_{n=1}^{\\infty} b_n \\sin\\left(\\frac{2\\pi n t}{L}\\right) \\) være den odde fourierrekken til \\( f \\). Finn fourierkoffisienten \\( b_n \\).",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 8,
+        "subject": "IMAX20XX",
+        "text": "Her er den oppryddete versjonen av oppgaven, der vi bare beholder det som er nødvendig for å løse den:\n\n---\n\n**Oppgave 8 (8 poeng)**  \n\nFunksjonen \\( f(x) = 2\\sin(3\\pi x) + \\sin(\\pi x) - 4\\sin(2x) \\) er periodisk med periode \\( L = 2 \\).  \n\n**a)** Fourier-koeffisientene til \\( f \\) er som følger:  \n- \\( \\alpha_0 = \\)  \n- \\( a_1 = \\)  \n- \\( a_2 = \\)  \n- \\( b_1 = \\)  \n- \\( b_2 = \\)  \n- \\( b_3 = \\)  \n\n**b)** La \\( u(x, t) \\) være løsningen på initialverdiproblemet for bølgeligningen:  \n\\[\n\\begin{cases}\nu_{xx}(x, t) - u_{tt}(x, t) = 0, & x \\in [0, 1], \\, t > 0, \\\\\nu(x, 0) = 2\\sin(3\\pi x) + \\sin(\\pi x) - 4\\sin(2x), & x \\in [0, 1], \\\\\nu(0, t) = u(1, t) = 0, & t > 0, \\\\\nu_t(x, 0) = 0, & x \\in [0, 1].\n\\end{cases}\n\\]  \nDa er \\( u(1, 1) = \\)  \n\n*Hint: Bestem først hva løsningen \\( u(x, t) \\) er.*  \n\nMaksimum poeng: 8  \n\n--- \n\nLa meg vite om du vil ha hjelp til å løse oppgaven!",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 9,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 9 (6 Poeng)**  \n\na) La \\( F(w) \\) være fouriertransformasjonen til  \n\\[ f(t) = \\begin{cases}  \n0, & \\text{for } t < 0, \\\\  \n1, & \\text{for } 0 < t \\leq 1, \\\\  \n0, & \\text{for } t > 1.  \n\\end{cases} \\]  \nDa er \\( F(2\\pi) = \\) \\(\\boxed{\\ } + j\\boxed{\\ }\\).  \n\nb) La \\( g(t) = 2e^{-(t-3)^2} \\). Finn verdien \\( \\mathcal{F}\\{g(t)\\}(0) = \\) \\(\\boxed{\\ }\\) (avrundet til 3 desimaler).  \n\nc) La \\( h(t) = 4\\operatorname{sgn}(t) - 3j\\delta(t) \\). Beregn \\( \\mathcal{F}\\{h'(t)\\}(w) \\) og finn \\( \\mathcal{F}\\{h'(t)\\}(-2) = \\) \\(\\boxed{\\ } + j\\boxed{\\ }\\).",
+        "points": 6,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 10,
+        "subject": "IMAX20XX",
+        "text": "**Oppgave 10 (6 Poeng)**  \n\nEnhetssprangfunksjonen (eller Heaviside-funksjonen) er  \n\\[ u(t) = \\begin{cases} \n0, & \\text{hvis } t < 0, \\\\ \n1, & \\text{hvis } t \\geq 0. \n\\end{cases} \\]  \n\nLa \\( h(t) = (u * u)(t) \\) være konvolusjonen av enhetssprangfunksjonen med seg selv.  \n\nHva er  \n\\[ h(-1) = \\quad \\text{og} \\quad h(2) = \\quad ? \\]  \n\n**Maks poeng: 6**",
+        "points": 6,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 11,
+        "subject": "IMAX20XX",
+        "text": "a) 0.2  \n\nb) Alle frekvensene som er over 0.5 eller mindre enn -0.5 blir satt til 0.  \n\nc) Båndpassfilter",
+        "points": 6,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 12,
+        "subject": "IMAX20XX",
+        "text": "**12 Kopi av Oppgave 12: IDFT**  \n**Oppgave 12 (8 Poeng)**  \n\nVi skal finne invers diskrete fouriertransformasjonen (IDFT) av sekvensen F[k] = 1, 4, 0, 0. Her er F[0] = 1, F[1] = 4, F[2] = 0 og F[3] = 0. Angi svaret korrekt avrundet til 3 desimaler.  \n\nf[0] = D¯¹{F[k]}[0] = + j,  \nƒ[1] = D¯¹{F[k]}[1] = + j,  \nƒ[2] = D¯¹{F[k]}[2] = + j,  \nƒ[3] = D¯¹{F[k]}[3] = + j.  \n\n**Maks poeng: 8**",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 12
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 1,
+        "subject": "IMAX2012",
+        "text": "**Oppgave 1 (10 Poeng)**  \n\na) Gitt funksjonen \\( f(x, y) = 2y^2 - x - 1 \\). Finn verdiene til de partiellderiverte i punktet \\( (1, 1) \\).  \n\n\\[\n\\frac{\\partial f}{\\partial x}(1,1) = -1 \\quad \\frac{\\partial f}{\\partial y}(1,1) = 4\n\\]  \n\nb) Gitt funksjonen \\( g(x, y) = \\sin(x^2 + y^2 + 2x) \\). Finn verdiene til de partiellderiverte i punktet \\( (0, 0) \\). Angi svarene med 2 desimaler.  \n\n\\[\n\\frac{\\partial g}{\\partial x}(0,0) = 2.00 \\quad \\frac{\\partial g}{\\partial y}(0,0) = 0.00\n\\]",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 2,
+        "subject": "IMAX2012",
+        "text": "Her er den oppryddete versjonen av oppgaven med kun den nødvendige informasjonen for å løse den:\n\n**Oppgave 2 (10 poeng)**  \n\nMatch hver funksjon med dens tilsvarende graf (konturplot):  \n\n**Graf 1:**  \n2. 1 2 0 - 2 - 1 0 1 2  \n\n**Graf 2:**  \n- 1· +  \n\n**Graf 3:**  \n1 2 1 0 - 2 - 1 0 1 - 1  \n\n**Graf 4:**  \n0.8 0.6 90 0.4 0.2 0 - 2 1 0 1 2  \n\n**Graf 5:**  \n0.5 1 - - 0.5 0 0.5 1 - 0.5  \n\n**Funksjon 1:** f1(x, y) = x + y  \n**Funksjon 2:** f2(x, y) = -xy  \n**Funksjon 3:** f3(x, y) = sin(x - y)  \n**Funksjon 4:** f4(x, y) = sin(2x² + 2y²)  \n**Funksjon 5:** f(x, y) = exp(-2x² - 2y²)  \n\nMatch dem som følger:  \nf4 f2 f3 f5 f1  \n\nGraf 1 Graf 5 Graf 3 Graf 2 Graf 4",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 3,
+        "subject": "IMAX2012",
+        "text": "**Oppgave 3 (10 Poeng)**  \n\nKonturplottet til funksjonen f ( x, y ) er avbildet under.  \n\nJ  \n2.0  \n1.8  \n1.6  \n- 1.6  \n1.4  \n1.2  \n1.4  \n- 0.8  \n1.2  \n- 1.0  \n0.8  \n0  \n0.5  \n1  \n1.5  \nI  \n0.6  \n0.4  \n0.2  \n\na ) Finn fortegn til den retningsderiverte i punktet (1,1) i retning øst (1, 0).  \nVelg ett alternativ  \nNull  \nPositiv  \nKan ikke finnes ut fra plottet  \nNegativ  \n\nb ) I hvilken retning peker gradienten Vƒ (1, 1)?  \nVelg ett alternativ  \nN (0,1)  \n○ S (0, -1)  \n○ E (1,0)  \n○ W (-1,0)",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 4,
+        "subject": "IMAX2012",
+        "text": "**Oppgave 4 (10 Poeng)**  \n\nFinn det globale maksimum og det globale minimum til funksjonen  \n\\[ f(x, y) = 2x^2 - 3xy - y^2 + 2x + y - 1 \\]  \ni området avgrenset av \\( 0 \\leq x \\leq 1 \\) og \\( 0 \\leq y \\leq 1 \\).  \n\n**Maks poeng: 10**",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 4
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 13,
+        "subject": "IMAX20XX",
+        "text": "Gitt sekvensen \\( f[n] = 1, 0, 2, 1 \\), beregnes den diskrete Fourier-transformen (DFT) \\( F[k] \\) som følger:\n\n\\[\nF[k] = \\sum_{n=0}^{3} f[n] \\cdot e^{-j \\frac{2\\pi}{4} kn}\n\\]\n\nBeregning av hver \\( F[k] \\):\n\n\\[\nF[0] = 1 + 0 + 2 + 1 = 4.000\n\\]\n\n\\[\nF[1] = 1 \\cdot e^{-j \\frac{\\pi}{2} \\cdot 0} + 0 \\cdot e^{-j \\frac{\\pi}{2} \\cdot 1} + 2 \\cdot e^{-j \\frac{\\pi}{2} \\cdot 2} + 1 \\cdot e^{-j \\frac{\\pi}{2} \\cdot 3} = 1 + 0 + 2(-1) + 1(-j) = -1 - j\n\\]\n\n\\[\nF[2] = 1 \\cdot e^{-j \\pi \\cdot 0} + 0 \\cdot e^{-j \\pi \\cdot 1} + 2 \\cdot e^{-j \\pi \\cdot 2} + 1 \\cdot e^{-j \\pi \\cdot 3} = 1 + 0 + 2(1) + 1(-1) = 2\n\\]\n\n\\[\nF[3] = 1 \\cdot e^{-j \\frac{3\\pi}{2} \\cdot 0} + 0 \\cdot e^{-j \\frac{3\\pi}{2} \\cdot 1} + 2 \\cdot e^{-j \\frac{3\\pi}{2} \\cdot 2} + 1 \\cdot e^{-j \\frac{3\\pi}{2} \\cdot 3} = 1 + 0 + 2(-1) + 1(j) = -1 + j\n\\]\n\nAvrunding til 3 desimaler:\n\n\\[\nF[0] = 4.000  \n\\]\n\n\\[\nF[1] = -1.000 - 1.000j  \n\\]\n\n\\[\nF[2] = 2.000  \n\\]\n\n\\[\nF[3] = -1.000 + 1.000j  \n\\]",
+        "points": 6,
+        "images": [],
+        "code": null,
+        "amount": 14
+    },
+    {
+        "version": "Sommer 2024",
+        "task": 14,
+        "subject": "IMAX20XX",
+        "text": "Her er den rensede versjonen av Oppgave 14, der vi bare beholder den nødvendige informasjonen for å løse oppgaven:  \n\n---  \n\n**Oppgave 14 (6 poeng)**  \n\nFinn den inverse diskrete Fourier-transformen (IDFT) av sekvensen \\( F[k] = 1, 4, 0, 0 \\), der \\( F[0] = 1 \\), \\( F[1] = 4 \\), \\( F[2] = 0 \\), og \\( F[3] = 0 \\). Oppgi svaret avrundet til 3 desimaler.  \n\n\\[\nf[0] = \\mathcal{D}^{-1}\\{F[k]\\}[0] = \\quad + j \\quad,  \n\\]  \n\\[\nf[1] = \\mathcal{D}^{-1}\\{F[k]\\}[1] = \\quad + j \\quad,  \n\\]  \n\\[\nf[2] = \\mathcal{D}^{-1}\\{F[k]\\}[2] = \\quad + j \\quad,  \n\\]  \n\\[\nf[3] = \\mathcal{D}^{-1}\\{F[k]\\}[3] = \\quad + j \\quad.  \n\\]  \n\n---  \n\n(Det er ikke inkludert ytterligere forklaringer eller instrukser.)",
+        "points": 6,
+        "images": [],
+        "code": null,
+        "amount": 14
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 1,
+        "subject": "IFYKJA1000",
+        "text": "**1 a)**  \n○ natrium tilhører gruppe 1 og har 1 elektron i ytterste skall  \n\n**b)**  \n○ 1s²2s²2p⁶3s¹  \n\n**c)**  \n○ 124  \n\n**d)**  \n○ bindinger mellom ioner med ulik ladning",
+        "points": 4,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 2,
+        "subject": "IFYKJA1000",
+        "text": "As₂S₃ + 14 NaNO₃ + 6 Na₂CO₃ → 2 Na₃AsO₄ + 3 Na₂SO₄ + 14 NaNO₂ + 6 CO₂",
+        "points": 4,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 3,
+        "subject": "IFYKJA1000",
+        "text": "### **3**  \na) Beregn følgende i 200 g PbSO₄ (3 poeng):  \n   i) Antall mol PbSO₄.  \n   ii) Antall O-atomer.  \n   iii) Antall gram bly (Pb).  \n\nb) Propan (C₃H₈) reagerer med oksygen (O₂) og det dannes karbondioksid (CO₂) og vann (H₂O) i henhold til følgende reaksjonsligning:  \n   **C₃H₈(g) + 5O₂(g) → 3CO₂(g) + 4H₂O(g)**  \n   50,0 g C₃H₈(g) reagerer med 105,0 g O₂(g). Beregn antall liter CO₂(g) som kan bli dannet ved 50°C og 2,0 atm. (4 poeng)  \n\n**Molare masser:**  \n- M(Pb) = 207,2 g/mol  \n- M(S) = 32,06 g/mol  \n- M(O) = 16,00 g/mol  \n- M(C) = 12,01 g/mol  \n- M(H) = 1,008 g/mol  \n\n**Maks poeng: 7**",
+        "points": 7,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 4,
+        "subject": "IFYKJA1000",
+        "text": "**4**  \na)  \n○ Kc = [N₂O₄] / [NO₂]  \n○ Kc = [NO₂]² / [N₂O₄]  \n○ Kc = [N₂O₄] / [NO₂]²  \n○ Kc = [NO₂] / [N₂O₄]  \n\nb)  \n○ 6,10·10⁻⁵  \n○ 780  \n○ 1,64·10⁻⁶  \n○ 0,00128  \n○ 0,0420  \n○ 2,59  \n\nc)  \n○ 1,29·10⁻⁴  \n○ 6451  \n○ 7,75·10⁻⁵  \n○ 0,00155  \n○ 1,55·10⁻⁴  \n○ 645  \n\nd)  \n○ mot høyre  \n○ kan ikke avgjøres med informasjonen som er gitt  \n○ den vil ikke forskyves fordi den er ved likevekt  \n○ mot venstre",
+        "points": 4,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 5,
+        "subject": "IFYKJA1000",
+        "text": "**5 a)**  \nKsp = [Pb²⁺][Cl⁻]² = (s)(2s)² = 4s³ = 4(0,0162)³ = 1,70·10⁻⁵  \n\n**b)**  \nHCl er en sterk syre og fullstendig dissosiert:  \n[H⁺] = 0,010 mol/L → pH = -log(0,010) = 2,00  \n\n**c)**  \nNaCH₃COO er et salt som gir basisk løsning:  \nKb = Kw/Ka = 1,00·10⁻¹⁴ / 1,74·10⁻⁵ = 5,75·10⁻¹⁰  \n[OH⁻] = √(Kb · [CH₃COO⁻]) = √(5,75·10⁻¹⁰ · 0,100) = 7,58·10⁻⁶ mol/L  \npOH = -log(7,58·10⁻⁶) = 5,12 → pH = 14 - 5,12 = 8,88",
+        "points": 8,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 6,
+        "subject": "IFYKJA1000",
+        "text": "Å konvertere **1 kWh/mil** til **J/m**:  \n\n1. Konverter **1 kWh** til joule:  \n   \\( 1 \\text{ kWh} = 3.6 \\times 10^6 \\text{ J} \\).  \n\n2. Konverter **1 mil** til meter:  \n   \\( 1 \\text{ mil} = 10 \\text{ km} = 10\\,000 \\text{ m} \\).  \n\n3. Beregn **J/m**:  \n   \\( \\frac{3.6 \\times 10^6 \\text{ J}}{10\\,000 \\text{ m}} = 360 \\text{ J/m} = 0.36 \\text{ kJ/m} \\).  \n\nDet riktige svaret er:  \n- ○ 0,36 kJ/m",
+        "points": 2,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 7,
+        "subject": "IFYKJA1000",
+        "text": "**7**  \na) En bil starter fra ro og akselererer rettlinjet med en akselerasjon \\( a = 1,2 \\, \\text{m/s}^2 \\). Hvor lang tid bruker bilen på å tilbakelegge en strekning på 60 m? Velg ett alternativ:  \n○ \\( t = 10 \\, \\text{s} \\)  \n○ \\( t = 1,2 \\, \\text{s} \\)  \n○ \\( t = 2,4 \\, \\text{s} \\)  \n○ \\( t = 12 \\, \\text{s} \\)  \n○ \\( t = 1,0 \\, \\text{s} \\)  \n\nb) En ball skytes ut fra bakkenivå med startfart \\( v_0 = 10 \\, \\text{m/s} \\) og utgangsvinkel \\( \\alpha = 30^\\circ \\) horisontalt, og vi neglisjerer luftmotstand. Se figuren under.  \n\n\\[  \n\\begin{array}{c}  \n\\text{Vo} \\\\  \n\\alpha \\\\  \n\\hline  \nx  \n\\end{array}  \n\\]  \n\nBeregn avstanden \\( x \\) mellom utgangspunktet og der ballen lander. Velg ett alternativ:  \n○ \\( x = 5,1 \\, \\text{m} \\)  \n○ \\( x = 8,8 \\, \\text{m} \\)  \n○ \\( x = 18 \\, \\text{m} \\)  \n○ \\( x = 4,4 \\, \\text{m} \\)  \n○ \\( x = 2,2 \\, \\text{m} \\)  \n\n**Maks poeng: 4**",
+        "points": 4,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 8,
+        "subject": "IFYKJA1000",
+        "text": "**8**  \na) To steiner med samme masse m er festet sammen med en masseløs snor. Steinene slippes fra en høy bygning, og faller loddrett mot jorda uten luftmotstand og uten å rotere.  \n\nAvstanden mellom steinene endres ikke under fallet. Hva er snordraget S mens steinene faller? Velg ett alternativ:  \n○ S = mg  \n○ S = 0  \n○ S = mg  \n○ S = 3mg  \n○ S = 2mg  \n\nb) Vogna i en berg-og-dal-bane følger en sirkelformet bane (\"loop\"). Vogna er ikke festet til underlaget, men beholder kontakten med underlaget gjennom hele banen. Det virker ikke noen form for friksjon/luftmotstand på vogna. På figuren under er det markert fire punkter i banen:  \n\nA: Nederste punkt i loopen  \nB: Midtveis til toppen, på vei opp  \nC: Toppunktet  \nD: Midtveis til toppen, på vei ned  \n\nLa N angi normalkrafta fra underlaget på vogna. Hvilken påstand er riktig? Velg ett alternativ:  \n○ N størst i punkt A  \n○ N størst i punkt B  \n○ N størst i punkt C  \n○ N størst i punkt D  \n○ N har samme verdi i alle fire punktene",
+        "points": 4,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 9,
+        "subject": "IFYKJA1000",
+        "text": "**9** Figuren under viser fartsgrafen v ( t ) til en stein som slippes fra en høy bygning ved t = 0 og faller vannrett ned mot bakken. Etter en viss tid har steinen nådd terminalfarten Umax. Se figuren under.  \n\nν  \nVmax  \n\nHvordan blir den tilsvarende akselerasjonsgrafen for steinen?  \n\na  \na  \na  \nA  \nC  \nE  \n\nVelg ett alternativ:  \nA  \nB  \nC  \nD  \nE  \n\na  \na  \nD  \nB",
+        "points": 2,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 10,
+        "subject": "IFYKJA1000",
+        "text": "None",
+        "points": 0,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 11,
+        "subject": "IFYKJA1000",
+        "text": "For å bestemme effekten \\( P \\) syklisten må produsere for å opprettholde en konstant hastighet oppover bakken, analyserer vi kreftene og arbeidet som er involvert.  \n\n1. **Gravitasjonskraftens komponent langs skråningen:**  \n   \\( F_{\\text{parallel}} = m g \\sin \\theta \\)  \n\n2. **Effekt som kreves for å overvinne denne kraften ved hastighet \\( v \\):**  \n   \\( P = F_{\\text{parallel}} \\cdot v \\)  \n\nGitt:  \n- \\( m = 80 \\) kg  \n- \\( \\theta = 10^\\circ \\)  \n- \\( v = 10 \\) km/t \\( = \\frac{10 \\times 1000}{3600} \\) m/s \\( \\approx 2.78 \\) m/s  \n- \\( g = 9.81 \\) m/s²  \n\nBeregninger:  \n1. \\( F_{\\text{parallel}} = 80 \\times 9.81 \\times \\sin 10^\\circ \\approx 80 \\times 9.81 \\times 0.1736 \\approx 136.3 \\) N  \n2. \\( P = 136.3 \\times 2.78 \\approx 379 \\) W \\( = 0.38 \\) kW  \n\n**Korrekt svar:**  \n- \\( P = 0.38 \\) kW",
+        "points": 2,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 12,
+        "subject": "IFYKJA1000",
+        "text": "**12**  \n\nDenne oppgaven har flere deloppgaver som omhandler samme problemstilling, men som kan besvares uavhengig av hverandre.  \n\nEn massiv, homogen sylinder med masse *M* = 0,50 kg og radius *R* = 0,10 m ruller oppover et skråplan med helningsvinkel *β* = 20°. Sylinderen er ved *t* = 0 nederst på skråplanet, og da har massesenteret farten *v₀* = 3,0 m/s oppover skråplanet. Den fortsetter å rulle uten å gli oppover skråplanet.  \n\n**a)** Tegn kreftene som virker på sylinderen når den ruller oppover skråplanet. For full uttelling må alle krefter ha navn og det må være et rimelig størrelsesforhold mellom kreftene. **(3 poeng)**  \n\n**b)** Vis at absoluttverdien av akselerasjonen til sylinderens massesenter mens den ruller oppover er *a* = 2,2 m/s² med retning nedover langs skråplanet. **(3 poeng)**  \n\n**c)** Bestem strekningen *s* som sylinderen ruller oppover skråplanet før den snur. **(3 poeng)**  \n\n**d)** Skisser og forklar fartsgrafen, *v(t)*, for sylinderen når den ruller på skråplanet. Grafen må vise *v(t)* for tidsrommet fra *t* = 0 til den er tilbake til utgangspunktet. **(3 poeng)**  \n\n**e)** Hvor lang tid tar det fra *t* = 0 til sylinderen er tilbake til startpunktet ved bunnen av skråplanet? **(3 poeng)**  \n\n**Maks poeng: 15**",
+        "points": 15,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 13,
+        "subject": "IFYKJA1000",
+        "text": "**13**  \nTo massive sylindre med ulike masser og ulike radier ligger i ro på toppen av et skråplan. Den største sylinderen har masse M og radius R, mens den minste sylinderen har masse m < M og radius r < R. De to sylinderne slippes samtidig fra samme høyde, og de ruller begge nedover skråplanet uten å skli. Se figuren under.  \n\nHvilken påstand er riktig? Velg ett alternativ:  \n- Sylinderen med masse M kommer til bunnen av skråplanet først fordi det virker størst tyngdekraft på denne  \n- Sylindrene kommer til bunnen av skråplanet samtidig ettersom massesentrene (CM) hele tiden har samme fart  \n- Sylinderen med masse m kommer til bunnen først fordi denne har lavest treghetsmoment om rotasjonsaksen  \n- Sylindrene kommer til bunnen av skråplanet samtidig ettersom sylindrene hele tiden har samme vinkelfart  \n- Sylinderen med masse m kommer til bunnen av skråplanet først fordi det virker lavest friksjon på denne",
+        "points": 2,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 14,
+        "subject": "IFYKJA1000",
+        "text": "**14**  \nEt tannhjul med radius r er forbundet via et stramt kjede med et mindre tannhjul med radius r / 2. Begge tannhjulene roterer om sitt faste sentrum. Når det største tannhjulet roterer med vinkelfart w₁, roterer det minste med vinkelfart w2. Se figuren under.  \n\n@1  \nr  \n@2  \nr / 2  \n\nHva er forholdet mellom vinkelfartene w₂ og w₁ til hhv. det minste og det største tannhjulet? [Hint: alle punkter på kjedet må ha samme lineære fart.]  \n\nVelg ett alternativ:  \n○ W2 / W1 = 1/2  \n○ W2 / W1 = 1  \n○ W2 / W1 = 2  \n○ W2 / W1 = √2  \n○ W2 / W1 = 1/√2",
+        "points": 2,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 15,
+        "subject": "IFYKJA1000",
+        "text": "**15** En kloss er festet til en fjær og kan svinge friksjonsfritt på et horisontalt underlag. Klossen slippes med null startfart fra en startamplitude \\( x_1 = A \\). På figuren under er det indikert fire punkter: \\( x_1 = A \\) (startpunktet), \\( x_2 = A/2 \\), \\( x_3 = 0 \\) (likevektspunktet, som tilsvarer slapp fjær) og \\( x_4 = -A/4 \\).  \n\nI hvilket av punktene er absoluttverdien til klossens akselerasjon størst? Velg ett alternativ:  \n- \\( x_1 \\)  \n- \\( x_2 \\)  \n- \\( x_3 \\)  \n- \\( x_4 \\)  \n- Akselerasjonen har samme verdi i alle de fire punktene",
+        "points": 2,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 16,
+        "subject": "IFYKJA1000",
+        "text": "**16** | Realfagsbygget i Trondheim henger en pendel som kan modelleres som en punktmasse som svinger med små utslag i en masseløs snor. Vi måler perioden til \\( T = 10,0 \\, \\text{s} \\). Hva er lengden \\( L \\) til pendelsnora?  \n\nVelg ett alternativ:  \n- \\( L = 98,1 \\, \\text{m} \\)  \n- \\( L = 36,9 \\, \\text{m} \\)  \n- \\( L = 24,8 \\, \\text{m} \\)  \n- \\( L = 3,87 \\, \\text{m} \\)  \n- \\( L = 9,81 \\, \\text{m} \\)",
+        "points": 2,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 17,
+        "subject": "IFYKJA1000",
+        "text": "For å bestemme dybden \\( h \\) som skipet stikker ned i vannet, bruker vi prinsippet om oppdrift:  \n\n1. **Oppdriften** må være lik **tyngdekraften** som virker på skipet:  \n   \\[\n   F_{\\text{oppdrift}} = F_{\\text{tyngde}}\n   \\]\n   \\[\n   \\rho \\cdot V \\cdot g = m \\cdot g\n   \\]\n   Der \\( V \\) er volumet av fortrengt vann.  \n\n2. **Volumet av fortrengt vann** er gitt av:  \n   \\[\n   V = \\ell \\cdot b \\cdot h\n   \\]\n   Sett inn i likningen:  \n   \\[\n   \\rho \\cdot \\ell \\cdot b \\cdot h = m\n   \\]\n   Løs for \\( h \\):  \n   \\[\n   h = \\frac{m}{\\rho \\cdot \\ell \\cdot b}\n   \\]\n\n3. **Innsetting av tallverdier**:  \n   \\[\n   h = \\frac{1{,}0 \\cdot 10^8 \\, \\text{kg}}{1{,}0 \\cdot 10^3 \\, \\text{kg/m}^3 \\cdot 320 \\, \\text{m} \\cdot 40 \\, \\text{m}}\n   \\]\n   \\[\n   h = \\frac{1{,}0 \\cdot 10^8}{1{,}28 \\cdot 10^7} \\, \\text{m}\n   \\]\n   \\[\n   h \\approx 7{,}8 \\, \\text{m}\n   \\]\n\n**Riktig svar:**  \n○ \\( h = 7{,}8 \\, \\text{m} \\)",
+        "points": 21,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 18,
+        "subject": "IFYKJA1000",
+        "text": "**Oppgave 18:**  \n\nEn kraftforsterker består av et bevegelig stempel med sirkulært tverrsnitt og diameter D₁ som er forbundet via en inkompressibel væske med et annet, større stempel med sirkulært tverrsnitt og diameter D2. Når en kraft F1 ( \"input\" ) virker på det minste stempelet, er kraften F2 på det største stempelet ( \"output\" ) . Se figuren under.  \n\nF2  \nD2  \nF₁  \n1  \nD₁  \n\nHva må forholdet mellom diametrene D2 og D1 av stemplene være dersom kraftforsterkeren skal ha en forsterkning på 100 ganger ( dvs. F2 = 100F₁ ) ?  \n\nVelg ett alternativ:  \n○ D2 / D₁ = 1,4  \n○ D2 / D₁ = \\sqrt\\sqrt2  \n○ D2 / D₁ = 10³  \n○ D2 / D₁ = 10  \n○ D2 / D₁ = 102",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 19
+    },
+    {
+        "version": "Sommer 2023",
+        "task": 19,
+        "subject": "IFYKJA1000",
+        "text": "**19**  \n\nEt svømmebasseng har rektangulær grunnflate A1 = 10 m x 5,0 m og det er fylt vann i høyde h = 3,0 m over bassengbunnen. Bassenget skal tømmes gjennom et horisontalt rør med sirkulært tverrsnitt og diameter D = 75 mm som ligger i samme dybde som bassengbunnen. Over vannspeilet og ved rørutløpet er det lufttrykk po = 101 kPa.  \n\n**a)** Hvor stort er trykket mot ventilen fra den siden som ligger an mot vannet? **(2 poeng)**  \n\n**b)** Vis at volumstrømmen i røret er 0,034 m³/s dersom vi ser bort fra alle former for tap. **(2 poeng)**  \n\n**c)** Hva blir volumstrømmen dersom det monteres inn en vannmåler som utgjør en enkeltmotstand med tapskoeffisient = 7,0 like ved utløpet, og vi neglisjerer all rørfriksjon? **(2 poeng)**  \n\n**d)** Vanndybden h avtar gradvis etter hvert som bassenget tømmes. La A2 være tverrsnittarealet av røret. Vis eller forklar at h(t) er løsningen av differensiallikningen dh/dt = – (A2/A1)√(2gh). **(2 poeng)**  \n\n**e)** Hvis tappingen starter ved t = 0, er løsningen gitt ved:  \nh(t) = (√h(0) – (A2/A1)√(g/2) · t)².  \nHvor lang tid tar det å tømme bassenget dersom vanndybden ved t = 0 er h(0) = 3,0 m? **(2 poeng)**",
+        "points": 10,
+        "images": [],
+        "code": null,
+        "amount": 19
     }
 ]

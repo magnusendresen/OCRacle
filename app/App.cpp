@@ -1,60 +1,59 @@
 #include "App.h"
-#include "Color.h"
+#include <windows.h>
+#include <commdlg.h>
+#include <winuser.h>
+#include <synchapi.h>
+#include <fstream>
+#include <filesystem>
+#include <iostream>
+#include <map>
+#include <thread>
+#include <string>
+#include <chrono>
+#include <cctype>
 
-// Definisjon av statiske variabler
-unsigned int App::buttonWidth = 200;
-unsigned int App::buttonHeight = 100;
-int App::pad = 20;
-
-extern ProgressBar* progressBar_ptr;  // Ingen ny definisjon!
-extern ProgressBar* progressBar_ptr2;  // Ingen ny definisjon!
-extern App* myApp_ptr;
+#include "widgets/TextBox.h"
+#include "widgets/Button.h"
 
 
 App::App(const std::string& windowName)
     : TDT4102::AnimationWindow{
-        calculateWindowPosX(),
-        calculateWindowPosY(),
-        calculateWindowWidth(),
-        calculateWindowHeight(),
+
+        // Sentrering av vinduet på skjermen
+        ((GetSystemMetrics(SM_CXSCREEN)) - (GetSystemMetrics(SM_CXSCREEN)) * 3 / 4) / 2,
+        ((GetSystemMetrics(SM_CYSCREEN)) - (GetSystemMetrics(SM_CYSCREEN)) * 3 / 4) / 2,
+
+        // Setter vindusstørrelsen til 3/4 av høyden og bredden til skjermen
+        GetSystemMetrics(SM_CXSCREEN) * 3 / 4,
+        GetSystemMetrics(SM_CYSCREEN) * 3 / 4,
         windowName
     }
 {
-    // Sett bakgrunnsfarge og kall GUI-setup
     setBackgroundColor(TDT4102::Color::light_gray);
-
     GUI();
 }
 
-int App::calculateMonitorWidth()  { return GetSystemMetrics(SM_CXSCREEN); }
-int App::calculateMonitorHeight() { return GetSystemMetrics(SM_CYSCREEN); }
-int App::calculateWindowWidth()   { return calculateMonitorWidth() * 3 / 4; }
-int App::calculateWindowHeight()  { return calculateMonitorHeight() * 3 / 4; }
-int App::calculateWindowPosX()    { return (calculateMonitorWidth() - calculateWindowWidth()) / 2; }
-int App::calculateWindowPosY()    { return (calculateMonitorHeight() - calculateWindowHeight()) / 2; }
 
-/*
------------------------------------------------------------------------
-*/
+
 
 void App::GUI() {
-    // Knapp for å velge fil
-
     pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
     googlevision = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
     deepseek = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
     
-    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth*3/2, buttonHeight / 2, "   Subject: ");
-    examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*3/2, buttonHeight/2, "   Version: ");
-    examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth*3/2, buttonHeight/2, "   Amount: ");
+    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth*3/2, buttonHeight / 2, "Subject: ");
+    examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*3/2, buttonHeight/2, "Version: ");
+    examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth*3/2, buttonHeight/2, "Tasks: ");
 
-    progressBar_ptr = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*8, "PDF processing"); 
-    progressBar_ptr2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*12, "Task processing");
+    ProgressBar1 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*8, "PDF processing");
+    ProgressBar2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*12, "Task processing");
 
     pdfButton->setLabelColor(TDT4102::Color::white);
     pdfButton->setCallback([this]() {
         pdfHandling();
     });
+
+    timerBox = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth) + ProgressBar1->width - static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Tid: ");
 
     add(*pdfButton);
     add(*googlevision);
@@ -63,79 +62,101 @@ void App::GUI() {
     add(*examSubject);
     add(*examVersion);
     add(*examAmount);
+
+    add(*timerBox);
+
 }
 
-/*
------------------------------------------------------------------------
-*/
+void App::update() {
+    ProgressBar1->setCount();
+    ProgressBar2->setCount();
+}
+
+void App::startTimer() {
+    startTime = std::chrono::steady_clock::now();
+    timerRunning = true;
+
+    timerThread = std::thread([this]() {
+        while (timerRunning) {
+            auto now = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - startTime).count();
+
+            int minutes = static_cast<int>(elapsed / 60);
+            int seconds = static_cast<int>(elapsed % 60);
+
+            if (timerBox) {
+                timerBox->setText("Tid: " + std::to_string(minutes) + " min " + std::to_string(seconds) + " sek");
+            }
+
+            Sleep(1000);
+        }
+    });
+}
+
+void App::stopTimer() {
+    timerRunning = false;
+    if (timerThread.joinable()) {
+        timerThread.join();
+    }
+}
 
 void App::pdfHandling() {
+        try {
+        std::cout << "Handling PDF..." << std::endl;
 
-    Sleep(1000);
+        calculateProgress();
 
-    std::cout << "Handling PDF..." << std::endl;
+        // For å kunne skrive æøå i console
+        SetConsoleOutputCP(CP_UTF8);    
 
-    calculateProgress();
+        // Popup for å velge PDF
+        wchar_t filePath[MAX_PATH] = L"";
+        OPENFILENAMEW ofn = {};
+        ofn.lStructSize = sizeof(ofn);
+        ofn.lpstrFile = filePath;
+        ofn.nMaxFile = MAX_PATH;
+        ofn.lpstrFilter = L"PDF Files\0*.pdf\0";
 
+        if (!GetOpenFileNameW(&ofn)) {
+            std::wcout << L"Ingen fil ble valgt." << std::endl;
+            return;
+        }
 
-    // For å kunne skrive æøå i console
-    SetConsoleOutputCP(CP_UTF8);
+        // Konverter til UTF-8
+        int utf8_len = WideCharToMultiByte(CP_UTF8, 0, filePath, -1, nullptr, 0, nullptr, nullptr);
+        std::string selectedFile(static_cast<size_t>(utf8_len), '\0');
+        WideCharToMultiByte(CP_UTF8, 0, filePath, -1, &selectedFile[0], utf8_len, nullptr, nullptr);
+        if (!selectedFile.empty() && selectedFile.back() == '\0') {
+            selectedFile.pop_back();
+        }
 
-    // Legg til to 'TextBox'-widgets for illustrasjon
+        std::cout << "[INFO] Valgt fil: " << selectedFile << std::endl;
 
-    
+        // Finn scripts-mappe
+        char buffer[MAX_PATH];
+        GetModuleFileNameA(NULL, buffer, MAX_PATH);
+        std::filesystem::path exePath = buffer;
+        std::filesystem::path exeDir = exePath.parent_path();
+        std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
+        std::filesystem::current_path(scriptDir);
 
-    // Dialog for å velge PDF
-    wchar_t filePath[MAX_PATH] = L"";
-    OPENFILENAMEW ofn = {};
-    ofn.lStructSize = sizeof(ofn);
-    ofn.lpstrFile = filePath;
-    ofn.nMaxFile = MAX_PATH;
-    ofn.lpstrFilter = L"PDF Files\0*.pdf\0";
+        std::cout << "[INFO] scriptDir: " << scriptDir << std::endl;
 
-    if (!GetOpenFileNameW(&ofn)) {
-        std::wcout << L"Ingen fil ble valgt." << std::endl;
-        return;
-    }
-
-    // Konverter til UTF-8
-    int utf8_len = WideCharToMultiByte(CP_UTF8, 0, filePath, -1, nullptr, 0, nullptr, nullptr);
-    std::string selectedFile(static_cast<size_t>(utf8_len), '\0');
-    WideCharToMultiByte(CP_UTF8, 0, filePath, -1, &selectedFile[0], utf8_len, nullptr, nullptr);
-    if (!selectedFile.empty() && selectedFile.back() == '\0') {
-        selectedFile.pop_back(); // Fjern null-terminator om nødvendig
-    }
-
-    std::cout << "[INFO] Valgt fil: " << selectedFile << std::endl;
-
-    // Finn /scripts-mappe (for Python)
-    char buffer[MAX_PATH];
-    GetModuleFileNameA(NULL, buffer, MAX_PATH);
-    std::filesystem::path exePath = buffer;
-    std::filesystem::path exeDir = exePath.parent_path();
-    std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
-    std::filesystem::current_path(scriptDir);
-
-    std::cout << "[INFO] scriptDir: " << scriptDir << std::endl;
-
-    // Skriv filsti til dir.txt
-    {
         std::ofstream dirFile(scriptDir / "dir.txt", std::ios::binary);
         dirFile << selectedFile;
-    }
 
-    // Start Python-script i en bakgrunnstråd
-    std::thread([]() {
-        // Kall Python. Evt. "python main.py" eller "py main.py"
-        std::system("start /min powershell -Command \"python main.py; pause\""); 
-    }).detach();    
+        // Start Python-script i en bakgrunnstråd
+        std::thread([]() {
+            std::system("start /min powershell -Command \"python main.py; pause\""); 
+        }).detach();
+
+        startTimer();
+    } catch (const std::exception& e) {
+        std::cerr << "[ERROR] Exception i håndtering av PDF: " << e.what() << std::endl;
+    }
 }
 
-/*
------------------------------------------------------------------------
-*/
-
-
+// Map for lesing av tekstfilen
 std::string ocrLine, taskLine, googlevisionLine, deepseekLine, examSubjectLine, examVersionLine, examAmountLine;
 const std::map<int, std::string*> ProgressLineMap = {
     {1, &googlevisionLine},
@@ -157,123 +178,124 @@ void App::calculateProgress() {
         std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
         std::filesystem::path progressPath = scriptDir / "progress.txt";
 
-        // Tømmer progress.txt ved oppstart
-        {
-            std::ofstream ofs(progressPath, std::ios::trunc);
-            ofs.close();
-            std::cout << "Cleared progress.txt at startup." << std::endl;
-        }
+        std::ofstream ofs(progressPath, std::ios::trunc);
+        ofs.close();
+        std::cout << "Cleared progress.txt at startup." << std::endl;
 
         FILETIME lastWriteTime = {0, 0};
         
-        while (true) {
-            WIN32_FILE_ATTRIBUTE_DATA fileInfo;
-            if (GetFileAttributesExA(progressPath.string().c_str(), GetFileExInfoStandard, &fileInfo)) {
-                if (CompareFileTime(&fileInfo.ftLastWriteTime, &lastWriteTime) != 0) {
-                    lastWriteTime = fileInfo.ftLastWriteTime;
-                    std::cout << "File progress.txt has been updated." << std::endl;
-        
-                    std::ifstream file(progressPath);
-                    if (file.is_open()) {
-                        
-                        std::string line;
-                        
-                        for (int i = 1; i <= static_cast<int>(ProgressLineMap.size()); i++) {
-                            std::getline(file, line);
-                            if (ProgressLineMap.find(i) != ProgressLineMap.end()) {
-                                *ProgressLineMap.at(i) = line;
-                            }
-                        }
-
-                        if (!googlevisionLine.empty()) {
-                            for (char c : googlevisionLine) {
-                                // Hvis linja inneholder 1, så blir knappen grønn
-                                if (c == '1') {
-                                    googlevision->setBoxColor(TDT4102::Color::green);
-                                    googlevision->setTextColor(TDT4102::Color::white);
-                                    break;
+        try {
+            while (true) {
+                WIN32_FILE_ATTRIBUTE_DATA fileInfo;
+                if (GetFileAttributesExA(progressPath.string().c_str(), GetFileExInfoStandard, &fileInfo)) {
+                    if (CompareFileTime(&fileInfo.ftLastWriteTime, &lastWriteTime) != 0) {
+                        lastWriteTime = fileInfo.ftLastWriteTime;
+                        std::cout << "File progress.txt has been updated." << std::endl;
+            
+                        std::ifstream file(progressPath);
+                        if (file.is_open()) {
+                            
+                            std::string line;
+                            
+                            // Iterering over hver linje av fila knytta opp mot map-et med pekere
+                            for (int i = 1; i <= static_cast<int>(ProgressLineMap.size()); i++) {
+                                std::getline(file, line);
+                                if (ProgressLineMap.find(i) != ProgressLineMap.end()) {
+                                    *ProgressLineMap.at(i) = line;
                                 }
                             }
-                        }
 
-                        if (!deepseekLine.empty()) {
-                            for (char c : deepseekLine) {
-                                // Hvis linja inneholder 1, så blir knappen grønn
-                                if (c == '1') {
-                                    deepseek->setBoxColor(TDT4102::Color::green);
-                                    deepseek->setTextColor(TDT4102::Color::white);
-
-                                    break;
+                            // Oppdatering av Google Vision knapp
+                            if (!googlevisionLine.empty()) {
+                                for (char c : googlevisionLine) {
+                                    if (c == '1') {
+                                        googlevision->setBoxColor(TDT4102::Color::green);
+                                        googlevision->setTextColor(TDT4102::Color::white);
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (!examSubjectLine.empty()) {
-                            examSubject->setBoxColor(TDT4102::Color::green);
-                            examSubject->setText("Subject: "+examSubjectLine);
-                            examSubject->setTextColor(TDT4102::Color::white);
-                        }
+                            // Oppdatering av DeepSeek knapp
+                            if (!deepseekLine.empty()) {
+                                for (char c : deepseekLine) {
+                                    if (c == '1') {
+                                        deepseek->setBoxColor(TDT4102::Color::green);
+                                        deepseek->setTextColor(TDT4102::Color::white);
 
-                        if (!examVersionLine.empty()) {
-                            examVersion->setBoxColor(TDT4102::Color::green);
-                            examVersion->setText("Version: "+examVersionLine);
-                            examVersion->setTextColor(TDT4102::Color::white);
-
-                        }
-
-                        if (!examAmountLine.empty()) {
-                            examAmount->setBoxColor(TDT4102::Color::green);
-                            examAmount->setText("Tasks: "+examAmountLine);
-                            examAmount->setTextColor(TDT4102::Color::white);
-
-                        }
-        
-                        double ocrProgress = 0.0;
-                        // Beregn OCR-progresjonen fra linje 2
-                        if (!ocrLine.empty()) {
-                            int sum = 0;
-                            int count = 0;
-                            for (char c : ocrLine) {
-                                if (isdigit(c)) {
-                                    sum += c - '0';
-                                    count++;
+                                        break;
+                                    }
                                 }
                             }
-                            if (count > 0) {
-                                ocrProgress = static_cast<double>(sum) / count;
+
+                            // Oppdatering av emnebeholder
+                            if (!examSubjectLine.empty()) {
+                                examSubject->setBoxColor(TDT4102::Color::green);
+                                examSubject->setText("Subject: "+examSubjectLine);
+                                examSubject->setTextColor(TDT4102::Color::white);
                             }
-                        }
-        
-                        // Oppdater progress med OCR-progresjonen
-                        progress = ocrProgress;
-                        std::cout << "OCR Progress: " << progress << std::endl;
-        
-                        // Dersom OCR-prosessen er fullført, oppdater progress2 med oppgaveprogresjonen fra linje 4
-                        if (ocrProgress >= 1.0 && !taskLine.empty()) {
-                            int sum = 0;
-                            int count = 0;
-                            for (char c : taskLine) {
-                                if (isdigit(c)) {
-                                    sum += c - '0';
-                                    count++;
+
+                            // Oppdatering av utgivelsebeholder
+                            if (!examVersionLine.empty()) {
+                                examVersion->setBoxColor(TDT4102::Color::green);
+                                examVersion->setText("Version: "+examVersionLine);
+                                examVersion->setTextColor(TDT4102::Color::white);
+
+                            }
+
+                            // Oppdatering av antallbeholder
+                            if (!examAmountLine.empty()) {
+                                examAmount->setBoxColor(TDT4102::Color::green);
+                                examAmount->setText("Tasks: "+examAmountLine);
+                                examAmount->setTextColor(TDT4102::Color::white);
+
+                            }
+            
+                            // Beregn OCR-progresjonen til progressbar
+                            if (!ocrLine.empty()) {
+                                int sum = 0;
+                                int count = 0;
+                                for (char c : ocrLine) {
+                                    if (isdigit(c)) {
+                                        sum += c - '0';
+                                        count++;
+                                    }
                                 }
+                                if (count > 0) {
+                                    ProgressBar1->progress = static_cast<double>(sum) / count;
+                                }
+                                std::cout << "OCR Progress: " << ProgressBar1->progress << std::endl;
                             }
-                            count *= 5;
-                            double taskProgress = 0.0;
-                            if (count > 0) {
-                                taskProgress = static_cast<double>(sum) / count;
+
+                            // Beregn AI-behandling-progresjon til progressbar
+                            if (ProgressBar1->progress >= 1.0 && !taskLine.empty()) {
+                                int sum = 0;
+                                int count = 0;
+                                for (char c : taskLine) {
+                                    if (isdigit(c)) {
+                                        sum += c - '0';
+                                        count++;
+                                    }
+                                }
+                                count *= 5;
+                                if (count > 0) {
+                                    ProgressBar2->progress = static_cast<double>(sum) / count;
+                                }
+                                std::cout << "Task Progress: " << ProgressBar2->progress << std::endl;
                             }
-                            // Oppdater progress2 manuelt etter at OCR er ferdig
-                            progress2 = taskProgress;
-                            std::cout << "Task Progress: " << progress2 << std::endl;
+                            if (ProgressBar2->progress >= 1.0) {
+                                stopTimer();
+                            }
                         }
                     }
+                    Sleep(200);
+                } else {
+                    std::cerr << "Failed to access progress.txt. Retrying..." << std::endl;
                 }
-                Sleep(200);
-            } else {
-                std::cerr << "Failed to access progress.txt. Retrying..." << std::endl;
             }
-        }                
+        } catch (const std::exception& e) {
+            std::cerr << "[ERROR] Exception oppstod i lesing av progress.txt" << e.what() << std::endl;
+        }
     }).detach();
 }
 

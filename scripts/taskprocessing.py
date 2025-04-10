@@ -45,7 +45,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            f"{nonchalant} Translate this task text from norwegian bokmål or english to norwegian bokmål, do not change anything else."
+            f"{nonchalant} Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else."
             "If it is already in norwegian bokmål respond with the exact same text: "
         ),
         "max_tokens": 1000,
@@ -218,17 +218,15 @@ async def process_task(task_number, ocr_text, exam):
             
 
         # Behandling av valideringsboolean
-        if valid == 0:
-            print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task not approved. Retrying...\n")
-            return None
-        else:
             task_exam.task = task_number
             task_exam.text = task_output
             task_exam.points = points
-            task_status[task_number] = 6
-            update_progress_file()
+        if valid == 0:
+            print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task not approved. Retrying...\n")
+        else:
             print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task approved.\n")
-            return task_exam
+            
+        return task_exam
 
 async def main_async(ocr_text):
     exam_template = await get_exam_info(ocr_text)

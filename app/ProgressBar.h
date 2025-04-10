@@ -1,28 +1,22 @@
 #pragma once
 
 #include "AnimationWindow.h"
-#include "Point.h"
-#include <filesystem>
-#include <fstream>
-#include <windows.h>
+#include <string>
 
-extern int nextFrame;
-extern double progress;
-extern double progress2;
 
 class ProgressBar {
 public:
-    ProgressBar(TDT4102::AnimationWindow& win, int xPos, int yPos, std::string Title);
+ProgressBar(TDT4102::AnimationWindow& win, int xPos, int yPos, std::string Title);
 
-    // Tegner grønn fremdriftsindikator
-    void setCount(double percent);
+    void setCount();
+    double progress;
 
     std::string Title;
     int xPos;
     int yPos;
+    int width  = 800;
+    int height = 40;
 
 private:
     TDT4102::AnimationWindow& window;
-    const int width  = 800;
-    const int height = 40;
 };
