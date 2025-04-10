@@ -33,7 +33,7 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
 - `taskprocessing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
 - `objecttojson.py` – lagrer oppgaveobjektene til `tasks.json`
 
-# Eksempel av prompting i taskprocessing.py:
+## Eksempel av prompting i taskprocessing.py:
 ```
 What is task number {task_number}?
 Write only all text related directly to that one task from the raw text.
