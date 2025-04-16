@@ -33,9 +33,6 @@ App::App(const std::string& windowName)
     GUI();
 }
 
-
-
-
 void App::GUI() {
     pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
     googlevision = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");

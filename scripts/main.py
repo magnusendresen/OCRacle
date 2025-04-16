@@ -10,9 +10,6 @@ rawtext = ocrpdf.main()
 # Step 2: Normalize text
 rawtext = textnormalization.normalize_text(rawtext)
 
-# Step 3: Use cachetask to handle caching and selection of tasks
-rawtext = cachetask.main(rawtext)
-
 # Step 4: Process tasks using taskseparation
 tasks = taskprocessing.main(rawtext)
 

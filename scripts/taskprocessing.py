@@ -11,7 +11,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 progress_file = Path(__file__).resolve().parent / "progress.txt"
 task_status = defaultdict(lambda: 0)
-exam_amount = 0
+total_tasks = 0
 
 nonchalant = "DONT EVER EXPLAIN OR SAY WHAT YOU ARE DOING. JUST DO AS YOU ARE TOLD AND RESPOND WITH WHAT IS ASKED FROM YOU. "
 task_process_instructions = [
@@ -36,8 +36,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            f"{nonchalant} Remove all text related to Inspera and exam administration, "
-            "keep only what is necessary for solving the task: "
+            f"{nonchalant} Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else."
+            "If it is already in norwegian bokmål respond with the exact same text: "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -45,8 +45,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            f"{nonchalant} Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else."
-            "If it is already in norwegian bokmål respond with the exact same text: "
+            f"{nonchalant} Remove all text related to Inspera and exam administration, "
+            "keep only what is necessary for solving the task: "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -65,17 +65,18 @@ task_process_instructions = [
 
 @dataclass
 class Exam:
-    version: Optional[str] = None
-    task: Optional[str] = None
     subject: Optional[str] = None
-    text: Optional[str] = None
+    topic: Optional[str] = None
+    exam_version: Optional[str] = None
+    task_number: Optional[str] = None
     points: Optional[int] = None
+    task_text: Optional[str] = None
     images: List[str] = field(default_factory=list)
     code: Optional[str] = None
-    amount: Optional[int] = None
+    total_tasks: Optional[int] = None
 
     def __str__(self):
-        return f"Task {self.task}: {self.text} (Points: {self.points})"
+        return f"Task {self.task}: {self.task_text} (Points: {self.points})"
 
 def ensure_min_lines(lines, min_len):
     while len(lines) < min_len:
@@ -83,7 +84,7 @@ def ensure_min_lines(lines, min_len):
     return lines
 
 def update_progress_file():
-    status_str = ''.join(str(task_status[i]) for i in range(1, exam_amount + 1))
+    status_str = ''.join(str(task_status[i]) for i in range(1, total_tasks + 1))
     try:
         if progress_file.exists():
             with open(progress_file, "r", encoding="utf-8") as f:
@@ -115,6 +116,7 @@ def write_exam_info_line(line_index: int, info_text: str):
 
 async def get_exam_info(ocr_text):
     exam = Exam()
+
     exam.subject = await prompttotext.async_prompt_to_text(
         f"{nonchalant} What is the subject code for this exam? "
         f"Respond only with the singular formatted subject code (e.g., IFYT1000). "
@@ -127,7 +129,7 @@ async def get_exam_info(ocr_text):
     print(f"[DEEPSEEK] | Subject code found: {exam.subject}\n")
     write_exam_info_line(4, exam.subject if exam.subject else "")
 
-    exam.version = await prompttotext.async_prompt_to_text(
+    exam.exam_version = await prompttotext.async_prompt_to_text(
         f"{nonchalant} What exam edition is this exam? "
         f"Respond only with the singular formatted exam edition (e.g., Høst 2023). "
         f"S20XX means Sommer 20XX. {ocr_text}",
@@ -135,10 +137,10 @@ async def get_exam_info(ocr_text):
         isNum=False,
         maxLen=12
     )
-    print(f"[DEEPSEEK] | Exam version found: {exam.version}\n")
-    write_exam_info_line(5, exam.version if exam.version else "")
+    print(f"[DEEPSEEK] | Exam version found: {exam.exam_version}\n")
+    write_exam_info_line(5, exam.exam_version if exam.exam_version else "")
 
-    amount_str = await prompttotext.async_prompt_to_text(
+    exam.total_tasks = await prompttotext.async_prompt_to_text(
         f"{nonchalant} How many tasks are in this text? "
         f"Answer with a single number only. "
         f"Here is the text: {ocr_text}",
@@ -146,12 +148,12 @@ async def get_exam_info(ocr_text):
         isNum=True,
         maxLen=2
     )
-    exam.amount = 5 if not amount_str else int(str(amount_str))
-    print(f"[DEEPSEEK] | Number of tasks found: {exam.amount}\n")
-    write_exam_info_line(6, str(exam.amount))
 
-    global exam_amount
-    exam_amount = exam.amount
+    print(f"[DEEPSEEK] | Number of tasks found: {exam.total_tasks}\n")
+    write_exam_info_line(6, str(exam.total_tasks))
+
+    global total_tasks
+    total_tasks = exam.total_tasks
     return exam
 
 async def process_task(task_number, ocr_text, exam):
@@ -234,7 +236,7 @@ async def main_async(ocr_text):
 
     tasks = [
         asyncio.create_task(process_task(i, ocr_text, exam_template))
-        for i in range(1, exam_template.amount + 1)
+        for i in range(1, exam_template.total_tasks + 1)
     ]
     results = await asyncio.gather(*tasks)
 

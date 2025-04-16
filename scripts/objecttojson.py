@@ -48,19 +48,3 @@ def main(tasks):
         json.dump(existing_tasks, f, ensure_ascii=False, indent=4)
     
     print("[INFO] | Oppgavene er skrevet til tasks.json.")
-
-if __name__ == "__main__":
-    # Eksempel på testing
-    from taskprocessing import Exam
-
-    example_task = Exam(
-        version="Høst 2023",
-        task=1,
-        subject="IMAT2022",
-        text="Eksempel på oppgavetekst",
-        points=10,
-        images=[],
-        code=None,
-        amount=5
-    )
-    main([example_task])
