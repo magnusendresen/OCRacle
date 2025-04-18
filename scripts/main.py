@@ -1,5 +1,4 @@
 import ocrpdf
-import cachetask
 import textnormalization
 import taskprocessing
 import objecttojson
