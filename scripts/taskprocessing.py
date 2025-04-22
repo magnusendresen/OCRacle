@@ -1,7 +1,9 @@
+import prompttotext
+import extractimages
+
 import asyncio
 import json
 import sys
-import prompttotext
 import re
 import difflib
 from pathlib import Path
@@ -235,6 +237,14 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     global total_tasks
     total_tasks = exam.total_tasks
+
+    pdf_dir = None
+    with open("dir.txt", "r", encoding="utf-8") as dir_file:
+        pdf_dir = dir_file.readline().strip()
+
+    await extractimages.extract_images(pdf_dir, exam.subject, exam.exam_version)
+
+
     return exam
 
 

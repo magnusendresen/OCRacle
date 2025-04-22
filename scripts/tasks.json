@@ -37,15 +37,15 @@
     },
     {
         "subject": "IMAX20X2",
-        "matching_codes": [],
+        "matching_codes": null,
         "topic": "Kritiske Punkt",
         "exam_version": "Sommer 2024",
-        "task_number": 4,
+        "task_number": 7,
         "points": 10,
-        "task_text": "Finn det globale maksimum og det globale minimum til funksjonen f ( x, y ) = 2x² - 3xy - y² + 2x + y - 1 i området avgrenset av 0 ≤ x ≤ 1 og 0 ≤ y ≤ 1.",
+        "task_text": "La f ( x, y ) = x² + y² - 2xy + 4x + 4y. a ) Finn de kritiske punktene til funksjonen f. b ) Klassifiser de kritiske punktene til funksjonen f. Med andre ord, avgjør om de kritiske punktene er sadelpunkter, lokale maksimumspunkter, lokale minimumspunkter, eller ingen av delene.",
         "images": [],
         "code": null,
-        "total_tasks": 4
+        "total_tasks": 7
     },
     {
         "subject": "IFYT1000",
