@@ -10047,19 +10047,43 @@
         "Emnekode": "IFYA1002",
         "Emnenavn": "Fysikk",
         "Sted": "Ålesund",
-        "Temaer": []
+        "Temaer": [
+            "Kritiske Punkt",
+            "Mekanikk",
+            "Opplagerkrefter",
+            "Fysikk",
+            "Kjemi",
+            "Kjemisk likevekt",
+            "Fluidmekanikk"
+        ]
     },
     {
         "Emnekode": "IFYT1000",
         "Emnenavn": "Fysikk",
         "Sted": "Trondheim",
-        "Temaer": []
+        "Temaer": [
+            "Kritiske Punkt",
+            "Mekanikk",
+            "Opplagerkrefter",
+            "Fysikk",
+            "Kjemi",
+            "Kjemisk likevekt",
+            "Fluidmekanikk"
+        ]
     },
     {
         "Emnekode": "IFYT1002",
         "Emnenavn": "Fysikk",
         "Sted": "Trondheim",
-        "Temaer": []
+        "Temaer": [
+            "Kritiske Punkt",
+            "Mekanikk",
+            "Opplagerkrefter",
+            "Fysikk",
+            "Kjemi",
+            "Kjemisk likevekt",
+            "Fluidmekanikk"
+        ]
     },
     {
         "Emnekode": "TFOR0112",
@@ -10083,13 +10107,29 @@
         "Emnekode": "IFYA1000",
         "Emnenavn": "Fysikk",
         "Sted": "Ålesund",
-        "Temaer": []
+        "Temaer": [
+            "Kritiske Punkt",
+            "Mekanikk",
+            "Opplagerkrefter",
+            "Fysikk",
+            "Kjemi",
+            "Kjemisk likevekt",
+            "Fluidmekanikk"
+        ]
     },
     {
         "Emnekode": "IFYG1002",
         "Emnenavn": "Fysikk",
         "Sted": "Gjøvik",
-        "Temaer": []
+        "Temaer": [
+            "Kritiske Punkt",
+            "Mekanikk",
+            "Opplagerkrefter",
+            "Fysikk",
+            "Kjemi",
+            "Kjemisk likevekt",
+            "Fluidmekanikk"
+        ]
     },
     {
         "Emnekode": "VB6045",
@@ -10101,7 +10141,15 @@
         "Emnekode": "IFYG1000",
         "Emnenavn": "Fysikk",
         "Sted": "Gjøvik",
-        "Temaer": []
+        "Temaer": [
+            "Kritiske Punkt",
+            "Mekanikk",
+            "Opplagerkrefter",
+            "Fysikk",
+            "Kjemi",
+            "Kjemisk likevekt",
+            "Fluidmekanikk"
+        ]
     },
     {
         "Emnekode": "TFOR0117",
@@ -19156,20 +19204,11 @@
         "Emnenavn": "Matematikk for ingeniørfag 2 A",
         "Sted": "Ålesund, Trondheim",
         "Temaer": [
-            "None",
-            "**Oppgave 3: Retningsderivert**",
-            "Partiell derivasjon",
-            "**Topic: Kritiske punkt**",
-            "Graf-forståelse",
-            "**Taylor 1D**",
-            "**Oppgave 8: PDE**",
-            "**Oppgåve 4 (10 Poeng)**",
-            "**Graf-forståelse**",
-            "**Kritiske punkt**",
-            "**Retningsderivert**",
-            "Graph understanding",
-            "**Oppgave 2, kritiske punkt**",
-            "```  \n6 Kopi av Oppgave 6: Taylor 2D  \n```"
+            "Partiell Derivasjon",
+            "Globalt Maksimum og Minimum",
+            "Graf-Forståelse",
+            "Retningsderivert",
+            "Kritiske Punkt"
         ]
     },
     {
@@ -19177,20 +19216,11 @@
         "Emnenavn": "Matematikk for ingeniørfag 2 A",
         "Sted": "Trondheim",
         "Temaer": [
-            "None",
-            "**Oppgave 3: Retningsderivert**",
-            "Partiell derivasjon",
-            "**Topic: Kritiske punkt**",
-            "Graf-forståelse",
-            "**Taylor 1D**",
-            "**Oppgave 8: PDE**",
-            "**Oppgåve 4 (10 Poeng)**",
-            "**Graf-forståelse**",
-            "**Kritiske punkt**",
-            "**Retningsderivert**",
-            "Graph understanding",
-            "**Oppgave 2, kritiske punkt**",
-            "```  \n6 Kopi av Oppgave 6: Taylor 2D  \n```"
+            "Partiell Derivasjon",
+            "Globalt Maksimum og Minimum",
+            "Graf-Forståelse",
+            "Retningsderivert",
+            "Kritiske Punkt"
         ]
     },
     {
@@ -19198,20 +19228,11 @@
         "Emnenavn": "Matematikk for ingeniørfag 2 A",
         "Sted": "Gjøvik",
         "Temaer": [
-            "None",
-            "**Oppgave 3: Retningsderivert**",
-            "Partiell derivasjon",
-            "**Topic: Kritiske punkt**",
-            "Graf-forståelse",
-            "**Taylor 1D**",
-            "**Oppgave 8: PDE**",
-            "**Oppgåve 4 (10 Poeng)**",
-            "**Graf-forståelse**",
-            "**Kritiske punkt**",
-            "**Retningsderivert**",
-            "Graph understanding",
-            "**Oppgave 2, kritiske punkt**",
-            "```  \n6 Kopi av Oppgave 6: Taylor 2D  \n```"
+            "Partiell Derivasjon",
+            "Globalt Maksimum og Minimum",
+            "Graf-Forståelse",
+            "Retningsderivert",
+            "Kritiske Punkt"
         ]
     },
     {
@@ -19219,20 +19240,11 @@
         "Emnenavn": "Matematikk for ingeniørfag 2 B",
         "Sted": "Trondheim",
         "Temaer": [
-            "None",
-            "**Oppgave 3: Retningsderivert**",
-            "Partiell derivasjon",
-            "**Topic: Kritiske punkt**",
-            "Graf-forståelse",
-            "**Taylor 1D**",
-            "**Oppgave 8: PDE**",
-            "**Oppgåve 4 (10 Poeng)**",
-            "**Graf-forståelse**",
-            "**Kritiske punkt**",
-            "**Retningsderivert**",
-            "Graph understanding",
-            "**Oppgave 2, kritiske punkt**",
-            "```  \n6 Kopi av Oppgave 6: Taylor 2D  \n```"
+            "Partiell Derivasjon",
+            "Globalt Maksimum og Minimum",
+            "Graf-Forståelse",
+            "Retningsderivert",
+            "Kritiske Punkt"
         ]
     },
     {
@@ -19240,20 +19252,11 @@
         "Emnenavn": "Matematikk for ingeniørfag 2 B",
         "Sted": "Ålesund, Trondheim",
         "Temaer": [
-            "None",
-            "**Oppgave 3: Retningsderivert**",
-            "Partiell derivasjon",
-            "**Topic: Kritiske punkt**",
-            "Graf-forståelse",
-            "**Taylor 1D**",
-            "**Oppgave 8: PDE**",
-            "**Oppgåve 4 (10 Poeng)**",
-            "**Graf-forståelse**",
-            "**Kritiske punkt**",
-            "**Retningsderivert**",
-            "Graph understanding",
-            "**Oppgave 2, kritiske punkt**",
-            "```  \n6 Kopi av Oppgave 6: Taylor 2D  \n```"
+            "Partiell Derivasjon",
+            "Globalt Maksimum og Minimum",
+            "Graf-Forståelse",
+            "Retningsderivert",
+            "Kritiske Punkt"
         ]
     },
     {
@@ -19261,20 +19264,11 @@
         "Emnenavn": "Matematikk for ingeniørfag 2 B",
         "Sted": "Gjøvik",
         "Temaer": [
-            "None",
-            "**Oppgave 3: Retningsderivert**",
-            "Partiell derivasjon",
-            "**Topic: Kritiske punkt**",
-            "Graf-forståelse",
-            "**Taylor 1D**",
-            "**Oppgave 8: PDE**",
-            "**Oppgåve 4 (10 Poeng)**",
-            "**Graf-forståelse**",
-            "**Kritiske punkt**",
-            "**Retningsderivert**",
-            "Graph understanding",
-            "**Oppgave 2, kritiske punkt**",
-            "```  \n6 Kopi av Oppgave 6: Taylor 2D  \n```"
+            "Partiell Derivasjon",
+            "Globalt Maksimum og Minimum",
+            "Graf-Forståelse",
+            "Retningsderivert",
+            "Kritiske Punkt"
         ]
     },
     {

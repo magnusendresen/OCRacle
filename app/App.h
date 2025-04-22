@@ -8,6 +8,7 @@
 
 #include "widgets/TextBox.h"
 #include "widgets/Button.h"
+#include "widgets/TextInput.h"
 
 
 class App : public TDT4102::AnimationWindow {
@@ -30,6 +31,7 @@ public:
     TDT4102::TextBox *deepseek;
 
     TDT4102::TextBox *examSubject;
+    TDT4102::TextInput *examSubjectInput;
     TDT4102::TextBox *examVersion;
     TDT4102::TextBox *examAmount;
 

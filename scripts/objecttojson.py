@@ -36,15 +36,28 @@ def main(tasks):
             task_dict = task
 
         key = (task_dict.get('version'), task_dict.get('task'), task_dict.get('subject'))
+        # For å unngå format-feil når task er None, fallback til 0
+        task_num = task_dict.get('task') or 0
+
         if key in existing_index:
             existing_tasks[existing_index[key]] = task_dict
-            print(f"[INFO] | Oppgave erstattet: Exam: {task_dict.get('version')}, Task: {task_dict.get('task'):02}, Subject: {task_dict.get('subject')}")
+            print(
+                f"[INFO] | Oppgave erstattet: "
+                f"Exam: {task_dict.get('version')}, "
+                f"Task: {task_num:02}, "
+                f"Subject: {task_dict.get('subject')}"
+            )
         else:
             existing_tasks.append(task_dict)
-            print(f"[INFO] | Oppgave lagt til : Exam: {task_dict.get('version')}, Task: {task_dict.get('task'):02}, Subject: {task_dict.get('subject')}")
+            print(
+                f"[INFO] | Oppgave lagt til : "
+                f"Exam: {task_dict.get('version')}, "
+                f"Task: {task_num:02}, "
+                f"Subject: {task_dict.get('subject')}"
+            )
 
     # Skriv tilbake alle oppgavene til tasks.json
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(existing_tasks, f, ensure_ascii=False, indent=4)
-    
+
     print("[INFO] | Oppgavene er skrevet til tasks.json.")

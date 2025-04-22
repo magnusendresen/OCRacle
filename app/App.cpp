@@ -14,6 +14,7 @@
 
 #include "widgets/TextBox.h"
 #include "widgets/Button.h"
+#include "widgets/TextInput.h"
 
 
 App::App(const std::string& windowName)
@@ -39,6 +40,7 @@ void App::GUI() {
     deepseek = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
     
     examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth*3/2, buttonHeight / 2, "Subject: ");
+    examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth*3/2, buttonHeight / 2, "Subject: ");
     examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*3/2, buttonHeight/2, "Version: ");
     examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth*3/2, buttonHeight/2, "Tasks: ");
 
@@ -56,7 +58,7 @@ void App::GUI() {
     add(*googlevision);
     add(*deepseek);
 
-    add(*examSubject);
+    add(*examSubjectInput);
     add(*examVersion);
     add(*examAmount);
 
@@ -103,6 +105,26 @@ void App::pdfHandling() {
 
         calculateProgress();
 
+        // Finn script-mappen
+        char buffer[MAX_PATH];
+        GetModuleFileNameA(NULL, buffer, MAX_PATH);
+        std::filesystem::path exePath = buffer;
+        std::filesystem::path exeDir = exePath.parent_path();
+        std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
+
+        std::ofstream subjectFile(scriptDir / "subject.txt", std::ios::binary);
+        std::string userinp;
+        if (examSubjectInput->getText() != "Subject: ") {
+            userinp = examSubjectInput->getText().substr(9);
+            std::cout << "User input subject: " << userinp << std::endl;
+        } else {
+            add(*examSubject);
+            userinp = "";
+            examSubjectInput->setVisible(0);
+        }
+
+        subjectFile << userinp;
+
         // For å kunne skrive æøå i console
         SetConsoleOutputCP(CP_UTF8);    
 
@@ -129,12 +151,6 @@ void App::pdfHandling() {
 
         std::cout << "[INFO] Valgt fil: " << selectedFile << std::endl;
 
-        // Finn scripts-mappe
-        char buffer[MAX_PATH];
-        GetModuleFileNameA(NULL, buffer, MAX_PATH);
-        std::filesystem::path exePath = buffer;
-        std::filesystem::path exeDir = exePath.parent_path();
-        std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
         std::filesystem::current_path(scriptDir);
 
         std::cout << "[INFO] scriptDir: " << scriptDir << std::endl;
