@@ -60,12 +60,12 @@ class Exam:
     matching_codes: List[str] = field(default_factory=list)
     topic: Optional[str] = None
     exam_version: Optional[str] = None
-    task_number: Optional[int] = None
+    task_number: Optional[str] = None
     points: Optional[int] = None
     task_text: Optional[str] = None
     images: List[str] = field(default_factory=list)
     code: Optional[str] = None
-    total_tasks: Optional[int] = None
+    total_tasks: List[str] = field(default_factory=list)
 
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
@@ -82,7 +82,7 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
             lines = []
 
         if updates is None:
-            status_str = ''.join(str(task_status[i]) for i in range(1, total_tasks + 1))
+            status_str = ''.join(str(task_status[t]) for t in total_tasks)
             updates = {3: status_str}
 
         max_idx = max(updates.keys())
@@ -158,17 +158,18 @@ def add_topics(topic: str, exam: Exam):
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
+import re
+
 def get_subject_code_variations(subject: str):
     data, emnekart = load_emnekart_from_json(JSON_PATH)
     pattern_parts = []
-    for i, ch in enumerate(subject):
-        if ch not in {'X', 'A', 'G', 'T'} and i < 3:
-            pattern_parts.append(re.escape(ch))
+    for ch in subject:
+        if ch == 'X':
+            # Tillat både bokstaver A, G, T og tall for X
+            pattern_parts.append('[AGT0-9]')
         else:
-            if i == 3:
-                pattern_parts.append('[AGT]')
-            else:
-                pattern_parts.append('[0-9]')
+            # Escapet for sikkerhets skyld
+            pattern_parts.append(re.escape(ch))
     regex = re.compile('^' + ''.join(pattern_parts) + '$')
     matching_codes = [kode for kode in emnekart if regex.match(kode)]
     if matching_codes:
@@ -176,6 +177,7 @@ def get_subject_code_variations(subject: str):
         return matching_codes
     else:
         print(f"[INFO] | Ingen matchende emnekoder i JSON.")
+        return []
 
 async def get_exam_info(ocr_text: str) -> Exam:
     exam = Exam()
@@ -221,18 +223,23 @@ async def get_exam_info(ocr_text: str) -> Exam:
     print(f"[DEEPSEEK] | Exam version found: {exam.exam_version}")
     write_progress({5: exam.exam_version or ""})
 
-    exam.total_tasks = int(
+    exam.total_tasks = (
         await prompttotext.async_prompt_to_text(
             nonchalant +
             "How many tasks are in this text? "
-            "Answer with a single number only. "
+            "Respond with each task number separated by a comma. "
+            "If the subtasks are related in topic and need the answer to the previous subtask to be solved, respond with the main task number only (e.g. 1, 2, 5, 8, etc.). . "
+            "If the subtasks are unrelated (e.g. opplagerkrefter, nullstaver, stavkrefter) even if the same topic (e.g. fagverk), respond with each subtask by itself (e.g. 1a, 1b, 1c, 5a, 5b, etc.). "
+            "The exam may have a mixture of both types of tasks (e.g. 1, 2, 3a, 3b, 4, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, etc.). "
+            "Do not include any symbols like ) or - or similar. "
             + ocr_text,  
             max_tokens=1000,
-            isNum=True,
-            maxLen=2
+            isNum=False,
+            maxLen=150
         )
     )
-    print(f"[DEEPSEEK] | Number of tasks found: {exam.total_tasks}")
+    exam.total_tasks = [task.strip() for task in exam.total_tasks.split(",")]
+    print(f"[DEEPSEEK] | Tasks found for processing: {exam.total_tasks}")
     write_progress({6: str(exam.total_tasks)})
 
     global total_tasks
@@ -242,7 +249,13 @@ async def get_exam_info(ocr_text: str) -> Exam:
     with open("dir.txt", "r", encoding="utf-8") as dir_file:
         pdf_dir = dir_file.readline().strip()
 
-    await extractimages.extract_images(pdf_dir, exam.subject, exam.exam_version)
+    await extractimages.extract_images(
+        pdf_path=pdf_dir,
+        subject=exam.subject,
+        version=exam.exam_version,
+        total_tasks=exam.total_tasks,
+        output_folder=None
+    )
 
 
     return exam
@@ -253,12 +266,25 @@ task_process_instructions = [
         "instruction": (
             nonchalant +
             f"What is task number {{task_number}}? "
-            "Write only all text related directly to that one task from the raw text. "
+            "Write only all text related directly to that one TASK or SUBTASK from the raw text. "
             "Include the topic of the task and how many maximum points you can get. Do not solve the task: "
+            "Do not include the solution to the task. "
+            "If the text is written in multiple languages, respond with the text in norwegian. "
         ),
         "max_tokens": 1000,
         "isNum": False,
         "maxLen": 2000
+    },
+    {
+        "instruction": (
+            nonchalant + 
+            "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
+            "Does this task require an image for solving? "
+            "If yes, respond with 1, otherwise 0. "
+        ),
+        "max_tokens": 1000,
+        "isNum": True,
+        "maxLen": 2
     },
     {
         "instruction": (
@@ -297,8 +323,41 @@ task_process_instructions = [
         "instruction": (
             nonchalant + 
             "Remove all text related to Inspera and exam administration. "
+            "This includes information about the exam, such as: "
+            "- Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger på papir. "
+            "- Skriv enten 1, 2, eller 3 i svarfeltet. "
+            "- Skriv bare én av bokstavene A, B, C, D, E i hvert felt under. "
+            "- Skriv ditt svar her, eller bruk scantronark. "
+            "- Denne oppgaven skal besvares i tekstboksen under, eller ved bruk av scantronark. "
+            "- Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. "
+            "- Vi anbefaler bruk av Scantron-ark. "
+            "- Nederst i oppgaven finner du en sjusifret kode. Fyll inn denne koden øverst til venstre på arkene du ønsker å levere. "
+            "- Etter eksamen finner du besvarelsen din i arkivet i Inspera. "
+            "- Varslinger vil bli gitt via Inspera. "
+            "- Kontaktinformasjon til faglærer under eksamen. "
+            "- Hjelpemiddelkoder og kalkulatorliste. "
+            "- Eksamensdato og klokkeslett. "
             "Also remove the task number, max points and title/topic of the task. "
             "Be careful to still include the information necessary for being able to solve the task: "
+        ),
+        "max_tokens": 1000,
+        "isNum": False,
+        "maxLen": 2000
+    },
+    {
+        "instruction": (
+            "Format this exam task as a valid HTML string for use in a JavaScript variable. "
+            "Use <p>...</p> for all text paragraphs. "
+            "Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present. "
+            "Use MathJax LaTeX. "
+            "Wrap display math in $$...$$. "
+            "Wrap inline math in $...$. "
+            "Do not use \\( ... \\) or \\[ ... \\]. "
+            "Escape all LaTeX backslashes with double backslashes. "
+            "Do not explain summarize or add anything outside the HTML. "
+            "Output must be usable directly inside const oppgaveTekst = `<the content here>`. "
+            "Do not add any other text or explanation. "
+            "Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags. "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -316,29 +375,46 @@ task_process_instructions = [
     }
 ]
 
-async def process_task(task_number: int, ocr_text: str, exam: Exam) -> Exam:
+async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
+    task_exam.task_number = task_number
+    task_exam.exam_version = exam.exam_version
 
     while True:
         task_output = str(ocr_text)
-        task_exam.task_number = task_number
         valid = 0
+        images = 0
 
         for i in range(len(task_process_instructions)):
 
-            # Initiell innhenting av oppgavetekst
+            # Initial extraction of task text
             if i == 0:
                 task_output = str(
                     await prompttotext.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"].format(task_number=f"{task_number}") + task_output,
+                        task_process_instructions[i]["instruction"].format(task_number=task_number) + task_output,
                         max_tokens=task_process_instructions[i]["max_tokens"],
                         isNum=task_process_instructions[i]["isNum"],
                         maxLen=task_process_instructions[i]["maxLen"]
                     )
                 )
 
-            # Innhenting av poeng
+            # Image extraction
             elif i == 1:
+                images = int(
+                    await prompttotext.async_prompt_to_text(
+                        task_process_instructions[i]["instruction"] + task_output,
+                        max_tokens=task_process_instructions[i]["max_tokens"],
+                        isNum=task_process_instructions[i]["isNum"],
+                        maxLen=task_process_instructions[i]["maxLen"]
+                    )
+                )
+                if images == 1:
+                    print(f"[DEEPSEEK] | Images were found in task {task_number}.")
+                else:
+                    print(f"[DEEPSEEK] | No images were found in task {task_number}.")
+
+            # Points extraction
+            elif i == 2:
                 task_exam.points = int(
                     await prompttotext.async_prompt_to_text(
                         task_process_instructions[i]["instruction"] + task_output,
@@ -348,8 +424,8 @@ async def process_task(task_number: int, ocr_text: str, exam: Exam) -> Exam:
                     )
                 )
 
-            # Hent tema og oppdater JSON
-            elif i == 2:
+            # Topic extraction
+            elif i == 3:
                 task_exam.topic = str(
                     await prompttotext.async_prompt_to_text(
                         task_process_instructions[i]["instruction"] + get_topics(exam.subject) + task_output,
@@ -358,10 +434,10 @@ async def process_task(task_number: int, ocr_text: str, exam: Exam) -> Exam:
                         maxLen=task_process_instructions[i]["maxLen"]
                     )
                 )
-                print(f"\n\n\n TOPIC FOUND: {task_exam.topic} \n\n\n")
+                print(f"[DEEPSEEK] | Topic found for task {task_number}: {task_exam.topic}")
                 add_topics(task_exam.topic, exam)
 
-            # Oppdatering av oppgavetekst for steg 3 og 4
+            # Update task_output for middle steps
             elif not i == len(task_process_instructions) - 1:
                 task_output = str(
                     await prompttotext.async_prompt_to_text(
@@ -372,7 +448,7 @@ async def process_task(task_number: int, ocr_text: str, exam: Exam) -> Exam:
                     )
                 )
 
-            # Validering av oppgaven (siste steg)
+            # Validation step
             else:
                 valid = int(
                     await prompttotext.async_prompt_to_text(
@@ -383,41 +459,39 @@ async def process_task(task_number: int, ocr_text: str, exam: Exam) -> Exam:
                     )
                 )
 
-
-            # Skriv ut midlertidig resultat og oppdater progress.txt
-            if i != 1 and i != 2 and i != len(task_process_instructions) - 1:
-                print("\n\n\n\n" + task_output + "\n\n\n\n")
+            # Print intermediate result with task identifier
+            if i not in (1, 2, len(task_process_instructions) - 1):
+                print(f"\n\n\nOppgave {task_number}:\n{task_output}\n\n\n\n")
 
             task_status[task_number] = i + 1
             write_progress()
 
-        # Bygg opp task_exam
         task_exam.task_text = task_output
 
         if valid == 0:
-            # print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task not approved. Retrying...\n")
-            print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task not approved.\n")
+            print(f"[DEEPSEEK] [TASK {task_number}] | Task not approved.\n")
             return task_exam
         else:
-            print(f"[DEEPSEEK] [TASK {task_number:02d}] | Task approved.\n")
+            print(f"[DEEPSEEK] [TASK {task_number}] | Task approved.\n")
             return task_exam
 
 async def main_async(ocr_text: str):
     exam_template = await get_exam_info(ocr_text)
     print(f"[DEEPSEEK] | Started processing all tasks")
 
+    # Iterate through string identifiers
     tasks = [
-        asyncio.create_task(process_task(i, ocr_text, exam_template))
-        for i in range(1, exam_template.total_tasks + 1)
+        asyncio.create_task(process_task(task, ocr_text, exam_template))
+        for task in exam_template.total_tasks
     ]
     results = await asyncio.gather(*tasks)
 
     failed = [res.task_number for res in results if res.task_text is None]
     points = [res.points for res in results if res.task_text is not None]
 
-    for idx, res in enumerate(results, start=1):
+    for res in results:
         if res.task_text is not None:
-            print(f"Result for task {idx:02d}: {res.task_text}\n   (Points: {res.points})\n")
+            print(f"Result for task {res.task_number}: {res.task_text}\n   (Points: {res.points})\n")
 
     print(f"[DEEPSEEK] | Failed tasks: {failed}")
     print(f"[DEEPSEEK] | Points for tasks: {points}")

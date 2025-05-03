@@ -37,15 +37,32 @@
     },
     {
         "subject": "IMAX20X2",
-        "matching_codes": null,
-        "topic": "Kritiske Punkt",
+        "matching_codes": [
+            "IMAA2012",
+            "IMAT2012",
+            "IMAG2012",
+            "IMAT2022",
+            "IMAA2022",
+            "IMAG2022"
+        ],
+        "topic": "Derivasjon",
         "exam_version": "Sommer 2024",
-        "task_number": 7,
+        "task_number": "5b",
         "points": 10,
-        "task_text": "La f ( x, y ) = x² + y² - 2xy + 4x + 4y. a ) Finn de kritiske punktene til funksjonen f. b ) Klassifiser de kritiske punktene til funksjonen f. Med andre ord, avgjør om de kritiske punktene er sadelpunkter, lokale maksimumspunkter, lokale minimumspunkter, eller ingen av delene.",
+        "task_text": "```html\n<p>La $f(x) = \\\\tan x$, $a) -\\\\frac{\\\\pi}{2} < x < \\\\frac{\\\\pi}{2}$. Finn verdiene til $f\\'$ og $f\\\"$ i punktet $x = \\\\frac{\\\\pi}{4}$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$f\\'(\\\\frac{\\\\pi}{4}) = $</p>\n<p>$f\\\"(\\\\frac{\\\\pi}{4}) = $</p>\n<h3>b)</h3>\n<p>Lag det 2. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\\\frac{\\\\pi}{4}$ for funksjonen $f$. Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\\\tan(\\\\frac{\\\\pi}{4} + 0.1)$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$\\\\tan(\\\\frac{\\\\pi}{4} + 0.1) \\\\approx P_2(\\\\frac{\\\\pi}{4} + 0.1) = $</p>\n```",
         "images": [],
         "code": null,
-        "total_tasks": 7
+        "total_tasks": [
+            "1a",
+            "1b",
+            "2",
+            "3a",
+            "3b",
+            "3c",
+            "4",
+            "5a",
+            "5b"
+        ]
     },
     {
         "subject": "IFYT1000",
@@ -369,5 +386,19 @@
         "images": [],
         "code": null,
         "total_tasks": 17
+    },
+    {
+        "subject": "IMAX",
+        "matching_codes": [],
+        "topic": "Arealmoment og Steiner",
+        "exam_version": "S20XX",
+        "task_number": "2b",
+        "points": 6,
+        "task_text": "```html\n<p>Et sammersatt tverrsnitt har geometri som vist i figuren. $z$-aksen er en symmetriakse for tverrsnitts geometrien.</p>\n<p>200 mm $Z$ ▲ 25 mm 25 mm $C$ $y$ 150 mm 50 mm 75 mm</p>\n<p>Beregn tverrsnittets annet arealmoment $I_y$. Bruk Steiners teorem. Rund av svaret ditt til nærmeste heltall. $I_y = ( 83 - 84 ) \\\\times 10^6$ mm$^4$. Merk at håndberegningene du gjør for å løse denne oppgaven må leveres inn.</p>\n```",
+        "images": [],
+        "code": null,
+        "total_tasks": [
+            "2b"
+        ]
     }
 ]

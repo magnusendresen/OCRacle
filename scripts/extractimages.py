@@ -8,6 +8,7 @@ import asyncio
 from google.cloud import vision
 import prompttotext
 import sys
+from typing import List
 
 # Sørg for UTF-8-output
 try:
@@ -21,17 +22,24 @@ if not json_path or not os.path.exists(json_path):
     raise FileNotFoundError(f"[ERROR] Invalid OCRACLE_JSON_PATH: {json_path}")
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
 
-async def extract_images(pdf_path: str, subject: str, version: str, output_folder: str = None):
+async def extract_images(
+    pdf_path: str,
+    subject: str,
+    version: str,
+    total_tasks: List[str],
+    output_folder: str = None
+):
     """
-    Ekstraher bilder fra PDF og navngi dem basert på emnekode (subject), versjon og oppgavenummer.
+    Ekstraher bilder fra PDF og navngi dem basert på emnekode (subject), versjon og oppgavenummer (string).
 
     Args:
         pdf_path: Path til PDF-filen.
         subject: Emnekode, f.eks. 'MEKT1101H24'.
         version: Versjonskode, f.eks. 'H24'.
+        total_tasks: Liste med alle oppgavenummer som kan forekomme, f.eks. ['1', '1a', '2b'].
         output_folder: Mappe der filer lagres. Default: 'img/<subject>_<version>_images'.
     """
-    # Standard output_folder basert på subject og version, i 'img'-katalog
+    # Standard output_folder basert på subject og version
     if output_folder is None:
         base = f"{subject}_{version}_images"
         output_folder = os.path.join("img", base)
@@ -62,34 +70,43 @@ async def extract_images(pdf_path: str, subject: str, version: str, output_folde
             raise RuntimeError(response.error.message)
         text = response.text_annotations[0].description.replace('\n', ' ') if response.text_annotations else ''
 
+        # Prompt som ber om streng-oppgavenummer fra total_tasks
+        options = ", ".join(total_tasks)
         prompt = (
             "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
-            "Respond ONLY with the single task number that appears on this page as an integer (e.g., 1, 2, 3). "
-            "If it is highly unclear which task(s) is on the page, or you think there are illogically many tasks, respond with 0. "
-            "If there are multiple tasks, respond with each task number on a new line. "
-            "If there are subtasks (e.g. a, b, i, ii, etc.), respond with the main task number only. "
+            f"Hvilket av disse oppgavenummerne er på siden? {options}. "
+            "Respond ONLY with the task number from this list that appears on this page as a string. "
+            "Hvis det er uklart eller ingen stemmer, respond med 0. "
             + text
         )
         try:
-            result = await prompttotext.async_prompt_to_text(prompt, max_tokens=50, isNum=False, maxLen=100)
+            result = await prompttotext.async_prompt_to_text(
+                prompt,
+                max_tokens=50,
+                isNum=False,
+                maxLen=200
+            )
         except Exception as e:
             print(f"Warning: OCR-prompt feilet på side {page_index}: {e}")
             result = ''
 
-        # Håndter resultat
+        # Håndter resultat som strenger
         if not isinstance(result, str) or not result.strip():
             tasks = ['0']
         else:
             lines = [line.strip() for line in result.splitlines()]
-            tasks = [line for line in lines if line.isdigit()]
+            tasks = [line for line in lines if line in total_tasks or line == '0']
             tasks = tasks or ['0']
 
+        # Fallback til forrige hvis ingen funnet, eller bruk resultat
         if tasks == ['0']:
             tasks = last_tasks
-        else:
-            last_tasks = tasks
+        last_tasks = tasks
 
-        # Ekstraher bilder
+        # Velg det første task-nummeret fra prompt som gjelder for hele siden
+        page_task = tasks[0]
+
+        # Ekstraher og navngi bilder per task (string)
         for img_idx, img_info in enumerate(page.get_images(full=True), start=1):
             rects = page.get_image_rects(img_info[0])
             if not rects:
@@ -101,7 +118,8 @@ async def extract_images(pdf_path: str, subject: str, version: str, output_folde
             if crop.size == 0:
                 continue
 
-            task_num = tasks[img_idx-1] if img_idx <= len(tasks) else tasks[-1]
+            # Brug page_task fra prompt for filnavn
+            task_num = page_task
             counts.setdefault(task_num, 0)
             counts[task_num] += 1
             seq = f"{counts[task_num]:02d}"

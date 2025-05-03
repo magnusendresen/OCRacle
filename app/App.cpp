@@ -290,7 +290,7 @@ void App::calculateProgress() {
                                         count++;
                                     }
                                 }
-                                count *= 5;
+                                count *= 6;
                                 if (count > 0) {
                                     ProgressBar2->progress = static_cast<double>(sum) / count;
                                 }

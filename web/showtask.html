@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="no">
 <head>
-  <title>MathJax Task 17</title>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  <meta charset="UTF-8">
+  <title>Dynamisk MathJax-oppsett (struktur-nazi edition)</title>
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+      },
+      svg: { fontCache: 'global' }
+    };
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 700px;
+      margin: 2em auto;
+      line-height: 1.6;
+    }
+    h3 {
+      margin-top: 2em;
+    }
+  </style>
 </head>
 <body>
-<div id="content"></div>
+  <div id="content">Oppgave lastes...</div>
 
-<script type="text/javascript">
-  const mathContent = `
-    <strong>Task 17:</strong><br><br>
+  <script>
+    const oppgaveTekst = `
+     html
 
-    Olje med massetetthet \\( \\rho = 9{,}0 \\cdot 10^2 \\, \\text{kg/m}^3 \\) skal tappes fra et reservoar på havbunnen gjennom et vertikalt rør med lengde \\( L = 1{,}1 \\, \\text{km} \\) og diameter \\( D = 0{,}20 \\, \\text{m} \\). Trykket i reservoaret i det tappingen starter er \\( P_1 = 1{,}0 \\cdot 10^7 \\, \\text{Pa} \\), og oljen er tilnærmet i ro idet den kommer inn i røret. På overflaten kommer oljen ut i luft der lufttrykket er \\( p_0 = 1{,}0 \\cdot 10^5 \\, \\text{Pa} \\).<br><br>
+<p>Et sammersatt tverrsnitt har geometri som vist i figuren. $z$-aksen er en symmetriakse for tverrsnitts geometrien.</p>
+<p>200 mm $Z$ ▲ 25 mm 25 mm $C$ $y$ 150 mm 50 mm 75 mm</p>
+<p>Beregn tverrsnittets annet arealmoment $I_y$. Bruk Steiners teorem. Rund av svaret ditt til nærmeste heltall. $I_y = ( 83 - 84 ) \\times 10^6$ mm$^4$. Merk at håndberegningene du gjør for å løse denne oppgaven må leveres inn.</p>
+    `;
 
-    <strong>a)</strong> Vis at væskefarten ut av røret ved overflaten er \\( v = 20 \\, \\text{m/s} \\) når vi neglisjerer alle former for tap.<br><br>
-
-    <strong>b)</strong> Bestem volumstrømmen i røret.<br><br>
-
-    <strong>c)</strong> Trykket i reservoaret vil reduseres etter hvert som olje tappes ut. Hva er trykket i reservoaret når oljestrømmen stopper opp?<br><br>
-
-    <strong>d)</strong> Røret har ruhet \\( \\varepsilon = 0{,}040 \\, \\text{mm} \\), og oljen har dynamisk viskositet \\( \\eta = 2{,}5 \\cdot 10^{-3} \\, \\text{Pa} \\cdot \\text{s} \\). På grunn av rørfriksjon måles væskefarten i røret til \\( v = 10 \\, \\text{m/s} \\). Bestem friksjonsfaktoren \\( f \\) for væskestrømmen i røret.<br><br>
-
-    <strong>e)</strong> Beregn tapshøyden \\( h_f \\) på grunn av rørfriksjon under samme forutsetninger som i oppgave d). Forklar kort hva tapshøyden representerer.<br><br>
-
-    <strong>Maks poeng: 15</strong>
-  `;
-
-  document.getElementById("content").innerHTML = mathContent;
-
-  window.MathJax = {
-    tex: { inlineMath: [['\\(', '\\)']] },
-    startup: {
-      ready: () => {
-        MathJax.startup.defaultReady();
-        MathJax.typeset();
-      }
-    }
-  };
-</script>
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = oppgaveTekst;
+    MathJax.typeset();
+  </script>
 </body>
 </html>
