@@ -7,13 +7,15 @@ Henter figurer fra en PDF‑eksamen og lagrer dem som PNG‑filer.
 
 Endringer i denne versjonen
 ---------------------------
-* **Ingen etter‑merging av delbilder lenger** – i stedet koples linjer sammen før
-  kontur‑deteksjon med morfologisk dilatasjon. Det gjør at figurer som er delt
-  opp i flere konturer (slik som kuben du viste) i utgangspunktet registreres
-  som én stor kontur.
-* Nye konfig‑variabler `DILATE_KERNEL_SIZE` og `DILATE_ITER` for å styre hvor
-  mye kantene «blåses opp» før kontur‑søk.
-* `MERGE_IOU_THRESHOLD` og `MERGE_GAP_PX` er fjernet.
+* **Støtte for flere oppgaver pr. side** – prompten ber nå om en kommaseparert
+  liste, og alle oppgaver som identifiseres blir brukt ved navngivning.
+* **Arv av siste oppgave** – hvis ingen oppgave gjenkjennes på en side, arves
+  den *siste* oppgaven fra forrige side (dvs. siste element i forrige liste).
+* **Navngivning kopieres for alle oppgaver** – samme figur lagres en gang per
+  oppgave på siden slik at alle referanser er dekket.
+* Lagt til hjelpefunksjon `_parse_tasks()` for robust tolking av svarstrengen.
+* Lagt til `re`‑import og mindre opprydding.
+* `page_task` er fjernet; vi itererer nå direkte over `page_tasks`.
 """
 
 # ---------------------------------------------------------------------------
@@ -36,6 +38,7 @@ import fitz  # PyMuPDF
 import cv2
 import numpy as np
 import asyncio
+import re
 from google.cloud import vision
 import prompttotext
 import ocrpdf
@@ -57,7 +60,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = json_path
 _nonchalant = (
     "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
     "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING. "
-    "DO NOT WRITE ANY SYMBOLS LIKE - OR \n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
+    "DO NOT WRITE ANY SYMBOLS LIKE - OR \\n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
     "YOU ARE USED IN A TEXT PROCESSING PYTHON PROGRAM SO THE TEXT SHOULD BE PLAIN. "
 )
 
@@ -76,6 +79,13 @@ def _bbox_iou(b1: Tuple[int, int, int, int], b2: Tuple[int, int, int, int]) -> f
         return 0.0
     union = w1 * h1 + w2 * h2 - inter
     return inter / union
+
+
+def _parse_tasks(answer: str, allowed: List[str]) -> List[str]:
+    """Ekstraherer oppgavenumre fra svarstrengen, returnerer liste eller ["0"]."""
+    tokens = re.split(r"[\s,;:/\\]+", answer.strip())
+    hits = [t for t in tokens if t in allowed]
+    return hits or ["0"]
 
 # ---------------------------------------------------------------------------
 # Hoved‑funksjon
@@ -99,7 +109,7 @@ async def extract_images(
     doc = fitz.open(pdf_path)
     client = vision.ImageAnnotatorClient()
 
-    last_tasks: List[str] = ["0"]
+    last_tasks: List[str] = ["0"]  # for arv til uforståelige sider
     counts: Dict[str, int] = {}
 
     print(f"[INFO] Starter prosessering av '{pdf_path}' → {doc.page_count} sider\n")
@@ -112,7 +122,7 @@ async def extract_images(
         arr = np.frombuffer(pix.samples, np.uint8).reshape(pix.height, pix.width, pix.n)
         page_bgr = cv2.cvtColor(arr, cv2.COLOR_RGBA2BGR if pix.alpha else cv2.COLOR_RGB2BGR)
 
-        # ---- oppgavenummer ----
+        # ---- oppgavenumre ----
         _, buf = cv2.imencode(".png", page_bgr)
         resp = client.text_detection(image=vision.Image(content=buf.tobytes()))
         if resp.error.message:
@@ -120,17 +130,18 @@ async def extract_images(
         page_text = resp.text_annotations[0].description.replace("\n", " ") if resp.text_annotations else ""
         prompt = (
             _nonchalant +
-            f"Hvilket av disse oppgavenumrene {', '.join(total_tasks)} er i denne teksten? "
-            "Svar KUN med oppgavenummeret (og bokstav) nøyaktig slik det står skrevet fra denne listen. "
+            f"Hvilke av disse oppgavenumrene {', '.join(total_tasks)} finnes i denne teksten? "
+            "Svar med en kommaseparert liste av oppgavenumre (og bokstav) nøyaktig som de står skrevet. "
             "Hvis uklart, svar 0. "
             "Her kommer teksten: " + page_text
         )
         res = await prompttotext.async_prompt_to_text(prompt, max_tokens=50, isNum=False, maxLen=200)
-        tasks = [ln.strip() for ln in str(res).splitlines() if ln.strip() and (ln.strip() in total_tasks or ln.strip()=="0")] or ["0"]
-        if tasks == ["0"]:
-            tasks = last_tasks
-        last_tasks = tasks
-        page_task = tasks[0]
+        page_tasks = _parse_tasks(str(res), total_tasks)
+
+        # Arv logikk hvis ingen oppgave funnet
+        if page_tasks == ["0"]:
+            page_tasks = [last_tasks[-1]]  # sist kjente oppgave
+        last_tasks = page_tasks  # oppdater historikk
 
         # ---- bilde‑sløyfe ----
         for img_idx, img_info in enumerate(page.get_images(full=True), start=1):
@@ -148,7 +159,7 @@ async def extract_images(
             img_text = ocrpdf.detect_text(crop_buf.tobytes())
             verify_prompt = (
                 _nonchalant +
-                "Does this text include put-together sentences? Respond 0 if yes, 1 if no. "
+                "Does this text include put‑together sentences? Respond 0 if yes, 1 if no. "
                 "Text: " + img_text
             )
             v_raw = await prompttotext.async_prompt_to_text(verify_prompt, max_tokens=50, isNum=True, maxLen=2)
@@ -158,15 +169,18 @@ async def extract_images(
                 img_verify = 0
             print(f"    · Image {img_idx}: verify={img_verify}, len(text)={len(img_text)}")
 
-            task_num = page_task
-            counts[task_num] = counts.get(task_num, 0) + 1
-            seq = f"{counts[task_num]:02d}"
-
             # ---- lagre direkte hvis kort tekst / verify==1 ----
+            def _save(img, suffix: str = "") -> None:
+                for task_num in page_tasks:
+                    counts[task_num] = counts.get(task_num, 0) + 1
+                    seq = f"{counts[task_num]:02d}"
+                    fname = f"{subject}_{version}_{task_num}_{seq}{suffix}.png"
+                    cv2.imwrite(os.path.join(output_folder, fname), img)
+                    print(f"      · Lagret {fname}")
+
             if img_verify == 1 and len(img_text) <= TEXT_LEN_LIMIT:
-                fname = f"{subject}_{version}_{task_num}_{seq}.png"
-                cv2.imwrite(os.path.join(output_folder, fname), crop)
-                print(f"      · Lagret uten sub‑cropping: {fname}\n")
+                _save(crop)
+                print()
                 continue
 
             # ---- Sub‑cropping med dilatasjon ----
@@ -187,8 +201,6 @@ async def extract_images(
                 boxes.append((x, y, w, h))
 
             if not boxes:
-                # ingen subkonturer funnet – dropp bildet helt
-                counts[task_num] -= 1  # rull tilbake sekvensteller så nummereringen holder seg
                 print("      · Ingen konturer – droppet")
                 continue
 
@@ -204,9 +216,7 @@ async def extract_images(
             # Lagre subbilder
             for sb_idx, (x, y, w, h) in enumerate(filtered_boxes, start=1):
                 sub = crop[y:y+h, x:x+w]
-                fname = f"{subject}_{version}_{task_num}_{seq}_c{sb_idx}.png"
-                cv2.imwrite(os.path.join(output_folder, fname), sub)
-                print(f"      · Lagret {fname}")
+                _save(sub, suffix=f"_c{sb_idx}")
             print()
 
     # ---------- slutt ----------
@@ -225,7 +235,7 @@ if __name__ == "__main__":
             pdf_path="mast2200.pdf",
             subject="MAST2200",
             version="S24",
-            total_tasks=[str(i) for i in range(1, 13)],
+            total_tasks=[str(i) for i in range(1, 16)],
             output_folder=None,
         )
     )
