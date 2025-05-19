@@ -45,11 +45,11 @@
             "IMAA2022",
             "IMAG2022"
         ],
-        "topic": "Derivasjon",
+        "topic": "Fourierrekke",
         "exam_version": "Sommer 2024",
-        "task_number": "5b",
-        "points": 10,
-        "task_text": "```html\n<p>La $f(x) = \\\\tan x$, $a) -\\\\frac{\\\\pi}{2} < x < \\\\frac{\\\\pi}{2}$. Finn verdiene til $f\\'$ og $f\\\"$ i punktet $x = \\\\frac{\\\\pi}{4}$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$f\\'(\\\\frac{\\\\pi}{4}) = $</p>\n<p>$f\\\"(\\\\frac{\\\\pi}{4}) = $</p>\n<h3>b)</h3>\n<p>Lag det 2. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\\\frac{\\\\pi}{4}$ for funksjonen $f$. Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\\\tan(\\\\frac{\\\\pi}{4} + 0.1)$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$\\\\tan(\\\\frac{\\\\pi}{4} + 0.1) \\\\approx P_2(\\\\frac{\\\\pi}{4} + 0.1) = $</p>\n```",
+        "task_number": "12",
+        "points": 8,
+        "task_text": "```html\n<p>Vi skal finne invers diskrete fouriertransformasjonen (IDFT) av sekvensen $F[k] = 1, 4, 0, 0$. Her er $F[0] = 1$, $F[1] = 4$, $F[2] = 0$ og $F[3] = 0$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$f[0] = D^{-1}\\\\{F[k]\\\\}[0] = $ + j,</p>\n<p>$f[1] = D^{-1}\\\\{F[k]\\\\}[1] = $ + j,</p>\n<p>$f[2] = D^{-1}\\\\{F[k]\\\\}[2] = $ + j,</p>\n<p>$f[3] = D^{-1}\\\\{F[k]\\\\}[3] = $ + j.</p>\n```",
         "images": [],
         "code": null,
         "total_tasks": [
@@ -61,7 +61,22 @@
             "3c",
             "4",
             "5a",
-            "5b"
+            "5b",
+            "6a",
+            "6b",
+            "6c",
+            "6d",
+            "7",
+            "8a",
+            "8b",
+            "9a",
+            "9b",
+            "9c",
+            "10",
+            "11a",
+            "11b",
+            "11c",
+            "12"
         ]
     },
     {
