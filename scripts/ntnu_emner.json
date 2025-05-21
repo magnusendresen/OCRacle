@@ -19210,7 +19210,8 @@
             "Retningsderivert",
             "Kritiske Punkt",
             "Derivasjon",
-            "Fourierrekke"
+            "Fourierrekke",
+            "Konvolusjon"
         ]
     },
     {
@@ -19224,7 +19225,8 @@
             "Retningsderivert",
             "Kritiske Punkt",
             "Derivasjon",
-            "Fourierrekke"
+            "Fourierrekke",
+            "Konvolusjon"
         ]
     },
     {
@@ -19238,7 +19240,8 @@
             "Retningsderivert",
             "Kritiske Punkt",
             "Derivasjon",
-            "Fourierrekke"
+            "Fourierrekke",
+            "Konvolusjon"
         ]
     },
     {
@@ -19252,7 +19255,8 @@
             "Retningsderivert",
             "Kritiske Punkt",
             "Derivasjon",
-            "Fourierrekke"
+            "Fourierrekke",
+            "Konvolusjon"
         ]
     },
     {
@@ -19266,7 +19270,8 @@
             "Retningsderivert",
             "Kritiske Punkt",
             "Derivasjon",
-            "Fourierrekke"
+            "Fourierrekke",
+            "Konvolusjon"
         ]
     },
     {
@@ -19280,7 +19285,8 @@
             "Retningsderivert",
             "Kritiske Punkt",
             "Derivasjon",
-            "Fourierrekke"
+            "Fourierrekke",
+            "Konvolusjon"
         ]
     },
     {
@@ -19593,7 +19599,13 @@
         "Emnekode": "MAST2200",
         "Emnenavn": "Materialteknikk",
         "Sted": "Trondheim",
-        "Temaer": []
+        "Temaer": [
+            "Kritiske Punkt",
+            "Polymerteknologi",
+            "Materialegenskaper",
+            "Krystallografi",
+            "Materialvitenskap"
+        ]
     },
     {
         "Emnekode": "MASG2200",
@@ -19605,7 +19617,15 @@
         "Emnekode": "TMM4100",
         "Emnenavn": "Materialteknikk",
         "Sted": "Trondheim",
-        "Temaer": []
+        "Temaer": [
+            "Polymere",
+            "Materialvitenskap",
+            "Materialegenskaper",
+            "Materiallære",
+            "Krystallografi",
+            "Kritiske Punkt",
+            "Viskoelastisitet"
+        ]
     },
     {
         "Emnekode": "MASA2100",

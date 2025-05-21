@@ -151,9 +151,14 @@ async def main_async():
     ]
     results = await asyncio.gather(*tasks)
 
-    all_text = " ".join(results)
+    # Lag en enkelt tekststreng med tydelig markering av hver side
+    all_text = ""
+    for idx, page_text in enumerate(results, start=1):
+        all_text += f"\n\n=== PAGE {idx} ===\n\n{page_text}"
+
     print("\n[INFO] Text extraction complete! Returning collected text.\n")
     return all_text
+
 
 def main():
     return asyncio.run(main_async())

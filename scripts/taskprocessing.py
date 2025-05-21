@@ -20,6 +20,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 db_dir = Path(__file__).resolve().parent
 progress_file = db_dir / "progress.txt"
 JSON_PATH = db_dir / "ntnu_emner.json"
+IMG_PATH = db_dir / "img"
 task_status = defaultdict(lambda: 0)
 
 # Prompt prefix
@@ -235,7 +236,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
             + ocr_text,  
             max_tokens=1000,
             isNum=False,
-            maxLen=150
+            maxLen=250
         )
     )
     exam.total_tasks = [task.strip() for task in exam.total_tasks.split(",")]
@@ -254,9 +255,9 @@ async def get_exam_info(ocr_text: str) -> Exam:
         subject=exam.subject,
         version=exam.exam_version,
         total_tasks=exam.total_tasks,
+        full_text=ocr_text,
         output_folder=None
     )
-
 
     return exam
 
@@ -277,10 +278,11 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant + 
+            nonchalant +
             "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
-            "Does this task require an image for solving? "
-            "If yes, respond with 1, otherwise 0. "
+            "Does this task likely contain any images or figures that are relevant for solving the task? "
+            "Respond with 1 if you think there are images, 0 if not. "
+            "Only reply with 0 or 1, nothing else. "
         ),
         "max_tokens": 1000,
         "isNum": True,
@@ -337,8 +339,8 @@ task_process_instructions = [
             "- Kontaktinformasjon til faglærer under eksamen. "
             "- Hjelpemiddelkoder og kalkulatorliste. "
             "- Eksamensdato og klokkeslett. "
-            "Also remove the task number, max points and title/topic of the task. "
-            "Be careful to still include the information necessary for being able to solve the task: "
+            "Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task. "
+            "Be careful to still include the information necessary for being able to solve the task, such as the main question itself. "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -346,6 +348,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
+            nonchalant +
             "Format this exam task as a valid HTML string for use in a JavaScript variable. "
             "Use <p>...</p> for all text paragraphs. "
             "Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present. "
@@ -358,6 +361,7 @@ task_process_instructions = [
             "Output must be usable directly inside const oppgaveTekst = `<the content here>`. "
             "Do not add any other text or explanation. "
             "Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags. "
+            "Make sure that e.g. infty, omega, theta, etc. are properly formatted."
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -408,21 +412,30 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
                         maxLen=task_process_instructions[i]["maxLen"]
                     )
                 )
-                if images == 1:
+                if images > 0:
                     print(f"[DEEPSEEK] | Images were found in task {task_number}.")
+                    EXAM_IMG_PATH = IMG_PATH / f"{task_exam.subject}_{task_exam.exam_version}_images"
+                    # Finn alle bilder som matcher patternet for denne oppgaven
+                    pattern = f"{task_exam.subject}_{task_exam.exam_version}_{task_number}_*.png"
+                    found_images = sorted(EXAM_IMG_PATH.glob(pattern))
+                    task_exam.images = [str(img) for img in found_images]
+                    print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
                 else:
                     print(f"[DEEPSEEK] | No images were found in task {task_number}.")
+                    task_exam.images = []
 
             # Points extraction
             elif i == 2:
-                task_exam.points = int(
-                    await prompttotext.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"] + task_output,
-                        max_tokens=task_process_instructions[i]["max_tokens"],
-                        isNum=task_process_instructions[i]["isNum"],
-                        maxLen=task_process_instructions[i]["maxLen"]
-                    )
+                points_str = await prompttotext.async_prompt_to_text(
+                    task_process_instructions[i]["instruction"] + task_output,
+                    max_tokens=task_process_instructions[i]["max_tokens"],
+                    isNum=task_process_instructions[i]["isNum"],
+                    maxLen=task_process_instructions[i]["maxLen"]
                 )
+                try:
+                    task_exam.points = int(points_str) if points_str is not None else None
+                except (TypeError, ValueError):
+                    task_exam.points = None
 
             # Topic extraction
             elif i == 3:
@@ -488,6 +501,20 @@ async def main_async(ocr_text: str):
 
     failed = [res.task_number for res in results if res.task_text is None]
     points = [res.points for res in results if res.task_text is not None]
+
+    # Slett alle bilder i IMG_PATH som ikke er knyttet til noen oppgave
+    used_images = set()
+    for res in results:
+        if res.images:
+            used_images.update(res.images)
+
+    for img_file in IMG_PATH.glob("*.png"):
+        if str(img_file) not in used_images:
+            try:
+                img_file.unlink()
+                print(f"[CLEANUP] | Deleted unused image: {img_file}")
+            except Exception as e:
+                print(f"[CLEANUP ERROR] | Could not delete {img_file}: {e}")
 
     for res in results:
         if res.task_text is not None:

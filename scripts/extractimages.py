@@ -1,36 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-extract_images.py
-~~~~~~~~~~~~~~~~~
-Henter figurer fra en PDF‑eksamen og lagrer dem som PNG‑filer.
-
-Endringer i denne versjonen
----------------------------
-* **Støtte for flere oppgaver pr. side** – prompten ber nå om en kommaseparert
-  liste, og alle oppgaver som identifiseres blir brukt ved navngivning.
-* **Arv av siste oppgave** – hvis ingen oppgave gjenkjennes på en side, arves
-  den *siste* oppgaven fra forrige side (dvs. siste element i forrige liste).
-* **Navngivning kopieres for alle oppgaver** – samme figur lagres en gang per
-  oppgave på siden slik at alle referanser er dekket.
-* Lagt til hjelpefunksjon `_parse_tasks()` for robust tolking av svarstrengen.
-* Lagt til `re`‑import og mindre opprydding.
-* `page_task` er fjernet; vi itererer nå direkte over `page_tasks`.
-"""
-
-# ---------------------------------------------------------------------------
-# KONFIG – juster verdier etter behov
-# ---------------------------------------------------------------------------
-TEXT_LEN_LIMIT = 75              # Tegn før et bilde regnes som «tekst‑tungt»
-MIN_CONTOUR_AREA = 15_000        # Min. areal for en kontur (px²)
-MIN_CONTOUR_HEIGHT = 120         # Min. høyde for en kontur (px)
-OVERLAP_IOU_THRESHOLD = 0.3      # Dropp subcrops som overlapper > dette
-PIXEL_SIMILARITY_THRESHOLD = 0.5 # Dropp duplikater som ligner mer enn dette
-CANNY_LOW, CANNY_HIGH = 50, 150  # Canny‑parametre
-DILATE_KERNEL_SIZE = 5           # Kernel‑størrelse for dilatasjon (px)
-DILATE_ITER = 2                  # Antall iterasjoner med dilatasjon
-ZOOM = 2.0                       # Rasteriseringsoppløsning for PDF‑siden
-# ---------------------------------------------------------------------------
+import taskprocessing
+import ocrpdf
+import prompttotext
 
 import os
 import shutil
@@ -39,67 +9,87 @@ import cv2
 import numpy as np
 import asyncio
 import re
-from google.cloud import vision
-import prompttotext
-import ocrpdf
+import json
 import sys
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Optional
+from pathlib import Path
 
-# Sørg for UTF‑8‑stdout
+# Sørg for UTF-8-stdout
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except AttributeError:
     pass
 
-# Google Vision‑legitimasjon
-json_path = os.getenv("OCRACLE_JSON_PATH")
-if not json_path or not os.path.exists(json_path):
-    raise FileNotFoundError(f"[ERROR] Invalid OCRACLE_JSON_PATH: {json_path}")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = json_path
+# Funksjon for å skrive fremdrift til progress.txt
+progress_file = Path(__file__).resolve().parent / "progress.txt"
+
+def write_progress(updates: Optional[Dict[int, str]] = None):
+    try:
+        if progress_file.exists():
+            with open(progress_file, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+        else:
+            lines = []
+
+        if updates is None:
+            return
+
+        max_idx = max(updates.keys())
+        while len(lines) < max_idx + 1:
+            lines.append("\n")
+
+        for idx, text in updates.items():
+            lines[idx] = f"{text}\n"
+
+        with open(progress_file, "w", encoding="utf-8") as f:
+            f.writelines(lines)
+
+        for idx, text in updates.items():
+            print(f"[STATUS] | Wrote '{text}' to line {idx + 1} in {progress_file}")
+    except Exception as e:
+        print(f"[ERROR] Could not update progress file: {e}")
 
 _nonchalant = (
     "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
     "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING. "
-    "DO NOT WRITE ANY SYMBOLS LIKE - OR \\n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
+    "DO NOT WRITE ANY SYMBOLS LIKE - OR \n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
     "YOU ARE USED IN A TEXT PROCESSING PYTHON PROGRAM SO THE TEXT SHOULD BE PLAIN. "
 )
 
-# ---------------------------------------------------------------------------
-# Hjelpefunksjoner
-# ---------------------------------------------------------------------------
+TEXT_LEN_LIMIT = 75
+MIN_CONTOUR_AREA = 15_000
+MIN_CONTOUR_HEIGHT = 120
+OVERLAP_IOU_THRESHOLD = 0.3
+CANNY_LOW, CANNY_HIGH = 50, 150
+DILATE_KERNEL_SIZE = 5
+DILATE_ITER = 2
+ZOOM = 2.0
 
 def _bbox_iou(b1: Tuple[int, int, int, int], b2: Tuple[int, int, int, int]) -> float:
-    """IoU mellom to bokser (x, y, w, h)."""
     x1, y1, w1, h1 = b1
     x2, y2, w2, h2 = b2
     xa, ya = max(x1, x2), max(y1, y2)
-    xb, yb = min(x1 + w1, x2 + w2), min(y1 + h1, y2 + h2)
+    xb = min(x1 + w1, x2 + w2)
+    yb = min(y1 + h1, y2 + h2)
     inter = max(0, xb - xa) * max(0, yb - ya)
     if inter == 0:
         return 0.0
     union = w1 * h1 + w2 * h2 - inter
     return inter / union
 
-
 def _parse_tasks(answer: str, allowed: List[str]) -> List[str]:
-    """Ekstraherer oppgavenumre fra svarstrengen, returnerer liste eller ["0"]."""
     tokens = re.split(r"[\s,;:/\\]+", answer.strip())
     hits = [t for t in tokens if t in allowed]
     return hits or ["0"]
-
-# ---------------------------------------------------------------------------
-# Hoved‑funksjon
-# ---------------------------------------------------------------------------
 
 async def extract_images(
     pdf_path: str,
     subject: str,
     version: str,
     total_tasks: List[str],
-    output_folder: str | None = None,
+    full_text: str,
+    output_folder: Optional[str] = None,
 ):
-    """Ekstraherer figurer fra *pdf_path* og lagrer dem som PNG‑filer."""
-
     if output_folder is None:
         output_folder = os.path.join("img", f"{subject}_{version}_images")
     if os.path.exists(output_folder):
@@ -107,135 +97,124 @@ async def extract_images(
     os.makedirs(output_folder, exist_ok=True)
 
     doc = fitz.open(pdf_path)
-    client = vision.ImageAnnotatorClient()
-
-    last_tasks: List[str] = ["0"]  # for arv til uforståelige sider
+    image_progress = ['0'] * len(doc)  # Initialiser fremdrift per side
     counts: Dict[str, int] = {}
+    last_tasks: List[str] = [total_tasks[0]]
 
-    print(f"[INFO] Starter prosessering av '{pdf_path}' → {doc.page_count} sider\n")
+    print(f"[INFO] Starter prosessering av '{pdf_path}' → {doc.page_count} sider")
 
-    # ---------- side‑sløyfe ----------
-    for page_index, page in enumerate(doc, start=1):
+    async def process_page(page_index: int, page):
         print(f"[INFO] Side {page_index}/{doc.page_count}")
+
+        images = page.get_images(full=True)
+        if not images:
+            print("    · Ingen bilder på siden, hopper over tekstprompt.")
+            image_progress[page_index - 1] = '1'
+            write_progress({7: ''.join(image_progress)})
+            return {}
+
+        prompt = (
+            _nonchalant + 
+            f"Hvilke oppgave(r) fra denne listen {total_tasks} er på side {page_index} i teksten? "
+            "Skriv hver oppgave separert med et komma. "
+            "Skriv kun de oppgavene du er helt sikker på at er på siden. "
+            "Se på teksten i sin helhet for å logisk avgjøre hvilke oppgaver som er på siden. "
+            "Her er teksten: " + full_text
+            )
+        res = await prompttotext.async_prompt_to_text(
+            prompt, max_tokens=50, isNum=False, maxLen=200
+        )
+        page_tasks = _parse_tasks(str(res), total_tasks)
+        if page_tasks == ["0"]:
+            page_tasks = [last_tasks[-1]]
+        last_tasks[:] = page_tasks
 
         pix = page.get_pixmap(matrix=fitz.Matrix(ZOOM, ZOOM))
         arr = np.frombuffer(pix.samples, np.uint8).reshape(pix.height, pix.width, pix.n)
-        page_bgr = cv2.cvtColor(arr, cv2.COLOR_RGBA2BGR if pix.alpha else cv2.COLOR_RGB2BGR)
-
-        # ---- oppgavenumre ----
-        _, buf = cv2.imencode(".png", page_bgr)
-        resp = client.text_detection(image=vision.Image(content=buf.tobytes()))
-        if resp.error.message:
-            raise RuntimeError(resp.error.message)
-        page_text = resp.text_annotations[0].description.replace("\n", " ") if resp.text_annotations else ""
-        prompt = (
-            _nonchalant +
-            f"Hvilke av disse oppgavenumrene {', '.join(total_tasks)} finnes i denne teksten? "
-            "Svar med en kommaseparert liste av oppgavenumre (og bokstav) nøyaktig som de står skrevet. "
-            "Hvis uklart, svar 0. "
-            "Her kommer teksten: " + page_text
+        page_bgr = cv2.cvtColor(
+            arr, cv2.COLOR_RGBA2BGR if pix.alpha else cv2.COLOR_RGB2BGR
         )
-        res = await prompttotext.async_prompt_to_text(prompt, max_tokens=50, isNum=False, maxLen=200)
-        page_tasks = _parse_tasks(str(res), total_tasks)
 
-        # Arv logikk hvis ingen oppgave funnet
-        if page_tasks == ["0"]:
-            page_tasks = [last_tasks[-1]]  # sist kjente oppgave
-        last_tasks = page_tasks  # oppdater historikk
+        def _save(img: np.ndarray, task_nums: List[str]):
+            for task_num in task_nums:
+                counts[task_num] = counts.get(task_num, 0) + 1
+                seq = f"{counts[task_num]:02d}"
+                task_num_padded = f"{int(task_num):02d}" if task_num.isdigit() else task_num
+                fname = f"{subject}_{version}_{task_num_padded}_{seq}.png"
+                cv2.imwrite(os.path.join(output_folder, fname), img)
+                print(f"      · Lagret {fname}")
 
-        # ---- bilde‑sløyfe ----
-        for img_idx, img_info in enumerate(page.get_images(full=True), start=1):
+        for img_idx, img_info in enumerate(images, start=1):
             rects = page.get_image_rects(img_info[0])
             if not rects:
                 continue
             r = max(rects, key=lambda rt: rt.width * rt.height)
-            x0, y0, x1, y1 = (int(r.x0 * ZOOM), int(r.y0 * ZOOM), int(r.x1 * ZOOM), int(r.y1 * ZOOM))
+            x0, y0, x1, y1 = (
+                int(r.x0 * ZOOM), int(r.y0 * ZOOM),
+                int(r.x1 * ZOOM), int(r.y1 * ZOOM)
+            )
             crop = page_bgr[y0:y1, x0:x1]
             if crop.size == 0:
                 continue
 
-            # ---- figur/tekst‑sjekk ----
             _, crop_buf = cv2.imencode(".png", crop)
             img_text = ocrpdf.detect_text(crop_buf.tobytes())
-            verify_prompt = (
-                _nonchalant +
-                "Does this text include put‑together sentences? Respond 0 if yes, 1 if no. "
-                "Text: " + img_text
+            verify_prompt = (_nonchalant + "Does this text include put-together sentences? Respond 0 if yes, 1 if no. Text: " + img_text)
+            v_raw = await prompttotext.async_prompt_to_text(
+                verify_prompt, max_tokens=50, isNum=True, maxLen=2
             )
-            v_raw = await prompttotext.async_prompt_to_text(verify_prompt, max_tokens=50, isNum=True, maxLen=2)
             try:
                 img_verify = int(str(v_raw).strip())
             except ValueError:
                 img_verify = 0
             print(f"    · Image {img_idx}: verify={img_verify}, len(text)={len(img_text)}")
 
-            # ---- lagre direkte hvis kort tekst / verify==1 ----
-            def _save(img, suffix: str = "") -> None:
-                for task_num in page_tasks:
-                    counts[task_num] = counts.get(task_num, 0) + 1
-                    seq = f"{counts[task_num]:02d}"
-                    fname = f"{subject}_{version}_{task_num}_{seq}{suffix}.png"
-                    cv2.imwrite(os.path.join(output_folder, fname), img)
-                    print(f"      · Lagret {fname}")
-
             if img_verify == 1 and len(img_text) <= TEXT_LEN_LIMIT:
-                _save(crop)
+                _save(crop, page_tasks)
                 print()
                 continue
 
-            # ---- Sub‑cropping med dilatasjon ----
             gray = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
             blurred = cv2.GaussianBlur(gray, (5, 5), 0)
             edges = cv2.Canny(blurred, CANNY_LOW, CANNY_HIGH)
-
-            # Koble sammen nærgående kanter
             kernel = np.ones((DILATE_KERNEL_SIZE, DILATE_KERNEL_SIZE), np.uint8)
             edges = cv2.dilate(edges, kernel, iterations=DILATE_ITER)
-
-            contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-            boxes = []
-            for c in contours:
-                x, y, w, h = cv2.boundingRect(c)
-                if w * h < MIN_CONTOUR_AREA or h < MIN_CONTOUR_HEIGHT:
-                    continue
-                boxes.append((x, y, w, h))
-
+            contours, _ = cv2.findContours(
+                edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+            )
+            boxes = [cv2.boundingRect(c) for c in contours]
+            boxes = [b for b in boxes if b[2]*b[3] >= MIN_CONTOUR_AREA and b[3] >= MIN_CONTOUR_HEIGHT]
             if not boxes:
                 print("      · Ingen konturer – droppet")
                 continue
 
-            # Fjern overlappende bokser (kun én per område)
-            filtered_boxes = []
+            filtered = []
             for b in sorted(boxes, key=lambda b: b[2]*b[3], reverse=True):
-                if any(_bbox_iou(b, fb) > OVERLAP_IOU_THRESHOLD for fb in filtered_boxes):
+                if any(_bbox_iou(b, fb) > OVERLAP_IOU_THRESHOLD for fb in filtered):
                     continue
-                filtered_boxes.append(b)
+                filtered.append(b)
+            print(f"      · {len(boxes)} konturer → {len(filtered)} etter filtrering")
 
-            print(f"      · {len(boxes)} konturer → {len(filtered_boxes)} etter filtrering")
-
-            # Lagre subbilder
-            for sb_idx, (x, y, w, h) in enumerate(filtered_boxes, start=1):
+            for sb_idx, (x, y, w, h) in enumerate(filtered, start=1):
                 sub = crop[y:y+h, x:x+w]
-                _save(sub, suffix=f"_c{sb_idx}")
+                _save(sub, page_tasks)
             print()
 
-    # ---------- slutt ----------
+        image_progress[page_index - 1] = '1'
+        write_progress({7: ''.join(image_progress)})
+        return counts
+
+    results = await asyncio.gather(*[process_page(i + 1, p) for i, p in enumerate(doc)])
+
+    for page_counts in results:
+        for k, v in page_counts.items():
+            counts[k] = counts.get(k, 0) + v
+
     doc.close()
     print("\n[INFO] Ferdig! Sammendrag:")
-    for task, cnt in sorted(counts.items(), key=lambda t: (int(''.join(filter(str.isdigit, t[0])) or 0), t[0])):
+    for task, cnt in sorted(
+        counts.items(), key=lambda t: (int(re.sub(r'\D', '', t[0]) or 0), t[0])
+    ):
         print(f"  Oppgave {task}: {cnt} figur(er)")
-    print(f"\n[INFO] Alle filer er lagret i: {output_folder}\n")
 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
-if __name__ == "__main__":
-    asyncio.run(
-        extract_images(
-            pdf_path="mast2200.pdf",
-            subject="MAST2200",
-            version="S24",
-            total_tasks=[str(i) for i in range(1, 16)],
-            output_folder=None,
-        )
-    )
+    print(f"\n[INFO] Alle filer er lagret i: {output_folder}\n")

@@ -1,58 +1,113 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Task Tester med KaTeX</title>
-  
-  <!-- KaTeX CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css" />
-  <!-- KaTeX Scripts -->
-  <script defer src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"></script>
-  
+  <meta charset="UTF-8">
+  <title>Eksamen og Oppgaver</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     body {
       font-family: sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      padding: 20px;
+      margin: 20px;
     }
-    .task {
-      white-space: pre-wrap; /* Sørger for at \n vises som linjeskift */
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #f8f9fa;
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1em;
+    }
+    select {
+      width: 200px;
+      padding: 5px;
+    }
+    #task_text {
       margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-width: 700px;
     }
   </style>
 </head>
 <body>
-  <h1>Task Tester med KaTeX</h1>
-  <div id="task-container" class="task"></div>
-  
+  <h1>Vis Oppgavetekst</h1>
+  <label for="exam">Velg eksamen:</label>
+  <select id="exam"></select>
+
+  <label for="task">Velg oppgave:</label>
+  <select id="task"></select>
+
+  <div id="task_text">Velg en oppgave for å vise innholdet.</div>
+
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Flat streng med newline-tegn (ingen <br>-tagger)
-      const taskString = "Du skal svara på denne oppgava i Inspera. Du skal ikkje leggja ved utrekningar på papir. <br>Kva for ein av dei følgande er ein basis for \\( \\mathbb{R}^2 \\)? Vel eitt alternativ. <br>\\( \\{(1,0,0), (-1,1,1)\\} \\) <br>\\( \\{(1,1,0), (0,0,2), (1,1,2), (1,1,1)\\} \\) <br>\\( \\{(1,1,0), (0,0,2), (1,1,2)\\} \\) <br>\\( \\{(1,1,0), (0,1,0), (1,0,0)\\} \\) <br>\\( \\{(1,0,0), (1,1,0), (1,1,1)\\} \\) <br>\\( \\{(1,0,0), (0,1,0), (0,0,1), (1,0,1)\\} \\) <br>\\( \\{(1,0,0), (1,1,2)\\} \\) <br>Merk at i denne oppgava bruker vi notasjonen \\( x (x,y,z) = |y] - z \\).";
-      
-      const container = document.getElementById("task-container");
-      // Bruk innerText slik at newline-tegnene bevares (men math-delimitere settes inn som ren tekst)
-      container.innerText = taskString;
-      
-      // Deretter settes innholdet som HTML slik at KaTeX kan gjengi matematikken.
-      // En mulig fremgangsmåte er å bytte til innerHTML etter at du har fått med newline-behandlingen:
-      container.innerHTML = container.innerText;
-      
-      // Auto-render KaTeX i containeren
-      renderMathInElement(container, {
-        delimiters: [
-          { left: "\\(", right: "\\)", display: false },
-          { left: "\\[", right: "\\]", display: true }
-        ]
+    const examSelect = document.getElementById("exam");
+    const taskSelect = document.getElementById("task");
+    const taskTextDiv = document.getElementById("task_text");
+
+    const rawPath = "C:/Users/magnu/Documents/Documents/GitHub/OCRacle/scripts/tasks.json";
+    const relativePath = '../../scripts/tasks.json';
+
+    console.log("Prøver å laste:", relativePath);
+    console.log("(Rå sti til filen er:", rawPath, ")");
+
+    fetch(relativePath)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP-feil: ${response.status}`);
+        }
+        console.log("tasks.json funnet og lastet.");
+        return response.json();
+      })
+      .then(data => {
+        const grouped = {};
+
+        data.forEach(entry => {
+          const key = `${entry.subject} – ${entry.exam_version}`;
+          if (!grouped[key]) grouped[key] = [];
+          grouped[key].push(entry);
+        });
+
+        for (const exam of Object.keys(grouped)) {
+          const opt = document.createElement("option");
+          opt.value = exam;
+          opt.textContent = exam;
+          examSelect.appendChild(opt);
+        }
+
+        function updateTaskOptions() {
+          taskSelect.innerHTML = "";
+          const selectedExam = examSelect.value;
+          const tasks = grouped[selectedExam] || [];
+
+          tasks.sort((a, b) => (a.task_number > b.task_number ? 1 : -1));
+
+          tasks.forEach(entry => {
+            const opt = document.createElement("option");
+            opt.value = entry.task_number;
+            opt.textContent = `Oppgave ${entry.task_number}`;
+            opt.dataset.text = entry.task_text;
+            taskSelect.appendChild(opt);
+          });
+
+          updateTaskText();
+        }
+
+        function updateTaskText() {
+          const selectedOption = taskSelect.options[taskSelect.selectedIndex];
+          const raw = selectedOption?.dataset.text || "Ingen oppgave valgt.";
+          taskTextDiv.innerHTML = raw;
+          if (window.MathJax && MathJax.typeset) {
+            MathJax.typeset([taskTextDiv]);
+          }
+        }
+
+        examSelect.addEventListener("change", updateTaskOptions);
+        taskSelect.addEventListener("change", updateTaskText);
+
+        updateTaskOptions();
+      })
+      .catch(error => {
+        taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";
+        console.error("Feil ved lasting av tasks.json:", error);
       });
-    });
   </script>
 </body>
 </html>

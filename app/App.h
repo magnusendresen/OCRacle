@@ -37,6 +37,7 @@ public:
 
     ProgressBar *ProgressBar1 = nullptr;
     ProgressBar *ProgressBar2 = nullptr;
+    ProgressBar *ProgressBar3 = nullptr;
 
     TDT4102::TextBox *timerBox;
     std::thread timerThread;

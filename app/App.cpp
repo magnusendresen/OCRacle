@@ -45,7 +45,8 @@ void App::GUI() {
     examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth*3/2, buttonHeight/2, "Tasks: ");
 
     ProgressBar1 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*8, "PDF processing");
-    ProgressBar2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*12, "Task processing");
+    ProgressBar2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*16, "Task processing");
+    ProgressBar3 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*12, "Image extraction");
 
     pdfButton->setLabelColor(TDT4102::Color::white);
     pdfButton->setCallback([this]() {
@@ -69,6 +70,7 @@ void App::GUI() {
 void App::update() {
     ProgressBar1->setCount();
     ProgressBar2->setCount();
+    ProgressBar3->setCount();
 }
 
 void App::startTimer() {
@@ -170,7 +172,7 @@ void App::pdfHandling() {
 }
 
 // Map for lesing av tekstfilen
-std::string ocrLine, taskLine, googlevisionLine, deepseekLine, examSubjectLine, examVersionLine, examAmountLine;
+std::string ocrLine, taskLine, googlevisionLine, deepseekLine, examSubjectLine, examVersionLine, examAmountLine, imageExtractionLine;
 const std::map<int, std::string*> ProgressLineMap = {
     {1, &googlevisionLine},
     {2, &ocrLine},
@@ -178,7 +180,8 @@ const std::map<int, std::string*> ProgressLineMap = {
     {4, &taskLine},
     {5, &examSubjectLine},
     {6, &examVersionLine},
-    {7, &examAmountLine}
+    {7, &examAmountLine},
+    {8, &imageExtractionLine}
 };
 
 void App::calculateProgress() {
@@ -278,6 +281,22 @@ void App::calculateProgress() {
                                     ProgressBar1->progress = static_cast<double>(sum) / count;
                                 }
                                 std::cout << "OCR Progress: " << ProgressBar1->progress << std::endl;
+                            }
+
+                            // Beregn bildeuthenting-progresjon til progressbar
+                            if (!imageExtractionLine.empty()) {
+                                int sum = 0;
+                                int count = 0;
+                                for (char c : imageExtractionLine) {
+                                    if (isdigit(c)) {
+                                        sum += c - '0';
+                                        count++;
+                                    }
+                                }
+                                if (count > 0) {
+                                    ProgressBar3->progress = static_cast<double>(sum) / count;
+                                }
+                                std::cout << "Image Extraction Progress: " << ProgressBar3->progress << std::endl;
                             }
 
                             // Beregn AI-behandling-progresjon til progressbar
