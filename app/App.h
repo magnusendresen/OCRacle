@@ -35,6 +35,8 @@ public:
     TDT4102::TextBox *examVersion;
     TDT4102::TextBox *examAmount;
 
+    // TDT4102::TextInput *ignoredTopics;
+
     ProgressBar *ProgressBar1 = nullptr;
     ProgressBar *ProgressBar2 = nullptr;
     ProgressBar *ProgressBar3 = nullptr;

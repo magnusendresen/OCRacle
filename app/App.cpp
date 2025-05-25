@@ -38,15 +38,21 @@ void App::GUI() {
     pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
     googlevision = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
     deepseek = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
-    
-    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth*3/2, buttonHeight / 2, "Subject: ");
-    examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth*3/2, buttonHeight / 2, "Subject: ");
-    examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*3/2, buttonHeight/2, "Version: ");
-    examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth*3/2, buttonHeight/2, "Tasks: ");
 
-    ProgressBar1 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*8, "PDF processing");
-    ProgressBar2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*16, "Task processing");
-    ProgressBar3 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*12, "Image extraction");
+
+    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
+    examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
+
+    // ignoredTopics = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*4, buttonHeight / 2, "Ignored topics: ");
+    
+    examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth, buttonHeight/2, "Version: ");
+
+    examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*7}, buttonWidth*4, buttonHeight/2, "Tasks: ");
+
+
+    ProgressBar1 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*10, "PDF processing");
+    ProgressBar2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*18, "Task processing");
+    ProgressBar3 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*14, "Image extraction");
 
     pdfButton->setLabelColor(TDT4102::Color::white);
     pdfButton->setCallback([this]() {
@@ -62,6 +68,8 @@ void App::GUI() {
     add(*examSubjectInput);
     add(*examVersion);
     add(*examAmount);
+
+    // add(*ignoredTopics);
 
     add(*timerBox);
 

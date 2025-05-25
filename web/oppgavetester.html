@@ -3,29 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Eksamen og Oppgaver</title>
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$']],
-      displayMath: [['$$', '$$']],
-      processEscapes: true
-    },
-    options: {
-      processHtmlClass: 'mathjax-process',
-      ignoreHtmlClass: 'tex2jax_ignore',
-      renderActions: {
-        find: [10, (doc) => {
-          for (const node of document.querySelectorAll('.mathjax-process')) {
-            doc.findMath({elements: [node]});
-          }
-        }, '', false]
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      options: {
+        processHtmlClass: 'mathjax-process',
+        ignoreHtmlClass: 'tex2jax_ignore',
+        renderActions: {
+          find: [10, (doc) => {
+            for (const node of document.querySelectorAll('.mathjax-process')) {
+              doc.findMath({ elements: [node] });
+            }
+          }, '', false]
+        }
       }
-    }
-  };
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+    };
+  </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
   <style>
     body {
       font-family: sans-serif;
@@ -65,9 +64,8 @@
   <label for="task">Velg oppgave:</label>
   <select id="task"></select>
 
-  <div id="task_text">Velg en oppgave for å vise innholdet.</div>
+  <div id="task_text" class="mathjax-process">Velg en oppgave for å vise innholdet.</div>
 
-  
   <script>
     const subjectSelect = document.getElementById("subject");
     const topicSelect = document.getElementById("topic");
@@ -174,8 +172,11 @@
             taskTextDiv.appendChild(imgContainer);
           }
 
-          if (window.MathJax && MathJax.typeset) {
-            MathJax.typeset([taskTextDiv]);
+          if (window.MathJax?.typesetPromise) {
+            MathJax.typesetClear();
+            MathJax.typesetPromise([taskTextDiv])
+              .then(() => console.log("MathJax-rendering fullført."))
+              .catch(err => console.error("MathJax-feil:", err));
           }
         }
 

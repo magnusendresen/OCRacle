@@ -26,7 +26,7 @@ task_status = defaultdict(lambda: 0)
 # Prompt prefix
 nonchalant = (
     "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
-    "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING. "
+    "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING (e.g. here is the..., below is..., sure here is..., etc.). "
     "DO NOT WRITE ANY SYMBOLS LIKE - OR \n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
     "YOU ARE USED IN A TEXT PROCESSING PYTHON PROGRAM SO THE TEXT SHOULD BE PLAIN. "
 )
@@ -260,11 +260,12 @@ task_process_instructions = [
     {
         "instruction": (
             nonchalant +
-            f"What is task number {{task_number}}? "
-            "Write only all text related directly to that one TASK or SUBTASK from the raw text. "
-            "Include the topic of the task and how many maximum points you can get. Do not solve the task: "
+            f"What is task {{task_number}}? "
+            "Write only all text that is required for solving that one TASK or SUBTASK from the raw text. "
+            "If the task is a subtask (e.g. 1a), only include the text related to solving that subtask, not the full task, but be sure to have what is necessary for solving the task. "
+            "Include the topic (if there is one in the title) of the task and how many maximum points you can get. "
             "Do not include the solution to the task. "
-            "If the text is written in multiple languages, respond with the text in norwegian. "
+            "If the text is written in multiple languages, respond with the text in norwegian bokmål. "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -364,19 +365,23 @@ task_process_instructions = [
             "Format this exam task as a valid HTML string for use in a JavaScript variable. "
             "Use <p>...</p> for all text paragraphs. "
             "Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present. "
-            "Use MathJax LaTeX. "
+            "Use MathJax-compatible LaTeX. "
             "Wrap display math in $$...$$. "
             "Wrap inline math in $...$. "
+            "Use a single backslash for LaTeX commands (e.g., \\frac, \\sqrt). "
             "Do not use \\( ... \\) or \\[ ... \\]. "
-            "Escape all LaTeX backslashes with double backslashes. "
-            "Do not explain summarize or add anything outside the HTML. "
+            "Do not double-escape backslashes. "
+            "Do not explain, summarize, or add anything outside the HTML. "
             "Output must be usable directly inside const oppgaveTekst = `<the content here>`. "
             "Do not add any other text or explanation. "
             "Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags. "
-            "Make sure that e.g. infty, omega, theta, etc. are properly formatted."
+            "Make sure that e.g. infty, omega, theta, etc. are properly formatted. "
             "Do not write the result as you would write in a programming box, but as you would write it as clean text. "
             "Do not include ```html or const oppgaveTekst = `` or similar. "
+            "You are allowed to make som assumptions about OCR artifacts in the text, such as \\sqrt{\\sqrt{\\sqrt most likely being an error for a single square root. "
+            "Be sure to include spaces and newlines where appropriate. "
             "Just write the task in plaintext in the format described above. "
+            "Here is the task text: "
         ),
         "max_tokens": 1000,
         "isNum": False,
