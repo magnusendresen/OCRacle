@@ -3,7 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Eksamen og Oppgaver</title>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],
+      displayMath: [['$$', '$$']],
+      processEscapes: true
+    },
+    options: {
+      processHtmlClass: 'mathjax-process',
+      ignoreHtmlClass: 'tex2jax_ignore',
+      renderActions: {
+        find: [10, (doc) => {
+          for (const node of document.querySelectorAll('.mathjax-process')) {
+            doc.findMath({elements: [node]});
+          }
+        }, '', false]
+      }
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     body {
@@ -25,65 +46,93 @@
       padding: 10px;
       max-width: 700px;
     }
+    img {
+      display: block;
+      margin-top: 10px;
+      max-width: 100%;
+    }
   </style>
 </head>
 <body>
   <h1>Vis Oppgavetekst</h1>
-  <label for="exam">Velg eksamen:</label>
-  <select id="exam"></select>
+
+  <label for="subject">Velg emne:</label>
+  <select id="subject"></select>
+
+  <label for="topic">Velg tema:</label>
+  <select id="topic"></select>
 
   <label for="task">Velg oppgave:</label>
   <select id="task"></select>
 
   <div id="task_text">Velg en oppgave for å vise innholdet.</div>
 
+  
   <script>
-    const examSelect = document.getElementById("exam");
+    const subjectSelect = document.getElementById("subject");
+    const topicSelect = document.getElementById("topic");
     const taskSelect = document.getElementById("task");
     const taskTextDiv = document.getElementById("task_text");
 
-    const rawPath = "C:/Users/magnu/Documents/Documents/GitHub/OCRacle/scripts/tasks.json";
     const relativePath = '../../scripts/tasks.json';
-
-    console.log("Prøver å laste:", relativePath);
-    console.log("(Rå sti til filen er:", rawPath, ")");
 
     fetch(relativePath)
       .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP-feil: ${response.status}`);
-        }
-        console.log("tasks.json funnet og lastet.");
+        if (!response.ok) throw new Error(`HTTP-feil: ${response.status}`);
         return response.json();
       })
       .then(data => {
-        const grouped = {};
+        const subjects = {};
 
         data.forEach(entry => {
-          const key = `${entry.subject} – ${entry.exam_version}`;
-          if (!grouped[key]) grouped[key] = [];
-          grouped[key].push(entry);
+          const subj = entry.subject || "Ukjent emne";
+          const top = entry.topic || "Ukjent tema";
+          if (!subjects[subj]) subjects[subj] = {};
+          if (!subjects[subj][top]) subjects[subj][top] = [];
+          subjects[subj][top].push(entry);
         });
 
-        for (const exam of Object.keys(grouped)) {
+        for (const subj of Object.keys(subjects)) {
           const opt = document.createElement("option");
-          opt.value = exam;
-          opt.textContent = exam;
-          examSelect.appendChild(opt);
+          opt.value = subj;
+          opt.textContent = subj;
+          subjectSelect.appendChild(opt);
+        }
+
+        function updateTopicOptions() {
+          topicSelect.innerHTML = "";
+          taskSelect.innerHTML = "";
+          taskTextDiv.innerHTML = "Velg en oppgave for å vise innholdet.";
+
+          const selectedSubject = subjectSelect.value;
+          const topics = subjects[selectedSubject] || {};
+
+          for (const top of Object.keys(topics)) {
+            const opt = document.createElement("option");
+            opt.value = top;
+            opt.textContent = top;
+            topicSelect.appendChild(opt);
+          }
+
+          updateTaskOptions();
         }
 
         function updateTaskOptions() {
           taskSelect.innerHTML = "";
-          const selectedExam = examSelect.value;
-          const tasks = grouped[selectedExam] || [];
+          taskTextDiv.innerHTML = "Velg en oppgave for å vise innholdet.";
 
-          tasks.sort((a, b) => (a.task_number > b.task_number ? 1 : -1));
+          const selectedSubject = subjectSelect.value;
+          const selectedTopic = topicSelect.value;
+          const tasks = subjects[selectedSubject]?.[selectedTopic] || [];
+
+          tasks.sort((a, b) => a.task_number.localeCompare(b.task_number, undefined, { numeric: true }));
 
           tasks.forEach(entry => {
             const opt = document.createElement("option");
             opt.value = entry.task_number;
             opt.textContent = `Oppgave ${entry.task_number}`;
             opt.dataset.text = entry.task_text;
+            opt.dataset.images = JSON.stringify(entry.images || []);
             taskSelect.appendChild(opt);
           });
 
@@ -93,16 +142,48 @@
         function updateTaskText() {
           const selectedOption = taskSelect.options[taskSelect.selectedIndex];
           const raw = selectedOption?.dataset.text || "Ingen oppgave valgt.";
+          const images = JSON.parse(selectedOption?.dataset.images || "[]");
+
           taskTextDiv.innerHTML = raw;
+
+          console.log("Valgt oppgave:", selectedOption?.textContent);
+          console.log("Bilder:", images);
+
+          if (images.length > 0) {
+            const imgContainer = document.createElement("div");
+
+            images.forEach(imgPath => {
+              const match = imgPath.match(/scripts[\\/](.+)/);
+              const relative = match ? match[1].replace(/\\/g, "/") : null;
+
+              console.log("Relativ sti:", relative);
+
+              if (relative) {
+                const img = document.createElement("img");
+                img.src = `../../scripts/${relative}`;
+                img.alt = "Bilde til oppgave";
+                img.onerror = () => {
+                  console.warn("Kunne ikke laste bilde:", img.src);
+                };
+                imgContainer.appendChild(img);
+              } else {
+                console.warn("Klarte ikke å generere relativ sti:", imgPath);
+              }
+            });
+
+            taskTextDiv.appendChild(imgContainer);
+          }
+
           if (window.MathJax && MathJax.typeset) {
             MathJax.typeset([taskTextDiv]);
           }
         }
 
-        examSelect.addEventListener("change", updateTaskOptions);
+        subjectSelect.addEventListener("change", updateTopicOptions);
+        topicSelect.addEventListener("change", updateTaskOptions);
         taskSelect.addEventListener("change", updateTaskText);
 
-        updateTaskOptions();
+        updateTopicOptions();
       })
       .catch(error => {
         taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";

@@ -19,7 +19,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 # Paths and global state
 db_dir = Path(__file__).resolve().parent
 progress_file = db_dir / "progress.txt"
-JSON_PATH = db_dir / "ntnu_emner.json"
+JSON_PATH = db_dir / "ntnu_emner_sammenslaatt.json"
 IMG_PATH = db_dir / "img"
 task_status = defaultdict(lambda: 0)
 
@@ -122,16 +122,8 @@ def get_topics(emnekode: str) -> str:
             unike_temaer.update(map(str.strip, temaer))
 
     if len(unike_temaer) < 3:
-        print("\n Fewer than 3 topics found in subject, reverting to default entries for reference.\n")
-        return (
-            "Partiell Derivasjon, Kritiske Punkt, Retningsderivert, Graf-Forståelse, Taylor 1D, "
-            "Fourierrekke, Jevn og Odd Fourierrekke, PDE, Fouriertransformasjon, Konvolusjon, DFT, IDFT, "
-            "Fagverk, Opplagerkrefter, Nullstaver, Strekk og Trykk i Fagverk, Arealtyngdepunkt, "
-            "Arealmoment og Steiner, Statisk Bestemthet i Ramme, Reaksjonskrefter i Ramme, "
-            "Normalkraftdiagram, Skjærkraftdiagram, Momentdiagram, Bøyespenning i Tverrsnitt, "
-            "Tverrsnittdimensjonering, Deformasjonsmønster, Forskyvning og Rotasjon i Punkt, "
-            "Pythonkodeanalyse for Nedbøyning"
-        )
+        print("\n Fewer than 3 topics found in subject, returning empty string.\n")
+        return ""
 
     print("\n Topics found in subject, using results as reference.\n")
     return ", ".join(sorted(unike_temaer))
@@ -164,14 +156,15 @@ import re
 def get_subject_code_variations(subject: str):
     data, emnekart = load_emnekart_from_json(JSON_PATH)
     pattern_parts = []
+
     for ch in subject:
-        if ch == 'X':
-            # Tillat både bokstaver A, G, T og tall for X
-            pattern_parts.append('[AGT0-9]')
+        if ch == 'Y':
+            pattern_parts.append(r'\d')  # ett valgfritt siffer
         else:
-            # Escapet for sikkerhets skyld
-            pattern_parts.append(re.escape(ch))
+            pattern_parts.append(re.escape(ch))  # bokstavelig match
+
     regex = re.compile('^' + ''.join(pattern_parts) + '$')
+
     matching_codes = [kode for kode in emnekart if regex.match(kode)]
     if matching_codes:
         print(f"[INFO] | Fant matchende emnekoder i JSON: {matching_codes}")
@@ -195,7 +188,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
                                     "What is the subject code for this exam? "
                                     "Respond only with the singular formatted subject code (e.g., IFYT1000). "
                                     "If there are variation in the last letter (e.g. IMAA, IMAG, IMAT), replace the variating letter with an X instead => IMAX. "
-                                    "If there are variation in number(s), e.g 2002, 2012, 2022 - replace the variating number(s) with an X instead => 20X2. "
+                                    "If there are variation in number(s), e.g 2002, 2012, 2022 - replace the variating number(s) with an Y instead => 20Y2. "
                                     + ocr_text,
                                     max_tokens=1000,
                                     isNum=False,
@@ -232,6 +225,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
             "If the subtasks are related in topic and need the answer to the previous subtask to be solved, respond with the main task number only (e.g. 1, 2, 5, 8, etc.). . "
             "If the subtasks are unrelated (e.g. opplagerkrefter, nullstaver, stavkrefter) even if the same topic (e.g. fagverk), respond with each subtask by itself (e.g. 1a, 1b, 1c, 5a, 5b, etc.). "
             "The exam may have a mixture of both types of tasks (e.g. 1, 2, 3a, 3b, 4, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, etc.). "
+            "There will under no circumstances be instances of both for the SAME task, e.g. 1, 1a, 1b, 2, 2a, 2b, etc. "
             "Do not include any symbols like ) or - or similar. "
             + ocr_text,  
             max_tokens=1000,
@@ -301,11 +295,27 @@ task_process_instructions = [
     {
         "instruction": (
             nonchalant + 
-            "Hva er temaet i denne oppgaven, potensielt skrevet i tittelen dens? Svar kun med temaet på norsk bokmål, ingenting annet. "
+            "Hva er temaet i denne oppgaven? Svar kun med temaet på norsk bokmål, ingenting annet. "
+            "I noen tilfeller vil temaet stå i oppgavetittelen, men i andre tilfeller gjør den ikke det, og da må du gjøre et meget godt educated guess utifra instruksjonene nedenfor. "
             "Ikke gå for spesifikt, hold deg til overordnede temaer logisk for kategorisering av eksamenssett. "
             "Ettersom dette er for eksamensoppgavekategorisering behøver jeg svar som er generelle og vil fås i flere ulike prompts. "
-            "For eksempel Globalt Maksimum og Minimum bør generaliseres til Kritiske Punkt. Gjør passende slike antakelser for hva som er lurt for kategorisering. "
-            "Temaer formatteres og kategoriseres noe slik, og dersom en av disse dekker oppgavens tema skal den brukes: "
+            "For å unngå for mange og konkrete temaer gjøres forenklinger. Gjør passende slike antakelser for hva som er lurt for kategorisering. Her kommer noen eksempler: "
+            "- Globalt Maksimum og Minimum => Kritiske Punkt. "
+            "- Derivasjon => Derivasjon. "
+            "- Partiell Derivasjon => Partiell Derivasjon. "
+            "- Taylor 1D, Taylor 2D, Taylorrekke,  => Taylorrekker. "
+            "- Oppgaver der energibevaring er viktig => Energibevaring. "
+            "- Alt av bevegelsesmengde - med eller uten fjærer og friksjon => Bevegelsesmengde. "
+            "- Oppgaver med rotasjon, treghetsmoment, vinkelhastighet, vinkelakselerasjon og/eller vinkelmoment => Rotasjonsmekanikk. "
+            "- Oppgaver med friksjon, krefter og akselerasjon i skråplan og tau => Mekanikk. "
+            "- Svingning med fjær eller pendel, med eller uten demping => Svingninger. "
+            "- Hvis oppgaven handler om regning med matriser (matriseprodukt, invers, determinant, rang, etc.) => Matriseregning. "
+            "- Hvis oppgaven handler om vektorer, vektorprodukt, skalarprodukt, projeksjon, vektorrom, etc. => Vektorregning. "
+            "- Osv. Osv. Osv. "
+            "Hvis det finnes en referanse for relevante temaer for emnet, vil den stå under. Bruk referansen som støtte for å velge passende tema, men ikke nødvendigvis spesifikt for temaet hvis det virker feil. "
+            "Hvis det ikke finnes en referanse, gjør en god vurdering basert på oppgaveteksten og forklaringen over. Målet er å få det samme resultatet ved ulike eksamenssett. "
+            "Svar kun med temaet på norsk bokmål, ingenting annet. "
+            "Her kommer den eventuelle referansen, samt teksten til oppgaven: "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -315,7 +325,8 @@ task_process_instructions = [
         "instruction": (
             nonchalant + 
             "Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else. "
-            "If it is already in norwegian bokmål respond with the exact same text: "
+            "If it is already in norwegian bokmål respond with the exact same text. "
+            "Here is the text: "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -341,6 +352,7 @@ task_process_instructions = [
             "- Eksamensdato og klokkeslett. "
             "Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task. "
             "Be careful to still include the information necessary for being able to solve the task, such as the main question itself. "
+            "Do not include the solution to the task, only the task text itself. "
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -362,6 +374,9 @@ task_process_instructions = [
             "Do not add any other text or explanation. "
             "Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags. "
             "Make sure that e.g. infty, omega, theta, etc. are properly formatted."
+            "Do not write the result as you would write in a programming box, but as you would write it as clean text. "
+            "Do not include ```html or const oppgaveTekst = `` or similar. "
+            "Just write the task in plaintext in the format described above. "
         ),
         "max_tokens": 1000,
         "isNum": False,

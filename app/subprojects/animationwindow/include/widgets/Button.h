@@ -15,6 +15,7 @@ namespace TDT4102 {
         nk_color buttonColor = nk_rgba(50,50,50,255);
         nk_color buttonColorHover = nk_rgba(40, 40, 40,255);
         nk_color buttonColorActive = nk_rgba(35, 35, 35,255);
+        nk_color buttonColorBorder = nk_rgba(35, 35, 35,255);
 
     protected:
         void update(nk_context* context) override;
@@ -25,5 +26,6 @@ namespace TDT4102 {
         void setButtonColor(Color newColor) {buttonColor = nk_color{(nk_byte)newColor.redChannel, (nk_byte)newColor.greenChannel, (nk_byte)newColor.blueChannel, (nk_byte)newColor.alphaChannel};}
         void setButtonColorHover(Color newColor) {buttonColorHover = nk_color{(nk_byte)newColor.redChannel, (nk_byte)newColor.greenChannel, (nk_byte)newColor.blueChannel, (nk_byte)newColor.alphaChannel};}
         void setButtonColorActive(Color newColor) {buttonColorActive = nk_color{(nk_byte)newColor.redChannel, (nk_byte)newColor.greenChannel, (nk_byte)newColor.blueChannel, (nk_byte)newColor.alphaChannel};}
+        void setButtonColorBorder(Color newColor) {buttonColorBorder = nk_color{(nk_byte)newColor.redChannel, (nk_byte)newColor.greenChannel, (nk_byte)newColor.blueChannel, (nk_byte)newColor.alphaChannel};}
     };
 }

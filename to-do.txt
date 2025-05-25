@@ -1,0 +1,3 @@
+Endre tekst som "se figuren under" nøytralt.
+
+Undersøke om deepseek visuelt kan matche om bilder tilhører løsningsforslaget eller ikke.
