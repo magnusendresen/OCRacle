@@ -317,7 +317,7 @@ void App::calculateProgress() {
                                         count++;
                                     }
                                 }
-                                count *= 6;
+                                count *= 8;
                                 if (count > 0) {
                                     ProgressBar2->progress = static_cast<double>(sum) / count;
                                 }

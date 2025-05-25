@@ -9,7 +9,7 @@ public:
 ProgressBar(TDT4102::AnimationWindow& win, int xPos, int yPos, std::string Title);
 
     void setCount();
-    double progress;
+    double progress = 0.0;
 
     std::string Title;
     int xPos;
