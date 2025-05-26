@@ -82,6 +82,55 @@ def _parse_tasks(answer: str, allowed: List[str]) -> List[str]:
     hits = [t for t in tokens if t in allowed]
     return hits or ["0"]
 
+
+TASK_PATTERN = re.compile(
+    r"(Oppg(?:ave|\xE5ve)?\s*(\d+[a-zA-Z]?)|Task\s*(\d+[a-zA-Z]?)|Problem\s*(\d+[a-zA-Z]?))",
+    re.IGNORECASE,
+)
+
+def _extract_headings(page) -> List[Tuple[float, str]]:
+    """Return list of (y_position, task_number) for headings on the page."""
+    res: List[Tuple[float, str]] = []
+    try:
+        data = page.get_text("dict")
+    except Exception:
+        return res
+    for block in data.get("blocks", []):
+        if block.get("type") != 0:
+            continue
+        for line in block.get("lines", []):
+            line_text = "".join(span.get("text", "") for span in line.get("spans", []))
+            m = TASK_PATTERN.search(line_text)
+            if m:
+                num_match = re.search(r"\d+[a-zA-Z]?", m.group())
+                if num_match:
+                    y = line["bbox"][1]
+                    res.append((y, num_match.group()))
+                break
+    return res
+
+def _build_regions(doc) -> Dict[int, List[Tuple[str, float, float]]]:
+    """Return mapping: page_index -> list of (task, start_y, end_y)."""
+    regions: Dict[int, List[Tuple[str, float, float]]] = {}
+    last_task: Optional[str] = None
+    for idx in range(len(doc)):
+        page = doc[idx]
+        rect = page.rect
+        headings = sorted(_extract_headings(page), key=lambda x: x[0])
+        page_regions: List[Tuple[str, float, float]] = []
+        start_y = 0.0
+        curr_task = last_task
+        for y, tnum in headings:
+            if curr_task:
+                page_regions.append((curr_task, start_y, y))
+            curr_task = tnum
+            start_y = y
+        if curr_task:
+            page_regions.append((curr_task, start_y, rect.height))
+        regions[idx + 1] = page_regions
+        last_task = curr_task
+    return regions
+
 async def extract_images(
     pdf_path: str,
     subject: str,
@@ -97,6 +146,7 @@ async def extract_images(
     os.makedirs(output_folder, exist_ok=True)
 
     doc = fitz.open(pdf_path)
+    regions_per_page = _build_regions(doc)
     image_progress = ['0'] * len(doc)  # Initialiser fremdrift per side
     counts: Dict[str, int] = {}
     last_tasks: List[str] = [total_tasks[0]]
@@ -106,6 +156,7 @@ async def extract_images(
     async def process_page(page_index: int, page):
         print(f"[INFO] Side {page_index}/{doc.page_count}")
 
+        page_regions = regions_per_page.get(page_index, [])
         images = page.get_images(full=True)
         if not images:
             print("    · Ingen bilder på siden, hopper over tekstprompt.")
@@ -135,14 +186,13 @@ async def extract_images(
             arr, cv2.COLOR_RGBA2BGR if pix.alpha else cv2.COLOR_RGB2BGR
         )
 
-        def _save(img: np.ndarray, task_nums: List[str]):
-            for task_num in task_nums:
-                counts[task_num] = counts.get(task_num, 0) + 1
-                seq = f"{counts[task_num]:02d}"
-                task_num_padded = f"{int(task_num):02d}" if task_num.isdigit() else task_num
-                fname = f"{subject}_{version}_{task_num_padded}_{seq}.png"
-                cv2.imwrite(os.path.join(output_folder, fname), img)
-                print(f"      · Lagret {fname}")
+        def _save(img: np.ndarray, task_num: str):
+            counts[task_num] = counts.get(task_num, 0) + 1
+            seq = f"{counts[task_num]:02d}"
+            task_num_padded = f"{int(task_num):02d}" if task_num.isdigit() else task_num
+            fname = f"{subject}_{version}_{task_num_padded}_{seq}.png"
+            cv2.imwrite(os.path.join(output_folder, fname), img)
+            print(f"      · Lagret {fname}")
 
         for img_idx, img_info in enumerate(images, start=1):
             rects = page.get_image_rects(img_info[0])
@@ -170,7 +220,14 @@ async def extract_images(
             print(f"    · Image {img_idx}: verify={img_verify}, len(text)={len(img_text)}")
 
             if img_verify == 1 and len(img_text) <= TEXT_LEN_LIMIT:
-                _save(crop, page_tasks)
+                center_y = y0 + (y1 - y0) / 2
+                task_num = next(
+                    (t for t, sy, ey in page_regions if sy <= center_y <= ey),
+                    None,
+                )
+                if task_num is None:
+                    task_num = page_tasks[0]
+                _save(crop, task_num)
                 print()
                 continue
 
@@ -197,7 +254,14 @@ async def extract_images(
 
             for sb_idx, (x, y, w, h) in enumerate(filtered, start=1):
                 sub = crop[y:y+h, x:x+w]
-                _save(sub, page_tasks)
+                sub_center_y = y0 + y + h / 2
+                tnum = next(
+                    (t for t, sy, ey in page_regions if sy <= sub_center_y <= ey),
+                    None,
+                )
+                if tnum is None:
+                    tnum = page_tasks[0]
+                _save(sub, tnum)
             print()
 
         image_progress[page_index - 1] = '1'
