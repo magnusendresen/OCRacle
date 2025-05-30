@@ -8,7 +8,7 @@
         "topic": "Partiell Derivasjon",
         "exam_version": "Sommer 2024",
         "task_number": "1a",
-        "points": 5,
+        "points": 10,
         "task_text": "<p>Gitt funksjonen $f(x, y) = 3x^2 + 2y - 4$. Finn verdiene til de partiellderiverte i punktet $(1, 1)$.</p>\n\n<h3>a)</h3>\n<p>$\\frac{\\partial f(1,1)}{\\partial x} =$</p>\n\n<h3>b)</h3>\n<p>$\\frac{\\partial f(1,1)}{\\partial y} =$</p>\n\n<h3>c)</h3>\n<p>$\\frac{\\partial}{\\partial x} f(x, y)|_{(1,1)}$</p>\n\n<h3>d)</h3>\n<p>$\\frac{\\partial}{\\partial y} f(x, y)|_{(1,1)}$</p>",
         "images": [],
         "code": null,
@@ -34,7 +34,7 @@
         "exam_version": "Sommer 2024",
         "task_number": "1b",
         "points": 10,
-        "task_text": "<p>Gitt funksjonen $g(x, y) = \\sqrt{x^4 + 2x^2y + 2xy^2 + 3}$, $x \\geq 0$, $y \\geq 0$. Finn verdiene til de partiellderiverte i punktet $(1, 2)$. Angi svarene med 2 desimaler.</p>\n\n<h3>a)</h3>\n<p>$\\frac{\\partial g(1,2)}{\\partial x} =$</p>\n\n<h3>b)</h3>\n<p>$\\frac{\\partial g(1,2)}{\\partial y} =$</p>\n\n<h3>c)</h3>\n<p>$\\frac{\\partial}{\\partial x} g(x, y)\\big|_{(1,2)} =$</p>\n\n<h3>d)</h3>\n<p>$\\frac{\\partial}{\\partial y} g(x, y)\\big|_{(1,2)} =$</p>",
+        "task_text": "<p>Gitt funksjonen $g(x, y) = \\sqrt{x^4 + 2x^2y + 2xy^2 + 3}$, $x \\geq 0$, $y \\geq 0$. Finn verdiene til de partiellderiverte i punktet $(1, 2)$. Angi svarene med 2 desimaler.</p>\n\n<h3>a)</h3>\n<p>$\\frac{\\partial g(1,2)}{\\partial x} =$</p>\n\n<h3>b)</h3>\n<p>$\\frac{\\partial g(1,2)}{\\partial y} =$</p>\n\n<p>$\\frac{\\partial}{\\partial x} g(x, y)\\big|_{(1,2)}$</p>\n<p>$\\frac{\\partial}{\\partial y} g(x, y)\\big|_{(1,2)}$</p>",
         "images": [],
         "code": null,
         "total_tasks": [
@@ -84,7 +84,7 @@
         "exam_version": "Sommer 2024",
         "task_number": "3a",
         "points": 10,
-        "task_text": "<p>Finn gradienten i punktet $(x, y) = (1, 1)$.</p>  \n<p>$\\nabla f(1,1) = \\mathbf{i} + \\mathbf{j}$</p>",
+        "task_text": "<p>Finn gradienten i punktet $(x, y) = (1, 1)$.</p>\n<p>$\\nabla f(1,1) = \\mathbf{i} + \\mathbf{j}$</p>",
         "images": [],
         "code": null,
         "total_tasks": [
@@ -105,11 +105,11 @@
             "IMAX2012",
             "IMAX2022"
         ],
-        "topic": "Derivasjon",
+        "topic": "Retningsderivert",
         "exam_version": "Sommer 2024",
         "task_number": "3b",
-        "points": 10,
-        "task_text": "<p>Vi har funksjonsuttrykket $f(x, y) = 3x^2 - 2xy + 2y^2$.</p><p>Vi starter i punktet $(1, 1)$, og beveger oss i retningen $\\mathbf{u} = \\frac{1}{\\sqrt{5}}(1, 2)$. Finn den retningsderiverte.</p><h3>a)</h3><p>$D_{\\mathbf{u}}f(1, 1) =$</p>",
+        "points": 5,
+        "task_text": "<p>Vi har funksjonsuttrykket $f(x, y) = 3x^2 - 2xy + 2y^2$. Vi starter i punktet $(1, 1)$, og beveger oss i retningen $\\mathbf{u} = \\frac{1}{2}\\mathbf{i} + \\frac{1}{2}\\mathbf{j}$. Finn den retningsderiverte.</p>\n\n<h3>a)</h3>\n\n<p>Finn gradienten til $f$.</p>\n\n<h3>b)</h3>\n\n<p>Finn den retningsderiverte av $f$ i punktet $(1, 1)$ i retningen $\\mathbf{u}$.</p>",
         "images": [],
         "code": null,
         "total_tasks": [
@@ -134,7 +134,7 @@
         "exam_version": "Sommer 2024",
         "task_number": "3c",
         "points": 2,
-        "task_text": "<p>Vi har funksjonsuttrykket $f(x, y) = 3x^2 - 2xy + 2y^2$.</p>\n\n<p>Figuren under viser nivåkurver for funksjonen $f$. I tillegg viser figuren en tangentlinje til nivåkurven i et valgt punkt. Hvilken retning vil gradientvektoren ha i punktet?</p>\n\n<h3>a)</h3>\n<p>Alternativ 1: Gradientvektoren i punktet vil være parallell med tangentlinjen.</p>\n\n<h3>b)</h3>\n<p>Alternativ 2: Gradientvektoren i punktet vil stå vinkelrett på tangentlinjen.</p>\n\n<h3>c)</h3>\n<p>Alternativ 3: Retningen til gradientvektoren i punktet er verken parallell eller vinkelrett på tangentlinjen.</p>\n\n<p>Svar: Alternativ 2</p>",
+        "task_text": "<p>Vi har funksjonsuttrykket $f(x, y) = 3x^2 - 2xy + 2y^2$.</p>\n\n<p>Figuren under viser nivåkurver for funksjonen $f$. I tillegg viser figuren en tangentlinje til nivåkurven i et valgt punkt. Hvilken retning vil gradientvektoren ha i punktet?</p>\n\n<p>• Alternativ 1: Gradientvektoren i punktet vil være parallell med tangentlinjen.</p>\n<p>• Alternativ 2: Gradientvektoren i punktet vil stå vinkelrett på tangentlinjen.</p>\n<p>• Alternativ 3: Retningen til gradientvektoren i punktet er verken parallell eller vinkelrett på tangentlinjen.</p>\n\n<p>Svar: Alternativ 2</p>",
         "images": [
             "C:\\Users\\magnu\\Documents\\Documents\\GitHub\\OCRacle\\scripts\\img\\IMAX20Y2_Sommer 2024_images\\IMAX20Y2_Sommer 2024_3c_01.png",
             "C:\\Users\\magnu\\Documents\\Documents\\GitHub\\OCRacle\\scripts\\img\\IMAX20Y2_Sommer 2024_images\\IMAX20Y2_Sommer 2024_3c_02.png"
@@ -162,7 +162,7 @@
         "exam_version": "Sommer 2024",
         "task_number": "4",
         "points": 10,
-        "task_text": "<p>Hvilken funksjon hører sammen med hvilken graf?</p>\n\n<p>Funksjonen $f(x, y) = \\cos(xy)$ og figuren hører sammen.</p>\n\n<p>Funksjonen $f(x, y) = y^2 - x^2$ og figuren hører sammen.</p>\n\n<p>Funksjonen $f(x, y) = \\frac{1}{1 + x^2y^2}$ og figuren hører sammen.</p>\n\n<p>Funksjonen $f(x, y) = x \\cdot e^{-x^2 - y^2}$ og figuren hører sammen.</p>\n\n<p>Funksjonen $f(x, y) = x^2 - y^2$ og figuren hører sammen.</p>",
+        "task_text": "<p>Hvilken funksjon hører sammen med hvilken graf?</p>\n\n<p>Skriv bare én av bokstavene A, B, C, D, E i hvert felt under.</p>\n\n<h3>a)</h3>\n<p>Funksjonen $f(x, y) = \\cos(xy)$ og figuren hører sammen.</p>\n\n<h3>b)</h3>\n<p>Funksjonen $f(x, y) = y^2 - x^2$ og figuren hører sammen.</p>\n\n<h3>c)</h3>\n<p>Funksjonen $f(x, y) = \\frac{1}{1 + x^2y^2}$ og figuren hører sammen.</p>\n\n<h3>d)</h3>\n<p>Funksjonen $f(x, y) = x \\cdot e^{-x^2 - y^2}$ og figuren hører sammen.</p>\n\n<h3>e)</h3>\n<p>Funksjonen $f(x, y) = x^2 - y^2$ og figuren hører sammen.</p>",
         "images": [],
         "code": null,
         "total_tasks": [
@@ -187,7 +187,7 @@
         "exam_version": "Sommer 2024",
         "task_number": "5a",
         "points": 10,
-        "task_text": "<h3>a)</h3>\n<p>La $f(x) = \\tan x$, $-\\pi/2 < x < \\pi/2$. Finn verdiene til $f'$ og $f''$ i punktet $x = \\pi/4$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$f'(\\pi/4) = $</p>\n<p>$f''(\\pi/4) = $</p>\n\n<h3>b)</h3>\n<p>Lag det 2. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\pi/4$ for funksjonen $f$. Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\tan(\\pi/4 + 0.1)$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$\\tan(\\pi/4 + 0.1) \\approx P_2(\\pi/4 + 0.1) = $</p>",
+        "task_text": "<p>La $f(x) = \\tan x$, $-\\frac{\\pi}{2} < x < \\frac{\\pi}{2}$.</p>\n\n<p>Finn verdiene til $f'$ og $f''$ i punktet $x = \\frac{\\pi}{4}$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n\n<h3>a)</h3>\n<p>$f'(\\frac{\\pi}{4}) = $</p>\n\n<h3>b)</h3>\n<p>$f''(\\frac{\\pi}{4}) = $</p>\n\n<p>Lag det 2. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\frac{\\pi}{4}$ for funksjonen $f$. Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\tan(\\frac{\\pi}{4} + 0.1)$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n\n<h3>c)</h3>\n<p>$\\tan(\\frac{\\pi}{4} + 0.1) \\approx P_2(\\frac{\\pi}{4} + 0.1) = $</p>",
         "images": [],
         "code": null,
         "total_tasks": [
@@ -212,7 +212,7 @@
         "exam_version": "Sommer 2024",
         "task_number": "5b",
         "points": 10,
-        "task_text": "<p>La $f(x) = \\tan x$, $-\\frac{\\pi}{2} < x < \\frac{\\pi}{2}$.</p>\n\n<h3>a)</h3>\n<p>Finn verdiene til $f'$ og $f''$ i punktet $x = \\frac{\\pi}{4}$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$f'(\\frac{\\pi}{4}) = $</p>\n<p>$f''(\\frac{\\pi}{4}) = $</p>\n\n<h3>b)</h3>\n<p>Lag det 2. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\frac{\\pi}{4}$ for funksjonen $f$. Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\tan(\\frac{\\pi}{4} + 0.1)$. Angi svaret korrekt avrundet til 3 desimaler.</p>\n<p>$\\tan(\\frac{\\pi}{4} + 0.1) \\approx P_2(\\frac{\\pi}{4} + 0.1) = $</p>",
+        "task_text": "<h3>a)</h3><p>La $f(x) = \\tan x$, $-\\pi/2 < x < \\pi/2$. Finn verdiene til $f'$ og $f''$ i punktet $x = \\pi/4$. Angi svaret korrekt avrundet til 3 desimaler.</p><p>$f'(\\pi/4) = $</p><p>$f''(\\pi/4) = $</p><h3>b)</h3><p>Lag det 2. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\pi/4$ for funksjonen $f$. Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\tan(\\pi/4 + 0.1)$. Angi svaret korrekt avrundet til 3 desimaler.</p><p>$\\tan(\\pi/4 + 0.1) \\approx P_2(\\pi/4 + 0.1) = $</p>",
         "images": [],
         "code": null,
         "total_tasks": [

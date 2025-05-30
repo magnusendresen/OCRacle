@@ -14,13 +14,11 @@ import sys
 from typing import List, Tuple, Dict, Optional
 from pathlib import Path
 
-# Sørg for UTF-8-stdout
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except AttributeError:
     pass
 
-# Funksjon for å skrive fremdrift til progress.txt
 progress_file = Path(__file__).resolve().parent / "progress.txt"
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
@@ -65,6 +63,8 @@ DILATE_KERNEL_SIZE = 5
 DILATE_ITER = 2
 ZOOM = 2.0
 
+TASK_RE = re.compile(r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+)", re.IGNORECASE)
+
 def _bbox_iou(b1: Tuple[int, int, int, int], b2: Tuple[int, int, int, int]) -> float:
     x1, y1, w1, h1 = b1
     x2, y2, w2, h2 = b2
@@ -77,59 +77,53 @@ def _bbox_iou(b1: Tuple[int, int, int, int], b2: Tuple[int, int, int, int]) -> f
     union = w1 * h1 + w2 * h2 - inter
     return inter / union
 
-def _parse_tasks(answer: str, allowed: List[str]) -> List[str]:
-    tokens = re.split(r"[\s,;:/\\]+", answer.strip())
-    hits = [t for t in tokens if t in allowed]
-    return hits or ["0"]
-
-
-TASK_PATTERN = re.compile(
-    r"(Oppg(?:ave|\xE5ve)?\s*(\d+[a-zA-Z]?)|Task\s*(\d+[a-zA-Z]?)|Problem\s*(\d+[a-zA-Z]?))",
-    re.IGNORECASE,
-)
-
-def _extract_headings(page) -> List[Tuple[float, str]]:
-    """Return list of (y_position, task_number) for headings on the page."""
-    res: List[Tuple[float, str]] = []
+def _find_task_headings(page) -> List[Tuple[float, str]]:
+    headings = []
     try:
-        data = page.get_text("dict")
+        text_dict = page.get_text("dict")
     except Exception:
-        return res
-    for block in data.get("blocks", []):
+        return headings
+
+    for block in text_dict.get("blocks", []):
         if block.get("type") != 0:
             continue
         for line in block.get("lines", []):
             line_text = "".join(span.get("text", "") for span in line.get("spans", []))
-            m = TASK_PATTERN.search(line_text)
+            m = TASK_RE.search(line_text)
             if m:
-                num_match = re.search(r"\d+[a-zA-Z]?", m.group())
-                if num_match:
-                    y = line["bbox"][1]
-                    res.append((y, num_match.group()))
+                y = line["bbox"][1]
+                headings.append((y, m.group(2)))
                 break
-    return res
+    return headings
 
-def _build_regions(doc) -> Dict[int, List[Tuple[str, float, float]]]:
-    """Return mapping: page_index -> list of (task, start_y, end_y)."""
-    regions: Dict[int, List[Tuple[str, float, float]]] = {}
-    last_task: Optional[str] = None
-    for idx in range(len(doc)):
-        page = doc[idx]
-        rect = page.rect
-        headings = sorted(_extract_headings(page), key=lambda x: x[0])
-        page_regions: List[Tuple[str, float, float]] = []
-        start_y = 0.0
-        curr_task = last_task
-        for y, tnum in headings:
-            if curr_task:
-                page_regions.append((curr_task, start_y, y))
-            curr_task = tnum
-            start_y = y
-        if curr_task:
-            page_regions.append((curr_task, start_y, rect.height))
-        regions[idx + 1] = page_regions
-        last_task = curr_task
+def _build_regions(page, headings: List[Tuple[float, str]], fallback_task: str) -> List[Tuple[float, float, str]]:
+    rect_height = page.rect.height
+    if not headings:
+        return [(0, rect_height, fallback_task)]
+
+    headings = sorted(headings, key=lambda h: h[0])
+    regions = []
+    prev_y = 0.0
+    prev_task = fallback_task
+    for y, task_num in headings:
+        if y > prev_y:
+            regions.append((prev_y, y, prev_task))
+        prev_y = y
+        prev_task = task_num
+    regions.append((prev_y, rect_height, prev_task))
     return regions
+
+def _task_from_y(regions: List[Tuple[float, float, str]], y: float) -> str:
+    for start, end, t in regions:
+        if start <= y < end:
+            return t
+    return regions[-1][2]
+
+def _parse_tasks(answer: str, allowed: List[str]) -> List[str]:
+    allowed_nums = {re.match(r"(\d+)", t).group(1) for t in allowed if re.match(r"\d+", t)}
+    tokens = re.split(r"[\s,;:/\\]+", answer.strip())
+    hits = [t for t in tokens if t in allowed]
+    return hits or ["0"]
 
 async def extract_images(
     pdf_path: str,
@@ -146,17 +140,18 @@ async def extract_images(
     os.makedirs(output_folder, exist_ok=True)
 
     doc = fitz.open(pdf_path)
-    regions_per_page = _build_regions(doc)
-    image_progress = ['0'] * len(doc)  # Initialiser fremdrift per side
+    image_progress = ['0'] * len(doc)
     counts: Dict[str, int] = {}
     last_tasks: List[str] = [total_tasks[0]]
+    first_task_match = re.match(r"(\d+)", total_tasks[0])
+    first_task = first_task_match.group(1) if first_task_match else total_tasks[0]
+    last_tasks: List[str] = [first_task]
 
     print(f"[INFO] Starter prosessering av '{pdf_path}' → {doc.page_count} sider")
 
     async def process_page(page_index: int, page):
         print(f"[INFO] Side {page_index}/{doc.page_count}")
 
-        page_regions = regions_per_page.get(page_index, [])
         images = page.get_images(full=True)
         if not images:
             print("    · Ingen bilder på siden, hopper over tekstprompt.")
@@ -179,6 +174,9 @@ async def extract_images(
         if page_tasks == ["0"]:
             page_tasks = [last_tasks[-1]]
         last_tasks[:] = page_tasks
+
+        headings = _find_task_headings(page)
+        regions = _build_regions(page, headings, last_tasks[-1])
 
         pix = page.get_pixmap(matrix=fitz.Matrix(ZOOM, ZOOM))
         arr = np.frombuffer(pix.samples, np.uint8).reshape(pix.height, pix.width, pix.n)
@@ -207,6 +205,9 @@ async def extract_images(
             if crop.size == 0:
                 continue
 
+            y_center = (y0 + y1) / 2
+            task_for_img = _task_from_y(regions, y_center)
+
             _, crop_buf = cv2.imencode(".png", crop)
             img_text = ocrpdf.detect_text(crop_buf.tobytes())
             verify_prompt = (_nonchalant + "Does this text include put-together sentences? Respond 0 if yes, 1 if no. Text: " + img_text)
@@ -220,14 +221,10 @@ async def extract_images(
             print(f"    · Image {img_idx}: verify={img_verify}, len(text)={len(img_text)}")
 
             if img_verify == 1 and len(img_text) <= TEXT_LEN_LIMIT:
-                center_y = y0 + (y1 - y0) / 2
-                task_num = next(
-                    (t for t, sy, ey in page_regions if sy <= center_y <= ey),
-                    None,
-                )
-                if task_num is None:
-                    task_num = page_tasks[0]
-                _save(crop, task_num)
+                for t in page_tasks:
+                    _save(crop, t)
+            if not (img_verify == 0 and len(img_text) > TEXT_LEN_LIMIT):
+                _save(crop, task_for_img)
                 print()
                 continue
 
@@ -254,21 +251,19 @@ async def extract_images(
 
             for sb_idx, (x, y, w, h) in enumerate(filtered, start=1):
                 sub = crop[y:y+h, x:x+w]
-                sub_center_y = y0 + y + h / 2
-                tnum = next(
-                    (t for t, sy, ey in page_regions if sy <= sub_center_y <= ey),
-                    None,
-                )
-                if tnum is None:
-                    tnum = page_tasks[0]
-                _save(sub, tnum)
+                _save(sub, task_for_img)
+                for t in page_tasks:
+                    _save(sub, t)
             print()
 
         image_progress[page_index - 1] = '1'
         write_progress({7: ''.join(image_progress)})
         return counts
 
-    results = await asyncio.gather(*[process_page(i + 1, p) for i, p in enumerate(doc)])
+    results = []
+    for i, p in enumerate(doc):
+        res = await process_page(i + 1, p)
+        results.append(res)
 
     for page_counts in results:
         for k, v in page_counts.items():

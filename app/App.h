@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AnimationWindow.h"
+#include "Image.h"
 #include "ProgressBar.h"
 #include <string>
 #include <chrono>
@@ -35,11 +36,14 @@ public:
     TDT4102::TextBox *examVersion;
     TDT4102::TextBox *examAmount;
 
-    // TDT4102::TextInput *ignoredTopics;
+    TDT4102::TextInput *ignoredTopics;
 
     ProgressBar *ProgressBar1 = nullptr;
     ProgressBar *ProgressBar2 = nullptr;
     ProgressBar *ProgressBar3 = nullptr;
+
+    TDT4102::Image *ntnuLogo = nullptr;
+    int *ntnuLogoScale = nullptr;
 
     TDT4102::TextBox *timerBox;
     std::thread timerThread;

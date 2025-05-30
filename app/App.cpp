@@ -17,16 +17,16 @@
 #include "widgets/TextInput.h"
 
 
+constexpr int WINDOW_WIDTH  = 1280;
+constexpr int WINDOW_HEIGHT = 720;
+
 App::App(const std::string& windowName)
     : TDT4102::AnimationWindow{
-
-        // Sentrering av vinduet på skjermen
-        ((GetSystemMetrics(SM_CXSCREEN)) - (GetSystemMetrics(SM_CXSCREEN)) * 3 / 4) / 2,
-        ((GetSystemMetrics(SM_CYSCREEN)) - (GetSystemMetrics(SM_CYSCREEN)) * 3 / 4) / 2,
-
-        // Setter vindusstørrelsen til 3/4 av høyden og bredden til skjermen
-        GetSystemMetrics(SM_CXSCREEN) * 3 / 4,
-        GetSystemMetrics(SM_CYSCREEN) * 3 / 4,
+        // Beregn senterposisjon
+        (GetSystemMetrics(SM_CXSCREEN)  - WINDOW_WIDTH)  / 2,
+        (GetSystemMetrics(SM_CYSCREEN) - WINDOW_HEIGHT) / 2,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
         windowName
     }
 {
@@ -43,7 +43,7 @@ void App::GUI() {
     examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
     examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
 
-    // ignoredTopics = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*4, buttonHeight / 2, "Ignored topics: ");
+    ignoredTopics = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*4, buttonHeight / 2, "Ignored topics: ");
     
     examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth, buttonHeight/2, "Version: ");
 
@@ -53,6 +53,9 @@ void App::GUI() {
     ProgressBar1 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*10, "PDF processing");
     ProgressBar2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*18, "Task processing");
     ProgressBar3 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*14, "Image extraction");
+
+    ntnuLogo = new TDT4102::Image("ntnu_logo.png");
+    ntnuLogoScale = new int(8);
 
     pdfButton->setLabelColor(TDT4102::Color::white);
     pdfButton->setCallback([this]() {
@@ -69,7 +72,7 @@ void App::GUI() {
     add(*examVersion);
     add(*examAmount);
 
-    // add(*ignoredTopics);
+    add(*ignoredTopics);
 
     add(*timerBox);
 
@@ -79,6 +82,7 @@ void App::update() {
     ProgressBar1->setCount();
     ProgressBar2->setCount();
     ProgressBar3->setCount();
+    this->draw_image({WINDOW_WIDTH - ntnuLogo->width/ *ntnuLogoScale - pad, pad}, *ntnuLogo, ntnuLogo->width/ *ntnuLogoScale, ntnuLogo->height/ *ntnuLogoScale);
 }
 
 void App::startTimer() {
@@ -123,17 +127,26 @@ void App::pdfHandling() {
         std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
 
         std::ofstream subjectFile(scriptDir / "subject.txt", std::ios::binary);
-        std::string userinp;
+        std::string userinp1;
         if (examSubjectInput->getText() != "Subject: ") {
-            userinp = examSubjectInput->getText().substr(9);
-            std::cout << "User input subject: " << userinp << std::endl;
+            userinp1 = examSubjectInput->getText().substr(9);
+            std::cout << "User input subject: " << userinp1 << std::endl;
         } else {
             add(*examSubject);
-            userinp = "";
+            userinp1 = "";
             examSubjectInput->setVisible(0);
         }
+        std::ofstream ignoredFile(scriptDir / "ignored.txt", std::ios::binary);
+        std::string userinp2;
+        if (ignoredTopics->getText() != "Ignored topics: ") {
+            userinp2 = ignoredTopics->getText().substr(16);
+            std::cout << "User input ignored topics: " << userinp2 << std::endl;
+        } else {
+            userinp2 = "";
+        }
 
-        subjectFile << userinp;
+        subjectFile << userinp1;
+        ignoredFile << userinp2;
 
         // For å kunne skrive æøå i console
         SetConsoleOutputCP(CP_UTF8);    
