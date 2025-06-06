@@ -182,9 +182,13 @@ void App::pdfHandling() {
         dirFile << selectedFile;
 
         // Start Python-script i en bakgrunnstråd
-        std::thread([]() {
-            std::system("start /min powershell -Command \"python main.py; pause\""); 
-        }).detach();
+        try {
+            std::thread([]() {
+            std::system("start /min powershell -Command \"python main.py; pause\"");
+            }).detach();
+        } catch (const std::exception& e) {
+            std::cerr << "[ERROR] Exception oppstod ved kjøring av Python-script: " << e.what() << std::endl;
+        }
 
         startTimer();
     } catch (const std::exception& e) {
