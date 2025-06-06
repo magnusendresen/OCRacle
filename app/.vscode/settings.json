@@ -6,5 +6,8 @@
     "makefile.alwaysPreConfigure": false,
     "clangd.arguments": [
         "--compile-commands-dir=builddir"
-    ]
+    ],
+    "files.associations": {
+        "fstream": "cpp"
+    }
 }

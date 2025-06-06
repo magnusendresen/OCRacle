@@ -85,6 +85,7 @@ namespace TDT4102 {
         const static Color dark_slategrey;
         const static Color dark_turquoise;
         const static Color dark_violet;
+        const static Color dark_yellow;
         const static Color deep_pink;
         const static Color deep_skyblue;
         const static Color dim_gray;
@@ -235,7 +236,8 @@ namespace TDT4102 {
     inline const TDT4102::Color TDT4102::Color::dark_slategray = [] { return TDT4102::Color{0x2f4f4f};}(); 	
     inline const TDT4102::Color TDT4102::Color::dark_slategrey = [] { return TDT4102::Color{0x2f4f4f};}(); 	
     inline const TDT4102::Color TDT4102::Color::dark_turquoise = [] { return TDT4102::Color{0x00ced1};}(); 	
-    inline const TDT4102::Color TDT4102::Color::dark_violet = [] { return TDT4102::Color{0x9400d3};}(); 	
+    inline const TDT4102::Color TDT4102::Color::dark_violet = [] { return TDT4102::Color{0x9400d3};}(); 
+    inline const TDT4102::Color TDT4102::Color::dark_yellow = [] { return TDT4102::Color{0xffcc00};}();	
     inline const TDT4102::Color TDT4102::Color::deep_pink = [] { return TDT4102::Color{0xff1493};}(); 	
     inline const TDT4102::Color TDT4102::Color::deep_skyblue = [] { return TDT4102::Color{0x00bfff};}(); 	
     inline const TDT4102::Color TDT4102::Color::dim_gray = [] { return TDT4102::Color{0x696969};}(); 	

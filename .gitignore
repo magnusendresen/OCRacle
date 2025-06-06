@@ -1,3 +1,24 @@
+# === MASKIN- OG BYGGESPESIFIKKE FILER ===
 
-ocracle-8ab6e49a7b54.json
-/scripts/t5_finetuned_task
+# Meson/Ninja build-mappe
+/app/builddir/
+
+# VSCode-brukerinnstillinger
+.vscode/
+
+# Python cache
+*.pyc
+__pycache__/
+
+# Loggfiler
+*.log
+
+# === SENSITIVE LOKALE FILER ===
+
+# API-nøkkel / konfigfiler
+ocracle-*.json
+
+# === SPESIFIKKE SKRIPTFILER DU VIL IGNORERE ===
+
+# Modellresultater, mellomlagring etc.
+scripts/t5_finetuned_task/
