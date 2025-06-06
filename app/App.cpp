@@ -23,8 +23,8 @@ constexpr int WINDOW_HEIGHT = 720;
 App::App(const std::string& windowName)
     : TDT4102::AnimationWindow{
         // Beregn senterposisjon
-        (GetSystemMetrics(SM_CXSCREEN)  - WINDOW_WIDTH)  / 2,
-        (GetSystemMetrics(SM_CYSCREEN) - WINDOW_HEIGHT) / 2,
+        640,
+        360,
         WINDOW_WIDTH,
         WINDOW_HEIGHT,
         windowName

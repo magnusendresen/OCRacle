@@ -1,24 +1,30 @@
-# === MASKIN- OG BYGGESPESIFIKKE FILER ===
+# === BYGGEDATA ===
+builddir/              # Hele builddir-mappa ignoreres
 
-# Meson/Ninja build-mappe
-/app/builddir/
+# === VSCode ===
+.vscode/               # Brukerspesifikke editorinnstillinger
 
-# VSCode-brukerinnstillinger
-.vscode/
-
-# Python cache
-*.pyc
+# === Python-cache ===
 __pycache__/
+*.pyc
 
-# Loggfiler
+# === TDT4102-prosjektmal-filer ===
+subprojects/           # Eksterne dependencies fra template
+.clangd               # LSP-config fra NTNU-template
+compile_commands.json # Autogenerert av Meson/Clang
+
+# === Binærfiler og linker ===
+*.exe
+*.o
+*.obj
+*.a
+*.dll
+*.so
+
+# === Diverse midlertidig ===
 *.log
+*.tmp
 
-# === SENSITIVE LOKALE FILER ===
-
-# API-nøkkel / konfigfiler
+# === Egendefinerte nøkler eller sensitive filer ===
 ocracle-*.json
-
-# === SPESIFIKKE SKRIPTFILER DU VIL IGNORERE ===
-
-# Modellresultater, mellomlagring etc.
 scripts/t5_finetuned_task/
