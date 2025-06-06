@@ -1,5 +1,9 @@
-Endre tekst som "se figuren under" nøytralt.
+Endre tekst som "se figuren under" til nøytralt ved prompting.
 
 Undersøke om deepseek visuelt kan matche om bilder tilhører løsningsforslaget eller ikke.
 
 Gjøre temainndelingen med råteksten direkte fra ocr og få kommaseparert svar, og spørre hvilket av temaene som hver oppgave tilhører i den asynkrone oppgaveprosseseringen.
+
+Prompte 'Does this task require the Moody diagram?'
+
+Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.'
