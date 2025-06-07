@@ -4,10 +4,10 @@ Script to purge all "Temaer" lists in ntnu_emner.json by setting each to an empt
 """
 import json
 import sys
-import main
+from project_paths import PROJECT_ROOT
 
 # Path to the JSON file
-JSON_PATH = main.PROJECT_ROOT / "ntnu_emner.json"
+JSON_PATH = PROJECT_ROOT / "ntnu_emner.json"
 
 
 def purge_temaer():

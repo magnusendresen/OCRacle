@@ -1,6 +1,6 @@
 import prompttotext
 import extractimages
-import main
+from project_paths import PROJECT_ROOT
 
 import asyncio
 import json
@@ -18,7 +18,7 @@ import json
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Paths and global state
-db_dir = main.PROJECT_ROOT
+db_dir = PROJECT_ROOT
 progress_file = db_dir / "progress.txt"
 JSON_PATH = db_dir / "ntnu_emner_sammenslaatt.json"
 IMG_PATH = db_dir / "img"
@@ -107,7 +107,7 @@ def get_topics(emnekode: str) -> str:
     Return comma-separated unique 'Temaer' for matching emnekoder,
     or default list if fewer than 6 topics are found.
     """
-    json_path = main.PROJECT_ROOT / "ntnu_emner.json"
+    json_path = PROJECT_ROOT / "ntnu_emner.json"
 
     with json_path.open('r', encoding='utf-8') as f:
         data = json.load(f)
