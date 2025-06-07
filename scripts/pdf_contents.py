@@ -22,7 +22,7 @@ from project_config import PROMPT_CONFIG
 import math
 import re
 
-PDF_PATH = "F:\\OCRacle\\pdf\\mast2200.pdf"
+PDF_PATH = "F:\\OCRacle\\pdf\\mekt1101h24.pdf"
 
 # Set Google credentials
 json_path = os.getenv("OCRACLE_JSON_PATH")
@@ -119,6 +119,10 @@ async def query_task_markers(containers: List[Dict], n_chunks: int = 6) -> List[
             PROMPT_CONFIG
             + f"Below are container texts numbered {start}-{end-1}. "
             "Identify all container numbers that clearly mark the start or end of a task. "
+            "You will often be able to tell that a task is starting by the presence of text like Oppgave 1, Task 1, 1a, 1, etc. "
+            "Make sure to add markers wherever is indicated that the løsningsforslag is coming up."
+            "Mind the logic that there should not be multiple task markers in a row too close to each other. "
+            "Be wary not to include containers that are not task markers. They should only indicate the START or END of a task. "
             "There are usually more than one. Respond only with the numbers separated by commas.\n"
             + chunk_text
         )
