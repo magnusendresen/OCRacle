@@ -4,7 +4,8 @@ Steps performed:
 1. Iterate over all text and image containers in the PDF.
 2. Extract text from each container using direct extraction or Google Vision OCR for images.
 3. Combine the text with markers ``=== CONTAINER x ===`` so the LLM can refer to specific containers by number.
-4. Ask DeepSeek, in 6 roughly equal-sized batches, which containers denote the start or end of tasks.
+4. Ask DeepSeek, using the text from **all** containers at once, which
+   containers denote the start or end of tasks.
 5. Draw separating lines in the PDF at the identified coordinates.
 6. Save the modified PDF.
 """
@@ -19,7 +20,6 @@ from google.cloud import vision
 
 import prompt_to_text
 from project_config import PROMPT_CONFIG
-import math
 import re
 
 PDF_PATH = "F:\\OCRacle\\pdf\\mast2200.pdf"
@@ -102,32 +102,24 @@ def build_container_string(containers: List[Dict], start_index: int = 0) -> str:
     return "".join(parts)
 
 
-async def query_task_markers(containers: List[Dict], n_chunks: int = 6) -> List[int]:
+async def query_task_markers(containers: List[Dict]) -> List[int]:
     """Query DeepSeek for containers that mark task boundaries."""
-    if n_chunks < 4:
-        n_chunks = 4
-    elif n_chunks > 8:
-        n_chunks = 8
-
-    chunk_size = max(1, math.ceil(len(containers) / n_chunks))
     hits: List[int] = []
-    for start in range(0, len(containers), chunk_size):
-        end = min(start + chunk_size, len(containers))
-        print(f"[INFO] Querying containers {start}-{end-1}")
-        chunk_text = build_container_string(containers[start:end], start_index=start)
-        prompt = (
-            PROMPT_CONFIG
-            + f"Below are container texts numbered {start}-{end-1}. "
-            "Identify all container numbers that clearly mark the start or end of a task. "
-            "There are usually more than one. Respond only with the numbers separated by commas.\n"
-            + chunk_text
-        )
-        resp = await prompt_to_text.async_prompt_to_text(
-            prompt, max_tokens=2000, isNum=False, maxLen=1000
-        )
-        if resp:
-            for tok in re.findall(r"\d+", str(resp)):
-                hits.append(int(tok))
+    container_text = build_container_string(containers)
+    prompt = (
+        PROMPT_CONFIG
+        + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
+        "Many containers mark where a new task begins or an old one ends. "
+        "Identify every container number that clearly starts or finishes a task, for example headings such as 'Oppgave 1' or concluding text. "
+        "Respond only with the numbers separated by commas.\n"
+        + container_text
+    )
+    resp = await prompt_to_text.async_prompt_to_text(
+        prompt, max_tokens=2000, isNum=False, maxLen=1000
+    )
+    if resp:
+        for tok in re.findall(r"\d+", str(resp)):
+            hits.append(int(tok))
     return sorted(set(hits))
 
 
