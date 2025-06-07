@@ -7,6 +7,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 # Communication files between C++ and Python
 ICP_DATA_DIR = PROJECT_ROOT / "icp_data"
+ICP_DATA_DIR.mkdir(parents=True, exist_ok=True)
 PROGRESS_FILE = ICP_DATA_DIR / "progress.txt"
 DIR_FILE = ICP_DATA_DIR / "dir.txt"
 SUBJECT_FILE = ICP_DATA_DIR / "subject.txt"
@@ -49,4 +50,5 @@ def print_config():
         value = globals()[name]
         print(f"{name}: {value}")
 
-print_config()
+if __name__ == "__main__":
+    print_config()
