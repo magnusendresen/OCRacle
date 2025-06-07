@@ -4,13 +4,13 @@ Steps performed:
 1. Iterate over all text and image containers in the PDF.
 2. Extract text from each container using direct extraction or Google Vision OCR for images.
 3. Combine the text with markers ``=== CONTAINER x ===`` so the LLM can refer to specific containers by number.
-4. Ask DeepSeek, using the text from **all** containers at once, which
-   containers denote the start or end of tasks.
+4. Ask DeepSeek, using the text from all containers at once, which containers denote the start or end of tasks.
 5. Draw separating lines in the PDF at the identified coordinates.
 6. Save the modified PDF.
 """
 
 import os
+import re
 import asyncio
 from pathlib import Path
 from typing import List, Dict
@@ -20,11 +20,10 @@ from google.cloud import vision
 
 import prompt_to_text
 from project_config import PROMPT_CONFIG
-import re
 
 PDF_PATH = "F:\\OCRacle\\pdf\\mast2200.pdf"
 
-# Set Google credentials
+# --- Google Vision setup ---
 json_path = os.getenv("OCRACLE_JSON_PATH")
 if not json_path or not os.path.exists(json_path):
     raise FileNotFoundError(f"[ERROR] JSON path not found or invalid: {json_path}")
@@ -32,7 +31,6 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = json_path
 
 
 def detect_text(image_content: bytes) -> str:
-    """Run Google Vision OCR on the given image bytes."""
     try:
         client = vision.ImageAnnotatorClient()
         image = vision.Image(content=image_content)
@@ -49,11 +47,11 @@ def detect_text(image_content: bytes) -> str:
 async def _extract_block_text(page, block) -> str:
     if "lines" in block:
         lines = []
-        for line in block.get("lines", []):
+        for line in block["lines"]:
             parts = [span.get("text", "") for span in line.get("spans", [])]
             lines.append(" ".join(parts))
         return " ".join(lines).strip()
-    if "image" in block or block.get("type") == 1:
+    elif "image" in block or block.get("type") == 1:
         try:
             clip = fitz.Rect(block["bbox"])
             pix = page.get_pixmap(clip=clip, dpi=300)
@@ -65,88 +63,71 @@ async def _extract_block_text(page, block) -> str:
 
 
 async def list_pdf_containers(pdf_path: str) -> List[Dict]:
-    """Return a list of containers with coordinates and extracted text."""
-    containers: List[Dict] = []
+    containers = []
     doc = fitz.open(pdf_path)
-    total_pages = len(doc)
-    for page_num in range(total_pages):
-        page = doc[page_num]
+    for page_num, page in enumerate(doc):
         blocks = page.get_text("dict")["blocks"]
-        print(f"[INFO] Processing page {page_num + 1}/{total_pages} with {len(blocks)} blocks")
+        print(f"[INFO] Processing page {page_num + 1}/{len(doc)} with {len(blocks)} blocks")
         for block in blocks:
             x0, y0, x1, y1 = block["bbox"]
-            width = x1 - x0
-            height = y1 - y0
-            if width < 20 or height < 8:
+            if (x1 - x0) < 20 or (y1 - y0) < 8:
                 continue
-            y_coord = round(y0)
-            c = {
+            container = {
                 "page": page_num + 1,
-                "y": y_coord,
+                "y": round(y0),
+                "type": "text" if "lines" in block else "image" if "image" in block or block.get("type") == 1 else "unknown"
             }
-            if "lines" in block:
-                c["type"] = "text"
-            elif "image" in block or block.get("type") == 1:
-                c["type"] = "image"
-            else:
+            if container["type"] == "unknown":
                 continue
-            c["text"] = await _extract_block_text(page, block)
-            containers.append(c)
+            container["text"] = await _extract_block_text(page, block)
+            containers.append(container)
     return containers
 
 
-def build_container_string(containers: List[Dict], start_index: int = 0) -> str:
-    parts = []
-    for idx, c in enumerate(containers, start=start_index):
-        parts.append(f"\n\n=== CONTAINER {idx} ===\n{c.get('text', '')}")
-    return "".join(parts)
+def build_container_string(containers: List[Dict]) -> str:
+    return "".join(
+        f"\n\n=== CONTAINER {idx} ===\n{c.get('text', '')}"
+        for idx, c in enumerate(containers)
+    )
 
 
 async def query_task_markers(containers: List[Dict]) -> List[int]:
-    """Query DeepSeek for containers that mark task boundaries."""
-    hits: List[int] = []
-    container_text = build_container_string(containers)
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
         "Many containers mark where a new task begins or an old one ends. "
-        "Identify every container number that clearly starts or finishes a task, for example headings such as 'Oppgave 1' or concluding text. "
+        "Identify every container number that clearly starts or finishes a task, such as 'Oppgave 1' or concluding text. "
         "Respond only with the numbers separated by commas.\n"
-        + container_text
+        + build_container_string(containers)
     )
-    resp = await prompt_to_text.async_prompt_to_text(
-        prompt, max_tokens=2000, isNum=False, maxLen=1000
-    )
-    if resp:
-        for tok in re.findall(r"\d+", str(resp)):
-            hits.append(int(tok))
-    return sorted(set(hits))
+    resp = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=2000, isNum=False, maxLen=1000)
+    return sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
 
 
 async def main_async(pdf_path: str):
     containers = await list_pdf_containers(pdf_path)
     print(f"[INFO] Extracted {len(containers)} containers")
+
     markers = await query_task_markers(containers)
     print("Task marker containers:", markers)
 
-    if markers:
-        doc = fitz.open(pdf_path)
-        for idx in markers:
-            if 0 <= idx < len(containers):
-                c = containers[idx]
-                page = doc[c["page"] - 1]
-                line_y = max(c["y"] - 2, 0)
-                rect = page.rect
-                p1 = fitz.Point(0, line_y)
-                p2 = fitz.Point(rect.width, line_y)
-                page.draw_line(p1, p2, color=(1, 0, 0), width=2)
-
-        output_path = Path(pdf_path).with_stem(Path(pdf_path).stem + "_lines")
-        doc.save(str(output_path))
-        doc.close()
-        print(f"[SUCCESS] Saved annotated PDF to {output_path}")
-    else:
+    if not markers:
         print("[INFO] No markers found; PDF not modified.")
+        return
+
+    doc = fitz.open(pdf_path)
+    for idx in markers:
+        if 0 <= idx < len(containers):
+            c = containers[idx]
+            page = doc[c["page"] - 1]
+            y = max(c["y"] - 2, 0)
+            rect = page.rect
+            page.draw_line(fitz.Point(0, y), fitz.Point(rect.width, y), color=(1, 0, 0), width=2)
+
+    output_path = Path(pdf_path).with_stem(Path(pdf_path).stem + "_lines")
+    doc.save(str(output_path))
+    doc.close()
+    print(f"[SUCCESS] Saved annotated PDF to {output_path}")
 
 
 def main(path: str = PDF_PATH):
