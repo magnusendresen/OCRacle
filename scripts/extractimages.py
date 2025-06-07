@@ -13,18 +13,17 @@ import json
 import sys
 from typing import List, Tuple, Dict, Optional
 from pathlib import Path
+from project_config import *
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
 except AttributeError:
     pass
 
-progress_file = PROJECT_ROOT / "progress.txt"
-
 def write_progress(updates: Optional[Dict[int, str]] = None):
     try:
-        if progress_file.exists():
-            with open(progress_file, "r", encoding="utf-8") as f:
+        if PROGRESS_FILE.exists():
+            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
                 lines = f.readlines()
         else:
             lines = []
@@ -39,20 +38,15 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
         for idx, text in updates.items():
             lines[idx] = f"{text}\n"
 
-        with open(progress_file, "w", encoding="utf-8") as f:
+        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             f.writelines(lines)
 
         for idx, text in updates.items():
-            print(f"[STATUS] | Wrote '{text}' to line {idx + 1} in {progress_file}")
+            print(f"[STATUS] | Wrote '{text}' to line {idx + 1} in {PROGRESS_FILE}")
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
-_nonchalant = (
-    "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
-    "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING. "
-    "DO NOT WRITE ANY SYMBOLS LIKE - OR \n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
-    "YOU ARE USED IN A TEXT PROCESSING PYTHON PROGRAM SO THE TEXT SHOULD BE PLAIN. "
-)
+
 
 TEXT_LEN_LIMIT = 75
 MIN_CONTOUR_AREA = 15_000
@@ -158,7 +152,7 @@ async def extract_images(
             return {}
 
         prompt = (
-            _nonchalant + 
+            PROMPT_CONFIG + 
             f"Hvilke oppgave(r) fra denne listen {total_tasks} er på side {page_index} i teksten? "
             "Skriv oppgavene funnet på den siden separert med et komma. "
             "Eksempler på svar (uten anførselstegn): \"1\", \"2, 3\", \"1, 2, 3\", osv. "
@@ -209,7 +203,7 @@ async def extract_images(
 
             _, crop_buf = cv2.imencode(".png", crop)
             img_text = ocrpdf.detect_text(crop_buf.tobytes())
-            verify_prompt = (_nonchalant + "Does this text include put-together sentences? Respond 0 if yes, 1 if no. Text: " + img_text)
+            verify_prompt = (PROMPT_CONFIG + "Does this text include put-together sentences? Respond 0 if yes, 1 if no. Text: " + img_text)
             v_raw = await prompttotext.async_prompt_to_text(
                 verify_prompt, max_tokens=50, isNum=True, maxLen=2
             )

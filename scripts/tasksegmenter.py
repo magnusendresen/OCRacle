@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 import prompttotext
 import difflib
+from project_config import *
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -14,12 +15,6 @@ if not json_path or not os.path.exists(json_path):
     raise FileNotFoundError(f"[ERROR] JSON path not found or invalid: {json_path}")
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
 
-nonchalant = (
-    "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
-    "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING (e.g. here is the..., below is..., sure here is..., etc.). "
-    "DO NOT WRITE ANY SYMBOLS LIKE - OR \n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
-    "YOU ARE USED IN A TEXT PROCESSING PYTHON PROGRAM SO THE TEXT SHOULD BE PLAIN. "
-)
 
 def detect_text(image_content):
     try:
@@ -69,7 +64,7 @@ async def perform_ocr(images):
 
 async def detect_task_markers(full_text: str):
     prompt = (
-        nonchalant +
+        PROMPT_CONFIG +
         "The provided text is extracted from a multi-page document, with each page clearly marked as === PAGE x ===. "
         "Identify distinctive markers or short introductory phrases that reliably signal the start of each new task or subtask. "
         "Provide each marker as the full beginning phrase (5-15 words) separated by commas. Do not include page markers like === PAGE x ===. "

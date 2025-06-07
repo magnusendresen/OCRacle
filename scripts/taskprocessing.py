@@ -1,6 +1,6 @@
 import prompttotext
 import extractimages
-from project_paths import PROJECT_ROOT
+from project_config import *
 
 import asyncio
 import json
@@ -17,19 +17,8 @@ from collections import defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Paths and global state
-db_dir = PROJECT_ROOT
-progress_file = db_dir / "progress.txt"
-JSON_PATH = db_dir / "ntnu_emner_sammenslaatt.json"
-IMG_PATH = IMG_DIR
+JSON_PATH = EXAM_CODES_MERGED_JSON
 task_status = defaultdict(lambda: 0)
-
-# Prompt prefix
-nonchalant = (
-    "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
-    "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING (e.g. here is the..., below is..., sure here is..., etc.). "
-    "DO NOT WRITE ANY SYMBOLS LIKE - OR \n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
-    "YOU ARE USED IN A TEXT PROCESSING PYTHON PROGRAM SO THE TEXT SHOULD BE PLAIN. "
-)
 
 def load_emnekart_from_json(json_path: Path):
     """
@@ -76,8 +65,8 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
       - Ellers: bruk `updates` som {0-indeks linjenr: tekst uten newline}
     """
     try:
-        if progress_file.exists():
-            with open(progress_file, "r", encoding="utf-8") as f:
+        if PROGRESS_FILE.exists():
+            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
                 lines = f.readlines()
         else:
             lines = []
@@ -93,11 +82,11 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
         for idx, text in updates.items():
             lines[idx] = f"{text}\n"
 
-        with open(progress_file, "w", encoding="utf-8") as f:
+        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             f.writelines(lines)
 
         for idx, text in updates.items():
-            print(f"[STATUS] | Wrote '{text}' to line {idx + 1} in {progress_file}")
+            print(f"[STATUS] | Wrote '{text}' to line {idx + 1} in {PROGRESS_FILE}")
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
@@ -106,7 +95,7 @@ def get_topics(emnekode: str) -> str:
     Return comma-separated unique 'Temaer' for matching emnekoder,
     or default list if fewer than 6 topics are found.
     """
-    json_path = PROJECT_ROOT / "ntnu_emner.json"
+    json_path = EXAM_CODES_JSON
 
     with json_path.open('r', encoding='utf-8') as f:
         data = json.load(f)
@@ -176,7 +165,7 @@ def get_subject_code_variations(subject: str):
 async def get_exam_info(ocr_text: str) -> Exam:
     exam = Exam()
 
-    with open("subject.txt", "r", encoding="utf-8") as f:
+    with SUBJECT_FILE.open("r", encoding="utf-8") as f:
                         first_line = f.readline().strip()
                         if len(first_line) > 4:
                             exam.subject = first_line.strip().upper()
@@ -184,7 +173,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
                         else:
                             exam.subject = (
                                 await prompttotext.async_prompt_to_text(
-                                    nonchalant +
+                                    PROMPT_CONFIG +
                                     "What is the subject code for this exam? "
                                     "Respond only with the singular formatted subject code (e.g., IFYT1000). "
                                     "If there are variation in the last letter (e.g. IMAA, IMAG, IMAT), replace the variating letter with an X instead => IMAX. "
@@ -204,7 +193,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     exam.exam_version = (
         await prompttotext.async_prompt_to_text(
-            nonchalant +
+            PROMPT_CONFIG +
             "What exam edition is this exam? "
             "Respond only with the singular formatted exam edition (e.g., Høst 2023). "
             "S20XX means Sommer 20XX. "
@@ -219,7 +208,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     exam.total_tasks = (
         await prompttotext.async_prompt_to_text(
-            nonchalant +
+            PROMPT_CONFIG +
             "How many tasks are in this text? "
             "Respond with each task number separated by a comma. "
             "If the subtasks are related in topic and need the answer to the previous subtask to be solved, respond with the main task number only (e.g. 1, 2, 5, 8, etc.). . "
@@ -241,7 +230,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
     total_tasks = exam.total_tasks
 
     pdf_dir = None
-    with open("dir.txt", "r", encoding="utf-8") as dir_file:
+    with DIR_FILE.open("r", encoding="utf-8") as dir_file:
         pdf_dir = dir_file.readline().strip()
 
     await extractimages.extract_images(
@@ -259,7 +248,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
 task_process_instructions = [
     {
         "instruction": (
-            nonchalant +
+            PROMPT_CONFIG +
             f"What is task {{task_number}}? "
             "Write only all text that is required for solving that one TASK or SUBTASK from the raw text. "
             "If the task is a subtask (e.g. 1a), only include the text related to solving that subtask, not the full task, but be sure to have what is necessary for solving the task. "
@@ -273,7 +262,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant +
+            PROMPT_CONFIG +
             "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
             "Does this task likely contain any images or figures that are relevant for solving the task? "
             "Respond with 1 if you think there are images, 0 if not. "
@@ -285,7 +274,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant +
+            PROMPT_CONFIG +
             "MAKE SURE YOU ONLY RESPOND WITH A NUMBER!!! "
             "How many points can you get for this task? Only reply with the number of points, nothing else: "
         ),
@@ -295,7 +284,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant + 
+            PROMPT_CONFIG + 
             "Hva er temaet i denne oppgaven? Svar kun med temaet på norsk bokmål, ingenting annet. "
             "I noen tilfeller vil temaet stå i oppgavetittelen, men i andre tilfeller gjør den ikke det, og da må du gjøre et meget godt educated guess utifra instruksjonene nedenfor. "
             "Ikke gå for spesifikt, hold deg til overordnede temaer logisk for kategorisering av eksamenssett. "
@@ -324,7 +313,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant + 
+            PROMPT_CONFIG + 
             "Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else. "
             "If it is already in norwegian bokmål respond with the exact same text. "
             "Here is the text: "
@@ -335,7 +324,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant + 
+            PROMPT_CONFIG + 
             "Remove all text related to Inspera and exam administration. "
             "This includes information about the exam, such as: "
             "- Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger på papir. "
@@ -361,7 +350,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant +
+            PROMPT_CONFIG +
             "Format this exam task as a valid HTML string for use in a JavaScript variable. "
             "Use <p>...</p> for all text paragraphs. "
             "Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present. "
@@ -389,7 +378,7 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            nonchalant + 
+            PROMPT_CONFIG + 
             "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
             "Answer 1 if this is a valid task that could be in an exam and that can be logically solved, otherwise 0:"
         ),
@@ -434,10 +423,10 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
                 )
                 if images > 0:
                     print(f"[DEEPSEEK] | Images were found in task {task_number}.")
-                    EXAM_IMG_PATH = IMG_PATH / f"{task_exam.subject}_{task_exam.exam_version}_images"
+                    EXAM_IMG_DIR = IMG_DIR / f"{task_exam.subject}_{task_exam.exam_version}_images"
                     # Finn alle bilder som matcher patternet for denne oppgaven
                     pattern = f"{task_exam.subject}_{task_exam.exam_version}_{task_number}_*.png"
-                    found_images = sorted(EXAM_IMG_PATH.glob(pattern))
+                    found_images = sorted(EXAM_IMG_DIR.glob(pattern))
                     task_exam.images = [str(img) for img in found_images]
                     print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
                 else:
@@ -522,13 +511,13 @@ async def main_async(ocr_text: str):
     failed = [res.task_number for res in results if res.task_text is None]
     points = [res.points for res in results if res.task_text is not None]
 
-    # Slett alle bilder i IMG_PATH som ikke er knyttet til noen oppgave
+    # Slett alle bilder i IMG_DIR som ikke er knyttet til noen oppgave
     used_images = set()
     for res in results:
         if res.images:
             used_images.update(res.images)
 
-    for img_file in IMG_PATH.glob("*.png"):
+    for img_file in IMG_DIR.glob("*.png"):
         if str(img_file) not in used_images:
             try:
                 img_file.unlink()

@@ -4,10 +4,7 @@ Script to purge all "Temaer" lists in ntnu_emner.json by setting each to an empt
 """
 import json
 import sys
-from project_paths import PROJECT_ROOT
-
-# Path to the JSON file
-JSON_PATH = PROJECT_ROOT / "ntnu_emner.json"
+from project_config import *
 
 
 def purge_temaer():
@@ -15,7 +12,7 @@ def purge_temaer():
     Load the JSON, clear all Temaer, and save back the file.
     """
     try:
-        with JSON_PATH.open('r', encoding='utf-8') as f:
+        with EXAM_CODES_JSON.open('r', encoding='utf-8') as f:
             data = json.load(f)
     except Exception as e:
         print(f"❌ Error reading JSON: {e}", file=sys.stderr)
@@ -26,13 +23,13 @@ def purge_temaer():
         entry['Temaer'] = []
 
     try:
-        with JSON_PATH.open('w', encoding='utf-8') as f:
+        with EXAM_CODES_JSON.open('w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
     except Exception as e:
         print(f"❌ Error writing JSON: {e}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"✅ All Temaer fields in '{JSON_PATH.name}' have been purged.")
+    print(f"✅ All Temaer fields in '{EXAM_CODES_JSON.name}' have been purged.")
 
 
 if __name__ == '__main__':
