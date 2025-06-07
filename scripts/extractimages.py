@@ -22,7 +22,7 @@ except AttributeError:
 
 IMG_DIR = main.PROJECT_ROOT / "img"
 
-progress_file = Path(__file__).resolve().parent / "progress.txt"
+progress_file = main.PROJECT_ROOT / "progress.txt"
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
     try:
