@@ -4,7 +4,7 @@ import asyncio
 from google.cloud import vision
 from pathlib import Path
 import sys
-import prompttotext
+import prompt_to_text
 import difflib
 from project_config import *
 
@@ -72,7 +72,7 @@ async def detect_task_markers(full_text: str):
         "Here is the text: " + full_text
     )
 
-    response = await prompttotext.async_prompt_to_text(
+    response = await prompt_to_text.async_prompt_to_text(
         prompt, max_tokens=2000, isNum=False, maxLen=5000
     )
     markers = [marker.strip() for marker in response.split(',') if marker.strip()]

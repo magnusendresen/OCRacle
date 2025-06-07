@@ -1,6 +1,6 @@
-import taskprocessing
-import ocrpdf
-import prompttotext
+import task_processing
+import ocr_pdf
+import prompt_to_text
 
 import os
 import shutil
@@ -160,7 +160,7 @@ async def extract_images(
             "Se på teksten i sin helhet for å logisk avgjøre hvilke oppgaver som er på siden. "
             "Her er teksten: " + full_text
             )
-        res = await prompttotext.async_prompt_to_text(
+        res = await prompt_to_text.async_prompt_to_text(
             prompt, max_tokens=50, isNum=False, maxLen=200
         )
         page_tasks = _parse_tasks(str(res), total_tasks)
@@ -202,9 +202,9 @@ async def extract_images(
             task_for_img = _task_from_y(regions, y_center)
 
             _, crop_buf = cv2.imencode(".png", crop)
-            img_text = ocrpdf.detect_text(crop_buf.tobytes())
+            img_text = ocr_pdf.detect_text(crop_buf.tobytes())
             verify_prompt = (PROMPT_CONFIG + "Does this text include put-together sentences? Respond 0 if yes, 1 if no. Text: " + img_text)
-            v_raw = await prompttotext.async_prompt_to_text(
+            v_raw = await prompt_to_text.async_prompt_to_text(
                 verify_prompt, max_tokens=50, isNum=True, maxLen=2
             )
             try:

@@ -28,12 +28,12 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
 ---
 
 ## Python-skriptene
-- `ocrpdf.py` – bruker Google Vision API til å lese PDF som bilder og hente tekst
-- `textnormalization.py` – renser opp i artifacts og symboler etter OCR
+ - `ocr_pdf.py` – bruker Google Vision API til å lese PDF som bilder og hente tekst
+ - `text_normalization.py` – renser opp i artifacts og symboler etter OCR
 - `cachetask.py` – brukt under utvikling for å teste DeepSeek uten ny OCR
-- `prompttotext.py` – sender prompts til DeepSeek og henter svar
-- `taskprocessing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
-- `objecttojson.py` – lagrer oppgaveobjektene til `tasks.json`
+ - `prompt_to_text.py` – sender prompts til DeepSeek og henter svar
+ - `task_processing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
+ - `object_to_json.py` – lagrer oppgaveobjektene til `tasks.json`
 
 ## Start av Python-arbeidsflyten
 Python-delen startes med
@@ -45,7 +45,7 @@ python -m scripts.main
 Du kan også bruke `python scripts/main.py`. Før kjøring må miljøvariabler som `OCRACLE_JSON_PATH` og `DEEPSEEK_API_KEY` settes. Alle skriptene henter innstillinger fra `project_config.py` hvor blant annet `PROJECT_ROOT`, `PROGRESS_FILE` og `PROMPT_CONFIG` er definert.
 
 
-## Eksempel av prompting i taskprocessing.py:
+## Eksempel av prompting i task_processing.py:
 ```
 What is task number {task_number}?
 Write only all text related directly to that one task from the raw text: {text}
