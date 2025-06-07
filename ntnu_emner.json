@@ -19325,7 +19325,16 @@
     {
         "Emnekode": "INGX1002",
         "Emnenavn": "Programmering, numerikk og sikkerhet",
-        "Temaer": []
+        "Temaer": [
+            "Derivasjon",
+            "Matematiske operasjoner",
+            "Funksjoner",
+            "Numerisk analyse",
+            "Differensiallikninger",
+            "Integrasjon",
+            "Numerikk",
+            "Matriseregning"
+        ]
     },
     {
         "Emnekode": "TDT4165",

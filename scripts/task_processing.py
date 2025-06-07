@@ -178,6 +178,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
                                     "Respond only with the singular formatted subject code (e.g., IFYT1000). "
                                     "If there are variation in the last letter (e.g. IMAA, IMAG, IMAT), replace the variating letter with an X instead => IMAX. "
                                     "If there are variation in number(s), e.g 2002, 2012, 2022 - replace the variating number(s) with an Y instead => 20Y2. "
+                                    "Only replace a number with a letter if the exam text clearly has variations. "
                                     + ocr_text,
                                     max_tokens=1000,
                                     isNum=False,
@@ -190,13 +191,21 @@ async def get_exam_info(ocr_text: str) -> Exam:
     exam.matching_codes = get_subject_code_variations(exam.subject)
     write_progress({4: exam.subject or ""})
     
+    pdf_dir = None
+    with DIR_FILE.open("r", encoding="utf-8") as dir_file:
+        pdf_dir = dir_file.readline().strip()
 
     exam.exam_version = (
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG +
             "What exam edition is this exam? "
-            "Respond only with the singular formatted exam edition (e.g., Høst 2023). "
-            "S20XX means Sommer 20XX. "
+            "Respond only with the singular formatted exam edition written in norwegian. "
+            "If the exam is in the spring or early summer, it should be titled Vår 20XX. "
+            "If the exam is in the autumn or early winter, it should be titled Høst 20XX. "
+            "If the exam is in the late summer or early autumn, it should be titled Kont 20XX. "
+            "Of course 20XX is just an example here, write the actual year. "
+            f"The title of the pdf is {pdf_dir} which might help you, or not. "
+            "Make an educated guess from all the information above collectively. "
             + ocr_text,
             max_tokens=1000,
             isNum=False,
@@ -228,10 +237,6 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     global total_tasks
     total_tasks = exam.total_tasks
-
-    pdf_dir = None
-    with DIR_FILE.open("r", encoding="utf-8") as dir_file:
-        pdf_dir = dir_file.readline().strip()
 
     await extract_images.extract_images(
         pdf_path=pdf_dir,

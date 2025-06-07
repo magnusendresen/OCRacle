@@ -7,3 +7,5 @@ Gjøre temainndelingen med råteksten direkte fra ocr og få kommaseparert svar,
 Prompte 'Does this task require the Moody diagram?'
 
 Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.'
+
+Implementere prompting og formattering for programmeringsbokser.
