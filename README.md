@@ -35,6 +35,15 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
 - `taskprocessing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
 - `objecttojson.py` – lagrer oppgaveobjektene til `tasks.json`
 
+## Start av Python-arbeidsflyten
+Python-delen startes med
+
+```bash
+python -m scripts.main
+```
+
+Du kan også bruke `python scripts/main.py`. Før kjøring må miljøvariabler som `OCRACLE_JSON_PATH` og `DEEPSEEK_API_KEY` settes. Alle skriptene bruker `project_paths.PROJECT_ROOT` for å finne filer.
+
 
 ## Eksempel av prompting i taskprocessing.py:
 ```
