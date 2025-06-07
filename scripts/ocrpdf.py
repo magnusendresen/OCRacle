@@ -5,6 +5,7 @@ from google.cloud import vision
 from pathlib import Path
 from tqdm import tqdm
 import sys
+import main
 
 # Sørg for UTF-8 utskrift i terminalen
 sys.stdout.reconfigure(encoding='utf-8')
@@ -19,7 +20,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
 print(f"\n[GOOGLE] Successfully connected to Google Vision API using:\n{json_path}\n")
 
 # Definer sti for progress.txt
-progress_file = Path(__file__).resolve().parent / "progress.txt"
+progress_file = main.PROJECT_ROOT / "progress.txt"
 
 # Tømmer hele progress.txt ved oppstart
 with open(progress_file, "w", encoding="utf-8") as f:
@@ -119,7 +120,7 @@ async def process_image(index, image, ocr_progress):
 
 async def main_async():
     # Les PDF-sti fra dir.txt
-    script_dir = Path(__file__).resolve().parent
+    script_dir = main.PROJECT_ROOT
     dir_txt = script_dir / "dir.txt"
 
     if not dir_txt.exists():
