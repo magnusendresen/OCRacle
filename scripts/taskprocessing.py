@@ -12,7 +12,6 @@ from dataclasses import dataclass, field
 from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
-import json
 
 # Ensure UTF-8 output
 sys.stdout.reconfigure(encoding='utf-8')
@@ -21,7 +20,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 db_dir = PROJECT_ROOT
 progress_file = db_dir / "progress.txt"
 JSON_PATH = db_dir / "ntnu_emner_sammenslaatt.json"
-IMG_PATH = db_dir / "img"
+IMG_PATH = IMG_DIR
 task_status = defaultdict(lambda: 0)
 
 # Prompt prefix

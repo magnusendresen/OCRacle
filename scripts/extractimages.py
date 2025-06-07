@@ -1,9 +1,6 @@
 import taskprocessing
 import ocrpdf
 import prompttotext
-from project_paths import PROJECT_ROOT
-
-IMG_DIR = PROJECT_ROOT / "img"
 
 import os
 import shutil
