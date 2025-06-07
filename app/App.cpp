@@ -124,9 +124,13 @@ void App::pdfHandling() {
         GetModuleFileNameA(NULL, buffer, MAX_PATH);
         std::filesystem::path exePath = buffer;
         std::filesystem::path exeDir = exePath.parent_path();
-        std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
+        std::filesystem::path rootDir = exeDir.parent_path().parent_path();
+        std::filesystem::path dataDir = rootDir / "icp_data";
+        std::filesystem::path scriptDir = rootDir / "scripts";
 
-        std::ofstream subjectFile(scriptDir / "subject.txt", std::ios::binary);
+        std::filesystem::create_directories(dataDir);
+
+        std::ofstream subjectFile(dataDir / "subject.txt", std::ios::binary);
         std::string userinp1;
         if (examSubjectInput->getText() != "Subject: ") {
             userinp1 = examSubjectInput->getText().substr(9);
@@ -178,7 +182,7 @@ void App::pdfHandling() {
 
         std::cout << "[INFO] scriptDir: " << scriptDir << std::endl;
 
-        std::ofstream dirFile(scriptDir / "dir.txt", std::ios::binary);
+        std::ofstream dirFile(dataDir / "dir.txt", std::ios::binary);
         dirFile << selectedFile;
 
         // Start Python-script i en bakgrunnstråd
@@ -211,8 +215,11 @@ void App::calculateProgress() {
         GetModuleFileNameA(NULL, buffer, MAX_PATH);
         std::filesystem::path exePath = buffer;
         std::filesystem::path exeDir = exePath.parent_path();
-        std::filesystem::path scriptDir = exeDir.parent_path().parent_path() / "scripts";
-        std::filesystem::path progressPath = scriptDir / "progress.txt";
+        std::filesystem::path rootDir = exeDir.parent_path().parent_path();
+        std::filesystem::path scriptDir = rootDir / "scripts";
+        std::filesystem::path dataDir = rootDir / "icp_data";
+        std::filesystem::create_directories(dataDir);
+        std::filesystem::path progressPath = dataDir / "progress.txt";
 
         std::ofstream ofs(progressPath, std::ios::trunc);
         ofs.close();
