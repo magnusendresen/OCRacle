@@ -103,8 +103,9 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
         "Identify every container number that clearly marks the start of a new task or subtask, "
-        "for example phrases beginning with 'Oppgave 1', 'Oppgave 2a' and similar. "
-        "Ignore pages that merely list tasks with columns like 'Maks poeng' or 'Oppgavetype'. "
+        "For example phrases beginning with 'Oppgave 1', 'Oppgave 2a' and similar. "
+        "Look for patterns, e.g. if you think that a container including 4(b) is a marker, a container including 4(a) is also likely a marker. "
+        "Be careful to not make markers where the text following text is clearly not a task, even though it may have a number or task phrase. "
         "Respond only with the numbers separated by commas.\n"
         + build_container_string(containers)
     )
@@ -122,6 +123,15 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
         "Some containers explicitly start a solution section, typically using words like 'L\u00f8sning' or 'L\u00f8sningsforslag'. "
+        "Some tasks may have text that sound somewhat like a solution, but be wary and only mark actual solutions. "
+        "So do not mark containers that are not clearly solutions. "
+        "Just because a container has an equals sign or is explaining something does not mean it is a solution. "
+        "Be wary that some of these exams have individual letters or numbers that are images, "
+        "so they may have sentences that sound like they have gaps, so if the sentences are split into different containers, "
+        "imagine there might be a missing part in the middle, and make an educated guess accordingly. "
+        "What I'm trying to explain above is that if the solution sounds incomplete, be sure to avoid it. "
+        "E.G Ett steg av Newtons metode gir : is not a solution. "
+        "E.G Dersom vi bruker steglengde får vi feilen . Hvilken steglengde må vi velge for at feilen skal bli is not a solution. "
         "Sometimes the solution begins directly with calculations or a final numeric answer without those keywords. "
         "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
         + build_container_string(containers)
