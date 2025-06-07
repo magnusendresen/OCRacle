@@ -37,9 +37,9 @@ __all__ = [
     "PROMPT_CONFIG",
 ]
 
-def print_config():
-    for name in __all__:
-        value = globals()[name]
-        print(f"{name}: {value}")
+# def print_config():
+#     for name in __all__:
+#         value = globals()[name]
+#         print(f"{name}: {value}")
 
-print_config()
+# print_config()
