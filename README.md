@@ -33,7 +33,8 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
 - `cachetask.py` – brukt under utvikling for å teste DeepSeek uten ny OCR
  - `prompt_to_text.py` – sender prompts til DeepSeek og henter svar
  - `task_processing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
- - `object_to_json.py` – lagrer oppgaveobjektene til `tasks.json`
+ - `object_to_json.py` – lagrer oppgaveobjektene til `tasks.json` i
+   strukturen `emne -> eksamensutgivelse -> oppgave`
 
 ## Start av Python-arbeidsflyten
 Python-delen startes med

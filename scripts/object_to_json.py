@@ -3,61 +3,65 @@ import json
 from dataclasses import asdict
 from project_config import *
 
+
 def main(tasks):
-    """
-    Tar inn en liste med oppgaveobjekter, og lagrer/oppdaterer disse i tasks.json.
-    Dersom en oppgave med samme exam_version, task_number og subject finnes,
-    byttes den ut med den nye prosesseringen av oppgaven.
-    """
+    """Lag eller oppdater tasks.json i struktur emne -> eksamensutgivelse -> oppgave."""
     file_path = TASKS_JSON
 
-    # Last inn eksisterende oppgaver dersom fila finnes
     if os.path.exists(file_path):
-        with open(file_path, 'r', encoding='utf-8') as f:
-            try:
-                existing_tasks = json.load(f)
-            except json.JSONDecodeError:
-                print("[INFO] | JSON-dekoderingsfeil i tasks.json. Starter med en tom liste.")
-                existing_tasks = []
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+        except json.JSONDecodeError:
+            print("[INFO] | JSON-dekoderingsfeil i tasks.json. Starter med et tomt oppsett.")
+            existing = {}
     else:
-        existing_tasks = []
+        existing = {}
 
-    # Lag et oppslagsverk for eksisterende oppgaver basert på (exam_version, task_number, subject)
-    existing_index = {}
-    for index, task in enumerate(existing_tasks):
-        key = (task.get('exam_version'), task.get('task_number'), task.get('subject'))
-        existing_index[key] = index
-
-    # Gå gjennom de nye oppgavene og oppdater eller legg til
     for task in tasks:
-        if not isinstance(task, dict):
-            task_dict = asdict(task)
+        task_dict = asdict(task) if not isinstance(task, dict) else task
+        subject = task_dict.get("subject")
+        exam = task_dict.get("exam_version")
+        if not subject or not exam:
+            continue
+
+        subject_data = existing.setdefault(subject, {})
+        exam_data = subject_data.setdefault(exam, {
+            "total_tasks": task_dict.get("total_tasks", []),
+            "matching_codes": task_dict.get("matching_codes", []),
+            "tasks": []
+        })
+
+        if task_dict.get("total_tasks"):
+            exam_data["total_tasks"] = task_dict["total_tasks"]
+        if task_dict.get("matching_codes"):
+            exam_data["matching_codes"] = task_dict["matching_codes"]
+
+        task_copy = {k: v for k, v in task_dict.items() if k not in {"subject", "exam_version", "total_tasks", "matching_codes"}}
+        task_num = task_copy.get("task_number") or 0
+
+        tasks_list = exam_data["tasks"]
+        idx = next((i for i, t in enumerate(tasks_list) if t.get("task_number") == task_copy.get("task_number")), None)
+        if idx is not None:
+            tasks_list[idx] = task_copy
+            action = "erstattet"
         else:
-            task_dict = task
+            tasks_list.append(task_copy)
+            action = "lagt til"
 
-        key = (task_dict.get('exam_version'), task_dict.get('task_number'), task_dict.get('subject'))
-        task_num = task_dict.get('task_number') or 0
+        print(
+            f"[INFO] | Oppgave {action}: "
+            f"Exam: {exam}, "
+            f"Task: {task_num:02}, "
+            f"Subject: {subject} "
+            f"({len(task_copy.get('images', []))} bilder)"
+        )
 
-        if key in existing_index:
-            existing_tasks[existing_index[key]] = task_dict
-            print(
-                f"[INFO] | Oppgave erstattet: "
-                f"Exam: {task_dict.get('exam_version')}, "
-                f"Task: {task_num:02}, "
-                f"Subject: {task_dict.get('subject')} "
-                f"({len(task_dict.get('images', []))} bilder)"
-            )
-        else:
-            existing_tasks.append(task_dict)
-            print(
-                f"[INFO] | Oppgave lagt til : "
-                f"Exam: {task_dict.get('exam_version')}, "
-                f"Task: {task_num:02}, "
-                f"Subject: {task_dict.get('subject')} "
-                f"({len(task_dict.get('images', []))} bilder)"
-            )
+    for subject_data in existing.values():
+        for exam_data in subject_data.values():
+            exam_data["tasks"].sort(key=lambda x: x.get("task_number"))
 
-    with open(file_path, 'w', encoding='utf-8') as f:
-        json.dump(existing_tasks, f, ensure_ascii=False, indent=4)
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(existing, f, ensure_ascii=False, indent=4)
 
     print("[INFO] | Oppgavene er skrevet til tasks.json.")

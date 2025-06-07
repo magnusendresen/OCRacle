@@ -82,13 +82,16 @@
       .then(data => {
         const subjects = {};
 
-        data.forEach(entry => {
-          const subj = entry.subject || "Ukjent emne";
-          const top = entry.topic || "Ukjent tema";
+        for (const [subj, exams] of Object.entries(data)) {
           if (!subjects[subj]) subjects[subj] = {};
-          if (!subjects[subj][top]) subjects[subj][top] = [];
-          subjects[subj][top].push(entry);
-        });
+          for (const exam of Object.values(exams)) {
+            (exam.tasks || []).forEach(entry => {
+              const top = entry.topic || "Ukjent tema";
+              if (!subjects[subj][top]) subjects[subj][top] = [];
+              subjects[subj][top].push(entry);
+            });
+          }
+        }
 
         for (const subj of Object.keys(subjects)) {
           const opt = document.createElement("option");
