@@ -4,8 +4,10 @@ Steps performed:
 1. Iterate over all text and image containers in the PDF.
 2. Extract text from each container using direct extraction or Google Vision OCR for images.
 3. Combine the text with markers ``=== CONTAINER x ===`` so the LLM can refer to specific containers by number.
-4. Ask DeepSeek, using the text from all containers at once, which containers denote the start or end of tasks.
-5. Draw separating lines in the PDF at the identified coordinates.
+4. Ask DeepSeek, using the text from all containers at once, which containers
+   mark the start of each task and which mark when a solution section begins.
+5. Draw separating lines in the PDF at the identified coordinates. Start lines
+   are drawn in green while solution-start lines are drawn in red.
 6. Save the modified PDF.
 """
 
@@ -91,38 +93,67 @@ def build_container_string(containers: List[Dict]) -> str:
     )
 
 
-async def query_task_markers(containers: List[Dict]) -> List[int]:
+async def _query_markers(prompt: str) -> List[int]:
+    resp = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=2000, isNum=False, maxLen=1000)
+    return sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
+
+
+async def query_start_markers(containers: List[Dict]) -> List[int]:
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
-        "Many containers mark where a new task begins or an old one ends. "
-        "Identify every container number that clearly starts or finishes a task, such as 'Oppgave 1' or concluding text. "
+        "Identify every container number that clearly marks the start of a new task or subtask, "
+        "for example phrases beginning with 'Oppgave 1', 'Oppgave 2a' and similar. "
         "Respond only with the numbers separated by commas.\n"
         + build_container_string(containers)
     )
-    resp = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=2000, isNum=False, maxLen=1000)
-    return sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
+    return await _query_markers(prompt)
+
+
+async def query_solution_markers(containers: List[Dict]) -> List[int]:
+    prompt = (
+        PROMPT_CONFIG
+        + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
+        "Some containers explicitly start a solution section, typically using words like 'L\u00f8sning' or 'L\u00f8sningsforslag'. "
+        "Identify container numbers that clearly begin such solution text and respond only with the numbers separated by commas.\n"
+        + build_container_string(containers)
+    )
+    return await _query_markers(prompt)
 
 
 async def main_async(pdf_path: str):
     containers = await list_pdf_containers(pdf_path)
     print(f"[INFO] Extracted {len(containers)} containers")
 
-    markers = await query_task_markers(containers)
-    print("Task marker containers:", markers)
+    start_markers = await query_start_markers(containers)
+    solution_markers = await query_solution_markers(containers)
+    print("Start marker containers:", start_markers)
+    print("Solution marker containers:", solution_markers)
 
-    if not markers:
+    if not start_markers and not solution_markers:
         print("[INFO] No markers found; PDF not modified.")
         return
 
     doc = fitz.open(pdf_path)
-    for idx in markers:
+    for idx in start_markers:
         if 0 <= idx < len(containers):
             c = containers[idx]
             page = doc[c["page"] - 1]
             y = max(c["y"] - 2, 0)
             rect = page.rect
-            page.draw_line(fitz.Point(0, y), fitz.Point(rect.width, y), color=(1, 0, 0), width=2)
+            page.draw_line(
+                fitz.Point(0, y), fitz.Point(rect.width, y), color=(0, 1, 0), width=2
+            )
+
+    for idx in solution_markers:
+        if 0 <= idx < len(containers):
+            c = containers[idx]
+            page = doc[c["page"] - 1]
+            y = max(c["y"] - 2, 0)
+            rect = page.rect
+            page.draw_line(
+                fitz.Point(0, y), fitz.Point(rect.width, y), color=(1, 0, 0), width=2
+            )
 
     output_path = Path(pdf_path).with_stem(Path(pdf_path).stem + "_lines")
     doc.save(str(output_path))
