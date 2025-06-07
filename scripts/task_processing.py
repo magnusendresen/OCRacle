@@ -178,7 +178,8 @@ async def get_exam_info(ocr_text: str) -> Exam:
                                     "Respond only with the singular formatted subject code (e.g., IFYT1000). "
                                     "If there are variation in the last letter (e.g. IMAA, IMAG, IMAT), replace the variating letter with an X instead => IMAX. "
                                     "If there are variation in number(s), e.g 2002, 2012, 2022 - replace the variating number(s) with an Y instead => 20Y2. "
-                                    "Only replace a number with a letter if the exam text clearly has variations. "
+                                    "Only replace a number with a letter if the subject code clearly has variations. "
+                                    "Here is the text from the OCR: "
                                     + ocr_text,
                                     max_tokens=1000,
                                     isNum=False,
