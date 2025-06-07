@@ -2,6 +2,11 @@ import ocrpdf
 import textnormalization
 import taskprocessing
 import objecttojson
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent
+IMG_DIR = PROJECT_ROOT / "img"
+
 
 # Step 1: Run OCR PDF to get raw text
 rawtext = ocrpdf.main()

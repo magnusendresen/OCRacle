@@ -43,7 +43,7 @@ void App::GUI() {
     examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
     examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
 
-    ignoredTopics = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*4, buttonHeight / 2, "Ignored topics: ");
+    // ignoredTopics = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*4, buttonHeight / 2, "Ignored topics: ");
     
     examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth, buttonHeight/2, "Version: ");
 
@@ -72,7 +72,7 @@ void App::GUI() {
     add(*examVersion);
     add(*examAmount);
 
-    add(*ignoredTopics);
+    // add(*ignoredTopics);
 
     add(*timerBox);
 
@@ -136,17 +136,17 @@ void App::pdfHandling() {
             userinp1 = "";
             examSubjectInput->setVisible(0);
         }
-        std::ofstream ignoredFile(scriptDir / "ignored.txt", std::ios::binary);
-        std::string userinp2;
-        if (ignoredTopics->getText() != "Ignored topics: ") {
-            userinp2 = ignoredTopics->getText().substr(16);
-            std::cout << "User input ignored topics: " << userinp2 << std::endl;
-        } else {
-            userinp2 = "";
-        }
+        // std::ofstream ignoredFile(scriptDir / "ignored.txt", std::ios::binary);
+        // std::string userinp2;
+        // if (ignoredTopics->getText() != "Ignored topics: ") {
+        //     userinp2 = ignoredTopics->getText().substr(16);
+        //     std::cout << "User input ignored topics: " << userinp2 << std::endl;
+        // } else {
+        //     userinp2 = "";
+        // }
 
         subjectFile << userinp1;
-        ignoredFile << userinp2;
+        // ignoredFile << userinp2;
 
         // For å kunne skrive æøå i console
         SetConsoleOutputCP(CP_UTF8);    
@@ -182,14 +182,9 @@ void App::pdfHandling() {
         dirFile << selectedFile;
 
         // Start Python-script i en bakgrunnstråd
-        try {
-            std::thread([]() {
+        std::thread([]() {
             std::system("start /min powershell -Command \"python main.py; pause\"");
-            }).detach();
-        } catch (const std::exception& e) {
-            std::cerr << "[ERROR] Exception oppstod ved kjøring av Python-script: " << e.what() << std::endl;
-        }
-
+                 }).detach();
         startTimer();
     } catch (const std::exception& e) {
         std::cerr << "[ERROR] Exception i håndtering av PDF: " << e.what() << std::endl;

@@ -1,10 +1,11 @@
 import taskprocessing
 import ocrpdf
 import prompttotext
+import main
 
 import os
 import shutil
-import fitz  # PyMuPDF
+import fitz
 import cv2
 import numpy as np
 import asyncio
@@ -18,6 +19,8 @@ try:
     sys.stdout.reconfigure(encoding="utf-8")
 except AttributeError:
     pass
+
+IMG_DIR = main.PROJECT_ROOT / "img"
 
 progress_file = Path(__file__).resolve().parent / "progress.txt"
 
@@ -131,14 +134,9 @@ async def extract_images(
     version: str,
     total_tasks: List[str],
     full_text: str,
-    output_folder: Optional[str] = None,
+    output_folder: str,
 ):
-    if output_folder is None:
-        output_folder = os.path.join("img", f"{subject}_{version}_images")
-    if os.path.exists(output_folder):
-        shutil.rmtree(output_folder)
-    os.makedirs(output_folder, exist_ok=True)
-
+    
     doc = fitz.open(pdf_path)
     image_progress = ['0'] * len(doc)
     counts: Dict[str, int] = {}
@@ -162,7 +160,8 @@ async def extract_images(
         prompt = (
             _nonchalant + 
             f"Hvilke oppgave(r) fra denne listen {total_tasks} er på side {page_index} i teksten? "
-            "Skriv hver oppgave separert med et komma. "
+            "Skriv oppgavene funnet på den siden separert med et komma. "
+            "Eksempler på svar (uten anførselstegn): \"1\", \"2, 3\", \"1, 2, 3\", osv. "
             "Skriv kun de oppgavene du er helt sikker på at er på siden. "
             "Se på teksten i sin helhet for å logisk avgjøre hvilke oppgaver som er på siden. "
             "Her er teksten: " + full_text
