@@ -129,7 +129,13 @@ async def extract_images(
 ):
 
     if output_folder is None:
-        output_folder = str(IMG_DIR)
+        output_folder = IMG_DIR / f"{subject}_{version}_images"
+    else:
+        output_folder = Path(output_folder)
+
+    # Ensure destination directory exists
+    Path(output_folder).mkdir(parents=True, exist_ok=True)
+    output_folder = str(output_folder)
 
     doc = fitz.open(pdf_path)
     image_progress = ['0'] * len(doc)

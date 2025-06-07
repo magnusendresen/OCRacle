@@ -239,13 +239,14 @@ async def get_exam_info(ocr_text: str) -> Exam:
     global total_tasks
     total_tasks = exam.total_tasks
 
+    exam_img_dir = IMG_DIR / f"{exam.subject}_{exam.exam_version}_images"
     await extract_images.extract_images(
         pdf_path=pdf_dir,
         subject=exam.subject,
         version=exam.exam_version,
         total_tasks=exam.total_tasks,
         full_text=ocr_text,
-        output_folder=None
+        output_folder=str(exam_img_dir)
     )
 
     return exam
@@ -517,13 +518,14 @@ async def main_async(ocr_text: str):
     failed = [res.task_number for res in results if res.task_text is None]
     points = [res.points for res in results if res.task_text is not None]
 
-    # Slett alle bilder i IMG_DIR som ikke er knyttet til noen oppgave
+    # Slett alle bilder i mappen for denne eksamenen som ikke er knyttet til noen oppgave
+    exam_img_dir = IMG_DIR / f"{exam_template.subject}_{exam_template.exam_version}_images"
     used_images = set()
     for res in results:
         if res.images:
             used_images.update(res.images)
 
-    for img_file in IMG_DIR.glob("*.png"):
+    for img_file in exam_img_dir.glob("*.png"):
         if str(img_file) not in used_images:
             try:
                 img_file.unlink()
