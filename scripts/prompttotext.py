@@ -4,11 +4,10 @@ import asyncio
 import contextvars
 from openai import OpenAI  # Using OpenAI SDK for DeepSeek
 import builtins
-from pathlib import Path
-import main
+from project_paths import PROJECT_ROOT
 
 # Definer sti for progress.txt
-progress_file = main.PROJECT_ROOT / "progress.txt"
+progress_file = PROJECT_ROOT / "progress.txt"
 
 def update_progress_line3(value="1"):
     """

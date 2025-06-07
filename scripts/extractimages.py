@@ -1,7 +1,7 @@
 import taskprocessing
 import ocrpdf
 import prompttotext
-import main
+from project_paths import PROJECT_ROOT, IMG_DIR
 
 import os
 import shutil
@@ -20,9 +20,7 @@ try:
 except AttributeError:
     pass
 
-IMG_DIR = main.PROJECT_ROOT / "img"
-
-progress_file = main.PROJECT_ROOT / "progress.txt"
+progress_file = PROJECT_ROOT / "progress.txt"
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
     try:
