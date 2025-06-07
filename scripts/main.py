@@ -2,9 +2,7 @@ import ocrpdf
 import textnormalization
 import taskprocessing
 import objecttojson
-
 from project_paths import PROJECT_ROOT, IMG_DIR
-
 
 def main():
     """Run the full OCR and task processing workflow."""
@@ -24,7 +22,6 @@ def main():
     # with open('output.txt', 'w', encoding='utf-8') as f:
     #     for task in tasks:
     #         f.write(task + '\n\n')
-
 
 if __name__ == "__main__":
     main()

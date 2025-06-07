@@ -1,6 +1,6 @@
 import prompttotext
 import extractimages
-from project_paths import PROJECT_ROOT, IMG_DIR
+from project_paths import PROJECT_ROOT
 
 import asyncio
 import json
