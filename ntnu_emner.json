@@ -14977,7 +14977,14 @@
     {
         "Emnekode": "IMAX1002",
         "Emnenavn": "Matematikk for ingeniørfag 1",
-        "Temaer": []
+        "Temaer": [
+            "Komplekse tall",
+            "Differensiallikninger",
+            "Vektorregning",
+            "Matriseregning",
+            "Integrasjon",
+            "Derivasjon"
+        ]
     },
     {
         "Emnekode": "IMAX2012",
