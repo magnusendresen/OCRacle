@@ -2,14 +2,11 @@
 
 Steps performed:
 1. Iterate over all text and image containers in the PDF.
-2. Extract text from each container using direct extraction or Google Vision
-   OCR for images.
-3. Combine the text with markers ``=== CONTAINER x ===`` so the LLM can refer
-   to specific containers by number.
-4. Ask DeepSeek, in manageable container batches, which containers denote the
-   start or end of tasks.
-5. Return the resulting list of container indices (these can later be used to
-   draw separating lines in the PDF).
+2. Extract text from each container using direct extraction or Google Vision OCR for images.
+3. Combine the text with markers ``=== CONTAINER x ===`` so the LLM can refer to specific containers by number.
+4. Ask DeepSeek, in manageable container batches, which containers denote the start or end of tasks.
+5. Draw separating lines in the PDF at the identified coordinates.
+6. Save the modified PDF.
 """
 
 import os
@@ -25,7 +22,7 @@ from project_config import PROMPT_CONFIG
 
 PDF_PATH = "F:\\OCRacle\\pdf\\mast2200.pdf"
 
-
+# Set Google credentials
 json_path = os.getenv("OCRACLE_JSON_PATH")
 if not json_path or not os.path.exists(json_path):
     raise FileNotFoundError(f"[ERROR] JSON path not found or invalid: {json_path}")
@@ -48,13 +45,13 @@ def detect_text(image_content: bytes) -> str:
 
 
 async def _extract_block_text(page, block) -> str:
-    if "lines" in block:  # text block
+    if "lines" in block:
         lines = []
         for line in block.get("lines", []):
             parts = [span.get("text", "") for span in line.get("spans", [])]
             lines.append(" ".join(parts))
         return " ".join(lines).strip()
-    if "image" in block or block.get("type") == 1:  # image block
+    if "image" in block or block.get("type") == 1:
         try:
             clip = fitz.Rect(block["bbox"])
             pix = page.get_pixmap(clip=clip, dpi=300)
@@ -97,7 +94,6 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
 
 
 def build_container_string(containers: List[Dict], start_index: int = 0) -> str:
-    """Return a string with container texts marked by their global index."""
     parts = []
     for idx, c in enumerate(containers, start=start_index):
         parts.append(f"\n\n=== CONTAINER {idx} ===\n{c.get('text', '')}")
@@ -105,7 +101,6 @@ def build_container_string(containers: List[Dict], start_index: int = 0) -> str:
 
 
 async def query_task_markers(containers: List[Dict], chunk_size: int = 50) -> List[int]:
-    """Query DeepSeek to find task boundary containers."""
     hits: List[int] = []
     for start in range(0, len(containers), chunk_size):
         end = min(start + chunk_size, len(containers))
@@ -142,4 +137,3 @@ def main(path: str = PDF_PATH):
 
 if __name__ == "__main__":
     main()
-
