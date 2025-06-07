@@ -1,7 +1,7 @@
 import os
 import json
 from dataclasses import asdict
-import main
+from project_paths import PROJECT_ROOT
 
 def main(tasks):
     """
@@ -9,7 +9,7 @@ def main(tasks):
     Dersom en oppgave med samme exam_version, task_number og subject finnes,
     byttes den ut med den nye prosesseringen av oppgaven.
     """
-    file_path = main.PROJECT_ROOT / 'tasks.json'
+    file_path = PROJECT_ROOT / 'tasks.json'
 
     # Last inn eksisterende oppgaver dersom fila finnes
     if os.path.exists(file_path):

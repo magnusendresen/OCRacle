@@ -1,7 +1,7 @@
 import json
 import os
 from collections import defaultdict
-import main
+from project_paths import PROJECT_ROOT
 
 def splitt_emnekode(kode):
     """Deler opp i bokstavprefiks og tall"""
@@ -20,7 +20,7 @@ def felles_prefiks(prefikser):
     return resultat
 
 def main():
-    file_path = main.PROJECT_ROOT / "ntnu_emner.json"
+    file_path = PROJECT_ROOT / "ntnu_emner.json"
     with open(file_path, encoding='utf-8') as f:
         emner = json.load(f)
 
@@ -55,7 +55,7 @@ def main():
 
     print("\nFullført.")
 
-    output_path = main.PROJECT_ROOT / "ntnu_emner_sammenslaatt.json"
+    output_path = PROJECT_ROOT / "ntnu_emner_sammenslaatt.json"
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(resultat, f, indent=2, ensure_ascii=False)
 
