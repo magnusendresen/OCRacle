@@ -12,7 +12,6 @@ IGNORED_FILE = ICP_DATA_DIR / "ignored.txt"
 
 TASKS_JSON = PROJECT_ROOT / "tasks.json"
 EXAM_CODES_JSON = PROJECT_ROOT / "ntnu_emner.json"
-EXAM_CODES_MERGED_JSON = PROJECT_ROOT / "ntnu_emner_sammenslaatt.json"
 
 IMG_DIR = PROJECT_ROOT / "img"
 PDF_DIR = PROJECT_ROOT / "pdf"
@@ -33,7 +32,6 @@ __all__ = [
     "IGNORED_FILE",
     "TASKS_JSON",
     "EXAM_CODES_JSON",
-    "EXAM_CODES_MERGED_JSON",
     "IMG_DIR",
     "PDF_DIR",
     "PROMPT_CONFIG",

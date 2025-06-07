@@ -55,7 +55,7 @@ def main():
 
     print("\nFullført.")
 
-    output_path = EXAM_CODES_MERGED_JSON
+    output_path = EXAM_CODES_JSON
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(resultat, f, indent=2, ensure_ascii=False)
 

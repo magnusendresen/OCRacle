@@ -1,5 +1,5 @@
-import prompttotext
-import extractimages
+import prompt_to_text
+import extract_images
 from project_config import *
 
 import asyncio
@@ -17,7 +17,7 @@ from collections import defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Paths and global state
-JSON_PATH = EXAM_CODES_MERGED_JSON
+JSON_PATH = EXAM_CODES_JSON
 task_status = defaultdict(lambda: 0)
 
 def load_emnekart_from_json(json_path: Path):
@@ -172,7 +172,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
                             print("\n\n\n TOPIC FOUND IN FILE:")
                         else:
                             exam.subject = (
-                                await prompttotext.async_prompt_to_text(
+                                await prompt_to_text.async_prompt_to_text(
                                     PROMPT_CONFIG +
                                     "What is the subject code for this exam? "
                                     "Respond only with the singular formatted subject code (e.g., IFYT1000). "
@@ -192,7 +192,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
     
 
     exam.exam_version = (
-        await prompttotext.async_prompt_to_text(
+        await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG +
             "What exam edition is this exam? "
             "Respond only with the singular formatted exam edition (e.g., Høst 2023). "
@@ -207,7 +207,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
     write_progress({5: exam.exam_version or ""})
 
     exam.total_tasks = (
-        await prompttotext.async_prompt_to_text(
+        await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG +
             "How many tasks are in this text? "
             "Respond with each task number separated by a comma. "
@@ -233,7 +233,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
     with DIR_FILE.open("r", encoding="utf-8") as dir_file:
         pdf_dir = dir_file.readline().strip()
 
-    await extractimages.extract_images(
+    await extract_images.extract_images(
         pdf_path=pdf_dir,
         subject=exam.subject,
         version=exam.exam_version,
@@ -403,7 +403,7 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
             # Initial extraction of task text
             if i == 0:
                 task_output = str(
-                    await prompttotext.async_prompt_to_text(
+                    await prompt_to_text.async_prompt_to_text(
                         task_process_instructions[i]["instruction"].format(task_number=task_number) + task_output,
                         max_tokens=task_process_instructions[i]["max_tokens"],
                         isNum=task_process_instructions[i]["isNum"],
@@ -414,7 +414,7 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
             # Image extraction
             elif i == 1:
                 images = int(
-                    await prompttotext.async_prompt_to_text(
+                    await prompt_to_text.async_prompt_to_text(
                         task_process_instructions[i]["instruction"] + task_output,
                         max_tokens=task_process_instructions[i]["max_tokens"],
                         isNum=task_process_instructions[i]["isNum"],
@@ -435,7 +435,7 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
 
             # Points extraction
             elif i == 2:
-                points_str = await prompttotext.async_prompt_to_text(
+                points_str = await prompt_to_text.async_prompt_to_text(
                     task_process_instructions[i]["instruction"] + task_output,
                     max_tokens=task_process_instructions[i]["max_tokens"],
                     isNum=task_process_instructions[i]["isNum"],
@@ -449,7 +449,7 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
             # Topic extraction
             elif i == 3:
                 task_exam.topic = str(
-                    await prompttotext.async_prompt_to_text(
+                    await prompt_to_text.async_prompt_to_text(
                         task_process_instructions[i]["instruction"] + get_topics(exam.subject) + task_output,
                         max_tokens=task_process_instructions[i]["max_tokens"],
                         isNum=task_process_instructions[i]["isNum"],
@@ -462,7 +462,7 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
             # Update task_output for middle steps
             elif not i == len(task_process_instructions) - 1:
                 task_output = str(
-                    await prompttotext.async_prompt_to_text(
+                    await prompt_to_text.async_prompt_to_text(
                         task_process_instructions[i]["instruction"] + task_output,
                         max_tokens=task_process_instructions[i]["max_tokens"],
                         isNum=task_process_instructions[i]["isNum"],
@@ -473,7 +473,7 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
             # Validation step
             else:
                 valid = int(
-                    await prompttotext.async_prompt_to_text(
+                    await prompt_to_text.async_prompt_to_text(
                         task_process_instructions[i]["instruction"] + task_output,
                         max_tokens=task_process_instructions[i]["max_tokens"],
                         isNum=task_process_instructions[i]["isNum"],
@@ -531,7 +531,7 @@ async def main_async(ocr_text: str):
 
     print(f"[DEEPSEEK] | Failed tasks: {failed}")
     print(f"[DEEPSEEK] | Points for tasks: {points}")
-    print(f"[DEEPSEEK] | Final total cost: {prompttotext.total_cost:.4f} USD")
+    print(f"[DEEPSEEK] | Final total cost: {prompt_to_text.total_cost:.4f} USD")
     return results
 
 
