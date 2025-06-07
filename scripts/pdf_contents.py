@@ -4,7 +4,7 @@ Steps performed:
 1. Iterate over all text and image containers in the PDF.
 2. Extract text from each container using direct extraction or Google Vision OCR for images.
 3. Combine the text with markers ``=== CONTAINER x ===`` so the LLM can refer to specific containers by number.
-4. Ask DeepSeek, in manageable container batches, which containers denote the start or end of tasks.
+4. Ask DeepSeek, in 6 roughly equal-sized batches, which containers denote the start or end of tasks.
 5. Draw separating lines in the PDF at the identified coordinates.
 6. Save the modified PDF.
 """
@@ -19,6 +19,8 @@ from google.cloud import vision
 
 import prompt_to_text
 from project_config import PROMPT_CONFIG
+import math
+import re
 
 PDF_PATH = "F:\\OCRacle\\pdf\\mast2200.pdf"
 
@@ -100,7 +102,14 @@ def build_container_string(containers: List[Dict], start_index: int = 0) -> str:
     return "".join(parts)
 
 
-async def query_task_markers(containers: List[Dict], chunk_size: int = 50) -> List[int]:
+async def query_task_markers(containers: List[Dict], n_chunks: int = 6) -> List[int]:
+    """Query DeepSeek for containers that mark task boundaries."""
+    if n_chunks < 4:
+        n_chunks = 4
+    elif n_chunks > 8:
+        n_chunks = 8
+
+    chunk_size = max(1, math.ceil(len(containers) / n_chunks))
     hits: List[int] = []
     for start in range(0, len(containers), chunk_size):
         end = min(start + chunk_size, len(containers))
@@ -108,19 +117,17 @@ async def query_task_markers(containers: List[Dict], chunk_size: int = 50) -> Li
         chunk_text = build_container_string(containers[start:end], start_index=start)
         prompt = (
             PROMPT_CONFIG
-            + f"Which of these [{start}-{end-1}] containers indicate that a new task is starting or ending?\n"
-            "Reply only with the container number(s) separated by a comma.\n"
-            "Containers are marked with '=== CONTAINER x ===' followed by their text.\n"
+            + f"Below are container texts numbered {start}-{end-1}. "
+            "Identify all container numbers that clearly mark the start or end of a task. "
+            "There are usually more than one. Respond only with the numbers separated by commas.\n"
             + chunk_text
         )
         resp = await prompt_to_text.async_prompt_to_text(
             prompt, max_tokens=2000, isNum=False, maxLen=1000
         )
         if resp:
-            for tok in str(resp).replace("CONTAINER", "").split(","):
-                tok = tok.strip()
-                if tok.isdigit():
-                    hits.append(int(tok))
+            for tok in re.findall(r"\d+", str(resp)):
+                hits.append(int(tok))
     return sorted(set(hits))
 
 
@@ -129,6 +136,25 @@ async def main_async(pdf_path: str):
     print(f"[INFO] Extracted {len(containers)} containers")
     markers = await query_task_markers(containers)
     print("Task marker containers:", markers)
+
+    if markers:
+        doc = fitz.open(pdf_path)
+        for idx in markers:
+            if 0 <= idx < len(containers):
+                c = containers[idx]
+                page = doc[c["page"] - 1]
+                line_y = max(c["y"] - 2, 0)
+                rect = page.rect
+                p1 = fitz.Point(0, line_y)
+                p2 = fitz.Point(rect.width, line_y)
+                page.draw_line(p1, p2, color=(1, 0, 0), width=2)
+
+        output_path = Path(pdf_path).with_stem(Path(pdf_path).stem + "_lines")
+        doc.save(str(output_path))
+        doc.close()
+        print(f"[SUCCESS] Saved annotated PDF to {output_path}")
+    else:
+        print("[INFO] No markers found; PDF not modified.")
 
 
 def main(path: str = PDF_PATH):
