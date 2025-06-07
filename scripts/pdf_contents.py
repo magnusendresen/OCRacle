@@ -1,16 +1,15 @@
 """Utility to identify task boundaries in a PDF.
 
-The process is:
- 1. Iterate over all containers (text blocks and images) in the PDF.
- 2. Extract text from each container. Text blocks are read directly while
-    images are processed using Google Vision OCR.
- 3. Combine all container texts into one string where each container is clearly
-    marked with ``=== CONTAINER x ===``. These markers allow the LLM to refer to
-    specific containers.
- 4. Send the combined text to DeepSeek in manageable chunks asking which
-    container numbers mark the start or end of tasks.
- 5. The resulting indices can later be used to draw lines in the PDF to
-    visually separate tasks.
+Steps performed:
+1. Iterate over all text and image containers in the PDF.
+2. Extract text from each container using direct extraction or Google Vision
+   OCR for images.
+3. Combine the text with markers ``=== CONTAINER x ===`` so the LLM can refer
+   to specific containers by number.
+4. Ask DeepSeek, in manageable container batches, which containers denote the
+   start or end of tasks.
+5. Return the resulting list of container indices (these can later be used to
+   draw separating lines in the PDF).
 """
 
 import os
@@ -70,11 +69,18 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
     """Return a list of containers with coordinates and extracted text."""
     containers: List[Dict] = []
     doc = fitz.open(pdf_path)
-    for page_num in range(len(doc)):
+    total_pages = len(doc)
+    for page_num in range(total_pages):
         page = doc[page_num]
         blocks = page.get_text("dict")["blocks"]
+        print(f"[INFO] Processing page {page_num + 1}/{total_pages} with {len(blocks)} blocks")
         for block in blocks:
-            y_coord = round(block["bbox"][1])
+            x0, y0, x1, y1 = block["bbox"]
+            width = x1 - x0
+            height = y1 - y0
+            if width < 20 or height < 8:
+                continue
+            y_coord = round(y0)
             c = {
                 "page": page_num + 1,
                 "y": y_coord,
@@ -90,9 +96,10 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
     return containers
 
 
-def build_container_string(containers: List[Dict]) -> str:
+def build_container_string(containers: List[Dict], start_index: int = 0) -> str:
+    """Return a string with container texts marked by their global index."""
     parts = []
-    for idx, c in enumerate(containers):
+    for idx, c in enumerate(containers, start=start_index):
         parts.append(f"\n\n=== CONTAINER {idx} ===\n{c.get('text', '')}")
     return "".join(parts)
 
@@ -102,16 +109,20 @@ async def query_task_markers(containers: List[Dict], chunk_size: int = 50) -> Li
     hits: List[int] = []
     for start in range(0, len(containers), chunk_size):
         end = min(start + chunk_size, len(containers))
-        chunk_text = build_container_string(containers[start:end])
+        print(f"[INFO] Querying containers {start}-{end-1}")
+        chunk_text = build_container_string(containers[start:end], start_index=start)
         prompt = (
             PROMPT_CONFIG
-            + f"Which of these [{start}-{end-1}] containers indicate that a new task is starting or ending? "
-            "Reply only with the container number(s) separated by a comma: "
+            + f"Which of these [{start}-{end-1}] containers indicate that a new task is starting or ending?\n"
+            "Reply only with the container number(s) separated by a comma.\n"
+            "Containers are marked with '=== CONTAINER x ===' followed by their text.\n"
             + chunk_text
         )
-        resp = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=2000, isNum=False, maxLen=1000)
+        resp = await prompt_to_text.async_prompt_to_text(
+            prompt, max_tokens=2000, isNum=False, maxLen=1000
+        )
         if resp:
-            for tok in str(resp).split(","):
+            for tok in str(resp).replace("CONTAINER", "").split(","):
                 tok = tok.strip()
                 if tok.isdigit():
                     hits.append(int(tok))
