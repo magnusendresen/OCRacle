@@ -2,36 +2,37 @@ from pathlib import Path
 
 """Centralized configuration constants used throughout the project."""
 
-# Base directory containing all Python scripts and related assets
-PROJECT_ROOT = Path(__file__).resolve().parent
+# Base directory of the entire project (repo root)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-# File locations
-PROGRESS_FILE = PROJECT_ROOT / "progress.txt"
-DIR_FILE = PROJECT_ROOT / "dir.txt"
-SUBJECT_FILE = PROJECT_ROOT / "subject.txt"
+# Communication files between C++ and Python
+ICP_DATA_DIR = PROJECT_ROOT / "icp_data"
+PROGRESS_FILE = ICP_DATA_DIR / "progress.txt"
+DIR_FILE = ICP_DATA_DIR / "dir.txt"
+SUBJECT_FILE = ICP_DATA_DIR / "subject.txt"
+
+# Main task data file (directly in root)
 TASKS_JSON = PROJECT_ROOT / "tasks.json"
 
-# JSON databases for subject information
-EXAM_CODES_JSON = PROJECT_ROOT / "ntnu_emner.json"
-EXAM_CODES_MERGED_JSON = PROJECT_ROOT / "ntnu_emner_sammenslaatt.json"
+# JSON databases for subject information (still in scripts/)
+EXAM_CODES_JSON = PROJECT_ROOT / "scripts" / "ntnu_emner.json"
+EXAM_CODES_MERGED_JSON = PROJECT_ROOT / "scripts" / "ntnu_emner_sammenslaatt.json"
 
-# Directory locations
+# Other directories
 IMG_DIR = PROJECT_ROOT / "img"
+PDF_DIR = PROJECT_ROOT / "pdf"
 
-# Optional directory for stored PDF files (one level above scripts)
-PDF_DIR = PROJECT_ROOT.parent / "pdf"
-
-# Prefix for all language model prompts to keep responses short and direct
+# Prompt template
 PROMPT_CONFIG = (
     "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
     "DO NOT EXPLAIN OR SAY WHAT YOU ARE DOING (e.g. here is the..., below is..., sure here is..., etc.). "
-    "DO NOT WRITE ANY SYMBOLS LIKE - OR \n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
+    "DO NOT WRITE ANY SYMBOLS LIKE - OR \\n OR CHANGE LETTER FORMATTING WITH ** AND SIMILAR. "
     "YOU ARE USED IN A TEXT PROCESSING PYTHON PROGRAM SO THE TEXT SHOULD BE PLAIN. "
 )
 
-# Define what gets imported when using 'from project_config import *'
 __all__ = [
     "PROJECT_ROOT",
+    "ICP_DATA_DIR",
     "PROGRESS_FILE",
     "DIR_FILE",
     "SUBJECT_FILE",
@@ -42,3 +43,10 @@ __all__ = [
     "PDF_DIR",
     "PROMPT_CONFIG",
 ]
+
+def print_config():
+    for name in __all__:
+        value = globals()[name]
+        print(f"{name}: {value}")
+
+print_config()
