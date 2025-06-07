@@ -132,9 +132,12 @@ async def extract_images(
     version: str,
     total_tasks: List[str],
     full_text: str,
-    output_folder: str,
+    output_folder: Optional[str] = None,
 ):
-    
+
+    if output_folder is None:
+        output_folder = str(IMG_DIR)
+
     doc = fitz.open(pdf_path)
     image_progress = ['0'] * len(doc)
     counts: Dict[str, int] = {}
