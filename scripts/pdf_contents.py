@@ -104,10 +104,17 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
         "Identify every container number that clearly marks the start of a new task or subtask, "
         "for example phrases beginning with 'Oppgave 1', 'Oppgave 2a' and similar. "
+        "Ignore pages that merely list tasks with columns like 'Maks poeng' or 'Oppgavetype'. "
         "Respond only with the numbers separated by commas.\n"
         + build_container_string(containers)
     )
-    return await _query_markers(prompt)
+    markers = await _query_markers(prompt)
+
+    def _is_summary(text: str) -> bool:
+        t = text.lower()
+        return "maks poeng" in t and "oppgavetype" in t
+
+    return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
 
 
 async def query_solution_markers(containers: List[Dict]) -> List[int]:
@@ -115,7 +122,8 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
         "Some containers explicitly start a solution section, typically using words like 'L\u00f8sning' or 'L\u00f8sningsforslag'. "
-        "Identify container numbers that clearly begin such solution text and respond only with the numbers separated by commas.\n"
+        "Sometimes the solution begins directly with calculations or a final numeric answer without those keywords. "
+        "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
         + build_container_string(containers)
     )
     return await _query_markers(prompt)
