@@ -2,7 +2,7 @@ import ocrpdf
 import textnormalization
 import taskprocessing
 import objecttojson
-from project_paths import PROJECT_ROOT, IMG_DIR
+from project_config import *
 
 def main():
     """Run the full OCR and task processing workflow."""

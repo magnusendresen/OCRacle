@@ -42,7 +42,7 @@ Python-delen startes med
 python -m scripts.main
 ```
 
-Du kan også bruke `python scripts/main.py`. Før kjøring må miljøvariabler som `OCRACLE_JSON_PATH` og `DEEPSEEK_API_KEY` settes. Alle skriptene bruker `project_paths.PROJECT_ROOT` for å finne filer.
+Du kan også bruke `python scripts/main.py`. Før kjøring må miljøvariabler som `OCRACLE_JSON_PATH` og `DEEPSEEK_API_KEY` settes. Alle skriptene henter innstillinger fra `project_config.py` hvor blant annet `PROJECT_ROOT`, `PROGRESS_FILE` og `PROMPT_CONFIG` er definert.
 
 
 ## Eksempel av prompting i taskprocessing.py:
