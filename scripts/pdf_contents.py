@@ -23,7 +23,7 @@ from google.cloud import vision
 import prompt_to_text
 from project_config import PROMPT_CONFIG
 
-PDF_PATH = "C:\\Users\\magnu\\Documents\\Documents\\GitHub\\OCRacle\\pdf\\mast2200.pdf"
+PDF_PATH = "C:\\Users\\magnu\\Documents\\Documents\\GitHub\\OCRacle\\pdf\\imat1002.pdf"
 
 # --- Google Vision setup ---
 json_path = os.getenv("OCRACLE_JSON_PATH")
@@ -83,9 +83,9 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
                 continue
             container["text"] = await _extract_block_text(page, block)
             containers.append(container)
-            print(
-                f"[INFO] Added container {len(containers) - 1} of type {container['type']}"
-            )
+            # print(
+            #     f"[INFO] Added container {len(containers) - 1} of type {container['type']}"
+            # )
     return containers
 
 
@@ -128,19 +128,32 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
         "Some containers explicitly start a solution section, typically using words like 'Løsning' or 'Løsningsforslag'. "
         "Some tasks may have text that sound somewhat like a solution, but be wary and only mark actual solutions. "
-        "So do not mark containers that are not clearly solutions. "
-        "Just because a container has an equals sign or is explaining something does not mean it is a solution. "
+        "Do not mark containers that are not clearly solutions. "
+
         "Be wary that some of these exams have individual letters or numbers that are images, "
         "so they may have sentences that sound like they have gaps, so if the sentences are split into different containers, "
         "imagine there might be a missing part in the middle, and make an educated guess accordingly. "
-        "What I'm trying to explain above is that if the solution sounds incomplete, be sure to avoid it. "
-        "E.G Ett steg av Newtons metode gir : is not a solution. "
-        "E.G Dersom vi bruker steglengde får vi feilen . Hvilken steglengde må vi velge for at feilen skal bli is not a solution. "
-        "Sometimes the solution begins directly with calculations or a final numeric answer without those keywords. "
+        "What I'm trying to explain above is that if the solution sounds incomplete, be sure to not instinctively mark it as a solution. "
+
+        "Here are some examples of what is not a solution: "
+            "E.G Ett steg av Newtons metode gir... "
+            "Dersom vi bruker steglengde får vi feilen . Hvilken steglengde må vi velge for at feilen skal bli... "
+            "Finn inversmatrisa A^-1. "
+            "Løys likningssettet for å finne motstanden ,  og  til kvar av dei tre komponentane. "
+            "Du skal svara på denne oppgåva på papir (med sjusifra kode) som vert skanna inn. "
+            "Finn konstantane A og B. "
+            "Finn eigenverdiane og eigenvektorane til matrisa. "
+
+        "Here are a few examples of solutions that may not be obvious, but should be marked: "
+            "Oppgave: Utløst skjærspenning Planet har normal [111] og retningen er [10 ¯ 1] . Utløst skjærspenning: σ ⋅ n |σ |n| σ ⋅ s |σ |s| τR = σ⋅cos(ϕ)cos(λ) = =50⋅ =50 =20.41 MPa. "
+            "... så her kan mye avrundes. "
+            "Korrekte alternativer er... "
+
+            
         "In some cases, you will only be able to identify the beginning of a solution by the appearant ending of a task, "
+        "so if text is coming that is not related to the task before it, it is likely a solution, "
         "so be careful to look at tasks as a whole, and pick up patterns that indicate a task is done, which means a solution is likely to follow. "
-        "E.G. if a task is marked by a number in an image container, and the following containers are text containers with what may seem like a task,  "
-        "then the first container that is a text container is likely the start of a solution. "
+        
         "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
         + build_container_string(containers)
     )
