@@ -77,18 +77,21 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
             container = {
                 "page": page_num + 1,
                 "y": round(y0),
-                "type": "text" if "lines" in block else "image" if "image" in block or block.get("type") == 1 else "unknown"
+                "type": "text" if "lines" in block else "image" if "image" in block or block.get("type") == 1 else "unknown",
             }
             if container["type"] == "unknown":
                 continue
             container["text"] = await _extract_block_text(page, block)
             containers.append(container)
+            print(
+                f"[INFO] Added container {len(containers) - 1} of type {container['type']}"
+            )
     return containers
 
 
 def build_container_string(containers: List[Dict]) -> str:
     return "".join(
-        f"\n\n=== CONTAINER {idx} ===\n{c.get('text', '')}"
+        f"\n\n=== CONTAINER {idx} ({c.get('type', 'unknown')}) ===\n{c.get('text', '')}"
         for idx, c in enumerate(containers)
     )
 
