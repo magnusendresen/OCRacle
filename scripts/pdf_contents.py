@@ -23,7 +23,7 @@ from google.cloud import vision
 import prompt_to_text
 from project_config import PROMPT_CONFIG
 
-PDF_PATH = "F:\\OCRacle\\pdf\\mast2200.pdf"
+PDF_PATH = "C:\\Users\\magnu\\Documents\\Documents\\GitHub\\OCRacle\\pdf\\mast2200.pdf"
 
 # --- Google Vision setup ---
 json_path = os.getenv("OCRACLE_JSON_PATH")
@@ -104,6 +104,7 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
         "Identify every container number that clearly marks the start of a new task or subtask, "
         "For example phrases beginning with 'Oppgave 1', 'Oppgave 2a' and similar. "
+        "In some cases, the beginning of a task may just be indicated by a number. "
         "Look for patterns, e.g. if you think that a container including 4(b) is a marker, a container including 4(a) is also likely a marker. "
         "Be careful to not make markers where the text following text is clearly not a task, even though it may have a number or task phrase. "
         "Respond only with the numbers separated by commas.\n"
@@ -122,7 +123,7 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
-        "Some containers explicitly start a solution section, typically using words like 'L\u00f8sning' or 'L\u00f8sningsforslag'. "
+        "Some containers explicitly start a solution section, typically using words like 'Løsning' or 'Løsningsforslag'. "
         "Some tasks may have text that sound somewhat like a solution, but be wary and only mark actual solutions. "
         "So do not mark containers that are not clearly solutions. "
         "Just because a container has an equals sign or is explaining something does not mean it is a solution. "
@@ -133,6 +134,10 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
         "E.G Ett steg av Newtons metode gir : is not a solution. "
         "E.G Dersom vi bruker steglengde får vi feilen . Hvilken steglengde må vi velge for at feilen skal bli is not a solution. "
         "Sometimes the solution begins directly with calculations or a final numeric answer without those keywords. "
+        "In some cases, you will only be able to identify the beginning of a solution by the appearant ending of a task, "
+        "so be careful to look at tasks as a whole, and pick up patterns that indicate a task is done, which means a solution is likely to follow. "
+        "E.G. if a task is marked by a number in an image container, and the following containers are text containers with what may seem like a task,  "
+        "then the first container that is a text container is likely the start of a solution. "
         "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
         + build_container_string(containers)
     )

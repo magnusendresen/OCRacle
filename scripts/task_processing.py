@@ -221,11 +221,13 @@ async def get_exam_info(ocr_text: str) -> Exam:
             PROMPT_CONFIG +
             "How many tasks are in this text? "
             "Respond with each task number separated by a comma. "
-            "If the subtasks are related in topic and need the answer to the previous subtask to be solved, respond with the main task number only (e.g. 1, 2, 5, 8, etc.). . "
-            "If the subtasks are unrelated (e.g. opplagerkrefter, nullstaver, stavkrefter) even if the same topic (e.g. fagverk), respond with each subtask by itself (e.g. 1a, 1b, 1c, 5a, 5b, etc.). "
-            "The exam may have a mixture of both types of tasks (e.g. 1, 2, 3a, 3b, 4, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, etc.). "
-            "There will under no circumstances be instances of both for the SAME task, e.g. 1, 1a, 1b, 2, 2a, 2b, etc. "
+            # "If the subtasks are related in topic and need the answer to the previous subtask to be solved, respond with the main task number only (e.g. 1, 2, 5, 8, etc.). . "
+            # "If the subtasks are unrelated (e.g. opplagerkrefter, nullstaver, stavkrefter) even if the same topic (e.g. fagverk), respond with each subtask by itself (e.g. 1a, 1b, 1c, 5a, 5b, etc.). "
+            # "The exam may have a mixture of both types of tasks (e.g. 1, 2, 3a, 3b, 4, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, etc.). "
+            # "There will under no circumstances be instances of both for the SAME task, e.g. 1, 1a, 1b, 2, 2a, 2b, etc. "
+            "Only include the task number, do not account for subtasks, only the main task number. "
             "Do not include any symbols like ) or - or similar. "
+            "Here is the text: "
             + ocr_text,  
             max_tokens=1000,
             isNum=False,
