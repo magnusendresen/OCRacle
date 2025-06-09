@@ -13,7 +13,7 @@ IGNORED_FILE = ICP_DATA_DIR / "ignored.txt"
 TASKS_JSON = PROJECT_ROOT / "tasks.json"
 EXAM_CODES_JSON = PROJECT_ROOT / "ntnu_emner.json"
 
-IMG_DIR = PROJECT_ROOT / "img"
+IMG_DIR = PROJECT_ROOT / "scripts" / "img"
 PDF_DIR = PROJECT_ROOT / "pdf"
 
 PROMPT_CONFIG = (

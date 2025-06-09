@@ -124,11 +124,13 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
     os.makedirs(exam_folder, exist_ok=True)
 
     def _save(img: np.ndarray, task_num: str):
+        task_folder = os.path.join(exam_folder, task_num)
+        os.makedirs(task_folder, exist_ok=True)
         counts[task_num] = counts.get(task_num, 0) + 1
         seq = counts[task_num]
         fname = f"{subject}_{version}_{task_num}_{seq}.png"
-        cv2.imwrite(os.path.join(exam_folder, fname), img)
-        print(f"Saved {subject}/{version}/{fname}")
+        cv2.imwrite(os.path.join(task_folder, fname), img)
+        print(f"Saved {subject}/{version}/{task_num}/{fname}")
 
     return _save
 
