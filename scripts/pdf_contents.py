@@ -122,13 +122,15 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
 
 
-async def query_solution_markers(containers: List[Dict]) -> List[int]:
+async def query_solution_markers(containers: List[Dict], task_markers: List[int]) -> List[int]:
+    start_info = ",".join(str(m) for m in task_markers) if task_markers else "none"
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
-        "Some containers explicitly start a solution section, typically using words like 'Løsning' or 'Løsningsforslag'. "
-        "Some tasks may have text that sound somewhat like a solution, but be wary and only mark actual solutions. "
-        "Do not mark containers that are not clearly solutions. "
+        f"The following container numbers mark the beginning of each task: {start_info}. "
+        "Your job is to identify the container numbers that clearly begin a solution section. "
+        "Solutions typically appear shortly after the task they solve and often start with phrases like 'Løsning' or 'Løsningsforslag'. "
+        "Only mark a container if it unmistakably starts a solution. Be conservative and prefer fewer false positives. "
 
         "Here are some examples of what is not a solution: "
             "Ett steg av Newtons metode gir... "
@@ -144,19 +146,12 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
             "... så her kan mye avrundes. "
             "Korrekte alternativer er... "
             
-        "Look for patterns in the container types that indicate a solution, "
-        "e.g. if solutions are typically in a text container that follows an image container, "
-        "or if they are always in a specific type of text container, "
-        "it means that the pattern likely indicates a solution. "
-        "Basically, look for patterns, and understand the context of the text. "
-
-        "It is possible that there are no solutions in the text whatsoever, "
-        "in these cases, respond with an empty string. "
-        
-        "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas. "
+        "It is possible that there are no solutions in the text whatsoever, in these cases respond with an empty string. "
+        "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
         "Here is the text: "
         + build_container_string(containers)
     )
+
     return await _query_markers(prompt)
 
 
@@ -165,7 +160,7 @@ async def main_async(pdf_path: str):
     print(f"[INFO] Extracted {len(containers)} containers")
 
     start_markers = await query_start_markers(containers)
-    solution_markers = await query_solution_markers(containers)
+    solution_markers = await query_solution_markers(containers, start_markers)
     print("Start marker containers:", start_markers)
     print("Solution marker containers:", solution_markers)
 
