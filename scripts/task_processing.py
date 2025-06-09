@@ -241,13 +241,11 @@ async def get_exam_info(ocr_text: str) -> Exam:
     global total_tasks
     total_tasks = exam.total_tasks
 
-    await extract_images.extract_images(
+    await extract_images.extract_images_with_tasks(
         pdf_path=pdf_dir,
         subject=exam.subject,
         version=exam.exam_version,
-        total_tasks=exam.total_tasks,
-        full_text=ocr_text,
-        output_folder=None
+        output_folder=None,
     )
 
     return exam
