@@ -2,7 +2,7 @@ import asyncio
 from pathlib import Path
 
 from project_config import PDF_DIR
-from extract_images_with_tasks import main_async
+from extract_images import main_async
 
 PDF_DIRECTORY = PDF_DIR
 
