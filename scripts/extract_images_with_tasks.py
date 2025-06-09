@@ -70,22 +70,10 @@ async def _assign_tasks(containers: List[Dict]) -> Dict[int, str]:
     return task_map
 
 
-async def _verify_text(img: np.ndarray) -> Tuple[int, str]:
+async def _get_text(img: np.ndarray) -> str:
+    """OCR the provided image and return the detected text."""
     _, buf = cv2.imencode(".png", img)
-    text = ocr_pdf.detect_text(buf.tobytes())
-    verify_prompt = (
-        PROMPT_CONFIG
-        + "Does this text include put-together sentences? Respond 0 if yes, 1 if no. Text: "
-        + text
-    )
-    raw = await prompt_to_text.async_prompt_to_text(
-        verify_prompt, max_tokens=50, isNum=True, maxLen=2
-    )
-    try:
-        val = int(str(raw).strip())
-    except ValueError:
-        val = 0
-    return val, text
+    return ocr_pdf.detect_text(buf.tobytes())
 
 
 def _detect_crops(img: np.ndarray) -> List[np.ndarray]:
@@ -108,12 +96,17 @@ def _detect_crops(img: np.ndarray) -> List[np.ndarray]:
 
 
 def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str, int]):
+    exam_folder = os.path.join(output_folder, subject, version)
+    os.makedirs(exam_folder, exist_ok=True)
+
     def _save(img: np.ndarray, task_num: str):
+        task_dir = os.path.join(exam_folder, task_num)
+        os.makedirs(task_dir, exist_ok=True)
         counts[task_num] = counts.get(task_num, 0) + 1
         seq = f"{counts[task_num]:02d}"
-        fname = f"{subject}_{version}_{task_num}_{seq}.png"
-        cv2.imwrite(os.path.join(output_folder, fname), img)
-        print(f"Saved {fname}")
+        fname = f"{seq}.png"
+        cv2.imwrite(os.path.join(task_dir, fname), img)
+        print(f"Saved {subject}/{version}/{task_num}/{fname}")
 
     return _save
 
@@ -124,10 +117,10 @@ async def _process_image(
     save_func,
     attempt: int = 0,
 ):
-    verify, text = await _verify_text(img)
-    print(f"    · attempt {attempt}: verify={verify}, len(text)={len(text)}")
+    text = await _get_text(img)
+    print(f"    · attempt {attempt}: len(text)={len(text)}")
 
-    if not (verify == 0 and len(text) > TEXT_LEN_LIMIT):
+    if len(text) <= TEXT_LEN_LIMIT:
         save_func(img, task_num)
         return
 
