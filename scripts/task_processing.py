@@ -431,11 +431,12 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
                 )
                 if images > 0:
                     print(f"[DEEPSEEK] | Images were found in task {task_number}.")
-                    EXAM_IMG_DIR = IMG_DIR / f"{task_exam.subject}_{task_exam.exam_version}_images"
-                    # Finn alle bilder som matcher patternet for denne oppgaven
-                    pattern = f"{task_exam.subject}_{task_exam.exam_version}_{task_number}_*.png"
-                    found_images = sorted(EXAM_IMG_DIR.glob(pattern))
-                    task_exam.images = [str(img) for img in found_images]
+                    task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
+                    if task_dir.exists():
+                        found_images = sorted(task_dir.glob("*.png"))
+                        task_exam.images = [str(img) for img in found_images]
+                    else:
+                        task_exam.images = []
                     print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
                 else:
                     print(f"[DEEPSEEK] | No images were found in task {task_number}.")
@@ -525,7 +526,7 @@ async def main_async(ocr_text: str):
         if res.images:
             used_images.update(res.images)
 
-    for img_file in IMG_DIR.glob("*.png"):
+    for img_file in IMG_DIR.rglob("*.png"):
         if str(img_file) not in used_images:
             try:
                 img_file.unlink()
