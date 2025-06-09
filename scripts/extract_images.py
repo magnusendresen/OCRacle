@@ -1,6 +1,7 @@
 import asyncio
 import os
 import re
+from pathlib import Path
 from typing import Dict, List, Tuple
 
 import pytesseract
@@ -120,17 +121,24 @@ def _detect_crops(img: np.ndarray) -> List[np.ndarray]:
 
 
 def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str, int]):
-    exam_folder = os.path.join(output_folder, subject, version)
-    os.makedirs(exam_folder, exist_ok=True)
+    """Create a save function that writes images to disk safely."""
+    exam_folder = Path(output_folder) / subject / version
+    exam_folder.mkdir(parents=True, exist_ok=True)
 
     def _save(img: np.ndarray, task_num: str):
-        task_folder = os.path.join(exam_folder, task_num)
-        os.makedirs(task_folder, exist_ok=True)
+        task_folder = exam_folder / task_num
+        task_folder.mkdir(parents=True, exist_ok=True)
         counts[task_num] = counts.get(task_num, 0) + 1
         seq = counts[task_num]
         fname = f"{subject}_{version}_{task_num}_{seq}.png"
-        cv2.imwrite(os.path.join(task_folder, fname), img)
-        print(f"Saved {subject}/{version}/{task_num}/{fname}")
+        path = task_folder / fname
+        ok, buf = cv2.imencode(".png", img)
+        if ok:
+            with open(path, "wb") as f:
+                f.write(buf.tobytes())
+            print(f"Saved {path}")
+        else:
+            print(f"[ERROR] Could not encode image for {path}")
 
     return _save
 
