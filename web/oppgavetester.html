@@ -72,7 +72,7 @@
     const taskSelect = document.getElementById("task");
     const taskTextDiv = document.getElementById("task_text");
 
-    const relativePath = '../../scripts/tasks.json';
+    const relativePath = '../tasks.json';
 
     fetch(relativePath)
       .then(response => {
@@ -154,22 +154,14 @@
             const imgContainer = document.createElement("div");
 
             images.forEach(imgPath => {
-              const match = imgPath.match(/scripts[\\/](.+)/);
-              const relative = match ? match[1].replace(/\\/g, "/") : null;
-
-              console.log("Relativ sti:", relative);
-
-              if (relative) {
-                const img = document.createElement("img");
-                img.src = `../../scripts/${relative}`;
-                img.alt = "Bilde til oppgave";
-                img.onerror = () => {
-                  console.warn("Kunne ikke laste bilde:", img.src);
-                };
-                imgContainer.appendChild(img);
-              } else {
-                console.warn("Klarte ikke å generere relativ sti:", imgPath);
-              }
+              const normalized = imgPath.replace(/\\/g, "/");
+              const img = document.createElement("img");
+              img.src = `../${normalized}`;
+              img.alt = "Bilde til oppgave";
+              img.onerror = () => {
+                console.warn("Kunne ikke laste bilde:", img.src);
+              };
+              imgContainer.appendChild(img);
             });
 
             taskTextDiv.appendChild(imgContainer);

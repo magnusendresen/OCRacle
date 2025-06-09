@@ -432,7 +432,7 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
                     task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
                     if task_dir.exists():
                         found_images = sorted(task_dir.glob("*.png"))
-                        task_exam.images = [str(img) for img in found_images]
+                        task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
                     else:
                         task_exam.images = []
                     print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
@@ -518,19 +518,7 @@ async def main_async(ocr_text: str):
     failed = [res.task_number for res in results if res.task_text is None]
     points = [res.points for res in results if res.task_text is not None]
 
-    # Slett alle bilder i IMG_DIR som ikke er knyttet til noen oppgave
-    used_images = set()
-    for res in results:
-        if res.images:
-            used_images.update(res.images)
-
-    for img_file in IMG_DIR.rglob("*.png"):
-        if str(img_file) not in used_images:
-            try:
-                img_file.unlink()
-                print(f"[CLEANUP] | Deleted unused image: {img_file}")
-            except Exception as e:
-                print(f"[CLEANUP ERROR] | Could not delete {img_file}: {e}")
+    # Bilder beholdes for fremtidig bruk og slettes ikke automatisk
 
     for res in results:
         if res.task_text is not None:
