@@ -23,7 +23,7 @@ from google.cloud import vision
 import prompt_to_text
 from project_config import PROMPT_CONFIG
 
-PDF_PATH = "C:\\Users\\magnu\\Documents\\Documents\\GitHub\\OCRacle\\pdf\\imat1002.pdf"
+PDF_PATH = "C:\\Users\\magnu\\Documents\\Documents\\GitHub\\OCRacle\\pdf\\mast.pdf"
 
 # --- Google Vision setup ---
 json_path = os.getenv("OCRACLE_JSON_PATH")
@@ -131,20 +131,10 @@ async def query_solution_markers(containers: List[Dict], task_markers: List[int]
         "Your job is to identify the container numbers that clearly begin a solution section. "
         "Solutions typically appear shortly after the task they solve and often start with phrases like 'Løsning' or 'Løsningsforslag'. "
         "Only mark a container if it unmistakably starts a solution. Be conservative and prefer fewer false positives. "
+        "A solution MUST be a complete solution to the task, not just a few sentences that could be part of the task. "
 
-        "Here are some examples of what is not a solution: "
-            "Ett steg av Newtons metode gir... "
-            "Dersom vi bruker steglengde får vi feilen . Hvilken steglengde må vi velge for at feilen skal bli... "
-            "Finn inversmatrisa A^-1. "
-            "Løys likningssettet for å finne motstanden ,  og  til kvar av dei tre komponentane. "
-            "Du skal svara på denne oppgåva på papir (med sjusifra kode) som vert skanna inn. "
-            "Finn konstantane A og B. "
-            "Finn eigenverdiane og eigenvektorane til matrisa. "
-
-        "Here are some examples of what is in fact a solution, and may not be obvious: "
-            "Oppgave: Utløst skjærspenning Planet har normal [111] og retningen er [10 ¯ 1] . Utløst skjærspenning: σ ⋅ n |σ |n| σ ⋅ s |σ |s| τR = σ⋅cos(ϕ)cos(λ) = =50⋅ =50 =20.41 MPa. "
-            "... så her kan mye avrundes. "
-            "Korrekte alternativer er... "
+        "Look for the contents of multiple containers as a whole in order to identify solutions that aren't marked with the keywords. "
+        "Single containers with short text are unlikely to be solutions, but may be if containers collectively contain a complete solution. "
             
         "It is possible that there are no solutions in the text whatsoever, in these cases respond with an empty string. "
         "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
