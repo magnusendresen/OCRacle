@@ -130,13 +130,8 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
         "Some tasks may have text that sound somewhat like a solution, but be wary and only mark actual solutions. "
         "Do not mark containers that are not clearly solutions. "
 
-        "Be wary that some of these exams have individual letters or numbers that are images, "
-        "so they may have sentences that sound like they have gaps, so if the sentences are split into different containers, "
-        "imagine there might be a missing part in the middle, and make an educated guess accordingly. "
-        "What I'm trying to explain above is that if the solution sounds incomplete, be sure to not instinctively mark it as a solution. "
-
         "Here are some examples of what is not a solution: "
-            "E.G Ett steg av Newtons metode gir... "
+            "Ett steg av Newtons metode gir... "
             "Dersom vi bruker steglengde får vi feilen . Hvilken steglengde må vi velge for at feilen skal bli... "
             "Finn inversmatrisa A^-1. "
             "Løys likningssettet for å finne motstanden ,  og  til kvar av dei tre komponentane. "
@@ -144,17 +139,22 @@ async def query_solution_markers(containers: List[Dict]) -> List[int]:
             "Finn konstantane A og B. "
             "Finn eigenverdiane og eigenvektorane til matrisa. "
 
-        "Here are a few examples of solutions that may not be obvious, but should be marked: "
+        "Here are some examples of what is in fact a solution, and may not be obvious: "
             "Oppgave: Utløst skjærspenning Planet har normal [111] og retningen er [10 ¯ 1] . Utløst skjærspenning: σ ⋅ n |σ |n| σ ⋅ s |σ |s| τR = σ⋅cos(ϕ)cos(λ) = =50⋅ =50 =20.41 MPa. "
             "... så her kan mye avrundes. "
             "Korrekte alternativer er... "
-
             
-        "In some cases, you will only be able to identify the beginning of a solution by the appearant ending of a task, "
-        "so if text is coming that is not related to the task before it, it is likely a solution, "
-        "so be careful to look at tasks as a whole, and pick up patterns that indicate a task is done, which means a solution is likely to follow. "
+        "Look for patterns in the container types that indicate a solution, "
+        "e.g. if solutions are typically in a text container that follows an image container, "
+        "or if they are always in a specific type of text container, "
+        "it means that the pattern likely indicates a solution. "
+        "Basically, look for patterns, and understand the context of the text. "
+
+        "It is possible that there are no solutions in the text whatsoever, "
+        "in these cases, respond with an empty string. "
         
-        "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
+        "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas. "
+        "Here is the text: "
         + build_container_string(containers)
     )
     return await _query_markers(prompt)
