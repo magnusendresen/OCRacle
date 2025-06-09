@@ -69,7 +69,9 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
     doc = fitz.open(pdf_path)
     for page_num, page in enumerate(doc):
         blocks = page.get_text("dict")["blocks"]
-        print(f"[INFO] Processing page {page_num + 1}/{len(doc)} with {len(blocks)} blocks")
+        print(
+            f"[INFO] Processing page {page_num + 1}/{len(doc)} with {len(blocks)} blocks"
+        )
         for block in blocks:
             x0, y0, x1, y1 = block["bbox"]
             if (x1 - x0) < 20 or (y1 - y0) < 8:
@@ -77,7 +79,16 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
             container = {
                 "page": page_num + 1,
                 "y": round(y0),
-                "type": "text" if "lines" in block else "image" if "image" in block or block.get("type") == 1 else "unknown",
+                "bbox": (x0, y0, x1, y1),
+                "type": (
+                    "text"
+                    if "lines" in block
+                    else (
+                        "image"
+                        if "image" in block or block.get("type") == 1
+                        else "unknown"
+                    )
+                ),
             }
             if container["type"] == "unknown":
                 continue
@@ -97,8 +108,12 @@ def build_container_string(containers: List[Dict]) -> str:
 
 
 async def _query_markers(prompt: str) -> List[int]:
-    resp = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=2000, isNum=False, maxLen=1000)
-    return sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
+    resp = await prompt_to_text.async_prompt_to_text(
+        prompt, max_tokens=2000, isNum=False, maxLen=1000
+    )
+    return (
+        sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
+    )
 
 
 async def query_start_markers(containers: List[Dict]) -> List[int]:
@@ -122,7 +137,9 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
 
 
-async def query_solution_markers(containers: List[Dict], task_markers: List[int]) -> List[int]:
+async def query_solution_markers(
+    containers: List[Dict], task_markers: List[int]
+) -> List[int]:
     start_info = ",".join(str(m) for m in task_markers) if task_markers else "none"
     prompt = (
         PROMPT_CONFIG
@@ -132,14 +149,11 @@ async def query_solution_markers(containers: List[Dict], task_markers: List[int]
         "Solutions typically appear shortly after the task they solve and often start with phrases like 'Løsning' or 'Løsningsforslag'. "
         "Only mark a container if it unmistakably starts a solution. Be conservative and prefer fewer false positives. "
         "A solution MUST be a complete solution to the task, not just a few sentences that could be part of the task. "
-
         "Look for the contents of multiple containers as a whole in order to identify solutions that aren't marked with the keywords. "
         "Single containers with short text are unlikely to be solutions, but may be if containers collectively contain a complete solution. "
-            
         "It is possible that there are no solutions in the text whatsoever, in these cases respond with an empty string. "
         "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
-        "Here is the text: "
-        + build_container_string(containers)
+        "Here is the text: " + build_container_string(containers)
     )
 
     return await _query_markers(prompt)
