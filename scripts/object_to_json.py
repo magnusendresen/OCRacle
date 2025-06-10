@@ -41,13 +41,27 @@ def main(tasks):
         task_num = task_copy.get("task_number") or 0
 
         tasks_list = exam_data["tasks"]
-        idx = next((i for i, t in enumerate(tasks_list) if t.get("task_number") == task_copy.get("task_number")), None)
+        idx = next(
+            (i for i, t in enumerate(tasks_list) if t.get("task_number") == task_copy.get("task_number")),
+            None,
+        )
         if idx is not None:
             tasks_list[idx] = task_copy
             action = "erstattet"
         else:
             tasks_list.append(task_copy)
             action = "lagt til"
+
+        # Remove any duplicate entries with the same task number while keeping the latest
+        seen = set()
+        deduped = []
+        for i, t in enumerate(reversed(tasks_list)):
+            num = t.get("task_number")
+            if num in seen:
+                continue
+            seen.add(num)
+            deduped.append(t)
+        tasks_list[:] = list(reversed(deduped))
 
         print(
             f"[INFO] | Oppgave {action}: "
