@@ -2,7 +2,7 @@
     "configurations": [
         {
             "name": "Build and Run Debug",
-            "type": "lldb",
+            "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/builddir/program",
             "args": [],

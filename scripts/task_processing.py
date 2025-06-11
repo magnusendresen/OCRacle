@@ -241,12 +241,17 @@ async def get_exam_info(ocr_text: str) -> Exam:
     global total_tasks
     total_tasks = exam.total_tasks
 
+    version_abbr = exam.exam_version[0].upper() + exam.exam_version[-2:]
+
+    print("[INFO] | Set exam version abbreviation to: " + version_abbr)
+
     await extract_images.extract_images_with_tasks(
         pdf_path=pdf_dir,
         subject=exam.subject,
-        version=exam.exam_version,
+        version=version_abbr,
         output_folder=None,
     )
+
 
     return exam
 

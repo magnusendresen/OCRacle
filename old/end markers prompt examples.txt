@@ -1,0 +1,13 @@
+"Here are some examples of what is not a solution: "
+            "Ett steg av Newtons metode gir... "
+            "Dersom vi bruker steglengde får vi feilen . Hvilken steglengde må vi velge for at feilen skal bli... "
+            "Finn inversmatrisa A^-1. "
+            "Løys likningssettet for å finne motstanden ,  og  til kvar av dei tre komponentane. "
+            "Du skal svara på denne oppgåva på papir (med sjusifra kode) som vert skanna inn. "
+            "Finn konstantane A og B. "
+            "Finn eigenverdiane og eigenvektorane til matrisa. "
+
+        "Here are some examples of what is in fact a solution, and may not be obvious: "
+            "Oppgave: Utløst skjærspenning Planet har normal [111] og retningen er [10 ¯ 1] . Utløst skjærspenning: σ ⋅ n |σ |n| σ ⋅ s |σ |s| τR = σ⋅cos(ϕ)cos(λ) = =50⋅ =50 =20.41 MPa. "
+            "... så her kan mye avrundes. "
+            "Korrekte alternativer er... "
