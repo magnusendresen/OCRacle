@@ -65,11 +65,25 @@ def _bbox_iou(b1: Tuple[int, int, int, int], b2: Tuple[int, int, int, int]) -> f
     return inter / union
 
 
+TASK_PATTERN = re.compile(r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)", re.IGNORECASE)
+
+def _fallback_markers(containers: List[Dict]) -> List[int]:
+    """Return a list of container indices that look like task starts."""
+    markers = []
+    for idx, c in enumerate(containers):
+        if TASK_PATTERN.search(c.get("text", "")):
+            markers.append(idx)
+    return markers
+
+
 async def _assign_tasks(containers: List[Dict]) -> Dict[int, str]:
     markers = await query_start_markers(containers)
     if not markers:
-        return {}
-    markers = sorted(markers)
+        markers = _fallback_markers(containers)
+        if not markers:
+            print("[WARNING] Could not detect task markers. Falling back to sequential numbering.")
+            return {i: str(i + 1) for i in range(len(containers))}
+    markers = sorted(set([0] + markers))
     ranges: List[Tuple[int, int]] = []
     for i, start in enumerate(markers):
         end = markers[i + 1] if i + 1 < len(markers) else len(containers)
@@ -88,7 +102,12 @@ async def _assign_tasks(containers: List[Dict]) -> Dict[int, str]:
             prompt, max_tokens=20, isNum=False, maxLen=20
         )
         m = TASK_RE.search(str(answer))
-        task_num = m.group(2) if m else str(idx)
+        if m:
+            task_num = m.group(2)
+        else:
+            first_text = region_containers[0].get("text", "") if region_containers else ""
+            m2 = TASK_PATTERN.search(first_text)
+            task_num = m2.group(2) if m2 else str(idx)
         for ci in range(start, end):
             task_map[ci] = task_num
     return task_map
