@@ -31,10 +31,12 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
  - `ocr_pdf.py` – bruker Google Vision API til å lese PDF som bilder og hente tekst
  - `text_normalization.py` – renser opp i artifacts og symboler etter OCR
 - `cachetask.py` – brukt under utvikling for å teste DeepSeek uten ny OCR
- - `prompt_to_text.py` – sender prompts til DeepSeek og henter svar
- - `task_processing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
- - `object_to_json.py` – lagrer oppgaveobjektene til `tasks.json` i
-   strukturen `emne -> eksamensutgivelse -> oppgave`
+- `prompt_to_text.py` – sender prompts til DeepSeek og henter svar
+- `task_processing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
+- `object_to_json.py` – lagrer oppgaveobjektene til `tasks.json` i
+  strukturen `emne -> eksamensutgivelse -> oppgave`
+- `prompt_tuning.py` – itererer over ulike prompts og plottar treffprosenten for
+  å finne best mulig formulering
 
 ## Start av Python-arbeidsflyten
 Python-delen startes med
@@ -108,6 +110,7 @@ tqdm
 transformers
 requests
 scipy
+matplotlib
 PyMuPDF
 pdf2image
 PyPDF2
