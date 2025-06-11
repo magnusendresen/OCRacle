@@ -383,11 +383,15 @@ task_process_instructions = [
             "- You are allowed to make som assumptions about OCR artifacts in the text, such as \\sqrt{\\sqrt{\\sqrt most likely being an error for a single square root. "
             "- Be sure to include spaces and newlines where appropriate, the formatting is supposed to look proper.  "
 
-            "For multiple choice tasks with both text and image alternatives, also follow these rules: "
-            "- "
+            "For multiple choice tasks with text or image alternatives, also follow these rules: "
+            "- Present the alternatives as an ordered list using <ol><li>. "
+            "- Prefix each alternative with the corresponding letter label inside <b> tags (A, B, C, ...). "
+            "- If an alternative contains an image, use <img src='PATH' alt=''> within the <li> element. "
+            "- Keep the statement of the task itself outside the list in normal <p> tags. "
 
-            "For regular tasks that require proving a result, calculating or explaining, also follow these rules: "
-            "- "
+            "For regular tasks that require proving, calculating or explaining, also follow these rules: "
+            "- Keep paragraphs short and use multiple <p> elements rather than a single long block. "
+            "- Introduce each subtask with its label using <h3>a)</h3>, <h3>b)</h3> and so on. "
 
 
             "Here is the task text: "
