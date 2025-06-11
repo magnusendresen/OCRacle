@@ -352,7 +352,7 @@ task_process_instructions = [
             "- Hjelpemiddelkoder og kalkulatorliste. "
             "- Eksamensdato og klokkeslett. "
             "Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task. "
-            "Be careful to still include the information necessary for being able to solve the task, such as the main question itself. "
+            "Be sure to still include ALL the information necessary for being able to solve the task, such as the main question itself. "
             "Do not include the solution to the task, only the task text itself. "
         ),
         "max_tokens": 1000,
