@@ -197,24 +197,27 @@ async def get_exam_info(ocr_text: str) -> Exam:
     with DIR_FILE.open("r", encoding="utf-8") as dir_file:
         pdf_dir = dir_file.readline().strip()
 
-    exam.exam_version = (
+    exam_raw_version = (
         await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG +
-            "What exam edition is this exam? "
-            "Respond only with the singular formatted exam edition written in norwegian. "
-            "If the exam is in the spring or early summer, it should be titled Vår 20XX. "
-            "If the exam is in the autumn or early winter, it should be titled Høst 20XX. "
-            "If the exam is in the late summer or early autumn, it should be titled Kont 20XX. "
-            "Of course 20XX is just an example here, write the actual year. "
-            f"The title of the pdf is {pdf_dir} which might help you, or not. "
-            "Make an educated guess from all the information above collectively. "
+            PROMPT_CONFIG
+            + "What exam edition is this exam? "
+            + "Respond only with the singular formatted exam edition written in norwegian. "
+            + "If the exam is in the spring or early summer, it should be titled Vår 20XX. "
+            + "If the exam is in the autumn or early winter, it should be titled Høst 20XX. "
+            + "If the exam is in the late summer or early autumn, it should be titled Kont 20XX. "
+            + "Of course 20XX is just an example here, write the actual year. "
+            + f"The title of the pdf is {pdf_dir} which might help you, or not. "
+            + "Make an educated guess from all the information above collectively. "
             + ocr_text,
             max_tokens=1000,
             isNum=False,
-            maxLen=12
+            maxLen=12,
         )
     )
-    print(f"[DEEPSEEK] | Exam version found: {exam.exam_version}")
+    version_abbr = exam_raw_version[0].upper() + exam_raw_version[-2:]
+    exam.exam_version = version_abbr
+    print(f"[DEEPSEEK] | Exam version found: {exam_raw_version}")
+    print("[INFO] | Set exam version abbreviation to: " + version_abbr)
     write_progress({5: exam.exam_version or ""})
 
     exam.total_tasks = (
@@ -261,14 +264,10 @@ async def get_exam_info(ocr_text: str) -> Exam:
     global total_tasks
     total_tasks = exam.total_tasks
 
-    version_abbr = exam.exam_version[0].upper() + exam.exam_version[-2:]
-
-    print("[INFO] | Set exam version abbreviation to: " + version_abbr)
-
     await extract_images.extract_images_with_tasks(
         pdf_path=pdf_dir,
         subject=exam.subject,
-        version=version_abbr,
+        version=exam.exam_version,
         output_folder=None,
     )
 
@@ -315,28 +314,10 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            PROMPT_CONFIG + 
-            "Hva er temaet i denne oppgaven? Svar kun med temaet på norsk bokmål, ingenting annet. "
-            "I noen tilfeller vil temaet stå i oppgavetittelen, men i andre tilfeller gjør den ikke det, og da må du gjøre et meget godt educated guess utifra instruksjonene nedenfor. "
-            "Ikke gå for spesifikt, hold deg til overordnede temaer logisk for kategorisering av eksamenssett. "
-            "Ettersom dette er for eksamensoppgavekategorisering behøver jeg svar som er generelle og vil fås i flere ulike prompts. "
-            "For å unngå for mange og konkrete temaer gjøres forenklinger. Gjør passende slike antakelser for hva som er lurt for kategorisering. Her kommer noen eksempler: "
-            "- Globalt Maksimum og Minimum => Kritiske Punkt. "
-            "- Derivasjon => Derivasjon. "
-            "- Partiell Derivasjon => Partiell Derivasjon. "
-            "- Taylor 1D, Taylor 2D, Taylorrekke,  => Taylorrekker. "
-            "- Oppgaver der energibevaring er viktig => Energibevaring. "
-            "- Alt av bevegelsesmengde - med eller uten fjærer og friksjon => Bevegelsesmengde. "
-            "- Oppgaver med rotasjon, treghetsmoment, vinkelhastighet, vinkelakselerasjon og/eller vinkelmoment => Rotasjonsmekanikk. "
-            "- Oppgaver med friksjon, krefter og akselerasjon i skråplan og tau => Mekanikk. "
-            "- Svingning med fjær eller pendel, med eller uten demping => Svingninger. "
-            "- Hvis oppgaven handler om regning med matriser (matriseprodukt, invers, determinant, rang, etc.) => Matriseregning. "
-            "- Hvis oppgaven handler om vektorer, vektorprodukt, skalarprodukt, projeksjon, vektorrom, etc. => Vektorregning. "
-            "- Osv. Osv. Osv. "
-            "Hvis det finnes en referanse for relevante temaer for emnet, vil den stå under. Bruk referansen som støtte for å velge passende tema, men ikke nødvendigvis spesifikt for temaet hvis det virker feil. "
-            "Hvis det ikke finnes en referanse, gjør en god vurdering basert på oppgaveteksten og forklaringen over. Målet er å få det samme resultatet ved ulike eksamenssett. "
-            "Svar kun med temaet på norsk bokmål, ingenting annet. "
-            "Her kommer den eventuelle referansen, samt teksten til oppgaven: "
+            PROMPT_CONFIG
+            + "Velg temaet til denne oppgaven fra listen under. "
+            + "Svar kun med temaet på norsk bokmål, ingenting annet. "
+            + "Her kommer listen og deretter oppgaveteksten: "
         ),
         "max_tokens": 1000,
         "isNum": False,

@@ -26,18 +26,35 @@ def main(tasks):
             continue
 
         subject_data = existing.setdefault(subject, {})
-        exam_data = subject_data.setdefault(exam, {
-            "total_tasks": task_dict.get("total_tasks", []),
-            "matching_codes": task_dict.get("matching_codes", []),
-            "tasks": []
-        })
+        exam_data = subject_data.setdefault(
+            exam,
+            {
+                "total_tasks": task_dict.get("total_tasks", []),
+                "matching_codes": task_dict.get("matching_codes", []),
+                "exam_topics": task_dict.get("exam_topics", []),
+                "tasks": [],
+            },
+        )
 
         if task_dict.get("total_tasks"):
             exam_data["total_tasks"] = task_dict["total_tasks"]
         if task_dict.get("matching_codes"):
             exam_data["matching_codes"] = task_dict["matching_codes"]
+        if task_dict.get("exam_topics"):
+            exam_data["exam_topics"] = task_dict["exam_topics"]
 
-        task_copy = {k: v for k, v in task_dict.items() if k not in {"subject", "exam_version", "total_tasks", "matching_codes"}}
+        task_copy = {
+            k: v
+            for k, v in task_dict.items()
+            if k
+            not in {
+                "subject",
+                "exam_version",
+                "total_tasks",
+                "matching_codes",
+                "exam_topics",
+            }
+        }
         task_num = task_copy.get("task_number") or 0
 
         tasks_list = exam_data["tasks"]
