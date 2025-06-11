@@ -21,3 +21,4 @@ PyMuPDF  # Includes fitz
 openai
 requests
 scipy
+matplotlib
