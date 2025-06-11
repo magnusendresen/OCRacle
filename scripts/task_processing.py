@@ -56,6 +56,7 @@ class Exam:
     images: List[str] = field(default_factory=list)
     code: Optional[str] = None
     total_tasks: List[str] = field(default_factory=list)
+    exam_topics: List[str] = field(default_factory=list)
 
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
@@ -237,6 +238,25 @@ async def get_exam_info(ocr_text: str) -> Exam:
     exam.total_tasks = [task.strip() for task in exam.total_tasks.split(",")]
     print(f"[DEEPSEEK] | Tasks found for processing: {exam.total_tasks}")
     write_progress({6: str(exam.total_tasks)})
+
+    exam.exam_topics = (
+        await prompt_to_text.async_prompt_to_text(
+            PROMPT_CONFIG +
+            "Hva er de viktigste temaene i denne teksten? "
+            "Svar med en kommaseparert liste i norsk bokmål. "
+            "Hold deg til overordnede temaer som egner seg for eksamenskategorisering. "
+            "Her er teksten: "
+            + ocr_text,
+            max_tokens=1000,
+            isNum=False,
+            maxLen=300
+        )
+    )
+    if exam.exam_topics:
+        exam.exam_topics = [t.strip() for t in str(exam.exam_topics).split(',')]
+    else:
+        exam.exam_topics = []
+    print(f"[DEEPSEEK] | Topics found in exam: {exam.exam_topics}")
 
     global total_tasks
     total_tasks = exam.total_tasks
@@ -460,9 +480,13 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
 
             # Topic extraction
             elif i == 3:
+                reference = get_topics(exam.subject)
+                if exam.exam_topics:
+                    topics_str = ", ".join(exam.exam_topics)
+                    reference = f"{reference}, {topics_str}" if reference else topics_str
                 task_exam.topic = str(
                     await prompt_to_text.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"] + get_topics(exam.subject) + task_output,
+                        task_process_instructions[i]["instruction"] + reference + task_output,
                         max_tokens=task_process_instructions[i]["max_tokens"],
                         isNum=task_process_instructions[i]["isNum"],
                         maxLen=task_process_instructions[i]["maxLen"]
