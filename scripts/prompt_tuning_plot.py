@@ -28,6 +28,11 @@ def refine_prompt(current_prompt: str, input_text: str, output_text: str, target
         "Gjør ditt beste for å ikke gå for spesifikt, altså å forklare ved å bruke innholdet i akkurat denne oppgaven. "
         "Hold instruksjonene generelle slik at de kan brukes på andre oppgaver. "
         "Oppdater prompten som på nytt skal bli sendt til den samme teksten for å komme nærmere svaret. "
+        "Ikke forklar for ting som kun gjelder denne oppgaven, som f.eks.:"
+        " \"bruk $$ for matrisen og determinanten\", "
+        " \"erstatt understrek med\", "
+        " \"etter matrisen\","
+        " \"skriv determinanten som\". "
         "Svar kun med selve prompten."
     )
     suggestion = prompt_to_text.prompt_to_text(
@@ -56,8 +61,8 @@ def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: i
         matches.append(match)
         print(f"Match: {match:.2f}%\nOutput: {out}\n")
 
-        if match >= 95:
-            print("Oppnådde over 95% match, stopper tidlig.")
+        if match >= 90:
+            print("Oppnådde over 90% match, stopper tidlig.")
             prompts.append(current_prompt)
             break
 
@@ -110,7 +115,7 @@ def main():
         "--target_text",
         default="<p><em>Du skal svare på denne oppgaven i Inspera. Du skal ikke legge ved utregninger på papir.</em></p><p>La $$A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 3 & 8 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}.$$</p><p>Hva er determinanten til matrisen <em>A</em>?</p><p>$$\\det(A) = \\boxed{\\phantom{0}}$$</p><p>Avrund svaret til nærmeste heltall.</p>",
     )
-    parser.add_argument("--iterations", type=int, default=5)
+    parser.add_argument("--iterations", type=int, default=20)
     parser.add_argument("--plot", default="prompt_tuning_plot.png", help="Fil for lagring av plott")
     parser.add_argument("--json", default=None, help="Valgfri fil for å lagre detaljer som JSON")
     args = parser.parse_args()
