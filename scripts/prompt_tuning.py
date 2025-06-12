@@ -18,18 +18,18 @@ def refine_prompt(current_prompt: str, input_text: str, output_text: str, target
     instruction = (
         f"{PROMPT_CONFIG}Vi prøver å løse teksten '{input_text}'. "
         f"Den gjeldende prompten er: '{current_prompt}'. "
-        f"Svaret ble: '{output_text}'. "
-        f"Målet er noe som ligner: '{target}'. "
-        "Gi en intuitiv forbedring av prompten uten å sitere eller be om eksakt tekst. "
+        f"Svaret etter forrige denne prompten ble: '{output_text}'. "
+        f"Målet er at svaret skal bli: '{target}'. "
+        "Oppdater prompten som på nytt skal bli sendt til den samme teksten for å komme nærmere svaret. "
         "Svar kun med selve prompten."
     )
     suggestion = prompt_to_text.prompt_to_text(
-        instruction, max_tokens=200, isNum=False, maxLen=400
+        instruction, max_tokens=200, isNum=False, maxLen=1500
     )
     return suggestion if suggestion else current_prompt
 
 
-def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: int = 5):
+def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: int = 15):
     prompts = [initial_prompt]
     outputs = []
     matches = []
@@ -69,9 +69,16 @@ def main():
     parser.add_argument("--input_text", default="x**2 + 8x + 16 = 0")
     parser.add_argument(
         "--target_text",
-        default="Vi benytter abc-formelen og setter a=1, b=8 og c=16.",
+        default=(
+            "Vi benytter abc-formelen, som brukes til å løse andregradsligninger på formen ax^2 + bx + c = 0. "
+            "Her setter vi a=1, b=8 og c=16. "
+            "Formelen er: x = (-b ± sqrt(b^2 - 4ac)) / (2a). "
+            "Vi regner først ut diskriminanten: D = b^2 - 4ac = 8^2 - 4*1*16 = 64 - 64 = 0. "
+            "Siden diskriminanten er 0, finnes det én løsning: x = -b / (2a) = -8 / 2 = -4. "
+            "Løsningen på ligningen er altså x = -4."
+        ),
     )
-    parser.add_argument("--iterations", type=int, default=5)
+    parser.add_argument("--iterations", type=int, default=10)
     args = parser.parse_args()
 
     tune_prompt(args.prompt, args.input_text, args.target_text, args.iterations)
