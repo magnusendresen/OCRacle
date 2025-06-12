@@ -51,7 +51,12 @@ def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: i
 
     for i in range(iterations):
         print(f"\n--- Iterasjon {i + 1} ---")
-        full_prompt = f"{PROMPT_CONFIG}{current_prompt}\n\n{input_text}"
+        full_prompt = (
+            f"{PROMPT_CONFIG}{current_prompt}\n\n"
+            "Format the following text according to the instructions above. "
+            "Do not include the instructions themselves in the response:\n"
+            f"{input_text}"
+        )
         out = prompt_to_text.prompt_to_text(
             full_prompt, max_tokens=800, isNum=False, maxLen=1500
         )
