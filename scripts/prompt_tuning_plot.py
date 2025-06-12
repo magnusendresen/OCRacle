@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-"""Utility to run prompt tuning and generate an annotated plot."""
+"""Utility to run prompt tuning and generate annotated plots.
+
+Supports running multiple tasks concurrently to speed up testing of new
+formatting prompts.
+"""
 
 import argparse
 import json
+import asyncio
 from pathlib import Path
 from difflib import SequenceMatcher
 import matplotlib
@@ -36,6 +41,29 @@ def refine_prompt(current_prompt: str, input_text: str, output_text: str, target
         "Svar kun med selve prompten."
     )
     suggestion = prompt_to_text.prompt_to_text(
+        instruction, max_tokens=200, isNum=False, maxLen=1500
+    )
+    return suggestion if suggestion else current_prompt
+
+
+async def async_refine_prompt(current_prompt: str, input_text: str, output_text: str, target: str) -> str:
+    """Asynchronous wrapper for refine_prompt."""
+    instruction = (
+        f"{PROMPT_CONFIG} Vi prøver å formattere teksten '{input_text}'. "
+        f"Den gjeldende prompten er: '{current_prompt}'. "
+        f"Svaret etter denne prompten ble: '{output_text}'. "
+        f"Målet er at svaret skal bli: '{target}'. "
+        "Gjør ditt beste for å ikke gå for spesifikt, altså å forklare ved å bruke innholdet i akkurat denne oppgaven. "
+        "Hold instruksjonene generelle slik at de kan brukes på andre oppgaver. "
+        "Oppdater prompten som på nytt skal bli sendt til den samme teksten for å komme nærmere svaret. "
+        "Ikke forklar for ting som kun gjelder denne oppgaven, som f.eks.:"
+        " \"bruk $$ for matrisen og determinanten\", "
+        " \"erstatt understrek med\", "
+        " \"etter matrisen\","
+        " \"skriv determinanten som\". "
+        "Svar kun med selve prompten."
+    )
+    suggestion = await prompt_to_text.async_prompt_to_text(
         instruction, max_tokens=200, isNum=False, maxLen=1500
     )
     return suggestion if suggestion else current_prompt
@@ -85,6 +113,73 @@ def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: i
     return prompts, outputs, matches
 
 
+async def tune_prompts(tasks, iterations: int = 15):
+    """Tune multiple prompts asynchronously.
+
+    Args:
+        tasks: list of dicts with keys 'prompt', 'input_text', 'target_text'
+        iterations: number of tuning iterations
+
+    Returns:
+        tuple of lists (prompts_list, outputs_list, matches_list)
+    """
+    n = len(tasks)
+    prompts_list = [[t["prompt"]] for t in tasks]
+    outputs_list = [[] for _ in tasks]
+    matches_list = [[] for _ in tasks]
+    current_prompts = [t["prompt"] for t in tasks]
+    best_prompts = current_prompts[:]
+    best_matches = [0.0] * n
+
+    for i in range(iterations):
+        print(f"\n--- Iterasjon {i + 1} ---")
+        full_prompts = [
+            f"{PROMPT_CONFIG}{cp}\n\n"
+            "Format the following text according to the instructions above. "
+            "Do not include the instructions themselves in the response:\n"
+            f"{t['input_text']}"
+            for cp, t in zip(current_prompts, tasks)
+        ]
+        outs = await asyncio.gather(
+            *[
+                prompt_to_text.async_prompt_to_text(fp, max_tokens=800, isNum=False, maxLen=1500)
+                for fp in full_prompts
+            ]
+        )
+
+        for idx, out in enumerate(outs):
+            out = out or ""
+            outputs_list[idx].append(out)
+            match = match_percent(out, tasks[idx]["target_text"])
+            matches_list[idx].append(match)
+            print(f"Oppgave {idx + 1} match: {match:.2f}%")
+
+            if match >= 98:
+                continue
+
+            if match >= best_matches[idx]:
+                best_matches[idx] = match
+                best_prompts[idx] = current_prompts[idx]
+            else:
+                current_prompts[idx] = best_prompts[idx]
+                print("Match sank, går tilbake til beste prompt.")
+
+        refined = await asyncio.gather(
+            *[
+                async_refine_prompt(cp, t["input_text"], o, t["target_text"])
+                if m[-1] < 98 else asyncio.sleep(0, result=cp)
+                for cp, t, o, m in zip(current_prompts, tasks, outs, matches_list)
+            ]
+        )
+
+        for idx, new_p in enumerate(refined):
+            current_prompts[idx] = new_p
+            prompts_list[idx].append(new_p)
+            print(f"Prompt {idx + 1} etter iterasjon {i + 1}: {new_p}")
+
+    return prompts_list, outputs_list, matches_list
+
+
 def save_results(prompts, outputs, matches, path):
     """Save tuning results as JSON."""
     data = [
@@ -107,6 +202,27 @@ def plot_results(matches, out_file):
     plt.title("Prompt tuning")
     plt.ylim(0, 100)
     plt.grid(True, linestyle="--", alpha=0.6)
+    plt.tight_layout()
+    plt.savefig(out_file)
+    print(f"Plot lagret til {out_file}")
+
+
+def plot_multiple_results(matches_list, out_file, labels=None):
+    """Plot match curves for multiple tasks in one window."""
+    plt.figure(figsize=(8, 4))
+    if labels is None:
+        labels = [f"Task {i+1}" for i in range(len(matches_list))]
+    for matches, label in zip(matches_list, labels):
+        x = list(range(1, len(matches) + 1))
+        plt.plot(x, matches, marker="o", linestyle="-", label=label)
+        for xi, yi in zip(x, matches):
+            plt.annotate(f"{yi:.1f}%", (xi, yi), textcoords="offset points", xytext=(0, 5), ha="center")
+    plt.xlabel("Iterasjon")
+    plt.ylabel("Match %")
+    plt.title("Prompt tuning")
+    plt.ylim(0, 100)
+    plt.grid(True, linestyle="--", alpha=0.6)
+    plt.legend()
     plt.tight_layout()
     plt.savefig(out_file)
     print(f"Plot lagret til {out_file}")
@@ -153,16 +269,55 @@ def main():
     parser.add_argument("--iterations", type=int, default=20)
     parser.add_argument("--plot", default="prompt_tuning_plot.png", help="Fil for lagring av plott")
     parser.add_argument("--json", default=None, help="Valgfri fil for å lagre detaljer som JSON")
+    parser.add_argument("--tasks_file", type=Path, default=None, help="JSON-fil med flere oppgaver")
     args = parser.parse_args()
 
-    prompts, outputs, matches = tune_prompt(
-        args.prompt, args.input_text, args.target_text, args.iterations
-    )
-    plot_results(matches, args.plot)
+    if args.tasks_file and args.tasks_file.exists():
+        tasks_data = json.loads(args.tasks_file.read_text(encoding="utf-8"))
+        if isinstance(tasks_data, dict):
+            tasks_iter = tasks_data.get("tasks", [])
+        else:
+            tasks_iter = tasks_data
+        tasks = [
+            {
+                "prompt": t.get("prompt", args.prompt),
+                "input_text": t["input_text"],
+                "target_text": t["target_text"],
+            }
+            for t in tasks_iter[:3]
+        ]
+    else:
+        tasks = [
+            {
+                "prompt": args.prompt,
+                "input_text": args.input_text,
+                "target_text": args.target_text,
+            }
+        ]
 
-    if args.json:
-        save_results(prompts, outputs, matches, args.json)
-        print(f"Resultater lagret til {args.json}")
+    if len(tasks) == 1:
+        prompts, outputs, matches = tune_prompt(
+            tasks[0]["prompt"], tasks[0]["input_text"], tasks[0]["target_text"], args.iterations
+        )
+        plot_results(matches, args.plot)
+        if args.json:
+            save_results(prompts, outputs, matches, args.json)
+            print(f"Resultater lagret til {args.json}")
+    else:
+        prompts_list, outputs_list, matches_list = asyncio.run(tune_prompts(tasks, args.iterations))
+        labels = [f"Oppgave {i+1}" for i in range(len(tasks))]
+        plot_multiple_results(matches_list, args.plot, labels=labels)
+        if args.json:
+            data = {
+                f"task_{i+1}": [
+                    {"iteration": j, "prompt": p, "output": o, "match": m}
+                    for j, (p, o, m) in enumerate(zip(pr, ou, ma), 1)
+                ]
+                for i, (pr, ou, ma) in enumerate(zip(prompts_list, outputs_list, matches_list))
+            }
+            with open(args.json, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            print(f"Resultater lagret til {args.json}")
 
 
 if __name__ == "__main__":
