@@ -14983,7 +14983,12 @@
             "Vektorregning",
             "Matriseregning",
             "Integrasjon",
-            "Derivasjon"
+            "Derivasjon",
+            "Inversmatriser",
+            "Initialverdiproblemer",
+            "Lineære likningssystemer",
+            "Lineære transformasjoner",
+            "Determinanter"
         ]
     },
     {

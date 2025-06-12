@@ -178,5 +178,155 @@
                 }
             ]
         }
+    },
+    "IMAX10Y2": {
+        "H24": {
+            "total_tasks": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14"
+            ],
+            "matching_codes": [
+                "IMAX1002"
+            ],
+            "exam_topics": [
+                "Lineære likningssystemer",
+                "Determinanter",
+                "Lineære transformasjoner",
+                "Underrom",
+                "Basis",
+                "Inversmatriser",
+                "Komplekse tall",
+                "Differensiallikninger",
+                "Integraler",
+                "Initialverdiproblemer",
+                "System av differensiallikninger"
+            ],
+            "tasks": [
+                {
+                    "topic": "Lineære likningssystemer",
+                    "task_number": "1",
+                    "points": 8,
+                    "task_text": "<p>Løs likningssettet for å finne motstanden x, y og z til hver av de tre komponentene.</p>\n\n<p>Motstanden til komponent A er x, komponent B har motstand y, og komponent C har motstand z.</p>\n\n<p>Krets 1 har en motstand på 212 og har 2 av komponent A, 3 av komponent B og 4 av komponent C. Likningen: $2x + 3y + 4z = 212$.</p>\n\n<p>Krets 2 har en motstand på 101 og har 1 av komponent A, 5 av komponent B og 0 av komponent C. Likningen: $x + 5y = 101$.</p>\n\n<p>Krets 3 har en motstand på 158 og har 8 av komponent A, 0 av komponent B og 4 av komponent C. Likningen: $8x + 4z = 158$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Integrasjon",
+                    "task_number": "10",
+                    "points": 5,
+                    "task_text": "<p>Finn verdien til integralet</p>\n<p>$$\\int_{2}^{3} x^2 e^{x^3 / 3} \\, dx$$</p>\n<p>Rund av til nærmeste heltall.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Derivasjon",
+                    "task_number": "11",
+                    "points": 10,
+                    "task_text": "<p>La $f(t) = t^3e^t$.</p>\n\n<p>Hvilket av følgende uttrykk er $f'(t)$? Velg ett alternativ</p>\n<ol>\n<li><b>A</b> $f'(t) = 3t^3e^t + t^2e^t$</li>\n<li><b>B</b> $f'(t) = (3t^2 + t^3)e^t$</li>\n<li><b>C</b> $f'(t) = 2t^2e^t + t^3e^t$</li>\n<li><b>D</b> $f'(t) = 2t^2e^t$</li>\n<li><b>E</b> $f'(t) = 3t^2e^t$</li>\n<li><b>F</b> $f'(t) = t^3e^t$</li>\n</ol>\n\n<p>Hvilken av følgende differensiallikninger har funksjonen $f$ som en løsning? Velg ett alternativ</p>\n<ol>\n<li><b>A</b> $tf'(t) - 2f(t) = 0$</li>\n<li><b>B</b> $tf'(t) - e^tf(t) = 0$</li>\n<li><b>C</b> $-tf'(t) - e^tf(t) = 0$</li>\n<li><b>D</b> $f'(t) - \\frac{3f(t)}{t} - f(t) = 0$</li>\n<li><b>E</b> $f'(t) - (t^2 - e^t)f(t) = 0$</li>\n<li><b>F</b> $f'(t) - \\frac{3f(t)}{t} = 0$</li>\n</ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Initialverdiproblemer",
+                    "task_number": "12",
+                    "points": 6,
+                    "task_text": "<p>Finn løsningen på initialverdiproblemet</p><p>$y(x) y'(x) = e^{3x}$, $y(0) = 1$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Differensiallikninger",
+                    "task_number": "13",
+                    "points": 8,
+                    "task_text": "<p>Differensiallikningen $4y''(x) - 4y'(x) + y(x) = \\cos(2x)$ har en partikulær løsning på formen $y(x) = A \\cos(2x) + B \\sin(2x)$.</p><p>Finn konstantene $A$ og $B$.</p><p>$A = $, $B = $</p><p>Rund av til to desimaler etter komma.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Differensiallikninger",
+                    "task_number": "14",
+                    "points": 10,
+                    "task_text": "<p>Se på følgende system av førsteordens differensiallikninger</p>  \n<p>$x_1'(t) = 3x_1(t) + x_2(t),$</p>  \n<p>$x_2'(t) = x_1(t) + x_2(t).$</p>  \n\n<h3>a)</h3>  \n<p>Skriv systemet på matriseform, altså på formen $x'(t) = A x(t)$ hvor $A$ er en matrise og $x(t) = [x_1(t) x_2(t)]^\\top.$</p>  \n\n<h3>b)</h3>  \n<p>Finn egenverdiene og egenvektorene til matrisen $A.$</p>  \n\n<h3>c)</h3>  \n<p>Finn den generelle løsningen til systemet av differensiallikninger.</p>  \n\n<h3>d)</h3>  \n<p>Finn løsningen av systemet som tilfredsstiller initialbetingelsene $x_1(0) = 2$ og $x_2(0) = \\sqrt{2}.$</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Determinanter",
+                    "task_number": "2",
+                    "points": 6,
+                    "task_text": "<p>La $A = \\begin{pmatrix} 1 & 2 & 0 \\\\ 3 & 8 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$.</p><p>Hva er determinanten til matrisen $A$?</p><p>$\\det(A) =$ ☐</p><p>Rund av svaret til nærmeste heltall.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Lineære transformasjoner",
+                    "task_number": "3",
+                    "points": 6,
+                    "task_text": "<p>La $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ være lineærtransformasjonen gitt ved $T(x, y, z) = \\begin{pmatrix} 2x + 3z \\\\ 2y + 4z \\end{pmatrix}$.</p><h3>A.</h3><p>Finn en matrise $A$ slik at $T(x, y, z) = A \\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix}$.</p><p>$A =$</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Lineære likningssystemer",
+                    "task_number": "4",
+                    "points": 6,
+                    "task_text": "<p>Finn konstanten $c$ slik at vektoren</p>\n<p>$$\n\\begin{bmatrix}\n1 \\\\\n3 \\\\\n-25\n\\end{bmatrix}\n$$</p>\n<p>ligger i underrommet</p>\n<p>$$\n\\text{span}\\left\\{\n\\begin{bmatrix}\n12 \\\\\n1 \\\\\n1\n\\end{bmatrix},\n\\begin{bmatrix}\n8 \\\\\nv_2 \\\\\n2\n\\end{bmatrix},\n\\begin{bmatrix}\nc \\\\\n5 \\\\\n0\n\\end{bmatrix}\n\\right\\}.\n$$</p>\n<p>Rund av til nærmeste heltall.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Lineære likningssystemer",
+                    "task_number": "5",
+                    "points": 4,
+                    "task_text": "<p>Hvilken av de følgende er en basis for R³? Velg ett alternativ</p><ol><li><b>A</b> { ( -1,0,0 ) , ( -1,1,1 ) }</li><li><b>B</b> { (1,1,0 ) , (0,0,2 ) , (1,1,2 ) , (1,1,1 ) }</li><li><b>C</b> { (1,1,0 ) , (0,0,2 ) , (1,1,2 ) }</li><li><b>D</b> { (1,1,0 ) , (0,1,0 ) , (1,0,0 ) }</li><li><b>E</b> { (1,0,0 ) , (1,1,0 ) , (1,1,1 ) }</li><li><b>F</b> { (1,0,0 ) , (0,1,0 ) , (0,0,1 ) , (1,0,1 ) }</li><li><b>G</b> { (1,0,0 ) , (1,1,2 ) }</li></ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Inversmatriser",
+                    "task_number": "6",
+                    "points": 8,
+                    "task_text": "<p>La</p>\n<p>$$ A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix} $$</p>\n<p>Finn inversmatrisen $A^{-1}$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Komplekse tall",
+                    "task_number": "7",
+                    "points": 7,
+                    "task_text": "<p>Se på det komplekse tallet z = 4 - 2i. Rund av til 2 desimalers nøyaktighet.</p>\n\n<h3>a)</h3>\n<p>Hva er realdelen og hva er imaginærdelen til z?</p>\n<p>Re(z) = 4.00, Im(z) = -2.00</p>\n\n<h3>b)</h3>\n<p>Skriv z på polarform. Vinklene skal være i radianer og ligge i intervallet $[-\\pi, \\pi)$.</p>\n<p>z = $\\sqrt{20}$ (cos($-0.46$) + i sin($-0.46$))</p>\n\n<h3>c)</h3>\n<p>Skriv z på eksponentialform. Vinklene skal være i radianer og ligge i intervallet $[-\\pi, \\pi)$.</p>\n<p>z = $\\sqrt{20}$ exp(i $-0.46$)</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Komplekse tall",
+                    "task_number": "8",
+                    "points": 7,
+                    "task_text": "<p>La $z_1 = 2 + i$ og $z_2 = 5 + 5i$. Finn den kartesiske formen til de følgende komplekse tallene.</p>\n\n<h3>a)</h3>\n<p>$z_1 + z_2 = \\phantom{+} i$</p>\n\n<h3>b)</h3>\n<p>$z_1 - z_2 = \\phantom{+} i$</p>\n\n<h3>c)</h3>\n<p>$z_1 \\cdot z_2 = \\phantom{+} i$</p>\n\n<p>Rund av til én desimal etter komma.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Komplekse tall",
+                    "task_number": "9",
+                    "points": 8,
+                    "task_text": "<p>Finn alle løsningene til ligningen $z^3 = 8i$.</p>",
+                    "images": [],
+                    "code": null
+                }
+            ]
+        }
     }
 }

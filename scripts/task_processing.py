@@ -358,9 +358,10 @@ task_process_instructions = [
             "- Kontaktinformasjon til faglærer under eksamen. "
             "- Hjelpemiddelkoder og kalkulatorliste. "
             "- Eksamensdato og klokkeslett. "
+            "- Rund av til 2 desimalers nøyaktighet // til nærmeste heltall. " # Kan fjernes om ønskelig
             "Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task. "
-            "Be sure to still include ALL the information necessary for being able to solve the task, such as the main question itself. "
             "Do not include the solution to the task, only the task text itself. "
+            "Be sure to still include ALL the information necessary for being able to solve the task, such as the main question itself. "
         ),
         "max_tokens": 1000,
         "isNum": False,
