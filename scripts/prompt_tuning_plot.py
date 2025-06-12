@@ -21,10 +21,11 @@ def match_percent(a: str, b: str) -> float:
 def refine_prompt(current_prompt: str, input_text: str, output_text: str, target: str) -> str:
     """Use DeepSeek to suggest a better prompt."""
     instruction = (
-        f"{PROMPT_CONFIG}Vi prøver å løse teksten '{input_text}'. "
+        f"{PROMPT_CONFIG} Vi prøver å formattere teksten '{input_text}'. "
         f"Den gjeldende prompten er: '{current_prompt}'. "
-        f"Svaret etter forrige denne prompten ble: '{output_text}'. "
+        f"Svaret etter denne prompten ble: '{output_text}'. "
         f"Målet er at svaret skal bli: '{target}'. "
+        "Gjør ditt beste for å ikke gå for spesifikt, altså å forklare ved å bruke innholdet i akkurat denne oppgaven. "
         "Oppdater prompten som på nytt skal bli sendt til den samme teksten for å komme nærmere svaret. "
         "Svar kun med selve prompten."
     )
@@ -87,11 +88,11 @@ def plot_results(matches, out_file):
 
 def main():
     parser = argparse.ArgumentParser(description="Kjør prompt tuning og lagre plott")
-    parser.add_argument("--prompt", default="Løs denne oppgaven")
-    parser.add_argument("--input_text", default="x**2 + 8x + 16 = 0")
+    parser.add_argument("--prompt", default="Formatter oppgaven til html med mathjax.")
+    parser.add_argument("--input_text", default="Du skal svare på denne oppgaven i Inspera. Du skal ikke legge ved utregninger på papir. La A = [ 1  2  0  3  8  0  0  0  1 ] Hva er determinanten til matrisen A? det(A) = ______ Avrund svaret til nærmeste heltall.")
     parser.add_argument(
         "--target_text",
-        default="Vi benytter abc-formelen og setter a=1, b=8 og c=16.",
+        default="<p><em>Du skal svare på denne oppgaven i Inspera. Du skal ikke legge ved utregninger på papir.</em></p><p>La $$A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 3 & 8 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}.$$</p><p>Hva er determinanten til matrisen <em>A</em>?</p><p>$$\\det(A) = \\boxed{\\phantom{0}}$$</p><p>Avrund svaret til nærmeste heltall.</p>",
     )
     parser.add_argument("--iterations", type=int, default=5)
     parser.add_argument("--plot", default="prompt_tuning_plot.png", help="Fil for lagring av plott")
