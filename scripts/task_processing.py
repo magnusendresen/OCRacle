@@ -230,21 +230,12 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     exam.exam_topics = (
         await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG +
-            "Hva er de viktigste temaene i denne teksten? "
-            "Svar med en kommaseparert liste i norsk bokmål. "
-            "Hold deg til overordnede temaer som egner seg for eksamenskategorisering. "
-            "Eksempler på temaer fra noen eksamner: "
-            "- Fysikk V24: Bevegelse, Mekanikk, Sirkelbevegelse, Rotasjonsmekanikk, Programmering, Fluidmekanikk, Svingninger, Bølgefysikk, Energi og arbeid, Impuls og støt. "
-            "- Matte for ingeniørfag 2b V24: Partiell derivasjon, Kritiske Punkt, Retningsderivert og Gradient, Funksjonsforståelse, Taylor 1D, Fourierrekker, PDE, Fouriertransformasjon, Konvolusjon, DFT, IDFT. "
-            "- Programmerings og numerikk H24: Matematiske operasjoner, Funksjoner, Sammenligningsoperatorer, Lister og indekser, Numpy og matriser, Analyse av listedata, Numerisk derivasjon, Numeriske metoder, Newtons metode, Differensialligning, Konvergensrate, Integrasjon, Numerisk derivasjon, Numerisk Integrasjon med Trapesmetoden, Eulers metode, Fikspunktiterasjon, Absolutt og relativ feil. "
-            "Svar kun med temaene, ikke med noe annet. "
-            "If the text is written in multiple languages, respond with the topics in norwegian bokmål. "
-            "Her er teksten: "
+            PROMPT_CONFIG
+            + load_prompt("exam_topics")
             + ocr_text,
             max_tokens=1000,
             isNum=False,
-            maxLen=300
+            maxLen=300,
         )
     )
     if exam.exam_topics:
