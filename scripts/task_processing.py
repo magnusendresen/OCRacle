@@ -248,6 +248,12 @@ async def get_exam_info(ocr_text: str) -> Exam:
             "Hva er de viktigste temaene i denne teksten? "
             "Svar med en kommaseparert liste i norsk bokmål. "
             "Hold deg til overordnede temaer som egner seg for eksamenskategorisering. "
+            "Eksempler på temaer fra noen eksamner: "
+            "- Fysikk V24: Bevegelse, Mekanikk, Sirkelbevegelse, Rotasjonsmekanikk, Programmering, Fluidmekanikk, Svingninger, Bølgefysikk, Energi og arbeid, Impuls og støt. "
+            "- Matte for ingeniørfag 2b V24: Partiell derivasjon, Kritiske Punkt, Retningsderivert og Gradient, Funksjonsforståelse, Taylor 1D, Fourierrekker, PDE, Fouriertransformasjon, Konvolusjon, DFT, IDFT. "
+            "- Programmerings og numerikk H24: Matematiske operasjoner, Funksjoner, Sammenligningsoperatorer, Lister og indekser, Numpy og matriser, Analyse av listedata, Numerisk derivasjon, Numeriske metoder, Newtons metode, Differensialligning, Konvergensrate, Integrasjon, Numerisk derivasjon, Numerisk Integrasjon med Trapesmetoden, Eulers metode, Fikspunktiterasjon, Absolutt og relativ feil. "
+            "Svar kun med temaene, ikke med noe annet. "
+            "If the text is written in multiple languages, respond with the topics in norwegian bokmål. "
             "Her er teksten: "
             + ocr_text,
             max_tokens=1000,
@@ -392,7 +398,6 @@ task_process_instructions = [
             "For regular tasks that require proving, calculating or explaining, also follow these rules: "
             "- Keep paragraphs short and use multiple <p> elements rather than a single long block. "
             "- Introduce each subtask with its label using <h3>a)</h3>, <h3>b)</h3> and so on. "
-
 
             "Here is the task text: "
         ),

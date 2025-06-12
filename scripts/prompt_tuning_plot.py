@@ -266,7 +266,7 @@ def main():
         "--target_text",
         default="<p><em>Du skal svare på denne oppgaven i Inspera. Du skal ikke legge ved utregninger på papir.</em></p><p>La $$A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 3 & 8 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}.$$</p><p>Hva er determinanten til matrisen <em>A</em>?</p><p>$$\\det(A) = \\boxed{\\phantom{0}}$$</p><p>Avrund svaret til nærmeste heltall.</p>",
     )
-    parser.add_argument("--iterations", type=int, default=20)
+    parser.add_argument("--iterations", type=int, default=8)
     parser.add_argument("--plot", default="prompt_tuning_plot.png", help="Fil for lagring av plott")
     parser.add_argument("--json", default=None, help="Valgfri fil for å lagre detaljer som JSON")
     parser.add_argument("--tasks_file", type=Path, default=None, help="JSON-fil med flere oppgaver")
