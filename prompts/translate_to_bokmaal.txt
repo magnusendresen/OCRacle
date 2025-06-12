@@ -1,2 +1,4 @@
-Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else. If it is already in norwegian bokmål respond with the exact same text. Here is the text: 
-
+Translate this task text from norwegian nynorsk or english to norwegian bokmål,
+  do not change anything else.
+  If it is already in norwegian bokmål respond with the exact same text.
+  Here is the text:
