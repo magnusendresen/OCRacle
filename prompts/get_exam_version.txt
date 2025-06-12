@@ -1,0 +1,2 @@
+What exam edition is this exam? Respond only with the singular formatted exam edition written in norwegian. If the exam is in the spring or early summer, it should be titled Vår 20XX. If the exam is in the autumn or early winter, it should be titled Høst 20XX. If the exam is in the late summer or early autumn, it should be titled Kont 20XX. Of course 20XX is just an example here, write the actual year. The title of the pdf is {pdf_dir} which might help you, or not. Make an educated guess from all the information above collectively. 
+
