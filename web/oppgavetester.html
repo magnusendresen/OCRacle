@@ -37,9 +37,8 @@
   <div id="task_text" class="mathjax-process"></div>
 
   <script>
-    const taskHTML = "<p><em>Du skal svare på denne oppgaven i Inspera. Du skal ikke legge ved utregninger på papir.</em></p><p>La $$A = \\begin{bmatrix} 1 & 2 & 0 \\\\ 3 & 8 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}.$$</p><p>Hva er determinanten til matrisen <em>A</em>?</p><p>$$\\det(A) = \\boxed{\\phantom{0}}$$</p><p>Avrund svaret til nærmeste heltall.</p>";
-
-    document.getElementById("task_text").innerHTML = taskHTML;
+    const taskHTML = "<em>Du skal svare på denne oppgaven i Inspera. Du skal ikke legge ved utregninger på papir.</em><p>La <em>A</em> = $$ \begin{bmatrix} 1 & 2 & 0 \\ 3 & 8 & 0 \\ 0 & 0 & 1 \end{bmatrix} $$.</p><p>Hva er determinanten til matrisen <em>A</em>?</p><p>$$\det(A) = \boxed{\phantom{2}}$$</p><p>Avrund svaret til nærmeste heltall.</p>";
+document.getElementById("task_text").innerHTML = taskHTML;
 
     if (window.MathJax?.typesetPromise) {
       MathJax.typesetClear();

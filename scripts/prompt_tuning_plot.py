@@ -66,8 +66,8 @@ def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: i
         matches.append(match)
         print(f"Match: {match:.2f}%\nOutput: {out}\n")
 
-        if match >= 90:
-            print("Oppnådde over 90% match, stopper tidlig.")
+        if match >= 98:
+            print("Oppnådde over 98% match, stopper tidlig.")
             prompts.append(current_prompt)
             break
 
@@ -114,7 +114,37 @@ def plot_results(matches, out_file):
 
 def main():
     parser = argparse.ArgumentParser(description="Kjør prompt tuning og lagre plott")
-    parser.add_argument("--prompt", default="Formatter oppgaven til html med mathjax.")
+    parser.add_argument("--prompt", default=(
+        "Format this exam task as a valid HTML string for use in a JavaScript variable. "
+            "Here are a couple rules to follow: "
+            "- Use <p>...</p> for all text paragraphs. "
+            "- Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present. "
+            "- Use MathJax-compatible LaTeX. "
+            "- Wrap display math in $$...$$. "
+            "- Wrap inline math in $...$. "
+            "- Use a single backslash for LaTeX commands (e.g., \\frac, \\sqrt). "
+            "- Do not use \\( ... \\) or \\[ ... \\]. "
+            "- Do not double-escape backslashes. "
+            "- Do not explain, summarize, or add anything outside the HTML. "
+            "- Output must be usable directly inside const oppgaveTekst = `<the content here>`. "
+            "- Do not add any other text or explanation. "
+            "- Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags. "
+            "- Make sure that e.g. infty, omega, theta, etc. are properly formatted. "
+            "- Do not write the result as you would write in a programming box, but as you would write it as clean text. "
+            "- Do not include ```html or const oppgaveTekst = `` or similar. "
+            "- You are allowed to make som assumptions about OCR artifacts in the text, such as \\sqrt{\\sqrt{\\sqrt most likely being an error for a single square root. "
+            "- Be sure to include spaces and newlines where appropriate, the formatting is supposed to look proper.  "
+
+            "For multiple choice tasks with text or image alternatives, also follow these rules: "
+            "- Present the alternatives as an ordered list using <ol><li>. "
+            "- Prefix each alternative with the corresponding letter label inside <b> tags (A, B, C, ...). "
+            "- If an alternative contains an image, use <img src='PATH' alt=''> within the <li> element. "
+            "- Keep the statement of the task itself outside the list in normal <p> tags. "
+
+            "For regular tasks that require proving, calculating or explaining, also follow these rules: "
+            "- Keep paragraphs short and use multiple <p> elements rather than a single long block. "
+            "- Introduce each subtask with its label using <h3>a)</h3>, <h3>b)</h3> and so on. "
+    ))
     parser.add_argument("--input_text", default="Du skal svare på denne oppgaven i Inspera. Du skal ikke legge ved utregninger på papir. La A = [ 1  2  0  3  8  0  0  0  1 ] Hva er determinanten til matrisen A? det(A) = ______ Avrund svaret til nærmeste heltall.")
     parser.add_argument(
         "--target_text",
