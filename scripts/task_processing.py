@@ -13,6 +13,12 @@ from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
 
+PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
+
+def load_prompt(name: str) -> str:
+    with open(PROMPT_DIR / f"{name}.txt", "r", encoding="utf-8") as f:
+        return f.read()
+
 # Ensure UTF-8 output
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -174,17 +180,12 @@ async def get_exam_info(ocr_text: str) -> Exam:
                         else:
                             exam.subject = (
                                 await prompt_to_text.async_prompt_to_text(
-                                    PROMPT_CONFIG +
-                                    "What is the subject code for this exam? "
-                                    "Respond only with the singular formatted subject code (e.g., IFYT1000). "
-                                    "If there are variation in the last letter (e.g. IMAA, IMAG, IMAT), replace the variating letter with an X instead => IMAX. "
-                                    "If there are variation in number(s), e.g 2002, 2012, 2022 - replace the variating number(s) with an Y instead => 20Y2. "
-                                    "Only replace a number with a letter if the subject code clearly has variations. "
-                                    "Here is the text from the OCR: "
+                                    PROMPT_CONFIG
+                                    + load_prompt("get_subject_code")
                                     + ocr_text,
                                     max_tokens=1000,
                                     isNum=False,
-                                    maxLen=50
+                                    maxLen=50,
                                 )
                             ).strip().upper()
                             print("\n\n\n TOPIC FOUND WITH DEEPSEEK:")
@@ -200,14 +201,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
     exam_raw_version = (
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG
-            + "What exam edition is this exam? "
-            + "Respond only with the singular formatted exam edition written in norwegian. "
-            + "If the exam is in the spring or early summer, it should be titled Vår 20XX. "
-            + "If the exam is in the autumn or early winter, it should be titled Høst 20XX. "
-            + "If the exam is in the late summer or early autumn, it should be titled Kont 20XX. "
-            + "Of course 20XX is just an example here, write the actual year. "
-            + f"The title of the pdf is {pdf_dir} which might help you, or not. "
-            + "Make an educated guess from all the information above collectively. "
+            + load_prompt("get_exam_version").format(pdf_dir=pdf_dir)
             + ocr_text,
             max_tokens=1000,
             isNum=False,
@@ -222,17 +216,9 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     exam.total_tasks = (
         await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG +
-            "How many tasks are in this text? "
-            "Respond with each task number separated by a comma. "
-            # "If the subtasks are related in topic and need the answer to the previous subtask to be solved, respond with the main task number only (e.g. 1, 2, 5, 8, etc.). . "
-            # "If the subtasks are unrelated (e.g. opplagerkrefter, nullstaver, stavkrefter) even if the same topic (e.g. fagverk), respond with each subtask by itself (e.g. 1a, 1b, 1c, 5a, 5b, etc.). "
-            # "The exam may have a mixture of both types of tasks (e.g. 1, 2, 3a, 3b, 4, 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, etc.). "
-            # "There will under no circumstances be instances of both for the SAME task, e.g. 1, 1a, 1b, 2, 2a, 2b, etc. "
-            "Only include the task number, do not account for subtasks, only the main task number. "
-            "Do not include any symbols like ) or - or similar. "
-            "Here is the text: "
-            + ocr_text,  
+            PROMPT_CONFIG
+            + load_prompt("get_total_tasks")
+            + ocr_text,
             max_tokens=1000,
             isNum=False,
             maxLen=250
@@ -284,13 +270,8 @@ async def get_exam_info(ocr_text: str) -> Exam:
 task_process_instructions = [
     {
         "instruction": (
-            PROMPT_CONFIG +
-            f"What is task {{task_number}}? "
-            "Write only all text that is required for solving that one TASK or SUBTASK from the raw text. "
-            "If the task is a subtask (e.g. 1a), only include the text related to solving that subtask, not the full task, but be sure to have what is necessary for solving the task. "
-            "Include the topic (if there is one in the title) of the task and how many maximum points you can get. "
-            "Do not include the solution to the task. "
-            "If the text is written in multiple languages, respond with the text in norwegian bokmål. "
+            PROMPT_CONFIG
+            + load_prompt("extract_task_text")
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -298,21 +279,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            PROMPT_CONFIG +
-            "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
-            "Does this task likely contain any images or figures that are relevant for solving the task? "
-            "Respond with 1 if you think there are images, 0 if not. "
-            "Only reply with 0 or 1, nothing else. "
-        ),
-        "max_tokens": 1000,
-        "isNum": True,
-        "maxLen": 2
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG +
-            "MAKE SURE YOU ONLY RESPOND WITH A NUMBER!!! "
-            "How many points can you get for this task? Only reply with the number of points, nothing else: "
+            PROMPT_CONFIG
+            + load_prompt("detect_images")
         ),
         "max_tokens": 1000,
         "isNum": True,
@@ -321,9 +289,16 @@ task_process_instructions = [
     {
         "instruction": (
             PROMPT_CONFIG
-            + "Velg temaet til denne oppgaven fra listen under. "
-            + "Svar kun med temaet på norsk bokmål, ingenting annet. "
-            + "Her kommer listen og deretter oppgaveteksten: "
+            + load_prompt("extract_points")
+        ),
+        "max_tokens": 1000,
+        "isNum": True,
+        "maxLen": 2
+    },
+    {
+        "instruction": (
+            PROMPT_CONFIG
+            + load_prompt("extract_topic")
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -331,10 +306,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            PROMPT_CONFIG + 
-            "Translate this task text from norwegian nynorsk or english to norwegian bokmål, do not change anything else. "
-            "If it is already in norwegian bokmål respond with the exact same text. "
-            "Here is the text: "
+            PROMPT_CONFIG
+            + load_prompt("translate_to_bokmaal")
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -342,26 +315,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            PROMPT_CONFIG + 
-            "Remove all text related to Inspera and exam administration. "
-            "This includes information about the exam, such as: "
-            "- Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger på papir. "
-            "- Skriv enten 1, 2, eller 3 i svarfeltet. "
-            "- Skriv bare én av bokstavene A, B, C, D, E i hvert felt under. "
-            "- Skriv ditt svar her, eller bruk scantronark. "
-            "- Denne oppgaven skal besvares i tekstboksen under, eller ved bruk av scantronark. "
-            "- Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. "
-            "- Vi anbefaler bruk av Scantron-ark. "
-            "- Nederst i oppgaven finner du en sjusifret kode. Fyll inn denne koden øverst til venstre på arkene du ønsker å levere. "
-            "- Etter eksamen finner du besvarelsen din i arkivet i Inspera. "
-            "- Varslinger vil bli gitt via Inspera. "
-            "- Kontaktinformasjon til faglærer under eksamen. "
-            "- Hjelpemiddelkoder og kalkulatorliste. "
-            "- Eksamensdato og klokkeslett. "
-            "- Rund av til 2 desimalers nøyaktighet // til nærmeste heltall. " # Kan fjernes om ønskelig
-            "Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task. "
-            "Do not include the solution to the task, only the task text itself. "
-            "Be sure to still include ALL the information necessary for being able to solve the task, such as the main question itself. "
+            PROMPT_CONFIG
+            + load_prompt("remove_exam_admin")
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -369,38 +324,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            PROMPT_CONFIG +
-            "Format this exam task as a valid HTML string for use in a JavaScript variable. "
-            "Here are a couple rules to follow: "
-            "- Use <p>...</p> for all text paragraphs. "
-            "- Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present. "
-            "- Use MathJax-compatible LaTeX. "
-            "- Wrap display math in $$...$$. "
-            "- Wrap inline math in $...$. "
-            "- Use a single backslash for LaTeX commands (e.g., \\frac, \\sqrt). "
-            "- Do not use \\( ... \\) or \\[ ... \\]. "
-            "- Do not double-escape backslashes. "
-            "- Do not explain, summarize, or add anything outside the HTML. "
-            "- Output must be usable directly inside const oppgaveTekst = `<the content here>`. "
-            "- Do not add any other text or explanation. "
-            "- Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags. "
-            "- Make sure that e.g. infty, omega, theta, etc. are properly formatted. "
-            "- Do not write the result as you would write in a programming box, but as you would write it as clean text. "
-            "- Do not include ```html or const oppgaveTekst = `` or similar. "
-            "- You are allowed to make som assumptions about OCR artifacts in the text, such as \\sqrt{\\sqrt{\\sqrt most likely being an error for a single square root. "
-            "- Be sure to include spaces and newlines where appropriate, the formatting is supposed to look proper.  "
-
-            "For multiple choice tasks with text or image alternatives, also follow these rules: "
-            "- Present the alternatives as an ordered list using <ol><li>. "
-            "- Prefix each alternative with the corresponding letter label inside <b> tags (A, B, C, ...). "
-            "- If an alternative contains an image, use <img src='PATH' alt=''> within the <li> element. "
-            "- Keep the statement of the task itself outside the list in normal <p> tags. "
-
-            "For regular tasks that require proving, calculating or explaining, also follow these rules: "
-            "- Keep paragraphs short and use multiple <p> elements rather than a single long block. "
-            "- Introduce each subtask with its label using <h3>a)</h3>, <h3>b)</h3> and so on. "
-
-            "Here is the task text: "
+            PROMPT_CONFIG
+            + load_prompt("format_html_output")
         ),
         "max_tokens": 1000,
         "isNum": False,
@@ -408,9 +333,8 @@ task_process_instructions = [
     },
     {
         "instruction": (
-            PROMPT_CONFIG + 
-            "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
-            "Answer 1 if this is a valid task that could be in an exam and that can be logically solved, otherwise 0:"
+            PROMPT_CONFIG
+            + load_prompt("validate_task")
         ),
         "max_tokens": 1000,
         "isNum": True,
