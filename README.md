@@ -35,8 +35,6 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
 - `task_processing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
 - `object_to_json.py` – lagrer oppgaveobjektene til `tasks.json` i
   strukturen `emne -> eksamensutgivelse -> oppgave`
-- `prompt_tuning.py` – itererer over ulike prompts og plottar treffprosenten for
-  å finne best mulig formulering
 - `prompt_tuning_plot.py` – kjører tuning, lagrer resultater og lager mer
   utfyllende plott med annotasjoner
 
