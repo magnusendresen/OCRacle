@@ -26,6 +26,7 @@ def refine_prompt(current_prompt: str, input_text: str, output_text: str, target
         f"Svaret etter denne prompten ble: '{output_text}'. "
         f"Målet er at svaret skal bli: '{target}'. "
         "Gjør ditt beste for å ikke gå for spesifikt, altså å forklare ved å bruke innholdet i akkurat denne oppgaven. "
+        "Hold instruksjonene generelle slik at de kan brukes på andre oppgaver. "
         "Oppdater prompten som på nytt skal bli sendt til den samme teksten for å komme nærmere svaret. "
         "Svar kun med selve prompten."
     )
@@ -40,6 +41,8 @@ def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: i
     outputs = []
     matches = []
     current_prompt = initial_prompt
+    best_prompt = initial_prompt
+    best_match = 0.0
 
     for i in range(iterations):
         print(f"\n--- Iterasjon {i + 1} ---")
@@ -52,6 +55,19 @@ def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: i
         match = match_percent(out, target)
         matches.append(match)
         print(f"Match: {match:.2f}%\nOutput: {out}\n")
+
+        if match >= 95:
+            print("Oppnådde over 95% match, stopper tidlig.")
+            prompts.append(current_prompt)
+            break
+
+        if match >= best_match:
+            best_match = match
+            best_prompt = current_prompt
+        else:
+            current_prompt = best_prompt
+            print("Match sank, går tilbake til beste prompt.")
+
         current_prompt = refine_prompt(current_prompt, input_text, out, target)
         prompts.append(current_prompt)
         print(f"Prompt etter iterasjon {i + 1}: {current_prompt}")
