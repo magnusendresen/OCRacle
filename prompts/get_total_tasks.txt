@@ -1,2 +1,5 @@
-How many tasks are in this text? Respond with each task number separated by a comma. Only include the task number, do not account for subtasks, only the main task number. Do not include any symbols like ) or - or similar. Here is the text: 
-
+How many tasks are in this text?
+  Respond with each task number separated by a comma.
+  Only include the task number, do not account for subtasks, only the main task number.
+  Do not include any symbols like ) or - or similar.
+  Here is the text:
