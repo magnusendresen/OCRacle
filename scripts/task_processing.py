@@ -252,6 +252,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
         subject=exam.subject,
         version=exam.exam_version,
         output_folder=None,
+        expected_tasks=exam.total_tasks,
     )
 
 

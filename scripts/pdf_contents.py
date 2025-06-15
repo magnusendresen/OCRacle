@@ -15,7 +15,8 @@ import os
 import re
 import asyncio
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Tuple
+import random
 
 import fitz  # PyMuPDF
 from google.cloud import vision
@@ -105,6 +106,36 @@ def build_container_string(containers: List[Dict]) -> str:
         f"\n\n=== CONTAINER {idx} ({c.get('type', 'unknown')}) ===\n{c.get('text', '')}"
         for idx, c in enumerate(containers)
     )
+
+
+async def confirm_task_text(
+    containers: List[Dict],
+    ranges: List[Tuple[int, int]],
+    task_nums: List[str],
+) -> None:
+    """Randomly sample container ranges and confirm the task number via LLM."""
+
+    if not ranges or not task_nums:
+        return
+
+    sample_count = max(3, len(ranges) // 3)
+    sample_indices = random.sample(range(len(ranges)), min(sample_count, len(ranges)))
+
+    for idx in sample_indices:
+        start, end = ranges[idx]
+        text = build_container_string(containers[start:end])
+        prompt = (
+            PROMPT_CONFIG
+            + f"Does the following text belong to task {task_nums[idx]}? "
+            "Answer with yes or no. Text:" + text
+        )
+        ans = await prompt_to_text.async_prompt_to_text(
+            prompt, max_tokens=10, is_num=False, max_len=20
+        )
+        ans_str = str(ans).strip().lower()
+        result = "yes" in ans_str or "ja" in ans_str
+        status = "CONFIRMED" if result else "MISMATCH"
+        print(f"[CHECK] Task {task_nums[idx]} -> {status} ({ans_str})")
 
 
 async def _query_markers(prompt: str) -> List[int]:
