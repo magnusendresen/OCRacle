@@ -161,7 +161,7 @@ async def extract_images(
             "Her er teksten: " + full_text
             )
         res = await prompt_to_text.async_prompt_to_text(
-            prompt, max_tokens=50, isNum=False, maxLen=200
+            prompt, max_tokens=50, is_num=False, max_len=200
         )
         page_tasks = _parse_tasks(str(res), total_tasks)
         if page_tasks == ["0"]:
@@ -205,7 +205,7 @@ async def extract_images(
             img_text = ocr_pdf.detect_text(crop_buf.tobytes())
             verify_prompt = (PROMPT_CONFIG + "Does this text include put-together sentences? Respond 0 if yes, 1 if no. Text: " + img_text)
             v_raw = await prompt_to_text.async_prompt_to_text(
-                verify_prompt, max_tokens=50, isNum=True, maxLen=2
+                verify_prompt, max_tokens=50, is_num=True, max_len=2
             )
             try:
                 img_verify = int(str(v_raw).strip())

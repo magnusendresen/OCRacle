@@ -49,8 +49,8 @@ async def which_task_on_page(pdf_path: str, page_number: int) -> None:
     result = await prompttotext.async_prompt_to_text(
         prompt,
         max_tokens=50,
-        isNum=False,
-        maxLen=100
+        is_num=False,
+        max_len=100
     )
     print(result)
 

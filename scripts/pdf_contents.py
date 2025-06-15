@@ -109,7 +109,7 @@ def build_container_string(containers: List[Dict]) -> str:
 
 async def _query_markers(prompt: str) -> List[int]:
     resp = await prompt_to_text.async_prompt_to_text(
-        prompt, max_tokens=2000, isNum=False, maxLen=1000
+        prompt, max_tokens=2000, is_num=False, max_len=1000
     )
     return (
         sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []

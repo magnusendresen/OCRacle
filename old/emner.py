@@ -42,8 +42,8 @@ async def test_prompt():
         "DONT EVER EXPLAIN OR SAY WHAT YOU ARE DOING. JUST DO AS YOU ARE TOLD AND RESPOND WITH WHAT IS ASKED FROM YOU. "
         "What are the subject codes for this exam? Respond only with codes separated by commas: " + ocrtext,
         max_tokens=100,
-        isNum=False,
-        maxLen=200
+        is_num=False,
+        max_len=200
     )
 
     # Splitt og normaliser
@@ -75,8 +75,8 @@ async def test_prompt():
         result = await prompttotext.async_prompt_to_text(
             prompt,
             max_tokens=2000,
-            isNum=False,
-            maxLen=3000
+            is_num=False,
+            max_len=3000
         )
     except Exception as e:
         print(f"❌ Feil under API-kall: {e}", file=sys.stderr)

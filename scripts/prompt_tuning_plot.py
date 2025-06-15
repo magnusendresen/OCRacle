@@ -41,7 +41,7 @@ def refine_prompt(current_prompt: str, input_text: str, output_text: str, target
         "Svar kun med selve prompten."
     )
     suggestion = prompt_to_text.prompt_to_text(
-        instruction, max_tokens=200, isNum=False, maxLen=1500
+        instruction, max_tokens=200, is_num=False, max_len=1500
     )
     return suggestion if suggestion else current_prompt
 
@@ -64,7 +64,7 @@ async def async_refine_prompt(current_prompt: str, input_text: str, output_text:
         "Svar kun med selve prompten."
     )
     suggestion = await prompt_to_text.async_prompt_to_text(
-        instruction, max_tokens=200, isNum=False, maxLen=1500
+        instruction, max_tokens=200, is_num=False, max_len=1500
     )
     return suggestion if suggestion else current_prompt
 
@@ -86,7 +86,7 @@ def tune_prompt(initial_prompt: str, input_text: str, target: str, iterations: i
             f"{input_text}"
         )
         out = prompt_to_text.prompt_to_text(
-            full_prompt, max_tokens=800, isNum=False, maxLen=1500
+            full_prompt, max_tokens=800, is_num=False, max_len=1500
         )
         out = out or ""
         outputs.append(out)
@@ -142,7 +142,7 @@ async def tune_prompts(tasks, iterations: int = 15):
         ]
         outs = await asyncio.gather(
             *[
-                prompt_to_text.async_prompt_to_text(fp, max_tokens=800, isNum=False, maxLen=1500)
+                prompt_to_text.async_prompt_to_text(fp, max_tokens=800, is_num=False, max_len=1500)
                 for fp in full_prompts
             ]
         )
