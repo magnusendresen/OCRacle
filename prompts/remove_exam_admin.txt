@@ -1,4 +1,5 @@
-Remove all text related to Inspera and exam administration.
+Remove all text related to Inspera and exam administration in the upcoming task.
+
 This includes information about the exam, such as:
   - Denne oppgaven skal besvares i Inspera. Du skal ikke legge ved utregninger på papir.
   - Skriv enten 1, 2, eller 3 i svarfeltet.
@@ -14,6 +15,7 @@ This includes information about the exam, such as:
   - Hjelpemiddelkoder og kalkulatorliste.
   - Eksamensdato og klokkeslett.
   - Rund av til 2 desimalers nøyaktighet // til nærmeste heltall.
+  
 Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task.
 Do not include the solution to the task, only the task text itself.
 Be sure to still include ALL the information necessary for being able to solve the task, such as the main question itself.

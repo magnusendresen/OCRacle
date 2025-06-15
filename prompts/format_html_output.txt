@@ -21,7 +21,6 @@ Here are a couple rules to follow:
 For multiple choice tasks with text or image alternatives, also follow these rules:
   - Present the alternatives as an ordered list using <ol><li>.
   - Prefix each alternative with the corresponding letter label inside <b> tags (A, B, C, ...).
-  - If an alternative contains an image, use <img src='PATH' alt=''> within the <li> element.
   - Keep the statement of the task itself outside the list in normal <p> tags.
 
 For regular tasks that require proving, calculating or explaining, also follow these rules:

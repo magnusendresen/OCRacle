@@ -256,7 +256,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
 
     return exam
-
+    
 
 task_process_instructions = [
     {
@@ -343,6 +343,23 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
         valid = 0
         images = 0
 
+        # Ny logikk for gjennomgang av instruksjoner
+        task_output = ""
+
+        task_exam.images = []
+
+        task_exam.points = None
+
+        task_exam.topic = None
+
+        for instruction in ["translate_to_bokmaal", "remove_exam_admin", "format_html_output"]:
+            task_output = ""
+
+        valid = 0
+
+
+
+        # Gammel logikk for gjennomgang av instruksjoner
         for i in range(len(task_process_instructions)):
 
             # Initial extraction of task text

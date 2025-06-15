@@ -1,6 +1,5 @@
 What is task {task_number}?
-  Write only all text that is required for solving that one TASK or SUBTASK from the raw text.
-  If the task is a subtask (e.g. 1a), only include the text related to solving that subtask, not the full task, but be sure to have what is necessary for solving the task.
+  Write only all text that is required for solving that one task from the raw text.
   Include the topic (if there is one in the title) of the task and how many maximum points you can get.
   Do not include the solution to the task.
-  If the text is written in multiple languages, respond with the text in norwegian bokmål.
+  If the text is written in multiple languages, respond with the task in norwegian bokmål.

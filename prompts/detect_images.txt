@@ -1,4 +1,5 @@
 MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!!
-  Does this task likely contain any images or figures that are relevant for solving the task?
-  Respond with 1 if you think there are images, 0 if not.
-  Only reply with 0 or 1, nothing else.
+
+Does this task likely contain any images or figures that are relevant for solving the task?
+Respond with 1 if you think there are images, 0 if not.
+Only reply with 0 or 1, nothing else.

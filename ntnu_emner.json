@@ -15001,7 +15001,8 @@
             "Taylor",
             "Funksjoner av flere variable",
             "Taylorrekker",
-            "Retningsderivert"
+            "Retningsderivert",
+            "Graf-forståelse"
         ]
     },
     {
@@ -15014,7 +15015,8 @@
             "Taylor",
             "Funksjoner av flere variable",
             "Taylorrekker",
-            "Retningsderivert"
+            "Retningsderivert",
+            "Graf-forståelse"
         ]
     },
     {
@@ -15660,7 +15662,13 @@
     {
         "Emnekode": "TKT4116",
         "Emnenavn": "Mekanikk 1",
-        "Temaer": []
+        "Temaer": [
+            "Aksialdeformasjon",
+            "Bjelketeori",
+            "Volumsenter",
+            "Kabelmekanikk",
+            "Lagerreaksjoner"
+        ]
     },
     {
         "Emnekode": "TKT4118",

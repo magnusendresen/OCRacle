@@ -328,5 +328,170 @@
                 }
             ]
         }
+    },
+    "IMAX20Y2": {
+        "V24": {
+            "total_tasks": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+            ],
+            "matching_codes": [
+                "IMAX2012",
+                "IMAX2022"
+            ],
+            "exam_topics": [
+                "Partiell derivasjon",
+                "Kritiske punkt",
+                "Retningsderivert",
+                "Graf-forståelse",
+                "Taylor 1D"
+            ],
+            "tasks": [
+                {
+                    "topic": "Partiell derivasjon",
+                    "task_number": "1",
+                    "points": 10,
+                    "task_text": "<p>Gitt funksjonen $f(x, y) = 3x^2 + 2y - 4$. Finn verdiene til de partiellderiverte i punktet $(1, 1)$.</p>\n\n<p>Gitt funksjonen $g(x, y) = \\sqrt{x^4 + 2x^2y + 2xy^2 + 3}$, $x \\geq 0$, $y \\geq 0$. Finn verdiene til de partiellderiverte i punktet $(1, 2)$. Angi svarene med 2 desimaler.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Kritiske punkt",
+                    "task_number": "2",
+                    "points": 10,
+                    "task_text": "<p>La $f(x, y) = 8xy - 2x^2 - y^2$.</p>\n\n<p>Finn de kritiske punktene til funksjonen $f$.</p>\n\n<p>Klassifiser de kritiske punktene til funksjonen $f$. Med andre ord, avgjør om de kritiske punktene er sadelpunkter, lokale maksimumspunkter, lokale minimumspunkter, eller ingen av delene.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Retningsderivert",
+                    "task_number": "3",
+                    "points": 10,
+                    "task_text": "<p>Vi har funksjonsuttrykket $f(x, y) = 3x^2 - 2xy + 2y^2$.</p>\n\n<h3>a)</h3>\n<p>Finn gradienten i punktet $(x, y) = (1, 1)$.</p>\n<p>$\\nabla f(1,1) = $ i $+$ j</p>\n\n<h3>b)</h3>\n<p>Vi starter i punktet $(1, 1)$, og beveger oss i retningen $\\mathbf{u} = \\mathbf{i} + \\mathbf{j}$. Finn den retningsderiverte.</p>\n<p>$D_{\\mathbf{u}}f(1, 1) = $</p>\n\n<h3>c)</h3>\n<p>Figuren under viser nivåkurver for funksjonen $f$. I tillegg viser figuren en tangentlinje til nivåkurven i et valgt punkt. Hvilken retning vil gradientvektoren ha i punktet?</p>\n<ol>\n<li><b>A</b> Gradientvektoren i punktet vil være parallell med tangentlinjen.</li>\n<li><b>B</b> Gradientvektoren i punktet vil stå vinkelrett på tangentlinjen.</li>\n<li><b>C</b> Retningen til gradientvektoren i punktet er verken parallell eller vinkelrett på tangentlinjen.</li>\n</ol>\n<p>Svar: Alternativ</p>",
+                    "images": [
+                        "img\\IMAX20Y2\\V24\\3\\IMAX20Y2_V24_3_1.png"
+                    ],
+                    "code": null
+                },
+                {
+                    "topic": "Graf-forståelse",
+                    "task_number": "4",
+                    "points": 10,
+                    "task_text": "<p>Hvilken funksjon hører sammen med hvilken graf?</p><p>Skriv bare én av bokstavene A, B, C, D, E i hvert felt under.</p><ol><li><b>A</b> Funksjonen $f(x, y) = \\cos(xy)$ og figuren hører sammen.</li><li><b>B</b> Funksjonen $f(x, y) = y^2 - x^2$ og figuren hører sammen.</li><li><b>C</b> Funksjonen $f(x, y) = \\frac{1}{1 + x^2y^2}$ og figuren hører sammen.</li><li><b>D</b> Funksjonen $f(x, y) = x e^{-x^2 - y^2}$ og figuren hører sammen.</li><li><b>E</b> Funksjonen $f(x, y) = x^2 - y^2$ og figuren hører sammen.</li></ol>",
+                    "images": [
+                        "img\\IMAX20Y2\\V24\\4\\IMAX20Y2_V24_4_1.png",
+                        "img\\IMAX20Y2\\V24\\4\\IMAX20Y2_V24_4_2.png",
+                        "img\\IMAX20Y2\\V24\\4\\IMAX20Y2_V24_4_3.png",
+                        "img\\IMAX20Y2\\V24\\4\\IMAX20Y2_V24_4_4.png",
+                        "img\\IMAX20Y2\\V24\\4\\IMAX20Y2_V24_4_5.png"
+                    ],
+                    "code": null
+                },
+                {
+                    "topic": "Taylor",
+                    "task_number": "5",
+                    "points": 10,
+                    "task_text": "<p>La $f(x) = \\tan x$, $a) -\\frac{\\pi}{4} < x < \\frac{\\pi}{4}$. Finn verdiene til $f'$ og $f''$ i punktet $x = \\frac{\\pi}{4}$. Angi svaret korrekt avrundet til 3 desimaler.</p><p>$f'(\\frac{\\pi}{4}) = $</p><p>$f''(\\frac{\\pi}{4}) = $</p><h3>b)</h3><p>Lag det 2. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\frac{\\pi}{4}$ for funksjonen $f$.</p><p>Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\tan(\\frac{\\pi}{4} + 0.1)$. Angi svaret korrekt avrundet til 3 desimaler.</p><p>$\\tan(\\frac{\\pi}{4} + 0.1) \\approx P_2(\\frac{\\pi}{4} + 0.1) = $</p>",
+                    "images": [],
+                    "code": null
+                }
+            ]
+        }
+    },
+    "TKT4116": {
+        "V21": {
+            "total_tasks": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6"
+            ],
+            "matching_codes": [
+                "TKT4116"
+            ],
+            "exam_topics": [
+                "Statikk",
+                "Lagerreaksjoner",
+                "Lastvirkninger",
+                "Bjelketeori",
+                "Tverrsnittsanalyse",
+                "Materialegenskaper",
+                "Volumsenter",
+                "Stabilitet",
+                "Friksjon",
+                "Numerisk beregning",
+                "Kabelmekanikk"
+            ],
+            "tasks": [
+                {
+                    "topic": "Lagerreaksjoner",
+                    "task_number": "1",
+                    "points": 30,
+                    "task_text": "<p>Bestem lagerreaksjonene Dz, Ex, Ez og Mε samt leddkreftene Cx og Cz.</p>\n\n<p>Bestem lastvirkningene N(x), V(x) og M(x) i alle rammekomponentene.</p>\n\n<p>Tegn N-, V- og M-diagram for rammen.</p>\n\n<p>Angi karakteristiske verdier i diagrammene.</p>\n\n<p>N- og V-diagram tegnes med virkningssymbol.</p>\n\n<p>M-diagrammet tegnes på strekksiden.</p>",
+                    "images": [
+                        "img\\TKT4116\\V21\\1\\TKT4116_V21_1_1.png"
+                    ],
+                    "code": null
+                },
+                {
+                    "topic": "Bjelketeori",
+                    "task_number": "2",
+                    "points": 20,
+                    "task_text": "<p>En fritt opplagt stålbjelke med IPE-tverrsnitt. Profilet er orientert slik at det bøyes om sterk akse. Stålmateriale er S355 med flytespenning $f_y = 355 \\text{ N/mm}^2$.</p>\n\n<p>Bestem nødvendig størrelse av IPE-profilen i bjelken. Profilet skal ikke være større enn det som er nødvendig for at flytespenningen ikke overskrides i noe punkt i tverrsnittet.</p>\n\n<h3>a)</h3>\n<p>Beregn 2. arealmoment $I_1$ for det forsterkede tverrsnittet.</p>\n\n<h3>b)</h3>\n<p>Bestem den maksimale jevnt fordelte lasten $q$ som den forsterkede bjelken kan belastes med uten at flytespenningen overskrides i noe punkt i bjelken.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Bjelketeori",
+                    "task_number": "3",
+                    "points": 15,
+                    "task_text": "<p>Den venstre delen av figuren ovenfor viser en ramme ABCD. Belastning, dimensjoner og opplagerbetingelser framgår av figuren.</p><p>Hvilket diagram er korrekt? Svaret skal begrunnes.</p><ol><li><b>A</b> Diagram A</li><li><b>B</b> Diagram B</li><li><b>C</b> Diagram C</li><li><b>D</b> Diagram D</li></ol><h3>a)</h3><p>Bestem horisontalforskyvningen av punkt A. Alle rammedeler har bøyestivhet EI. Det skal kun tas hensyn til bøyedeformasjoner.</p><p>Uttrykk svaret som funksjon av $F$, $a$ og $EI$.</p>",
+                    "images": [
+                        "img\\TKT4116\\V21\\3\\TKT4116_V21_3_1.png"
+                    ],
+                    "code": null
+                },
+                {
+                    "topic": "Volumsenter",
+                    "task_number": "4",
+                    "points": 15,
+                    "task_text": "<p>240 mm 240 mm 120 mm Zc 120 mm</p><p>Figuren ovenfor viser et tredimensjonalt legeme. Den nederste delen er et rektangulært prisme med kvadratisk bunnflate, og den øvre delen er en pyramide. Geometriske mål framgår av figuren. De to delene er laget av samme materiale.</p><h3>a)</h3><p>Bestem beliggenheten zc til volumsenteret C til legemet.</p><h3>b)</h3><p>Anta at friksjonen i flaten mellom legemet og skråplanet er tilstrekkelig stor slik at legemet ikke glir. Beregn den største helningsvinkelen a som skråplanet kan ha uten at legemet velter.</p><h3>c)</h3><p>Beregn hvor stor friksjonskoeffisienten μ minst må være for at legemet skal velte før det glir. Sett a = 50° hvis du mangler svar i spørsmål b.</p>",
+                    "images": [
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_1.png",
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_2.png",
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_3.png",
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_4.png",
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_5.png",
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_6.png",
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_7.png",
+                        "img\\TKT4116\\V21\\4\\TKT4116_V21_4_8.png"
+                    ],
+                    "code": null
+                },
+                {
+                    "topic": "Aksialdeformasjon",
+                    "task_number": "5",
+                    "points": 10,
+                    "task_text": "<p>Data:</p><p>a = 1 m</p><p>q = 10 kN/m</p><p>E = 10000 N/mm²</p><p>DA = 200 mm</p><p>DB = 500 mm</p><p>Beregn forkortelsen AL av skråsøylen AB ved å skrive nødvendig kode i Python (eller Matlab). Koden skal følge syntaksen i henhold til formelark A6.</p><p>Det var 2 varianter av denne oppgaven:</p><ol><li><b>Variant 1:</b> Søylen har størst diameter i B.</li><li><b>Variant 2:</b> Søylen har størst diameter i A.</li></ol><p>Formel for aksialdeformasjon er gitt som:</p><p>$$AL_1 = N(x) = \\frac{qx + \\frac{19qa}{25}}{EA_i} \\int_{0}^{L} \\frac{1}{A(x)} dx$$</p><p>Aksialkraftdiagrammet til rammen er vist i figuren med N = 9qa.</p><p>Oppgaven må løses numerisk siden søylens diameter varierer og aksialkraften i søylen ikke er konstant.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Kabelmekanikk",
+                    "task_number": "6",
+                    "points": 10,
+                    "task_text": "<p>Figuren viser en lang stålkabel som spenner fritt mellom to punkter som har horisontal avstand L = 2400 m. De to oppleggspunktene ligger på samme vertikale høyde slik at kabelen er symmetrisk. Kabelens lengde er s = 2410 m. Kabelen er kun belastet av sin egen tyngde, og den henger ganske stramt siden det er lite forskjell på buelengden s og spennvidden L. Tyngdens akselerasjon er g = 9,8 m/s².</p>\n\n<p>Data for stålmaterialet (det er ikke sikkert at du får bruk for all informasjonen):</p>\n<p>Elastisitetsmodul: E = 210 000 N/mm²</p>\n<p>Tverrkontraksjonstall: v = 0,3</p>\n<p>Tetthet: p = 7850 kg/m³</p>\n<p>Termisk lengdeutvidelseskoeffisient: a = 12·10⁻⁶ K⁻¹</p>\n\n<h3>a)</h3>\n<p>Bestem den største opptredende normalspenningen i kabelen.</p>\n\n<h3>b)</h3>\n<p>Kabelen ble montert på en varm sommerdag. En kald dag den påfølgende vinteren er temperaturen i stålet 50 °C lavere. Gi en kortfattet vurdering av hvordan dette eventuelt vil påvirke svaret i spørsmål a.</p>",
+                    "images": [
+                        "img\\TKT4116\\V21\\6\\TKT4116_V21_6_1.png"
+                    ],
+                    "code": null
+                }
+            ]
+        }
     }
 }
