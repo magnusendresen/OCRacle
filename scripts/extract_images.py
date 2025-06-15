@@ -121,6 +121,62 @@ async def _assign_tasks(
     return task_map, ranges, assigned
 
 
+def _parse_task_num(text: str) -> Optional[int]:
+    """Extract a leading integer from a task string if present."""
+    if not text:
+        return None
+    m = re.search(r"(\d+)", text)
+    return int(m.group(1)) if m else None
+
+
+def _infer_shift(
+    mismatches: List[int],
+    ranges: List[Tuple[int, int]],
+    expected_tasks: List[str],
+    containers: List[Dict],
+) -> Optional[int]:
+    """Return a constant shift if all mismatches indicate the same offset."""
+
+    diffs = []
+    for idx in mismatches:
+        start, _ = ranges[idx]
+        detected = _parse_task_num(containers[start].get("text", ""))
+        expected = _parse_task_num(expected_tasks[idx]) if idx < len(expected_tasks) else None
+        if detected is None or expected is None:
+            continue
+        diffs.append(expected - detected)
+
+    if diffs and len(set(diffs)) == 1:
+        return diffs[0]
+    return None
+
+
+def _apply_shift(
+    shift: int,
+    ranges: List[Tuple[int, int]],
+    expected_tasks: List[str],
+    containers: List[Dict],
+) -> Tuple[Dict[int, str], List[str]]:
+    """Rebuild task mapping using a constant shift."""
+
+    new_map: Dict[int, str] = {}
+    new_assigned: List[str] = []
+    for idx, (start, end) in enumerate(ranges):
+        src_idx = idx - shift
+        if 0 <= src_idx < len(expected_tasks):
+            task_num = expected_tasks[src_idx]
+        else:
+            first_text = containers[start].get("text", "")
+            m2 = TASK_PATTERN.search(first_text)
+            task_num = m2.group(2) if m2 else str(idx + 1)
+
+        new_assigned.append(task_num)
+        for ci in range(start, end):
+            new_map[ci] = task_num
+
+    return new_map, new_assigned
+
+
 async def _get_text(img: np.ndarray) -> str:
     """OCR the provided image and return the detected text using pytesseract."""
     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -207,7 +263,13 @@ async def extract_images_with_tasks(
     output_folder = output_folder or str(IMG_DIR)
     containers = await list_pdf_containers(pdf_path)
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
-    await confirm_task_text(containers, ranges, assigned)
+    mismatches = await confirm_task_text(containers, ranges, assigned)
+
+    if mismatches and expected_tasks:
+        shift = _infer_shift(mismatches, ranges, expected_tasks, containers)
+        if shift and shift != 0:
+            print(f"[INFO] Detected consistent task offset of {shift}; realigning.")
+            task_map, assigned = _apply_shift(shift, ranges, expected_tasks, containers)
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
     save = _make_saver(output_folder, subject, version, counts)
