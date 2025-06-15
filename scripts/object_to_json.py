@@ -1,5 +1,6 @@
 import os
 import json
+import re
 from dataclasses import asdict
 from project_config import *
 
@@ -80,17 +81,25 @@ def main(tasks):
             deduped.append(t)
         tasks_list[:] = list(reversed(deduped))
 
+        num_str = str(task_num)
+        if num_str.isdigit():
+            num_str = num_str.zfill(2)
         print(
             f"[INFO] | Oppgave {action}: "
             f"Exam: {exam}, "
-            f"Task: {task_num:02}, "
+            f"Task: {num_str}, "
             f"Subject: {subject} "
             f"({len(task_copy.get('images', []))} bilder)"
         )
 
+    def _sort_key(task: dict) -> tuple:
+        num = task.get("task_number", "")
+        m = re.search(r"\d+", str(num))
+        return (int(m.group()) if m else float("inf"), str(num))
+
     for subject_data in existing.values():
         for exam_data in subject_data.values():
-            exam_data["tasks"].sort(key=lambda x: x.get("task_number"))
+            exam_data["tasks"].sort(key=_sort_key)
 
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(existing, f, ensure_ascii=False, indent=4)
