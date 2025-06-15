@@ -2,7 +2,7 @@ import asyncio
 import os
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 import pytesseract
 from PIL import Image
@@ -17,6 +17,7 @@ from pdf_contents import (
     list_pdf_containers,
     query_start_markers,
     build_container_string,
+    confirm_task_text,
 )
 
 TASK_RE = re.compile(r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)")
@@ -76,41 +77,48 @@ def _fallback_markers(containers: List[Dict]) -> List[int]:
     return markers
 
 
-async def _assign_tasks(containers: List[Dict]) -> Dict[int, str]:
+async def _assign_tasks(
+    containers: List[Dict], expected_tasks: Optional[List[str]] = None
+) -> Tuple[Dict[int, str], List[Tuple[int, int]], List[str]]:
+    """Assign containers to tasks based on detected start markers."""
+
     markers = await query_start_markers(containers)
     if not markers:
         markers = _fallback_markers(containers)
         if not markers:
-            print("[WARNING] Could not detect task markers. Falling back to sequential numbering.")
-            return {i: str(i + 1) for i in range(len(containers))}
+            print(
+                "[WARNING] Could not detect task markers. Falling back to sequential numbering."
+            )
+            ranges = [(i, i + 1) for i in range(len(containers))]
+            task_map = {i: str(i + 1) for i in range(len(containers))}
+            return task_map, ranges, [str(i + 1) for i in range(len(containers))]
+
     markers = sorted(set([0] + markers))
     ranges: List[Tuple[int, int]] = []
     for i, start in enumerate(markers):
         end = markers[i + 1] if i + 1 < len(markers) else len(containers)
         ranges.append((start, end))
+
     task_map: Dict[int, str] = {}
+    assigned: List[str] = []
     for idx, (start, end) in enumerate(ranges, start=1):
-        region_containers = containers[start:end]
-        text = build_container_string(region_containers)
-        prompt = (
-            PROMPT_CONFIG
-            + "Which task number is described in the following containers? "
-            "Respond with the number only. "
-            "Text:" + text
-        )
-        answer = await prompt_to_text.async_prompt_to_text(
-            prompt, max_tokens=20, is_num=False, max_len=20
-        )
-        m = TASK_RE.search(str(answer))
-        if m:
-            task_num = m.group(2)
+        if expected_tasks and idx - 1 < len(expected_tasks):
+            task_num = expected_tasks[idx - 1]
         else:
-            first_text = region_containers[0].get("text", "") if region_containers else ""
+            first_text = containers[start].get("text", "") if start < len(containers) else ""
             m2 = TASK_PATTERN.search(first_text)
             task_num = m2.group(2) if m2 else str(idx)
+
+        assigned.append(task_num)
         for ci in range(start, end):
             task_map[ci] = task_num
-    return task_map
+
+    if expected_tasks and len(expected_tasks) != len(ranges):
+        print(
+            f"[WARNING] Number of tasks ({len(expected_tasks)}) does not match detected container batches ({len(ranges)})."
+        )
+
+    return task_map, ranges, assigned
 
 
 async def _get_text(img: np.ndarray) -> str:
@@ -190,11 +198,16 @@ async def _process_image(
 
 
 async def extract_images_with_tasks(
-    pdf_path: str, subject: str, version: str, output_folder: str = None
+    pdf_path: str,
+    subject: str,
+    version: str,
+    output_folder: Optional[str] = None,
+    expected_tasks: Optional[List[str]] = None,
 ):
     output_folder = output_folder or str(IMG_DIR)
     containers = await list_pdf_containers(pdf_path)
-    task_map = await _assign_tasks(containers)
+    task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
+    await confirm_task_text(containers, ranges, assigned)
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
     save = _make_saver(output_folder, subject, version, counts)
@@ -223,8 +236,13 @@ async def extract_images_with_tasks(
     doc.close()
 
 
-async def main_async(pdf_path: str, subject: str = "TEST", version: str = "1"):
-    await extract_images_with_tasks(pdf_path, subject, version)
+async def main_async(
+    pdf_path: str,
+    subject: str = "TEST",
+    version: str = "1",
+    expected_tasks: Optional[List[str]] = None,
+):
+    await extract_images_with_tasks(pdf_path, subject, version, expected_tasks=expected_tasks)
 
 
 if __name__ == "__main__":
