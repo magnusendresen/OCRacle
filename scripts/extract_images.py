@@ -135,8 +135,9 @@ def _infer_shift(
     expected_tasks: List[str],
     containers: List[Dict],
 ) -> Optional[int]:
-    """Return a constant shift if all mismatches indicate the same offset."""
+    """Infer a uniform task index shift to better align detected ranges."""
 
+    # First try to infer shift from sampled mismatches
     diffs = []
     for idx in mismatches:
         start, _ = ranges[idx]
@@ -148,6 +149,32 @@ def _infer_shift(
 
     if diffs and len(set(diffs)) == 1:
         return diffs[0]
+
+    # If mismatches didn't reveal a clear offset, try aligning all numbers
+    detected_nums = [
+        _parse_task_num(containers[start].get("text", "")) for start, _ in ranges
+    ]
+    expected_nums = [_parse_task_num(t) for t in expected_tasks]
+
+    max_shift = max(len(detected_nums), len(expected_nums))
+    best_shift: Optional[int] = None
+    best_matches = -1
+
+    for shift in range(-max_shift, max_shift + 1):
+        matches = 0
+        for idx, d_num in enumerate(detected_nums):
+            j = idx - shift
+            if 0 <= j < len(expected_nums):
+                e_num = expected_nums[j]
+                if d_num is not None and e_num is not None and d_num == e_num:
+                    matches += 1
+        if matches > best_matches:
+            best_matches = matches
+            best_shift = shift
+
+    if best_shift is not None and best_shift != 0 and best_matches >= 2:
+        return best_shift
+
     return None
 
 
@@ -265,11 +292,13 @@ async def extract_images_with_tasks(
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
     mismatches = await confirm_task_text(containers, ranges, assigned)
 
-    if mismatches and expected_tasks:
-        shift = _infer_shift(mismatches, ranges, expected_tasks, containers)
-        if shift and shift != 0:
-            print(f"[INFO] Detected consistent task offset of {shift}; realigning.")
-            task_map, assigned = _apply_shift(shift, ranges, expected_tasks, containers)
+    shift = None
+    if expected_tasks:
+        shift = _infer_shift(mismatches or [], ranges, expected_tasks, containers)
+
+    if shift and shift != 0:
+        print(f"[INFO] Detected consistent task offset of {shift}; realigning.")
+        task_map, assigned = _apply_shift(shift, ranges, expected_tasks, containers)
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
     save = _make_saver(output_folder, subject, version, counts)
