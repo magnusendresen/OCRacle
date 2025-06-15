@@ -112,8 +112,10 @@ async def confirm_task_text(
     containers: List[Dict],
     ranges: List[Tuple[int, int]],
     task_nums: List[str],
-) -> None:
-    """Randomly sample container ranges and confirm the task number via LLM."""
+) -> List[int]:
+    """Randomly sample container ranges and confirm the task number via LLM.
+
+    Returns a list of indices that were marked as mismatches."""
 
     if not ranges or not task_nums:
         return
@@ -121,6 +123,7 @@ async def confirm_task_text(
     sample_count = max(3, len(ranges) // 3)
     sample_indices = random.sample(range(len(ranges)), min(sample_count, len(ranges)))
 
+    mismatches: List[int] = []
     for idx in sample_indices:
         start, end = ranges[idx]
         text = build_container_string(containers[start:end])
@@ -136,6 +139,10 @@ async def confirm_task_text(
         result = "yes" in ans_str or "ja" in ans_str
         status = "CONFIRMED" if result else "MISMATCH"
         print(f"[CHECK] Task {task_nums[idx]} -> {status} ({ans_str})")
+        if not result:
+            mismatches.append(idx)
+
+    return mismatches
 
 
 async def _query_markers(prompt: str) -> List[int]:
