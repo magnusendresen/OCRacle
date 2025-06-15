@@ -54,12 +54,12 @@ def isNumber(a):
 def isType(a, b):
     return type(a) == b
 
-def prompt_to_text(prompt, max_tokens=1000, isNum=True, maxLen=None):
+def prompt_to_text(prompt, max_tokens=1000, is_num=True, max_len=None):
     """
     Synkron funksjon som sender API-kall, beregner tokenbruk og kostnad.
     Prøver opp til 3 ganger til et gyldig svar mottas.
-    Dersom isNum er True, sjekkes det at svaret er numerisk og konverteres til int.
-    Dersom maxLen er angitt og lengden på resultatet (etter strip) overstiger denne,
+    Dersom is_num er True, sjekkes det at svaret er numerisk og konverteres til int.
+    Dersom max_len er angitt og lengden på resultatet (etter strip) overstiger denne,
     skrives "Exceeded max letters" og loopen fortsetter.
     Returnerer None dersom prompten feiler etter 3 forsøk.
     """
@@ -86,10 +86,10 @@ def prompt_to_text(prompt, max_tokens=1000, isNum=True, maxLen=None):
             )
             if response.choices:
                 result_text = response.choices[0].message.content.strip()
-                if maxLen is not None and len(result_text) > maxLen:
+                if max_len is not None and len(result_text) > max_len:
                     print(f"{prefix}[ERROR] Exceeded max letters. (attempt {attempt}/{max_attempts})")
                     continue
-                if isNum:
+                if is_num:
                     if not isNumber(result_text):
                         print(f"{prefix}[ERROR] Expected numeric result. (attempt {attempt}/{max_attempts})")
                         continue
@@ -108,9 +108,9 @@ def prompt_to_text(prompt, max_tokens=1000, isNum=True, maxLen=None):
     print(f"{prefix}[ERROR] Prompt failed after {max_attempts} attempts.")
     return None
 
-async def async_prompt_to_text(prompt, max_tokens=1000, isNum=True, maxLen=None):
+async def async_prompt_to_text(prompt, max_tokens=1000, is_num=True, max_len=None):
     """
     Asynkron wrapper for prompt_to_text med propagasjon av context variables.
     """
     ctx = contextvars.copy_context()
-    return await asyncio.to_thread(ctx.run, prompt_to_text, prompt, max_tokens, isNum, maxLen)
+    return await asyncio.to_thread(ctx.run, prompt_to_text, prompt, max_tokens, is_num, max_len)

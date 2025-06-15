@@ -184,8 +184,8 @@ async def get_exam_info(ocr_text: str) -> Exam:
                                     + load_prompt("get_subject_code")
                                     + ocr_text,
                                     max_tokens=1000,
-                                    isNum=False,
-                                    maxLen=50,
+                                    is_num=False,
+                                    max_len=50,
                                 )
                             ).strip().upper()
                             print("\n\n\n TOPIC FOUND WITH DEEPSEEK:")
@@ -204,8 +204,8 @@ async def get_exam_info(ocr_text: str) -> Exam:
             + load_prompt("get_exam_version").format(pdf_dir=pdf_dir)
             + ocr_text,
             max_tokens=1000,
-            isNum=False,
-            maxLen=12,
+            is_num=False,
+            max_len=12,
         )
     )
     version_abbr = exam_raw_version[0].upper() + exam_raw_version[-2:]
@@ -220,8 +220,8 @@ async def get_exam_info(ocr_text: str) -> Exam:
             + load_prompt("get_total_tasks")
             + ocr_text,
             max_tokens=1000,
-            isNum=False,
-            maxLen=250
+            is_num=False,
+            max_len=250
         )
     )
     exam.total_tasks = [task.strip() for task in exam.total_tasks.split(",")]
@@ -234,8 +234,8 @@ async def get_exam_info(ocr_text: str) -> Exam:
             + load_prompt("exam_topics")
             + ocr_text,
             max_tokens=1000,
-            isNum=False,
-            maxLen=300,
+            is_num=False,
+            max_len=300,
         )
     )
     if exam.exam_topics:
@@ -256,213 +256,116 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
 
     return exam
-    
-
-task_process_instructions = [
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("extract_task_text")
-        ),
-        "max_tokens": 1000,
-        "isNum": False,
-        "maxLen": 2000
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("detect_images")
-        ),
-        "max_tokens": 1000,
-        "isNum": True,
-        "maxLen": 2
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("extract_points")
-        ),
-        "max_tokens": 1000,
-        "isNum": True,
-        "maxLen": 2
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("extract_topic")
-        ),
-        "max_tokens": 1000,
-        "isNum": False,
-        "maxLen": 100
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("translate_to_bokmaal")
-        ),
-        "max_tokens": 1000,
-        "isNum": False,
-        "maxLen": 2000
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("remove_exam_admin")
-        ),
-        "max_tokens": 1000,
-        "isNum": False,
-        "maxLen": 2000
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("format_html_output")
-        ),
-        "max_tokens": 1000,
-        "isNum": False,
-        "maxLen": 2000
-    },
-    {
-        "instruction": (
-            PROMPT_CONFIG
-            + load_prompt("validate_task")
-        ),
-        "max_tokens": 1000,
-        "isNum": True,
-        "maxLen": 2
-    }
-]
 
 async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
 
-    while True:
-        task_output = str(ocr_text)
-        valid = 0
-        images = 0
+    task_output = str(ocr_text)
+    valid = 0
+    images = 0
 
-        # Ny logikk for gjennomgang av instruksjoner
-        task_output = ""
+    task_output = str(
+        await prompt_to_text.async_prompt_to_text(
+            PROMPT_CONFIG + load_prompt("extract_task_text").format(task_number=task_number) + task_output,
+            max_tokens=1000,
+            is_num=False,
+            max_len=2000,
+        )
+    )
+    task_status[task_number] = 1
+    write_progress()
 
-        task_exam.images = []
-
-        task_exam.points = None
-
-        task_exam.topic = None
-
-        for instruction in ["translate_to_bokmaal", "remove_exam_admin", "format_html_output"]:
-            task_output = ""
-
-        valid = 0
-
-
-
-        # Gammel logikk for gjennomgang av instruksjoner
-        for i in range(len(task_process_instructions)):
-
-            # Initial extraction of task text
-            if i == 0:
-                task_output = str(
-                    await prompt_to_text.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"].format(task_number=task_number) + task_output,
-                        max_tokens=task_process_instructions[i]["max_tokens"],
-                        isNum=task_process_instructions[i]["isNum"],
-                        maxLen=task_process_instructions[i]["maxLen"]
-                    )
-                )
-
-            # Image extraction
-            elif i == 1:
-                images = int(
-                    await prompt_to_text.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"] + task_output,
-                        max_tokens=task_process_instructions[i]["max_tokens"],
-                        isNum=task_process_instructions[i]["isNum"],
-                        maxLen=task_process_instructions[i]["maxLen"]
-                    )
-                )
-                if images > 0:
-                    print(f"[DEEPSEEK] | Images were found in task {task_number}.")
-                    task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
-                    if task_dir.exists():
-                        found_images = sorted(task_dir.glob("*.png"))
-                        task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
-                    else:
-                        task_exam.images = []
-                    print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
-                else:
-                    print(f"[DEEPSEEK] | No images were found in task {task_number}.")
-                    task_exam.images = []
-
-            # Points extraction
-            elif i == 2:
-                points_str = await prompt_to_text.async_prompt_to_text(
-                    task_process_instructions[i]["instruction"] + task_output,
-                    max_tokens=task_process_instructions[i]["max_tokens"],
-                    isNum=task_process_instructions[i]["isNum"],
-                    maxLen=task_process_instructions[i]["maxLen"]
-                )
-                try:
-                    task_exam.points = int(points_str) if points_str is not None else None
-                except (TypeError, ValueError):
-                    task_exam.points = None
-
-            # Topic extraction
-            elif i == 3:
-                reference = get_topics(exam.subject)
-                if exam.exam_topics:
-                    topics_str = ", ".join(exam.exam_topics)
-                    reference = f"{reference}, {topics_str}" if reference else topics_str
-                task_exam.topic = str(
-                    await prompt_to_text.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"] + reference + task_output,
-                        max_tokens=task_process_instructions[i]["max_tokens"],
-                        isNum=task_process_instructions[i]["isNum"],
-                        maxLen=task_process_instructions[i]["maxLen"]
-                    )
-                )
-                print(f"[DEEPSEEK] | Topic found for task {task_number}: {task_exam.topic}")
-                add_topics(task_exam.topic, exam)
-
-            # Update task_output for middle steps
-            elif not i == len(task_process_instructions) - 1:
-                task_output = str(
-                    await prompt_to_text.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"] + task_output,
-                        max_tokens=task_process_instructions[i]["max_tokens"],
-                        isNum=task_process_instructions[i]["isNum"],
-                        maxLen=task_process_instructions[i]["maxLen"]
-                    )
-                )
-
-            # Validation step
-            else:
-                valid = int(
-                    await prompt_to_text.async_prompt_to_text(
-                        task_process_instructions[i]["instruction"] + task_output,
-                        max_tokens=task_process_instructions[i]["max_tokens"],
-                        isNum=task_process_instructions[i]["isNum"],
-                        maxLen=task_process_instructions[i]["maxLen"]
-                    )
-                )
-
-            # Print intermediate result with task identifier
-            if i not in (1, 2, len(task_process_instructions) - 1):
-                print(f"\n\n\nOppgave {task_number}:\n{task_output}\n\n\n\n")
-
-            task_status[task_number] = i + 1
-            write_progress()
-
-        task_exam.task_text = task_output
-
-        if valid == 0:
-            print(f"[DEEPSEEK] [TASK {task_number}] | Task not approved.\n")
-            return task_exam
+    images = int(
+        await prompt_to_text.async_prompt_to_text(
+            PROMPT_CONFIG + load_prompt("detect_images") + task_output,
+            max_tokens=1000,
+            is_num=True,
+            max_len=2,
+        )
+    )
+    if images > 0:
+        print(f"[DEEPSEEK] | Images were found in task {task_number}.")
+        task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
+        if task_dir.exists():
+            found_images = sorted(task_dir.glob("*.png"))
+            task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
         else:
-            print(f"[DEEPSEEK] [TASK {task_number}] | Task approved.\n")
-            return task_exam
+            task_exam.images = []
+        print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
+    else:
+        print(f"[DEEPSEEK] | No images were found in task {task_number}.")
+        task_exam.images = []
+    task_status[task_number] = 2
+    write_progress()
+
+    points_str = await prompt_to_text.async_prompt_to_text(
+        PROMPT_CONFIG + load_prompt("extract_points") + task_output,
+        max_tokens=1000,
+        is_num=True,
+        max_len=2,
+    )
+    try:
+        task_exam.points = int(points_str) if points_str is not None else None
+    except (TypeError, ValueError):
+        task_exam.points = None
+    task_status[task_number] = 3
+    write_progress()
+
+    reference = get_topics(exam.subject)
+    if exam.exam_topics:
+        topics_str = ", ".join(exam.exam_topics)
+        reference = f"{reference}, {topics_str}" if reference else topics_str
+    task_exam.topic = str(
+        await prompt_to_text.async_prompt_to_text(
+            PROMPT_CONFIG + load_prompt("extract_topic") + reference + task_output,
+            max_tokens=1000,
+            is_num=False,
+            max_len=100,
+        )
+    )
+    print(f"[DEEPSEEK] | Topic found for task {task_number}: {task_exam.topic}")
+    add_topics(task_exam.topic, exam)
+    task_status[task_number] = 4
+    write_progress()
+
+    for step_idx, instruction in enumerate([
+        "translate_to_bokmaal",
+        "remove_exam_admin",
+        "format_html_output",
+    ], start=5):
+        task_output = str(
+            await prompt_to_text.async_prompt_to_text(
+                PROMPT_CONFIG + load_prompt(instruction) + task_output,
+                max_tokens=1000,
+                is_num=False,
+                max_len=2000,
+            )
+        )
+        print(f"\n\n\nOppgave {task_number}:\n{task_output}\n\n\n\n")
+        task_status[task_number] = step_idx
+        write_progress()
+
+    valid = int(
+        await prompt_to_text.async_prompt_to_text(
+            PROMPT_CONFIG + load_prompt("validate_task") + task_output,
+            max_tokens=1000,
+            is_num=True,
+            max_len=2,
+        )
+    )
+    task_status[task_number] = 8
+    write_progress()
+
+    task_exam.task_text = task_output
+
+    if valid == 0:
+        print(f"[DEEPSEEK] [TASK {task_number}] | Task not approved.\n")
+        return task_exam
+    else:
+        print(f"[DEEPSEEK] [TASK {task_number}] | Task approved.\n")
+        return task_exam
 
 async def main_async(ocr_text: str):
     exam_template = await get_exam_info(ocr_text)

@@ -73,7 +73,7 @@ async def detect_task_markers(full_text: str):
     )
 
     response = await prompt_to_text.async_prompt_to_text(
-        prompt, max_tokens=2000, isNum=False, maxLen=5000
+        prompt, max_tokens=2000, is_num=False, max_len=5000
     )
     markers = [marker.strip() for marker in response.split(',') if marker.strip()]
 

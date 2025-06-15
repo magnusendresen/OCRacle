@@ -61,7 +61,7 @@ async def _assign_tasks(containers: List[Dict]) -> Dict[int, str]:
             "Text:" + text
         )
         answer = await prompt_to_text.async_prompt_to_text(
-            prompt, max_tokens=20, isNum=False, maxLen=20
+            prompt, max_tokens=20, is_num=False, max_len=20
         )
         m = TASK_RE.search(str(answer))
         task_num = m.group(2) if m else str(idx)
