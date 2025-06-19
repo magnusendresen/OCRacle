@@ -12,6 +12,7 @@
 #include <string>
 #include <chrono>
 #include <cctype>
+#include <regex>
 
 #include "subprojects/animationwindow/include/Widget.h"
 #include "widgets/TextBox.h"
@@ -88,6 +89,12 @@ examAmount = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, 
 
     examUpload->setCallback([this]() {
         pdfHandling(selectedExam);
+    });
+    solutionUpload->setCallback([this]() {
+        pdfHandling(selectedSolution);
+    });
+    formulaSheetUpload->setCallback([this]() {
+        pdfHandling(selectedFormulaSheet);
     });
 
     timerBox = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth) + ProgressBarOCR->width - static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Tid: ");
@@ -190,6 +197,46 @@ void App::pdfHandling(TDT4102::TextBox* chosenFile) {
         if (chosenFile) {
             chosenFile->setText(selectedFile);
         }
+
+        // Update dir.json with selected file paths
+        char buffer[MAX_PATH];
+        GetModuleFileNameA(NULL, buffer, MAX_PATH);
+        std::filesystem::path exePath = buffer;
+        std::filesystem::path rootDir = exePath.parent_path().parent_path();
+        std::filesystem::path dataDir = rootDir / "icp_data";
+        std::filesystem::create_directories(dataDir);
+        std::filesystem::path dirPath = dataDir / "dir.json";
+
+        auto escape_json = [](const std::string& in) {
+            std::string out;
+            for(char c : in){
+                if(c == '\\' || c == '"') out += '\\';
+                out += c;
+            }
+            return out;
+        };
+
+        std::map<std::string, std::string> data;
+        if(std::ifstream ifs{dirPath}; ifs.is_open()){
+            std::string content((std::istreambuf_iterator<char>(ifs)), {});
+            std::regex re("\"([^\"]+)\"\\s*:\\s*\"([^\"]*)\"");
+            for(auto it = std::sregex_iterator(content.begin(), content.end(), re); it != std::sregex_iterator(); ++it){
+                data[(*it)[1].str()] = (*it)[2].str();
+            }
+        }
+        if(chosenFile == selectedExam) data["exam"] = selectedFile;
+        else if(chosenFile == selectedSolution) data["solution"] = selectedFile;
+        else if(chosenFile == selectedFormulaSheet) data["formula"] = selectedFile;
+
+        std::ofstream ofs(dirPath, std::ios::trunc);
+        ofs << "{";
+        bool first = true;
+        for(const auto& [k,v] : data){
+            if(!first) ofs << ",";
+            ofs << "\"" << k << "\":\"" << escape_json(v) << "\"";
+            first = false;
+        }
+        ofs << "}";
     } catch (const std::exception& e) {
         std::cerr << "[ERROR] Exception i håndtering av PDF: " << e.what() << std::endl;
     }
@@ -232,8 +279,20 @@ void App::startProcessing() {
 
         std::filesystem::current_path(scriptDir);
 
-        std::ofstream dirFile(dataDir / "dir.txt", std::ios::binary);
-        dirFile << selectedExam->getText();
+        auto escape_json = [](const std::string& in) {
+            std::string out;
+            for (char c : in) {
+                if (c == '\\' || c == '"') out += '\\';
+                out += c;
+            }
+            return out;
+        };
+
+        std::ofstream dirFile(dataDir / "dir.json", std::ios::trunc);
+        dirFile << "{";
+        dirFile << "\"exam\":\"" << escape_json(selectedExam->getText()) << "\","";
+        dirFile << "\"solution\":\"" << escape_json(selectedSolution->getText()) << "\","";
+        dirFile << "\"formula\":\"" << escape_json(selectedFormulaSheet->getText()) << "\"}";
 
         // Start Python-script i en bakgrunnstråd
         std::thread([]() {
@@ -270,11 +329,12 @@ void App::calculateProgress() {
         std::filesystem::path scriptDir = rootDir / "scripts";
         std::filesystem::path dataDir = rootDir / "icp_data";
         std::filesystem::create_directories(dataDir);
-        std::filesystem::path progressPath = dataDir / "progress.txt";
+        std::filesystem::path progressPath = dataDir / "progress.json";
 
         std::ofstream ofs(progressPath, std::ios::trunc);
+        ofs << "{}";
         ofs.close();
-        std::cout << "Cleared progress.txt at startup." << std::endl;
+        std::cout << "Cleared progress.json at startup." << std::endl;
 
         FILETIME lastWriteTime = {0, 0};
         
@@ -284,18 +344,24 @@ void App::calculateProgress() {
                 if (GetFileAttributesExA(progressPath.string().c_str(), GetFileExInfoStandard, &fileInfo)) {
                     if (CompareFileTime(&fileInfo.ftLastWriteTime, &lastWriteTime) != 0) {
                         lastWriteTime = fileInfo.ftLastWriteTime;
-                        std::cout << "File progress.txt has been updated." << std::endl;
-            
+                        std::cout << "File progress.json has been updated." << std::endl;
+
                         std::ifstream file(progressPath);
                         if (file.is_open()) {
-                            
-                            std::string line;
-                            
-                            // Iterering over hver linje av fila knytta opp mot map-et med pekere
+                            std::string content((std::istreambuf_iterator<char>(file)), {});
+                            file.close();
+                            std::regex re("\"(\\d+)\"\\s*:\\s*\"([^\"]*)\"");
+                            std::map<std::string, std::string> jdata;
+                            for (auto it = std::sregex_iterator(content.begin(), content.end(), re); it != std::sregex_iterator(); ++it) {
+                                jdata[(*it)[1].str()] = (*it)[2].str();
+                            }
+
                             for (int i = 1; i <= static_cast<int>(ProgressLineMap.size()); i++) {
-                                std::getline(file, line);
-                                if (ProgressLineMap.find(i) != ProgressLineMap.end()) {
-                                    *ProgressLineMap.at(i) = line;
+                                auto key = std::to_string(i);
+                                if (jdata.count(key)) {
+                                    *ProgressLineMap.at(i) = jdata[key];
+                                } else {
+                                    *ProgressLineMap.at(i) = "";
                                 }
                             }
 
@@ -402,11 +468,11 @@ void App::calculateProgress() {
                     }
                     Sleep(200);
                 } else {
-                    std::cerr << "Failed to access progress.txt. Retrying..." << std::endl;
+                    std::cerr << "Failed to access progress.json. Retrying..." << std::endl;
                 }
             }
         } catch (const std::exception& e) {
-            std::cerr << "[ERROR] Exception oppstod i lesing av progress.txt" << e.what() << std::endl;
+            std::cerr << "[ERROR] Exception oppstod i lesing av progress.json" << e.what() << std::endl;
         }
     }).detach();
 }

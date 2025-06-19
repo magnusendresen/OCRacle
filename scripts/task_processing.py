@@ -67,33 +67,30 @@ class Exam:
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
     """
-    Skriver til progress.txt:
-      - Hvis `updates` er None: oppdater linje 4 (0-indeks 3) med task_status
-      - Ellers: bruk `updates` som {0-indeks linjenr: tekst uten newline}
+    Write updates to ``progress.json``.
+    ``updates`` should map zero-indexed line numbers to text. If ``updates`` is
+    ``None`` the function will write the current task_status to key ``4``
+    (1-indexed in the JSON file).
     """
     try:
         if PROGRESS_FILE.exists():
             with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                lines = f.readlines()
+                data = json.load(f)
         else:
-            lines = []
+            data = {}
 
         if updates is None:
             status_str = ''.join(str(task_status[t]) for t in total_tasks)
             updates = {3: status_str}
 
-        max_idx = max(updates.keys())
-        while len(lines) < max_idx + 1:
-            lines.append("\n")
-
         for idx, text in updates.items():
-            lines[idx] = f"{text}\n"
+            data[str(idx + 1)] = text
 
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            f.writelines(lines)
+            json.dump(data, f)
 
         for idx, text in updates.items():
-            print(f"[STATUS] | Wrote '{text}' to line {idx + 1} in {PROGRESS_FILE}")
+            print(f"[STATUS] | Wrote '{text}' to key {idx + 1} in {PROGRESS_FILE}")
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
@@ -195,8 +192,13 @@ async def get_exam_info(ocr_text: str) -> Exam:
     write_progress({4: exam.subject or ""})
     
     pdf_dir = None
-    with DIR_FILE.open("r", encoding="utf-8") as dir_file:
-        pdf_dir = dir_file.readline().strip()
+    try:
+        with DIR_FILE.open("r", encoding="utf-8") as dir_file:
+            dir_data = json.load(dir_file)
+            pdf_dir = dir_data.get("exam", "").strip()
+    except Exception as e:
+        print(f"[ERROR] Could not read dir.json: {e}")
+        pdf_dir = ""
 
     exam_raw_version = (
         await prompt_to_text.async_prompt_to_text(

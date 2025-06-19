@@ -3,8 +3,8 @@
 ## Samarbeid mellom Python og C++
 Programmet er et brukergrensesnitt laget i C++ for et allerede påbegynt prosjekt skrevet i Python. Kommunikasjonen mellom språkene skjer enkelt via skriving og lesing av tekstfiler, ettersom den nødvendige informasjonen som deles er minimal. C++ styrer alt visuelt med AnimationWindow, mens all behandling av PDF og tekst gjøres i Python ved bruk av Google Vision og DeepSeek API.
 
-I `dir.txt` skrives banen til PDF-filen valgt i AnimationWindow-vinduet, som deretter leses av Python-programmet.  
-I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et i AnimationWindow hver gang C++ oppdager en endring i filen:
+I `dir.json` skrives banene til valgte filer (eksamen, løsningsforslag og formelsamling), som deretter leses av Python-programmet.
+I `progress.json` skrives følgende informasjon fra Python, som oppdaterer GUI-et i AnimationWindow hver gang C++ oppdager en endring i filen:
 - Status på tilkobling til API-ene Google Vision og DeepSeek  
 - Fremdrift for OCR (optical character recognition) og AI-behandling  
 - Eksamensinformasjon (emnekode, versjon, antall oppgaver)
@@ -17,7 +17,7 @@ I `progress.txt` skrives følgende informasjon fra Python, som oppdaterer GUI-et
 
 ### Klassen `App` arver fra `AnimationWindow` og har følgende funksjoner:
 - `pdfHandling()` – viser et popup-vindu for valg av PDF-fil
-- `calculateProgress()` – overvåker `progress.txt` og oppdaterer GUI og progress-variabler
+- `calculateProgress()` – overvåker `progress.json` og oppdaterer GUI og progress-variabler
 - `startTimer()` og `stopTimer()` – viser hvor lenge prosesseringen har kjørt
 - Statiske GUI-variabler og pekere til elementene som vises i vinduet
 
