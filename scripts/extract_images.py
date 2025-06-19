@@ -13,6 +13,7 @@ import numpy as np
 
 import prompt_to_text
 from project_config import IMG_DIR, PROMPT_CONFIG, PROGRESS_FILE
+import json
 from pdf_contents import (
     list_pdf_containers,
     query_start_markers,
@@ -36,19 +37,15 @@ def write_progress(updates: Dict[int, str]) -> None:
     try:
         if PROGRESS_FILE.exists():
             with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                lines = f.readlines()
+                data = json.load(f)
         else:
-            lines = []
-
-        max_idx = max(updates.keys())
-        while len(lines) < max_idx + 1:
-            lines.append("\n")
+            data = {}
 
         for idx, text in updates.items():
-            lines[idx] = f"{text}\n"
+            data[str(idx + 1)] = text
 
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            f.writelines(lines)
+            json.dump(data, f)
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 

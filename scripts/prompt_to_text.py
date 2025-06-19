@@ -5,26 +5,22 @@ import contextvars
 from openai import OpenAI  # Using OpenAI SDK for DeepSeek
 import builtins
 from project_config import *
+import json
 
-def update_progress_line3(value="1"):
-    """
-    Oppdaterer kun linje 3 i progress.txt med den angitte verdien.
-    """
+def update_progress_line3(value: str = "1") -> None:
+    """Update key 3 in progress.json with the given value."""
     try:
         if PROGRESS_FILE.exists():
             with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                lines = f.readlines()
+                data = json.load(f)
         else:
-            lines = []
-        if len(lines) < 3:
-            lines += ["\n"] * (3 - len(lines))
-        # Linje 3 er indeks 2
-        lines[2] = f"{value}\n"
+            data = {}
+        data["3"] = value
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            f.writelines(lines)
-        print(f"[STATUS] | Updated line 3 of {PROGRESS_FILE} with '{value}'")
+            json.dump(data, f)
+        print(f"[STATUS] | Updated key 3 of {PROGRESS_FILE} with '{value}'")
     except Exception as e:
-        print(f"[ERROR] Could not update line 3 in {PROGRESS_FILE}: {e}")
+        print(f"[ERROR] Could not update key 3 in {PROGRESS_FILE}: {e}")
 
 # Context variables for task-ID og processing step
 current_task = contextvars.ContextVar("current_task", default="")
@@ -45,7 +41,7 @@ MODEL_NAME = "deepseek-chat"
 total_cost = 0  # Global variabel for akkumulert kostnad
 
 print("[DEEPSEEK] Successfully connected to DeepSeekAPI!\n")
-# Oppdaterer progress.txt linje 3 med "1" når DeepSeek er kobla til.
+# Oppdaterer progress.json nøkkel 3 med "1" når DeepSeek er kobla til.
 update_progress_line3("1")
 
 def isNumber(a):

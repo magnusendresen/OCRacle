@@ -5,6 +5,7 @@ from google.cloud import vision
 from tqdm import tqdm
 import sys
 from project_config import *
+import json
 
 # Sørg for UTF-8 utskrift i terminalen
 sys.stdout.reconfigure(encoding='utf-8')
@@ -18,49 +19,41 @@ if not json_path or not os.path.exists(json_path):
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
 print(f"\n[GOOGLE] Successfully connected to Google Vision API using:\n{json_path}\n")
 
-# Definer sti for progress.txt and empty file at startup
+# Definer sti for progress.json and empty file at startup
 with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-    f.write("")
+    json.dump({}, f)
 
-def update_progress_line1(value="1"):
-    """
-    Oppdaterer kun linje 1 i progress.txt med den angitte verdien.
-    (Her brukes linje 1 til å vise Google Vision API-status.)
-    """
-    try:
-        if PROGRESS_FILE.exists():
+def _read_progress() -> dict:
+    if PROGRESS_FILE.exists():
+        try:
             with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                lines = f.readlines()
-        else:
-            lines = []
-        if len(lines) < 1:
-            lines = ["\n"]
-        lines[0] = f"{value}\n"
-        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            f.writelines(lines)
-        print(f"[STATUS] | Updated line 1 of {PROGRESS_FILE} with '{value}'")
-    except Exception as e:
-        print(f"[ERROR] Could not update line 1 in {PROGRESS_FILE}: {e}")
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
 
-def update_progress_line2(value):
-    """
-    Oppdaterer kun linje 2 i progress.txt med den angitte verdien.
-    (Her skrives en tallrekke som indikerer hvor mange sider som er prosessert.)
-    """
+
+def _write_progress(data: dict) -> None:
     try:
-        if PROGRESS_FILE.exists():
-            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                lines = f.readlines()
-        else:
-            lines = []
-        if len(lines) < 2:
-            lines += ["\n"] * (2 - len(lines))
-        lines[1] = f"{value}\n"
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            f.writelines(lines)
-        print(f"[STATUS] | Updated line 2 of {PROGRESS_FILE} with '{value}'")
+            json.dump(data, f)
     except Exception as e:
-        print(f"[ERROR] Could not update line 2 in {PROGRESS_FILE}: {e}")
+        print(f"[ERROR] Could not write progress file: {e}")
+
+
+def update_progress_line1(value: str = "1"):
+    """Update key 1 in progress.json with the given value."""
+    data = _read_progress()
+    data["1"] = value
+    _write_progress(data)
+    print(f"[STATUS] | Updated key 1 of {PROGRESS_FILE} with '{value}'")
+
+def update_progress_line2(value: str) -> None:
+    """Update key 2 in progress.json with the given value."""
+    data = _read_progress()
+    data["2"] = value
+    _write_progress(data)
+    print(f"[STATUS] | Updated key 2 of {PROGRESS_FILE} with '{value}'")
 
 # Sett opp Google Vision API-status (linje 1)
 update_progress_line1("1")
@@ -115,14 +108,18 @@ async def process_image(index, image, ocr_progress):
     return result
 
 async def main_async():
-    # Les PDF-sti fra dir.txt
-    dir_txt = DIR_FILE
-
-    if not dir_txt.exists():
-        print(f"[ERROR] Could not find dir.txt at {dir_txt}")
+    # Les PDF-sti fra dir.json
+    if not DIR_FILE.exists():
+        print(f"[ERROR] Could not find dir.json at {DIR_FILE}")
+        return ""
+    try:
+        with open(DIR_FILE, "r", encoding="utf-8") as f:
+            dir_data = json.load(f)
+    except Exception as e:
+        print(f"[ERROR] Could not read dir.json: {e}")
         return ""
 
-    pdf_path = dir_txt.read_text(encoding="utf-8").strip()
+    pdf_path = dir_data.get("exam", "").strip()
 
     if not os.path.exists(pdf_path):
         print(f"[ERROR] File does not exist: {pdf_path}")
