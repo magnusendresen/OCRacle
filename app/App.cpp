@@ -290,8 +290,8 @@ void App::startProcessing() {
 
         std::ofstream dirFile(dataDir / "dir.json", std::ios::trunc);
         dirFile << "{";
-        dirFile << "\"exam\":\"" << escape_json(selectedExam->getText()) << "\","";
-        dirFile << "\"solution\":\"" << escape_json(selectedSolution->getText()) << "\","";
+        dirFile << "\"exam\":\"" << escape_json(selectedExam->getText()) << "\",";
+        dirFile << "\"solution\":\"" << escape_json(selectedSolution->getText()) << "\",";
         dirFile << "\"formula\":\"" << escape_json(selectedFormulaSheet->getText()) << "\"}";
 
         // Start Python-script i en bakgrunnstråd
