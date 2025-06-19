@@ -79,7 +79,11 @@ void App::GUI() {
 
     startButton->setLabelColor(TDT4102::Color::white);
     startButton->setCallback([this]() {
-        pdfHandling();
+        startProcessing();
+    });
+
+    examUpload->setCallback([this]() {
+        pdfHandling(selectedExam);
     });
 
     timerBox = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth) + ProgressBarOCR->width - static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Tid: ");
@@ -141,47 +145,10 @@ void App::stopTimer() {
     }
 }
 
-void App::pdfHandling() {
-        try {
-        std::cout << "Handling PDF..." << std::endl;
-
-        calculateProgress();
-
-        // Finn script-mappen
-        char buffer[MAX_PATH];
-        GetModuleFileNameA(NULL, buffer, MAX_PATH);
-        std::filesystem::path exePath = buffer;
-        std::filesystem::path exeDir = exePath.parent_path();
-        std::filesystem::path rootDir = exeDir.parent_path().parent_path();
-        std::filesystem::path dataDir = rootDir / "icp_data";
-        std::filesystem::path scriptDir = rootDir / "scripts";
-
-        std::filesystem::create_directories(dataDir);
-
-        std::ofstream subjectFile(dataDir / "subject.txt", std::ios::binary);
-        std::string userinp1;
-        if (examSubjectInput->getText() != "Subject: ") {
-            userinp1 = examSubjectInput->getText().substr(9);
-            std::cout << "User input subject: " << userinp1 << std::endl;
-        } else {
-            add(*examSubject);
-            userinp1 = "";
-            examSubjectInput->setVisible(0);
-        }
-        // std::ofstream ignoredFile(scriptDir / "ignored.txt", std::ios::binary);
-        // std::string userinp2;
-        // if (ignoredTopics->getText() != "Ignored topics: ") {
-        //     userinp2 = ignoredTopics->getText().substr(16);
-        //     std::cout << "User input ignored topics: " << userinp2 << std::endl;
-        // } else {
-        //     userinp2 = "";
-        // }
-
-        subjectFile << userinp1;
-        // ignoredFile << userinp2;
-
+void App::pdfHandling(TDT4102::TextBox* chosenFile) {
+    try {
         // For å kunne skrive æøå i console
-        SetConsoleOutputCP(CP_UTF8);    
+        SetConsoleOutputCP(CP_UTF8);
 
         // Popup for å velge PDF
         wchar_t filePath[MAX_PATH] = L"";
@@ -206,20 +173,60 @@ void App::pdfHandling() {
 
         std::cout << "[INFO] Valgt fil: " << selectedFile << std::endl;
 
+        if (chosenFile) {
+            chosenFile->setText(selectedFile);
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "[ERROR] Exception i håndtering av PDF: " << e.what() << std::endl;
+    }
+}
+
+void App::startProcessing() {
+    try {
+        if (selectedExam->getText() == "No file selected.") {
+            std::cout << "[WARN] No exam file selected." << std::endl;
+            return;
+        }
+
+        std::cout << "Handling PDF..." << std::endl;
+
+        calculateProgress();
+
+        // Finn script-mappen
+        char buffer[MAX_PATH];
+        GetModuleFileNameA(NULL, buffer, MAX_PATH);
+        std::filesystem::path exePath = buffer;
+        std::filesystem::path exeDir = exePath.parent_path();
+        std::filesystem::path rootDir = exeDir.parent_path().parent_path();
+        std::filesystem::path dataDir = rootDir / "icp_data";
+        std::filesystem::path scriptDir = rootDir / "scripts";
+
+        std::filesystem::create_directories(dataDir);
+
+        std::ofstream subjectFile(dataDir / "subject.txt", std::ios::binary);
+        std::string userinp1;
+        if (examSubjectInput->getText() != "Subject: ") {
+            userinp1 = examSubjectInput->getText().substr(9);
+        } else {
+            add(*examSubject);
+            userinp1 = "";
+            examSubjectInput->setVisible(0);
+        }
+        subjectFile << userinp1;
+
         std::filesystem::current_path(scriptDir);
 
-        std::cout << "[INFO] scriptDir: " << scriptDir << std::endl;
-
         std::ofstream dirFile(dataDir / "dir.txt", std::ios::binary);
-        dirFile << selectedFile;
+        dirFile << selectedExam->getText();
 
         // Start Python-script i en bakgrunnstråd
         std::thread([]() {
             std::system("start /min powershell -Command \"python main.py; pause\"");
-                 }).detach();
+        }).detach();
+
         startTimer();
     } catch (const std::exception& e) {
-        std::cerr << "[ERROR] Exception i håndtering av PDF: " << e.what() << std::endl;
+        std::cerr << "[ERROR] Exception i startProcessing: " << e.what() << std::endl;
     }
 }
 
