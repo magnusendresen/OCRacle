@@ -18,7 +18,8 @@ public:
     App(const std::string& windowName);
 
     void GUI();
-    void pdfHandling();
+    void pdfHandling(TDT4102::TextBox* chosenFile);
+    void startProcessing();
     void calculateProgress();
     void startTimer();
     void stopTimer();
