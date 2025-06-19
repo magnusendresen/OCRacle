@@ -13,6 +13,7 @@
 #include <chrono>
 #include <cctype>
 
+#include "subprojects/animationwindow/include/Widget.h"
 #include "widgets/TextBox.h"
 #include "widgets/Button.h"
 #include "widgets/TextInput.h"
@@ -36,37 +37,40 @@ App::App(const std::string& windowName)
 }
 
 void App::GUI() {
-    startButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
+    startWidget = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Start Processing");
+    startButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Start Processing");
+    
+    startButton->setButtonColor(TDT4102::Color::dark_seagreen);
     GoogleVisionIndicator = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
     DeepSeekIndicator = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
-
+    
     examUpload = new TDT4102::Button({pad * 2 + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Upload Exam");
     solutionUpload = new TDT4102::Button({pad * 3 + static_cast<int>(buttonWidth) * 2, pad}, buttonWidth, buttonHeight / 2, "Upload Solution");
     formulaSheetUpload = new TDT4102::Button({pad * 4 + static_cast<int>(buttonWidth) * 3, pad}, buttonWidth, buttonHeight / 2, "Upload Formula Sheet");
-
+    
     selectedExam = new TDT4102::TextBox({pad * 2 + static_cast<int>(buttonWidth), pad + buttonHeight / 4 + 2}, buttonWidth, buttonHeight / 2, "No file selected.");
     selectedSolution = new TDT4102::TextBox({pad * 3 + static_cast<int>(buttonWidth) * 2, pad + buttonHeight / 4 + 2}, buttonWidth, buttonHeight / 2, "No file selected.");
     selectedFormulaSheet = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad + buttonHeight / 4 + 2}, buttonWidth, buttonHeight / 2, "No file selected.");
-
+    
     for (auto* box : {selectedExam, selectedSolution, selectedFormulaSheet}) {
         for (auto [setter, value] : {
             std::pair{&TDT4102::TextBox::setBoxColor, TDT4102::Color::transparent},
             std::pair{&TDT4102::TextBox::setBorderColor, TDT4102::Color::transparent},
             std::pair{&TDT4102::TextBox::setTextColor, TDT4102::Color{0x323232}
-}
-        }) {
-            (box->*setter)(value);
         }
+    }) {
+        (box->*setter)(value);
     }
+}
 
-    ignoredTopics = new TDT4102::TextInput({pad * 2 + static_cast<int>(buttonWidth), pad * 6}, pad * 2 + buttonWidth * 3, buttonHeight / 2, "Ignored topics: ");
+ignoredTopics = new TDT4102::TextInput({pad * 2 + static_cast<int>(buttonWidth), pad * 6}, pad * 2 + buttonWidth * 3, buttonHeight / 2, "Ignored topics: ");
 
-    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
-    examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
+examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
+examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
 
-    examVersion = new TDT4102::TextBox({pad * 3 + static_cast<int>(buttonWidth) * 2, pad * 11}, buttonWidth, buttonHeight/2, "Version: ");
-    
-    examAmount = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad*11}, buttonWidth, buttonHeight/2, "Tasks: ");
+examVersion = new TDT4102::TextBox({pad * 3 + static_cast<int>(buttonWidth) * 2, pad * 11}, buttonWidth, buttonHeight/2, "Version: ");
+
+examAmount = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad*11}, buttonWidth, buttonHeight/2, "Tasks: ");
 
 
 
@@ -88,7 +92,11 @@ void App::GUI() {
 
     timerBox = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth) + ProgressBarOCR->width - static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Tid: ");
 
+    add(*startWidget);
     add(*startButton);
+    startButton->setVisible(false);
+
+
     add(*GoogleVisionIndicator);
     add(*DeepSeekIndicator);
 
@@ -147,6 +155,12 @@ void App::stopTimer() {
 
 void App::pdfHandling(TDT4102::TextBox* chosenFile) {
     try {
+        if (chosenFile == selectedExam) {
+            startWidget->setVisible(false);
+            startButton->setVisible(true);
+            startButton->setButtonColor(TDT4102::Color::dark_green);
+        }
+
         // For å kunne skrive æøå i console
         SetConsoleOutputCP(CP_UTF8);
 
@@ -187,6 +201,8 @@ void App::startProcessing() {
             std::cout << "[WARN] No exam file selected." << std::endl;
             return;
         }
+
+        startButton->setButtonColor(TDT4102::Color::green);
 
         std::cout << "Handling PDF..." << std::endl;
 

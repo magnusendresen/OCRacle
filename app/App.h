@@ -6,6 +6,7 @@
 #include <chrono>
 #include <thread>
 
+#include "subprojects/animationwindow/include/Widget.h"
 #include "widgets/TextBox.h"
 #include "widgets/Button.h"
 #include "widgets/TextInput.h"
@@ -29,6 +30,7 @@ public:
     static constexpr int buttonHeight = 100;
     static constexpr int pad = 20;
 
+    TDT4102::Button *startWidget;
     TDT4102::Button *startButton;
     TDT4102::TextBox *GoogleVisionIndicator;
     TDT4102::TextBox *DeepSeekIndicator;
