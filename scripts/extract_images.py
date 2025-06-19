@@ -118,87 +118,6 @@ async def _assign_tasks(
     return task_map, ranges, assigned
 
 
-def _parse_task_num(text: str) -> Optional[int]:
-    """Extract a leading integer from a task string if present."""
-    if not text:
-        return None
-    m = re.search(r"(\d+)", text)
-    return int(m.group(1)) if m else None
-
-
-def _infer_shift(
-    mismatches: List[int],
-    ranges: List[Tuple[int, int]],
-    expected_tasks: List[str],
-    containers: List[Dict],
-) -> Optional[int]:
-    """Infer a uniform task index shift to better align detected ranges."""
-
-    # First try to infer shift from sampled mismatches
-    diffs = []
-    for idx in mismatches:
-        start, _ = ranges[idx]
-        detected = _parse_task_num(containers[start].get("text", ""))
-        expected = _parse_task_num(expected_tasks[idx]) if idx < len(expected_tasks) else None
-        if detected is None or expected is None:
-            continue
-        diffs.append(expected - detected)
-
-    if diffs and len(set(diffs)) == 1:
-        return diffs[0]
-
-    # If mismatches didn't reveal a clear offset, try aligning all numbers
-    detected_nums = [
-        _parse_task_num(containers[start].get("text", "")) for start, _ in ranges
-    ]
-    expected_nums = [_parse_task_num(t) for t in expected_tasks]
-
-    max_shift = max(len(detected_nums), len(expected_nums))
-    best_shift: Optional[int] = None
-    best_matches = -1
-
-    for shift in range(-max_shift, max_shift + 1):
-        matches = 0
-        for idx, d_num in enumerate(detected_nums):
-            j = idx - shift
-            if 0 <= j < len(expected_nums):
-                e_num = expected_nums[j]
-                if d_num is not None and e_num is not None and d_num == e_num:
-                    matches += 1
-        if matches > best_matches:
-            best_matches = matches
-            best_shift = shift
-
-    if best_shift is not None and best_shift != 0 and best_matches >= 2:
-        return best_shift
-
-    return None
-
-
-def _apply_shift(
-    shift: int,
-    ranges: List[Tuple[int, int]],
-    expected_tasks: List[str],
-    containers: List[Dict],
-) -> Tuple[Dict[int, str], List[str]]:
-    """Rebuild task mapping using a constant shift."""
-
-    new_map: Dict[int, str] = {}
-    new_assigned: List[str] = []
-    for idx, (start, end) in enumerate(ranges):
-        src_idx = idx - shift
-        if 0 <= src_idx < len(expected_tasks):
-            task_num = expected_tasks[src_idx]
-        else:
-            first_text = containers[start].get("text", "")
-            m2 = TASK_PATTERN.search(first_text)
-            task_num = m2.group(2) if m2 else str(idx + 1)
-
-        new_assigned.append(task_num)
-        for ci in range(start, end):
-            new_map[ci] = task_num
-
-    return new_map, new_assigned
 
 
 async def _get_text(img: np.ndarray) -> str:
@@ -287,15 +206,10 @@ async def extract_images_with_tasks(
     output_folder = output_folder or str(IMG_DIR)
     containers = await list_pdf_containers(pdf_path)
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
-    mismatches = await confirm_task_text(containers, ranges, assigned)
-
-    shift = None
-    if expected_tasks:
-        shift = _infer_shift(mismatches or [], ranges, expected_tasks, containers)
-
-    if shift and shift != 0:
-        print(f"[INFO] Detected consistent task offset of {shift}; realigning.")
-        task_map, assigned = _apply_shift(shift, ranges, expected_tasks, containers)
+    to_remove = await confirm_task_text(containers, ranges)
+    if to_remove:
+        containers = [c for i, c in enumerate(containers) if i not in to_remove]
+        task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
     save = _make_saver(output_folder, subject, version, counts)
