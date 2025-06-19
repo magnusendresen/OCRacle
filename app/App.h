@@ -2,7 +2,6 @@
 
 #include "AnimationWindow.h"
 #include "Image.h"
-#include "ProgressBar.h"
 #include <string>
 #include <chrono>
 #include <thread>
@@ -10,6 +9,8 @@
 #include "widgets/TextBox.h"
 #include "widgets/Button.h"
 #include "widgets/TextInput.h"
+
+class ProgressBar;
 
 
 class App : public TDT4102::AnimationWindow {
@@ -27,9 +28,16 @@ public:
     static constexpr int buttonHeight = 100;
     static constexpr int pad = 20;
 
-    TDT4102::Button *pdfButton;
-    TDT4102::TextBox *googlevision;
-    TDT4102::TextBox *deepseek;
+    TDT4102::Button *startButton;
+    TDT4102::TextBox *GoogleVisionIndicator;
+    TDT4102::TextBox *DeepSeekIndicator;
+
+    TDT4102::Button *examUpload;
+    TDT4102::TextBox *selectedExam;
+    TDT4102::Button *solutionUpload;
+    TDT4102::TextBox *selectedSolution;
+    TDT4102::Button *formulaSheetUpload;
+    TDT4102::TextBox *selectedFormulaSheet;
 
     TDT4102::TextBox *examSubject;
     TDT4102::TextInput *examSubjectInput;
@@ -38,9 +46,9 @@ public:
 
     TDT4102::TextInput *ignoredTopics;
 
-    ProgressBar *ProgressBar1 = nullptr;
-    ProgressBar *ProgressBar2 = nullptr;
-    ProgressBar *ProgressBar3 = nullptr;
+    ProgressBar *ProgressBarOCR = nullptr;
+    ProgressBar *ProgressBarLLM = nullptr;
+    ProgressBar *ProgressBarIMG = nullptr;
 
     TDT4102::Image *ntnuLogo = nullptr;
     int *ntnuLogoScale = nullptr;

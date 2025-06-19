@@ -1,4 +1,5 @@
 #include "App.h"
+#include "ProgressBar.h"
 #include <windows.h>
 #include <commdlg.h>
 #include <winuser.h>
@@ -23,8 +24,8 @@ constexpr int WINDOW_HEIGHT = 720;
 App::App(const std::string& windowName)
     : TDT4102::AnimationWindow{
         // Beregn senterposisjon
-        640,
-        360,
+        100,
+        100,
         WINDOW_WIDTH,
         WINDOW_HEIGHT,
         windowName
@@ -35,53 +36,80 @@ App::App(const std::string& windowName)
 }
 
 void App::GUI() {
-    pdfButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
-    googlevision = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
-    deepseek = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
+    startButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Select File");
+    GoogleVisionIndicator = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
+    DeepSeekIndicator = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
 
+    examUpload = new TDT4102::Button({pad * 2 + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Upload Exam");
+    solutionUpload = new TDT4102::Button({pad * 3 + static_cast<int>(buttonWidth) * 2, pad}, buttonWidth, buttonHeight / 2, "Upload Solution");
+    formulaSheetUpload = new TDT4102::Button({pad * 4 + static_cast<int>(buttonWidth) * 3, pad}, buttonWidth, buttonHeight / 2, "Upload Formula Sheet");
 
-    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
-    examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Subject: ");
+    selectedExam = new TDT4102::TextBox({pad * 2 + static_cast<int>(buttonWidth), pad + buttonHeight / 4 + 2}, buttonWidth, buttonHeight / 2, "No file selected.");
+    selectedSolution = new TDT4102::TextBox({pad * 3 + static_cast<int>(buttonWidth) * 2, pad + buttonHeight / 4 + 2}, buttonWidth, buttonHeight / 2, "No file selected.");
+    selectedFormulaSheet = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad + buttonHeight / 4 + 2}, buttonWidth, buttonHeight / 2, "No file selected.");
 
-    // ignoredTopics = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad*3}, buttonWidth*4, buttonHeight / 2, "Ignored topics: ");
+    for (auto* box : {selectedExam, selectedSolution, selectedFormulaSheet}) {
+        for (auto [setter, value] : {
+            std::pair{&TDT4102::TextBox::setBoxColor, TDT4102::Color::transparent},
+            std::pair{&TDT4102::TextBox::setBorderColor, TDT4102::Color::transparent},
+            std::pair{&TDT4102::TextBox::setTextColor, TDT4102::Color{0x323232}
+}
+        }) {
+            (box->*setter)(value);
+        }
+    }
+
+    ignoredTopics = new TDT4102::TextInput({pad * 2 + static_cast<int>(buttonWidth), pad * 6}, pad * 2 + buttonWidth * 3, buttonHeight / 2, "Ignored topics: ");
+
+    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
+    examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
+
+    examVersion = new TDT4102::TextBox({pad * 3 + static_cast<int>(buttonWidth) * 2, pad * 11}, buttonWidth, buttonHeight/2, "Version: ");
     
-    examVersion = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*5}, buttonWidth, buttonHeight/2, "Version: ");
-
-    examAmount = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad*7}, buttonWidth*4, buttonHeight/2, "Tasks: ");
+    examAmount = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad*11}, buttonWidth, buttonHeight/2, "Tasks: ");
 
 
-    ProgressBar1 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*10, "PDF processing");
-    ProgressBar2 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*18, "Task processing");
-    ProgressBar3 = new ProgressBar(*this, App::pad*2 + static_cast<int>(App::buttonWidth), App::pad*14, "Image extraction");
+
+    ProgressBarOCR = new ProgressBar(*this, App::pad + 4, App::pad*16, "PDF processing");
+    ProgressBarLLM = new ProgressBar(*this, App::pad + 4, App::pad*19, "Task processing");
+    ProgressBarIMG = new ProgressBar(*this, App::pad + 4, App::pad*22, "Image extraction");
 
     ntnuLogo = new TDT4102::Image("ntnu_logo.png");
     ntnuLogoScale = new int(8);
 
-    pdfButton->setLabelColor(TDT4102::Color::white);
-    pdfButton->setCallback([this]() {
+    startButton->setLabelColor(TDT4102::Color::white);
+    startButton->setCallback([this]() {
         pdfHandling();
     });
 
-    timerBox = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth) + ProgressBar1->width - static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Tid: ");
+    timerBox = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth) + ProgressBarOCR->width - static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Tid: ");
 
-    add(*pdfButton);
-    add(*googlevision);
-    add(*deepseek);
+    add(*startButton);
+    add(*GoogleVisionIndicator);
+    add(*DeepSeekIndicator);
+
+    add(*examUpload);
+    add(*solutionUpload);
+    add(*formulaSheetUpload);
+
+    add(*selectedExam);
+    add(*selectedSolution);
+    add(*selectedFormulaSheet);
 
     add(*examSubjectInput);
     add(*examVersion);
     add(*examAmount);
 
-    // add(*ignoredTopics);
+    add(*ignoredTopics);
 
     add(*timerBox);
 
 }
 
 void App::update() {
-    ProgressBar1->setCount();
-    ProgressBar2->setCount();
-    ProgressBar3->setCount();
+    ProgressBarOCR->setCount();
+    ProgressBarLLM->setCount();
+    ProgressBarIMG->setCount();
     this->draw_image({WINDOW_WIDTH - ntnuLogo->width/ *ntnuLogoScale - pad, pad}, *ntnuLogo, ntnuLogo->width/ *ntnuLogoScale, ntnuLogo->height/ *ntnuLogoScale);
 }
 
@@ -196,11 +224,11 @@ void App::pdfHandling() {
 }
 
 // Map for lesing av tekstfilen
-std::string ocrLine, taskLine, googlevisionLine, deepseekLine, examSubjectLine, examVersionLine, examAmountLine, imageExtractionLine;
+std::string ocrLine, taskLine, GoogleVisionIndicatorLine, DeepSeekIndicatorLine, examSubjectLine, examVersionLine, examAmountLine, imageExtractionLine;
 const std::map<int, std::string*> ProgressLineMap = {
-    {1, &googlevisionLine},
+    {1, &GoogleVisionIndicatorLine},
     {2, &ocrLine},
-    {3, &deepseekLine},
+    {3, &DeepSeekIndicatorLine},
     {4, &taskLine},
     {5, &examSubjectLine},
     {6, &examVersionLine},
@@ -249,22 +277,22 @@ void App::calculateProgress() {
                             }
 
                             // Oppdatering av Google Vision knapp
-                            if (!googlevisionLine.empty()) {
-                                for (char c : googlevisionLine) {
+                            if (!GoogleVisionIndicatorLine.empty()) {
+                                for (char c : GoogleVisionIndicatorLine) {
                                     if (c == '1') {
-                                        googlevision->setBoxColor(TDT4102::Color::green);
-                                        googlevision->setTextColor(TDT4102::Color::white);
+                                        GoogleVisionIndicator->setBoxColor(TDT4102::Color::green);
+                                        GoogleVisionIndicator->setTextColor(TDT4102::Color::white);
                                         break;
                                     }
                                 }
                             }
 
                             // Oppdatering av DeepSeek knapp
-                            if (!deepseekLine.empty()) {
-                                for (char c : deepseekLine) {
+                            if (!DeepSeekIndicatorLine.empty()) {
+                                for (char c : DeepSeekIndicatorLine) {
                                     if (c == '1') {
-                                        deepseek->setBoxColor(TDT4102::Color::green);
-                                        deepseek->setTextColor(TDT4102::Color::white);
+                                        DeepSeekIndicator->setBoxColor(TDT4102::Color::green);
+                                        DeepSeekIndicator->setTextColor(TDT4102::Color::white);
 
                                         break;
                                     }
@@ -305,9 +333,9 @@ void App::calculateProgress() {
                                     }
                                 }
                                 if (count > 0) {
-                                    ProgressBar1->progress = static_cast<double>(sum) / count;
+                                    ProgressBarOCR->progress = static_cast<double>(sum) / count;
                                 }
-                                std::cout << "OCR Progress: " << ProgressBar1->progress << std::endl;
+                                std::cout << "OCR Progress: " << ProgressBarOCR->progress << std::endl;
                             }
 
                             // Beregn bildeuthenting-progresjon til progressbar
@@ -321,13 +349,13 @@ void App::calculateProgress() {
                                     }
                                 }
                                 if (count > 0) {
-                                    ProgressBar3->progress = static_cast<double>(sum) / count;
+                                    ProgressBarIMG->progress = static_cast<double>(sum) / count;
                                 }
-                                std::cout << "Image Extraction Progress: " << ProgressBar3->progress << std::endl;
+                                std::cout << "Image Extraction Progress: " << ProgressBarIMG->progress << std::endl;
                             }
 
                             // Beregn AI-behandling-progresjon til progressbar
-                            if (ProgressBar1->progress >= 1.0 && !taskLine.empty()) {
+                            if (ProgressBarOCR->progress >= 1.0 && !taskLine.empty()) {
                                 int sum = 0;
                                 int count = 0;
                                 for (char c : taskLine) {
@@ -338,11 +366,11 @@ void App::calculateProgress() {
                                 }
                                 count *= 8;
                                 if (count > 0) {
-                                    ProgressBar2->progress = static_cast<double>(sum) / count;
+                                    ProgressBarLLM->progress = static_cast<double>(sum) / count;
                                 }
-                                std::cout << "Task Progress: " << ProgressBar2->progress << std::endl;
+                                std::cout << "Task Progress: " << ProgressBarLLM->progress << std::endl;
                             }
-                            if (ProgressBar2->progress >= 1.0) {
+                            if (ProgressBarLLM->progress >= 1.0) {
                                 stopTimer();
                             }
                         }

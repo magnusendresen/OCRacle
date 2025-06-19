@@ -1,7 +1,9 @@
 #pragma once
 
 #include "AnimationWindow.h"
+#include "App.h"
 #include <string>
+
 
 
 class ProgressBar {
@@ -14,8 +16,8 @@ ProgressBar(TDT4102::AnimationWindow& win, int xPos, int yPos, std::string Title
     std::string Title;
     int xPos;
     int yPos;
-    int width  = 800;
-    int height = 40;
+    int width  = App::buttonWidth * 4 + App::pad * 3 - 18;
+    int height = App::buttonHeight / 3;
 
 private:
     TDT4102::AnimationWindow& window;
