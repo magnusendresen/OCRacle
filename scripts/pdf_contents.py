@@ -109,40 +109,40 @@ def build_container_string(containers: List[Dict]) -> str:
 
 
 async def confirm_task_text(
-    containers: List[Dict],
-    ranges: List[Tuple[int, int]],
-    task_nums: List[str],
+    containers: List[Dict], ranges: List[Tuple[int, int]]
 ) -> List[int]:
-    """Randomly sample container ranges and confirm the task number via LLM.
+    """Check the first and last three container ranges for tasks.
 
-    Returns a list of indices that were marked as mismatches."""
+    Returns a list of container indices belonging to ranges that do not
+    contain a task."""
 
-    if not ranges or not task_nums:
-        return
+    if not ranges:
+        return []
 
-    sample_count = max(3, len(ranges) // 3)
-    sample_indices = random.sample(range(len(ranges)), min(sample_count, len(ranges)))
+    check_indices = list(range(min(3, len(ranges))))
+    tail_start = max(len(ranges) - 3, 3)
+    if tail_start < len(ranges):
+        check_indices.extend(range(tail_start, len(ranges)))
 
-    mismatches: List[int] = []
-    for idx in sample_indices:
+    remove: List[int] = []
+    for idx in check_indices:
         start, end = ranges[idx]
         text = build_container_string(containers[start:end])
         prompt = (
             PROMPT_CONFIG
-            + f"Does the following text belong to task {task_nums[idx]}? "
-            "Answer with yes or no. Text:" + text
+            + "Inneholder denne teksten en oppgave? Svar kun med 1 for ja eller 0 for nei. Tekst:"
+            + text
         )
         ans = await prompt_to_text.async_prompt_to_text(
-            prompt, max_tokens=10, is_num=False, max_len=20
+            prompt, max_tokens=5, is_num=True, max_len=5
         )
-        ans_str = str(ans).strip().lower()
-        result = "yes" in ans_str or "ja" in ans_str
-        status = "CONFIRMED" if result else "MISMATCH"
-        print(f"[CHECK] Task {task_nums[idx]} -> {status} ({ans_str})")
-        if not result:
-            mismatches.append(idx)
+        keep = int(ans) == 1 if ans is not None else True
+        status = "KEEP" if keep else "DROP"
+        print(f"[CHECK] Range {idx} -> {status} ({ans})")
+        if not keep:
+            remove.extend(range(start, end))
 
-    return mismatches
+    return sorted(set(remove))
 
 
 async def _query_markers(prompt: str) -> List[int]:
