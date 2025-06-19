@@ -32,8 +32,8 @@ public:
 
     TDT4102::Button *startWidget;
     TDT4102::Button *startButton;
-    TDT4102::TextBox *GoogleVisionIndicator;
-    TDT4102::TextBox *DeepSeekIndicator;
+    TDT4102::Button *GoogleVisionIndicator;
+    TDT4102::Button *DeepSeekIndicator;
 
     TDT4102::Button *examUpload;
     TDT4102::TextBox *selectedExam;

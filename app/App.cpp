@@ -41,8 +41,8 @@ void App::GUI() {
     startButton = new TDT4102::Button({pad, pad}, buttonWidth, buttonHeight, "Start Processing");
     
     startButton->setButtonColor(TDT4102::Color::dark_seagreen);
-    GoogleVisionIndicator = new TDT4102::TextBox({pad, pad * 6}, buttonWidth, buttonHeight, "   Google Vision");
-    DeepSeekIndicator = new TDT4102::TextBox({pad, pad * 11}, buttonWidth, buttonHeight, "   DeepSeek");
+    GoogleVisionIndicator = new TDT4102::Button({pad, pad * 6}, buttonWidth, buttonHeight, "Google Vision");
+    DeepSeekIndicator = new TDT4102::Button({pad, pad * 11}, buttonWidth, buttonHeight, "DeepSeek");
     
     examUpload = new TDT4102::Button({pad * 2 + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Upload Exam");
     solutionUpload = new TDT4102::Button({pad * 3 + static_cast<int>(buttonWidth) * 2, pad}, buttonWidth, buttonHeight / 2, "Upload Solution");
@@ -303,8 +303,9 @@ void App::calculateProgress() {
                             if (!GoogleVisionIndicatorLine.empty()) {
                                 for (char c : GoogleVisionIndicatorLine) {
                                     if (c == '1') {
-                                        GoogleVisionIndicator->setBoxColor(TDT4102::Color::green);
-                                        GoogleVisionIndicator->setTextColor(TDT4102::Color::white);
+                                        GoogleVisionIndicator->setButtonColor(TDT4102::Color::green);
+                                        GoogleVisionIndicator->setButtonColorActive(TDT4102::Color::green);
+                                        GoogleVisionIndicator->setLabelColor(TDT4102::Color::white);
                                         break;
                                     }
                                 }
@@ -314,8 +315,9 @@ void App::calculateProgress() {
                             if (!DeepSeekIndicatorLine.empty()) {
                                 for (char c : DeepSeekIndicatorLine) {
                                     if (c == '1') {
-                                        DeepSeekIndicator->setBoxColor(TDT4102::Color::green);
-                                        DeepSeekIndicator->setTextColor(TDT4102::Color::white);
+                                        DeepSeekIndicator->setButtonColor(TDT4102::Color::green);
+                                        DeepSeekIndicator->setButtonColorActive(TDT4102::Color::green);
+                                        DeepSeekIndicator->setLabelColor(TDT4102::Color::white);
 
                                         break;
                                     }
