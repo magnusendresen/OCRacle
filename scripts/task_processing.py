@@ -64,6 +64,7 @@ class Exam:
     code: Optional[str] = None
     total_tasks: int = 0
     exam_topics: List[str] = field(default_factory=list)
+    task_numbers: List[str] = field(default_factory=list)
 
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
@@ -226,18 +227,6 @@ async def get_exam_info(ocr_text: str) -> Exam:
     print("[INFO] | Set exam version abbreviation to: " + version_abbr)
     write_progress({5: exam.exam_version or ""})
 
-    exam.total_tasks = (
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG
-            + load_prompt("get_total_tasks")
-            + ocr_text,
-            max_tokens=1000,
-            is_num=True,
-            max_len=10
-        )
-    ) or 0
-    print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
-    write_progress({6: str(exam.total_tasks)})
 
     exam.exam_topics = (
         await prompt_to_text.async_prompt_to_text(
@@ -255,16 +244,19 @@ async def get_exam_info(ocr_text: str) -> Exam:
         exam.exam_topics = []
     print(f"[DEEPSEEK] | Topics found in exam: {exam.exam_topics}")
 
-    global total_task_count
-    total_task_count = exam.total_tasks
-
-    await extract_images.extract_images_with_tasks(
-        pdf_path=pdf_dir,
+    assigned_tasks = await extract_images.main_async(
+        str(pdf_path),
         subject=exam.subject,
         version=exam.exam_version,
-        output_folder=None,
-        expected_tasks=[str(i) for i in range(1, exam.total_tasks + 1)],
+        expected_tasks=None,
     )
+    exam.task_numbers = assigned_tasks
+    exam.total_tasks = len(assigned_tasks)
+    print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
+    write_progress({6: str(exam.total_tasks)})
+
+    global total_task_count
+    total_task_count = exam.total_tasks
 
 
     return exam
@@ -385,7 +377,7 @@ async def main_async(ocr_text: str):
 
     tasks = [
         asyncio.create_task(process_task(str(task), ocr_text, exam_template))
-        for task in range(1, exam_template.total_tasks + 1)
+        for task in exam_template.task_numbers
     ]
     results = await asyncio.gather(*tasks)
 
