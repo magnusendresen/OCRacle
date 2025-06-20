@@ -1,5 +1,6 @@
 import prompt_to_text
 import extract_images
+import task_boundaries
 from project_config import *
 
 import asyncio
@@ -9,7 +10,7 @@ import re
 import difflib
 from pathlib import Path
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Tuple
 from copy import deepcopy
 from collections import defaultdict
 
@@ -65,6 +66,9 @@ class Exam:
     total_tasks: int = 0
     exam_topics: List[str] = field(default_factory=list)
     task_numbers: List[str] = field(default_factory=list)
+    pdf_path: Optional[str] = None
+    containers: List[Dict] = field(default_factory=list)
+    task_ranges: List[Tuple[int, int]] = field(default_factory=list)
 
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
@@ -244,14 +248,14 @@ async def get_exam_info(ocr_text: str) -> Exam:
         exam.exam_topics = []
     print(f"[DEEPSEEK] | Topics found in exam: {exam.exam_topics}")
 
-    assigned_tasks = await extract_images.main_async(
-        str(pdf_path),
-        subject=exam.subject,
-        version=exam.exam_version,
-        expected_tasks=None,
-    )
+    from task_boundaries import detect_task_boundaries
+
+    containers, ranges, assigned_tasks = await detect_task_boundaries(str(pdf_path))
+    exam.containers = containers
+    exam.task_ranges = ranges
     exam.task_numbers = assigned_tasks
     exam.total_tasks = len(assigned_tasks)
+    exam.pdf_path = str(pdf_path)
     print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
     write_progress({6: str(exam.total_tasks)})
 
@@ -261,14 +265,48 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     return exam
 
-async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
+async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
 
-    task_output = str(ocr_text)
     valid = 0
-    images = 0
+
+    # determine which containers belong to this task
+    try:
+        idx = exam.task_numbers.index(task_number)
+    except ValueError:
+        idx = 0
+
+    if idx < len(exam.task_ranges):
+        task_range = exam.task_ranges[idx]
+    else:
+        task_range = (0, 0)
+
+    from project_config import TEMP_DIR
+
+    # extract relevant images to temporary folder
+    await extract_images.extract_task_images(
+        exam.pdf_path,
+        exam.containers,
+        task_range,
+        task_number,
+        exam.subject,
+        exam.exam_version,
+        output_folder=str(TEMP_DIR),
+    )
+
+    image_dir = TEMP_DIR / exam.subject / exam.exam_version / task_number
+    ocr_parts = []
+    if image_dir.exists():
+        for img_path in sorted(image_dir.glob("*.png")):
+            with open(img_path, "rb") as f:
+                img_bytes = f.read()
+            text = await asyncio.to_thread(task_boundaries.detect_text, img_bytes)
+            ocr_parts.append(text)
+        task_exam.images = [str(p.relative_to(PROJECT_ROOT)) for p in image_dir.glob("*.png")]
+
+    task_output = "\n".join(ocr_parts)
 
     task_output = str(
         await prompt_to_text.async_prompt_to_text(
@@ -279,29 +317,6 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
         )
     )
     task_status[task_number] = 1
-    write_progress()
-
-    images = int(
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG + load_prompt("detect_images") + task_output,
-            max_tokens=1000,
-            is_num=True,
-            max_len=2,
-        )
-    )
-    if images > 0:
-        print(f"[DEEPSEEK] | Images were found in task {task_number}.")
-        task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
-        if task_dir.exists():
-            found_images = sorted(task_dir.glob("*.png"))
-            task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
-        else:
-            task_exam.images = []
-        print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
-    else:
-        print(f"[DEEPSEEK] | No images were found in task {task_number}.")
-        task_exam.images = []
-    task_status[task_number] = 2
     write_progress()
 
     points_str = await prompt_to_text.async_prompt_to_text(
@@ -376,7 +391,7 @@ async def main_async(ocr_text: str):
     print(f"[DEEPSEEK] | Started processing all tasks")
 
     tasks = [
-        asyncio.create_task(process_task(str(task), ocr_text, exam_template))
+        asyncio.create_task(process_task(str(task), exam_template))
         for task in exam_template.task_numbers
     ]
     results = await asyncio.gather(*tasks)
