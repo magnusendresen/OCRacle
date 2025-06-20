@@ -1,5 +1,8 @@
 import prompt_to_text
 import extract_images
+import task_boundaries
+import ocr_pdf
+import text_normalization
 from project_config import *
 
 import asyncio
@@ -12,6 +15,7 @@ from dataclasses import dataclass, field
 from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
+
 
 PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
@@ -168,7 +172,22 @@ def get_subject_code_variations(subject: str):
         print(f"[INFO] | Ingen matchende emnekoder i JSON.")
         return []
 
-async def get_exam_info(ocr_text: str) -> Exam:
+
+async def _ocr_full_pdf(pdf_path: Path) -> str:
+    images = ocr_pdf.pdf_to_images(str(pdf_path))
+    texts = []
+    for image in images:
+        if image:
+            page_text = await asyncio.to_thread(ocr_pdf.detect_text, image)
+        else:
+            page_text = ""
+        texts.append(page_text)
+    all_text = ""
+    for idx, page_text in enumerate(texts, start=1):
+        all_text += f"\n\n=== PAGE {idx} ===\n\n{page_text}"
+    return text_normalization.normalize_text(all_text)
+
+async def get_exam_info(ocr_text: str, pdf_path: Path) -> Exam:
     exam = Exam()
 
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
@@ -193,22 +212,6 @@ async def get_exam_info(ocr_text: str) -> Exam:
     exam.matching_codes = get_subject_code_variations(exam.subject)
     write_progress({4: exam.subject or ""})
     
-    pdf_dir = ""
-    try:
-        with DIR_FILE.open("r", encoding="utf-8") as dir_file:
-            dir_data = json.load(dir_file)
-            pdf_dir = dir_data.get("exam", "").strip()
-    except Exception as e:
-        print(f"[ERROR] Could not read dir.json: {e}")
-        pdf_dir = ""
-
-    pdf_path = Path(pdf_dir)
-    if not pdf_path.is_absolute():
-        candidate = PDF_DIR / pdf_path
-        if candidate.exists():
-            pdf_path = candidate
-    if not pdf_path.exists():
-        print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
     exam_raw_version = (
@@ -244,14 +247,15 @@ async def get_exam_info(ocr_text: str) -> Exam:
         exam.exam_topics = []
     print(f"[DEEPSEEK] | Topics found in exam: {exam.exam_topics}")
 
-    assigned_tasks = await extract_images.main_async(
+    task_info = await task_boundaries.create_task_images(str(pdf_path))
+    exam.task_numbers = [t["number"] for t in task_info]
+    exam.total_tasks = len(exam.task_numbers)
+    await extract_images.main_async(
         str(pdf_path),
         subject=exam.subject,
         version=exam.exam_version,
-        expected_tasks=None,
+        expected_tasks=exam.task_numbers,
     )
-    exam.task_numbers = assigned_tasks
-    exam.total_tasks = len(assigned_tasks)
     print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
     write_progress({6: str(exam.total_tasks)})
 
@@ -261,12 +265,24 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     return exam
 
-async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
+async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
 
-    task_output = str(ocr_text)
+    task_output = ""
+    temp_dir = Path(__file__).parent / "temp"
+    bdata = task_boundaries.load_boundaries(temp_dir)
+    if bdata:
+        _, assigned, files = bdata
+        for num, fname in zip(assigned, files):
+            if str(num) == str(task_number):
+                img_path = temp_dir / fname
+                if img_path.exists():
+                    with open(img_path, "rb") as f:
+                        img_bytes = f.read()
+                    task_output = await asyncio.to_thread(ocr_pdf.detect_text, img_bytes)
+                break
     valid = 0
     images = 0
 
@@ -371,12 +387,29 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
         print(f"[DEEPSEEK] [TASK {task_number}] | Task approved.\n")
         return task_exam
 
-async def main_async(ocr_text: str):
-    exam_template = await get_exam_info(ocr_text)
+async def main_async():
+    pdf_path = None
+    try:
+        with DIR_FILE.open("r", encoding="utf-8") as f:
+            dir_data = json.load(f)
+            pdf_path = dir_data.get("exam", "").strip()
+    except Exception:
+        pdf_path = ""
+    path_obj = Path(pdf_path)
+    if not path_obj.is_absolute():
+        candidate = PDF_DIR / path_obj
+        if candidate.exists():
+            path_obj = candidate
+    if not path_obj.exists():
+        print(f"[ERROR] File does not exist: {path_obj}")
+        return []
+
+    ocr_text = await _ocr_full_pdf(path_obj)
+    exam_template = await get_exam_info(ocr_text, path_obj)
     print(f"[DEEPSEEK] | Started processing all tasks")
 
     tasks = [
-        asyncio.create_task(process_task(str(task), ocr_text, exam_template))
+        asyncio.create_task(process_task(str(task), exam_template))
         for task in exam_template.task_numbers
     ]
     results = await asyncio.gather(*tasks)
@@ -396,9 +429,8 @@ async def main_async(ocr_text: str):
     return results
 
 
-def main(ocr_text: str):
-    return asyncio.run(main_async(ocr_text))
+def main():
+    return asyncio.run(main_async())
 
 if __name__ == "__main__":
-    ocr_input = sys.stdin.read()
-    main(ocr_input)
+    main()
