@@ -130,7 +130,7 @@ async def confirm_task_text(
         ans = await prompt_to_text.async_prompt_to_text(
             prompt, max_tokens=5, is_num=True, max_len=5
         )
-        keep = int(ans) == 1 if ans is not None else True
+        keep = str(ans).strip() == "1"
         status = "KEEP" if keep else "DROP"
         print(f"[CHECK] Range {idx} -> {status} ({ans})")
         if not keep:
@@ -489,6 +489,8 @@ async def extract_images_with_tasks(
 
     doc.close()
 
+    return assigned
+
 
 async def main_async(
     pdf_path: str,
@@ -496,7 +498,7 @@ async def main_async(
     version: str = "1",
     expected_tasks: Optional[List[str]] = None,
 ):
-    await extract_images_with_tasks(pdf_path, subject, version, expected_tasks=expected_tasks)
+    return await extract_images_with_tasks(pdf_path, subject, version, expected_tasks=expected_tasks)
 
 
 if __name__ == "__main__":
