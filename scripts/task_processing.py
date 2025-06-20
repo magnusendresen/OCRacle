@@ -1,6 +1,9 @@
 import prompt_to_text
 import extract_images
+import task_boundaries
+import ocr_pdf
 from project_config import *
+import os
 
 import asyncio
 import json
@@ -65,6 +68,7 @@ class Exam:
     total_tasks: int = 0
     exam_topics: List[str] = field(default_factory=list)
     task_numbers: List[str] = field(default_factory=list)
+    task_ocr_images: Dict[str, List[str]] = field(default_factory=dict)
 
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
@@ -168,6 +172,52 @@ def get_subject_code_variations(subject: str):
         print(f"[INFO] | Ingen matchende emnekoder i JSON.")
         return []
 
+async def ocr_pdf_to_text() -> str:
+    if not DIR_FILE.exists():
+        print(f"[ERROR] Could not find dir.json at {DIR_FILE}")
+        return ""
+    try:
+        with DIR_FILE.open("r", encoding="utf-8") as f:
+            dir_data = json.load(f)
+    except Exception as e:
+        print(f"[ERROR] Could not read dir.json: {e}")
+        return ""
+
+    pdf_path = dir_data.get("exam", "").strip()
+    path_obj = Path(pdf_path)
+    if not path_obj.is_absolute():
+        candidate = PDF_DIR / path_obj
+        if candidate.exists():
+            path_obj = candidate
+    if not path_obj.exists():
+        print(f"[ERROR] File does not exist: {path_obj}")
+        return ""
+    pdf_path = str(path_obj)
+
+    print(f"\n[INFO] Selected file: {os.path.basename(pdf_path)}\n")
+
+    images = ocr_pdf.pdf_to_images(pdf_path)
+    if not images:
+        print("[ERROR] No images could be generated from the PDF. Exiting...")
+        return ""
+
+    ocr_progress = [0] * len(images)
+    ocr_pdf.update_progress_line2("".join(str(x) for x in ocr_progress))
+
+    print("[INFO] Starting text extraction from PDF pages...\n")
+    tasks = [
+        asyncio.create_task(asyncio.to_thread(ocr_pdf.detect_text, img))
+        for img in images
+    ]
+    results = await asyncio.gather(*tasks)
+
+    all_text = ""
+    for idx, page_text in enumerate(results, start=1):
+        all_text += f"\n\n=== PAGE {idx} ===\n\n{page_text}"
+
+    print("\n[INFO] Text extraction complete! Returning collected text.\n")
+    return all_text
+
 async def get_exam_info(ocr_text: str) -> Exam:
     exam = Exam()
 
@@ -244,14 +294,11 @@ async def get_exam_info(ocr_text: str) -> Exam:
         exam.exam_topics = []
     print(f"[DEEPSEEK] | Topics found in exam: {exam.exam_topics}")
 
-    assigned_tasks = await extract_images.main_async(
-        str(pdf_path),
-        subject=exam.subject,
-        version=exam.exam_version,
-        expected_tasks=None,
-    )
+    assigned_tasks, task_images, containers, task_map = await task_boundaries.prepare_task_images(str(pdf_path))
+    await extract_images.extract_task_figures(str(pdf_path), containers, task_map, exam.subject, exam.exam_version)
     exam.task_numbers = assigned_tasks
     exam.total_tasks = len(assigned_tasks)
+    exam.task_ocr_images = task_images
     print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
     write_progress({6: str(exam.total_tasks)})
 
@@ -261,23 +308,21 @@ async def get_exam_info(ocr_text: str) -> Exam:
 
     return exam
 
-async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
+async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
 
-    task_output = str(ocr_text)
     valid = 0
     images = 0
 
-    task_output = str(
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG + load_prompt("extract_task_text").format(task_number=task_number) + task_output,
-            max_tokens=1000,
-            is_num=False,
-            max_len=2000,
-        )
-    )
+    ocr_images = exam.task_ocr_images.get(task_number, [])
+    parts = []
+    for img_path in ocr_images:
+        with open(img_path, "rb") as f:
+            img_bytes = f.read()
+        parts.append(await asyncio.to_thread(ocr_pdf.detect_text, img_bytes))
+    task_output = "\n".join(parts)
     task_status[task_number] = 1
     write_progress()
 
@@ -376,7 +421,7 @@ async def main_async(ocr_text: str):
     print(f"[DEEPSEEK] | Started processing all tasks")
 
     tasks = [
-        asyncio.create_task(process_task(str(task), ocr_text, exam_template))
+        asyncio.create_task(process_task(str(task), exam_template))
         for task in exam_template.task_numbers
     ]
     results = await asyncio.gather(*tasks)
