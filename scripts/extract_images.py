@@ -122,7 +122,9 @@ async def confirm_task_text(
         text = build_container_string(containers[start:end])
         prompt = (
             PROMPT_CONFIG
-            + "Inneholder denne teksten en oppgave? Svar kun med 1 for ja eller 0 for nei. Tekst:"
+            + "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
+            + "Does this text very clearly include a task, or is it unrelated to a task? "
+            + "If it includes a task, respond with with 1, if it is unrelated to a task respond with 0. "
             + text
         )
         ans = await prompt_to_text.async_prompt_to_text(

@@ -4,7 +4,7 @@ Hva er de viktigste temaene i denne teksten?
   Eksempler på temaer fra noen eksamner, disse er for å gi deg en idé av inndelingen:
   - Fysikk: Bevegelse, Mekanikk, Sirkelbevegelse, Rotasjonsmekanikk, Programmering, Fluidmekanikk, Svingninger, Bølgefysikk, Energi og arbeid, Impuls og støt.
   - Matte: Partiell derivasjon, Kritiske Punkt, Retningsderivert og Gradient, Funksjonsforståelse, Taylor 1D, Fourierrekker, PDE, Fouriertransformasjon, Konvolusjon, DFT, IDFT.
-  - Programmerings og numerikk: Matematiske operasjoner, Funksjoner, Sammenligningsoperatorer, Lister og indekser, Numpy og matriser, Analyse av listedata, Numerisk derivasjon, Numeriske metoder, Newtons metode, Differensialligning, Konvergensrate, Integrasjon, Numerisk derivasjon, Numerisk Integrasjon med Trapesmetoden, Eulers metode, Fikspunktiterasjon, Absolutt og relativ feil.
+  - Programmering og numerikk: Matematiske operasjoner, Funksjoner, Sammenligningsoperatorer, Lister og indekser, Numpy og matriser, Analyse av listedata, Numerisk derivasjon, Numeriske metoder, Newtons metode, Differensialligning, Konvergensrate, Integrasjon, Numerisk derivasjon, Numerisk Integrasjon med Trapesmetoden, Eulers metode, Fikspunktiterasjon, Absolutt og relativ feil.
   Svar kun med temaene, ikke med noe annet.
   If the text is written in multiple languages, respond with the topics in norwegian bokmål.
   Her er teksten:
