@@ -125,16 +125,21 @@ async def confirm_task_text(
             + "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
             + "Does this text very clearly include a task, or is it unrelated to a task? "
             + "If it includes a task, respond with with 1, if it is unrelated to a task respond with 0. "
+            + "Do not reply with multiple numbers, only a single 1 or 0. "
+            + "Here is the text:"
             + text
         )
         ans = await prompt_to_text.async_prompt_to_text(
-            prompt, max_tokens=5, is_num=True, max_len=5
+            prompt, max_tokens=5, is_num=False, max_len=2
         )
-        keep = str(ans).strip() == "1"
-        status = "KEEP" if keep else "DROP"
-        print(f"[CHECK] Range {idx} -> {status} ({ans})")
-        if not keep:
+        print("\n\n\n [KEEP/DROP] " + ans + "\n\n\n")
+
+
+        if str(ans).strip() == "0":
+            print(f"[CHECK] Range {idx} -> DROP ({ans})")
             remove.extend(range(start, end))
+        else:
+            print(f"[CHECK] Range {idx} -> KEEP ({ans})")
 
     return sorted(set(remove))
 

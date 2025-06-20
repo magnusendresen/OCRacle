@@ -1,4 +1,6 @@
 How many tasks are in this text?
   Respond only with the total number of tasks as a single number.
+  Make sure to look as the text in its entirety to determine how many tasks are in the text.
+  Don't lose any tasks or make up any.
   Do not include any symbols or words.
   Here is the text:

@@ -1,6 +1,15 @@
 What is the subject code for this exam?
-  Respond only with the singular formatted subject code (e.g., IFYT1000).
-  If there are variation in the last letter (e.g., IMAA, IMAG, IMAT), replace the variating letter with an X instead => IMAX.
-  If there are variation in number(s), e.g 2002, 2012, 2022 - replace the variating number(s) with an Y instead => 20Y2.
-  Only replace a number with a letter if the subject code clearly has variations.
+  The subject code may look something like this: IFYT1000, IMAA2022, TDT4102, INGT1002, MAST2200.
+
+  In some cases there will be variations of the subject code in the text like this: IFYA1000, IFYG1000, IFYT1000 - 
+which means that the subject code is for Ålesund, Gjøvik and Trondheim in that order.
+  In the cases where variations like explained above occur, replace the variating letter (e.g. A, G, T) with a capital X.
+
+  There may also occur variations in the numbers in the subject code like this: IMAA2012, IMAA2022, IMAG2012, IMAG2022, IMAT2012 IMAT2022 - here you will do as instructed above, as well as remove the variating number (in this case the 3rd number) with a Y.
+
+
+  Respond only with the singular formatted subject code (e.g. from above: IFYX1000, IMAX20Y2).
+
+  Only replace a number or letter with if that symbol clearly has variations.
+
   Here is the text from the OCR:
