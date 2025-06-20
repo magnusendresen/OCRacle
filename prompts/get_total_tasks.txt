@@ -1,5 +1,4 @@
 How many tasks are in this text?
-  Respond with each task number separated by a comma.
-  Only include the task number, do not account for subtasks, only the main task number.
-  Do not include any symbols like ) or - or similar.
+  Respond only with the total number of tasks as a single number.
+  Do not include any symbols or words.
   Here is the text:
