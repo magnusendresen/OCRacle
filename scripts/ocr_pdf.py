@@ -4,6 +4,7 @@ import asyncio
 from google.cloud import vision
 from tqdm import tqdm
 import sys
+from pathlib import Path
 from project_config import *
 import json
 
@@ -120,10 +121,15 @@ async def main_async():
         return ""
 
     pdf_path = dir_data.get("exam", "").strip()
-
-    if not os.path.exists(pdf_path):
-        print(f"[ERROR] File does not exist: {pdf_path}")
+    path_obj = Path(pdf_path)
+    if not path_obj.is_absolute():
+        candidate = PDF_DIR / path_obj
+        if candidate.exists():
+            path_obj = candidate
+    if not path_obj.exists():
+        print(f"[ERROR] File does not exist: {path_obj}")
         return ""
+    pdf_path = str(path_obj)
 
     print(f"\n[INFO] Selected file: {os.path.basename(pdf_path)}\n")
 

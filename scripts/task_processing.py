@@ -25,6 +25,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 # Paths and global state
 JSON_PATH = EXAM_CODES_JSON
 task_status = defaultdict(lambda: 0)
+total_task_count = 0
 
 def load_emnekart_from_json(json_path: Path):
     """
@@ -61,7 +62,7 @@ class Exam:
     task_text: Optional[str] = None
     images: List[str] = field(default_factory=list)
     code: Optional[str] = None
-    total_tasks: List[str] = field(default_factory=list)
+    total_tasks: int = 0
     exam_topics: List[str] = field(default_factory=list)
 
 
@@ -80,7 +81,7 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
             data = {}
 
         if updates is None:
-            status_str = ''.join(str(task_status[t]) for t in total_tasks)
+            status_str = ''.join(str(task_status[t]) for t in range(1, total_task_count + 1))
             updates = {3: status_str}
 
         for idx, text in updates.items():
@@ -191,7 +192,7 @@ async def get_exam_info(ocr_text: str) -> Exam:
     exam.matching_codes = get_subject_code_variations(exam.subject)
     write_progress({4: exam.subject or ""})
     
-    pdf_dir = None
+    pdf_dir = ""
     try:
         with DIR_FILE.open("r", encoding="utf-8") as dir_file:
             dir_data = json.load(dir_file)
@@ -199,6 +200,15 @@ async def get_exam_info(ocr_text: str) -> Exam:
     except Exception as e:
         print(f"[ERROR] Could not read dir.json: {e}")
         pdf_dir = ""
+
+    pdf_path = Path(pdf_dir)
+    if not pdf_path.is_absolute():
+        candidate = PDF_DIR / pdf_path
+        if candidate.exists():
+            pdf_path = candidate
+    if not pdf_path.exists():
+        print(f"[WARNING] PDF file not found: {pdf_path}")
+    pdf_dir = str(pdf_path)
 
     exam_raw_version = (
         await prompt_to_text.async_prompt_to_text(
@@ -222,12 +232,11 @@ async def get_exam_info(ocr_text: str) -> Exam:
             + load_prompt("get_total_tasks")
             + ocr_text,
             max_tokens=1000,
-            is_num=False,
-            max_len=250
+            is_num=True,
+            max_len=10
         )
-    )
-    exam.total_tasks = [task.strip() for task in exam.total_tasks.split(",")]
-    print(f"[DEEPSEEK] | Tasks found for processing: {exam.total_tasks}")
+    ) or 0
+    print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
     write_progress({6: str(exam.total_tasks)})
 
     exam.exam_topics = (
@@ -246,15 +255,15 @@ async def get_exam_info(ocr_text: str) -> Exam:
         exam.exam_topics = []
     print(f"[DEEPSEEK] | Topics found in exam: {exam.exam_topics}")
 
-    global total_tasks
-    total_tasks = exam.total_tasks
+    global total_task_count
+    total_task_count = exam.total_tasks
 
     await extract_images.extract_images_with_tasks(
         pdf_path=pdf_dir,
         subject=exam.subject,
         version=exam.exam_version,
         output_folder=None,
-        expected_tasks=exam.total_tasks,
+        expected_tasks=[str(i) for i in range(1, exam.total_tasks + 1)],
     )
 
 
@@ -374,10 +383,9 @@ async def main_async(ocr_text: str):
     exam_template = await get_exam_info(ocr_text)
     print(f"[DEEPSEEK] | Started processing all tasks")
 
-    # Iterate through string identifiers
     tasks = [
-        asyncio.create_task(process_task(task, ocr_text, exam_template))
-        for task in exam_template.total_tasks
+        asyncio.create_task(process_task(str(task), ocr_text, exam_template))
+        for task in range(1, exam_template.total_tasks + 1)
     ]
     results = await asyncio.gather(*tasks)
 
