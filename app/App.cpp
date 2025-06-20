@@ -54,24 +54,25 @@ void App::GUI() {
     selectedFormulaSheet = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad + buttonHeight / 4 + 2}, buttonWidth, buttonHeight / 2, "No file selected.");
     
     for (auto* box : {selectedExam, selectedSolution, selectedFormulaSheet}) {
-        for (auto [setter, value] : {
-            std::pair{&TDT4102::TextBox::setBoxColor, TDT4102::Color::transparent},
-            std::pair{&TDT4102::TextBox::setBorderColor, TDT4102::Color::transparent},
-            std::pair{&TDT4102::TextBox::setTextColor, TDT4102::Color{0x323232}
-        }
-    }) {
-        (box->*setter)(value);
+        // Set box color
+        box->setBoxColor(TDT4102::Color::transparent);
+        // Set border color
+        box->setBorderColor(TDT4102::Color::transparent);
+        // Set text color
+        box->setTextColor(TDT4102::Color{0x323232});
+        // Set size
+        // box->setFontSize(20);
     }
-}
 
-ignoredTopics = new TDT4102::TextInput({pad * 2 + static_cast<int>(buttonWidth), pad * 6}, pad * 2 + buttonWidth * 3, buttonHeight / 2, "Ignored topics: ");
+    ignoredTopics = new TDT4102::TextInput({pad * 2 + static_cast<int>(buttonWidth), pad * 6}, pad * 2 + buttonWidth * 3, buttonHeight / 2, "Ignored topics: ");
 
-examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
-examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
+    examSubject = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
+    examSubjectInput = new TDT4102::TextInput({2*pad + static_cast<int>(buttonWidth), pad * 11}, buttonWidth, buttonHeight / 2, "Subject: ");
 
-examVersion = new TDT4102::TextBox({pad * 3 + static_cast<int>(buttonWidth) * 2, pad * 11}, buttonWidth, buttonHeight/2, "Version: ");
+    examVersion = new TDT4102::TextBox({pad * 3 + static_cast<int>(buttonWidth) * 2, pad * 11}, buttonWidth, buttonHeight/2, "Version: ");
 
-examAmount = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad*11}, buttonWidth, buttonHeight/2, "Tasks: ");
+
+    examAmount = new TDT4102::TextBox({pad * 4 + static_cast<int>(buttonWidth) * 3, pad*11}, buttonWidth, buttonHeight/2, "Tasks: ");
 
 
 
@@ -165,7 +166,7 @@ void App::pdfHandling(TDT4102::TextBox* chosenFile) {
         if (chosenFile == selectedExam) {
             startWidget->setVisible(false);
             startButton->setVisible(true);
-            startButton->setButtonColor(TDT4102::Color::dark_green);
+            startButton->setButtonColor(TDT4102::Color::medium_sea_green);
         }
 
         // For å kunne skrive æøå i console
@@ -194,8 +195,16 @@ void App::pdfHandling(TDT4102::TextBox* chosenFile) {
 
         std::cout << "[INFO] Valgt fil: " << selectedFile << std::endl;
 
+        std::string selectedFileName;
+        for (char& c : selectedFile) {
+            if (c == '\\' || c == '/') {
+                selectedFileName.clear();
+            } else {
+                selectedFileName += c;
+            }
+        }
         if (chosenFile) {
-            chosenFile->setText(selectedFile);
+            chosenFile->setText(selectedFileName);
         }
 
         // Update dir.json with selected file paths

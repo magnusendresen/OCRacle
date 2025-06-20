@@ -44,7 +44,9 @@ public:
 
     TDT4102::TextBox *examSubject;
     TDT4102::TextInput *examSubjectInput;
+    
     TDT4102::TextBox *examVersion;
+    
     TDT4102::TextBox *examAmount;
 
     TDT4102::TextInput *ignoredTopics;

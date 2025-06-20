@@ -9,7 +9,8 @@ __pycache__/
 *.pyc
 
 # === TDT4102-prosjektmal-filer ===
-subprojects/           # Eksterne dependencies fra template
+subprojects/*
+!subprojects/animationwindow/
 .clangd               # LSP-config fra NTNU-template
 compile_commands.json # Autogenerert av Meson/Clang
 
