@@ -1,4 +1,4 @@
-import ocr_pdf
+import asyncio
 import text_normalization
 import task_processing
 import object_to_json
@@ -7,7 +7,7 @@ from project_config import *
 def main():
     """Run the full OCR and task processing workflow."""
     # Step 1: Run OCR PDF to get raw text
-    rawtext = ocr_pdf.main()
+    rawtext = asyncio.run(task_processing.ocr_pdf_to_text())
 
     # Step 2: Normalize text
     rawtext = text_normalization.normalize_text(rawtext)
