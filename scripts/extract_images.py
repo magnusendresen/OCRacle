@@ -16,6 +16,7 @@ from google.cloud import vision
 import prompt_to_text
 from project_config import IMG_DIR, PROMPT_CONFIG, PROGRESS_FILE
 import json
+import time
 
 json_path = os.getenv("OCRACLE_JSON_PATH")
 if not json_path or not os.path.exists(json_path):
@@ -98,11 +99,16 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
     return containers
 
 
-def build_container_string(containers: List[Dict]) -> str:
+def build_container_string_with_identifier(containers: List[Dict]) -> str:
     return "".join(
         f"\n\n=== CONTAINER {idx} ({c.get('type', 'unknown')}) ===\n{c.get('text', '')}"
         for idx, c in enumerate(containers)
     )
+
+def build_container_string(containers: List[Dict]) -> str:
+    return "\n\n".join(c.get("text", "") for c in containers)
+
+
 
 
 async def confirm_task_text(
@@ -120,15 +126,23 @@ async def confirm_task_text(
     for idx in check_indices:
         start, end = ranges[idx]
         text = build_container_string(containers[start:end])
+        """
+        print(f"\n\n\n Batch {idx}:\n{text}\n\n\n")
+        time.sleep(15)
+        """
         prompt = (
             PROMPT_CONFIG
             + "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
-            + "Does this text very clearly include a task, or is it unrelated to a task? "
-            + "If it includes a task, respond with with 1, if it is unrelated to a task respond with 0. "
+            + "Does this text very clearly include a task, or is it unrelated to a task - e.g. exam administration information? "
+            + "Just because the text includes a number or the word 'task' (in any language) does not mean it is a task. "
+            + "Tasks may be short or long, but you should be able to identify them by their content. "
+            + "If the text includes a lot of text that is not related to a task, such as exam instructions, it is likely not a task. "
+            + "If it includes a task, respond with with 1, if not respond with 0. "
             + "Do not reply with multiple numbers, only a single 1 or 0. "
             + "Here is the text:"
             + text
         )
+        
         ans = await prompt_to_text.async_prompt_to_text(
             prompt, max_tokens=5, is_num=False, max_len=2
         )
@@ -157,13 +171,14 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
-        "Identify every container number that clearly marks the start of a new task or subtask, "
+        "Identify the number of every container that clearly marks the start of a new TASK. "
         "For example phrases beginning with 'Oppgave 1', 'Oppgave 2a' and similar. "
         "In some cases, the beginning of a task may just be indicated by a number. "
-        "Look for patterns, e.g. if you think that a container including 4(b) is a marker, a container including 4(a) is also likely a marker. "
+        "In other cases, the beginning may not be obvious, so you will have to look at the text as a whole. "
         "Be careful to not make markers where the text following text is clearly not a task, even though it may have a number or task phrase. "
-        "Respond only with the numbers separated by commas.\n"
-        + build_container_string(containers)
+        "Respond only with the numbers separated by commas. "
+        "Here is the text: "
+        + build_container_string_with_identifier(containers)
     )
     markers = await _query_markers(prompt)
 
@@ -190,7 +205,7 @@ async def query_solution_markers(
         "Single containers with short text are unlikely to be solutions, but may be if containers collectively contain a complete solution. "
         "It is possible that there are no solutions in the text whatsoever, in these cases respond with an empty string. "
         "Identify container numbers that clearly begin solution text and respond only with the numbers separated by commas.\n"
-        "Here is the text: " + build_container_string(containers)
+        "Here is the text: " + build_container_string_with_identifier(containers)
     )
 
     return await _query_markers(prompt)
