@@ -15,6 +15,7 @@ EXAM_CODES_JSON = PROJECT_ROOT / "ntnu_emner.json"
 
 IMG_DIR = PROJECT_ROOT / "img"
 PDF_DIR = PROJECT_ROOT / "pdf"
+TEMP_DIR = Path(__file__).resolve().parent / "temp"
 
 PROMPT_CONFIG = (
     "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
@@ -34,6 +35,7 @@ __all__ = [
     "EXAM_CODES_JSON",
     "IMG_DIR",
     "PDF_DIR",
+    "TEMP_DIR",
     "PROMPT_CONFIG",
 ]
 
