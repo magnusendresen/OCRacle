@@ -41,6 +41,16 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
     containers = []
     doc = fitz.open(pdf_path)
     for page_num, page in enumerate(doc):
+        if page_num == 0:
+            # Insert an extra container capturing the whole first page
+            r = page.rect
+            containers.append({
+                "page": 1,
+                "y": -1,
+                "bbox": (r.x0, r.y0, r.x1, r.y1),
+                "type": "extra",
+                "text": "",
+            })
         blocks = page.get_text("dict")["blocks"]
         for block in blocks:
             x0, y0, x1, y1 = block["bbox"]
@@ -175,7 +185,9 @@ async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[st
 
 async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[str]] = None):
     print("[INFO] | detect_task_boundaries")
-    containers = await list_pdf_containers(pdf_path)
+    containers_all = await list_pdf_containers(pdf_path)
+    extra = containers_all[0] if containers_all else None
+    containers = containers_all[1:]
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
     print("[INFO] | confirm_task_text -> checking task ranges")
     to_remove = await confirm_task_text(containers, ranges)
@@ -183,7 +195,7 @@ async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[st
         containers = [c for i, c in enumerate(containers) if i not in to_remove]
         task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
     print(f"[INFO] | Detected {len(ranges)} tasks")
-    return containers, task_map, ranges, assigned
+    return containers, task_map, ranges, assigned, extra
 
 
 

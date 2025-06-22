@@ -136,7 +136,7 @@ async def main_async(
 ) -> List[str]:
     """Compatibility wrapper used by legacy tests."""
     print("[INFO] | extract_images.main_async")
-    containers, task_map, ranges, assigned = await task_boundaries.detect_task_boundaries(
+    containers, task_map, ranges, assigned, _ = await task_boundaries.detect_task_boundaries(
         pdf_path, expected_tasks
     )
     await extract_figures(pdf_path, containers, task_map, subject, version)

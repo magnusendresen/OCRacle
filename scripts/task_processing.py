@@ -190,17 +190,27 @@ async def get_exam_info() -> Exam:
         print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
-    print("[INFO] | Processing PDF contents")
+    print("[INFO] | Finding task boundaries")
 
-    containers, task_map, ranges, assigned_tasks = await task_boundaries.detect_task_boundaries(str(pdf_path))
+    containers, task_map, ranges, assigned_tasks, extra = await task_boundaries.detect_task_boundaries(str(pdf_path))
+    print("[INFO] | Cropping detected tasks")
     cropped = task_boundaries.crop_tasks(
         str(pdf_path), containers, ranges, assigned_tasks, temp_dir=Path(__file__).parent / "temp"
     )
+    extra_cropped = (
+        task_boundaries.crop_tasks(str(pdf_path), [extra], [(0, 1)], ["header"], temp_dir=Path(__file__).parent / "temp")
+        if extra
+        else []
+    )
     print("[INFO] | Processing cropped task images with Google Vision")
-    ocr_results = await ocr_pdf.ocr_images([img for _, img in cropped])
-    ocr_text = " ".join(ocr_results)
+    ocr_inputs = [img for _, img in extra_cropped] + [img for _, img in cropped]
+    print("[INFO] | Running OCR on cropped images")
+    ocr_results = await ocr_pdf.ocr_images(ocr_inputs)
+    header_text = ocr_results[0] if extra_cropped else ""
+    task_results = ocr_results[1:] if extra_cropped else ocr_results
+    ocr_text = " ".join([header_text] + task_results)
     exam.ocr_tasks = {}
-    for (task_num, _), text in zip(cropped, ocr_results):
+    for (task_num, _), text in zip(cropped, task_results):
         exam.ocr_tasks[task_num] = exam.ocr_tasks.get(task_num, "") + text
     exam.task_numbers = assigned_tasks
     exam.total_tasks = len(assigned_tasks)
