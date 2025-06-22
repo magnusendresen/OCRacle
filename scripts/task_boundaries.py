@@ -3,7 +3,7 @@ import io
 import re
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
-from scripts.utils import log
+from utils import log
 
 import fitz
 import pytesseract
@@ -223,7 +223,8 @@ def crop_tasks(pdf_path: str, containers: List[Dict], ranges: List[Tuple[int, in
                 fname = Path(temp_dir) / f"task_{task_num}_{page_no}.png"
                 with open(fname, "wb") as f:
                     f.write(img_bytes)
-                log(f"Wrote debug image {fname}")
+                # Uncomment for debugging
+                # log(f"Wrote debug image {fname}")
     doc.close()
     return output
 

@@ -8,7 +8,7 @@ from typing import List
 from google.cloud import vision
 import fitz
 from project_config import *
-from scripts.utils import log
+from utils import log
 
 # Sørg for UTF-8 utskrift i terminalen
 sys.stdout.reconfigure(encoding='utf-8')
@@ -72,10 +72,12 @@ def detect_text(image_content):
             raise Exception(f"[ERROR] Vision API returned an error: {response.error.message}")
 
         extracted_text = texts[0].description.replace('\n', ' ') if texts else ''
+        # Uncomment for debugging
+        """
         if extracted_text:
             print(f"[INFO] Text detected: {len(extracted_text.split())} words")
         else:
-            print("[WARNING] No text detected on this page.")
+            print("[WARNING] No text detected on this page.")"""
 
         return extracted_text
     except Exception as e:

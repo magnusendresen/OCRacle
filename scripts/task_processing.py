@@ -3,7 +3,7 @@ import extract_images
 import task_boundaries
 import ocr_pdf
 from project_config import *
-from scripts.utils import log
+from utils import log
 
 import asyncio
 import json
@@ -95,8 +95,9 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f)
 
-        for idx, text in updates.items():
-            log("Progress written to progress.json")
+        # Uncomment the following lines if you want to log progress updates
+        # for idx, text in updates.items():
+        #     log("Progress written to progress.json")
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
@@ -119,12 +120,14 @@ def get_topics(emnekode: str) -> str:
         if entry.get("Emnekode", "").upper() in matches:
             temaer = entry.get("Temaer", [])
             unike_temaer.update(map(str.strip, temaer))
-
+            
+    # Uncomment for debugging
+    """
     if len(unike_temaer) < 3:
         log("Fewer than 3 topics found in subject")
         return ""
 
-    log("Topics found in subject, using results as reference")
+    log("Topics found in subject, using results as reference")"""
     return ", ".join(sorted(unike_temaer))
 
 def add_topics(topic: str, exam: Exam):
@@ -146,7 +149,7 @@ def add_topics(topic: str, exam: Exam):
                     entry["Temaer"] = temas
         with JSON_PATH.open('w', encoding='utf-8') as jf:
             json.dump(json_data, jf, ensure_ascii=False, indent=4)
-        log(f"Added topic '{topic}' for subject codes {exam.matching_codes}")
+        # log(f"Added topic '{topic}' for subject codes {exam.matching_codes}")
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 

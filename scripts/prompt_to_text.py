@@ -5,7 +5,7 @@ import contextvars
 from openai import OpenAI  # Using OpenAI SDK for DeepSeek
 import builtins
 from project_config import *
-from scripts.utils import log
+from utils import log
 import json
 
 def update_progress_line3(value: str = "1") -> None:
@@ -96,7 +96,8 @@ def prompt_to_text(prompt, max_tokens=1000, is_num=True, max_len=None):
                 request_cost = (input_tokens * usd_per_1m_input_tokens +
                                 output_tokens * usd_per_1m_output_tokens) / 1e6
                 total_cost += request_cost
-                print(f"{prefix}Tokens in: {input_tokens:04d}, Tokens out: {output_tokens:04d}")
+                # Uncomment for debugging token counts
+                # print(f"{prefix}Tokens in: {input_tokens:04d}, Tokens out: {output_tokens:04d}")
                 return result_text
             print(f"{prefix}[ERROR] Invalid response. (attempt {attempt}/{max_attempts})")
         except:
