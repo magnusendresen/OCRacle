@@ -9,6 +9,7 @@ import pytesseract
 from PIL import Image
 
 from project_config import IMG_DIR
+import task_boundaries
 
 
 TEXT_LEN_LIMIT = 75
@@ -122,4 +123,18 @@ async def extract_figures(
         tasks.append(task)
     await asyncio.gather(*tasks)
     doc.close()
+
+
+async def main_async(
+    pdf_path: str,
+    subject: str = "TEST",
+    version: str = "1",
+    expected_tasks: Optional[List[str]] = None,
+) -> List[str]:
+    """Compatibility wrapper used by legacy tests."""
+    containers, task_map, ranges, assigned = await task_boundaries.detect_task_boundaries(
+        pdf_path, expected_tasks
+    )
+    await extract_figures(pdf_path, containers, task_map, subject, version)
+    return assigned
 
