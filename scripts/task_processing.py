@@ -149,17 +149,6 @@ def add_topics(topic: str, exam: Exam):
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
-SUBJECT_REGEX = re.compile(r"[A-Z]{2,}[A-Z0-9]*\d{2,}")
-
-def clean_subject_code(raw: str) -> str:
-    """Return a sanitized subject code or 'UNKNOWN' if none found."""
-    cand = re.sub(r"[^A-Z0-9]", "", raw.upper())
-    match = SUBJECT_REGEX.search(cand)
-    return match.group(0) if match else "UNKNOWN"
-
-def guess_code_from_filename(pdf_path: str) -> str:
-    match = SUBJECT_REGEX.search(Path(pdf_path).stem.upper())
-    return match.group(0) if match else ""
 
 def get_subject_code_variations(subject: str):
     data, emnekart = load_emnekart_from_json(JSON_PATH)
@@ -220,23 +209,20 @@ async def get_exam_info() -> Exam:
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
         first_line = f.readline().strip()
         if len(first_line) > 4:
-            exam.subject = clean_subject_code(first_line)
+            exam.subject = first_line.strip().upper()
+            print("\n\n\n TOPIC FOUND IN FILE:")
         else:
             print("[PROMPT] | get_subject_code")
-            raw_subject = (
+            exam.subject = (
                 await prompt_to_text.async_prompt_to_text(
                     PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
                     max_tokens=1000,
                     is_num=False,
                     max_len=50,
                 )
-            )
-            exam.subject = clean_subject_code(raw_subject)
-    if exam.subject == "UNKNOWN":
-        guess = guess_code_from_filename(pdf_path)
-        if guess:
-            print(f"[INFO] | Guessed subject code from filename: {guess}")
-            exam.subject = guess
+            ).strip().upper()
+            print("\n\n\n TOPIC FOUND WITH DEEPSEEK:")
+    print(exam.subject + "\n\n\n")
     print(f"[INFO] | Subject code detected: {exam.subject}")
     exam.matching_codes = get_subject_code_variations(exam.subject)
     write_progress({4: exam.subject or ""})
