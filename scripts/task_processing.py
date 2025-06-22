@@ -1,5 +1,7 @@
 import prompt_to_text
 import extract_images
+import task_boundaries
+import ocr_pdf
 from project_config import *
 
 import asyncio
@@ -65,6 +67,7 @@ class Exam:
     total_tasks: int = 0
     exam_topics: List[str] = field(default_factory=list)
     task_numbers: List[str] = field(default_factory=list)
+    ocr_tasks: Dict[str, str] = field(default_factory=dict)
 
 
 def write_progress(updates: Optional[Dict[int, str]] = None):
@@ -168,36 +171,12 @@ def get_subject_code_variations(subject: str):
         print(f"[INFO] | Ingen matchende emnekoder i JSON.")
         return []
 
-async def get_exam_info(ocr_text: str) -> Exam:
+async def get_exam_info() -> Exam:
     exam = Exam()
 
-    with SUBJECT_FILE.open("r", encoding="utf-8") as f:
-                        first_line = f.readline().strip()
-                        if len(first_line) > 4:
-                            exam.subject = first_line.strip().upper()
-                            print("\n\n\n TOPIC FOUND IN FILE:")
-                        else:
-                            exam.subject = (
-                                await prompt_to_text.async_prompt_to_text(
-                                    PROMPT_CONFIG
-                                    + load_prompt("get_subject_code")
-                                    + ocr_text,
-                                    max_tokens=1000,
-                                    is_num=False,
-                                    max_len=50,
-                                )
-                            ).strip().upper()
-                            print("\n\n\n TOPIC FOUND WITH DEEPSEEK:")
-
-    print(exam.subject+"\n\n\n")
-    exam.matching_codes = get_subject_code_variations(exam.subject)
-    write_progress({4: exam.subject or ""})
-    
-    pdf_dir = ""
     try:
         with DIR_FILE.open("r", encoding="utf-8") as dir_file:
-            dir_data = json.load(dir_file)
-            pdf_dir = dir_data.get("exam", "").strip()
+            pdf_dir = json.load(dir_file).get("exam", "").strip()
     except Exception as e:
         print(f"[ERROR] Could not read dir.json: {e}")
         pdf_dir = ""
@@ -211,62 +190,72 @@ async def get_exam_info(ocr_text: str) -> Exam:
         print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
-    exam_raw_version = (
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG
-            + load_prompt("get_exam_version").format(pdf_dir=pdf_dir)
-            + ocr_text,
-            max_tokens=1000,
-            is_num=False,
-            max_len=12,
-        )
+    containers, task_map, ranges, assigned_tasks = await task_boundaries.detect_task_boundaries(str(pdf_path))
+    cropped = task_boundaries.crop_tasks(
+        str(pdf_path), containers, ranges, assigned_tasks, temp_dir=Path(__file__).parent / "temp"
+    )
+    ocr_results = await ocr_pdf.ocr_images([img for _, img in cropped])
+    ocr_text = " ".join(ocr_results)
+    exam.ocr_tasks = {}
+    for (task_num, _), text in zip(cropped, ocr_results):
+        exam.ocr_tasks[task_num] = exam.ocr_tasks.get(task_num, "") + text
+    exam.task_numbers = assigned_tasks
+    exam.total_tasks = len(assigned_tasks)
+    write_progress({6: str(exam.total_tasks)})
+
+    with SUBJECT_FILE.open("r", encoding="utf-8") as f:
+        first_line = f.readline().strip()
+        if len(first_line) > 4:
+            exam.subject = first_line.strip().upper()
+        else:
+            exam.subject = (
+                await prompt_to_text.async_prompt_to_text(
+                    PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
+                    max_tokens=1000,
+                    is_num=False,
+                    max_len=50,
+                )
+            ).strip().upper()
+    exam.matching_codes = get_subject_code_variations(exam.subject)
+    write_progress({4: exam.subject or ""})
+
+    exam_raw_version = await prompt_to_text.async_prompt_to_text(
+        PROMPT_CONFIG + load_prompt("get_exam_version").format(pdf_dir=pdf_dir) + ocr_text,
+        max_tokens=1000,
+        is_num=False,
+        max_len=12,
     )
     version_abbr = exam_raw_version[0].upper() + exam_raw_version[-2:]
     exam.exam_version = version_abbr
-    print(f"[DEEPSEEK] | Exam version found: {exam_raw_version}")
-    print("[INFO] | Set exam version abbreviation to: " + version_abbr)
     write_progress({5: exam.exam_version or ""})
 
+    await extract_images.extract_figures(
+        str(pdf_path), containers, task_map, exam.subject, exam.exam_version
+    )
 
-    exam.exam_topics = (
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG
-            + load_prompt("exam_topics")
-            + ocr_text,
-            max_tokens=1000,
-            is_num=False,
-            max_len=300,
-        )
+    exam.exam_topics = await prompt_to_text.async_prompt_to_text(
+        PROMPT_CONFIG + load_prompt("exam_topics") + ocr_text,
+        max_tokens=1000,
+        is_num=False,
+        max_len=300,
     )
     if exam.exam_topics:
         exam.exam_topics = [t.strip() for t in str(exam.exam_topics).split(',')]
     else:
         exam.exam_topics = []
-    print(f"[DEEPSEEK] | Topics found in exam: {exam.exam_topics}")
-
-    assigned_tasks = await extract_images.main_async(
-        str(pdf_path),
-        subject=exam.subject,
-        version=exam.exam_version,
-        expected_tasks=None,
-    )
-    exam.task_numbers = assigned_tasks
-    exam.total_tasks = len(assigned_tasks)
-    print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
-    write_progress({6: str(exam.total_tasks)})
 
     global total_task_count
     total_task_count = exam.total_tasks
-
+    print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
 
     return exam
 
-async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
+async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
 
-    task_output = str(ocr_text)
+    task_output = str(exam.ocr_tasks.get(task_number, ""))
     valid = 0
     images = 0
 
@@ -371,12 +360,12 @@ async def process_task(task_number: str, ocr_text: str, exam: Exam) -> Exam:
         print(f"[DEEPSEEK] [TASK {task_number}] | Task approved.\n")
         return task_exam
 
-async def main_async(ocr_text: str):
-    exam_template = await get_exam_info(ocr_text)
+async def main_async():
+    exam_template = await get_exam_info()
     print(f"[DEEPSEEK] | Started processing all tasks")
 
     tasks = [
-        asyncio.create_task(process_task(str(task), ocr_text, exam_template))
+        asyncio.create_task(process_task(str(task), exam_template))
         for task in exam_template.task_numbers
     ]
     results = await asyncio.gather(*tasks)
@@ -396,9 +385,8 @@ async def main_async(ocr_text: str):
     return results
 
 
-def main(ocr_text: str):
-    return asyncio.run(main_async(ocr_text))
+def main():
+    return asyncio.run(main_async())
 
 if __name__ == "__main__":
-    ocr_input = sys.stdin.read()
-    main(ocr_input)
+    main()

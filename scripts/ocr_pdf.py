@@ -1,12 +1,11 @@
 import os
-import fitz  # For PDF-håndtering
 import asyncio
-from google.cloud import vision
-from tqdm import tqdm
-import sys
 from pathlib import Path
+from typing import List
+
+from google.cloud import vision
+import fitz
 from project_config import *
-import json
 
 # Sørg for UTF-8 utskrift i terminalen
 sys.stdout.reconfigure(encoding='utf-8')
@@ -79,6 +78,12 @@ def detect_text(image_content):
     except Exception as e:
         print(f"[ERROR] Text recognition failed: {e}")
         return ""
+
+
+async def ocr_images(images: List[bytes]) -> List[str]:
+    """Run Google Vision OCR on a list of PNG bytes."""
+    tasks = [asyncio.to_thread(detect_text, img) for img in images]
+    return await asyncio.gather(*tasks)
 
 def pdf_to_images(pdf_path):
     try:
