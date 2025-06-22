@@ -84,6 +84,7 @@ def detect_text(image_content):
 
 async def ocr_images(images: List[bytes]) -> List[str]:
     """Run Google Vision OCR on a list of PNG bytes."""
+    print(f"[INFO] | Processing {len(images)} images with Google Vision")
     tasks = [asyncio.to_thread(detect_text, img) for img in images]
     return await asyncio.gather(*tasks)
 

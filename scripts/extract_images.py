@@ -103,6 +103,8 @@ async def extract_figures(
     version: str,
     output_folder: Optional[str] = None,
 ) -> None:
+    num_imgs = sum(1 for c in containers if c.get("type") == "image")
+    print(f"[INFO] | Extracting {num_imgs} figures from tasks")
     output_folder = output_folder or str(IMG_DIR)
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
@@ -123,6 +125,7 @@ async def extract_figures(
         tasks.append(task)
     await asyncio.gather(*tasks)
     doc.close()
+    print("[INFO] | Figure extraction complete")
 
 
 async def main_async(

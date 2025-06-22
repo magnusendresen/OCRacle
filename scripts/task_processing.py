@@ -149,7 +149,13 @@ def add_topics(topic: str, exam: Exam):
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
-import re
+SUBJECT_REGEX = re.compile(r"[A-Z]{2,}[A-Z0-9]*\d{2,}")
+
+def clean_subject_code(raw: str) -> str:
+    """Return a sanitized subject code or 'UNKNOWN' if none found."""
+    cand = re.sub(r"[^A-Z0-9]", "", raw.upper())
+    match = SUBJECT_REGEX.search(cand)
+    return match.group(0) if match else "UNKNOWN"
 
 def get_subject_code_variations(subject: str):
     data, emnekart = load_emnekart_from_json(JSON_PATH)
@@ -190,10 +196,13 @@ async def get_exam_info() -> Exam:
         print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
+    print("[INFO] | Processing PDF contents")
+
     containers, task_map, ranges, assigned_tasks = await task_boundaries.detect_task_boundaries(str(pdf_path))
     cropped = task_boundaries.crop_tasks(
         str(pdf_path), containers, ranges, assigned_tasks, temp_dir=Path(__file__).parent / "temp"
     )
+    print("[INFO] | Processing cropped task images with Google Vision")
     ocr_results = await ocr_pdf.ocr_images([img for _, img in cropped])
     ocr_text = " ".join(ocr_results)
     exam.ocr_tasks = {}
@@ -206,16 +215,18 @@ async def get_exam_info() -> Exam:
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
         first_line = f.readline().strip()
         if len(first_line) > 4:
-            exam.subject = first_line.strip().upper()
+            exam.subject = clean_subject_code(first_line)
         else:
-            exam.subject = (
+            raw_subject = (
                 await prompt_to_text.async_prompt_to_text(
                     PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
                     max_tokens=1000,
                     is_num=False,
                     max_len=50,
                 )
-            ).strip().upper()
+            )
+            exam.subject = clean_subject_code(raw_subject)
+    print(f"[INFO] | Subject code detected: {exam.subject}")
     exam.matching_codes = get_subject_code_variations(exam.subject)
     write_progress({4: exam.subject or ""})
 

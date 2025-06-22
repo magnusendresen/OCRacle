@@ -37,6 +37,7 @@ async def _extract_block_text(page, block) -> str:
 
 async def list_pdf_containers(pdf_path: str) -> List[Dict]:
     """Return text and image containers from the PDF."""
+    print(f"[INFO] | Extracting containers from: {pdf_path}")
     containers = []
     doc = fitz.open(pdf_path)
     for page_num, page in enumerate(doc):
@@ -63,6 +64,7 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
                 continue
             container["text"] = await _extract_block_text(page, block)
             containers.append(container)
+    print(f"[INFO] | Found {len(containers)} containers in PDF")
     return containers
 
 
@@ -166,12 +168,14 @@ async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[st
 
 
 async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[str]] = None):
+    print("[INFO] | Finding task boundaries")
     containers = await list_pdf_containers(pdf_path)
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
     to_remove = await confirm_task_text(containers, ranges)
     if to_remove:
         containers = [c for i, c in enumerate(containers) if i not in to_remove]
         task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
+    print(f"[INFO] | Detected {len(ranges)} tasks")
     return containers, task_map, ranges, assigned
 
 
@@ -183,6 +187,7 @@ def crop_tasks(pdf_path: str, containers: List[Dict], ranges: List[Tuple[int, in
     segment. If ``temp_dir`` is provided the images are also written to disk for
     debugging purposes.
     """
+    print(f"[INFO] | Cropping images for {len(ranges)} tasks")
     output: List[Tuple[str, bytes]] = []
     doc = fitz.open(pdf_path)
     for idx, (start, end) in enumerate(ranges):
@@ -206,6 +211,7 @@ def crop_tasks(pdf_path: str, containers: List[Dict], ranges: List[Tuple[int, in
                 fname = Path(temp_dir) / f"task_{task_num}_{page_no}.png"
                 with open(fname, "wb") as f:
                     f.write(img_bytes)
+                print(f"[INFO] | Wrote debug image {fname}")
     doc.close()
     return output
 
