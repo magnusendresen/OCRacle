@@ -9,6 +9,7 @@ import pytesseract
 from PIL import Image
 
 from project_config import IMG_DIR
+from scripts.utils import log
 import task_boundaries
 
 
@@ -74,9 +75,9 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
         if ok:
             with open(path, "wb") as f:
                 f.write(buf.tobytes())
-            print(f"Saved {path}")
+            log(f"Saved {path}")
         else:
-            print(f"[ERROR] Could not encode image for {path}")
+            log(f"[ERROR] Could not encode image for {path}")
 
     return _save
 
@@ -104,7 +105,7 @@ async def extract_figures(
     output_folder: Optional[str] = None,
 ) -> None:
     num_imgs = sum(1 for c in containers if c.get("type") == "image")
-    print(f"[INFO] | extract_figures -> {num_imgs} figures")
+    log(f"Figures extracted: {num_imgs}")
     output_folder = output_folder or str(IMG_DIR)
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
@@ -125,7 +126,7 @@ async def extract_figures(
         tasks.append(task)
     await asyncio.gather(*tasks)
     doc.close()
-    print("[INFO] | Figure extraction complete")
+    log("Figure extraction complete")
 
 
 async def main_async(
@@ -135,7 +136,7 @@ async def main_async(
     expected_tasks: Optional[List[str]] = None,
 ) -> List[str]:
     """Compatibility wrapper used by legacy tests."""
-    print("[INFO] | extract_images.main_async")
+    log("extract_images.main_async")
     containers, task_map, ranges, assigned, _ = await task_boundaries.detect_task_boundaries(
         pdf_path, expected_tasks
     )

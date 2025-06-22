@@ -3,6 +3,7 @@ import extract_images
 import task_boundaries
 import ocr_pdf
 from project_config import *
+from scripts.utils import log
 
 import asyncio
 import json
@@ -95,7 +96,7 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
             json.dump(data, f)
 
         for idx, text in updates.items():
-            print(f"[STATUS] | Wrote '{text}' to key {idx + 1} in {PROGRESS_FILE}")
+            log("Progress written to progress.json")
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
@@ -120,10 +121,10 @@ def get_topics(emnekode: str) -> str:
             unike_temaer.update(map(str.strip, temaer))
 
     if len(unike_temaer) < 3:
-        print("\n Fewer than 3 topics found in subject, returning empty string.\n")
+        log("Fewer than 3 topics found in subject")
         return ""
 
-    print("\n Topics found in subject, using results as reference.\n")
+    log("Topics found in subject, using results as reference")
     return ", ".join(sorted(unike_temaer))
 
 def add_topics(topic: str, exam: Exam):
@@ -145,7 +146,7 @@ def add_topics(topic: str, exam: Exam):
                     entry["Temaer"] = temas
         with JSON_PATH.open('w', encoding='utf-8') as jf:
             json.dump(json_data, jf, ensure_ascii=False, indent=4)
-        print(f"[DEEPSEEK] | Lagt til tema '{topic}' for emnekoder {exam.matching_codes}")
+        log(f"Added topic '{topic}' for subject codes {exam.matching_codes}")
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
@@ -164,14 +165,14 @@ def get_subject_code_variations(subject: str):
 
     matching_codes = [kode for kode in emnekart if regex.match(kode)]
     if matching_codes:
-        print(f"[INFO] | Fant matchende emnekoder i JSON: {matching_codes}")
+        log(f"Subject code matches found: {matching_codes}")
         return matching_codes
     else:
-        print(f"[INFO] | Ingen matchende emnekoder i JSON.")
+        log("No matching subject codes in JSON")
         return []
 
 async def get_exam_info() -> Exam:
-    print("[INFO] | get_exam_info")
+    log("Processing PDF contents")
     exam = Exam()
 
     try:
@@ -190,10 +191,9 @@ async def get_exam_info() -> Exam:
         print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
-    print("[INFO] | Finding task boundaries")
-
+    log("Finding task boundaries")
     containers, task_map, ranges, assigned_tasks, extra = await task_boundaries.detect_task_boundaries(str(pdf_path))
-    print("[INFO] | Cropping detected tasks")
+    log("Cropping detected tasks")
     cropped = task_boundaries.crop_tasks(
         str(pdf_path), containers, ranges, assigned_tasks, temp_dir=Path(__file__).parent / "temp"
     )
@@ -202,9 +202,8 @@ async def get_exam_info() -> Exam:
         if extra
         else []
     )
-    print("[INFO] | Processing cropped task images with Google Vision")
+    log("Processing task images with Google Vision")
     ocr_inputs = [img for _, img in extra_cropped] + [img for _, img in cropped]
-    print("[INFO] | Running OCR on cropped images")
     ocr_results = await ocr_pdf.ocr_images(ocr_inputs)
     header_text = ocr_results[0] if extra_cropped else ""
     task_results = ocr_results[1:] if extra_cropped else ocr_results
@@ -220,9 +219,9 @@ async def get_exam_info() -> Exam:
         first_line = f.readline().strip()
         if len(first_line) > 4:
             exam.subject = first_line.strip().upper()
-            print("\n\n\n TOPIC FOUND IN FILE:")
+            log("Subject code read from file")
         else:
-            print("[PROMPT] | get_subject_code")
+            log("Prompting subject code")
             exam.subject = (
                 await prompt_to_text.async_prompt_to_text(
                     PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
@@ -231,13 +230,11 @@ async def get_exam_info() -> Exam:
                     max_len=50,
                 )
             ).strip().upper()
-            print("\n\n\n TOPIC FOUND WITH DEEPSEEK:")
-    print(exam.subject + "\n\n\n")
-    print(f"[INFO] | Subject code detected: {exam.subject}")
+    log(f"Subject code: {exam.subject}")
     exam.matching_codes = get_subject_code_variations(exam.subject)
     write_progress({4: exam.subject or ""})
 
-    print("[PROMPT] | get_exam_version")
+    log("Prompting exam version")
     exam_raw_version = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("get_exam_version") + ocr_text,
         max_tokens=1000,
@@ -256,7 +253,7 @@ async def get_exam_info() -> Exam:
         str(pdf_path), containers, task_map, exam.subject, exam.exam_version
     )
 
-    print("[PROMPT] | exam_topics")
+    log("Extracting exam topics")
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("exam_topics") + ocr_text,
         max_tokens=1000,
@@ -267,15 +264,16 @@ async def get_exam_info() -> Exam:
         exam.exam_topics = [t.strip() for t in str(exam.exam_topics).split(',')]
     else:
         exam.exam_topics = []
+    log(f"Topics extracted: {len(exam.exam_topics)}")
 
     global total_task_count
     total_task_count = exam.total_tasks
-    print(f"[DEEPSEEK] | Total tasks for processing: {exam.total_tasks}")
+    log(f"Tasks for processing: {exam.total_tasks}")
 
     return exam
 
 async def process_task(task_number: str, exam: Exam) -> Exam:
-    print(f"[INFO] | process_task {task_number}")
+    log(f"Task {task_number}: extracting raw text")
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
@@ -284,7 +282,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     valid = 0
     images = 0
 
-    print(f"[PROMPT] | extract_task_text for task {task_number}")
     task_output = str(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("extract_task_text").format(task_number=task_number) + task_output,
@@ -296,7 +293,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_status[task_number] = 1
     write_progress()
 
-    print(f"[PROMPT] | detect_images for task {task_number}")
     images = int(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("detect_images") + task_output,
@@ -306,21 +302,19 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         )
     )
     if images > 0:
-        print(f"[DEEPSEEK] | Images were found in task {task_number}.")
         task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
         if task_dir.exists():
             found_images = sorted(task_dir.glob("*.png"))
             task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
         else:
             task_exam.images = []
-        print(f"[DEEPSEEK] | Found {len(task_exam.images)} images for task {task_number}.")
+        log(f"Task {task_number}: detecting figures -> {len(task_exam.images)} found")
     else:
-        print(f"[DEEPSEEK] | No images were found in task {task_number}.")
+        log(f"Task {task_number}: no figures found")
         task_exam.images = []
     task_status[task_number] = 2
     write_progress()
 
-    print(f"[PROMPT] | extract_points for task {task_number}")
     points_str = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("extract_points") + task_output,
         max_tokens=1000,
@@ -333,12 +327,13 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         task_exam.points = None
     task_status[task_number] = 3
     write_progress()
+    if task_exam.points is not None:
+        log(f"Task {task_number}: points extracted -> {task_exam.points}p")
 
     reference = get_topics(exam.subject)
     if exam.exam_topics:
         topics_str = ", ".join(exam.exam_topics)
         reference = f"{reference}, {topics_str}" if reference else topics_str
-    print(f"[PROMPT] | extract_topic for task {task_number}")
     task_exam.topic = str(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("extract_topic") + reference + task_output,
@@ -347,7 +342,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             max_len=100,
         )
     )
-    print(f"[DEEPSEEK] | Topic found for task {task_number}: {task_exam.topic}")
+    log(f"Task {task_number}: topic -> {task_exam.topic}")
     add_topics(task_exam.topic, exam)
     task_status[task_number] = 4
     write_progress()
@@ -357,7 +352,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         "remove_exam_admin",
         "format_html_output",
     ], start=5):
-        print(f"[PROMPT] | {instruction} for task {task_number}")
         task_output = str(
             await prompt_to_text.async_prompt_to_text(
                 PROMPT_CONFIG + load_prompt(instruction) + task_output,
@@ -366,11 +360,15 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
                 max_len=2000,
             )
         )
-        print(f"\n\n\nOppgave {task_number}:\n{task_output}\n\n\n\n")
+        if instruction == "translate_to_bokmaal":
+            log(f"Task {task_number}: translated to Bokmål")
+        elif instruction == "remove_exam_admin":
+            pass
+        elif instruction == "format_html_output":
+            log(f"Task {task_number}: final HTML formatted")
         task_status[task_number] = step_idx
         write_progress()
 
-    print(f"[PROMPT] | validate_task for task {task_number}")
     valid = int(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("validate_task") + task_output,
@@ -385,16 +383,16 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam.task_text = task_output
 
     if valid == 0:
-        print(f"[DEEPSEEK] [TASK {task_number}] | Task not approved.\n")
+        log(f"Task {task_number}: not approved")
         return task_exam
     else:
-        print(f"[DEEPSEEK] [TASK {task_number}] | Task approved.\n")
+        log(f"Task {task_number}: approved")
         return task_exam
 
 async def main_async():
-    print("[INFO] | task_processing.main_async")
+    log("Starting task processing")
     exam_template = await get_exam_info()
-    print(f"[DEEPSEEK] | Started processing all tasks")
+    log("Started processing all tasks")
 
     tasks = [
         asyncio.create_task(process_task(str(task), exam_template))
@@ -409,11 +407,11 @@ async def main_async():
 
     for res in results:
         if res.task_text is not None:
-            print(f"Result for task {res.task_number}: {res.task_text}\n   (Points: {res.points})\n")
+            pass
 
-    print(f"[DEEPSEEK] | Failed tasks: {failed}")
-    print(f"[DEEPSEEK] | Points for tasks: {points}")
-    print(f"[DEEPSEEK] | Final total cost: {prompt_to_text.total_cost:.4f} USD")
+    log(f"Failed tasks: {failed}")
+    log(f"Points for tasks: {points}")
+    log(f"Final total cost: {prompt_to_text.total_cost:.4f} USD")
     return results
 
 

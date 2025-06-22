@@ -5,6 +5,7 @@ import contextvars
 from openai import OpenAI  # Using OpenAI SDK for DeepSeek
 import builtins
 from project_config import *
+from scripts.utils import log
 import json
 
 def update_progress_line3(value: str = "1") -> None:
@@ -40,7 +41,7 @@ usd_per_1m_output_tokens = 1.10
 MODEL_NAME = "deepseek-chat"
 total_cost = 0  # Global variabel for akkumulert kostnad
 
-print("[DEEPSEEK] Successfully connected to DeepSeekAPI!\n")
+log("Connected to DeepSeek API")
 # Oppdaterer progress.json nøkkel 3 med "1" når DeepSeek er kobla til.
 update_progress_line3("1")
 

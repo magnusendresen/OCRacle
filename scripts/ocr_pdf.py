@@ -8,6 +8,7 @@ from typing import List
 from google.cloud import vision
 import fitz
 from project_config import *
+from scripts.utils import log
 
 # Sørg for UTF-8 utskrift i terminalen
 sys.stdout.reconfigure(encoding='utf-8')
@@ -19,7 +20,7 @@ if not json_path or not os.path.exists(json_path):
 
 # Sett Google Cloud Vision API credentials
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
-print(f"\n[GOOGLE] Successfully connected to Google Vision API using:\n{json_path}\n")
+log(f"Authenticated Google Vision API ({Path(json_path).name})")
 
 # Definer sti for progress.json and empty file at startup
 with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
@@ -84,7 +85,7 @@ def detect_text(image_content):
 
 async def ocr_images(images: List[bytes]) -> List[str]:
     """Run Google Vision OCR on a list of PNG bytes."""
-    print(f"[INFO] | Processing {len(images)} images with Google Vision")
+    log(f"OCR processed: {len(images)} images")
     tasks = [asyncio.to_thread(detect_text, img) for img in images]
     return await asyncio.gather(*tasks)
 
