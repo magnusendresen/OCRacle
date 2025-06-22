@@ -243,12 +243,16 @@ async def get_exam_info() -> Exam:
 
     print("[PROMPT] | get_exam_version")
     exam_raw_version = await prompt_to_text.async_prompt_to_text(
-        PROMPT_CONFIG + load_prompt("get_exam_version").format(pdf_dir=pdf_dir) + ocr_text,
+        PROMPT_CONFIG + load_prompt("get_exam_version") + ocr_text,
         max_tokens=1000,
         is_num=False,
         max_len=12,
     )
-    version_abbr = exam_raw_version[0].upper() + exam_raw_version[-2:]
+    exam_raw_version = str(exam_raw_version).strip()
+    if len(exam_raw_version) >= 3:
+        version_abbr = exam_raw_version[0].upper() + exam_raw_version[-2:]
+    else:
+        version_abbr = exam_raw_version.upper()
     exam.exam_version = version_abbr
     write_progress({5: exam.exam_version or ""})
 
