@@ -166,7 +166,8 @@ async def confirm_task_text(
             + "Does this text very clearly include a task, or is it unrelated to a task - e.g. exam administration information? "
             + "If the text includes a lot of text that is not related to a task, it is likely not a task. "
             + "If it includes a task, respond with 1, if not respond with 0. "
-            + "Do not reply with multiple numbers. Here is the text:"
+            + "Do not reply with multiple numbers. Just a single number." 
+            + "Here is the text: "
             + text
         )
         ans = await prompt_to_text.async_prompt_to_text(
