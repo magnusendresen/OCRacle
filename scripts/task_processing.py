@@ -157,6 +157,10 @@ def clean_subject_code(raw: str) -> str:
     match = SUBJECT_REGEX.search(cand)
     return match.group(0) if match else "UNKNOWN"
 
+def guess_code_from_filename(pdf_path: str) -> str:
+    match = SUBJECT_REGEX.search(Path(pdf_path).stem.upper())
+    return match.group(0) if match else ""
+
 def get_subject_code_variations(subject: str):
     data, emnekart = load_emnekart_from_json(JSON_PATH)
     pattern_parts = []
@@ -178,6 +182,7 @@ def get_subject_code_variations(subject: str):
         return []
 
 async def get_exam_info() -> Exam:
+    print("[INFO] | get_exam_info")
     exam = Exam()
 
     try:
@@ -217,6 +222,7 @@ async def get_exam_info() -> Exam:
         if len(first_line) > 4:
             exam.subject = clean_subject_code(first_line)
         else:
+            print("[PROMPT] | get_subject_code")
             raw_subject = (
                 await prompt_to_text.async_prompt_to_text(
                     PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
@@ -226,10 +232,16 @@ async def get_exam_info() -> Exam:
                 )
             )
             exam.subject = clean_subject_code(raw_subject)
+    if exam.subject == "UNKNOWN":
+        guess = guess_code_from_filename(pdf_path)
+        if guess:
+            print(f"[INFO] | Guessed subject code from filename: {guess}")
+            exam.subject = guess
     print(f"[INFO] | Subject code detected: {exam.subject}")
     exam.matching_codes = get_subject_code_variations(exam.subject)
     write_progress({4: exam.subject or ""})
 
+    print("[PROMPT] | get_exam_version")
     exam_raw_version = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("get_exam_version").format(pdf_dir=pdf_dir) + ocr_text,
         max_tokens=1000,
@@ -244,6 +256,7 @@ async def get_exam_info() -> Exam:
         str(pdf_path), containers, task_map, exam.subject, exam.exam_version
     )
 
+    print("[PROMPT] | exam_topics")
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("exam_topics") + ocr_text,
         max_tokens=1000,
@@ -262,6 +275,7 @@ async def get_exam_info() -> Exam:
     return exam
 
 async def process_task(task_number: str, exam: Exam) -> Exam:
+    print(f"[INFO] | process_task {task_number}")
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
@@ -270,6 +284,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     valid = 0
     images = 0
 
+    print(f"[PROMPT] | extract_task_text for task {task_number}")
     task_output = str(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("extract_task_text").format(task_number=task_number) + task_output,
@@ -281,6 +296,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_status[task_number] = 1
     write_progress()
 
+    print(f"[PROMPT] | detect_images for task {task_number}")
     images = int(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("detect_images") + task_output,
@@ -304,6 +320,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_status[task_number] = 2
     write_progress()
 
+    print(f"[PROMPT] | extract_points for task {task_number}")
     points_str = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("extract_points") + task_output,
         max_tokens=1000,
@@ -321,6 +338,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     if exam.exam_topics:
         topics_str = ", ".join(exam.exam_topics)
         reference = f"{reference}, {topics_str}" if reference else topics_str
+    print(f"[PROMPT] | extract_topic for task {task_number}")
     task_exam.topic = str(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("extract_topic") + reference + task_output,
@@ -339,6 +357,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         "remove_exam_admin",
         "format_html_output",
     ], start=5):
+        print(f"[PROMPT] | {instruction} for task {task_number}")
         task_output = str(
             await prompt_to_text.async_prompt_to_text(
                 PROMPT_CONFIG + load_prompt(instruction) + task_output,
@@ -351,6 +370,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         task_status[task_number] = step_idx
         write_progress()
 
+    print(f"[PROMPT] | validate_task for task {task_number}")
     valid = int(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("validate_task") + task_output,
@@ -372,6 +392,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         return task_exam
 
 async def main_async():
+    print("[INFO] | task_processing.main_async")
     exam_template = await get_exam_info()
     print(f"[DEEPSEEK] | Started processing all tasks")
 

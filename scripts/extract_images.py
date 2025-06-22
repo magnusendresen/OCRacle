@@ -104,7 +104,7 @@ async def extract_figures(
     output_folder: Optional[str] = None,
 ) -> None:
     num_imgs = sum(1 for c in containers if c.get("type") == "image")
-    print(f"[INFO] | Extracting {num_imgs} figures from tasks")
+    print(f"[INFO] | extract_figures -> {num_imgs} figures")
     output_folder = output_folder or str(IMG_DIR)
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
@@ -135,6 +135,7 @@ async def main_async(
     expected_tasks: Optional[List[str]] = None,
 ) -> List[str]:
     """Compatibility wrapper used by legacy tests."""
+    print("[INFO] | extract_images.main_async")
     containers, task_map, ranges, assigned = await task_boundaries.detect_task_boundaries(
         pdf_path, expected_tasks
     )

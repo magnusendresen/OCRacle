@@ -37,7 +37,7 @@ async def _extract_block_text(page, block) -> str:
 
 async def list_pdf_containers(pdf_path: str) -> List[Dict]:
     """Return text and image containers from the PDF."""
-    print(f"[INFO] | Extracting containers from: {pdf_path}")
+    print(f"[INFO] | list_pdf_containers -> {pdf_path}")
     containers = []
     doc = fitz.open(pdf_path)
     for page_num, page in enumerate(doc):
@@ -80,6 +80,7 @@ def build_container_string(containers: List[Dict]) -> str:
 
 
 async def confirm_task_text(containers: List[Dict], ranges: List[Tuple[int, int]]) -> List[int]:
+    print("[INFO] | confirm_task_text")
     if not ranges:
         return []
 
@@ -104,6 +105,7 @@ async def confirm_task_text(containers: List[Dict], ranges: List[Tuple[int, int]
             + "Here is the text:"
             + text
         )
+        print(f"[PROMPT] | confirm_task_text range {start}-{end}")
         ans = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=5, is_num=False, max_len=2)
         if str(ans).strip() == "0":
             remove.extend(range(start, end))
@@ -111,11 +113,13 @@ async def confirm_task_text(containers: List[Dict], ranges: List[Tuple[int, int]
 
 
 async def _query_markers(prompt: str) -> List[int]:
+    print("[PROMPT] | _query_markers")
     resp = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=2000, is_num=False, max_len=1000)
     return sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
 
 
 async def query_start_markers(containers: List[Dict]) -> List[int]:
+    print("[INFO] | query_start_markers")
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
@@ -128,6 +132,7 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
         "Here is the text: "
         + build_container_string_with_identifier(containers)
     )
+    print("[PROMPT] | query_start_markers -> start markers")
     markers = await _query_markers(prompt)
 
     def _is_summary(text: str) -> bool:
@@ -138,6 +143,7 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
 
 
 async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[str]] = None) -> Tuple[Dict[int, str], List[Tuple[int, int]], List[str]]:
+    print("[INFO] | _assign_tasks")
     markers = await query_start_markers(containers)
     if not markers:
         markers = [idx for idx, c in enumerate(containers) if TASK_PATTERN.search(c.get("text", ""))]
@@ -168,9 +174,10 @@ async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[st
 
 
 async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[str]] = None):
-    print("[INFO] | Finding task boundaries")
+    print("[INFO] | detect_task_boundaries")
     containers = await list_pdf_containers(pdf_path)
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
+    print("[INFO] | confirm_task_text -> checking task ranges")
     to_remove = await confirm_task_text(containers, ranges)
     if to_remove:
         containers = [c for i, c in enumerate(containers) if i not in to_remove]
@@ -187,7 +194,7 @@ def crop_tasks(pdf_path: str, containers: List[Dict], ranges: List[Tuple[int, in
     segment. If ``temp_dir`` is provided the images are also written to disk for
     debugging purposes.
     """
-    print(f"[INFO] | Cropping images for {len(ranges)} tasks")
+    print(f"[INFO] | crop_tasks -> {len(ranges)} tasks")
     output: List[Tuple[str, bytes]] = []
     doc = fitz.open(pdf_path)
     for idx, (start, end) in enumerate(ranges):
