@@ -49,7 +49,8 @@ def update_progress_line1(value: str = "1"):
     data = _read_progress()
     data["1"] = value
     _write_progress(data)
-    print(f"[STATUS] | Updated key 1 of {PROGRESS_FILE} with '{value}'")
+    # Uncomment for debugging
+    # print(f"[STATUS] | Updated key 1 of {PROGRESS_FILE} with '{value}'")
 
 def update_progress_line2(value: str) -> None:
     """Update key 2 in progress.json with the given value."""

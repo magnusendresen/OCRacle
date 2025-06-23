@@ -75,6 +75,7 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
         if ok:
             with open(path, "wb") as f:
                 f.write(buf.tobytes())
+            # Uncomment for debugging
             # log(f"Saved {path}")
         else:
             log(f"[ERROR] Could not encode image for {path}")
