@@ -10,6 +10,7 @@ from PIL import Image
 
 from project_config import IMG_DIR
 from utils import log
+from time import perf_counter
 import task_boundaries
 
 
@@ -105,6 +106,7 @@ async def extract_figures(
     version: str,
     output_folder: Optional[str] = None,
 ) -> None:
+    start_time = perf_counter()
     num_imgs = sum(1 for c in containers if c.get("type") == "image")
     log(f"Figures extracted: {num_imgs}")
     output_folder = output_folder or str(IMG_DIR)
@@ -127,7 +129,7 @@ async def extract_figures(
         tasks.append(task)
     await asyncio.gather(*tasks)
     doc.close()
-    log("Figure extraction complete")
+    log(f"Figure extraction complete in {perf_counter() - start_time:.2f}s")
 
 
 async def main_async(
