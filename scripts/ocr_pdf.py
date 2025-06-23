@@ -23,9 +23,6 @@ if not json_path or not os.path.exists(json_path):
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
 log(f"Authenticated Google Vision API ({Path(json_path).name})")
 
-# Definer sti for progress.json and empty file at startup
-with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-    json.dump({}, f)
 
 def _read_progress() -> dict:
     if PROGRESS_FILE.exists():
