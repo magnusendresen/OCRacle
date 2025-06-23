@@ -81,7 +81,7 @@ void App::GUI() {
     ProgressBarIMG = new ProgressBar(*this, App::pad + 4, App::pad*22, "Image extraction");
 
     ntnuLogo = new TDT4102::Image("ntnu_logo.png");
-    ntnuLogoScale = new int(8);
+    ntnuLogoScale = new int(10);
 
     startButton->setLabelColor(TDT4102::Color::white);
     startButton->setCallback([this]() {
@@ -98,7 +98,7 @@ void App::GUI() {
         pdfHandling(selectedFormulaSheet);
     });
 
-    timerBox = new TDT4102::TextBox({2*pad + static_cast<int>(buttonWidth) + ProgressBarOCR->width - static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Tid: ");
+    timerBox = new TDT4102::TextBox({pad * 5 + static_cast<int>(buttonWidth) * 4, pad}, buttonWidth, buttonHeight / 2, "Tid: ");
 
     add(*startWidget);
     add(*startButton);
@@ -130,7 +130,7 @@ void App::update() {
     ProgressBarOCR->setCount();
     ProgressBarLLM->setCount();
     ProgressBarIMG->setCount();
-    this->draw_image({WINDOW_WIDTH - ntnuLogo->width/ *ntnuLogoScale - pad, pad}, *ntnuLogo, ntnuLogo->width/ *ntnuLogoScale, ntnuLogo->height/ *ntnuLogoScale);
+    this->draw_image({pad * 5 + static_cast<int>(buttonWidth) * 4 + 6, pad * 2 + static_cast<int>(buttonHeight) / 3}, *ntnuLogo, ntnuLogo->width/ *ntnuLogoScale, ntnuLogo->height/ *ntnuLogoScale);
 }
 
 void App::startTimer() {
