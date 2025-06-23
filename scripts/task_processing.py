@@ -18,6 +18,9 @@ from collections import defaultdict
 
 PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
+# Number of processing steps for each task in the LLM pipeline
+LLM_STEPS = 8
+
 def load_prompt(name: str) -> str:
     with open(PROMPT_DIR / f"{name}.txt", "r", encoding="utf-8") as f:
         return f.read()
@@ -100,6 +103,11 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
         #     log("Progress written to progress.json")
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
+
+def write_identify_progress(status: List[int]) -> None:
+    """Write progress for task identification to key 8."""
+    progress_str = "".join(str(x) for x in status)
+    write_progress({7: progress_str})
 
 def get_topics(emnekode: str) -> str:
     """
@@ -197,11 +205,25 @@ async def get_exam_info() -> Exam:
     log("Finding task boundaries")
     containers, task_map, ranges, assigned_tasks, extra = await task_boundaries.detect_task_boundaries(str(pdf_path))
     log("Cropping detected tasks")
+
+    identify_progress = [0] * len(ranges)
+    write_identify_progress(identify_progress)
+
+    def _id_cb(idx: int):
+        identify_progress[idx] = 1
+        write_identify_progress(identify_progress)
+
     cropped = task_boundaries.crop_tasks(
-        str(pdf_path), containers, ranges, assigned_tasks, temp_dir=Path(__file__).parent / "temp"
+        str(pdf_path), containers, ranges, assigned_tasks,
+        temp_dir=Path(__file__).parent / "temp",
+        progress_callback=_id_cb,
     )
     extra_cropped = (
-        task_boundaries.crop_tasks(str(pdf_path), [extra], [(0, 1)], ["header"], temp_dir=Path(__file__).parent / "temp")
+        task_boundaries.crop_tasks(
+            str(pdf_path), [extra], [(0, 1)], ["header"],
+            temp_dir=Path(__file__).parent / "temp",
+            progress_callback=lambda _: None,
+        )
         if extra
         else []
     )
@@ -217,6 +239,7 @@ async def get_exam_info() -> Exam:
     exam.task_numbers = assigned_tasks
     exam.total_tasks = len(assigned_tasks)
     write_progress({6: str(exam.total_tasks)})
+    write_progress({8: str(LLM_STEPS)})
 
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
         first_line = f.readline().strip()
