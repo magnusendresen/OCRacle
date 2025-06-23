@@ -37,8 +37,15 @@ async def _extract_block_text(page, block) -> str:
     return ""
 
 
-async def list_pdf_containers(pdf_path: str) -> List[Dict]:
-    """Return text and image containers from the PDF."""
+async def list_pdf_containers(
+    pdf_path: str,
+    progress_callback: Optional[Callable[[int], None]] = None,
+) -> List[Dict]:
+    """Return text and image containers from the PDF.
+
+    ``progress_callback`` is called with the current page index (0-based) after
+    each page has been processed.
+    """
     containers = []
     doc = fitz.open(pdf_path)
     for page_num, page in enumerate(doc):
@@ -75,6 +82,8 @@ async def list_pdf_containers(pdf_path: str) -> List[Dict]:
                 continue
             container["text"] = await _extract_block_text(page, block)
             containers.append(container)
+        if progress_callback:
+            progress_callback(page_num)
     log(f"Loaded PDF ({Path(pdf_path).name}) -> {len(containers)} containers found")
     return containers
 
@@ -178,9 +187,13 @@ async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[st
     return task_map, ranges, assigned
 
 
-async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[str]] = None):
+async def detect_task_boundaries(
+    pdf_path: str,
+    expected_tasks: Optional[List[str]] = None,
+    progress_callback: Optional[Callable[[int], None]] = None,
+):
     start_time = perf_counter()
-    containers_all = await list_pdf_containers(pdf_path)
+    containers_all = await list_pdf_containers(pdf_path, progress_callback)
     extra = containers_all[0] if containers_all else None
     containers = containers_all[1:]
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)

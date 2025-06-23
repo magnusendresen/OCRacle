@@ -16,6 +16,7 @@ from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
 from time import perf_counter
+import fitz
 
 PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
@@ -205,23 +206,28 @@ async def get_exam_info() -> Exam:
 
     from utils import timer
 
-    log("Finding task boundaries")
-    with timer("Detecting task boundaries"):
-        containers, task_map, ranges, assigned_tasks, extra = await task_boundaries.detect_task_boundaries(str(pdf_path))
-    log("Cropping detected tasks")
-
-    identify_progress = [0] * len(ranges)
+    doc_tmp = fitz.open(str(pdf_path))
+    identify_progress = [0] * len(doc_tmp)
+    doc_tmp.close()
     write_identify_progress(identify_progress)
 
-    def _id_cb(idx: int):
-        identify_progress[idx] = 1
-        write_identify_progress(identify_progress)
+    def _det_cb(idx: int):
+        if 0 <= idx < len(identify_progress):
+            identify_progress[idx] = 1
+            write_identify_progress(identify_progress)
+
+    log("Finding task boundaries")
+    with timer("Detecting task boundaries"):
+        containers, task_map, ranges, assigned_tasks, extra = await task_boundaries.detect_task_boundaries(
+            str(pdf_path), progress_callback=_det_cb
+        )
+    log("Cropping detected tasks")
 
     with timer("Cropping tasks"):
         cropped = task_boundaries.crop_tasks(
             str(pdf_path), containers, ranges, assigned_tasks,
             temp_dir=Path(__file__).parent / "temp",
-            progress_callback=_id_cb,
+            progress_callback=None,
         )
         extra_cropped = (
             task_boundaries.crop_tasks(
