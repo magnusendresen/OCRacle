@@ -9,8 +9,6 @@ I `progress.json` skrives følgende informasjon fra Python, som oppdaterer GUI-e
 - Fremdrift for OCR (optical character recognition) og AI-behandling  
 - Eksamensinformasjon (emnekode, versjon, antall oppgaver)
 
-## VIKTIG: I demo-versjonen av prosjektet funnet i mappa `app_demo` er fremgangen i oppgaveprossesering simulert av `demo.py`, altså benyttes ikke tilbkoblingen til Google Vision eller DeepSeek API i denne ettersom disse krever en særegen nøkkel i enviroment variables, et abonnement til disse, og mange libraries i Python. Likevel er den reelle versjonen av projektet demonstrert i mappene ``app`` og ``scripts``. En oversikt over hele prosjektet finnes her: [GitHub](https://github.com/magnusendresen/OCRacle)
-
 ---
 
 ## C++-delen
