@@ -2,7 +2,7 @@ import asyncio
 import io
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Callable
 from utils import log
 
 import fitz
@@ -192,7 +192,14 @@ async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[st
 
 
 
-def crop_tasks(pdf_path: str, containers: List[Dict], ranges: List[Tuple[int, int]], task_numbers: List[str], temp_dir: Optional[str] = None) -> List[Tuple[str, bytes]]:
+def crop_tasks(
+    pdf_path: str,
+    containers: List[Dict],
+    ranges: List[Tuple[int, int]],
+    task_numbers: List[str],
+    temp_dir: Optional[str] = None,
+    progress_callback: Optional[Callable[[int], None]] = None,
+) -> List[Tuple[str, bytes]]:
     """Crop image regions for each task and return them as bytes.
 
     Each returned tuple contains the task number and the PNG bytes for a page
@@ -225,6 +232,8 @@ def crop_tasks(pdf_path: str, containers: List[Dict], ranges: List[Tuple[int, in
                     f.write(img_bytes)
                 # Uncomment for debugging
                 # log(f"Wrote debug image {fname}")
+        if progress_callback:
+            progress_callback(idx)
     doc.close()
     return output
 

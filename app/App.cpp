@@ -76,9 +76,9 @@ void App::GUI() {
 
 
 
-    ProgressBarOCR = new ProgressBar(*this, App::pad + 4, App::pad*16, "PDF processing");
-    ProgressBarLLM = new ProgressBar(*this, App::pad + 4, App::pad*19, "Task processing");
-    ProgressBarIMG = new ProgressBar(*this, App::pad + 4, App::pad*22, "Image extraction");
+    ProgressBarIdentify = new ProgressBar(*this, App::pad + 4, App::pad*16, "Identifying tasks");
+    ProgressBarOCR = new ProgressBar(*this, App::pad + 4, App::pad*19, "OCR processing");
+    ProgressBarLLM = new ProgressBar(*this, App::pad + 4, App::pad*22, "LLM processing");
 
     ntnuLogo = new TDT4102::Image("ntnu_logo.png");
     ntnuLogoScale = new int(10);
@@ -127,9 +127,9 @@ void App::GUI() {
 }
 
 void App::update() {
+    ProgressBarIdentify->setCount();
     ProgressBarOCR->setCount();
     ProgressBarLLM->setCount();
-    ProgressBarIMG->setCount();
     this->draw_image({pad * 5 + static_cast<int>(buttonWidth) * 4 + 6, pad * 2 + static_cast<int>(buttonHeight) / 3}, *ntnuLogo, ntnuLogo->width/ *ntnuLogoScale, ntnuLogo->height/ *ntnuLogoScale);
 }
 
@@ -315,7 +315,8 @@ void App::startProcessing() {
 }
 
 // Map for lesing av tekstfilen
-std::string ocrLine, taskLine, GoogleVisionIndicatorLine, DeepSeekIndicatorLine, examSubjectLine, examVersionLine, examAmountLine, imageExtractionLine;
+std::string ocrLine, taskLine, GoogleVisionIndicatorLine, DeepSeekIndicatorLine, examSubjectLine, examVersionLine, examAmountLine, identifyLine;
+int taskSteps = 8;
 const std::map<int, std::string*> ProgressLineMap = {
     {1, &GoogleVisionIndicatorLine},
     {2, &ocrLine},
@@ -324,7 +325,7 @@ const std::map<int, std::string*> ProgressLineMap = {
     {5, &examSubjectLine},
     {6, &examVersionLine},
     {7, &examAmountLine},
-    {8, &imageExtractionLine}
+    {8, &identifyLine}
 };
 
 void App::calculateProgress() {
@@ -371,6 +372,13 @@ void App::calculateProgress() {
                                     *ProgressLineMap.at(i) = jdata[key];
                                 } else {
                                     *ProgressLineMap.at(i) = "";
+                                }
+                            }
+                            if (jdata.count("9")) {
+                                try {
+                                    taskSteps = std::stoi(jdata["9"]);
+                                } catch (...) {
+                                    taskSteps = 8;
                                 }
                             }
 
@@ -438,20 +446,20 @@ void App::calculateProgress() {
                                 std::cout << "OCR Progress: " << ProgressBarOCR->progress << std::endl;
                             }
 
-                            // Beregn bildeuthenting-progresjon til progressbar
-                            if (!imageExtractionLine.empty()) {
+                            // Beregn task-identifikasjonsprogresjon til progressbar
+                            if (!identifyLine.empty()) {
                                 int sum = 0;
                                 int count = 0;
-                                for (char c : imageExtractionLine) {
+                                for (char c : identifyLine) {
                                     if (isdigit(c)) {
                                         sum += c - '0';
                                         count++;
                                     }
                                 }
                                 if (count > 0) {
-                                    ProgressBarIMG->progress = static_cast<double>(sum) / count;
+                                    ProgressBarIdentify->progress = static_cast<double>(sum) / count;
                                 }
-                                std::cout << "Image Extraction Progress: " << ProgressBarIMG->progress << std::endl;
+                                std::cout << "Identify Progress: " << ProgressBarIdentify->progress << std::endl;
                             }
 
                             // Beregn AI-behandling-progresjon til progressbar
@@ -464,7 +472,7 @@ void App::calculateProgress() {
                                         count++;
                                     }
                                 }
-                                count *= 8;
+                                count *= taskSteps;
                                 if (count > 0) {
                                     ProgressBarLLM->progress = static_cast<double>(sum) / count;
                                 }
