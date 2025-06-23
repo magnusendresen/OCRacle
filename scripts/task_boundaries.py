@@ -4,6 +4,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Callable
 from utils import log
+from time import perf_counter
 
 import fitz
 import pytesseract
@@ -178,6 +179,7 @@ async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[st
 
 
 async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[str]] = None):
+    start_time = perf_counter()
     containers_all = await list_pdf_containers(pdf_path)
     extra = containers_all[0] if containers_all else None
     containers = containers_all[1:]
@@ -188,6 +190,7 @@ async def detect_task_boundaries(pdf_path: str, expected_tasks: Optional[List[st
         containers = [c for i, c in enumerate(containers) if i not in to_remove]
         task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
     log(f"Tasks detected: {len(ranges)}")
+    log(f"detect_task_boundaries finished in {perf_counter() - start_time:.2f}s")
     return containers, task_map, ranges, assigned, extra
 
 
@@ -206,6 +209,7 @@ def crop_tasks(
     segment. If ``temp_dir`` is provided the images are also written to disk for
     debugging purposes.
     """
+    start_time = perf_counter()
     log(f"Cropping {len(ranges)} task regions")
     output: List[Tuple[str, bytes]] = []
     doc = fitz.open(pdf_path)
@@ -235,5 +239,6 @@ def crop_tasks(
         if progress_callback:
             progress_callback(idx)
     doc.close()
+    log(f"crop_tasks finished in {perf_counter() - start_time:.2f}s")
     return output
 

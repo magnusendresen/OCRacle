@@ -4,6 +4,7 @@ import json
 import asyncio
 from pathlib import Path
 from typing import List
+from time import perf_counter
 
 from google.cloud import vision
 import fitz
@@ -89,8 +90,11 @@ def detect_text(image_content):
 async def ocr_images(images: List[bytes]) -> List[str]:
     """Run Google Vision OCR on a list of PNG bytes."""
     log(f"OCR processed: {len(images)} images")
+    start_time = perf_counter()
     tasks = [asyncio.to_thread(detect_text, img) for img in images]
-    return await asyncio.gather(*tasks)
+    results = await asyncio.gather(*tasks)
+    log(f"OCR processing took {perf_counter() - start_time:.2f}s")
+    return results
 
 def pdf_to_images(pdf_path):
     try:

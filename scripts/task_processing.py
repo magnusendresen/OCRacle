@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
+from time import perf_counter
 
 PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
@@ -202,8 +203,11 @@ async def get_exam_info() -> Exam:
         print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
+    from utils import timer
+
     log("Finding task boundaries")
-    containers, task_map, ranges, assigned_tasks, extra = await task_boundaries.detect_task_boundaries(str(pdf_path))
+    with timer("Detecting task boundaries"):
+        containers, task_map, ranges, assigned_tasks, extra = await task_boundaries.detect_task_boundaries(str(pdf_path))
     log("Cropping detected tasks")
 
     identify_progress = [0] * len(ranges)
@@ -213,23 +217,25 @@ async def get_exam_info() -> Exam:
         identify_progress[idx] = 1
         write_identify_progress(identify_progress)
 
-    cropped = task_boundaries.crop_tasks(
-        str(pdf_path), containers, ranges, assigned_tasks,
-        temp_dir=Path(__file__).parent / "temp",
-        progress_callback=_id_cb,
-    )
-    extra_cropped = (
-        task_boundaries.crop_tasks(
-            str(pdf_path), [extra], [(0, 1)], ["header"],
+    with timer("Cropping tasks"):
+        cropped = task_boundaries.crop_tasks(
+            str(pdf_path), containers, ranges, assigned_tasks,
             temp_dir=Path(__file__).parent / "temp",
-            progress_callback=lambda _: None,
+            progress_callback=_id_cb,
         )
-        if extra
-        else []
-    )
+        extra_cropped = (
+            task_boundaries.crop_tasks(
+                str(pdf_path), [extra], [(0, 1)], ["header"],
+                temp_dir=Path(__file__).parent / "temp",
+                progress_callback=lambda _: None,
+            )
+            if extra
+            else []
+        )
     log("Processing task images with Google Vision")
     ocr_inputs = [img for _, img in extra_cropped] + [img for _, img in cropped]
-    ocr_results = await ocr_pdf.ocr_images(ocr_inputs)
+    with timer("OCR processing"):
+        ocr_results = await ocr_pdf.ocr_images(ocr_inputs)
     header_text = ocr_results[0] if extra_cropped else ""
     task_results = ocr_results[1:] if extra_cropped else ocr_results
     ocr_text = " ".join([header_text] + task_results)
@@ -275,9 +281,10 @@ async def get_exam_info() -> Exam:
     exam.exam_version = version_abbr
     write_progress({5: exam.exam_version or ""})
 
-    await extract_images.extract_figures(
-        str(pdf_path), containers, task_map, exam.subject, exam.exam_version
-    )
+    with timer("Extracting figures"):
+        await extract_images.extract_figures(
+            str(pdf_path), containers, task_map, exam.subject, exam.exam_version
+        )
 
     log("Extracting exam topics")
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
@@ -299,6 +306,7 @@ async def get_exam_info() -> Exam:
     return exam
 
 async def process_task(task_number: str, exam: Exam) -> Exam:
+    start_time = perf_counter()
     log(f"Task {task_number}: extracting raw text")
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
@@ -410,12 +418,16 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
     if valid == 0:
         log(f"Task {task_number}: not approved")
-        return task_exam
+        result = task_exam
     else:
         log(f"Task {task_number}: approved")
-        return task_exam
+        result = task_exam
+
+    log(f"Task {task_number} completed in {perf_counter() - start_time:.2f}s")
+    return result
 
 async def main_async():
+    start_time = perf_counter()
     log("Starting task processing")
     exam_template = await get_exam_info()
     log("Started processing all tasks")
@@ -438,6 +450,7 @@ async def main_async():
     log(f"Failed tasks: {failed}")
     log(f"Points for tasks: {points}")
     log(f"Final total cost: {prompt_to_text.total_cost:.4f} USD")
+    log(f"Total processing time: {perf_counter() - start_time:.2f}s")
     return results
 
 
