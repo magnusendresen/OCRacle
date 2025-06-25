@@ -3,7 +3,7 @@ import extract_images
 import task_boundaries
 import ocr_pdf
 from project_config import *
-from utils import log, write_progress
+from utils import log, write_progress, update_progress_fraction
 
 import asyncio
 import json
@@ -16,7 +16,6 @@ from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
 from time import perf_counter
-import fitz
 
 PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
@@ -75,16 +74,6 @@ class Exam:
     task_numbers: List[str] = field(default_factory=list)
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
 
-
-
-def write_identify_progress(status: List[int]) -> None:
-    """Write progress for task identification to key 8."""
-    if status:
-        fraction = sum(status) / len(status)
-    else:
-        fraction = 0.0
-    progress = [task_status[t] for t in range(1, total_task_count + 1)]
-    write_progress(progress, LLM_STEPS, {7: f"{fraction:.2f}"})
 
 def get_topics(emnekode: str) -> str:
     """
@@ -180,17 +169,10 @@ async def get_exam_info() -> Exam:
         print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
-    from utils import timer
+    from utils import timer, update_progress_fraction
 
-    doc_tmp = fitz.open(str(pdf_path))
-    identify_progress = [0] * len(doc_tmp)
-    doc_tmp.close()
-    write_identify_progress(identify_progress)
-
-    def _det_cb(idx: int):
-        if 0 <= idx < len(identify_progress):
-            identify_progress[idx] = 1
-            write_identify_progress(identify_progress)
+    def _det_cb(current: int, total: int):
+        update_progress_fraction(8, current, total)
 
     log("Finding task boundaries")
     with timer("Detecting task boundaries"):

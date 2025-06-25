@@ -64,3 +64,12 @@ def write_progress(progress: List[int], n_steps: int, updates: Optional[Dict[int
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
+
+def update_progress_fraction(line: int, current: int, total: int) -> None:
+    """Update ``progress.json`` with ``current/total`` written to ``line``."""
+    try:
+        fraction = current / total if total else 0.0
+        update_progress_lines({line: f"{fraction:.2f}"})
+    except Exception as e:
+        print(f"[ERROR] Could not update progress file: {e}")
+

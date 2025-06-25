@@ -99,8 +99,14 @@ def build_container_string(containers: List[Dict]) -> str:
     return "\n\n".join(c.get("text", "") for c in containers)
 
 
-async def confirm_task_text(containers: List[Dict], ranges: List[Tuple[int, int]]) -> List[int]:
+async def confirm_task_text(
+    containers: List[Dict],
+    ranges: List[Tuple[int, int]],
+    progress_callback: Optional[Callable[[int, int], None]] = None,
+) -> List[int]:
     if not ranges:
+        if progress_callback:
+            progress_callback(1, 1)
         return []
 
     check_indices = list(range(min(3, len(ranges))))
@@ -109,7 +115,7 @@ async def confirm_task_text(containers: List[Dict], ranges: List[Tuple[int, int]
         check_indices.extend(range(tail_start, len(ranges)))
 
     remove: List[int] = []
-    for idx in check_indices:
+    for done, idx in enumerate(check_indices, start=1):
         start, end = ranges[idx]
         text = build_container_string(containers[start:end])
         prompt = (
@@ -124,9 +130,13 @@ async def confirm_task_text(containers: List[Dict], ranges: List[Tuple[int, int]
             + "Here is the text:"
             + text
         )
-        ans = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=5, is_num=False, max_len=2)
+        ans = await prompt_to_text.async_prompt_to_text(
+            prompt, max_tokens=5, is_num=False, max_len=2
+        )
         if str(ans).strip() == "0":
             remove.extend(range(start, end))
+        if progress_callback:
+            progress_callback(done, len(check_indices))
     return sorted(set(remove))
 
 
@@ -190,18 +200,39 @@ async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[st
 async def detect_task_boundaries(
     pdf_path: str,
     expected_tasks: Optional[List[str]] = None,
-    progress_callback: Optional[Callable[[int], None]] = None,
-):
+    progress_callback: Optional[Callable[[int, int], None]] = None,
+) -> Tuple[List[Dict], Dict[int, str], List[Tuple[int, int]], List[str], Optional[Dict]]:
     start_time = perf_counter()
-    containers_all = await list_pdf_containers(pdf_path, progress_callback)
+    containers_all = await list_pdf_containers(pdf_path, None)
     extra = containers_all[0] if containers_all else None
     containers = containers_all[1:]
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
+
+    check_indices = list(range(min(3, len(ranges))))
+    tail_start = max(len(ranges) - 3, 3)
+    if tail_start < len(ranges):
+        check_indices.extend(range(tail_start, len(ranges)))
+    total_steps = 1 + len(check_indices)
+    completed = 1
+    if progress_callback:
+        progress_callback(completed, total_steps)
+
     log("Finding task boundaries")
-    to_remove = await confirm_task_text(containers, ranges)
+
+    def _cb(done, _total):
+        nonlocal completed
+        completed += 1
+        if progress_callback:
+            progress_callback(completed, total_steps)
+
+    to_remove = await confirm_task_text(containers, ranges, progress_callback=_cb)
     if to_remove:
         containers = [c for i, c in enumerate(containers) if i not in to_remove]
         task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
+
+    if progress_callback:
+        progress_callback(total_steps, total_steps)
+
     log(f"Tasks detected: {len(ranges)}")
     log(f"detect_task_boundaries finished in {perf_counter() - start_time:.2f}s")
     return containers, task_map, ranges, assigned, extra
