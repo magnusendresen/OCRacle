@@ -117,8 +117,8 @@ async def process_image(index, image, ocr_progress):
     """
     result = await asyncio.to_thread(detect_text, image)
     ocr_progress[index] = 1  # Merk at siden er ferdig prosessert
-    progress_str = "".join(str(x) for x in ocr_progress)
-    update_progress_line2(progress_str)
+    progress = sum(ocr_progress) / len(ocr_progress)
+    update_progress_line2(f"{progress:.2f}")
     return result
 
 async def main_async():
@@ -153,7 +153,7 @@ async def main_async():
 
     # Initialiser en liste for OCR-status: 0 = ikke prosessert, 1 = prosessert
     ocr_progress = [0] * len(images)
-    update_progress_line2("".join(str(x) for x in ocr_progress))  # Oppdaterer med initial status
+    update_progress_line2("0.00")  # Startverdi
 
     print("[INFO] Starting text extraction from PDF pages...\n")
 

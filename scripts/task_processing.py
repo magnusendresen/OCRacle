@@ -91,8 +91,11 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
             data = {}
 
         if updates is None:
-            status_str = ''.join(str(task_status[t]) for t in range(1, total_task_count + 1))
-            updates = {3: status_str}
+            if total_task_count:
+                fraction = sum(task_status[t] for t in range(1, total_task_count + 1)) / (total_task_count * LLM_STEPS)
+            else:
+                fraction = 0.0
+            updates = {3: f"{fraction:.2f}"}
 
         for idx, text in updates.items():
             data[str(idx + 1)] = text
@@ -108,8 +111,11 @@ def write_progress(updates: Optional[Dict[int, str]] = None):
 
 def write_identify_progress(status: List[int]) -> None:
     """Write progress for task identification to key 8."""
-    progress_str = "".join(str(x) for x in status)
-    write_progress({7: progress_str})
+    if status:
+        fraction = sum(status) / len(status)
+    else:
+        fraction = 0.0
+    write_progress({7: f"{fraction:.2f}"})
 
 def get_topics(emnekode: str) -> str:
     """

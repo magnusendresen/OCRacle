@@ -218,32 +218,19 @@ void App::calculateProgress() {
                             }
 
                             if (!ocrLine.empty()) {
-                                int sum = 0;
-                                int count = 0;
-                                for (char c : ocrLine) {
-                                    if (isdigit(c)) {
-                                        sum += c - '0';
-                                        count++;
-                                    }
-                                }
-                                if (count > 0) {
-                                    ProgressBar1->progress = static_cast<double>(sum) / count;
+                                try {
+                                    ProgressBar1->progress = std::stod(ocrLine);
+                                } catch (...) {
+                                    ProgressBar1->progress = 0.0;
                                 }
                                 std::cout << "OCR Progress: " << ProgressBar1->progress << std::endl;
                             }
 
                             if (ProgressBar1->progress >= 1.0 && !taskLine.empty()) {
-                                int sum = 0;
-                                int count = 0;
-                                for (char c : taskLine) {
-                                    if (isdigit(c)) {
-                                        sum += c - '0';
-                                        count++;
-                                    }
-                                }
-                                count *= 5;
-                                if (count > 0) {
-                                    ProgressBar2->progress = static_cast<double>(sum) / count;
+                                try {
+                                    ProgressBar2->progress = std::stod(taskLine);
+                                } catch (...) {
+                                    ProgressBar2->progress = 0.0;
                                 }
                                 std::cout << "Task Progress: " << ProgressBar2->progress << std::endl;
                             }
