@@ -9,7 +9,7 @@ from time import perf_counter
 from google.cloud import vision
 import fitz
 from project_config import *
-from utils import log
+from utils import log, update_progress_lines
 
 # Sørg for UTF-8 utskrift i terminalen
 sys.stdout.reconfigure(encoding='utf-8')
@@ -24,41 +24,8 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = json_path
 log(f"Authenticated Google Vision API ({Path(json_path).name})")
 
 
-def _read_progress() -> dict:
-    if PROGRESS_FILE.exists():
-        try:
-            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return {}
-    return {}
-
-
-def _write_progress(data: dict) -> None:
-    try:
-        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f)
-    except Exception as e:
-        print(f"[ERROR] Could not write progress file: {e}")
-
-
-def update_progress_line1(value: str = "1"):
-    """Update key 1 in progress.json with the given value."""
-    data = _read_progress()
-    data["1"] = value
-    _write_progress(data)
-    # Uncomment for debugging
-    # print(f"[STATUS] | Updated key 1 of {PROGRESS_FILE} with '{value}'")
-
-def update_progress_line2(value: str) -> None:
-    """Update key 2 in progress.json with the given value."""
-    data = _read_progress()
-    data["2"] = value
-    _write_progress(data)
-    print(f"[STATUS] | Updated key 2 of {PROGRESS_FILE} with '{value}'")
-
 # Sett opp Google Vision API-status (linje 1)
-update_progress_line1("1")
+update_progress_lines({1: "1"})
 
 def detect_text(image_content):
     try:
@@ -118,7 +85,7 @@ async def process_image(index, image, ocr_progress):
     result = await asyncio.to_thread(detect_text, image)
     ocr_progress[index] = 1  # Merk at siden er ferdig prosessert
     progress = sum(ocr_progress) / len(ocr_progress)
-    update_progress_line2(f"{progress:.2f}")
+    update_progress_lines({2: f"{progress:.2f}"})
     return result
 
 async def main_async():
@@ -153,7 +120,7 @@ async def main_async():
 
     # Initialiser en liste for OCR-status: 0 = ikke prosessert, 1 = prosessert
     ocr_progress = [0] * len(images)
-    update_progress_line2("0.00")  # Startverdi
+    update_progress_lines({2: "0.00"})  # Startverdi
 
     print("[INFO] Starting text extraction from PDF pages...\n")
 
