@@ -5,23 +5,9 @@ import contextvars
 from openai import OpenAI  # Using OpenAI SDK for DeepSeek
 import builtins
 from project_config import *
-from utils import log
+from utils import log, update_progress_lines
 import json
 
-def update_progress_line3(value: str = "1") -> None:
-    """Update key 3 in progress.json with the given value."""
-    try:
-        if PROGRESS_FILE.exists():
-            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-        else:
-            data = {}
-        data["3"] = value
-        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f)
-        print(f"[STATUS] | Updated key 3 of {PROGRESS_FILE} with '{value}'")
-    except Exception as e:
-        print(f"[ERROR] Could not update key 3 in {PROGRESS_FILE}: {e}")
 
 # Context variables for task-ID og processing step
 current_task = contextvars.ContextVar("current_task", default="")
@@ -43,7 +29,7 @@ total_cost = 0  # Global variabel for akkumulert kostnad
 
 log("Connected to DeepSeek API")
 # Oppdaterer progress.json nøkkel 3 med "1" når DeepSeek er kobla til.
-update_progress_line3("1")
+update_progress_lines({3: "1"})
 
 def isNumber(a):
     return a.strip().isnumeric()

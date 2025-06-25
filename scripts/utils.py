@@ -6,6 +6,29 @@ import json
 
 from project_config import PROGRESS_FILE
 
+
+def read_progress() -> Dict[str, str]:
+    """Return the current ``progress.json`` data or an empty dict."""
+    if PROGRESS_FILE.exists():
+        try:
+            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+
+def update_progress_lines(lines: Dict[int, str]) -> None:
+    """Update ``progress.json`` with 1-indexed line numbers."""
+    try:
+        data = read_progress()
+        for line, text in lines.items():
+            data[str(line)] = text
+        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f)
+    except Exception as e:
+        print(f"[ERROR] Could not update progress file: {e}")
+
 def log(message: str) -> None:
     print(f"[{datetime.now():%H:%M:%S}] --- {message}")
 
@@ -30,12 +53,6 @@ def write_progress(progress: List[int], n_steps: int, updates: Optional[Dict[int
     written to the JSON file.
     """
     try:
-        if PROGRESS_FILE.exists():
-            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-        else:
-            data = {}
-
         if updates is None:
             updates = {}
 
@@ -43,11 +60,7 @@ def write_progress(progress: List[int], n_steps: int, updates: Optional[Dict[int
         fraction = sum(progress) / total if total else 0.0
         updates.setdefault(3, f"{fraction:.2f}")
 
-        for idx, text in updates.items():
-            data[str(idx + 1)] = text
-
-        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f)
+        update_progress_lines({idx + 1: text for idx, text in updates.items()})
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
