@@ -432,49 +432,30 @@ void App::calculateProgress() {
             
                             // Beregn OCR-progresjonen til progressbar
                             if (!ocrLine.empty()) {
-                                int sum = 0;
-                                int count = 0;
-                                for (char c : ocrLine) {
-                                    if (isdigit(c)) {
-                                        sum += c - '0';
-                                        count++;
-                                    }
-                                }
-                                if (count > 0) {
-                                    ProgressBarOCR->progress = static_cast<double>(sum) / count;
+                                try {
+                                    ProgressBarOCR->progress = std::stod(ocrLine);
+                                } catch (...) {
+                                    ProgressBarOCR->progress = 0.0;
                                 }
                                 std::cout << "OCR Progress: " << ProgressBarOCR->progress << std::endl;
                             }
 
                             // Beregn task-identifikasjonsprogresjon til progressbar
                             if (!identifyLine.empty()) {
-                                int sum = 0;
-                                int count = 0;
-                                for (char c : identifyLine) {
-                                    if (isdigit(c)) {
-                                        sum += c - '0';
-                                        count++;
-                                    }
-                                }
-                                if (count > 0) {
-                                    ProgressBarIdentify->progress = static_cast<double>(sum) / count;
+                                try {
+                                    ProgressBarIdentify->progress = std::stod(identifyLine);
+                                } catch (...) {
+                                    ProgressBarIdentify->progress = 0.0;
                                 }
                                 std::cout << "Identify Progress: " << ProgressBarIdentify->progress << std::endl;
                             }
 
                             // Beregn AI-behandling-progresjon til progressbar
                             if (ProgressBarOCR->progress >= 1.0 && !taskLine.empty()) {
-                                int sum = 0;
-                                int count = 0;
-                                for (char c : taskLine) {
-                                    if (isdigit(c)) {
-                                        sum += c - '0';
-                                        count++;
-                                    }
-                                }
-                                count *= taskSteps;
-                                if (count > 0) {
-                                    ProgressBarLLM->progress = static_cast<double>(sum) / count;
+                                try {
+                                    ProgressBarLLM->progress = std::stod(taskLine);
+                                } catch (...) {
+                                    ProgressBarLLM->progress = 0.0;
                                 }
                                 std::cout << "Task Progress: " << ProgressBarLLM->progress << std::endl;
                             }

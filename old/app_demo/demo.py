@@ -26,22 +26,21 @@ def simulate_progress():
     # Linje 3: DeepSeek status
     write_line(3, "1")
 
-    # Linje 2: OCR fremdrift (gradvis fylt med 1)
-    ocr_line = list("0" * 10)
-    for i in range(10):
-        ocr_line[i] = "1"
-        write_line(2, "".join(ocr_line))
+    # Linje 2: OCR fremdrift (0.00 -> 1.00)
+    total = 10
+    for i in range(total):
+        progress = (i + 1) / total
+        write_line(2, f"{progress:.2f}")
 
     # Linje 5–7: Eksamensdata
     write_line(5, "EKS1234")
     write_line(6, "VÅR 20XY")
     write_line(7, "10")
 
-    # Linje 4: Task progress (gradvis fylt med 5)
-    task_line = list("0" * 10)
-    for i in range(10):
-        task_line[i] = "5"
-        write_line(4, "".join(task_line))
+    # Linje 4: Task progress (0.00 -> 1.00)
+    for i in range(total):
+        progress = (i + 1) / total
+        write_line(4, f"{progress:.2f}")
 
     print("\n✅ Simulering ferdig – progress.txt er komplett!")
 
