@@ -133,7 +133,7 @@ def get_subject_code_variations(subject: str):
     pattern_parts = []
 
     for ch in subject:
-        if ch == 'Y':
+        if ch == 'Y' and pattern_parts[-1] == r'\d':
             pattern_parts.append(r'\d')  # ett valgfritt siffer
         else:
             pattern_parts.append(re.escape(ch))  # bokstavelig match

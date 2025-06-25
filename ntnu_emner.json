@@ -7932,7 +7932,12 @@
     {
         "Emnekode": "IFYX1000",
         "Emnenavn": "Fysikk",
-        "Temaer": []
+        "Temaer": [
+            "Mekanikk",
+            "Svingninger",
+            "Bølgefysikk",
+            "Fluidmekanikk"
+        ]
     },
     {
         "Emnekode": "TFOR0112",
