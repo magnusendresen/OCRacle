@@ -209,7 +209,7 @@ async def get_exam_info() -> Exam:
     exam.task_numbers = assigned_tasks
     exam.total_tasks = len(assigned_tasks)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
-    write_progress(progress, LLM_STEPS, {6: str(len(exam.total_tasks))})
+    write_progress(progress, LLM_STEPS, {6: str(exam.total_tasks)})
     write_progress(progress, LLM_STEPS, {8: str(LLM_STEPS)})
 
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
