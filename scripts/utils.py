@@ -49,9 +49,8 @@ def write_progress(progress: List[int], n_steps: int, updates: Optional[Dict[int
 
     ``progress`` should contain integers between ``0`` and ``n_steps`` for each
     running instance. ``n_steps`` specifies the total number of steps for an
-    instance. ``updates`` maps one-indexed line numbers to text that should be
-    written to the JSON file. The total progress fraction for all tasks is
-    written to line 4 unless another value for line 4 is provided in ``updates``.
+    instance. ``updates`` maps zero-indexed line numbers to text that should be
+    written to the JSON file.
     """
     try:
         if updates is None:
@@ -59,9 +58,9 @@ def write_progress(progress: List[int], n_steps: int, updates: Optional[Dict[int
 
         total = len(progress) * n_steps
         fraction = sum(progress) / total if total else 0.0
-        updates.setdefault(4, f"{fraction:.2f}")
+        updates.setdefault(3, f"{fraction:.2f}")
 
-        update_progress_lines(updates)
+        update_progress_lines({idx + 1: text for idx, text in updates.items()})
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
