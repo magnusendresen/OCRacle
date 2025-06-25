@@ -3,7 +3,7 @@ import extract_images
 import task_boundaries
 import ocr_pdf
 from project_config import *
-from utils import log
+from utils import log, write_progress
 
 import asyncio
 import json
@@ -76,38 +76,6 @@ class Exam:
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
 
 
-def write_progress(updates: Optional[Dict[int, str]] = None):
-    """
-    Write updates to ``progress.json``.
-    ``updates`` should map zero-indexed line numbers to text. If ``updates`` is
-    ``None`` the function will write the current task_status to key ``4``
-    (1-indexed in the JSON file).
-    """
-    try:
-        if PROGRESS_FILE.exists():
-            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-        else:
-            data = {}
-
-        if updates is None:
-            if total_task_count:
-                fraction = sum(task_status[t] for t in range(1, total_task_count + 1)) / (total_task_count * LLM_STEPS)
-            else:
-                fraction = 0.0
-            updates = {3: f"{fraction:.2f}"}
-
-        for idx, text in updates.items():
-            data[str(idx + 1)] = text
-
-        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f)
-
-        # Uncomment the following lines if you want to log progress updates
-        # for idx, text in updates.items():
-        #     log("Progress written to progress.json")
-    except Exception as e:
-        print(f"[ERROR] Could not update progress file: {e}")
 
 def write_identify_progress(status: List[int]) -> None:
     """Write progress for task identification to key 8."""
@@ -115,7 +83,8 @@ def write_identify_progress(status: List[int]) -> None:
         fraction = sum(status) / len(status)
     else:
         fraction = 0.0
-    write_progress({7: f"{fraction:.2f}"})
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS, {7: f"{fraction:.2f}"})
 
 def get_topics(emnekode: str) -> str:
     """
@@ -193,6 +162,7 @@ def get_subject_code_variations(subject: str):
 async def get_exam_info() -> Exam:
     log("Processing PDF contents")
     exam = Exam()
+    global total_task_count
 
     try:
         with DIR_FILE.open("r", encoding="utf-8") as dir_file:
@@ -256,8 +226,9 @@ async def get_exam_info() -> Exam:
         exam.ocr_tasks[task_num] = exam.ocr_tasks.get(task_num, "") + text
     exam.task_numbers = assigned_tasks
     exam.total_tasks = len(assigned_tasks)
-    write_progress({6: str(exam.total_tasks)})
-    write_progress({8: str(LLM_STEPS)})
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS, {6: str(exam.total_tasks)})
+    write_progress(progress, LLM_STEPS, {8: str(LLM_STEPS)})
 
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
         first_line = f.readline().strip()
@@ -276,7 +247,8 @@ async def get_exam_info() -> Exam:
             ).strip().upper()
     log(f"Subject code: {exam.subject}")
     exam.matching_codes = get_subject_code_variations(exam.subject)
-    write_progress({4: exam.subject or ""})
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS, {4: exam.subject or ""})
 
     log("Prompting exam version")
     exam_raw_version = await prompt_to_text.async_prompt_to_text(
@@ -291,7 +263,8 @@ async def get_exam_info() -> Exam:
     else:
         version_abbr = exam_raw_version.upper()
     exam.exam_version = version_abbr
-    write_progress({5: exam.exam_version or ""})
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS, {5: exam.exam_version or ""})
 
     with timer("Extracting figures"):
         await extract_images.extract_figures(
@@ -311,7 +284,6 @@ async def get_exam_info() -> Exam:
         exam.exam_topics = []
     log(f"Topics extracted: {len(exam.exam_topics)}")
 
-    global total_task_count
     total_task_count = exam.total_tasks
     log(f"Tasks for processing: {exam.total_tasks}")
 
@@ -337,7 +309,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         )
     )
     task_status[task_number] = 1
-    write_progress()
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS)
 
     images = int(
         await prompt_to_text.async_prompt_to_text(
@@ -359,7 +332,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         log(f"Task {task_number}: no figures found")
         task_exam.images = []
     task_status[task_number] = 2
-    write_progress()
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS)
 
     points_str = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("extract_points") + task_output,
@@ -372,7 +346,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     except (TypeError, ValueError):
         task_exam.points = None
     task_status[task_number] = 3
-    write_progress()
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS)
     if task_exam.points is not None:
         log(f"Task {task_number}: points extracted -> {task_exam.points}p")
 
@@ -391,7 +366,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     log(f"Task {task_number}: topic -> {task_exam.topic}")
     add_topics(task_exam.topic, exam)
     task_status[task_number] = 4
-    write_progress()
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS)
 
     for step_idx, instruction in enumerate([
         "translate_to_bokmaal",
@@ -413,7 +389,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         elif instruction == "format_html_output":
             log(f"Task {task_number}: final HTML formatted")
         task_status[task_number] = step_idx
-        write_progress()
+        progress = [task_status[t] for t in range(1, total_task_count + 1)]
+        write_progress(progress, LLM_STEPS)
 
     valid = int(
         await prompt_to_text.async_prompt_to_text(
@@ -424,7 +401,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         )
     )
     task_status[task_number] = 8
-    write_progress()
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS)
 
     task_exam.task_text = task_output
 
