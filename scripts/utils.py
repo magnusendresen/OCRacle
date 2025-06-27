@@ -5,13 +5,17 @@ from typing import List, Dict, Optional
 import json
 
 from project_config import PROGRESS_FILE
+from threading import Lock
+
+# Global lock to avoid concurrent writes to ``progress.json``
+_progress_lock = Lock()
 
 
 def read_progress() -> Dict[str, str]:
     """Return the current ``progress.json`` data or an empty dict."""
     if PROGRESS_FILE.exists():
         try:
-            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
+            with _progress_lock, open(PROGRESS_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             return {}
@@ -21,11 +25,12 @@ def read_progress() -> Dict[str, str]:
 def update_progress_lines(lines: Dict[int, str]) -> None:
     """Update ``progress.json`` with 1-indexed line numbers."""
     try:
-        data = read_progress()
-        for line, text in lines.items():
-            data[str(line)] = text
-        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-            json.dump(data, f)
+        with _progress_lock:
+            data = read_progress()
+            for line, text in lines.items():
+                data[str(line)] = text
+            with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
+                json.dump(data, f)
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
