@@ -55,6 +55,7 @@ def main(tasks):
                 "matching_codes",
                 "exam_topics",
                 "task_numbers",
+                "ocr_tasks",
             }
         }
         task_num = task_copy.get("task_number") or 0
