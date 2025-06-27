@@ -58,7 +58,7 @@ def write_progress(progress: List[int], n_steps: int, updates: Optional[Dict[int
 
         total = len(progress) * n_steps
         fraction = sum(progress) / total if total else 0.0
-        updates.setdefault(3, f"{fraction:.2f}")
+        updates.setdefault(4, f"{fraction:.2f}")
 
         update_progress_lines({idx + 1: text for idx, text in updates.items()})
     except Exception as e:
