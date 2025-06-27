@@ -109,8 +109,8 @@ async def confirm_task_text(
             progress_callback(1, 1)
         return []
 
-    check_indices = list(range(min(3, len(ranges))))
-    tail_start = max(len(ranges) - 3, 3)
+    check_indices = list(range(min(2, len(ranges))))
+    tail_start = max(len(ranges) - 2, 2)
     if tail_start < len(ranges):
         check_indices.extend(range(tail_start, len(ranges)))
 
@@ -208,8 +208,8 @@ async def detect_task_boundaries(
     containers = containers_all[1:]
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
 
-    check_indices = list(range(min(3, len(ranges))))
-    tail_start = max(len(ranges) - 3, 3)
+    check_indices = list(range(min(2, len(ranges))))
+    tail_start = max(len(ranges) - 2, 2)
     if tail_start < len(ranges):
         check_indices.extend(range(tail_start, len(ranges)))
     total_steps = 1 + len(check_indices)
