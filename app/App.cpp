@@ -76,8 +76,7 @@ void App::GUI() {
 
 
 
-    ProgressBarIdentify = new ProgressBar(*this, App::pad + 4, App::pad*16, "Identifying tasks");
-    ProgressBarLLM = new ProgressBar(*this, App::pad + 4, App::pad*19, "LLM processing");
+    ProgressBarLLM = new ProgressBar(*this, App::pad + 4, App::pad*16, "LLM processing");
 
     ntnuLogo = new TDT4102::Image("ntnu_logo.png");
     ntnuLogoScale = new int(10);
@@ -126,7 +125,6 @@ void App::GUI() {
 }
 
 void App::update() {
-    ProgressBarIdentify->setCount();
     ProgressBarLLM->setCount();
     this->draw_image({pad * 5 + static_cast<int>(buttonWidth) * 4 + 6, pad * 2 + static_cast<int>(buttonHeight) / 3}, *ntnuLogo, ntnuLogo->width/ *ntnuLogoScale, ntnuLogo->height/ *ntnuLogoScale);
 }
@@ -313,7 +311,7 @@ void App::startProcessing() {
 }
 
 // Map for lesing av tekstfilen
-std::string taskLine, GoogleVisionIndicatorLine, DeepSeekIndicatorLine, examSubjectLine, examVersionLine, examAmountLine, identifyLine;
+std::string taskLine, GoogleVisionIndicatorLine, DeepSeekIndicatorLine, examSubjectLine, examVersionLine, examAmountLine;
 int taskSteps = 8;
 const std::map<int, std::string*> ProgressLineMap = {
     {1, &GoogleVisionIndicatorLine},
@@ -321,8 +319,7 @@ const std::map<int, std::string*> ProgressLineMap = {
     {4, &taskLine},
     {5, &examSubjectLine},
     {6, &examVersionLine},
-    {7, &examAmountLine},
-    {8, &identifyLine}
+    {7, &examAmountLine}
 };
 
 void App::calculateProgress() {
@@ -427,16 +424,6 @@ void App::calculateProgress() {
 
                             }
             
-                            // Beregn task-identifikasjonsprogresjon til progressbar
-                            if (!identifyLine.empty()) {
-                                try {
-                                    ProgressBarIdentify->progress = std::stod(identifyLine);
-                                } catch (...) {
-                                    ProgressBarIdentify->progress = 0.0;
-                                }
-                                std::cout << "Identify Progress: " << ProgressBarIdentify->progress << std::endl;
-                            }
-
                             // Beregn AI-behandling-progresjon til progressbar
                             if (!taskLine.empty()) {
                                 try {

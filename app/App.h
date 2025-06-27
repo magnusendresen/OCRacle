@@ -51,7 +51,6 @@ public:
 
     TDT4102::TextInput *ignoredTopics;
 
-    ProgressBar *ProgressBarIdentify = nullptr;
     ProgressBar *ProgressBarLLM = nullptr;
 
     TDT4102::Image *ntnuLogo = nullptr;
