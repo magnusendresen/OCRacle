@@ -308,11 +308,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     )
     if images > 0:
         task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
-        if task_dir.exists():
-            found_images = sorted(task_dir.glob("*.png"))
-            task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
-        else:
-            task_exam.images = []
+        found_images = sorted(task_dir.glob("*.png"))
+        task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
         log(f"Task {task_number}: detecting figures -> {len(task_exam.images)} found")
     else:
         log(f"Task {task_number}: no figures found")

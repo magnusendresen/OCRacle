@@ -45,10 +45,15 @@
       padding: 10px;
       max-width: 700px;
     }
-    img {
-      display: block;
+    .img-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 10px;
-      max-width: 100%;
+    }
+    .img-container img {
+      max-width: 45%;
+      height: auto;
     }
   </style>
 </head>
@@ -72,6 +77,12 @@
     const taskSelect = document.getElementById("task");
     const taskTextDiv = document.getElementById("task_text");
 
+    function formatExamVersion(ver) {
+      const year = ver.slice(1);
+      const season = ver[0] === 'V' ? 'V\u00e5r' : 'H\u00f8st';
+      return `${season} 20${year}`;
+    }
+
     const relativePath = '../tasks.json';
 
     fetch(relativePath)
@@ -84,11 +95,11 @@
 
         for (const [subj, exams] of Object.entries(data)) {
           if (!subjects[subj]) subjects[subj] = {};
-          for (const exam of Object.values(exams)) {
+          for (const [ver, exam] of Object.entries(exams)) {
             (exam.tasks || []).forEach(entry => {
               const top = entry.topic || "Ukjent tema";
               if (!subjects[subj][top]) subjects[subj][top] = [];
-              subjects[subj][top].push(entry);
+              subjects[subj][top].push({ ...entry, exam_version: ver });
             });
           }
         }
@@ -134,6 +145,7 @@
             opt.textContent = `Oppgave ${entry.task_number}`;
             opt.dataset.text = entry.task_text;
             opt.dataset.images = JSON.stringify(entry.images || []);
+            opt.dataset.exam = entry.exam_version;
             taskSelect.appendChild(opt);
           });
 
@@ -144,14 +156,21 @@
           const selectedOption = taskSelect.options[taskSelect.selectedIndex];
           const raw = selectedOption?.dataset.text || "Ingen oppgave valgt.";
           const images = JSON.parse(selectedOption?.dataset.images || "[]");
+          const exam = selectedOption?.dataset.exam || "";
 
-          taskTextDiv.innerHTML = raw;
+          taskTextDiv.innerHTML = "";
 
-          console.log("Valgt oppgave:", selectedOption?.textContent);
-          console.log("Bilder:", images);
+          const header = document.createElement("h2");
+          header.textContent = `${subjectSelect.value} Eksamen ${formatExamVersion(exam)}`;
+          taskTextDiv.appendChild(header);
+
+          const sub = document.createElement("h3");
+          sub.textContent = `Oppgave ${selectedOption.value}`;
+          taskTextDiv.appendChild(sub);
 
           if (images.length > 0) {
             const imgContainer = document.createElement("div");
+            imgContainer.className = "img-container";
 
             images.forEach(imgPath => {
               const normalized = imgPath.replace(/\\/g, "/");
@@ -160,12 +179,17 @@
               img.alt = "Bilde til oppgave";
               img.onerror = () => {
                 console.warn("Kunne ikke laste bilde:", img.src);
+                img.replaceWith(document.createTextNode("[Bilde mangler]"));
               };
               imgContainer.appendChild(img);
             });
 
             taskTextDiv.appendChild(imgContainer);
           }
+
+          const textDiv = document.createElement("div");
+          textDiv.innerHTML = raw;
+          taskTextDiv.appendChild(textDiv);
 
           if (window.MathJax?.typesetPromise) {
             MathJax.typesetClear();
