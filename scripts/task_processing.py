@@ -277,6 +277,10 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
+    task_number = int(task_number)
+
+    print(f"\n\n\n TASK NUMBER = {task_number} \n\n\n")
+    print(f"\n\n\n TASK PROGRESS ARRAY = {task_status} \n\n\n")
 
     task_output = str(exam.ocr_tasks.get(task_number, ""))
     valid = 0
