@@ -278,7 +278,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam = deepcopy(exam)
     task_exam.task_number = task_number
     task_exam.exam_version = exam.exam_version
-    task_number = int(task_number)
+
+    task_idx = int(task_number)
 
     task_output = str(exam.ocr_tasks.get(task_number, ""))
 
@@ -293,7 +294,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             max_len=2000,
         )
     )
-    task_status[task_number] = 1
+    task_status[task_idx] = 1
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
 
@@ -310,7 +311,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     else:
         log(f"Task {task_number}: image directory does not exist")
         task_exam.images = []
-    task_status[task_number] = 2
+    task_status[task_idx] = 2
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
 
@@ -324,7 +325,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         task_exam.points = int(points_str) if points_str is not None else None
     except (TypeError, ValueError):
         task_exam.points = None
-    task_status[task_number] = 3
+    task_status[task_idx] = 3
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
     if task_exam.points is not None:
@@ -344,7 +345,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     )
     log(f"Task {task_number}: topic -> {task_exam.topic}")
     add_topics(task_exam.topic, exam)
-    task_status[task_number] = 4
+    task_status[task_idx] = 4
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
 
@@ -367,7 +368,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             pass
         elif instruction == "format_html_output":
             log(f"Task {task_number}: final HTML formatted")
-        task_status[task_number] = step_idx
+        task_status[task_idx] = step_idx
         progress = [task_status[t] for t in range(1, total_task_count + 1)]
         write_progress(progress, LLM_STEPS)
 
@@ -379,7 +380,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             max_len=2,
         )
     )
-    task_status[task_number] = 8
+    task_status[task_idx] = 8
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
 
