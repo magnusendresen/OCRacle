@@ -1,11 +1,13 @@
-"""Utilities for splitting PDFs into logical tasks."""
+"""Utilities for detecting and cropping exam tasks from PDFs."""
+
+from __future__ import annotations
 
 import asyncio
 import io
 import re
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Tuple
 from time import perf_counter
+from typing import Callable, Dict, List, Optional, Tuple
 
 import tkinter
 from tkinter import messagebox
@@ -18,22 +20,25 @@ import prompt_to_text
 from project_config import PROMPT_CONFIG
 from utils import log
 
-TASK_PATTERN = re.compile(
-    r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)",
-    re.IGNORECASE,
-)
+# Matches patterns like "Oppgave 1a" or "Task 2" to guess task numbers
+TASK_PATTERN = re.compile(r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)", re.IGNORECASE)
 
+
+# ---------------------------------------------------------------------------
+# Helper functions
+# ---------------------------------------------------------------------------
 
 def _indices_to_check(length: int) -> List[int]:
-    """Return indices of the first and last two ranges for manual checking."""
-    head = list(range(min(2, length)))
+    """Return indices of ranges that should be verified manually."""
+    if length <= 2:
+        return list(range(length))
+    head = [0, 1]
     tail_start = max(length - 2, 2)
-    return head + list(range(tail_start, length)) if tail_start < length else head
+    return head + list(range(tail_start, length))
 
 
-async def _extract_block_text(page, block) -> str:
+async def _extract_block_text(page: fitz.Page, block: Dict) -> str:
     """Return text from a text block or OCR an image block."""
-
     if "lines" in block:
         lines = []
         for line in block["lines"]:
@@ -51,20 +56,22 @@ async def _extract_block_text(page, block) -> str:
             )
         except Exception:
             return ""
-
     return ""
 
 
-async def list_pdf_containers(
-    pdf_path: str, progress_callback: Optional[Callable[[int], None]] = None
-) -> List[Dict]:
-    """Return text and image containers for every page in the PDF."""
+# ---------------------------------------------------------------------------
+# Container utilities
+# ---------------------------------------------------------------------------
 
+async def list_pdf_containers(
+    pdf_path: str,
+    progress_callback: Optional[Callable[[int], None]] = None,
+) -> List[Dict]:
+    """Extract containers with text or images from the PDF."""
     containers: List[Dict] = []
     with fitz.open(pdf_path) as doc:
-        for page_num, page in enumerate(doc):
-            if page_num == 0:
-                # Include the entire first page as a separate container
+        for page_idx, page in enumerate(doc):
+            if page_idx == 0:
                 r = page.rect
                 containers.append(
                     {
@@ -75,12 +82,10 @@ async def list_pdf_containers(
                         "text": "",
                     }
                 )
-
             for block in page.get_text("dict")["blocks"]:
                 x0, y0, x1, y1 = block["bbox"]
-                if (x1 - x0) < 20 or (y1 - y0) < 8:
+                if x1 - x0 < 20 or y1 - y0 < 8:
                     continue
-
                 block_type = (
                     "text"
                     if "lines" in block
@@ -88,128 +93,113 @@ async def list_pdf_containers(
                 )
                 if block_type == "unknown":
                     continue
-
                 text = await _extract_block_text(page, block)
                 containers.append(
                     {
-                        "page": page_num + 1,
+                        "page": page_idx + 1,
                         "y": round(y0),
                         "bbox": (x0, y0, x1, y1),
                         "type": block_type,
                         "text": text,
                     }
                 )
-
             if progress_callback:
-                progress_callback(page_num)
-
+                progress_callback(page_idx + 1)
     log(f"Loaded PDF ({Path(pdf_path).name}) -> {len(containers)} containers found")
     return containers
 
 
 def build_container_string_with_identifier(containers: List[Dict]) -> str:
-    return "".join(
-        f"\n\n=== CONTAINER {idx} ({c.get('type', 'unknown')}) ===\n{c.get('text', '')}"
-        for idx, c in enumerate(containers)
-    )
+    """Return concatenated container texts with container indices."""
+    parts = []
+    for idx, c in enumerate(containers):
+        parts.append(f"\n\n=== CONTAINER {idx} ({c.get('type', 'unknown')}) ===\n{c.get('text', '')}")
+    return "".join(parts)
 
 
 def build_container_string(containers: List[Dict]) -> str:
+    """Return the combined text of ``containers`` separated by blank lines."""
     return "\n\n".join(c.get("text", "") for c in containers)
 
+
+# ---------------------------------------------------------------------------
+# Language model helpers
+# ---------------------------------------------------------------------------
 
 async def confirm_task_text(
     containers: List[Dict],
     ranges: List[Tuple[int, int]],
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> List[int]:
-    """Ask the model to verify that the detected ranges actually contain tasks."""
+    """Ask the language model to verify that the detected ranges contain tasks."""
     if not ranges:
         if progress_callback:
             progress_callback(1, 1)
         return []
 
     check_indices = _indices_to_check(len(ranges))
-
-    remove: List[int] = []
+    to_remove: List[int] = []
     for done, idx in enumerate(check_indices, start=1):
         start, end = ranges[idx]
         text = build_container_string(containers[start:end])
         prompt = (
             PROMPT_CONFIG
             + "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
-            + "Does this text very clearly include a task, or is it unrelated to a task - e.g. exam administration information? "
-            + "Just because the text includes a number or the word 'task' (in any language) does not mean it is a task. "
-            + "Tasks may be short or long, but you should be able to identify them by their content. "
-            + "If the text includes a lot of text that is not related to a task, such as exam instructions, it is likely not a task. "
-            + "If it includes a task, respond with with 1, if not respond with 0. "
-            + "Do not reply with multiple numbers, only a single 1 or 0. "
-            + "Here is the text:"
-            + text
+            + "Does this text clearly contain a task, or is it unrelated exam administration text? "
+            + "Only respond with 1 or 0. "
+            + "Here is the text:" + text
         )
         ans = await prompt_to_text.async_prompt_to_text(
             prompt, max_tokens=5, is_num=False, max_len=2
         )
         if str(ans).strip() == "0":
-            remove.extend(range(start, end))
+            to_remove.extend(range(start, end))
         if progress_callback:
             progress_callback(done, len(check_indices))
-    return sorted(set(remove))
+    return sorted(set(to_remove))
 
 
 async def _query_markers(prompt: str) -> List[int]:
-    """Send a prompt to the language model and parse the numeric response."""
+    """Send a prompt to the language model and parse numbers from the response."""
     resp = await prompt_to_text.async_prompt_to_text(
         prompt, max_tokens=2000, is_num=False, max_len=1000
     )
-    return (
-        sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
-    )
+    return sorted({int(tok) for tok in re.findall(r"\d+", str(resp))}) if resp else []
 
 
 async def query_start_markers(containers: List[Dict]) -> List[int]:
-    """Ask the language model for indices that look like task starts."""
-
+    """Ask the model for container indices that appear to start new tasks."""
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
-        "Identify the number of every container that clearly marks the start of a new task. "
-        "It will not likely be consistent to just look for the word 'task' or 'oppgave' or a number in the text, "
-        "so you will have to look at the text as a whole to understand where tasks are found. "
-        "If it seems a container indicates the start of a task, make sure it is not related to the previous task, because then it should not be marked. "
-        "Be careful to not make markers where the text following text is clearly not a task, even though it may have a number or task phrase. "
-        "If a container only includes the text 'Maks poeng' or similar, it is not a task. "
+        "Identify every number that clearly marks the start of a new task. "
+        "Do not guess purely based on numbers in the text. "
         "Respond only with the numbers separated by commas. "
         "Here is the text: "
         + build_container_string_with_identifier(containers)
     )
-    markers = await _query_markers(prompt)
+    return await _query_markers(prompt)
 
-    return markers
 
-    # def _is_summary(text: str) -> bool:
-    #     t = text.lower()
-    #     return "maks poeng" in t and "oppgavetype" in t
-
-    # return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
-
+# ---------------------------------------------------------------------------
+# Task assignment
+# ---------------------------------------------------------------------------
 
 async def _assign_tasks(
     containers: List[Dict], expected_tasks: Optional[List[str]] = None
 ) -> Tuple[Dict[int, str], List[Tuple[int, int]], List[str]]:
-    """Assign a task number to each container."""
-
+    """Assign a task number to each container based on LLM markers."""
     markers = await query_start_markers(containers)
     if not markers:
         root = tkinter.Tk()
         root.withdraw()
         messagebox.showwarning(
-            "Ingen oppgaver funnet ved query_start_markers()."
-            )
+            "Ingen oppgaver funnet ved query_start_markers().",
+        )
         root.destroy()
         return {}, [], []
 
-    markers = sorted(set([0] + markers))
+    markers = sorted({0, *markers})
     ranges: List[Tuple[int, int]] = []
     for i, start in enumerate(markers):
         end = markers[i + 1] if i + 1 < len(markers) else len(containers)
@@ -222,27 +212,29 @@ async def _assign_tasks(
             task_num = expected_tasks[idx - 1]
         else:
             first_text = containers[start].get("text", "") if start < len(containers) else ""
-            m2 = TASK_PATTERN.search(first_text)
-            task_num = m2.group(2) if m2 else str(idx)
+            m = TASK_PATTERN.search(first_text)
+            task_num = m.group(2) if m else str(idx)
         assigned.append(task_num)
         for ci in range(start, end):
             task_map[ci] = task_num
         text = build_container_string(containers[start:end])
-        word_estimate = int(len(text) / 5)
+        word_estimate = len(text) // 5
         log(
-            f"Task {task_num}, start marker: {start}, "
-            f"end marker: {end}, words: {word_estimate}"
+            f"Task {task_num}, start marker: {start}, end marker: {end}, words: {word_estimate}"
         )
     return task_map, ranges, assigned
 
+
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
 
 async def detect_task_boundaries(
     pdf_path: str,
     expected_tasks: Optional[List[str]] = None,
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> Tuple[List[Dict], Dict[int, str], List[Tuple[int, int]], List[str], Optional[Dict]]:
-    """Detect task sections in the given PDF and return cropped ranges."""
-
+    """Detect task boundaries in ``pdf_path`` and return container info."""
     start_time = perf_counter()
     containers_all = await list_pdf_containers(pdf_path, None)
     extra = containers_all[0] if containers_all else None
@@ -257,7 +249,7 @@ async def detect_task_boundaries(
 
     log("Finding task boundaries")
 
-    def _cb(done, _total):
+    def _cb(done: int, _total: int) -> None:
         nonlocal completed
         completed += 1
         if progress_callback:
@@ -276,9 +268,6 @@ async def detect_task_boundaries(
     return containers, task_map, ranges, assigned, extra
 
 
-
-
-
 def crop_tasks(
     pdf_path: str,
     containers: List[Dict],
@@ -288,7 +277,6 @@ def crop_tasks(
     progress_callback: Optional[Callable[[int], None]] = None,
 ) -> List[Tuple[str, bytes]]:
     """Crop page regions for each task and return them as PNG bytes."""
-
     start_time = perf_counter()
     log(f"Cropping {len(ranges)} task regions")
     output: List[Tuple[str, bytes]] = []
@@ -315,20 +303,19 @@ def crop_tasks(
                     fname = Path(temp_dir) / f"task_{task_num}_{page_no}.png"
                     with open(fname, "wb") as f:
                         f.write(img_bytes)
-                    # log(f"Wrote debug image {fname}")
 
                 if (x1 - x0) < page.rect.width * 0.98:
                     root = tkinter.Tk()
                     root.withdraw()
-                    messagebox.showwarning(
-                        "Beskjæring av oppgave",
+                    message = (
                         f"Advarsel: Oppgave {task_num} på side {page_no} er smalere enn hele siden. "
-                        "Sjekk at beskjæringen er riktig.",
+                        "Sjekk at beskjæringen er riktig."
                     )
+                    messagebox.showwarning("Beskjæring av oppgave", message)
                     root.destroy()
 
             if progress_callback:
-                progress_callback(idx)
+                progress_callback(idx + 1)
 
     log(f"crop_tasks finished in {perf_counter() - start_time:.2f}s")
     return output
