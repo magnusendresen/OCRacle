@@ -1,10 +1,14 @@
+"""Utilities for splitting PDFs into logical tasks."""
+
 import asyncio
 import io
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional, Callable
-from utils import log
+from typing import Callable, Dict, List, Optional, Tuple
 from time import perf_counter
+
+import tkinter
+from tkinter import messagebox
 
 import fitz
 import pytesseract
@@ -12,80 +16,93 @@ from PIL import Image
 
 import prompt_to_text
 from project_config import PROMPT_CONFIG
-import tkinter
-from tkinter import messagebox
+from utils import log
+
+TASK_PATTERN = re.compile(
+    r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)",
+    re.IGNORECASE,
+)
 
 
-TASK_PATTERN = re.compile(r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)", re.IGNORECASE)
+def _indices_to_check(length: int) -> List[int]:
+    """Return indices of the first and last two ranges for manual checking."""
+    head = list(range(min(2, length)))
+    tail_start = max(length - 2, 2)
+    return head + list(range(tail_start, length)) if tail_start < length else head
 
 
 async def _extract_block_text(page, block) -> str:
-    """Extract text from a block without using external OCR services."""
+    """Return text from a text block or OCR an image block."""
+
     if "lines" in block:
         lines = []
         for line in block["lines"]:
             parts = [span.get("text", "") for span in line.get("spans", [])]
             lines.append(" ".join(parts))
         return " ".join(lines).strip()
-    elif "image" in block or block.get("type") == 1:
+
+    if "image" in block or block.get("type") == 1:
         try:
             clip = fitz.Rect(block["bbox"])
             pix = page.get_pixmap(clip=clip, dpi=300)
-            img_bytes = pix.tobytes("png")
-            rgb = Image.open(io.BytesIO(img_bytes)).convert("RGB")
-            return await asyncio.to_thread(pytesseract.image_to_string, rgb, lang="eng+nor")
+            rgb = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB")
+            return await asyncio.to_thread(
+                pytesseract.image_to_string, rgb, lang="eng+nor"
+            )
         except Exception:
             return ""
+
     return ""
 
 
 async def list_pdf_containers(
-    pdf_path: str,
-    progress_callback: Optional[Callable[[int], None]] = None,
+    pdf_path: str, progress_callback: Optional[Callable[[int], None]] = None
 ) -> List[Dict]:
-    """Return text and image containers from the PDF.
+    """Return text and image containers for every page in the PDF."""
 
-    ``progress_callback`` is called with the current page index (0-based) after
-    each page has been processed.
-    """
-    containers = []
-    doc = fitz.open(pdf_path)
-    for page_num, page in enumerate(doc):
-        if page_num == 0:
-            # Insert an extra container capturing the whole first page
-            r = page.rect
-            containers.append({
-                "page": 1,
-                "y": -1,
-                "bbox": (r.x0, r.y0, r.x1, r.y1),
-                "type": "extra",
-                "text": "",
-            })
-        blocks = page.get_text("dict")["blocks"]
-        for block in blocks:
-            x0, y0, x1, y1 = block["bbox"]
-            if (x1 - x0) < 20 or (y1 - y0) < 8:
-                continue
-            container = {
-                "page": page_num + 1,
-                "y": round(y0),
-                "bbox": (x0, y0, x1, y1),
-                "type": (
+    containers: List[Dict] = []
+    with fitz.open(pdf_path) as doc:
+        for page_num, page in enumerate(doc):
+            if page_num == 0:
+                # Include the entire first page as a separate container
+                r = page.rect
+                containers.append(
+                    {
+                        "page": 1,
+                        "y": -1,
+                        "bbox": (r.x0, r.y0, r.x1, r.y1),
+                        "type": "extra",
+                        "text": "",
+                    }
+                )
+
+            for block in page.get_text("dict")["blocks"]:
+                x0, y0, x1, y1 = block["bbox"]
+                if (x1 - x0) < 20 or (y1 - y0) < 8:
+                    continue
+
+                block_type = (
                     "text"
                     if "lines" in block
-                    else (
-                        "image"
-                        if "image" in block or block.get("type") == 1
-                        else "unknown"
-                    )
-                ),
-            }
-            if container["type"] == "unknown":
-                continue
-            container["text"] = await _extract_block_text(page, block)
-            containers.append(container)
-        if progress_callback:
-            progress_callback(page_num)
+                    else ("image" if "image" in block or block.get("type") == 1 else "unknown")
+                )
+                if block_type == "unknown":
+                    continue
+
+                text = await _extract_block_text(page, block)
+                containers.append(
+                    {
+                        "page": page_num + 1,
+                        "y": round(y0),
+                        "bbox": (x0, y0, x1, y1),
+                        "type": block_type,
+                        "text": text,
+                    }
+                )
+
+            if progress_callback:
+                progress_callback(page_num)
+
     log(f"Loaded PDF ({Path(pdf_path).name}) -> {len(containers)} containers found")
     return containers
 
@@ -106,15 +123,13 @@ async def confirm_task_text(
     ranges: List[Tuple[int, int]],
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> List[int]:
+    """Ask the model to verify that the detected ranges actually contain tasks."""
     if not ranges:
         if progress_callback:
             progress_callback(1, 1)
         return []
 
-    check_indices = list(range(min(2, len(ranges))))
-    tail_start = max(len(ranges) - 2, 2)
-    if tail_start < len(ranges):
-        check_indices.extend(range(tail_start, len(ranges)))
+    check_indices = _indices_to_check(len(ranges))
 
     remove: List[int] = []
     for done, idx in enumerate(check_indices, start=1):
@@ -143,11 +158,18 @@ async def confirm_task_text(
 
 
 async def _query_markers(prompt: str) -> List[int]:
-    resp = await prompt_to_text.async_prompt_to_text(prompt, max_tokens=2000, is_num=False, max_len=1000)
-    return sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
+    """Send a prompt to the language model and parse the numeric response."""
+    resp = await prompt_to_text.async_prompt_to_text(
+        prompt, max_tokens=2000, is_num=False, max_len=1000
+    )
+    return (
+        sorted(set(int(tok) for tok in re.findall(r"\d+", str(resp)))) if resp else []
+    )
 
 
 async def query_start_markers(containers: List[Dict]) -> List[int]:
+    """Ask the language model for indices that look like task starts."""
+
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
@@ -172,7 +194,11 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     # return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
 
 
-async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[str]] = None) -> Tuple[Dict[int, str], List[Tuple[int, int]], List[str]]:
+async def _assign_tasks(
+    containers: List[Dict], expected_tasks: Optional[List[str]] = None
+) -> Tuple[Dict[int, str], List[Tuple[int, int]], List[str]]:
+    """Assign a task number to each container."""
+
     markers = await query_start_markers(containers)
     if not markers:
         root = tkinter.Tk()
@@ -209,16 +235,15 @@ async def detect_task_boundaries(
     expected_tasks: Optional[List[str]] = None,
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> Tuple[List[Dict], Dict[int, str], List[Tuple[int, int]], List[str], Optional[Dict]]:
+    """Detect task sections in the given PDF and return cropped ranges."""
+
     start_time = perf_counter()
     containers_all = await list_pdf_containers(pdf_path, None)
     extra = containers_all[0] if containers_all else None
     containers = containers_all[1:]
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
 
-    check_indices = list(range(min(2, len(ranges))))
-    tail_start = max(len(ranges) - 2, 2)
-    if tail_start < len(ranges):
-        check_indices.extend(range(tail_start, len(ranges)))
+    check_indices = _indices_to_check(len(ranges))
     total_steps = 1 + len(check_indices)
     completed = 1
     if progress_callback:
@@ -246,6 +271,8 @@ async def detect_task_boundaries(
 
 
 
+
+
 def crop_tasks(
     pdf_path: str,
     containers: List[Dict],
@@ -254,54 +281,48 @@ def crop_tasks(
     temp_dir: Optional[str] = None,
     progress_callback: Optional[Callable[[int], None]] = None,
 ) -> List[Tuple[str, bytes]]:
-    """Crop image regions for each task and return them as bytes.
+    """Crop page regions for each task and return them as PNG bytes."""
 
-    Each returned tuple contains the task number and the PNG bytes for a page
-    segment. If ``temp_dir`` is provided the images are also written to disk for
-    debugging purposes.
-    """
     start_time = perf_counter()
     log(f"Cropping {len(ranges)} task regions")
     output: List[Tuple[str, bytes]] = []
-    doc = fitz.open(pdf_path)
-    for idx, (start, end) in enumerate(ranges):
-        task_num = task_numbers[idx] if idx < len(task_numbers) else str(idx + 1)
-        pages: Dict[int, List[Tuple[float, float, float, float]]] = {}
-        for c in containers[start:end]:
-            p = c["page"]
-            pages.setdefault(p, [])
-            pages[p].append(c["bbox"])
-        for page_no, boxes in pages.items():
-            page = doc[page_no - 1]
-            page_width = page.rect.width
-            x0 = 0
-            x1 = page_width
-            y0 = min(b[1] for b in boxes)
-            y1 = max(b[3] for b in boxes)
-            rect = fitz.Rect(x0, y0, x1, y1)
-            pix = doc[page_no - 1].get_pixmap(clip=rect, dpi=300)
-            img_bytes = pix.tobytes("png")
-            output.append((task_num, img_bytes))
-            if temp_dir:
-                Path(temp_dir).mkdir(parents=True, exist_ok=True)
-                fname = Path(temp_dir) / f"task_{task_num}_{page_no}.png"
-                with open(fname, "wb") as f:
-                    f.write(img_bytes)
-                # Uncomment for debugging
-                # log(f"Wrote debug image {fname}")
-        page_width = doc[page_no - 1].rect.width
-        if (x1 - x0) < page_width * 0.98:  # allow for small rounding errors
-            root = tkinter.Tk()
-            root.withdraw()
-            messagebox.showwarning(
-            "Beskjæring av oppgave",
-            f"Advarsel: Oppgave {task_num} på side {page_no} er smalere enn hele siden. "
-            "Sjekk at beskjæringen er riktig."
-            )
-            root.destroy()
-        if progress_callback:
-            progress_callback(idx)
-    doc.close()
+
+    with fitz.open(pdf_path) as doc:
+        for idx, (start, end) in enumerate(ranges):
+            task_num = task_numbers[idx] if idx < len(task_numbers) else str(idx + 1)
+            pages: Dict[int, List[Tuple[float, float, float, float]]] = {}
+            for c in containers[start:end]:
+                pages.setdefault(c["page"], []).append(c["bbox"])
+
+            for page_no, boxes in pages.items():
+                page = doc[page_no - 1]
+                x0, x1 = 0, page.rect.width
+                y0 = min(b[1] for b in boxes)
+                y1 = max(b[3] for b in boxes)
+                rect = fitz.Rect(x0, y0, x1, y1)
+                pix = page.get_pixmap(clip=rect, dpi=300)
+                img_bytes = pix.tobytes("png")
+                output.append((task_num, img_bytes))
+
+                if temp_dir:
+                    Path(temp_dir).mkdir(parents=True, exist_ok=True)
+                    fname = Path(temp_dir) / f"task_{task_num}_{page_no}.png"
+                    with open(fname, "wb") as f:
+                        f.write(img_bytes)
+                    # log(f"Wrote debug image {fname}")
+
+                if (x1 - x0) < page.rect.width * 0.98:
+                    root = tkinter.Tk()
+                    root.withdraw()
+                    messagebox.showwarning(
+                        "Beskjæring av oppgave",
+                        f"Advarsel: Oppgave {task_num} på side {page_no} er smalere enn hele siden. "
+                        "Sjekk at beskjæringen er riktig.",
+                    )
+                    root.destroy()
+
+            if progress_callback:
+                progress_callback(idx)
+
     log(f"crop_tasks finished in {perf_counter() - start_time:.2f}s")
     return output
-
