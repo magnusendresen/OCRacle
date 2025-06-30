@@ -12,6 +12,8 @@ from PIL import Image
 
 import prompt_to_text
 from project_config import PROMPT_CONFIG
+import tkinter
+from tkinter import messagebox
 
 
 TASK_PATTERN = re.compile(r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)", re.IGNORECASE)
@@ -149,32 +151,37 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
-        "Identify the number of every container that clearly marks the start of a new TASK. "
-        "For example phrases beginning with 'Oppgave 1', 'Oppgave 2a' and similar. "
-        "In some cases, the beginning of a task may just be indicated by a number. "
-        "In other cases, the beginning may not be obvious, so you will have to look at the text as a whole. "
+        "Identify the number of every container that clearly marks the start of a new task. "
+        "It will not likely be consistent to just look for the word 'task' or 'oppgave' or a number in the text, "
+        "so you will have to look at the text as a whole to understand where tasks are found. "
+        "If it seems a container indicates the start of a task, make sure it is not related to the previous task, because then it should not be marked. "
         "Be careful to not make markers where the text following text is clearly not a task, even though it may have a number or task phrase. "
+        "If a container only includes the text 'Maks poeng' or similar, it is not a task. "
         "Respond only with the numbers separated by commas. "
         "Here is the text: "
         + build_container_string_with_identifier(containers)
     )
     markers = await _query_markers(prompt)
 
-    def _is_summary(text: str) -> bool:
-        t = text.lower()
-        return "maks poeng" in t and "oppgavetype" in t
+    return markers
 
-    return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
+    # def _is_summary(text: str) -> bool:
+    #     t = text.lower()
+    #     return "maks poeng" in t and "oppgavetype" in t
+
+    # return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
 
 
 async def _assign_tasks(containers: List[Dict], expected_tasks: Optional[List[str]] = None) -> Tuple[Dict[int, str], List[Tuple[int, int]], List[str]]:
     markers = await query_start_markers(containers)
     if not markers:
-        markers = [idx for idx, c in enumerate(containers) if TASK_PATTERN.search(c.get("text", ""))]
-        if not markers:
-            ranges = [(i, i + 1) for i in range(len(containers))]
-            task_map = {i: str(i + 1) for i in range(len(containers))}
-            return task_map, ranges, [str(i + 1) for i in range(len(containers))]
+        root = tkinter.Tk()
+        root.withdraw()
+        messagebox.showwarning(
+            "Ingen oppgaver funnet ved query_start_markers()."
+            )
+        root.destroy()
+        return {}, [], []
 
     markers = sorted(set([0] + markers))
     ranges: List[Tuple[int, int]] = []
@@ -265,9 +272,11 @@ def crop_tasks(
             pages.setdefault(p, [])
             pages[p].append(c["bbox"])
         for page_no, boxes in pages.items():
-            x0 = min(b[0] for b in boxes)
+            page = doc[page_no - 1]
+            page_width = page.rect.width
+            x0 = 0
+            x1 = page_width
             y0 = min(b[1] for b in boxes)
-            x1 = max(b[2] for b in boxes)
             y1 = max(b[3] for b in boxes)
             rect = fitz.Rect(x0, y0, x1, y1)
             pix = doc[page_no - 1].get_pixmap(clip=rect, dpi=300)
@@ -280,6 +289,16 @@ def crop_tasks(
                     f.write(img_bytes)
                 # Uncomment for debugging
                 # log(f"Wrote debug image {fname}")
+        page_width = doc[page_no - 1].rect.width
+        if (x1 - x0) < page_width * 0.98:  # allow for small rounding errors
+            root = tkinter.Tk()
+            root.withdraw()
+            messagebox.showwarning(
+            "Beskjæring av oppgave",
+            f"Advarsel: Oppgave {task_num} på side {page_no} er smalere enn hele siden. "
+            "Sjekk at beskjæringen er riktig."
+            )
+            root.destroy()
         if progress_callback:
             progress_callback(idx)
     doc.close()

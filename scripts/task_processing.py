@@ -200,6 +200,7 @@ async def get_exam_info() -> Exam:
     ocr_inputs = [img for _, img in extra_cropped] + [img for _, img in cropped]
     with timer("OCR processing"):
         ocr_results = await ocr_pdf.ocr_images(ocr_inputs)
+    
     header_text = ocr_results[0] if extra_cropped else ""
     task_results = ocr_results[1:] if extra_cropped else ocr_results
     ocr_text = " ".join([header_text] + task_results)
@@ -279,10 +280,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam.exam_version = exam.exam_version
     task_number = int(task_number)
 
-    print(f"\n\n\n TASK NUMBER = {task_number} \n\n\n")
-    print(f"\n\n\n TASK PROGRESS ARRAY = {task_status} \n\n\n")
-
     task_output = str(exam.ocr_tasks.get(task_number, ""))
+
     valid = 0
     images = 0
 
