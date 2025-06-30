@@ -18,17 +18,15 @@ import prompt_to_text
 from project_config import PROMPT_CONFIG
 from utils import log
 
+CHECKED_TASKS = 5
+
 TASK_PATTERN = re.compile(
     r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)",
     re.IGNORECASE,
 )
 
 
-def _indices_to_check(length: int) -> List[int]:
-    """Return indices of the first and last two ranges for manual checking."""
-    head = list(range(min(2, length)))
-    tail_start = max(length - 2, 2)
-    return head + list(range(tail_start, length)) if tail_start < length else head
+
 
 
 async def _extract_block_text(page, block) -> str:
@@ -129,13 +127,11 @@ async def confirm_task_text(
             progress_callback(1, 1)
         return []
 
-    check_indices = _indices_to_check(len(ranges))
+    max_checks = min(CHECKED_TASKS, len(ranges))
+    total_expected = max_checks * 2
 
-    remove: List[int] = []
-    for done, idx in enumerate(check_indices, start=1):
-        start, end = ranges[idx]
-        text = build_container_string(containers[start:end])
-        prompt = (
+    def _build_prompt(text: str) -> str:
+        return (
             PROMPT_CONFIG
             + "MAKE SURE YOU ONLY RESPOND WITH 0 OR 1!!! "
             + "Does this text very clearly include a task, or is it unrelated to a task - e.g. exam administration information? "
@@ -147,13 +143,46 @@ async def confirm_task_text(
             + "Here is the text:"
             + text
         )
+
+    remove: List[int] = []
+    done = 0
+
+    for idx in range(max_checks):
+        start, end = ranges[idx]
+        text = build_container_string(containers[start:end])
+        prompt = _build_prompt(text)
         ans = await prompt_to_text.async_prompt_to_text(
             prompt, max_tokens=5, is_num=False, max_len=2
         )
+        done += 1
         if str(ans).strip() == "0":
             remove.extend(range(start, end))
+        else:
+            break
         if progress_callback:
-            progress_callback(done, len(check_indices))
+            progress_callback(done, total_expected)
+
+    for offset in range(1, max_checks + 1):
+        idx = len(ranges) - offset
+        if idx < max_checks:
+            break
+        start, end = ranges[idx]
+        text = build_container_string(containers[start:end])
+        prompt = _build_prompt(text)
+        ans = await prompt_to_text.async_prompt_to_text(
+            prompt, max_tokens=5, is_num=False, max_len=2
+        )
+        done += 1
+        if str(ans).strip() == "0":
+            remove.extend(range(start, end))
+        else:
+            break
+        if progress_callback:
+            progress_callback(done, total_expected)
+
+    if progress_callback:
+        progress_callback(done, total_expected)
+
     return sorted(set(remove))
 
 
@@ -249,8 +278,8 @@ async def detect_task_boundaries(
     containers = containers_all[1:]
     task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
 
-    check_indices = _indices_to_check(len(ranges))
-    total_steps = 1 + len(check_indices)
+    check_steps = min(len(ranges), CHECKED_TASKS) * 2
+    total_steps = 1 + check_steps
     completed = 1
     if progress_callback:
         progress_callback(completed, total_steps)
@@ -263,7 +292,9 @@ async def detect_task_boundaries(
         if progress_callback:
             progress_callback(completed, total_steps)
 
-    to_remove = await confirm_task_text(containers, ranges, progress_callback=_cb)
+    to_remove = await confirm_task_text(
+        containers, ranges, progress_callback=_cb
+    )
     if to_remove:
         containers = [c for i, c in enumerate(containers) if i not in to_remove]
         task_map, ranges, assigned = await _assign_tasks(containers, expected_tasks)
