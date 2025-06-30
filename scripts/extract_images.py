@@ -12,8 +12,6 @@ from project_config import IMG_DIR
 from utils import log
 from time import perf_counter
 import task_boundaries
-import tkinter as tk
-from tkinter import messagebox
 
 
 TEXT_CONTENT_RATIO = 40
@@ -89,11 +87,6 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
 async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int = 0):
     text = await _get_text(img)
     ratio = len(text) / (text.count("\n") + 1)
-
-    root = tk.Tk()
-    root.withdraw()
-    messagebox.showwarning("Image Ratio", f"Image ratio for task {task_num}: {ratio:.2f}")
-    root.destroy()
 
     if ratio <= TEXT_CONTENT_RATIO:
         save_func(img, task_num)
