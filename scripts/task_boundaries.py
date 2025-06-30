@@ -20,11 +20,6 @@ from utils import log
 
 CHECKED_TASKS = 5
 
-TASK_PATTERN = re.compile(
-    r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)",
-    re.IGNORECASE,
-)
-
 
 
 
@@ -149,6 +144,7 @@ async def confirm_task_text(
 
     for idx in range(max_checks):
         start, end = ranges[idx]
+        log(f"Checking containers {start}-{end - 1} from start")
         text = build_container_string(containers[start:end])
         prompt = _build_prompt(text)
         ans = await prompt_to_text.async_prompt_to_text(
@@ -156,8 +152,10 @@ async def confirm_task_text(
         )
         done += 1
         if str(ans).strip() == "0":
+            log(f"Containers {start}-{end - 1} invalid")
             remove.extend(range(start, end))
         else:
+            log(f"Containers {start}-{end - 1} valid")
             break
         if progress_callback:
             progress_callback(done, total_expected)
@@ -167,6 +165,7 @@ async def confirm_task_text(
         if idx < max_checks:
             break
         start, end = ranges[idx]
+        log(f"Checking containers {start}-{end - 1} from end")
         text = build_container_string(containers[start:end])
         prompt = _build_prompt(text)
         ans = await prompt_to_text.async_prompt_to_text(
@@ -174,8 +173,10 @@ async def confirm_task_text(
         )
         done += 1
         if str(ans).strip() == "0":
+            log(f"Containers {start}-{end - 1} invalid")
             remove.extend(range(start, end))
         else:
+            log(f"Containers {start}-{end - 1} valid")
             break
         if progress_callback:
             progress_callback(done, total_expected)
@@ -250,17 +251,13 @@ async def _assign_tasks(
         if expected_tasks and idx - 1 < len(expected_tasks):
             task_num = expected_tasks[idx - 1]
         else:
-            first_text = containers[start].get("text", "") if start < len(containers) else ""
-            m2 = TASK_PATTERN.search(first_text)
-            task_num = m2.group(2) if m2 else str(idx)
+            task_num = str(idx)
         assigned.append(task_num)
         for ci in range(start, end):
             task_map[ci] = task_num
-        text = build_container_string(containers[start:end])
-        word_estimate = int(len(text) / 5)
         log(
             f"Task {task_num}, start marker: {start}, "
-            f"end marker: {end}, words: {word_estimate}"
+            f"end marker: {end}"
         )
     return task_map, ranges, assigned
 
