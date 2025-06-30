@@ -7,6 +7,8 @@ import fitz
 import numpy as np
 import pytesseract
 from PIL import Image
+import tkinter as tk
+from tkinter import messagebox
 
 from project_config import IMG_DIR
 from utils import log
@@ -87,6 +89,12 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
 async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int = 0):
     text = await _get_text(img)
     ratio = len(text) / (text.count("\n") + 1)
+
+    if ratio > 20:
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showwarning("Image Ratio", f"Image ratio for task {task_num}: {ratio:.2f}")
+        root.destroy()
 
     if ratio <= TEXT_CONTENT_RATIO:
         save_func(img, task_num)

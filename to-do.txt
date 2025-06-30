@@ -9,6 +9,6 @@ Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvar
 
 Implementere prompting og formattering for programmeringsbokser.
 
-Sørge for at timeren stopper når prosessen er ferdig.
-
 Hvis den ytterste containeren inneholder en oppgave, så er det trivielt at den nest ytterste containeren også gjør det.
+
+TASK_PATTERN = re.compile(
