@@ -227,6 +227,12 @@ async def _assign_tasks(
         assigned.append(task_num)
         for ci in range(start, end):
             task_map[ci] = task_num
+        text = build_container_string(containers[start:end])
+        word_estimate = int(len(text) / 5)
+        log(
+            f"Task {task_num}, start marker: {start}, "
+            f"end marker: {end}, words: {word_estimate}"
+        )
     return task_map, ranges, assigned
 
 
