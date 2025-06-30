@@ -12,9 +12,11 @@ from project_config import IMG_DIR
 from utils import log
 from time import perf_counter
 import task_boundaries
+import tkinter as tk
+from tkinter import messagebox
 
 
-TEXT_LEN_LIMIT = 75
+TEXT_CONTENT_RATIO = 40
 MIN_CONTOUR_AREA = 15_000
 MIN_CONTOUR_HEIGHT = 120
 OVERLAP_IOU_THRESHOLD = 0.3
@@ -86,16 +88,27 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
 
 async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int = 0):
     text = await _get_text(img)
-    if len(text) <= TEXT_LEN_LIMIT:
+    ratio = len(text) / (text.count("\n") + 1)
+
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showwarning("Image Ratio", f"Image ratio for task {task_num}: {ratio:.2f}")
+    root.destroy()
+
+    if ratio <= TEXT_CONTENT_RATIO:
         save_func(img, task_num)
         return
+
     if attempt >= 2:
         return
+
     subs = _detect_crops(img)
     if not subs:
         return
+
     for sub in subs:
         await _process_image(sub, task_num, save_func, attempt + 1)
+
 
 
 async def extract_figures(

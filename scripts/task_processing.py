@@ -297,21 +297,18 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
 
-    images = int(
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG + load_prompt("detect_images") + task_output,
-            max_tokens=1000,
-            is_num=True,
-            max_len=2,
-        )
-    )
-    if images > 0:
-        task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / task_number
+    # Check if images exist for this task and add them to the object if they do
+    task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / str(task_number)
+    if task_dir.exists():
         found_images = sorted(task_dir.glob("*.png"))
-        task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
-        log(f"Task {task_number}: detecting figures -> {len(task_exam.images)} found")
+        if found_images:
+            task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
+            log(f"Task {task_number}: figures found -> {len(task_exam.images)}")
+        else:
+            log(f"Task {task_number}: no figures found")
+            task_exam.images = []
     else:
-        log(f"Task {task_number}: no figures found")
+        log(f"Task {task_number}: image directory does not exist")
         task_exam.images = []
     task_status[task_number] = 2
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
