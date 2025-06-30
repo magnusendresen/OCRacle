@@ -18,11 +18,6 @@ import prompt_to_text
 from project_config import PROMPT_CONFIG
 from utils import log
 
-TASK_PATTERN = re.compile(
-    r"(Oppg(?:ave|\xE5ve)?|Task|Problem)\s*(\d+[a-zA-Z]?)",
-    re.IGNORECASE,
-)
-
 CHECKED_TASKS = 5
 
 
@@ -256,9 +251,7 @@ async def _assign_tasks(
         if expected_tasks and idx - 1 < len(expected_tasks):
             task_num = expected_tasks[idx - 1]
         else:
-            first_text = containers[start].get("text", "") if start < len(containers) else ""
-            m2 = TASK_PATTERN.search(first_text)
-            task_num = m2.group(2) if m2 else str(idx)
+            task_num = str(idx)
         assigned.append(task_num)
         for ci in range(start, end):
             task_map[ci] = task_num
