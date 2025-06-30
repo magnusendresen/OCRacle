@@ -14,6 +14,8 @@ from project_config import IMG_DIR
 from utils import log
 from time import perf_counter
 import task_boundaries
+import io
+from PIL import ImageTk
 
 
 TEXT_CONTENT_RATIO = 40
@@ -90,11 +92,49 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     text = await _get_text(img)
     ratio = len(text) / (text.count("\n") + 1)
 
-    if ratio > 20:
-        root = tk.Tk()
-        root.withdraw()
-        messagebox.showwarning("Image Ratio", f"Image ratio for task {task_num}: {ratio:.2f}")
-        root.destroy()
+    words = text.split()
+    avg_word_len = sum(len(word) for word in words) / len(words) if words else 0
+    keep = "✔✔✔" if avg_word_len <= 4 else "✖✖✖"
+
+    root = tk.Tk()
+    root.withdraw()
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    pil_img = Image.fromarray(img_rgb)
+
+    # Resize image to fit in a max 600x600 window, keeping aspect ratio
+    max_size = 800
+    w, h = pil_img.size
+    scale = min(max_size / w, max_size / h, 1.0)
+    new_size = (int(w * scale), int(h * scale))
+    pil_img_resized = pil_img.resize(new_size, Image.Resampling.LANCZOS)
+
+    img_tk = ImageTk.PhotoImage(pil_img_resized)
+    top = tk.Toplevel(root)
+    top.title(f"Image Ratio Warning - Task {task_num}")
+    label = tk.Label(top, text=keep)
+    label.pack()
+    img_label = tk.Label(top, image=img_tk)
+    img_label.image = img_tk  # Keep reference
+    img_label.pack()
+    ok_btn = tk.Button(top, text="OK", command=top.destroy)
+    ok_btn.pack()
+
+    def on_enter(event):
+        top.destroy()
+
+    top.bind("<Return>", on_enter)  # Bind Enter key to close window
+
+    # Set window size to fit image and center on screen
+    top.update_idletasks()
+    win_w = top.winfo_width()
+    win_h = top.winfo_height()
+    screen_w = top.winfo_screenwidth()
+    screen_h = top.winfo_screenheight()
+    x = (screen_w // 2) - (win_w // 2)
+    y = (screen_h // 2) - (win_h // 2)
+    top.geometry(f"+{x}+{y}")
+    root.wait_window(top)
+    root.destroy()
 
     if ratio <= TEXT_CONTENT_RATIO:
         save_func(img, task_num)
