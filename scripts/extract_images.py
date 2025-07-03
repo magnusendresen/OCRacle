@@ -9,6 +9,7 @@ import pytesseract
 from PIL import Image
 import tkinter as tk
 from tkinter import messagebox
+import re
 
 from project_config import IMG_DIR
 from utils import log
@@ -93,9 +94,62 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     ratio = len(text) / (text.count("\n") + 1)
 
     words = text.split()
-    avg_word_len = sum(len(word) for word in words) / len(words) if words else 0
-    keep = "✔✔✔" if avg_word_len <= 4 else "✖✖✖"
 
+    words = [w.replace('\n', ' ') for w in words]
+
+    words = re.findall(r'\b[a-zA-ZæøåÆØÅ0-9]+\b', text)
+
+    words = [re.sub(r'(.)\1{2,}', r'\1', w) for w in words]
+
+    avg_word_len = sum(len(word) for word in words) / len(words) if words else 0
+
+
+    len_max = 250
+    ratio_max = 20
+    avg_word_len_max = 3
+
+    len_bool = len(text) > len_max
+    ratio_bool = ratio > ratio_max
+    avg_bool = avg_word_len > avg_word_len_max
+    admin_bool = "format" in text.lower() or "words:" in text.lower()
+
+    len_croc = ">" if len_bool else "<"
+    ratio_croc = ">" if ratio_bool else "<"
+    avg_croc = ">" if avg_bool else "<"
+    admin_includes = "includes" if admin_bool else "does not include"
+
+    keep = "✔✔✔"
+    if (avg_bool and (len_bool or ratio_bool)) or admin_bool:
+        keep = "✖✖✖"
+
+
+    keep += (
+        f"\nlen = {len(text)} {len_croc} {len_max},"
+        f"\nratio = {ratio:.2f} {ratio_croc} {ratio_max},"
+        f"\navg_word_len = {avg_word_len:.2f} {avg_croc} {avg_word_len_max}"
+        f"\n{admin_includes} admin keywords"
+    )
+
+    keep += "\n" + " ".join(words)
+    
+    # Uncomment for debugging
+    # popup_img()
+
+    if ratio <= TEXT_CONTENT_RATIO:
+        save_func(img, task_num)
+        return
+
+    if attempt >= 2:
+        return
+
+    subs = _detect_crops(img)
+    if not subs:
+        return
+
+    for sub in subs:
+        await _process_image(sub, task_num, save_func, attempt + 1)
+
+def popup_img():
     root = tk.Tk()
     root.withdraw()
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -135,22 +189,6 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     top.geometry(f"+{x}+{y}")
     root.wait_window(top)
     root.destroy()
-
-    if ratio <= TEXT_CONTENT_RATIO:
-        save_func(img, task_num)
-        return
-
-    if attempt >= 2:
-        return
-
-    subs = _detect_crops(img)
-    if not subs:
-        return
-
-    for sub in subs:
-        await _process_image(sub, task_num, save_func, attempt + 1)
-
-
 
 async def extract_figures(
     pdf_path: str,
