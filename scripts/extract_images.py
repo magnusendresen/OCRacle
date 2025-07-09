@@ -149,6 +149,7 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     for sub in subs:
         await _process_image(sub, task_num, save_func, attempt + 1)
 
+"""
 def popup_img():
     root = tk.Tk()
     root.withdraw()
@@ -189,7 +190,7 @@ def popup_img():
     top.geometry(f"+{x}+{y}")
     root.wait_window(top)
     root.destroy()
-
+"""
 async def extract_figures(
     pdf_path: str,
     containers: List[Dict],
