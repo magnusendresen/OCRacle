@@ -305,5 +305,153 @@
                 }
             ]
         }
+    },
+    "INGX1002": {
+        "H24": {
+            "total_tasks": 17,
+            "exam_topics": [],
+            "tasks": [
+                {
+                    "topic": null,
+                    "task_number": "1",
+                    "points": 4,
+                    "task_text": "<p>Hva blir verdien til $c$ etter at vi utfører følgende operasjoner?</p><pre class=\"code-box\"><code>C = 7\nc = c ** 2\nc %= 5</code></pre>\n\n<p>Hva blir verdien til $z$ etter at vi utfører følgende operasjoner?</p><pre class=\"code-box\"><code>z = 8\nZ += 10\nz = 3</code></pre>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "2",
+                    "points": 7,
+                    "task_text": "<p>This code defines a function is_prime(n) that checks if a given number n is a prime number. Testing the function gives these results:</p>\n<pre class=\"code-box\"><code>is_prime(10) # returns False\nis_prime(11) # returns True\nis_prime(1) # returns False\nis_prime(13) # returns True</code></pre>\n<p>Create the function is_prime by placing code fragments in the correct order. Some fragments should NOT be used. Ensure the drag areas snap to the desired slot. Ignore indentation</p>\n<pre class=\"code-box\"><code>def is_prime(n):\nif n <= 1:\nreturn False\nfor j in range(2, n):\nif n % j == 0:\nreturn False\nreturn True\nfrom math import sqrt\nif n // j == 0:</code></pre>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "3",
+                    "points": 7,
+                    "task_text": "<p>Gitt følgende kode:</p><pre class=\"code-box\"><code>a = 5\nb = 5.0\nc = \"5\"\nd = True\ne = False</code></pre><p>For hvert uttrykk, kryss av for True hvis uttrykket er sant, eller False hvis det er usant, eller kryss av for Error hvis uttrykket vil gi syntaksfeil. Finn de som passer sammen:</p><ol><li><b>A</b> $b > a$</li><li><b>B</b> $a >= b$</li><li><b>C</b> $d == 1$</li><li><b>D</b> $a != c$</li><li><b>E</b> $e <= 0$</li><li><b>F</b> $a == b$</li><li><b>G</b> $d < e$</li></ol><ol><li><b>A</b> False</li><li><b>B</b> True</li><li><b>C</b> Error</li></ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "4",
+                    "points": 6,
+                    "task_text": "<p>temperatures = [15.5, 17.2, 16.8, 14.9, 18.3, 19.0, 16.5]</p>\n<p>def f1(temps): return sum(temps) / len(temps)</p>\n<p>def f2(temps): return sum(temps [:3]) / len(temps [:3])</p>\n<p>def f3(temps): return sum(temps[-4:]) / len(temps [-4:])</p>\n<p>def f4(temps): return max(temps)</p>\n<p>def f5(temps): return temps[::-1]</p>\n<p>def f6(temps): result = [ ] for temp in temps: if temp > 17: result.append(temp) return result</p>\n<p>print(\"{f1(temperatures):.1f}\") skriver ut</p>\n<p>print(\"{f2(temperatures):.1f}\") skriver ut</p>\n<p>print(f\"{f3(temperatures):.1f}\") skriver ut</p>\n<p>print(f\"{f4(temperatures):.1f}\") skriver ut</p>\n<p>print(f\"{f5(temperatures)}\") skriver ut</p>\n<p>print(f\"{f6(temperatures)}\") skriver ut</p>",
+                    "images": [
+                        "img\\INGX1002\\H24\\4\\INGX1002_H24_4_1.png"
+                    ],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "5",
+                    "points": 4,
+                    "task_text": "<p>Fullfør funksjonen get_diagonal som tar inn en matrise $A$, og returnerer en ny matrise $A_{diag}$ der det kun er diagonalelementene fra $A$ som er med (resten av matriseelementene er lik $0$).</p>\n\n<p>For eksempel, hvis input til funksjonen er matrisen $A$ nedenfor, så skal output være matrisen $D$. Et matriseelement ligger langs diagonalen hvis $i = j$.</p>\n\n<p>Eksempel:</p>\n\n<pre class=\"code-box\"><code>[\n[10  2  4  9      [10  0  0  0\n 3 -5 15  8  → D =  0 -5  0  0\n 1  7  6  3        0  0  6  0\n17  0 17 10]       0  0  0 10]\n</code></pre>\n\n<pre class=\"code-box\"><code>import numpy as np\n\ndef get_diagonal(A):\n    rows, cols = np.shape(A)\n    A_diag = np.zeros([rows, cols])\n    for i in range(rows):\n        for j in range(cols):\n            if i==j:\n</code></pre>\n\n<p>Velg alternativ</p>\n\n<ol>\n<li><b>A</b> A_diag[i][j] = A[i][j]</li>\n<li><b>B</b> A_diag[i][j] = 1</li>\n<li><b>C</b> A_diag[i][j] = A[j][i]</li>\n<li><b>D</b> A_diag[i][j] = 0</li>\n</ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "6",
+                    "points": 5,
+                    "task_text": "<p>Lag en funksjon <code>bmi_statistikk</code> som kan ta inn en liste med persondata (høyde og vekt), og returnerer andelen av personene som har en kroppsmasseindeks (BMI) som er over en viss terskel i prosent.</p>\n\n<p>Formel for utregning av BMI (høyde er gitt i meter): $BMI = \\frac{vekt}{høyde^2}$</p>\n\n<p>Eksempel på data:</p>\n\n<pre class=\"code-box\"><code>bmi_data = [[180, 90], [195, 92], [165, 66]]\nterskel = 25</code></pre>\n\n<p>I tabellen representerer hver rad en person, der første kolonne er høyde målt i centimeter (cm) og andre kolonne er vekt målt i kg.</p>\n\n<p>Eksempel på funksjonskall (gitt at variabelen <code>bmi_data</code> og <code>terskel</code> er definert som ovenfor):</p>\n\n<pre class=\"code-box\"><code>andel = bmi_statistikk(bmi_data, terskel)\nprint(f\"Andel av personene med BMI over {terskel}: {andel:.2f}%\")</code></pre>\n\n<p>Skriver ut: Andel av personene med BMI over $25$: $33.33\\%$</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "7",
+                    "points": 6,
+                    "task_text": "<p>Vi måler følgende verdier for høyden til en drone: $h = [153, 155, 158, 163, 170, 178, 185, 189, 188, 183]$</p><p>Målingene er gjort ved følgende tidspunkt: $t = [0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0]$</p><p>Vi ser bort fra enhetene til $h$ og $t$. Vi antar at dronen kun beveger seg i høyderetningen.</p><h3>a)</h3><p>Hva gir fremoverdifferanse som en tilnærming til den tidsderiverte av høyden? $U_{fremover}(1.0) =$</p><h3>b)</h3><p>Hva gir bakoverdifferanse? $U_{bakover}(1.0) =$</p><h3>c)</h3><p>Hva gir sentraldifferanse? $U_{sentral}(1.0) =$</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "8",
+                    "points": 4,
+                    "task_text": "<p>Hvilken numerisk metode kan brukes til å løse hvilken oppgave. Hvert svaralternativ passer til nøyaktig en oppgave.</p><ol><li><b>A:</b> Vi har målt hastigheten $v(t)$ og startposisjonen $s(t_{\\text{start}})$ til en drone, og er interesserte i å vite posisjonen. Det vil si: Vi kjenner $v(t) = \\frac{ds}{dt}$ for tiden $t \\in [t_{\\text{start}}, t_{\\text{slutt}}]$, og vil finne $s(t)$ for $t$ i samme tidsrommet $[t_{\\text{start}}, t_{\\text{slutt}}]$.</li><li><b>B:</b> Vi har målt posisjonen til en drone, og er interesserte i å finne hastigheten. Det vil si: Vi kjenner $s(t)$ for tiden $t \\in [t_{\\text{start}}, t_{\\text{slutt}}]$, og vil finne $v(t) = \\frac{ds}{dt}$ for tidsrommet $(t_{\\text{start}}, t_{\\text{slutt}})$.</li><li><b>C:</b> En drone mister motorkraften, og faller fritt. Vi vet at $\\frac{dv}{dt} = g - \\frac{kv^2}{m}$. Vi er interesserte i å finne $v(t)$. ($g$, $k$ og $m$ er konstante tall vi vet.)</li><li><b>D:</b> Vi er gitt at en drone har følgende høyde målt fra hustaket ved tiden $t$: $h(t) = e^{-t} - 0.001t^2$. Vi er interesserte i ved hvilket tidspunkt høyden blir null, altså for hvilket tidspunkt $t$ man får $h(t) = 0$.</li></ol><p>Finn de som passer sammen: Newtons metode Foroverdifferanse Simpsons metode eller Eulers metode Vi har ikke nok informasjon</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "9",
+                    "points": 6,
+                    "task_text": "<p>Bruk to iterasjoner av Newtons metode til å løse ligningen $\\sin(x) + x = 2.0$. Det kan være nyttig at $\\frac{d}{dx} (\\sin(x)) = \\cos(x)$. Bruk startgjettning $x_0 = 0.5$.</p>\n\n<h3>a)</h3>\n<p>Ett steg av Newtons metode gir:</p>\n\n<h3>b)</h3>\n<p>To steg av Newtons metode gir:</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "10",
+                    "points": 5,
+                    "task_text": "<p>En stein faller med hastigheten $v(t)$, der $v(t)$ følger differensialligningen: $\\frac{dv}{dt} = 9 - kv^2$. Vi ser bort fra enheter og går ut fra $g = 9.81$ og $k = 0.15$. Ved $t = 0.0$ er hastigheten $3.0$ det vil si $v(0.0) = 3.0$.</p><p>Bruk ett eller flere steg i en numerisk metode for å løse differensialligninger til å beregne en tilnærming for hastigheten ett tidels sekund senere. Finn en tilnærming til $v(0.1)$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "11",
+                    "points": 5,
+                    "task_text": "<p>Over ser dere et logaritmisk plot av feilen $\\epsilon$ som en funksjon av steglengden $h$ for en numerisk metode. Vi ser at $\\epsilon = k h^a$, der $k$ og $a$ er konstanter. Det er oppgitt at $a$ er et heltall. Dere skal bestemme $a$ ut fra grafen.</p>\n\n<h3>a)</h3>\n<p>$a =$</p>\n\n<h3>b)</h3>\n<p>Dersom vi bruker steglengde $h = 0.09$ får vi feilen $\\epsilon = 0.09$. Hvilken steglengde $h$ må vi velge for at feilen skal bli $\\epsilon = 0.01$?</p>\n<p>$h =$</p>",
+                    "images": [
+                        "img\\INGX1002\\H24\\11\\INGX1002_H24_11_1.png"
+                    ],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "12",
+                    "points": 7,
+                    "task_text": "<p>Vi ser på funksjonen: $g(x) = \\sin(x)$</p><p>Bruk Trapesmetoden med to delintervaller til å finne en tilnærming til $I = \\int \\sqrt{g(x)} dx$.</p><p>Bruk så Simpsons metode med to delintervaller til å tilnærme $I$.</p><p>Hva er avviket fra eksakt verdi? Eksakt verdi er $2$.</p><p>Hvilken metode er den mest nøyaktige?</p><p>Vi ser så på $h(x) = 123.45x^2 + 4.34526x + 325 - \\pi T$</p><p>Dersom du skal beregne $\\int h(x) dx$ med tre punkter, vil trapesmetoden eller Simpsons metode gi minst feil?</p><p>Trenger du å regne ut integralet for å svare på spørsmålet? Begrunn svaret.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "13",
+                    "points": 6,
+                    "task_text": "<p>Gitt en matematisk funksjon $f(x) = (x + 3.5)^3 + 2x^2 - 10$.</p><p>Fullfør programmet nedenfor slik at det regner ut en tilnærming til funksjonens deriverte for intervallet $x = 0$ til $x = 4$ med bruk av senterdifferanse med skrittlengde $h$ som funksjon av $x$ i intervallet $0 \\leq x \\leq 4$.</p><pre class=\"code-box\"><code>import numpy as np\nimport matplotlib.pyplot as plt\n\ndef f(x):\n    y = (x + 3.5)**3 + 2*x**2 - 10\n    return y\n\nh = 0.02\nX = np.linspace(0, 4 + h, h), np.arange(0, 4, h), np.linspace(0, 4, h), np.arange(0, 4 + h, h)\nf_der = (f(x+h)-f(x))/h*2, f(x+h) - f(x-h)/(h+h), (f(x+h)-f(x- h))/2*h, (f(x+h)-f(x-h))/(2*h)\nplt.plot(f_der), plt.plot(f_der, x), plt.plot(f, f_der), plt.plot(x, f_der)</code></pre><h3>a)</h3><p>Velg riktig alternativ for $X$:</p><ol><li><b>A</b> np.linspace(0, 4 + h, h)</li><li><b>B</b> np.arange(0, 4, h)</li><li><b>C</b> np.linspace(0, 4, h)</li><li><b>D</b> np.arange(0, 4 + h, h)</li></ol><h3>b)</h3><p>Velg riktig alternativ for $f_{der}$:</p><ol><li><b>A</b> (f(x+h)-f(x))/h*2</li><li><b>B</b> f(x+h) - f(x-h)/(h+h)</li><li><b>C</b> (f(x+h)-f(x- h))/2*h</li><li><b>D</b> (f(x+h)-f(x-h))/(2*h)</li></ol><h3>c)</h3><p>Velg riktig alternativ for plt.plot:</p><ol><li><b>A</b> plt.plot(f_der)</li><li><b>B</b> plt.plot(f_der, x)</li><li><b>C</b> plt.plot(f, f_der)</li><li><b>D</b> plt.plot(x, f_der)</li></ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "14",
+                    "points": 6,
+                    "task_text": "<p>Consider the following Python code:</p><pre class=\"code-box\"><code>import numpy as np\ndef f(x):\n    y = x**2\n    return y\na = 0\nb = 1\nn = 10\nh = (b-a)/n\nX = np.linspace(a, b, n + 1)\ny = f(X)\nintegral = (h/2)*(y[0] + 2*sum(y[1:-1]) + y[-1])</code></pre><p>What numerical method is implemented by this code?</p><ol><li><b>A</b> Trapezoidal rule</li><li><b>B</b> Simpson's rule</li><li><b>C</b> Midpoint rule</li><li><b>D</b> Euler's method</li></ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "15",
+                    "points": null,
+                    "task_text": "<p>Consider the following Python code implementing Euler's method for solving a differential equation:</p><pre class=\"code-box\"><code>import numpy as np\ndef f(x, y):\n    return y - x**2 + 1\nh = 0.5\nX = np.arange(0, 1 + h, h)\ny = np.zeros(len(x))\ny[0] = 0.5\nfor i in range(1, len(x)):\n    y[i] = y[i-1] + h * f(x[i-1], y[i-1])</code></pre><p>The differential equation being solved is $y' = f(x, y) = y - x^2 + 1$ with initial condition $y(0) = 0.5$ and step size $h = 0.5$.</p><h3>a)</h3><p>What is the value of $y(1)$ computed by this code?</p><h3>b)</h3><p>What is the exact solution $y(x)$ of this differential equation?</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "16",
+                    "points": null,
+                    "task_text": "<p>Gitt ligningen $(4-x)^2 = 4$. Fullfør programkoden nedenfor slik at den bruker fikspunktiterasjon med initialverdi $x_0 = 0$ til å finne en løsning til ligningen med maksimalt avvik på $10^{-6}$.</p>\n\n<pre class=\"code-box\"><code>def g(x):\n    return ((x**2+12)/8, (x**2+12), (x**2+8)/12, (x**2+16))\n\nx = 0\nwhile (abs(g(x)) > 1e-6, abs(g(x)-x) > 1e-6, abs(x) < 1e-6, abs(g(x)-x) < 1e-6):\n    (x = g(x), x = x - g(x)/g_deriv(x), x += g(x), x += 1e-6)\n\nprint(f\"Tilnærmet løsning funnet: x = {x}\")</code></pre>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": null,
+                    "task_number": "17",
+                    "points": 7,
+                    "task_text": "<p>I numerikk bruker ofte absolutt feil og relativ feil til å evaluere nøyaktigheten til en numerisk beregning. Gitt en eksakt tallverdi $y$ og en tilnærmet tallverdi $x$, vil den matematiske definisjonen på absolutt og relativ feil være:</p>\n\n<p>absolutt feil $= |x - y|$</p>\n\n<p>relativ feil $= \\frac{|x - y|}{|y|}$</p>\n\n<p>Funksjonen nedenfor har som oppgave å sjekke om to tall $x$ og $y$ er tilnærmet like gitt en absolutt toleranse $atol$ og relativ toleranse $rtol$. Funksjonen skal returnere $True$ dersom absolutt feil $\\leq atol$ eller dersom relativ feil $\\leq rtol$, og returnere $False$ for alle andre tilfeller. Fullfør koden til funksjonen is_approx_equal slik at den fungerer som beskrevet over, samtidig som den unngår \"ulovlige\" matematiske regneoperasjoner (dvs. regneoperasjoner som gir feilmelding i Python).</p>\n\n<pre class=\"code-box\"><code>def is_approx_equal(x, y, rtol, atol):\n    if abs(x - y) <= max(atol, abs(y)*rtol):\n        return True\n    else:\n        return False</code></pre>",
+                    "images": [],
+                    "code": null
+                }
+            ]
+        }
     }
 }

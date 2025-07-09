@@ -8,3 +8,10 @@ Prompte 'Does this task require the Moody diagram?' eller liknende og få med en
 Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.'
 
 Implementere prompting og formattering for programmeringsbokser.
+    Inneholder bildet programmering? Da kan vi dorppe det og heller visualisere det.
+
+    Dersom spørsmålet er hvilken kode som skal sttes inn (f.eks. for X), kan vi bare skrive X = ? i selve programmeringsboksen.
+
+    Dersom noe kode er på en enkelt linje vil jeg fortsatt ha det i programmeringsobks.
+
+Fikse NoneType ved temaer i json.
