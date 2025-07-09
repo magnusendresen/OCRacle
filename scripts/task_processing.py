@@ -62,7 +62,6 @@ def load_emnekart_from_json(json_path: Path):
 @dataclass
 class Exam:
     subject: Optional[str] = None
-    matching_codes: List[str] = field(default_factory=list)
     topic: Optional[str] = None
     exam_version: Optional[str] = None
     task_number: Optional[str] = None
@@ -97,13 +96,13 @@ def get_topics(emnekode: str) -> str:
 
 def add_topics(topic: str, exam: Exam):
     """
-    Adds a topic to the JSON file for matching subject codes if it doesn't already exist.
+    Adds a topic to the JSON file for the subject code if it doesn't already exist.
     """
     try:
         with JSON_PATH.open('r', encoding='utf-8') as jf:
             json_data = json.load(jf)
         for entry in json_data:
-            if entry.get("Emnekode", "").upper() in exam.matching_codes:
+            if entry.get("Emnekode", "").upper() == exam.subject:
                 temas = entry.get("Temaer", [])
                 exists = any(
                     difflib.SequenceMatcher(None, t.lower(), topic.lower()).ratio() >= 0.9
@@ -114,7 +113,7 @@ def add_topics(topic: str, exam: Exam):
                     entry["Temaer"] = temas
         with JSON_PATH.open('w', encoding='utf-8') as jf:
             json.dump(json_data, jf, ensure_ascii=False, indent=4)
-        # log(f"Added topic '{topic}' for subject codes {exam.matching_codes}")
+        # log(f"Added topic '{topic}' for subject {exam.subject}")
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
@@ -128,26 +127,6 @@ def get_topic_from_enum(subject: str, num: int) -> str:
         if topic.value == num:
             return topic.name
     return "Unknown Topic"
-
-def get_subject_code_variations(subject: str):
-    data, emnekart = load_emnekart_from_json(JSON_PATH)
-    pattern_parts = []
-
-    for ch in subject:
-        if ch == 'Y' and pattern_parts[-1] == r'\d':
-            pattern_parts.append(r'\d')  # ett valgfritt siffer
-        else:
-            pattern_parts.append(re.escape(ch))  # bokstavelig match
-
-    regex = re.compile('^' + ''.join(pattern_parts) + '$')
-
-    matching_codes = [kode for kode in emnekart if regex.match(kode)]
-    if matching_codes:
-        log(f"Subject code matches found: {matching_codes}")
-        return matching_codes
-    else:
-        log("No matching subject codes in JSON")
-        return []
 
 async def get_exam_info() -> Exam:
     log("Processing PDF contents")
@@ -230,7 +209,6 @@ async def get_exam_info() -> Exam:
                 )
             ).strip().upper()
     log(f"Subject code: {exam.subject}")
-    exam.matching_codes = get_subject_code_variations(exam.subject)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS, {4: exam.subject or ""})
 

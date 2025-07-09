@@ -2,9 +2,6 @@
     "IFYX1000": {
         "V24": {
             "total_tasks": 16,
-            "matching_codes": [
-                "IFYX1000"
-            ],
             "exam_topics": [
                 "Bevegelse",
                 "Mekanikk",

@@ -31,7 +31,6 @@ def main(tasks):
             exam,
             {
                 "total_tasks": task_dict.get("total_tasks", 0),
-                "matching_codes": task_dict.get("matching_codes", []),
                 "exam_topics": task_dict.get("exam_topics", []),
                 "tasks": [],
             },
@@ -39,8 +38,6 @@ def main(tasks):
 
         if task_dict.get("total_tasks") is not None:
             exam_data["total_tasks"] = task_dict["total_tasks"]
-        if task_dict.get("matching_codes"):
-            exam_data["matching_codes"] = task_dict["matching_codes"]
         if task_dict.get("exam_topics"):
             exam_data["exam_topics"] = task_dict["exam_topics"]
 
@@ -52,7 +49,6 @@ def main(tasks):
                 "subject",
                 "exam_version",
                 "total_tasks",
-                "matching_codes",
                 "exam_topics",
                 "task_numbers",
                 "ocr_tasks",
