@@ -88,11 +88,10 @@ def get_topics(emnekode: str) -> str:
 
     emnekode = emnekode.upper().strip()
 
-    # Finn kun temaer for eksakt emnekode, ikke for alle matches
     for entry in data:
         if entry.get("Emnekode", "").upper() == emnekode:
             temaer = entry.get("Temaer", [])
-            break  # Bare bruk første eksakte match
+            break
 
     return Enum('Temaer', temaer)
 
