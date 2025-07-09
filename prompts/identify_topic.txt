@@ -1,0 +1,5 @@
+Which of the following topics is in the following task?
+  Respond only with the number associated with the topic.
+  If none of the topics fit very well, respond with a zero.
+  This is used for exam task categorization, so decide accordingly.
+  Here is the topics, followed by the task:

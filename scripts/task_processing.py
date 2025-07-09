@@ -121,6 +121,16 @@ def add_topics(topic: str, exam: Exam):
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
+def enum_to_str(enum: Enum) -> str:
+    return str([f"{e.value}: {e.name}" for e in enum])
+
+def get_topic_from_enum(subject: str, num: int) -> str:
+    """Get topic name from enum based on subject and number."""
+    topic_enum = get_topics(subject)
+    for topic in topic_enum:
+        if topic.value == num:
+            return topic.name
+    return "Unknown Topic"
 
 def get_subject_code_variations(subject: str):
     data, emnekart = load_emnekart_from_json(JSON_PATH)
@@ -325,18 +335,31 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     if task_exam.points is not None:
         log(f"Task {task_number}: points extracted -> {task_exam.points}p")
 
-    reference = get_topics(exam.subject)
+
     if exam.exam_topics:
-        topics_str = ", ".join(exam.exam_topics)
-        reference = f"{reference}, {topics_str}" if reference else topics_str
-    task_exam.topic = str(
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG + load_prompt("extract_topic") + reference + task_output,
-            max_tokens=1000,
-            is_num=False,
-            max_len=100,
+        cur_topic_enum_str = enum_to_str(get_topics(task_exam.subject))
+
+        identify_topic = int(
+            await prompt_to_text.async_prompt_to_text(
+                PROMPT_CONFIG + load_prompt("identify_topic") + cur_topic_enum_str + task_output,
+                max_tokens=1000,
+                is_num=False,
+                max_len=2000,
+            )
         )
+
+        if identify_topic != 0:
+            task_exam.topic = get_topic_from_enum(task_exam.subject, identify_topic)
+        else:
+            task_exam.topic = str(
+                await prompt_to_text.async_prompt_to_text(
+                    PROMPT_CONFIG + load_prompt("extract_topic") + task_output,
+                    max_tokens=1000,
+                    is_num=False,
+                    max_len=100,
+                )
     )
+    
     log(f"Task {task_number}: topic -> {task_exam.topic}")
     add_topics(task_exam.topic, exam)
     task_status[task_idx] = 4

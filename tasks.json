@@ -9,20 +9,20 @@
                 "Bevegelse",
                 "Mekanikk",
                 "Sirkelbevegelse",
-                "Rotasjonsmekanikk",
+                "Energi og arbeid",
+                "Impuls og støt",
                 "Fluidmekanikk",
                 "Svingninger",
                 "Bølgefysikk",
-                "Energi og arbeid",
-                "Impuls og støt",
-                "Programmering og numerikk"
+                "Rotasjonsmekanikk",
+                "Programmering"
             ],
             "tasks": [
                 {
-                    "topic": "Bevegelse",
+                    "topic": "Mekanikk",
                     "task_number": "1",
                     "points": 2,
-                    "task_text": "<p>Hvor mange m/s² tilsvarer en akselerasjon på 1,0 km/h²? Velg ett alternativ:</p><ol><li><b>A</b> 5,8 m/s²</li><li><b>B</b> 0,28 m/s²</li><li><b>C</b> 1,3.10⁴ m/s²</li><li><b>D</b> 2,8 m/s²</li><li><b>E</b> 7,7.10⁻⁵ m/s²</li></ol>",
+                    "task_text": "<p>Hvor mange m/s² tilsvarer en akselerasjon på 1,0 km/h²? Velg ett alternativ:</p><ol><li><b>A</b> 5,8 m/s²</li><li><b>B</b> 0,28 m/s²</li><li><b>C</b> 1,3 $10^4$ m/s²</li><li><b>D</b> 2,8 m/s²</li><li><b>E</b> 7,7 $10^{-5}$ m/s²</li></ol>",
                     "images": [],
                     "code": null
                 },
@@ -37,10 +37,10 @@
                     "code": null
                 },
                 {
-                    "topic": "Bevegelse",
+                    "topic": "Mekanikk",
                     "task_number": "3",
                     "points": 2,
-                    "task_text": "<p>Bestem den vertikale avstanden Ay mellom siktelinja (startfarten) og punktet der pilen treffer veggen, dersom pilen betraktes som en punktpartikkel og vi neglisjerer luftmotstand. Velg ett alternativ:</p><ol><li><b>A</b> $\\Delta y = 0,050$ m</li><li><b>B</b> $Ay = 0,56$ m</li><li><b>C</b> $Ay = 1,5$ m</li><li><b>D</b> $Ay = 0,20$ m</li><li><b>E</b> $Ay = 1,8$ m</li></ol>",
+                    "task_text": "<p>En pil skytes med horisontal startfart $v_1 = 90$ m/s mot en vegg i horisontal avstand $x = 50$ m fra skytteren. Se figuren under.</p><p>Bestem den vertikale avstanden $\\Delta y$ mellom siktelinja (startfarten) og punktet der pilen treffer veggen, dersom pilen betraktes som en punktpartikkel og vi neglisjerer luftmotstand. Velg ett alternativ:</p><ol><li><b>A</b> $\\Delta y = 0,050$ m</li><li><b>B</b> $\\Delta y = 0,56$ m</li><li><b>C</b> $\\Delta y = 1,5$ m</li><li><b>D</b> $\\Delta y = 0,20$ m</li><li><b>E</b> $\\Delta y = 1,8$ m</li></ol>",
                     "images": [
                         "img\\IFYX1000\\V24\\3\\IFYX1000_V24_3_1.png"
                     ],
@@ -50,7 +50,7 @@
                     "topic": "Mekanikk",
                     "task_number": "4",
                     "points": 2,
-                    "task_text": "<p>En kloss med masse m glir med konstant fart nedover et skråplan med helningsvinkel $\\theta = 30^\\circ$. Klossens fart er såpass liten at luftmotstand kan neglisjeres.</p><p>Hva er glidefriksjonstallet $\\mu$ mellom klossen og underlaget? Velg ett alternativ:</p><ol><li><b>A</b> $\\mu = 0,50$</li><li><b>B</b> $\\mu = 0,58$</li><li><b>C</b> $\\mu = 0,87$</li><li><b>D</b> $\\mu = 1,0$</li><li><b>E</b> Avhenger av tallverdien til massen m</li></ol>",
+                    "task_text": "<p>En kloss med masse m glir med konstant fart nedover et skråplan med helningsvinkel θ = 30°. Klossens fart er såpass liten at luftmotstand kan neglisjeres.</p><p>Hva er glidefriksjonstallet μ mellom klossen og underlaget? Velg ett alternativ:</p><ol><li><b>A</b> μ = 0,50</li><li><b>B</b> μ = 0,58</li><li><b>C</b> μ = 0,87</li><li><b>D</b> μ = 1,0</li><li><b>E</b> Avhenger av tallverdien til massen m</li></ol>",
                     "images": [
                         "img\\IFYX1000\\V24\\4\\IFYX1000_V24_4_1.png",
                         "img\\IFYX1000\\V24\\4\\IFYX1000_V24_4_2.png"
@@ -68,10 +68,10 @@
                     "code": null
                 },
                 {
-                    "topic": "Mekanikk",
+                    "topic": "Rotasjonsmekanikk",
                     "task_number": "6",
                     "points": 15,
-                    "task_text": "<p>A wagon with mass m in a roller coaster starts with zero initial velocity from a height h = 3R above the lowest point A in a circular loop with radius R. The wagon is not attached to the track and can slide frictionlessly on the rails. We ignore friction and air resistance throughout this problem, and the wagon can be treated as a point mass.</p>\n\n<h3>a)</h3>\n<p>Show that the speed of the wagon at the lowest point in the loop (point A) is v = $\\sqrt{6gR}$.</p>\n\n<h3>b)</h3>\n<p>Draw the forces acting on the wagon at the highest point in the loop (point C) and determine the magnitude of the normal force from the track on the wagon, expressed in terms of the wagon's weight G. For full credit, the figure must show a reasonable relative size of the forces, and all forces must be labeled.</p>\n\n<h3>c)</h3>\n<p>At which point(s) A-D in the loop is the magnitude of the wagon's tangential acceleration $a_t$ greatest? The answer must be briefly justified with an illustrative figure.</p>\n\n<h3>d)</h3>\n<p>After passing the loop, the wagon continues uphill to a peak at E, as shown in the figure above. Draw a figure showing the forces on the wagon at E for two different scenarios—for full credit, the figure must show a reasonable relative size of the forces, and all forces must be labeled.</p>\n<p>i) The wagon maintains contact with the track at the hilltop.</p>\n<p>ii) The wagon just loses contact with the track at point E.</p>",
+                    "task_text": "<p>En vogn med masse m i en berg-og-dalbane starter med null startfart fra en høyde h = 3R over det laveste punktet A i en sirkulær loop med radius R. Vogna er ikke festet til underlaget, og kan gli friksjonsfritt på skinnene i banen. Se figuren under. C h A R E B Vi ser bort fra friksjon og luftmotstand i hele denne oppgaven, og vogna kan betraktes som et punktlegeme.</p>\n\n<h3>a)</h3>\n\n<p>Vis at farten til vogna i det laveste punktet i loopen (punkt A) er v = $\\sqrt{6gR}$.</p>\n\n<h3>b)</h3>\n\n<p>Tegn kreftene som virker på vogna i det øverste punktet i loopen (punkt C) og bestem absoluttverdien av normalkraften fra underlaget på vogna, uttrykt ved vognas tyngde G. For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn.</p>\n\n<h3>c)</h3>\n\n<p>I hvilke(t) punkt A-D i loopen er absoluttverdien av vognas bane-/tangentielle akselerasjon a] størst? Svaret må begrunnes kort i form av en illustrerende figur.</p>\n\n<h3>d)</h3>\n\n<p>Etter å ha passert loopen fortsetter vogna i oppoverbakke med toppunkt i E, som vist på figuren over. Tegn en figur som viser kreftene på vogna i E, for to ulike scenarier - for full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn.</p>\n\n<p>Vogna har kontakt med underlaget over bakketoppen</p>\n\n<p>Vogna mister akkurat kontakten med underlaget i punkt E</p>",
                     "images": [
                         "img\\IFYX1000\\V24\\6\\IFYX1000_V24_6_1.png"
                     ],
@@ -91,7 +91,7 @@
                     "topic": "Rotasjonsmekanikk",
                     "task_number": "8",
                     "points": 2,
-                    "task_text": "<p>Et kvadratisk legeme består av 4 tynne, homogene stenger, hver med masse m og lengde L. Legemet kan rotere om en akse gjennom legemets massesenter som står vinkelrett på legemet, indikert på figuren under (stiplede linjer er hjelpelinjer). Bestem legemets treghetsmoment I om aksen. Velg ett alternativ:</p><ol><li><b>A</b> I = 4mL²</li><li><b>B</b> I = $\\frac{1}{2}$mL²</li><li><b>C</b> I = 2mL²</li><li><b>D</b> I = $\\frac{3}{2}$mL²</li><li><b>E</b> I = mL²</li></ol>",
+                    "task_text": "<p>Et kvadratisk legeme består av 4 tynne, homogene stenger, hver med masse m og lengde L.</p><p>Legemet kan rotere om en akse gjennom legemets massesenter som står vinkelrett på legemet, indikert på figuren under (stiplede linjer er hjelpelinjer).</p><p>Bestem legemets treghetsmoment I om aksen.</p><ol><li><b>A</b> I = 4mL²</li><li><b>B</b> I = $\\frac{1}{2}$mL²</li><li><b>C</b> I = 2mL²</li><li><b>D</b> I = $\\frac{3}{2}$mL²</li><li><b>E</b> I = mL²</li></ol>",
                     "images": [
                         "img\\IFYX1000\\V24\\8\\IFYX1000_V24_8_1.png"
                     ],
@@ -101,17 +101,17 @@
                     "topic": "Mekanikk",
                     "task_number": "9",
                     "points": 4,
-                    "task_text": "<p>a) Hva skal stå i kodelinja KODE MANGLER for at Pyton-funksjonen Fd(v) skal returnere luftmotstanden FDİ newton på legemet, når funksjonsargumentet v (farten v) angis i kilometer per time (km/h)?</p><p>def Fd(v):</p><p>rho=1.2</p><p>A=0.70</p><p>Cd=1.0</p><p>return KODE MANGLER</p><ol><li><b>A</b> 0.5*rho*A*Cd*(v/3.6)**2</li><li><b>B</b> 0.5*rho*A*Cd*(v*3.6)**2</li><li><b>C</b> 0.5*rho*A*Cd*(v*3.6)^2</li><li><b>D</b> 0.5*rho*A*Cd*v^2</li><li><b>E</b> 0.5*rho*A*Cd*v**2</li></ol>\n\n<p>b) Hva skal stå i kodelinja KODE MANGLER for å beregne farten v etter det neste tidssteget, dvs. v(t + dt)?</p><p>g=9.81</p><p>t=0</p><p>v=0 #fart i m/s</p><p>while (t<t_maks):</p><p>KODE MANGLER</p><p>t=t+dt</p><ol><li><b>A</b> v=v+(g+Fd(v)/m)*dt</li><li><b>B</b> v=v+(g-Fd/m)*dt</li><li><b>C</b> v=v+g*dt</li><li><b>D</b> v=v+(g+Fd/m)*dt</li><li><b>E</b> v=v+(g-Fd(v)/m)*dt</li></ol>",
+                    "task_text": "<p>a) Vi skal skrive en Python-funksjon som beregner FD(v), for gitte verdier av A (gitt i m²), Cd og ρ (gitt i kg/m³). Hva skal stå i kodelinja KODE MANGLER for at Python-funksjonen Fd(v) skal returnere luftmotstanden FD i newton på legemet, når funksjonsargumentet v (farten v) angis i kilometer per time (km/h)?</p><p>def Fd(v):</p><p>rho=1.2</p><p>A=0.70</p><p>Cd=1.0</p><p>return KODE MANGLER</p><ol><li><b>A</b> 0.5*rho*A*Cd*(v/3.6)**2</li><li><b>B</b> 0.5*rho*A*Cd*(v*3.6)**2</li><li><b>C</b> 0.5*rho*A*Cd*(v*3.6)^2</li><li><b>D</b> 0.5*rho*A*Cd*v^2</li><li><b>E</b> 0.5*rho*A*Cd*v**2</li></ol>\n\n<p>b) Vi skal numerisk bestemme farten v(t) for det fallende legemet ved å anta akselerasjonen som konstant over et lite tidssteg dt, for 0 < t < tmaks. Funksjonen for luftmotstanden FD(v) fra oppgave a) har nå blitt redefinert, slik at Fd(v) gir luftmotstanden i newton når funksjonsargumentet v (farten v) angis i meter per sekund (m/s). Hva skal stå i kodelinja KODE MANGLER for å beregne farten v etter det neste tidssteget, dvs. v(t + dt)?</p><p>g=9.81</p><p>t=0</p><p>v=0 #fart i m/s</p><p>while (t<t_maks):</p><p>KODE MANGLER</p><p>t=t+dt</p><ol><li><b>A</b> v=v+(g+Fd(v)/m)*dt</li><li><b>B</b> v=v+(g-Fd/m)*dt</li><li><b>C</b> v=v+g*dt</li><li><b>D</b> v=v+(g+Fd/m)*dt</li><li><b>E</b> v=v+(g-Fd(v)/m)*dt</li></ol>",
                     "images": [
                         "img\\IFYX1000\\V24\\9\\IFYX1000_V24_9_1.png"
                     ],
                     "code": null
                 },
                 {
-                    "topic": "Mekanikk",
+                    "topic": "Rotasjonsmekanikk",
                     "task_number": "10",
                     "points": 15,
-                    "task_text": "<p>En homogen, massiv sylinder med masse M og radius R ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel $\\theta = 30^\\circ$. Se figuren under.</p>\n\n<p>Tegn kreftene på sylinderen mens den ruller nedover skråplanet. For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn.</p>\n\n<h3>a)</h3>\n\n<p>Vis at akselerasjonen til sylinderen nedover skråplanet er $a = \\frac{1}{3}g$.</p>\n\n<h3>b)</h3>\n\n<p>Hvor lang tid bruker sylinderen på å rulle ned skråplanet dersom lengden av skråplanet er $\\Delta x = 1,0$ m og sylinderen starter fra ro?</p>\n\n<h3>c)</h3>\n\n<p>Sylinderen starter i $x = 0$ ved $t = 0$. Skisser sylinderens posisjonsgraf $x(t)$, fartsgraf $v(t)$ og akselerasjonsgraf $a(t)$. For full uttelling må grafens form framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.</p>\n\n<h3>d)</h3>\n\n<p>Sylinderen deltar deretter i et \"kappløp\" med en tynnvegget sylinder (ring) med samme masse M og radius R som sylinderen. De to legemene slippes samtidig med null startfart fra samme startpunkt, og begge ruller lengden $\\Delta x = 1,0$ m til enden av skråplanet.</p>\n\n<p>Hvilket legeme kommer først i \"mål\"? Svaret må begrunnes kort (enten med et kvalitativt argument, eller ved utregning).</p>\n\n<h3>e)</h3>\n\n<p>Hva blir tidsdifferansen $\\Delta t$ for \"målgang\" mellom de to legemene?</p>",
+                    "task_text": "<p>En homogen, massiv sylinder med masse M og radius R ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel $\\theta = 30^\\circ$. Se figuren under.</p>\n\n<p>Tegn kreftene på sylinderen mens den ruller nedover skråplanet. For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn.</p>\n\n<h3>a)</h3>\n\n<p>Vis at akselerasjonen til sylinderen nedover skråplanet er $a = \\frac{2}{3}g \\sin \\theta$.</p>\n\n<h3>b)</h3>\n\n<p>Hvor lang tid bruker sylinderen på å rulle ned skråplanet dersom lengden av skråplanet er $\\Delta x = 1,0$ m og sylinderen starter fra ro?</p>\n\n<h3>c)</h3>\n\n<p>Sylinderen starter i $x = 0$ ved $t = 0$. Skisser sylinderens posisjonsgraf $x(t)$, fartsgraf $v(t)$ og akselerasjonsgraf $a(t)$. For full uttelling må grafens form framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.</p>\n\n<h3>d)</h3>\n\n<p>Sylinderen deltar deretter i et \"kappløp\" med en tynnvegget sylinder (ring) med samme masse M og radius R som sylinderen. De to legemene slippes samtidig med null startfart fra samme startpunkt, og begge ruller lengden $\\Delta x = 1,0$ m til enden av skråplanet.</p>\n\n<p>Hvilket legeme kommer først i \"mål\"? Svaret må begrunnes kort (enten med et kvalitativt argument, eller ved utregning).</p>\n\n<h3>e)</h3>\n\n<p>Hva blir tidsdifferansen $\\Delta t$ for \"målgang\" mellom de to legemene?</p>",
                     "images": [
                         "img\\IFYX1000\\V24\\10\\IFYX1000_V24_10_1.png",
                         "img\\IFYX1000\\V24\\10\\IFYX1000_V24_10_2.png"
@@ -119,10 +119,10 @@
                     "code": null
                 },
                 {
-                    "topic": "Bevegelse",
+                    "topic": "Fluidmekanikk",
                     "task_number": "11",
                     "points": 2,
-                    "task_text": "<p>En homogen terning med sidekant h flyter i utgangspunktet i ro i et kar med vann som har dybde 2h.</p><p>I utgangspunktet flyter terningen slik at h ligger under vannoverflaten.</p><p>Terningen presses deretter nedover i vannet, helt til den nederste sidekant er i kontakt med bunnen av karet.</p><p>Se figuren under.</p><p>Hvilken av grafene A-E viser oppdriften FB på terningen som funksjon av dybden til den nederste sidekant?</p><p>Enhetene på aksene i figuren er ikke tegnet i riktig skala.</p><ol><li><b>A</b></li><li><b>B</b></li><li><b>C</b></li><li><b>D</b></li><li><b>E</b></li></ol>",
+                    "task_text": "<p>En homogen terning med sidekant h flyter i utgangspunktet i ro i et kar med vann som har dybde 2h.</p><p>I utgangspunktet flyter terningen slik at h ligger under vannoverflaten.</p><p>Terningen presses deretter nedover i vannet, helt til den nederste sidekanten er i kontakt med bunnen av karet.</p><p>Hvilken av grafene A-E viser oppdriften FB på terningen som funksjon av dybden til den nederste sidekant?</p><p>Enhetene på aksene i figuren er ikke tegnet i riktig skala.</p><ol><li><b>A</b></li><li><b>B</b></li><li><b>C</b></li><li><b>D</b></li><li><b>E</b></li></ol>",
                     "images": [
                         "img\\IFYX1000\\V24\\11\\IFYX1000_V24_11_1.png",
                         "img\\IFYX1000\\V24\\11\\IFYX1000_V24_11_2.png"
@@ -143,7 +143,7 @@
                     "topic": "Svingninger",
                     "task_number": "13",
                     "points": 0,
-                    "task_text": "<p>Figuren under viser en tynnveggsylinder (ring) med masse M og radius R som svinger friksjonsfritt med små vinkelutslag $\\theta$ om en akse gjennom periferien. Aksen står normalt på figuren.</p><p>Hva blir svingetiden (perioden) T for svingningene? Velg ett alternativ:</p><ol><li><b>A</b> $T=2\\pi \\sqrt{\\frac{R}{g}}$</li><li><b>B</b> $T = 2\\pi \\sqrt{\\frac{3R}{2g}}$</li><li><b>C</b> $T = 2\\pi \\sqrt{\\frac{2R}{g}}$</li><li><b>D</b> $T = 2\\pi \\sqrt{\\frac{3R}{g}}$</li><li><b>E</b> $T = 2\\pi \\sqrt{\\frac{R}{2g}}$</li></ol>",
+                    "task_text": "<p>Figuren under viser en tynnvegget sylinder (ring) med masse M og radius R som svinger friksjonsfritt med små vinkelutslag $\\theta$ om en akse gjennom periferien. Aksen står normalt på figuren.</p>\n\n<ol>\n<li><b>A</b> $T=2\\pi \\sqrt{\\frac{R}{g}}$</li>\n<li><b>B</b> $T = 2\\pi \\sqrt{\\frac{3R}{2g}}$</li>\n<li><b>C</b> $T = 2\\pi \\sqrt{\\frac{2R}{g}}$</li>\n<li><b>D</b> $T = 2\\pi \\sqrt{\\frac{3R}{g}}$</li>\n<li><b>E</b> $T = 2\\pi \\sqrt{\\frac{R}{2g}}$</li>\n</ol>",
                     "images": [
                         "img\\IFYX1000\\V24\\13\\IFYX1000_V24_13_1.png"
                     ],
@@ -153,7 +153,7 @@
                     "topic": "Svingninger",
                     "task_number": "14",
                     "points": 2,
-                    "task_text": "<p>Figuren under viser en kloss med masse m som er festet til en fjær med fjærkonstant k, og som kan svinge horisontalt (x-retningen på figuren).</p><p>Klossen er nedsenket i en væske som gir opphav til en friksjonskraft $F_D = -bv$ rettet mot fartsretningen, der $v$ er farten til klossen.</p><p>Dempingskonstanten $b$ er slik at klossen utfører svakt/underkritisk dempede svingninger.</p><p>Klossen dras ut til startamplitude $A_0$ og slippes. I hvilket av de angitte punktene er klossens akselerasjon størst?</p><ol><li><b>A</b> $x = \\frac{A_0}{3}$</li><li><b>B</b> $x = \\frac{A_0}{4}$</li><li><b>C</b> $x = A_0$</li><li><b>D</b> $x = 0$</li></ol>",
+                    "task_text": "<p>Figuren under viser en kloss med masse m som er festet til en fjær med fjærkonstant k, og som kan svinge horisontalt (x-retningen på figuren). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft $F_D = -bv$ rettet mot fartsretningen, der $v$ er farten til klossen.</p>\n\n<p>Dempingskonstanten $b$ er slik at klossen utfører svakt/underkritisk dempede svingninger.</p>\n\n<p>Klossen dras ut til startamplitude $A$ og slippes. I hvilket av de angitte punktene er klossens akselerasjon størst? Velg ett alternativ:</p>\n\n<ol>\n<li><b>A</b> $x = \\frac{A_0}{4}$</li>\n<li><b>B</b> $x = \\frac{A_0}{2}$</li>\n<li><b>C</b> $x = A_0$</li>\n<li><b>D</b> $x = 0$</li>\n</ol>",
                     "images": [
                         "img\\IFYX1000\\V24\\14\\IFYX1000_V24_14_1.png"
                     ],
@@ -163,7 +163,7 @@
                     "topic": "Bølgefysikk",
                     "task_number": "15",
                     "points": 4,
-                    "task_text": "<p>a) Følgende to sinusformede tversbølger møtes: $Y_1(x,t) = (1,0 m) \\sin(1,0 m^{-1} \\cdot x + 1,0 s^{-1} \\cdot t)$ $Y_2(x,t) = (1,0 m) \\sin(1,0 m^{-1} \\cdot x - 1,0 s^{-1} \\cdot t)$ Hvilken påstand om den resulterende bølgen er riktig? Velg ett alternativ:</p><ol><li><b>A</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 1,0 m$</li><li><b>B</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 2,0 m$</li><li><b>C</b> Resulterende bølge blir null; bølgene utslukker hverandre</li><li><b>D</b> Resulterende bølge beveger seg mot høyre med fart $v = 1,0 m/s$</li><li><b>E</b> Resulterende bølge beveger seg mot venstre med fart $v = 1,0 m/s$</li></ol>\n\n<h3>b)</h3><p>En stående bølge er gitt ved uttrykket $y(x,t) = 2A \\sin(kx) \\cos(\\omega t)$. Hva er den maksimale vertikale farten $v_{max}$ til et punkt på bølgen? Velg ett alternativ:</p><ol><li><b>A</b> $v_{max} = 2A\\omega$</li><li><b>B</b> $v_{max} = A\\omega$</li><li><b>C</b> $v_{max} = A\\omega$</li><li><b>D</b> $v_{max} = A\\omega$</li><li><b>E</b> $v_{max} = A\\omega$</li></ol>",
+                    "task_text": "<p>Følgende to sinusformede tverrbølger møtes: Y₁(x,t) = (1,0 m) sin(1,0 m⁻¹ • x+1,0 s⁻¹ • t) Y₂(x,t) = (1,0 m) sin(1,0 m⁻¹ • x - 1,0 s⁻¹ • t) Hvilken påstand om den resulterende bølgen er riktig? Velg ett alternativ:</p><ol><li><b>A</b> Resulterende bølge blir en stående bølge med maksimal amplitude A = 1,0 m</li><li><b>B</b> Resulterende bølge blir en stående bølge med maksimal amplitude A = 2,0 m</li><li><b>C</b> Resulterende bølge blir null; bølgene utslukker hverandre</li><li><b>D</b> Resulterende bølge beveger seg mot høyre med fart v = 1,0 m/s</li><li><b>E</b> Resulterende bølge beveger seg mot venstre med fart v = 1,0 m/s</li></ol><p>En stående bølge er gitt ved uttrykket y(x,t) = 2A sin(kx) cos(ωt). Hva er den maksimale vertikale farten vmax til et punkt på bølgen? Velg ett alternativ:</p><ol><li><b>A</b> vmax = 2Aω</li><li><b>B</b> vmax = Aω</li><li><b>C</b> vmax = Aω</li><li><b>D</b> vmax = Aω</li><li><b>E</b> vmax = Aω</li></ol>",
                     "images": [],
                     "code": null
                 },
@@ -171,7 +171,7 @@
                     "topic": "Bølgefysikk",
                     "task_number": "16",
                     "points": 2,
-                    "task_text": "<p>a) En streng med lengde L = 1,0 m er spent fast i begge ender. Når strengen settes i vibrasjon, er den laveste frekvensen som gir en stående bølge, lik f = 40 Hz. Bestem bølgefarten på strengen. Velg ett alternativ:</p><ol><li><b>A</b> 10 m/s</li><li><b>B</b> 20 m/s</li><li><b>C</b> 40 m/s</li><li><b>D</b> 60 m/s</li><li><b>E</b> 80 m/s</li></ol><h3>b)</h3><p>En bestemt streng med lengde L, lineær massetetthet $\\mu$ og snorstramming $F_T$ som er spent opp i begge ender, vibrerer med grunnfrekvensen f (dvs. frekvensen tilsvarende ordenstall n = 1). Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært 2L, massetettheten 2$\\mu$ og snorstrammingen 2$F_T$ (dvs. alle størrelser er doblet)? Velg ett alternativ</p><ol><li><b>A</b> $\\frac{1}{2}f$</li><li><b>B</b> $\\frac{1}{4}f$</li><li><b>C</b> $2f$</li><li><b>D</b> $4f$</li></ol>",
+                    "task_text": "<p>a) En streng med lengde L = 1,0 m er spent fast i begge ender. Når strengen settes i vibrasjon, er den laveste frekvensen som gir en stående bølge, lik f = 40 Hz. Bestem bølgefarten på strengen. Velg ett alternativ:</p><ol><li><b>A</b> 10 m/s</li><li><b>B</b> 20 m/s</li><li><b>C</b> 40 m/s</li><li><b>D</b> 60 m/s</li><li><b>E</b> 80 m/s</li></ol><h3>b)</h3><p>En bestemt streng med lengde L, lineær massetetthet $\\mu$ og snorstramming $F_T$ som er spent opp i begge ender, vibrerer med grunnfrekvensen f (dvs. frekvensen tilsvarende ordenstall n = 1). Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært 2L, massetettheten 2$\\mu$ og snorstrammingen 2$F_T$ (dvs. alle størrelser er doblet)? Velg ett alternativ:</p><ol><li><b>A</b> $\\frac{1}{2}f$</li><li><b>B</b> $\\frac{1}{\\sqrt{2}}f$</li><li><b>C</b> $f$</li><li><b>D</b> $\\sqrt{2}f$</li><li><b>E</b> $2f$</li></ol>",
                     "images": [],
                     "code": null
                 }

@@ -7937,15 +7937,9 @@
             "Svingninger",
             "Bølgefysikk",
             "Fluidmekanikk",
-            "Basis",
             "Bevegelse",
             "Rotasjonsmekanikk",
-            "Programmering",
-            "Matematiske operasjoner",
-            "En uventet vennskap",
-            "Funksjoner",
-            "Hva er oppgave 1  \nTopic: Not specified  \nMaximum points: Not specified",
-            "kode"
+            "Programmering"
         ]
     },
     {
@@ -15252,7 +15246,20 @@
     {
         "Emnekode": "TMM4100",
         "Emnenavn": "Materialteknikk",
-        "Temaer": []
+        "Temaer": [
+            "Glidesystem",
+            "Polymerer",
+            "Kopolymer",
+            "Støpejern",
+            "Mekaniske egenskaper",
+            "Skjærspenning",
+            "Enhetskonvertering",
+            "Materialteknikk",
+            "Vektprosent",
+            "Grafenlag",
+            "Diffusjon",
+            "Bindingsenergi"
+        ]
     },
     {
         "Emnekode": "MASX2100",
