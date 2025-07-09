@@ -1,5 +1,6 @@
 What is task {task_number}?
   Write only all text that is required for solving that one task from the raw text.
   Include the topic (if there is one in the title) of the task and how many maximum points you can get.
+  If there is any code in the task related to it make sure to keep it.
   Do not include the solution to the task.
   If the text is written in multiple languages, respond with the task in norwegian bokmål.

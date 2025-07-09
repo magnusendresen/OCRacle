@@ -174,5 +174,136 @@
                 }
             ]
         }
+    },
+    "IMAX1002": {
+        "H24": {
+            "total_tasks": 14,
+            "exam_topics": [
+                "Lineære likningssystemer",
+                "Matriser og determinanter",
+                "Lineære transformasjoner",
+                "Underrom og vektorer",
+                "Basis for vektorrom",
+                "Inversmatriser",
+                "Komplekse tall",
+                "Integraler",
+                "Differensiallikninger",
+                "Systemer av differensiallikninger"
+            ],
+            "tasks": [
+                {
+                    "topic": "Lineære likningssystemer",
+                    "task_number": "1",
+                    "points": 8,
+                    "task_text": "<p>Du har tre elektriske komponenter A, B og C som du ønsker å finne den elektriske motstanden til. Motstanden til komponent A er x, komponent B har motstand y, og komponent C har motstand z.</p>\n\n<p>Du har tilgang til tre forskjellige kretser som du kan måle motstanden i.</p>\n\n<p>Krets 1 har en motstand på 212 og har 2 av komponent A, 3 av komponent B og 4 av komponent C. Det vil si at vi får likningen 2x + 3y + 4z = 212.</p>\n\n<p>Krets 2 har en motstand på 101 og har 1 av komponent A, 5 av komponent B og 0 av komponent C. Det vil si at vi får likningen x + 5y = 101.</p>\n\n<p>Krets 3 har en motstand på 158 og har 8 av komponent A, 0 av komponent B og 4 av komponent C. Det vil si at vi får likningen 8x + 4z = 158.</p>\n\n<p>Løs likningssettet for å finne motstanden x, y og z til hver av de tre komponentene.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Determinanter",
+                    "task_number": "2",
+                    "points": 6,
+                    "task_text": "<p>Hva er determinanten til matrisen A?</p><p>det(A) =</p><p>Rund av svaret til nærmeste heltall.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Lineære transformasjoner",
+                    "task_number": "3",
+                    "points": 6,
+                    "task_text": "<p>La $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ være lineærtransformasjonen gitt ved $T(x, y, z) = [2x - 3z \\quad 2y+4z]$.</p><p>Finn en matrise $A$ slik at $T(x, y, z) = A \\cdot \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix}$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Vektorregning",
+                    "task_number": "4",
+                    "points": 6,
+                    "task_text": "<p>Finn konstanten c slik at vektoren 3 ligger i underrommet span(v1, v2).</p><p>Rund av til nærmeste heltall.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Basis",
+                    "task_number": "5",
+                    "points": 4,
+                    "task_text": "<p>Hvilken av de følgende er en basis for R³? Velg ett alternativ</p><ol><li><b>A</b> {(-1,0,0), (-1, 1, 1)}</li><li><b>B</b> {(1,1,0), (0,0,2), (1, 1, 2), (1, 1, 1)}</li><li><b>C</b> {(1,1,0), (0,0,2), (1,1,2)}</li><li><b>D</b> {(1, 1,0), (0, 1,0), (1,0,0)}</li><li><b>E</b> {(1,0,0), (1,1,0), (1, 1, 1)}</li><li><b>F</b> {(1,0,0), (0,1,0), (0,0,1), (1,0,1)}</li><li><b>G</b> {(1,0,0), (1,1,2)}</li></ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Inversmatriser",
+                    "task_number": "6",
+                    "points": 8,
+                    "task_text": "<p>La $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{pmatrix}$. Finn inversmatrisen $A^{-1}$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Komplekse tall",
+                    "task_number": "7",
+                    "points": 7,
+                    "task_text": "<p>Se på det komplekse tallet z = 4 - 2i. Rund av til 2 desimalers nøyaktighet.</p><p>Hva er realdelen og hva er imaginærdelen til z?</p><p>Re(z) = 4.00</p><p>Im(z) = -2.00</p><h3>a)</h3><p>Skriv z på polarform. Vinklene skal være i radianer og ligge i intervallet $[-\\pi,\\pi)$.</p><p>$z = \\sqrt{20} (\\cos \\theta + i \\sin \\theta)$</p><p>der $\\theta = \\arctan \\left( \\frac{-2}{4} \\right)$.</p><h3>b)</h3><p>Skriv z på eksponentialform. Vinklene skal være i radianer og ligge i intervallet $[-\\pi, \\pi)$.</p><p>$z = \\sqrt{20} e^{i \\theta}$</p><p>der $\\theta = \\arctan \\left( \\frac{-2}{4} \\right)$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Komplekse tall",
+                    "task_number": "8",
+                    "points": 8,
+                    "task_text": "<p>La z1 = 2 + i og z2 = 5 + 5i. Finn den kartesiske formen til de følgende komplekse tallene.</p>\n\n<h3>1.</h3>\n<p>z1 z2 + i</p>\n\n<h3>2.</h3>\n<p>z1 z2 z1</p>\n\n<h3>3.</h3>\n<p>z1 z2</p>\n\n<p>Rund av til én desimal etter komma.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Komplekse tall",
+                    "task_number": "9",
+                    "points": 8,
+                    "task_text": "<p>Finn alle løsningene til ligningen $z^3 = 8i$.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Integrasjon",
+                    "task_number": "10",
+                    "points": 5,
+                    "task_text": "<p>Finn verdien til integralet</p><p>$$ \\int x^2 e^{x^3/3} dx $$</p><p>Rund av til nærmeste heltall.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Derivasjon",
+                    "task_number": "11",
+                    "points": 10,
+                    "task_text": "<p>La f(t) = t³e<sup>t</sup>.</p>\n\n<h3>1.</h3>\n<p>Hvilket av følgende uttrykk er f'(t)?</p>\n<ol>\n<li><b>A</b> f'(t) = 3t³ e² + t² e<sup>t</sup></li>\n<li><b>B</b> f'(t) = (3t² + t³)e<sup>t</sup></li>\n<li><b>C</b> f'(t) = 2t²e<sup>t</sup> + t³ e<sup>t</sup></li>\n<li><b>D</b> f'(t) = 2t² e<sup>t</sup></li>\n<li><b>E</b> f'(t) = 3t² e<sup>t</sup></li>\n<li><b>F</b> f'(t) = t³ e<sup>t</sup></li>\n</ol>\n\n<h3>2.</h3>\n<p>Hvilken av følgende differensiallikninger har funksjonen f som en løsning?</p>\n<ol>\n<li><b>A</b> tf'(t) − 2f(t) = 0</li>\n<li><b>B</b> tf'(t) — e<sup>t</sup> f(t) == 0</li>\n<li><b>C</b> tf'(t) — e<sup>t</sup> f(t) = 0</li>\n<li><b>D</b> f'(t) – 3ƒ(t)/t − f(t) = 0</li>\n<li><b>E</b> f'(t) − (t² — e¹) f(t) = 0</li>\n<li><b>F</b> f'(t) − 3f(t)/t = 0</li>\n</ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Initialverdiproblemer",
+                    "task_number": "12",
+                    "points": 6,
+                    "task_text": "<p>Finn løsningen på initialverdiproblemet $y(x)y'(x) = e^{3x}$, $y(0) = 1$. Velg ett alternativ.</p><ol><li><b>A</b> $y(x) = \\sqrt{\\frac{2}{3}e^{3x} + \\frac{1}{3}}$</li><li><b>B</b> $y(x) = \\sqrt{\\frac{2}{3}e^{3x} - \\frac{1}{3}}$</li><li><b>C</b> $y(x) = \\sqrt{\\frac{2}{3}e^{3x} + 1}$</li><li><b>D</b> $y(x) = \\sqrt{\\frac{2}{3}e^{3x} - 1}$</li></ol>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Differensiallikninger",
+                    "task_number": "13",
+                    "points": 8,
+                    "task_text": "<p>Differensiallikningen $4y''(x) - 4y'(x) + y(x) = \\cos(2x)$ har en partikulær løsning på formen $y(x) = A \\cos(2x) + B \\sin(2x)$.</p><p>Finn konstantene $A$ og $B$.</p><p>$A = $</p><p>$B = $</p><p>Rund av til to desimaler etter komma.</p>",
+                    "images": [],
+                    "code": null
+                },
+                {
+                    "topic": "Differensiallikninger",
+                    "task_number": "14",
+                    "points": 10,
+                    "task_text": "<p>Consider the following system of first-order differential equations: $x_1'(t) = 3x_1(t) + x_2(t)$, $x_2'(t) = x_1(t) + x_2(t)$.</p>\n\n<h3>1.</h3>\n<p>Write the system in matrix form, i.e., in the form $\\mathbf{x}'(t) = A \\cdot \\mathbf{x}(t)$ where $A$ is a matrix and $\\mathbf{x}(t) = \\begin{bmatrix} x_1(t) \\\\ x_2(t) \\end{bmatrix}$.</p>\n\n<h3>2.</h3>\n<p>Find the eigenvalues and eigenvectors of the matrix $A$.</p>\n\n<h3>3.</h3>\n<p>Find the general solution to the system of differential equations.</p>\n\n<h3>4.</h3>\n<p>Find the solution of the system that satisfies the initial conditions $x_1(0) = 2$ and $x_2(0) = \\sqrt{2}$.</p>",
+                    "images": [],
+                    "code": null
+                }
+            ]
+        }
     }
 }

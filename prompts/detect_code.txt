@@ -1,0 +1,3 @@
+Does this task include any code that shoulud be visualized?
+  Respond with a 1 if the task requires any code in its visualization, respond with a 0 otherwise.
+  Just because you COULD visualize a task with code doesn't mean it should be, only if the task text already indicates code.

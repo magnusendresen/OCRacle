@@ -18,4 +18,5 @@ This includes information about the exam, such as:
   
 Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task.
 Do not include the solution to the task, only the task text itself.
+You can remove phrases like "Velg ett alternativ:", instead make it trivial in the sentence explaining the task when there are multiple possible correct answers.
 Be sure to still include ALL the information necessary for being able to solve the task, such as the main question itself.
