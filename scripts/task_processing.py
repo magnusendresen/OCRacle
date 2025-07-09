@@ -94,9 +94,7 @@ def get_topics(emnekode: str) -> str:
             temaer = entry.get("Temaer", [])
             break  # Bare bruk første eksakte match
 
-    TopicEnum = Enum('Temaer', temaer)
-
-    return TopicEnum
+    return Enum('Temaer', temaer)
 
 def add_topics(topic: str, exam: Exam):
     """
