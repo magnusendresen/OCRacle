@@ -16,6 +16,7 @@ from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
 from time import perf_counter
+from enum import Enum
 
 PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
@@ -85,24 +86,17 @@ def get_topics(emnekode: str) -> str:
     with json_path.open('r', encoding='utf-8') as f:
         data = json.load(f)
 
-    all_codes = [entry.get("Emnekode", "").upper() for entry in data]
-    matches = difflib.get_close_matches(emnekode.upper(), all_codes, n=len(all_codes), cutoff=0.6)
+    emnekode = emnekode.upper().strip()
 
-    unike_temaer = set()
-
+    # Finn kun temaer for eksakt emnekode, ikke for alle matches
     for entry in data:
-        if entry.get("Emnekode", "").upper() in matches:
+        if entry.get("Emnekode", "").upper() == emnekode:
             temaer = entry.get("Temaer", [])
-            unike_temaer.update(map(str.strip, temaer))
-            
-    # Uncomment for debugging
-    """
-    if len(unike_temaer) < 3:
-        log("Fewer than 3 topics found in subject")
-        return ""
+            break  # Bare bruk første eksakte match
 
-    log("Topics found in subject, using results as reference")"""
-    return ", ".join(sorted(unike_temaer))
+    TopicEnum = Enum('Temaer', temaer)
+
+    return TopicEnum
 
 def add_topics(topic: str, exam: Exam):
     """
