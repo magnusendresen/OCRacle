@@ -1,31 +1,46 @@
-Format this exam task as a valid HTML string for use in a JavaScript variable.
-Here are a couple rules to follow:
-  - Use <p>...</p> for all text paragraphs.
-  - Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present.
-  - Use MathJax-compatible LaTeX.
-  - Wrap display math in $$...$$.
-  - Wrap inline math in $...$. Use inline math for ALL numbers or symbols inline.
-  - Use a single backslash for LaTeX commands (e.g., \frac, \sqrt).
-  - Do not use \( ... \) or \[ ... \].
-  - Do not double-escape backslashes.
-  - Do not explain, summarize, or add anything outside the HTML.
-  - Output must be usable directly inside const oppgaveTekst = `<the content here>`.
-  - Do not add any other text or explanation.
-  - Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags.
-  - Make sure that e.g. infty, omega, theta, etc. are properly formatted as their respective symbols.
-  - If the task text contains programming code, keep it verbatim inside `<pre class="code-box"><code>...</code></pre>`.
-  - Do not write the result as you would write in a programming box, but as you would write it as clean text.
-  - Do not include ```html or const oppgaveTekst = `` or similar.
-  - You are allowed to make som assumptions about OCR artifacts in the text, such as \sqrt{\sqrt{\sqrt most likely being an error for a single square root.
-  - Be sure to include spaces and newlines where appropriate, the formatting is supposed to look proper.
+Format og struktur:
+- Format this exam task as a valid HTML string for use in a JavaScript variable.
+- Use <p>...</p> for all text paragraphs.
+- Use <h3>a)</h3>, <h3>b)</h3> etc for subtask labels if present.
+- Do not explain, summarize, or add anything outside the HTML.
+- Output must be usable directly inside const oppgaveTekst = `<the content here>`.
+- Do not add any other text or explanation.
+- Do not add any HTML tags outside the <p>...</p> and <h3>...</h3> tags.
+- Be sure to include spaces and newlines where appropriate, the formatting is supposed to look proper.
 
-For multiple choice tasks with text or image alternatives, also follow these rules:
+Matematisk innhold:
+- Use MathJax-compatible LaTeX.
+- Wrap display math in $$...$$.
+- Wrap inline math in $...$. Use inline math for ALL numbers or symbols inline.
+- Use a single backslash for LaTeX commands (e.g., \frac, \sqrt).
+- Do not use \( ... \) or \[ ... \].
+- Do not double-escape backslashes.
+- Make sure that e.g. infty, omega, theta, etc. are properly formatted as their respective symbols.
+
+Kode og programmering:
+- If the task text contains programming code, keep it verbatim inside <pre class="code-box"><code>...</code></pre>. \
+- If the code itself has multiple choice answers, write e.g. X = ? in the full code. Then list each alternative as a separate code box.
+- If any code is on a single line, e.g. in multiple choice tasks, also wrap each line in <pre class="code-box"><code>...</code></pre> instead of leaving it as plain text.
+- If the code contains math expressions (e.g. f(x), $f(x + h)$, etc.), do not try to combine it into code. Instead:
+  - Put code in <pre class="code-box"><code>...</code></pre>
+  - Put math in <div class="math">...</div> using MathJax-compatible LaTeX (e.g., inline $f(x)$ or block $$f(x + h) - f(x)$$)
+- If the task has subquestions (e.g. a), b), c)), and each contains code or math, format each as:
+  <h3>a)</h3>
+  <pre class="code-box"><code>...</code></pre>
+  <div class="math">...</div> (if relevant)
+- Keep all syntax and line breaks exactly as they appear in the original task. Remember that python is extremely strict to indentation, so format accordingly.
+ 
+
+Flervalg:
+- For multiple choice tasks with text or image alternatives, also follow these rules:
   - Present the alternatives as an ordered list using <ol><li>.
   - Prefix each alternative with the corresponding letter label inside <b> tags (A, B, C, ...).
   - Keep the statement of the task itself outside the list in normal <p> tags.
 
-For regular tasks that require proving, calculating or explaining, also follow these rules:
+Oppgaver som krever utregning, bevis eller forklaring:
+- For regular tasks that require proving, calculating or explaining, also follow these rules:
   - Keep paragraphs short and use multiple <p> elements rather than a single long block.
   - Introduce each subtask with its label using <h3>a)</h3>, <h3>b)</h3> and so on.
 
-Here is the task text:
+OCR-feil og tolkning:
+- You are allowed to make som assumptions about OCR artifacts in the text, such as \sqrt{\sqrt{\sqrt most likely being an error for a single square root.

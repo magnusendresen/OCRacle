@@ -323,6 +323,10 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             )
         )
 
+        if not isinstance(identify_topic, int):
+            print(f"\033[91m[ERROR]\033[0m Could not parse topic number for task {task_number}: got '{identify_topic}'", file=sys.stderr)
+            identify_topic = 0
+
         if identify_topic != 0:
             task_exam.topic = get_topic_from_enum(task_exam.subject, identify_topic)
         else:
@@ -333,7 +337,11 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
                     is_num=False,
                     max_len=100,
                 )
-    )
+            )
+        if not task_exam.topic or task_exam.topic.lower() in ("unknown topic", "ukjent tema"):
+            print(f"\033[91m[ERROR]\033[0m Klarte ikke å identifisere tema for oppgave {task_number}.", file=sys.stderr)
+        else:
+            print(f"\033[92m[INFO]\033[0m Tema for oppgave {task_number}: {task_exam.topic}")
     
     log(f"Task {task_number}: topic -> {task_exam.topic}")
     add_topics(task_exam.topic, exam)

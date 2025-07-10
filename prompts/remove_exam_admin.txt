@@ -15,6 +15,7 @@ This includes information about the exam, such as:
   - Hjelpemiddelkoder og kalkulatorliste.
   - Eksamensdato og klokkeslett.
   - Rund av til 2 desimalers nøyaktighet // til nærmeste heltall.
+  - kryss av for...
   
 Also remove the task number (1, Oppgave 1, 1a, a), etc.), max points and title/topic of the task.
 Do not include the solution to the task, only the task text itself.
