@@ -88,8 +88,8 @@ def get_topics(emnekode: str) -> str:
     emnekode = emnekode.upper().strip()
 
     for entry in data:
-        if entry.get("Emnekode", "").upper() == emnekode:
-            temaer = entry.get("Temaer", [])
+        if entry.get("Emnekode", "") == emnekode:
+            temaer = [t for t in entry.get("Temaer", []) if t is not None]
             break
 
     return Enum('Temaer', temaer)
@@ -231,10 +231,10 @@ async def get_exam_info() -> Exam:
 
     log("Extracting exam topics")
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
-        PROMPT_CONFIG + load_prompt("exam_topics") + ocr_text,
+        PROMPT_CONFIG + load_prompt("exam_topics") + enum_to_str(get_topics(exam.subject)) + ocr_text,
         max_tokens=1000,
         is_num=False,
-        max_len=300,
+        max_len=2000,
     )
     if exam.exam_topics:
         exam.exam_topics = [t.strip() for t in str(exam.exam_topics).split(',')]

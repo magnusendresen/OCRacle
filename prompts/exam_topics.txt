@@ -7,4 +7,5 @@ Hva er de viktigste temaene i denne teksten?
   - Programmering og numerikk: Matematiske operasjoner, Funksjoner, Sammenligningsoperatorer, Lister og indekser, Numpy og matriser, Analyse av listedata, Numerisk derivasjon, Numeriske metoder, Newtons metode, Differensialligning, Konvergensrate, Integrasjon, Numerisk derivasjon, Numerisk Integrasjon med Trapesmetoden, Eulers metode, Fikspunktiterasjon, Absolutt og relativ feil.
   Svar kun med temaene, ikke med noe annet.
   If the text is written in multiple languages, respond with the topics in norwegian bokmål.
-  Her er teksten:
+  If the topic is exactly or nearly covered by one of the topics below, do not write it. Although be careful not to add necessary topics.
+  Her er temaene, etterfult av oppgaveteksten:

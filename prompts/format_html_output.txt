@@ -19,7 +19,7 @@ Matematisk innhold:
 
 Kode og programmering:
 - If the task text contains programming code, keep it verbatim inside <pre class="code-box"><code>...</code></pre>. \
-- If the code itself has multiple choice answers, write e.g. X = ? in the full code. Then list each alternative as a separate code box.
+- If the code itself has multiple choice answers, write e.g. "X = ?" or return ?" in the full code. Then list each alternative as a separate code box.
 - If any code is on a single line, e.g. in multiple choice tasks, also wrap each line in <pre class="code-box"><code>...</code></pre> instead of leaving it as plain text.
 - If the code contains math expressions (e.g. f(x), $f(x + h)$, etc.), do not try to combine it into code. Instead:
   - Put code in <pre class="code-box"><code>...</code></pre>

@@ -7932,15 +7932,7 @@
     {
         "Emnekode": "IFYX1000",
         "Emnenavn": "Fysikk",
-        "Temaer": [
-            "Mekanikk",
-            "Svingninger",
-            "Bølgefysikk",
-            "Fluidmekanikk",
-            "Bevegelse",
-            "Rotasjonsmekanikk",
-            "Programmering"
-        ]
+        "Temaer": []
     },
     {
         "Emnekode": "TFOR0112",
@@ -14985,48 +14977,17 @@
     {
         "Emnekode": "IMAX1002",
         "Emnenavn": "Matematikk for ingeniørfag 1",
-        "Temaer": [
-            "Komplekse tall",
-            "Differensiallikninger",
-            "Vektorregning",
-            "Matriseregning",
-            "Integrasjon",
-            "Derivasjon",
-            "Inversmatriser",
-            "Initialverdiproblemer",
-            "Lineære likningssystemer",
-            "Lineære transformasjoner",
-            "Determinanter",
-            "Basis"
-        ]
+        "Temaer": []
     },
     {
         "Emnekode": "IMAX2012",
         "Emnenavn": "Matematikk for ingeniørfag 2 A",
-        "Temaer": [
-            "Derivasjon",
-            "Partiell Derivasjon",
-            "Kritiske Punkt",
-            "Taylor",
-            "Funksjoner av flere variable",
-            "Taylorrekker",
-            "Retningsderivert",
-            "Graf-forståelse"
-        ]
+        "Temaer": []
     },
     {
         "Emnekode": "IMAX2022",
         "Emnenavn": "Matematikk for ingeniørfag 2 B",
-        "Temaer": [
-            "Derivasjon",
-            "Partiell Derivasjon",
-            "Kritiske Punkt",
-            "Taylor",
-            "Funksjoner av flere variable",
-            "Taylorrekker",
-            "Retningsderivert",
-            "Graf-forståelse"
-        ]
+        "Temaer": []
     },
     {
         "Emnekode": "IMAX2023",
@@ -15246,20 +15207,7 @@
     {
         "Emnekode": "TMM4100",
         "Emnenavn": "Materialteknikk",
-        "Temaer": [
-            "Glidesystem",
-            "Polymerer",
-            "Kopolymer",
-            "Støpejern",
-            "Mekaniske egenskaper",
-            "Skjærspenning",
-            "Enhetskonvertering",
-            "Materialteknikk",
-            "Vektprosent",
-            "Grafenlag",
-            "Diffusjon",
-            "Bindingsenergi"
-        ]
+        "Temaer": []
     },
     {
         "Emnekode": "MASX2100",
@@ -15684,13 +15632,7 @@
     {
         "Emnekode": "TKT4116",
         "Emnenavn": "Mekanikk 1",
-        "Temaer": [
-            "Aksialdeformasjon",
-            "Bjelketeori",
-            "Volumsenter",
-            "Kabelmekanikk",
-            "Lagerreaksjoner"
-        ]
+        "Temaer": []
     },
     {
         "Emnekode": "TKT4118",
@@ -19360,16 +19302,7 @@
     {
         "Emnekode": "INGX1002",
         "Emnenavn": "Programmering, numerikk og sikkerhet",
-        "Temaer": [
-            "Derivasjon",
-            "Matematiske operasjoner",
-            "Funksjoner",
-            "Numerisk analyse",
-            "Differensiallikninger",
-            "Integrasjon",
-            "Numerikk",
-            "Matriseregning"
-        ]
+        "Temaer": []
     },
     {
         "Emnekode": "TDT4165",

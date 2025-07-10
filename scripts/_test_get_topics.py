@@ -1,7 +1,7 @@
 from task_processing import get_topics, enum_to_str, get_topic_from_enum
 from enum import Enum
 
-subject = "IFYX1000"
+subject = "INGX1002"
 
 topic_enum = get_topics(subject)
 
