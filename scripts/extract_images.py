@@ -16,6 +16,7 @@ from project_config import load_prompt
 
 import prompt_to_text
 from utils import log
+import shutil
 from time import perf_counter
 import task_boundaries
 import io
@@ -96,17 +97,11 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     text = await _get_text(img)
     ratio = len(text) / (text.count("\n") + 1)
 
-    words = text.split()
-
-    words = [w.replace('\n', ' ') for w in words]
-
     words = re.findall(r'\b[a-zA-ZæøåÆØÅ0-9]+\b', text)
-
     words = [re.sub(r'(.)\1{2,}', r'\1', w) for w in words]
-
     avg_word_len = sum(len(word) for word in words) / len(words) if words else 0
 
-
+    # Heuristikker
     len_max = 250
     ratio_max = 20
     avg_word_len_max = 3
@@ -115,32 +110,24 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     ratio_bool = ratio > ratio_max
     avg_bool = avg_word_len > avg_word_len_max
     admin_bool = "format" in text.lower() or "words:" in text.lower()
-    code_bool = int(
-        await prompt_to_text.async_prompt_to_text(
-                    "Does this text contain code? Answer with a 1 if it does, or a 0 if it does not. "
-                    "Just because comparison operators are used, does not mean it necessarily has code. "
-                    "Here is the text: " + text,
-                    max_tokens=1000,
-                    is_num=False,
-                    max_len=2,
-                )
-        )
-    
-    if code_bool == 1:
+
+    code_bool = int(await prompt_to_text.async_prompt_to_text(
+        "Does this text contain code? Answer with a 1 if it does, or a 0 if it does not. "
+        "Just because comparison operators are used, does not mean it necessarily has code. "
+        "Here is the text: " + text,
+        max_tokens=1000,
+        is_num=False,
+        max_len=2,
+    ))
+
+    if code_bool:
         log(f"\n\n\n[WARNING] Detected code in task {task_num}. Cropping/skipping image.\n\n\n")
         return
 
-    if code_bool:
-        return
-    elif not ((avg_bool and (len_bool or ratio_bool)) or admin_bool):
+    should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool
+    if not should_attempt_crop:
         save_func(img, task_num)
         return
-    
-    # Uncomment for debugging
-    """
-    popup_img()
-    """
-        
 
     if attempt >= 2:
         return
@@ -151,6 +138,7 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
 
     for sub in subs:
         await _process_image(sub, task_num, save_func, attempt + 1)
+
 
 """
 def popup_img():
@@ -206,6 +194,10 @@ async def extract_figures(
     num_imgs = sum(1 for c in containers if c.get("type") == "image")
     log(f"Figures extracted: {num_imgs}")
     output_folder = output_folder or str(IMG_DIR)
+    exam_folder = Path(output_folder) / subject
+    if exam_folder.exists():
+        shutil.rmtree(exam_folder)
+        log(f"[INFO] Rydder tidligere bilder i {exam_folder}")
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
     save = _make_saver(output_folder, subject, version, counts)
