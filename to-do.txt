@@ -1,13 +1,8 @@
 Endre tekst som "se figuren under" til nøytralt ved prompting. Eventuelt finne ut om vi vil ha bildet før eller etter oppgaveteksten eller et annet sted underveis - kanskje legge til et kjenningesymbolfor bilde?
 
-Gjøre temainndelingen med råteksten direkte fra ocr og få kommaseparert svar, og spørre hvilket av temaene som hver oppgave tilhører i den asynkrone oppgaveprosseseringen.
-Hvis det er temaer funnet i emnekoden, så skal dette kun brukes som referanse i innhenting av temaer ved start, ikke hver enkelt oppgave.
-
 Prompte 'Does this task require the Moody diagram?' eller liknende og få med en search engine til å finne den.
 
 Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.'
 
 Implementere prompting og formattering for programmeringsbokser.
     Inneholder bildet programmering? Da kan vi dorppe det og heller visualisere det.
-
-Fikse NoneType ved temaer i json.

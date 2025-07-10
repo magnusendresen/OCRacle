@@ -11,7 +11,10 @@ import tkinter as tk
 from tkinter import messagebox
 import re
 
-from project_config import IMG_DIR
+from project_config import *
+from project_config import load_prompt
+
+import prompt_to_text
 from utils import log
 from time import perf_counter
 import task_boundaries
@@ -112,32 +115,32 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     ratio_bool = ratio > ratio_max
     avg_bool = avg_word_len > avg_word_len_max
     admin_bool = "format" in text.lower() or "words:" in text.lower()
-
-    len_croc = ">" if len_bool else "<"
-    ratio_croc = ">" if ratio_bool else "<"
-    avg_croc = ">" if avg_bool else "<"
-    admin_includes = "includes" if admin_bool else "does not include"
-
-    keep = "✔✔✔"
-    if (avg_bool and (len_bool or ratio_bool)) or admin_bool:
-        keep = "✖✖✖"
-
-
-    keep += (
-        f"\nlen = {len(text)} {len_croc} {len_max},"
-        f"\nratio = {ratio:.2f} {ratio_croc} {ratio_max},"
-        f"\navg_word_len = {avg_word_len:.2f} {avg_croc} {avg_word_len_max}"
-        f"\n{admin_includes} admin keywords"
-    )
-
-    keep += "\n" + " ".join(words)
+    code_bool = int(
+        await prompt_to_text.async_prompt_to_text(
+                    "Does this text contain code? Answer with a 1 if it does, or a 0 if it does not. "
+                    "Just because comparison operators are used, does not mean it necessarily has code. "
+                    "Here is the text: " + text,
+                    max_tokens=1000,
+                    is_num=False,
+                    max_len=2,
+                )
+        )
     
-    # Uncomment for debugging
-    # popup_img()
+    if code_bool == 1:
+        log(f"\n\n\n[WARNING] Detected code in task {task_num}. Cropping/skipping image.\n\n\n")
+        return
 
-    if ratio <= TEXT_CONTENT_RATIO:
+    if code_bool:
+        return
+    elif not ((avg_bool and (len_bool or ratio_bool)) or admin_bool):
         save_func(img, task_num)
         return
+    
+    # Uncomment for debugging
+    """
+    popup_img()
+    """
+        
 
     if attempt >= 2:
         return

@@ -3,6 +3,7 @@ import extract_images
 import task_boundaries
 import ocr_pdf
 from project_config import *
+from project_config import load_prompt
 from utils import log, write_progress, update_progress_fraction
 
 import asyncio
@@ -18,14 +19,9 @@ from collections import defaultdict
 from time import perf_counter
 from enum import Enum
 
-PROMPT_DIR = Path(__file__).resolve().parent.parent / "prompts"
 
 # Number of processing steps for each task in the LLM pipeline
 LLM_STEPS = 8
-
-def load_prompt(name: str) -> str:
-    with open(PROMPT_DIR / f"{name}.txt", "r", encoding="utf-8") as f:
-        return f.read()
 
 # Ensure UTF-8 output
 sys.stdout.reconfigure(encoding='utf-8')
@@ -230,8 +226,13 @@ async def get_exam_info() -> Exam:
         )
 
     log("Extracting exam topics")
+
+    cur_topics = enum_to_str(get_topics(exam.subject)) if exam.subject else "There are no added topics for this subject yet."
+    if not exam.subject:
+        print("\n\n\nNo topics already in subject.\n\n\n")
+
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
-        PROMPT_CONFIG + load_prompt("exam_topics") + enum_to_str(get_topics(exam.subject)) + ocr_text,
+        PROMPT_CONFIG + load_prompt("exam_topics") + cur_topics + ocr_text,
         max_tokens=1000,
         is_num=False,
         max_len=2000,

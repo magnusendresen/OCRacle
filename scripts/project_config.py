@@ -10,11 +10,13 @@ DIR_FILE = ICP_DATA_DIR / "dir.json"
 SUBJECT_FILE = ICP_DATA_DIR / "subject.txt"
 IGNORED_FILE = ICP_DATA_DIR / "ignored.txt"
 
+
 TASKS_JSON = PROJECT_ROOT / "tasks.json"
 EXAM_CODES_JSON = PROJECT_ROOT / "ntnu_emner.json"
 
 IMG_DIR = PROJECT_ROOT / "img"
 PDF_DIR = PROJECT_ROOT / "pdf"
+PROMPT_DIR = PROJECT_ROOT / "prompts"
 
 PROMPT_CONFIG = (
     "DO AS YOU ARE TOLD AND RESPOND ONLY WITH WHAT IS ASKED FROM YOU. "
@@ -36,6 +38,10 @@ __all__ = [
     "PDF_DIR",
     "PROMPT_CONFIG",
 ]
+
+def load_prompt(name: str) -> str:
+    with open(PROMPT_DIR / f"{name}.txt", "r", encoding="utf-8") as f:
+        return f.read()
 
 # def print_config():
 #     for name in __all__:

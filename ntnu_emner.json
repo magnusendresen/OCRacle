@@ -19302,7 +19302,12 @@
     {
         "Emnekode": "INGX1002",
         "Emnenavn": "Programmering, numerikk og sikkerhet",
-        "Temaer": []
+        "Temaer": [
+            "Unknown Topic",
+            "Matematiske operasjoner",
+            "Integrasjon",
+            "Fikspunktiterasjon"
+        ]
     },
     {
         "Emnekode": "TDT4165",
