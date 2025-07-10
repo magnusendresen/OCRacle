@@ -94,26 +94,22 @@ def get_topics(emnekode: str) -> str:
 
     return Enum('Temaer', temaer)
 
-def add_topics(topic: str, exam: Exam):
+def add_topics(topic: str, subject: str):
     """
-    Adds a topic to the JSON file for the subject code if it doesn't already exist.
+    Adds a topic to the JSON file for matching subject codes if it doesn't already exist.
     """
     try:
         with JSON_PATH.open('r', encoding='utf-8') as jf:
             json_data = json.load(jf)
         for entry in json_data:
-            if entry.get("Emnekode", "").upper() == exam.subject:
+            if entry.get("Emnekode", "").upper() == subject.upper():
                 temas = entry.get("Temaer", [])
-                exists = any(
-                    difflib.SequenceMatcher(None, t.lower(), topic.lower()).ratio() >= 0.9
-                    for t in temas
-                )
-                if not exists:
+                if topic not in temas:
                     temas.append(topic)
                     entry["Temaer"] = temas
         with JSON_PATH.open('w', encoding='utf-8') as jf:
             json.dump(json_data, jf, ensure_ascii=False, indent=4)
-        # log(f"Added topic '{topic}' for subject {exam.subject}")
+        # log(f"Added topic '{topic}' for subject code {exam.subject}")
     except Exception as e:
         print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
@@ -344,7 +340,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             print(f"\033[92m[INFO]\033[0m Tema for oppgave {task_number}: {task_exam.topic}")
     
     log(f"Task {task_number}: topic -> {task_exam.topic}")
-    add_topics(task_exam.topic, exam)
+    add_topics(task_exam.topic, exam.subject)
     task_status[task_idx] = 4
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
