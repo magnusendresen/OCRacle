@@ -227,8 +227,10 @@ async def get_exam_info() -> Exam:
 
     log("Extracting exam topics")
 
-    cur_topics = enum_to_str(get_topics(exam.subject)) if exam.subject else "There are no added topics for this subject yet."
-    if not exam.subject:
+    try:
+        cur_topics = enum_to_str(get_topics(exam.subject)) 
+    except:
+        cur_topics = "There are no added topics for this subject yet."
         print("\n\n\nNo topics already in subject.\n\n\n")
 
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
