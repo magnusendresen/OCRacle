@@ -98,7 +98,7 @@
       return `${season} 20${year}`;
     }
 
-    const relativePath = '../tasks.json';
+    const relativePath = '../exams.json';
 
     fetch(relativePath)
       .then(response => {
@@ -222,7 +222,7 @@
       })
       .catch(error => {
         taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";
-        console.error("Feil ved lasting av tasks.json:", error);
+        console.error("Feil ved lasting av exams.json:", error);
       });
   </script>
 </body>

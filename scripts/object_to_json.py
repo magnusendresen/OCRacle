@@ -6,15 +6,15 @@ from project_config import *
 
 
 def main(tasks):
-    """Lag eller oppdater tasks.json i struktur emne -> eksamensutgivelse -> oppgave."""
-    file_path = TASKS_JSON
+    """Create or update exams.json in structure subject -> exams -> tasks."""
+    file_path = EXAMS_JSON
 
     if os.path.exists(file_path):
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 existing = json.load(f)
         except json.JSONDecodeError:
-            print("[INFO] | JSON-dekoderingsfeil i tasks.json. Starter med et tomt oppsett.")
+            print("[INFO] | JSON-dekoderingsfeil i exams.json. Starter med et tomt oppsett.")
             existing = {}
     else:
         existing = {}
@@ -26,20 +26,11 @@ def main(tasks):
         if not subject or not exam:
             continue
 
-        subject_data = existing.setdefault(subject, {})
-        exam_data = subject_data.setdefault(
-            exam,
-            {
-                "total_tasks": task_dict.get("total_tasks", 0),
-                "exam_topics": task_dict.get("exam_topics", []),
-                "tasks": [],
-            },
-        )
+        subject_data = existing.setdefault(subject, {"topics": [], "exams": {}})
+        exam_data = subject_data["exams"].setdefault(exam, {"tasks": []})
 
-        if task_dict.get("total_tasks") is not None:
-            exam_data["total_tasks"] = task_dict["total_tasks"]
         if task_dict.get("exam_topics"):
-            exam_data["exam_topics"] = task_dict["exam_topics"]
+            subject_data["topics"] = task_dict["exam_topics"]
 
         task_copy = {
             k: v
@@ -96,10 +87,10 @@ def main(tasks):
         return (int(m.group()) if m else float("inf"), str(num))
 
     for subject_data in existing.values():
-        for exam_data in subject_data.values():
+        for exam_data in subject_data.get("exams", {}).values():
             exam_data["tasks"].sort(key=_sort_key)
 
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(existing, f, ensure_ascii=False, indent=4)
 
-    print("[INFO] | Oppgavene er skrevet til tasks.json.")
+    print("[INFO] | Oppgavene er skrevet til exams.json.")
