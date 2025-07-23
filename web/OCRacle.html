@@ -108,10 +108,13 @@
       .then(data => {
         const subjects = {};
 
-        for (const [subj, exams] of Object.entries(data)) {
+        for (const [subj, subjectData] of Object.entries(data)) {
           if (!subjects[subj]) subjects[subj] = {};
+
+          const exams = subjectData.exams || {};
           for (const [ver, exam] of Object.entries(exams)) {
-            (exam.tasks || []).forEach(entry => {
+            const tasks = exam.oppgaver || exam.tasks || [];
+            tasks.forEach(entry => {
               const top = entry.topic || "Ukjent tema";
               if (!subjects[subj][top]) subjects[subj][top] = [];
               subjects[subj][top].push({ ...entry, exam_version: ver });
