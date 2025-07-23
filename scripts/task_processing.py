@@ -27,7 +27,7 @@ LLM_STEPS = 8
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Paths and global state
-JSON_PATH = EXAM_CODES_JSON
+JSON_PATH = EXAMS_JSON
 task_status = defaultdict(lambda: 0)
 total_task_count = 0
 
@@ -71,24 +71,14 @@ class Exam:
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
 
 
-def get_topics(emnekode: str) -> str:
-    """
-    Return comma-separated unique 'Temaer' for matching emnekoder,
-    or default list if fewer than 6 topics are found.
-    """
-    json_path = EXAM_CODES_JSON
-
-    with json_path.open('r', encoding='utf-8') as f:
+def get_topics(emnekode: str) -> Enum:
+    """Return available topics for a subject code."""
+    with EXAMS_JSON.open('r', encoding='utf-8') as f:
         data = json.load(f)
 
-    emnekode = emnekode.upper().strip()
-
-    for entry in data:
-        if entry.get("Emnekode", "") == emnekode:
-            temaer = [t for t in entry.get("Temaer", []) if t is not None]
-            break
-
-    return Enum('Temaer', temaer)
+    entry = data.get(emnekode.upper().strip(), {})
+    topics = [t for t in entry.get("topics", []) if t is not None]
+    return Enum('Temaer', topics)
 
 def add_topics(topic: str, subject: str):
     """
@@ -97,12 +87,11 @@ def add_topics(topic: str, subject: str):
     try:
         with JSON_PATH.open('r', encoding='utf-8') as jf:
             json_data = json.load(jf)
-        for entry in json_data:
-            if entry.get("Emnekode", "").upper() == subject.upper():
-                temas = entry.get("Temaer", [])
-                if topic not in temas:
-                    temas.append(topic)
-                    entry["Temaer"] = temas
+        subj = json_data.setdefault(subject.upper(), {"topics": [], "exams": {}})
+        temas = subj.get("topics", [])
+        if topic not in temas:
+            temas.append(topic)
+            subj["topics"] = temas
         with JSON_PATH.open('w', encoding='utf-8') as jf:
             json.dump(json_data, jf, ensure_ascii=False, indent=4)
         # log(f"Added topic '{topic}' for subject code {exam.subject}")

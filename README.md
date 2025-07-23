@@ -31,8 +31,8 @@ I `progress.json` skrives følgende informasjon fra Python, som oppdaterer GUI-e
 - `cachetask.py` – brukt under utvikling for å teste DeepSeek uten ny OCR
 - `prompt_to_text.py` – sender prompts til DeepSeek og henter svar
 - `task_processing.py` – styrer hele prompt-prosessen og bygger oppgaveobjekter
-- `object_to_json.py` – lagrer oppgaveobjektene til `tasks.json` i
-  strukturen `emne -> eksamensutgivelse -> oppgave`
+- `object_to_json.py` – lagrer oppgaveobjektene til `exams.json` i
+  strukturen `emne -> exams -> oppgave`
 - `prompt_tuning_plot.py` – kjører tuning, lagrer resultater og lager mer
   utfyllende plott med annotasjoner
 
