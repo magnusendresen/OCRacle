@@ -30,6 +30,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 JSON_PATH = EXAMS_JSON
 task_status = defaultdict(lambda: 0)
 total_task_count = 0
+OCR_TASKS: Dict[int, str] = {}
 
 def load_emnekart_from_json(json_path: Path):
     """
@@ -68,7 +69,6 @@ class Exam:
     total_tasks: int = 0
     exam_topics: List[str] = field(default_factory=list)
     task_numbers: List[str] = field(default_factory=list)
-    ocr_tasks: Dict[str, str] = field(default_factory=dict)
 
 
 def get_topics(emnekode: str) -> Enum:
@@ -165,9 +165,15 @@ async def get_exam_info() -> Exam:
     header_text = ocr_results[0] if extra_cropped else ""
     task_results = ocr_results[1:] if extra_cropped else ocr_results
     ocr_text = " ".join([header_text] + task_results)
-    exam.ocr_tasks = {}
+    global OCR_TASKS
+    OCR_TASKS = {}
     for (task_num, _), text in zip(cropped, task_results):
-        exam.ocr_tasks[task_num] = exam.ocr_tasks.get(task_num, "") + text
+        try:
+            num = int(task_num)
+        except (TypeError, ValueError):
+            num = task_num
+        OCR_TASKS[num] = OCR_TASKS.get(num, "") + text
+    log(f"OCR tasks created: {len(OCR_TASKS)}")
     exam.task_numbers = assigned_tasks
     exam.total_tasks = len(assigned_tasks)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
@@ -240,6 +246,7 @@ async def get_exam_info() -> Exam:
     return exam
 
 async def process_task(task_number: str, exam: Exam) -> Exam:
+    global OCR_TASKS
     start_time = perf_counter()
     log(f"Task {task_number}: extracting raw text")
     task_exam = deepcopy(exam)
@@ -248,7 +255,10 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
     task_idx = int(task_number)
 
-    task_output = str(exam.ocr_tasks.get(task_number, ""))
+    task_output = OCR_TASKS.get(task_number, "")
+    if not isinstance(task_output, str):
+        task_output = str(task_output)
+    log(f"Task {task_number}: OCR input -> {task_output}")
 
     valid = 0
     images = 0
