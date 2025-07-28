@@ -1,4 +1,4 @@
-from task_processing import add_topics
+import object_handling
 
-add_topics("Dette er en test ", "IFYX1000")
+object_handling.add_topics("IFYX1000", "V23", ["Dette er en test "])
 
