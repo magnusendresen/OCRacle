@@ -71,7 +71,7 @@ class Exam:
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
 
 
-def get_topics(emnekode: str) -> Enum:
+def get_topics_from_json(emnekode: str) -> Enum:
     """Return available topics for a subject code."""
     with EXAMS_JSON.open('r', encoding='utf-8') as f:
         data = json.load(f)
@@ -101,9 +101,8 @@ def add_topics(topic: str, subject: str):
 def enum_to_str(enum: Enum) -> str:
     return str([f"{e.value}: {e.name}" for e in enum])
 
-def get_topic_from_enum(subject: str, num: int) -> str:
-    """Get topic name from enum based on subject and number."""
-    topic_enum = get_topics(subject)
+def get_topic_from_enum(topic_enum: Enum, num: int) -> str:
+    """Get topic name from enum based on enum and number."""
     for topic in topic_enum:
         if topic.value == num:
             return topic.name
@@ -217,9 +216,13 @@ async def get_exam_info() -> Exam:
     log("Extracting exam topics")
 
     try:
-        cur_topics = enum_to_str(get_topics(exam.subject)) 
-    except:
-        cur_topics = "There are no added topics for this subject yet."
+        topics = enum_to_str(get_topics_from_json(exam.subject))
+        if not topics:
+            raise ValueError("No topics found for subject")
+        cur_topics = "The topics found in previous exams are: " + topics 
+        print(f"Current topics found: {cur_topics}")
+    except ValueError:
+        cur_topics = "There are no added topics for this subject yet. You must find your own from the text. "
         print("\n\n\nNo topics already in subject.\n\n\n")
 
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
@@ -300,14 +303,16 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
 
     if exam.exam_topics:
-        cur_topic_enum_str = enum_to_str(get_topics(task_exam.subject))
+        cur_topic_enum_str = enum_to_str(Enum('Temaer', exam.exam_topics))
+
+        print(f"\n\n\n cur_topic_enum_str: {cur_topic_enum_str}\n\n\n")
 
         identify_topic = int(
             await prompt_to_text.async_prompt_to_text(
                 PROMPT_CONFIG + load_prompt("identify_topic") + cur_topic_enum_str + task_output,
                 max_tokens=1000,
                 is_num=False,
-                max_len=2000,
+                max_len=5,
             )
         )
 
@@ -316,7 +321,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             identify_topic = 0
 
         if identify_topic != 0:
-            task_exam.topic = get_topic_from_enum(task_exam.subject, identify_topic)
+            task_exam.topic = get_topic_from_enum(Enum('Temaer', exam.exam_topics), identify_topic)
         else:
             task_exam.topic = str(
                 await prompt_to_text.async_prompt_to_text(

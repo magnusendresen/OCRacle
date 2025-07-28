@@ -1,13 +1,17 @@
 {
     "INGX1002": {
-        "H24": {
-            "tasks": [
-                {
-                    "topic": "History",
-                    "task_number": 3,
-                    "task_text": "Who was the first president of the United States?"
-                }
-            ]
+        "topics": [
+            "Matematiske operasjoner",
+            "Brøkregning"
+        ],
+        "exams": {
+            "H24": {
+                "tasks": []
+            },
+            "V25": {
+                "tasks": []
+            }
+            
         }
     }
 }
