@@ -5,6 +5,7 @@ import ocr_pdf
 from project_config import *
 from project_config import load_prompt
 from utils import log, write_progress, update_progress_fraction
+import object_handling
 
 import asyncio
 import json
@@ -27,7 +28,6 @@ LLM_STEPS = 8
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Paths and global state
-JSON_PATH = EXAMS_JSON
 task_status = defaultdict(lambda: 0)
 total_task_count = 0
 
@@ -80,23 +80,6 @@ def get_topics_from_json(emnekode: str) -> Enum:
     topics = [t for t in entry.get("topics", []) if t is not None]
     return Enum('Temaer', topics)
 
-def add_topics(topic: str, subject: str):
-    """
-    Adds a topic to the JSON file for matching subject codes if it doesn't already exist.
-    """
-    try:
-        with JSON_PATH.open('r', encoding='utf-8') as jf:
-            json_data = json.load(jf)
-        subj = json_data.setdefault(subject.upper(), {"topics": [], "exams": {}})
-        temas = subj.get("topics", [])
-        if topic not in temas:
-            temas.append(topic)
-            subj["topics"] = temas
-        with JSON_PATH.open('w', encoding='utf-8') as jf:
-            json.dump(json_data, jf, ensure_ascii=False, indent=4)
-        # log(f"Added topic '{topic}' for subject code {exam.subject}")
-    except Exception as e:
-        print(f"[ERROR] Kunne ikke oppdatere temaer i JSON: {e}", file=sys.stderr)
 
 def enum_to_str(enum: Enum) -> str:
     return str([f"{e.value}: {e.name}" for e in enum])
@@ -189,6 +172,7 @@ async def get_exam_info() -> Exam:
                 )
             ).strip().upper()
     log(f"Subject code: {exam.subject}")
+    object_handling.add_subject(exam.subject)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS, {4: exam.subject or ""})
 
@@ -205,6 +189,7 @@ async def get_exam_info() -> Exam:
     else:
         version_abbr = exam_raw_version.upper()
     exam.exam_version = version_abbr
+    object_handling.add_exam(exam.subject, exam.exam_version)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS, {5: exam.exam_version or ""})
 
@@ -236,6 +221,7 @@ async def get_exam_info() -> Exam:
     else:
         exam.exam_topics = []
     log(f"Topics extracted: {len(exam.exam_topics)}")
+    object_handling.add_topics(exam.subject, exam.exam_version, exam.exam_topics)
 
     total_task_count = exam.total_tasks
     log(f"Tasks for processing: {exam.total_tasks}")
@@ -337,7 +323,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             print(f"\033[92m[INFO]\033[0m Tema for oppgave {task_number}: {task_exam.topic}")
     
     log(f"Task {task_number}: topic -> {task_exam.topic}")
-    add_topics(task_exam.topic, exam.subject)
     task_status[task_idx] = 4
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
@@ -386,6 +371,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         log(f"Task {task_number}: approved")
         result = task_exam
 
+    object_handling.add_task(result)
     log(f"Task {task_number} completed in {perf_counter() - start_time:.2f}s")
     return result
 
