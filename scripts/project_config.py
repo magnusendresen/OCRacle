@@ -39,6 +39,8 @@ __all__ = [
 
 def load_prompt(name: str) -> str:
     with open(PROMPT_DIR / f"{name}.txt", "r", encoding="utf-8") as f:
+        if len(f.read().strip()) == 0:
+            print(f"Warning: Prompt '{name}' is empty.")
         return f.read()
 
 # def print_config():

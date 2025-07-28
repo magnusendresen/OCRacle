@@ -1,0 +1,117 @@
+{
+    "IFYX1000": {
+        "topics": [
+            "Bevegelse",
+            "Mekanikk",
+            "Sirkelbevegelse",
+            "Rotasjonsmekanikk",
+            "Fluidmekanikk",
+            "Svingninger",
+            "Bølgefysikk",
+            "Energi og arbeid",
+            "Impuls og støt"
+        ],
+        "exams": {
+            "V24": {
+                "tasks": [
+                    {
+                        "topic": "Mekanikk",
+                        "task_number": "1",
+                        "points": 2,
+                        "task_text": "<p>Hvor mange $m/s^2$ tilsvarer en akselerasjon på $1,0$ $km/h^2$?</p><ol><li><b>A</b> $5,8$ $m/s^2$</li><li><b>B</b> $0,28$ $m/s^2$</li><li><b>C</b> $1,3 \\cdot 10^4$ $m/s^2$</li><li><b>D</b> $2,8$ $m/s^2$</li><li><b>E</b> $7,7 \\cdot 10^{-5}$ $m/s^2$</li></ol>"
+                    },
+                    {
+                        "topic": "Bevegelse",
+                        "task_number": "2",
+                        "points": 2,
+                        "task_text": "<p>The figure shows the acceleration graph $a(t)$ for a runner in a $100$ m race. Which statement about the runner's motion is correct?</p>\n<ol>\n<li><b>A</b> The runner runs with uniformly increasing speed from start to finish.</li>\n<li><b>B</b> The runner maintains approximately constant speed throughout the race.</li>\n<li><b>C</b> The runner accelerates to a maximum speed, which is then held constant until the finish line.</li>\n<li><b>D</b> The runner accelerates to a maximum speed, but the speed decreases toward the finish line.</li>\n<li><b>E</b> The runner starts with a certain maximum speed, which then decreases toward the finish.</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Mekanikk",
+                        "task_number": "3",
+                        "points": 2,
+                        "task_text": "<p>En pil skytes med horisontal startfart $v_1 = 90$ m/s mot en vegg i horisontal avstand $x = 50$ m fra skytteren. Bestem den vertikale avstanden $\\Delta y$ mellom siktelinja (startfarten) og punktet der pilen treffer veggen, dersom pilen betraktes som en punktpartikkel og vi neglisjerer luftmotstand.</p><ol><li><b>A)</b> $\\Delta y = 0,050$ m</li><li><b>B)</b> $\\Delta y = 0,56$ m</li><li><b>C)</b> $\\Delta y = 1,5$ m</li><li><b>D)</b> $\\Delta y = 0,20$ m</li><li><b>E)</b> $\\Delta y = 1,8$ m</li></ol>"
+                    },
+                    {
+                        "topic": "Mekanikk",
+                        "task_number": "4",
+                        "points": 2,
+                        "task_text": "<p>A kloss with mass $m$ slides with constant speed down an inclined plane with angle $\\theta = 30^\\circ$. The speed is sufficiently low that air resistance can be neglected. What is the coefficient of kinetic friction $\\mu$ between the block and the surface?</p><ol><li><b>A</b> $\\mu = 0.50$</li><li><b>B</b> $\\mu = 0.58$</li><li><b>C</b> $\\mu = 0.87$</li><li><b>D</b> $\\mu = 1.0$</li><li><b>E</b> Depends on the numerical value of mass $m$</li></ol>"
+                    },
+                    {
+                        "topic": "Bevegelse",
+                        "task_number": "5",
+                        "points": 2,
+                        "task_text": "<p>In which point is the magnitude of the ball's acceleration greatest?</p><ol><li><b>A</b> just after the ball is thrown</li><li><b>B</b> midway to the top, going up</li><li><b>C</b> the highest point</li><li><b>D</b> midway to the top, going down</li><li><b>E</b> just before the ball returns to the starting point</li></ol>"
+                    },
+                    {
+                        "topic": "Sirkelbevegelse",
+                        "task_number": "6",
+                        "points": 15,
+                        "task_text": "<p>A wagon with mass $m$ in a roller coaster starts with zero initial velocity from a height $h = 3R$ above the lowest point $A$ in a circular loop with radius $R$. The wagon is not attached to the track and can slide frictionlessly on the rails. Friction and air resistance are negligible, and the wagon can be treated as a point mass.</p>\n\n<h3>a)</h3>\n<p>Show that the speed of the wagon at the lowest point in the loop (point $A$) is $v = \\sqrt{6gR}$.</p>\n\n<h3>b)</h3>\n<p>Draw the forces acting on the wagon at the highest point in the loop (point $C$) and determine the magnitude of the normal force from the track on the wagon, expressed in terms of the wagon's weight $G$.</p>\n\n<h3>c)</h3>\n<p>At which points $A$-$D$ in the loop is the magnitude of the wagon's tangential acceleration greatest?</p>\n\n<h3>d)</h3>\n<p>After passing the loop, the wagon continues uphill to a peak at $E$. Draw a figure showing the forces on the wagon at $E$ for two different scenarios:</p>\n<p>i) The wagon maintains contact with the track over the hilltop.</p>\n<p>ii) The wagon just loses contact with the track at point $E$.</p>"
+                    },
+                    {
+                        "topic": "Svingninger",
+                        "task_number": "7",
+                        "points": 2,
+                        "task_text": "<p>In which point is the absolute value of the jumper's speed maximal?</p><ol><li><b>A</b></li><li><b>B</b></li><li><b>C</b></li><li><b>D</b></li><li><b>E</b></li></ol>"
+                    },
+                    {
+                        "topic": "Rotasjonsmekanikk",
+                        "task_number": "8",
+                        "points": 2,
+                        "task_text": "<p>Et kvadratisk legeme består av $4$ tynne, homogene stenger, hver med masse $m$ og lengde $L$. Legemet kan rotere om en akse gjennom legemets massesenter som står vinkelrett på legemet, indikert på figuren under. Bestem legemets treghetsmoment $I$ om aksen.</p>"
+                    },
+                    {
+                        "topic": "Mekanikk",
+                        "task_number": "9",
+                        "points": 4,
+                        "task_text": "<p>a) Hva skal stå i kodelinja KODE MANGLER for at Pyton-funksjonen Fd(v) skal returnere luftmotstanden FD i newton på legemet, når funksjonsargumentet v (farten v) angis i kilometer per time (km/h)?</p>\n<pre class=\"code-box\"><code>def Fd(v):\n    rho=1.2\n    A=0.70\n    Cd=1.0\n    return KODE MANGLER</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*(v/3.6)**2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*(v*3.6)**2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*(v*3.6)^2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*v^2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*v**2</code></pre>\n\n<p>b) Hva skal stå i kodelinja KODE MANGLER for å beregne farten v etter det neste tidssteget, dvs. v(t + dt)?</p>\n<pre class=\"code-box\"><code>g=9.81\nt=0\nv=0 #fart i m/s\nwhile (t<t_maks):\n    KODE MANGLER\n    t=t+dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g+Fd(v)/m)*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g-Fd/m)*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+g*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g+Fd/m)*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g-Fd(v)/m)*dt</code></pre>"
+                    },
+                    {
+                        "topic": "Rotasjonsmekanikk",
+                        "task_number": "10",
+                        "points": 15,
+                        "task_text": "<p>A homogeneous, solid cylinder with mass $M$ and radius $R$ rolls straight without slipping down an inclined plane with an angle $\\theta = 30^\\circ$. The speed is sufficiently low that air resistance can be neglected.</p>\n\n<h3>a)</h3>\n<p>Draw the forces acting on the cylinder as it rolls down the inclined plane. The relative magnitudes of the forces should be reasonable, and all forces must be labeled.</p>\n\n<h3>b)</h3>\n<p>Show that the acceleration of the cylinder down the inclined plane is $a = \\frac{2}{3}g \\sin \\theta$.</p>\n\n<h3>c)</h3>\n<p>How long does it take for the cylinder to roll down the inclined plane if the length of the plane is $\\Delta x = 1.0$ m and the cylinder starts from rest?</p>\n\n<h3>d)</h3>\n<p>The cylinder starts at $x = 0$ at $t = 0$. Sketch the position graph $x(t)$, velocity graph $v(t)$, and acceleration graph $a(t)$ of the cylinder. The shape of the graphs should be clearly visible. All three graphs can be sketched in the same diagram without units on the axes.</p>\n\n<h3>e)</h3>\n<p>The cylinder then participates in a \"race\" with a thin-walled cylinder (ring) of the same mass $M$ and radius $R$ as the solid cylinder. The two objects are released simultaneously from rest at the same starting point, and both roll the length $\\Delta x = 1.0$ m to the end of the inclined plane.</p>\n<p>Which object reaches the \"finish line\" first? The answer must be briefly justified (either with a qualitative argument or by calculation).</p>\n\n<h3>f)</h3>\n<p>What is the time difference $\\Delta t$ between the two objects reaching the finish line?</p>"
+                    },
+                    {
+                        "topic": "Fluidmekanikk",
+                        "task_number": "11",
+                        "points": 2,
+                        "task_text": "<p>En homogen terning med sidekant $h$ flyter i utgangspunktet i ro i et kar med vann som har dybde $2h$. I utgangspunktet flyter terningen slik at $h$ ligger under vannoverflaten. Terningen presses deretter nedover i vannet, helt til den nederste sidekant er i kontakt med bunnen av karet. Hvilken av grafene A-E viser oppdriften $F_B$ på terningen som funksjon av dybden til den nederste sidekant? Enhetene på aksene i figuren er ikke tegnet i riktig skala.</p>\n\n<ol>\n<li><b>A</b></li>\n<li><b>B</b></li>\n<li><b>C</b></li>\n<li><b>D</b></li>\n<li><b>E</b></li>\n</ol>"
+                    },
+                    {
+                        "topic": "Fluidmekanikk",
+                        "task_number": "12",
+                        "points": 15,
+                        "task_text": "<p>Olje med massetetthet $9,0 \\cdot 10^2$ kg/m$^3$ skal tappes fra et reservoar på havbunnen gjennom et vertikalt rør med lengde $L = 1,1$ km og diameter $D = 0,20$ m. Trykket i reservoaret i det tappingen starter er $P_1 = 1,0 \\cdot 10^7$ Pa, og oljen er tilnærmet i ro idet den kommer inn i røret. På overflaten kommer oljen ut i luft der lufttrykket er $p_0 = 1,0 \\cdot 10^5$ Pa.</p>\n\n<h3>a)</h3>\n<p>Vis at væskefarten ut av røret ved overflaten er $v = 20$ m/s når vi neglisjerer alle former for tap.</p>\n\n<h3>b)</h3>\n<p>Bestem volumstrømmen i røret.</p>\n\n<h3>c)</h3>\n<p>Trykket i reservoaret vil reduseres etter hvert som olje tappes ut. Hva er trykket i reservoaret når oljestrømmen stopper opp?</p>\n\n<h3>d)</h3>\n<p>Røret har ruhet $\\epsilon = 0,040$ mm, og oljen har dynamisk viskositet $\\eta = 2,5 \\cdot 10^{-3}$ Pa$\\cdot$s. På grunn av rørfriksjon måles væskefarten i røret til $v = 10$ m/s. Bestem friksjonsfaktoren $f$ for væskestrømmen i røret.</p>\n\n<h3>e)</h3>\n<p>Beregn tapshøyden $h_f$ på grunn av rørfriksjon under samme forutsetninger som i oppgave d). Forklar kort hva tapshøyden representerer.</p>"
+                    },
+                    {
+                        "topic": "Svingninger",
+                        "task_number": "13",
+                        "points": 0,
+                        "task_text": "<p>Figuren under viser en tynnvegget sylinder (ring) med masse $M$ og radius $R$ som svinger friksjonsfritt med små vinkelutslag $\\theta$ om en akse gjennom periferien. Aksen står normalt på figuren.</p>\n\n<ol>\n<li><b>A</b> $T=2\\pi \\sqrt{\\frac{R}{g}}$</li>\n<li><b>B</b> $T = 2\\pi \\sqrt{\\frac{3R}{2g}}$</li>\n<li><b>C</b> $T = 2\\pi \\sqrt{\\frac{2R}{g}}$</li>\n<li><b>D</b> $T = 2\\pi \\sqrt{\\frac{3R}{g}}$</li>\n<li><b>E</b> $T = 2\\pi \\sqrt{\\frac{R}{2g}}$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Svingninger",
+                        "task_number": "14",
+                        "points": 2,
+                        "task_text": "<p>The figure shows a block with mass $m$ attached to a spring with spring constant $k$, oscillating horizontally ($x$-direction in the figure). The block is submerged in a fluid that produces a frictional force $F_D = -bv$ opposing the direction of motion, where $v$ is the block's velocity. The damping constant $b$ is such that the block undergoes weakly/underdamped oscillations. The block is pulled to an initial amplitude $A$ and released. At which of the specified points is the block's acceleration greatest?</p>\n\n<ol>\n<li><b>A</b> $x = 3$</li>\n<li><b>B</b> $x = 40$</li>\n<li><b>C</b> $x = A_0$</li>\n<li><b>D</b> $x = 0$</li>\n<li><b>E</b> $A_0$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Bølgefysikk",
+                        "task_number": "15",
+                        "points": 4,
+                        "task_text": "<p>Følgende to sinusformede tverrbølger møtes: $Y_1(x,t) = (1,0 \\text{ m}) \\sin(1,0 \\text{ m}^{-1} \\cdot x+1,0 \\text{ s}^{-1}t)$ $Y_2(x,t) = (1,0 \\text{ m}) \\sin(1,0 \\text{ m}^{-1} \\cdot x - 1,0 \\text{ s}^{-1}t)$ Hvilken påstand om den resulterende bølgen er riktig?</p><ol><li><b>A</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 1,0 \\text{ m}$</li><li><b>B</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 2,0 \\text{ m}$</li><li><b>C</b> Resulterende bølge blir null; bølgene utslukker hverandre</li><li><b>D</b> Resulterende bølge beveger seg mot høyre med fart $v = 1,0 \\text{ m/s}$</li><li><b>E</b> Resulterende bølge beveger seg mot venstre med fart $v = 1,0 \\text{ m/s}$</li></ol><p>En stående bølge er gitt ved uttrykket $y(x,t) = 2A \\sin(kx) \\cos(\\omega t)$. Hva er den maksimale vertikale farten $v_{\\text{max}}$ til et punkt på bølgen?</p><ol><li><b>A</b> $v_{\\text{max}} = 2A\\omega$</li><li><b>B</b> $v_{\\text{max}} = A\\omega$</li><li><b>C</b> $v_{\\text{max}} = A\\omega$</li><li><b>D</b> $v_{\\text{max}} = A\\omega$</li><li><b>E</b> $v_{\\text{max}} = A\\omega$</li></ol>"
+                    },
+                    {
+                        "topic": "Bølgefysikk",
+                        "task_number": "16",
+                        "points": 2,
+                        "task_text": "<p>a) En streng med lengde $L = 1,0$ m er spent fast i begge ender. Når strengen settes i vibrasjon, er den laveste frekvensen som gir en stående bølge, lik $f = 40$ Hz. Bestem bølgefarten på strengen.</p><ol><li><b>A</b> $10$ m/s</li><li><b>B</b> $20$ m/s</li><li><b>C</b> $40$ m/s</li><li><b>D</b> $60$ m/s</li><li><b>E</b> $80$ m/s</li></ol><p>b) En bestemt streng med lengde $L$, lineær massetetthet $\\mu$ og snorstramming $F_T$ som er spent opp i begge ender, vibrerer med grunnfrekvensen $f$ (dvs. frekvensen tilsvarende ordenstall $n = 1$). Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært $2L$, massetettheten $2\\mu$ og snorstrammingen $2F_T$ (dvs. alle størrelser er doblet)?</p><ol><li><b>A</b> $\\frac{1}{2} f$</li><li><b>B</b> $\\frac{1}{\\sqrt{2}} f$</li><li><b>C</b> $f$</li><li><b>D</b> $\\sqrt{2} f$</li><li><b>E</b> $2f$</li></ol>"
+                    }
+                ]
+            }
+        }
+    }
+}
