@@ -87,158 +87,156 @@
   <div id="task_text" class="mathjax-process">Velg en oppgave for å vise innholdet.</div>
 
   <script>
-    const subjectSelect = document.getElementById("subject");
-    const topicSelect = document.getElementById("topic");
-    const taskSelect = document.getElementById("task");
-    const taskTextDiv = document.getElementById("task_text");
+  const subjectSelect = document.getElementById("subject");
+  const topicSelect = document.getElementById("topic");
+  const taskSelect = document.getElementById("task");
+  const taskTextDiv = document.getElementById("task_text");
 
-    function formatExamVersion(ver) {
-      const year = ver.slice(1);
-      const season = ver[0] === 'V' ? 'V\u00e5r' : 'H\u00f8st';
-      return `${season} 20${year}`;
-    }
+  function formatExamVersion(ver) {
+    const year = ver.slice(1);
+    const season = ver[0] === 'V' ? 'V\u00e5r' : 'H\u00f8st';
+    return `${season} 20${year}`;
+  }
 
-    const relativePath = '../exams.json';
+  const relativePath = '../exams.json';
 
-    fetch(relativePath)
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP-feil: ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        const subjects = {};
+  fetch(relativePath)
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP-feil: ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      const subjects = {};
 
-        for (const [subj, subjectData] of Object.entries(data)) {
-          if (!subjects[subj]) subjects[subj] = {};
+      for (const [subj, subjectData] of Object.entries(data)) {
+        if (!subjects[subj]) subjects[subj] = {};
 
-          const exams = subjectData.exams || {};
-          for (const [ver, exam] of Object.entries(exams)) {
-            const tasks = exam.oppgaver || exam.tasks || [];
-            tasks.forEach(entry => {
-              const top = entry.topic || "Ukjent tema";
-              if (!subjects[subj][top]) subjects[subj][top] = [];
-              subjects[subj][top].push({ ...entry, exam_version: ver });
-            });
-          }
-        }
-
-        for (const subj of Object.keys(subjects)) {
-          const opt = document.createElement("option");
-          opt.value = subj;
-          opt.textContent = subj;
-          subjectSelect.appendChild(opt);
-        }
-
-        function updateTopicOptions() {
-          topicSelect.innerHTML = "";
-          taskSelect.innerHTML = "";
-          taskTextDiv.innerHTML = "Velg en oppgave for å vise innholdet.";
-
-          const selectedSubject = subjectSelect.value;
-          const topics = subjects[selectedSubject] || {};
-
-          for (const top of Object.keys(topics)) {
-            const opt = document.createElement("option");
-            opt.value = top;
-            opt.textContent = top;
-            topicSelect.appendChild(opt);
-          }
-
-          updateTaskOptions();
-        }
-
-        function updateTaskOptions() {
-          taskSelect.innerHTML = "";
-          taskTextDiv.innerHTML = "Velg en oppgave for å vise innholdet.";
-
-          const selectedSubject = subjectSelect.value;
-          const selectedTopic = topicSelect.value;
-          const tasks = subjects[selectedSubject]?.[selectedTopic] || [];
-
-          tasks.sort((a, b) => a.task_number.localeCompare(b.task_number, undefined, { numeric: true }));
-
+        const exams = subjectData.exams || {};
+        for (const [ver, exam] of Object.entries(exams)) {
+          const tasks = exam.oppgaver || exam.tasks || [];
           tasks.forEach(entry => {
-            const opt = document.createElement("option");
-            opt.value = entry.task_number;
-            opt.textContent = `Oppgave ${entry.task_number}`;
-            opt.dataset.text = entry.task_text;
-            opt.dataset.images = JSON.stringify(entry.images || []);
-            opt.dataset.exam = entry.exam_version;
-            taskSelect.appendChild(opt);
+            const top = entry.topic || "Ukjent tema";
+            if (!subjects[subj][top]) subjects[subj][top] = [];
+            subjects[subj][top].push({ ...entry, exam_version: ver });
           });
+        }
+      }
 
-          updateTaskText();
+      for (const subj of Object.keys(subjects)) {
+        const opt = document.createElement("option");
+        opt.value = subj;
+        opt.textContent = subj;
+        subjectSelect.appendChild(opt);
+      }
+
+      function updateTopicOptions() {
+        topicSelect.innerHTML = "";
+        taskSelect.innerHTML = "";
+        taskTextDiv.innerHTML = "Velg en oppgave for å vise innholdet.";
+
+        const selectedSubject = subjectSelect.value;
+        const topics = subjects[selectedSubject] || {};
+
+        for (const top of Object.keys(topics)) {
+          const opt = document.createElement("option");
+          opt.value = top;
+          opt.textContent = top;
+          topicSelect.appendChild(opt);
         }
 
-        function updateTaskText() {
-          const selectedOption = taskSelect.options[taskSelect.selectedIndex];
-          const raw = selectedOption?.dataset.text || "Ingen oppgave valgt.";
-          const images = JSON.parse(selectedOption?.dataset.images || "[]");
-          const exam = selectedOption?.dataset.exam || "";
+        updateTaskOptions();
+      }
 
-          var subject_code = subjectSelect.value;
-          var exam_version = exam;
-          var task_number = selectedOption?.value;
-            // Fuzzy image name prefix for matching: subject_exam_task
-            var img_prefix = subject_code + "_" + exam_version + "_" + task_number;
-            // Only match images that start with this prefix and end with .png (may have extra after task_number)
-            const filteredImages = images.filter(imgPath => {
-            const normalized = imgPath.replace(/\\/g, "/");
-            return normalized.startsWith(img_prefix) && normalized.endsWith(".png");
-            });
+      function updateTaskOptions() {
+        taskSelect.innerHTML = "";
+        taskTextDiv.innerHTML = "Velg en oppgave for å vise innholdet.";
 
+        const selectedSubject = subjectSelect.value;
+        const selectedTopic = topicSelect.value;
+        const tasks = subjects[selectedSubject]?.[selectedTopic] || [];
 
-          taskTextDiv.innerHTML = "";
+        tasks.sort((a, b) => a.task_number.localeCompare(b.task_number, undefined, { numeric: true }));
 
-          const header = document.createElement("h2");
-          header.textContent = `${subjectSelect.value} Eksamen ${formatExamVersion(exam)}`;
-          taskTextDiv.appendChild(header);
+        tasks.forEach(entry => {
+          const opt = document.createElement("option");
+          opt.value = entry.task_number;
+          opt.textContent = `Oppgave ${entry.task_number}`;
+          opt.dataset.text = entry.task_text;
+          opt.dataset.exam = entry.exam_version;
+          taskSelect.appendChild(opt);
+        });
 
-          const sub = document.createElement("h3");
-          sub.textContent = `Oppgave ${selectedOption.value}`;
-          taskTextDiv.appendChild(sub);
+        updateTaskText();
+      }
 
-          if (images.length > 0) {
-            const imgContainer = document.createElement("div");
-            imgContainer.className = "img-container";
+      function updateTaskText() {
+        const selectedOption = taskSelect.options[taskSelect.selectedIndex];
+        const raw = selectedOption?.dataset.text || "Ingen oppgave valgt.";
+        const exam = selectedOption?.dataset.exam || "";
 
-            images.forEach(imgPath => {
-              const normalized = imgPath.replace(/\\/g, "/");
-              const img = document.createElement("img");
-              img.src = `../${normalized}`;
-              img.alt = "Bilde til oppgave";
-              img.onerror = () => {
-                console.warn("Kunne ikke laste bilde:", img.src);
-                img.replaceWith(document.createTextNode("[Bilde mangler]"));
-              };
-              imgContainer.appendChild(img);
-            });
+        const subject_code = subjectSelect.value;
+        const exam_version = exam;
+        const task_number = selectedOption?.value;
+        const img_prefix = `${subject_code}_${exam_version}_${task_number}`;
 
-            taskTextDiv.appendChild(imgContainer);
-          }
+        taskTextDiv.innerHTML = "";
 
-          const textDiv = document.createElement("div");
-          textDiv.innerHTML = raw;
-          taskTextDiv.appendChild(textDiv);
+        const header = document.createElement("h2");
+        header.textContent = `${subject_code} Eksamen ${formatExamVersion(exam_version)}`;
+        taskTextDiv.appendChild(header);
 
-          if (window.MathJax?.typesetPromise) {
-            MathJax.typesetClear();
-            MathJax.typesetPromise([taskTextDiv])
-              .then(() => console.log("MathJax-rendering fullført."))
-              .catch(err => console.error("MathJax-feil:", err));
-          }
+        const sub = document.createElement("h3");
+        sub.textContent = `Oppgave ${task_number}`;
+        taskTextDiv.appendChild(sub);
+
+        // Lag container for bilder
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "img-container";
+        let foundAny = false;
+        const maxAttempts = 5;
+
+        for (let i = 1; i <= maxAttempts; i++) {
+          const filename = `${img_prefix}_${i}.png`;
+          const imgPath = `../img/${subject_code}/${exam_version}/${task_number}/${filename}`;
+          const img = document.createElement("img");
+          img.src = imgPath;
+          img.alt = `Bilde ${i} til oppgave`;
+          img.onload = () => {
+            if (!foundAny) {
+              foundAny = true;
+              // Legg til bildecontainer rett etter "Oppgave N"
+              sub.insertAdjacentElement("afterend", imgContainer);
+            }
+            imgContainer.appendChild(img);
+          };
+          img.onerror = () => {
+            // Ikke vis noe hvis bilde mangler
+          };
         }
 
-        subjectSelect.addEventListener("change", updateTopicOptions);
-        topicSelect.addEventListener("change", updateTaskOptions);
-        taskSelect.addEventListener("change", updateTaskText);
+        const textDiv = document.createElement("div");
+        textDiv.innerHTML = raw;
+        taskTextDiv.appendChild(textDiv);
 
-        updateTopicOptions();
-      })
-      .catch(error => {
-        taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";
-        console.error("Feil ved lasting av exams.json:", error);
-      });
-  </script>
+        if (window.MathJax?.typesetPromise) {
+          MathJax.typesetClear();
+          MathJax.typesetPromise([taskTextDiv])
+            .then(() => console.log("MathJax-rendering fullført."))
+            .catch(err => console.error("MathJax-feil:", err));
+        }
+      }
+
+      subjectSelect.addEventListener("change", updateTopicOptions);
+      topicSelect.addEventListener("change", updateTaskOptions);
+      taskSelect.addEventListener("change", updateTaskText);
+
+      updateTopicOptions();
+    })
+    .catch(error => {
+      taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";
+      console.error("Feil ved lasting av exams.json:", error);
+    });
+</script>
+
 </body>
 </html>
