@@ -176,6 +176,18 @@
           const images = JSON.parse(selectedOption?.dataset.images || "[]");
           const exam = selectedOption?.dataset.exam || "";
 
+          var subject_code = subjectSelect.value;
+          var exam_version = exam;
+          var task_number = selectedOption?.value;
+            // Fuzzy image name prefix for matching: subject_exam_task
+            var img_prefix = subject_code + "_" + exam_version + "_" + task_number;
+            // Only match images that start with this prefix and end with .png (may have extra after task_number)
+            const filteredImages = images.filter(imgPath => {
+            const normalized = imgPath.replace(/\\/g, "/");
+            return normalized.startsWith(img_prefix) && normalized.endsWith(".png");
+            });
+
+
           taskTextDiv.innerHTML = "";
 
           const header = document.createElement("h2");
