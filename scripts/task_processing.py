@@ -63,9 +63,8 @@ class Exam:
     task_number: Optional[str] = None
     points: Optional[int] = None
     task_text: Optional[str] = None
-    images: List[str] = field(default_factory=list)
-    code: Optional[str] = None
-    total_tasks: int = 0
+    # Images are handled automatically in the HTML layer
+    # Code snippets are embedded directly in the task text
     exam_topics: List[str] = field(default_factory=list)
     task_numbers: List[str] = field(default_factory=list)
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
@@ -151,9 +150,9 @@ async def get_exam_info() -> Exam:
     for (task_num, _), text in zip(cropped, task_results):
         exam.ocr_tasks[task_num] = exam.ocr_tasks.get(task_num, "") + text
     exam.task_numbers = assigned_tasks
-    exam.total_tasks = len(assigned_tasks)
+    total_task_count = len(assigned_tasks)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
-    write_progress(progress, LLM_STEPS, {6: str(exam.total_tasks)})
+    write_progress(progress, LLM_STEPS, {6: str(total_task_count)})
     write_progress(progress, LLM_STEPS, {8: str(LLM_STEPS)})
 
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
@@ -223,8 +222,8 @@ async def get_exam_info() -> Exam:
     log(f"Topics extracted: {len(exam.exam_topics)}")
     object_handling.add_topics(exam.subject, exam.exam_version, exam.exam_topics)
 
-    total_task_count = exam.total_tasks
-    log(f"Tasks for processing: {exam.total_tasks}")
+    total_task_count = len(exam.task_numbers)
+    log(f"Tasks for processing: {total_task_count}")
 
     return exam
 
@@ -240,7 +239,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_output = str(exam.ocr_tasks.get(task_number, ""))
 
     valid = 0
-    images = 0
 
     task_output = str(
         await prompt_to_text.async_prompt_to_text(
@@ -254,19 +252,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
 
-    # Check if images exist for this task and add them to the object if they do
-    task_dir = IMG_DIR / task_exam.subject / task_exam.exam_version / str(task_number)
-    if task_dir.exists():
-        found_images = sorted(task_dir.glob("*.png"))
-        if found_images:
-            task_exam.images = [str(img.relative_to(PROJECT_ROOT)) for img in found_images]
-            log(f"Task {task_number}: figures found -> {len(task_exam.images)}")
-        else:
-            log(f"Task {task_number}: no figures found")
-            task_exam.images = []
-    else:
-        log(f"Task {task_number}: image directory does not exist")
-        task_exam.images = []
     task_status[task_idx] = 2
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)

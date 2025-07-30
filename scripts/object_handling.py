@@ -76,7 +76,6 @@ def add_task(task: Any) -> None:
                 existing_topics.append(t)
         subj["topics"] = existing_topics
 
-    image_count = len(task_dict.get("images", []))
     task_copy = {
         k: v
         for k, v in task_dict.items()
@@ -84,12 +83,10 @@ def add_task(task: Any) -> None:
         not in {
             "subject",
             "exam_version",
-            "total_tasks",
             "exam_topics",
             "task_numbers",
             "ocr_tasks",
-            "images",
-            "code",
+            "total_tasks",
         }
     }
 
@@ -129,6 +126,5 @@ def add_task(task: Any) -> None:
         f"Exam: {exam}, "
         f"Task: {num_str}, "
         f"Subject: {subject} "
-        f"({image_count} bilder)"
     )
 
