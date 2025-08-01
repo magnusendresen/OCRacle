@@ -39,10 +39,11 @@ __all__ = [
 
 def load_prompt(name: str) -> str:
     with open(PROMPT_DIR / f"{name}.txt", "r", encoding="utf-8") as f:
-        if len(f.read().strip()) == 0:
+        content = f.read()
+        if len(content.strip()) == 0:
             print(f"Warning: Prompt '{name}' is empty.")
-        return f.read()
-
+        return content
+    
 # def print_config():
 #     for name in __all__:
 #         value = globals()[name]
