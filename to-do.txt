@@ -7,3 +7,5 @@ Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvar
 Implementere prompting og formattering for programmeringsbokser.
 
 Hvis temaet til oppgaven er programmering, så kan(skal?) temaet til oppgaven være både programmering ogdet opprinnelige temaet.
+
+Legge til ytterligere start/stop/restart funksjoner for cpp UI.
