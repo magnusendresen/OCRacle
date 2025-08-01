@@ -204,16 +204,16 @@ async def get_exam_info() -> Exam:
         if not topics:
             raise ValueError("No topics found for subject")
         cur_topics = "The topics found in previous exams are: " + topics 
-        print(f"Current topics found: {cur_topics}")
     except ValueError:
-        cur_topics = "There are no added topics for this subject yet. You must find your own from the text. "
-        print("\n\n\nNo topics already in subject.\n\n\n")
+        cur_topics = "There are no added topics for this subject yet. Topics will be extracted from exam."
 
+    log(cur_topics)
+    
     exam.exam_topics = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("exam_topics") + cur_topics + ocr_text,
         max_tokens=1000,
         is_num=False,
-        max_len=2000,
+        max_len=4000,
     )
     if exam.exam_topics:
         exam.exam_topics = [t.strip() for t in str(exam.exam_topics).split(',')]
@@ -236,6 +236,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
     task_idx = int(task_number)
 
+    task_number_str = task_number.zfill(2)
+
     task_output = str(exam.ocr_tasks.get(task_number, ""))
 
     valid = 0
@@ -245,7 +247,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             PROMPT_CONFIG + load_prompt("extract_task_text").format(task_number=task_number) + task_output,
             max_tokens=1000,
             is_num=False,
-            max_len=2000,
+            max_len=4000,
         )
     )
     task_status[task_idx] = 1
@@ -270,7 +272,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
     if task_exam.points is not None:
-        log(f"Task {task_number}: points extracted -> {task_exam.points}p")
+        log(f"Task {task_number_str}: points extracted -> {task_exam.points}p")
 
 
     if exam.exam_topics:
@@ -288,7 +290,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         )
 
         if not isinstance(identify_topic, int):
-            print(f"\033[91m[ERROR]\033[0m Could not parse topic number for task {task_number}: got '{identify_topic}'", file=sys.stderr)
             identify_topic = 0
 
         if identify_topic != 0:
@@ -302,12 +303,8 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
                     max_len=100,
                 )
             )
-        if not task_exam.topic or task_exam.topic.lower() in ("unknown topic", "ukjent tema"):
-            print(f"\033[91m[ERROR]\033[0m Klarte ikke å identifisere tema for oppgave {task_number}.", file=sys.stderr)
-        else:
-            print(f"\033[92m[INFO]\033[0m Tema for oppgave {task_number}: {task_exam.topic}")
     
-    log(f"Task {task_number}: topic -> {task_exam.topic}")
+    log(f"Task {task_number_str}: topic identified -> {task_exam.topic}")
     task_status[task_idx] = 4
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
@@ -315,22 +312,22 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     for step_idx, instruction in enumerate([
         "translate_to_bokmaal",
         "remove_exam_admin",
-        "format_html_output",
+        "format_html_output_nor",
     ], start=5):
         task_output = str(
             await prompt_to_text.async_prompt_to_text(
                 PROMPT_CONFIG + load_prompt(instruction) + task_output,
                 max_tokens=1000,
                 is_num=False,
-                max_len=2000,
+                max_len=4000,
             )
         )
         if instruction == "translate_to_bokmaal":
-            log(f"Task {task_number}: translated to Bokmål")
+            log(f"Task {task_number_str}: translated to Bokmål")
         elif instruction == "remove_exam_admin":
             pass
         elif instruction == "format_html_output":
-            log(f"Task {task_number}: final HTML formatted")
+            log(f"Task {task_number_str}: HTML formatted")
         task_status[task_idx] = step_idx
         progress = [task_status[t] for t in range(1, total_task_count + 1)]
         write_progress(progress, LLM_STEPS)
@@ -350,14 +347,14 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     task_exam.task_text = task_output
 
     if valid == 0:
-        log(f"Task {task_number}: not approved")
+        log(f"Task {task_number_str}: not approved")
         result = task_exam
     else:
-        log(f"Task {task_number}: approved")
+        log(f"Task {task_number_str}: approved")
         result = task_exam
 
     object_handling.add_task(result)
-    log(f"Task {task_number} completed in {perf_counter() - start_time:.2f}s")
+    log(f"Task {task_number_str}: completed in {perf_counter() - start_time:.2f}s")
     return result
 
 async def main_async():

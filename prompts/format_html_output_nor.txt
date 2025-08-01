@@ -1,0 +1,45 @@
+Format og struktur:
+- Formater denne eksamensoppgaven som en gyldig HTML-streng for bruk i en JavaScript-variabel.
+- Bruk <p>...</p> for alle tekstavsnitt.
+- Bruk <h3>a)</h3>, <h3>b)</h3> osv. for deloppgaver dersom det er aktuelt.
+- Ikke forklar, oppsummer eller legg til noe utenfor HTML-en.
+- Output må kunne brukes direkte i const oppgaveTekst = `<innholdet her>`.
+- Ikke legg til annen tekst eller forklaring.
+- Ikke legg til andre HTML-tagger enn <p>...</p> og <h3>...</h3>.
+- Sørg for å inkludere mellomrom og linjeskift der det er passende, formateringen skal se pen ut.
+
+Matematisk innhold:
+- Bruk LaTeX som er kompatibel med MathJax.
+- Bruk $$...$$ for display-matematikk.
+- Bruk $...$ for inline-matematikk. Bruk inline-matematikk for ALLE tall eller symboler inline.
+- Bruk én backslash for LaTeX-kommandoer (f.eks. \frac, \sqrt).
+- Ikke bruk \( ... \) eller \[ ... \].
+- Ikke dobbelt-escape backslashes.
+- Pass på at f.eks. infty, omega, theta osv. formateres korrekt som de respektive symbolene.
+
+Kode og programmering:
+- Dersom oppgaveteksten inneholder programkode, behold den nøyaktig som den er inne i <pre class="code-box"><code>...</code></pre>.
+- Dersom koden inneholder flervalg, skriv f.eks. "X = ?" eller "return ?" i selve koden. Deretter listes hvert alternativ i en egen kodeboks.
+- Dersom kode er på én enkelt linje, f.eks. i flervalg, skal også denne linjen pakkes inn i <pre class="code-box"><code>...</code></pre> og ikke vises som ren tekst.
+- Dersom koden inneholder matematiske uttrykk (f.eks. f(x), $f(x + h)$ osv.), ikke prøv å kombinere det inn i koden. I stedet:
+  - Sett kode i <pre class="code-box"><code>...</code></pre>
+  - Sett matematikk i <div class="math">...</div> med MathJax-kompatibel LaTeX (f.eks. $f(x)$ inline eller $$f(x + h) - f(x)$$ som blokk)
+- Dersom oppgaven har delspørsmål (f.eks. a), b), c)) og hvert inneholder kode eller matte, formater hvert slik:
+  <h3>a)</h3>
+  <pre class="code-box"><code>...</code></pre>
+  <div class="math">...</div> (hvis aktuelt)
+- Behold all syntaks og linjeskift nøyaktig slik det fremstår i originalteksten. Husk at Python er svært sensitiv for innrykk, så formater deretter.
+
+Flervalg:
+- For flervalgsoppgaver med tekst- eller bildealternativer, følg også disse reglene:
+  - Presenter alternativene som en nummerert liste med <ol><li>.
+  - Foran hvert alternativ: bruk bokstavetiketten inni <b>-tagger (A, B, C, ...).
+  - Selve oppgaveteksten skal stå utenfor listen i vanlige <p>-tagger.
+
+Oppgaver som krever utregning, bevis eller forklaring:
+- For vanlige oppgaver som krever bevis, utregning eller forklaring, følg også disse reglene:
+  - Hold avsnitt korte og bruk flere <p>-elementer i stedet for én lang blokk.
+  - Innled hver deloppgave med etiketten <h3>a)</h3>, <h3>b)</h3> og så videre.
+
+OCR-feil og tolkning:
+- Du har lov til å gjøre enkelte antakelser om OCR-feil i teksten, som at \sqrt{\sqrt{\sqrt sannsynligvis er en feil for én enkelt kvadratrot.

@@ -3,6 +3,7 @@ import re
 from dataclasses import asdict
 from typing import Any, Dict, List
 from project_config import EXAMS_JSON
+from utils import *
 
 
 def _load_json() -> Dict[str, Any]:
@@ -12,7 +13,7 @@ def _load_json() -> Dict[str, Any]:
             with EXAMS_JSON.open("r", encoding="utf-8") as f:
                 return json.load(f)
         except json.JSONDecodeError:
-            print("[INFO] | JSON-dekoderingsfeil i exams.json. Starter med et tomt oppsett.")
+            log("JSON-dekoderingsfeil i exams.json. Starter med et tomt oppsett.")
     return {}
 
 
@@ -94,10 +95,10 @@ def add_task(task: Any) -> None:
     idx = next((i for i, t in enumerate(tasks_list) if t.get("task_number") == task_copy.get("task_number")), None)
     if idx is not None:
         tasks_list[idx] = task_copy
-        action = "erstattet"
+        action = "replaced"
     else:
         tasks_list.append(task_copy)
-        action = "lagt til"
+        action = "added"
 
     # Remove duplicates while keeping the latest entry
     seen = set()
@@ -121,10 +122,12 @@ def add_task(task: Any) -> None:
     num_str = str(task_copy.get("task_number") or 0)
     if num_str.isdigit():
         num_str = num_str.zfill(2)
-    print(
-        f"[INFO] | Oppgave {action}: "
+    log(
+        f"Task {num_str}: "
+        f"Task {action}, "
         f"Exam: {exam}, "
-        f"Task: {num_str}, "
         f"Subject: {subject} "
     )
+
+
 
