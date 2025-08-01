@@ -276,7 +276,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     if exam.exam_topics:
         cur_topic_enum_str = enum_to_str(Enum('Temaer', exam.exam_topics))
 
-        print(f"\n\n\n cur_topic_enum_str: {cur_topic_enum_str}\n\n\n")
+        # print(f"\n\n\n cur_topic_enum_str: {cur_topic_enum_str}\n\n\n")
 
         identify_topic = int(
             await prompt_to_text.async_prompt_to_text(

@@ -70,7 +70,7 @@ def prompt_to_text(prompt, max_tokens=1000, is_num=True, max_len=None):
             if response.choices:
                 result_text = response.choices[0].message.content.strip()
                 if max_len is not None and len(result_text) > max_len:
-                    print(f"{prefix}[ERROR] Exceeded max letters. (attempt {attempt}/{max_attempts})")
+                    print(f"{prefix}[ERROR] Exceeded max letters with response: \"{result_text}\"(attempt {attempt}/{max_attempts})")
                     continue
                 if is_num:
                     if not isNumber(result_text):
