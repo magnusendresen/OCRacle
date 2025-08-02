@@ -310,5 +310,241 @@
                 ]
             }
         }
+    },
+    "MEKX1101": {
+        "topics": [
+            "Legeringer",
+            "fasediagrammer",
+            "korrosjon",
+            "mikrostruktur",
+            "diffusjon",
+            "bruddmekanismer",
+            "materialvalg",
+            "krystallstruktur",
+            "mekaniske egenskaper",
+            "termiske egenskaper",
+            "polymerer",
+            "legeringer"
+        ],
+        "exams": {
+            "V24": {
+                "tasks": [
+                    {
+                        "topic": "Legeringer",
+                        "task_number": "1",
+                        "points": 13,
+                        "task_text": "<p>Hva kalles en legering som hovedsakelig inneholder kobber og tinn?</p>\n\n<p>Hva er vanlig navn for legeringer som hovedsakelig inneholder kobber og sink?</p>\n\n<h3>a)</h3>\n<p>Likevektsstrukturen til en blanding av kobber og nikkel beskrives ved et isomorft fasediagram. Forklar hvorfor.</p>\n\n<h3>b)</h3>\n<p>Hva er maksimal løselighet av kobber i aluminium?</p>\n\n<h3>c)</h3>\n<p>Aluminiumslegeringar i 2000-serien har kobber som det primære legeringselementet. Forklar korleis og kvifor desse legeringane kan oppnå høg flytestyrke.</p>\n\n<h3>d)</h3>\n<p>Kan kobber nyttast som katodisk vern av stål? Gi ei kort forklaring på det du kjem fram til.</p>\n\n<h3>e)</h3>\n<p>Gi ei kort forklaring på kva som hindrar korrosjon i rustfrie stål, både med omsyn til stålet sitt innhald og mekanismen som verkar.</p>"
+                    },
+                    {
+                        "topic": "Legeringer",
+                        "task_number": "2",
+                        "points": 3,
+                        "task_text": "<p>En legering består av kun kobber og tinn. Forholdet mellom antall kobberatomer og antall tinnatomer er $25:1$. Hva er vektprosenten av tinn i legeringen? Oppgi svaret avrundet til nærmeste hele tall.</p>\n\n<h3>a)</h3>\n<p>Finn molmassen til kobber og tinn.</p>\n\n<h3>b)</h3>\n<p>Beregn total masse av kobber og tinn basert på forholdet $25:1$.</p>\n\n<h3>c)</h3>\n<p>Regn ut vektprosenten av tinn i legeringen.</p>"
+                    },
+                    {
+                        "topic": "fysikk",
+                        "task_number": "3",
+                        "points": 3,
+                        "task_text": "<p>Et stykke aluminiumsfolie har bredde lik $44$ cm, lengde lik $10$ m og den veier $180$ g. Hva er tykkelsen til denne folien?</p>\n<ol>\n<li><b>A</b> $< 10$ μm</li>\n<li><b>B</b> $15$ μm</li>\n<li><b>C</b> $25$ μm</li>\n<li><b>D</b> $35$ μm</li>\n<li><b>E</b> $45$ μm</li>\n<li><b>F</b> $55$ μm</li>\n<li><b>G</b> $65$ μm</li>\n<li><b>H</b> $> 75$ μm</li>\n</ol>"
+                    },
+                    {
+                        "topic": "korrosjon",
+                        "task_number": "4",
+                        "points": 3,
+                        "task_text": "<p>Aluminium reagerer raskt med oksygen i luft og danner et belegg av aluminiumoksid, $Al_2O_3$ på overflatene. Dette belegget er $4$ nanometer tykt. Hvor mye oksygen er i så fall bundet til aluminiumsfolien i forrige oppgave? Tettheten til aluminiumoksid er $3980$ kg/m$^3$ og du kan anta at alle flater har blitt eksponert for oksygen.</p>\n\n<ol>\n<li><b>A</b> $10$ $\\mu$g</li>\n<li><b>B</b> $15$ $\\mu$g</li>\n<li><b>C</b> $25$ $\\mu$g</li>\n<li><b>D</b> $35$ $\\mu$g</li>\n<li><b>E</b> $45$ $\\mu$g</li>\n<li><b>F</b> $55$ $\\mu$g</li>\n<li><b>G</b> $65$ $\\mu$g</li>\n<li><b>H</b> $70$ $\\mu$g</li>\n</ol>"
+                    },
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "5",
+                        "points": 3,
+                        "task_text": "<p>Kobber, som har tetthet lik $8935$ kg/m$^3$, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten $a$ for enhetscellen til kobber.</p><ol><li><b>A:</b> $180$ pm</li><li><b>B:</b> $216$ pm</li><li><b>C:</b> $240$ pm</li><li><b>D:</b> $288$ pm</li><li><b>E:</b> $360$ pm</li><li><b>F:</b> $405$ pm</li><li><b>G:</b> $450$ pm</li><li><b>H:</b> $480$ pm</li></ol>"
+                    },
+                    {
+                        "topic": "Legeringer",
+                        "task_number": "6",
+                        "points": 3,
+                        "task_text": "<p>80 g of a copper-silver alloy containing 30 weight percent silver is slowly heated from room temperature to 900$^\\circ$C and held at this temperature until the system is in complete equilibrium. The melt is then poured out of the mixture. How much solid remains?</p>\n\n<p>The solid remaining from the previous task is slowly cooled to 700$^\\circ$C. What is the weight percent of the $\\beta$-phase in the mixture of $\\alpha$ and $\\beta$ at this temperature?</p>"
+                    },
+                    {
+                        "topic": "fasediagrammer",
+                        "task_number": "7",
+                        "points": 3,
+                        "task_text": "<p>A legering of copper and silver contains $4$ mol copper and $6$ mol silver. The alloy is heated slowly from room temperature. At what temperature will the entire mixture become a melt? The relevant phase diagram is provided in an appendix. Choose one:</p><ol><li><b>A</b> $780^\\circ$C</li><li><b>B</b> $800^\\circ$C</li><li><b>C</b> $820^\\circ$C</li><li><b>D</b> $840^\\circ$C</li><li><b>E</b> $860^\\circ$C</li><li><b>F</b> $880^\\circ$C</li><li><b>G</b> $900^\\circ$C</li><li><b>H</b> $920^\\circ$C</li></ol>"
+                    },
+                    {
+                        "topic": "diffusjon",
+                        "task_number": "8",
+                        "points": 15,
+                        "task_text": "<p>Forklar kort og presist hva som menes med en semi-uendelig plate.</p>\n\n<p>Hva er diffusjonskoeffisienten for karbon i stål ved disse betingelsene?</p>\n\n<p>Hvor lang tid må platen holdes ved disse betingelsene for at konsentrasjonen av karbon ved en posisjon $1.0$ mm inn i platen blir $1.0$ wt%?</p>\n\n<p>Vis at betingelser for en semi-uendelig plate er oppfylt for tiden du har beregnet i forrige spørsmål.</p>\n\n<p>Hvordan forventer du at konsentrasjonen av karbon varierer gjennom platen når juleferien er over?</p>\n\n<p>Hva vil skje med materialet i platen nå?</p>"
+                    },
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "9",
+                        "points": 4,
+                        "task_text": "<p>Karbonstål med eutektoid sammensetning har $0,76$ vektprosent karbon. Hvor mange karbonatom har et slikt stål per $1000$ jernatom?</p>\n\n<h3>a)</h3>\n<p>Finn massen av karbon og jern i $100$ gram stål.</p>\n\n<h3>b)</h3>\n<p>Finn antall mol karbon og jern.</p>\n\n<h3>c)</h3>\n<p>Finn antall karbonatom per $1000$ jernatom.</p>"
+                    },
+                    {
+                        "topic": "fasediagrammer",
+                        "task_number": "10",
+                        "points": 4,
+                        "task_text": "<p>Karbonstål med $1.5$ wt% karbon er i likevekt som austenitt, og kjøles deretter langsomt ned til en temperatur lik $750^\\circ$C. Hvor stor del av materialet er sementitt ved denne temperaturen? Relevant diagram finner du i et vedlegg.</p>\n\n<h3>a)</h3>\n<p>Bruk fase"
+                    },
+                    {
+                        "topic": "mikrostruktur",
+                        "task_number": "11",
+                        "points": 4,
+                        "task_text": "<p>Karbonstålet består nå av $\\alpha$-jern (ferritt) og 0 wt% kjøles videre ned til romtemperatur. Hvor stor del av materialet (i vektprosent) er ferritt ved romtemperatur.</p>"
+                    },
+                    {
+                        "topic": "bruddmekanismer",
+                        "task_number": "12",
+                        "points": 14,
+                        "task_text": "<p>Gjør rede for forskjellen mellom sprøbrudd og duktilt brudd.</p>\n\n<p>Gjør kort rede for hva støpejern er.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til grått støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til hvitt støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til kulegrafittjern.</p>\n\n<p>Forklar kvifor grått og hvitt støpejern har liten eller ingen duktilitet, medan kulegrafittjern kan ha relativt høg duktilitet.</p>"
+                    },
+                    {
+                        "topic": "bruddmekanismer",
+                        "task_number": "13",
+                        "points": 4,
+                        "task_text": "<p>I en komponent er det laget en overflatesprekk med lengde $a = 2$ mm. Komponenten utsettes så for en strekkspenning, og det oppstår et sprøbrudd når denne spenningen er $126$ MPa. Materialets bruddseighet samt geometriparameteren til systemet er ukjent, men det kan antas at geometriparameteren ikke er avhengig av sprekkens lengde. En identisk komponent med kun naturlige overflatesprekker utsettes så for en strekklast, og sprøbrudd oppstår ved en spenning lik $325$ MPa. Hva er lengden $a$ på overflatesprekken som førte til brudd i denne komponenten? Anta at sprekken er lokalisert og orientert på samme måte som den kunstige sprekken i den første komponenten.</p>\n\n<ol>\n<li><b>A</b> $0.5$ mm</li>\n<li><b>B</b> $0.6$ mm</li>\n<li><b>C</b> $0.7$ mm</li>\n<li><b>D</b> $0.8$ mm</li>\n<li><b>E</b> $0.9$ mm</li>\n<li><b>F</b> $1.0$ mm</li>\n<li><b>G</b> $1.1$ mm</li>\n<li><b>H</b> $1.2$ mm</li>\n</ol>"
+                    },
+                    {
+                        "topic": "bruddmekanismer",
+                        "task_number": "14",
+                        "points": 5,
+                        "task_text": "<p>En fritt opplagret bjelke er utsatt for en senterlast $F$ (tilsvarende som for en tre-punkts bøyetest). Lengde mellom opplagringer er $L = 180$ mm, bredden til bjelken er $10$ mm og høyden er $8$ mm. Ved en last $F = 1212$ N, blir det et sprøbrudd $43$ mm til venstre for midten av bjelken. Hva var maksimal bøyespenning i bjelken ved bruddets posisjon?</p>\n\n<ol>\n<li><b>A</b> $43$ MPa</li>\n<li><b>B</b> $89$ MPa</li>\n<li><b>C</b> $146$ MPa</li>\n<li><b>D</b> $212$ MPa</li>\n<li><b>E</b> $267$ MPa</li>\n<li><b>F</b> $332$ MPa</li>\n<li><b>G</b> $425$ MPa</li>\n<li><b>H</b> $510$ MPa</li>\n<li><b>I</b> $600$ MPa</li>\n<li><b>J</b> $800$ MPa</li>\n<li><b>K</b> $999$ MPa</li>\n</ol>"
+                    },
+                    {
+                        "topic": "materialvalg",
+                        "task_number": "15",
+                        "points": 0,
+                        "task_text": "<p>En søyle med lengde $L = 6$ m skal ha et sirkulært tverrsnitt. Søylen skal være så lett som mulig, og du må ta hensyn til knekkingslasten, som for det konkrete tilfellet er gitt ved:</p>\n<div class=\"math\">$$F_r = \\frac{\\pi^2 EI}{L^2}$$</div>\n<p>Søylen må akkurat tåle $50$ kN i trykk uten å knekke. Du trenger ikke ta hensyn til materialets trykkstyrke, siden det er antatt at knekking er den begrensende faktoren. Data for materialer med ID-nummer $1...9$ er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m³ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene. Diameteren til søylen er i utgangspunktet en fri variabel (for de tre første spørsmålene som følger)</p>\n\n<h3>a)</h3>\n<p>Hvilket material er mest optimalt?</p>\n\n<h3>b)</h3>\n<p>Hvilket material er minst optimalt?</p>\n\n<h3>c)</h3>\n<p>Hvor mange materialer er bedre enn materialet med ID-nummer $7$?</p>\n\n<h3>d)</h3>\n<p>Nå er det bestemt at søylens diameter må være mindre enn $100$ mm. Hvor mange av materialene vil tilfredsstille dette kravet?</p>"
+                    },
+                    {
+                        "topic": "materialvalg",
+                        "task_number": "16",
+                        "points": 2,
+                        "task_text": "<p>Data for materialer med ID-nummer 1...9 er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m³ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene. Av de 9 materialene, er fem av materialene fiktive, mens de fire andre materialene representerer vanlige konstruksjonsmetall.</p>\n\n<h3>a)</h3>\n<p>Hvilket materiale er en stållegering? SVAR: (heltall, ID-nummer)</p>\n\n<h3>b)</h3>\n<p>Hvilket materiale er en aluminiumslegering? SVAR: (heltall, ID-nummer)</p>\n\n<h3>c)</h3>\n<p>Hvilket materiale er en titanlegering? SVAR: (heltall, ID-nummer)</p>\n\n<h3>d)</h3>\n<p>Hvilket materiale er en magnesiumlegering? SVAR: (heltall, ID-nummer)</p>"
+                    },
+                    {
+                        "topic": "mekaniske egenskaper",
+                        "task_number": "17",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt?</p><ol><li><b>A</b> Elastisitetsmodulen (E-modulen) til de fleste metaller er lite påvirket av temperaturen så lenge temperaturen er under smeltepunktet.</li><li><b>B</b> Temperert martensitt oppnås ved å varme martensitt til en temperatur over den eutektoide temperaturen, for så å holde denne temperaturen for en definert tid.</li><li><b>C</b> Austenittiske stål er særlig utsatt for en brå omvandling fra duktil til sprø oppførsel ved lave temperaturer.</li><li><b>D</b> Elektrisk resistivitet i metaller er generelt økende med økende temperatur.</li></ol>"
+                    },
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "18",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt?</p><ol><li><b>A</b> For metaller med BCC krystallstruktur, er siging (creep) relevant ved temperaturer over ca. 0.4 ganger smeltetemperaturen, mens dette ikke er tilfelle for metaller med FCC krystallstruktur.</li><li><b>B</b> Smeltetemperaturen til metaller gir en viss indikasjon på den potensielle øvre brukstemperaturen til materialet.</li><li><b>C</b> Krystallinske metaller blir sprø når temperaturen er under glasstransisjonstemperaturen.</li><li><b>D</b> Aluminium som er plastisk bearbeidet og dermed deformasjonsherdet, vil rekrystallisere og danne HCP-aluminium etter en gitt tid.</li></ol>"
+                    },
+                    {
+                        "topic": "polymerer",
+                        "task_number": "19",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt?</p>\n<ol>\n<li><b>A:</b> PTFE (polytetrafluoretylen) som vi finner i teflon, har spesielt høyt smeltepunkt på grunn av sterke hydrogenbindinger.</li>\n<li><b>B:</b> PE (polyetylen) har høyere smeltetemperatur enn PP (polypropylen) siden enklere molekyl pakkes lettere enn molekyl med sidegrupper.</li>\n<li><b>C:</b> Plastiserer (plasticizer) kan tilsettes f.eks. PVC (polyvinylklorid) for å øke glasstransisjonstemperaturen.</li>\n<li><b>D:</b> PVC (polyvinylklorid) har høyere smeltetemperatur enn PP (polypropylen) på grunn av sterkere dipolkrefter mellom molekylene.</li>\n</ol>"
+                    }
+                ]
+            },
+            "K24": {
+                "tasks": [
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "1",
+                        "points": 5,
+                        "task_text": "<p>Li$_2$O har kubisk krystallstruktur der litiumatom (Li) er plassert i følgende krystallografiske punkt:</p>\n<p>$\\frac{1}{4} \\frac{1}{4} \\frac{1}{4}$, $\\frac{3}{4} \\frac{3}{4} \\frac{1}{4}$, $\\frac{1}{4} \\frac{3}{4} \\frac{3}{4}$, $\\frac{3}{4} \\frac{1}{4} \\frac{3}{4}$</p>\n<p>Oksygenatom (O) er plassert i følgende krystallografiske punkt:</p>\n<p>$\\frac{1}{2} \\frac{1}{2} \\frac{1}{2}$, $0 0 0$</p>\n<p>Tettheten til Li$_2$O er $2.0$ g/cm$^3$. Hva er verdien til gitterkonstanten $a$ for enhetscellen til Li$_2$O?</p>"
+                    },
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "2",
+                        "points": 5,
+                        "task_text": "<p>Velg alle krystallografiske punkt som representerer posisjoner til atomer i en FCC-krystallstruktur:</p><ol><li><b>A</b> 1 1 1</li><li><b>B</b> 1 2 2</li><li><b>C</b> 2 1 1 0</li><li><b>D</b> 0 1 1 1 2</li><li><b>E</b> 1 1 3</li><li><b>F</b> 1 0 1</li><li><b>G</b> 1/1/1</li><li><b>H</b> 1/1 0</li><li><b>I</b> 1/1 3</li><li><b>J</b> 1 0 1 0</li><li><b>K</b> 1/1/1</li></ol>"
+                    },
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "3",
+                        "points": 5,
+                        "task_text": "<p>Velg alle krystallografiske punkter som representerer en oktaedral posisjon i en FCC-krystallstruktur.</p><ol><li><b>A</b> 1 0 0</li><li><b>B</b> 0 1 0</li><li><b>C</b> 0 0 1</li><li><b>D</b> 1/2 1/2 0</li><li><b>E</b> 1/2 0 1/2</li><li><b>F</b> 0 1/2 1/2</li><li><b>G</b> 1/2 1/2 1/2</li></ol>"
+                    },
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "4",
+                        "points": 10,
+                        "task_text": "<p>Lag illustrasjoner som viser følgende krystallografiske plan i kubiske krystallstrukturer:</p>\n\n<h3>a)</h3>\n<p>(112)</p>\n\n<h3>b)</h3>\n<p>(041)</p>\n\n<h3>c)</h3>\n<p>(012)</p>\n\n<p>Planet (110) er et plan med spesiell interesse i en BCC krystallstruktur. Gjør rede for denne påstanden.</p>\n\n<p>Krav til illustrasjoner: Aksene er definert/vist på figurene. Hensiktsmessig perspektiv og lett å tolke uten å måtte bruke magiske briller.</p>"
+                    },
+                    {
+                        "topic": "mekaniske egenskaper",
+                        "task_number": "5",
+                        "points": 5,
+                        "task_text": "<p>Finn utløst skjærspenning i dette planet langs retningen s når det virker en spenning $\\sigma = 50$ MPa i retningen [110].</p><ol><li><b>A</b> $0$ MPa</li><li><b>B</b> $2$ MPa</li><li><b>C</b> $4$ MPa</li><li><b>D</b> $6$ MPa</li><li><b>E</b> $8$ MPa</li><li><b>F</b> $10$ MPa</li><li><b>G</b> $12$ MPa</li><li><b>H</b> $14$ MPa</li><li><b>I</b> $16$ MPa</li><li><b>J</b> $18$ MPa</li><li><b>K</b> $20$ MPa</li></ol>"
+                    },
+                    {
+                        "topic": "krystallstruktur",
+                        "task_number": "6",
+                        "points": 5,
+                        "task_text": "<p>Tettheten til krystallinsk polypropylen (PP) er $945$ kg/m$^3$. Krystallsystemet til krystallinsk PP er monoklinsk med følgende parameter: $a = 666$ pm, $b = 2078$ pm, $c = 650$ pm, $\\alpha = \\gamma = 90^\\circ$, $\\beta = 99.62^\\circ$ ($\\beta$ er vinkelen mellom x-aksen og z-aksen). Hvor mange repeterende enheter av PP er innenfor en enhetscelle?</p>\n\n<ol>\n<li><b>A</b> 1</li>\n<li><b>B</b> 2</li>\n<li><b>C</b> 4</li>\n<li><b>D</b> 6</li>\n<li><b>E</b> 8</li>\n<li><b>F</b> 10</li>\n<li><b>G</b> 12</li>\n</ol>"
+                    },
+                    {
+                        "topic": "polymerer",
+                        "task_number": "7",
+                        "points": 5,
+                        "task_text": "<p>En PP-PE kopolymer er polymerisert fra en blanding av etylen og propylen og inneholder 1000 kg med repeterende enheter av PP og 200 kg med repeterende enheter av PE. Regn ut forholdet mellom antall repeterende enheter av PE ($N_{PE}$) og antall repeterende enheter av PP ($N_{PP}$).</p>\n\n<h3>a)</h3>\n<p>Massen til repeterende enheter av PP er 1000 kg.</p>\n\n<h3>b)</h3>\n<p>Massen til repeterende enheter av PE er 200 kg.</p>\n\n<h3>c)</h3>\n<p>Molar masse av PP ($M_{PP}$) er $42.08$ g/mol.</p>\n\n<h3>d)</h3>\n<p>Molar masse av PE ($M_{PE}$) er $28.05$ g/mol.</p>\n\n<h3>e)</h3>\n<p>Antall repeterende enheter av PP ($N_{PP}$):</p>\n<p>$$N_{PP} = \\frac{1000 \\times 1000}{42.08}$$</p>\n\n<h3>f)</h3>\n<p>Antall repeterende enheter av PE ($N_{PE}$):</p>\n<p>$$N_{PE} = \\frac{200 \\times 1000}{28.05}$$</p>\n\n<h3>g)</h3>\n<p>Forholdet mellom $N_{PE}$ og $N_{PP}$:</p>\n<p>$$\\frac{N_{PE}}{N_{PP}} = \\frac{\\frac{200 \\times 1000}{28.05}}{\\frac{1000 \\times 1000}{42.08}}$$</p>"
+                    },
+                    {
+                        "topic": "termiske egenskaper",
+                        "task_number": "8",
+                        "points": 5,
+                        "task_text": "<p>The figure shows stress as a function of time for a relaxation test of a viscoelastic material.</p>\n\n<p>The material is immediately subjected to a strain of 0.01 at time $t = 0$, and the material behaves perfectly according to the 3-parameter model.</p>\n\n<h3>a)</h3>\n<p>Estimate the value of $E_x$.</p>\n<p>Answer: $[MPa]$. Tolerance: $\\pm5\\%$</p>\n\n<h3>b)</h3>\n<p>Estimate the value of $E_0$.</p>\n<p>Answer: $[MPa]$. Tolerance: $\\pm5\\%$</p>\n\n<h3>c)</h3>\n<p>Estimate the value of the time constant $T_r$.</p>\n<p>Answer: $[s]$. Tolerance $\\pm10\\%$</p>"
+                    },
+                    {
+                        "topic": "polymerer",
+                        "task_number": "9",
+                        "points": 10,
+                        "task_text": "<p>Formater denne eksamensoppgaven som en gyldig HTML-streng for bruk i en JavaScript-variabel.</p>\n\n<h3>a)</h3>\n<p>Thermoplastic: Polymers that can be melted and reshaped multiple times upon heating due to weak intermolecular forces.</p>\n\n<h3>b)</h3>\n<p>Crosslinking: The formation of covalent bonds between polymer chains, increasing rigidity and thermal stability.</p>\n\n<h3>c)</h3>\n<p>Melting temperature $T_m$: The temperature at which a crystalline polymer transitions from solid to liquid.</p>\n\n<h3>d)</h3>\n<p>Glass transition temperature $T_g$: The temperature at which an amorphous polymer transitions from hard to rubbery.</p>\n\n<h3>e)</h3>\n<p>Condensation polymerization: A step-growth polymerization where monomers react to form polymers with the release of small molecules like water.</p>"
+                    },
+                    {
+                        "topic": "polymerer",
+                        "task_number": "10",
+                        "points": 6,
+                        "task_text": "<p>11.8 kg glassfiber som har tetthet $2550$ kg/m$^3$ blandes med $5$ kg av en polymer som har tetthet $1150$ kg/m$^3$. Hva blir tettheten til komposittmaterialet? Hva blir fibervolumfraksjonen til komposittmaterialet?</p>\n\n<h3>a)</h3>\n<p>Hva blir tettheten til komposittmaterialet?</p>\n\n<h3>b)</h3>\n<p>Hva blir fibervolumfraksjonen til komposittmaterialet?</p>"
+                    },
+                    {
+                        "topic": "mekaniske egenskaper",
+                        "task_number": "11",
+                        "points": 4,
+                        "task_text": "<p>Et laminat består av 3 lag. Hvert lag består av ensrettet karbonfiber i en epoxymatrise der E-modul i fiberretning er $150$ GPa og E-modul på tvers av fiberretning er $10$ GPa. Hvert lag har tykkelse $0,5$ mm, og orienteringer på lag er $[0/90/0]$ der $0$-retning og $x$-retning sammenfaller. Laminatet har dimensjoner $L = 1000$ mm og $b = 100$ mm. Hva må kraften $F_x$ være for at laminatet skal forlenge seg med $2$ mm (altså få en deformert lengde lik $1002$ mm)? Velg alternativet som representerer et realistisk estimat.</p>  \n<ol>  \n<li><b>A:</b> $O \\leq 15$ kN</li>  \n<li><b>B:</b> $30$ kN</li>  \n<li><b>C:</b> $50$ kN</li>  \n<li><b>D:</b> $75$ kN</li>  \n<li><b>E:</b> $100$ kN</li>  \n<li><b>F:</b> $150$ kN</li>  \n<li><b>G:</b> $175$ kN</li>  \n<li><b>H:</b> $\\geq 300$ kN</li>  \n</ol>"
+                    },
+                    {
+                        "topic": "fasediagrammer",
+                        "task_number": "12",
+                        "points": 3,
+                        "task_text": "<p>Estimer maksimal løselighet av karbon i austenitt ved $850^\\circ$C og velg det mest presise alternativet. Legg merke til enheter i alternativene.</p><ol><li><b>A</b> $<1$ at%</li><li><b>B</b> $\\approx2$ at%</li><li><b>C</b> $\\approx3$ at%</li><li><b>D</b> $\\approx4$ at%</li><li><b>E</b> $\\approx5$ at%</li><li><b>F</b> $\\approx6$ at%</li><li><b>G</b> $\\approx7$ at%</li><li><b>H</b> $>8$ at%</li></ol>"
+                    },
+                    {
+                        "topic": "fasediagrammer",
+                        "task_number": "13",
+                        "points": 3,
+                        "task_text": "<p>Fasediagrammet for systemet jern-karbon er vist under. En likevektsstruktur av karbonstål med 1.75 wt% karbon består av austenitt og 12 wt% Fe3C. Hva er temperaturen? Velg intervallet som inneholder svaret.</p><ol><li><b>A</b> 400°C<T<500°C</li><li><b>B</b> 500°C<T<600°C</li><li><b>C</b> 600°C<T<700°C</li><li><b>D</b> 700°C<T<800°C</li><li><b>E</b> 800°C<T<900°C</li><li><b>F</b> 900°C<T<1000°C</li><li><b>G</b> 1000°C<T<1100°C</li><li><b>H</b> 1100°C<T<1200°C</li></ol>"
+                    },
+                    {
+                        "topic": "fasediagrammer",
+                        "task_number": "14",
+                        "points": 4,
+                        "task_text": "<p>En likevektsstruktur av karbonstål består av 90 vekt% perlitt og 10% proeutektisk sementitt ved romtemperatur. Hva er sammensetningen?</p>\n\n<h3>a)</h3>\n<p>Beregn karboninnholdet i stålet.</p>\n\n<h3>b)</h3>\n<p>Bruk fase-diagrammet for jern-karbon for å bestemme sammensetningen.</p>"
+                    },
+                    {
+                        "topic": "mekaniske egenskaper",
+                        "task_number": "15",
+                        "points": 10,
+                        "task_text": "<p>Gjør rede for følgende konsept/begrep som brukes for å beskrive mekaniske egenskaper og/eller oppførsel til materialer:</p>\n\n<h3>a)</h3>\n<p>Elastisk deformasjon er en midlertidig endring i materialets form eller størrelse under påvirkning av en kraft, der materialet går tilbake til sin opprinnelige form når kraften fjernes. Dette skjer innenfor materialets elastiske grense.</p>\n\n<h3>b)</h3>\n<p>Resiliens er materialets evne til å absorbere energi under elastisk deformasjon og frigjøre denne energien når belastningen fjernes. Det er et mål på hvor mye energi materialet kan lagre uten å bli permanent deformert.</p>\n\n<h3>c)</h3>\n<p>Fasthet er materialets motstandsevne mot plastisk deformasjon eller hardhet. Det beskriver hvor vanskelig det er å lage permanente inngrep eller deformasjoner i materialet.</p>\n\n<h3>d)</h3>\n<p>Seighet er materialets evne til å absorbere energi og deformere plastisk før det bryter sammen. Et seigt materiale tåler store deformasjoner og absorberer mye energi før brudd.</p>\n\n<h3>e)</h3>\n<p>Duktilitet er materialets evne til å deformere plastisk under strekkbelastning uten å briste. Et duktilt materiale kan trekkes ut til en tråd eller rulles ut til en tynn plate uten å gå i stykker.</p>"
+                    },
+                    {
+                        "topic": "mekaniske egenskaper",
+                        "task_number": "16",
+                        "points": 10,
+                        "task_text": "<p>a) Hvorfor regnes aluminium som generelt mer duktilt enn titan?</p>\n\n<h3>b)</h3>\n<p>En karbonfiber er anisotrop mens en glassfiber er isotrop. Gi en kort forklaring på hva dette betyr og hva som er årsaken til denne forskjellen.</p>\n\n<h3>c)</h3>\n<p>PVC (polyvinylklorid) har mye høyere smeltepunkt enn PP (polypropylen). Gi en kort forklaring på årsaken til dette.</p>\n\n<h3>d)</h3>\n<p>Noen materialer har en utmattingsgrense. Hva betyr det?</p>\n\n<h3>e)</h3>\n<p>Hva er prinsippforskjellen mellom en ionisk forbindelse og en polar kovalent forbindelse?</p>"
+                    }
+                ]
+            }
+        }
     }
 }

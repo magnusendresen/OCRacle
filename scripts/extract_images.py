@@ -109,7 +109,9 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     len_bool = len(text) > len_max
     ratio_bool = ratio > ratio_max
     avg_bool = avg_word_len > avg_word_len_max
-    admin_bool = "format" in text.lower() or "words:" in text.lower()
+    admin_bool = any(word in text.lower() for word in ["format", "words:", "maks poeng:"])
+    size_bool = img.shape[0] < 200 or img.shape[1] < 200
+    color_bool = len(np.unique(img[::max(1,img.shape[0]//100),::max(1,img.shape[1]//100)], axis=0)) < 10
 
     code_bool = int(await prompt_to_text.async_prompt_to_text(
         "Does this text contain code? Answer with a 1 if it does, or a 0 if it does not. "
@@ -124,7 +126,7 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
         log(f"\n\n\n[WARNING] Detected code in task {task_num}. Cropping/skipping image.\n\n\n")
         return
 
-    should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool
+    should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool or size_bool or color_bool
     if not should_attempt_crop:
         save_func(img, task_num)
         return
@@ -197,7 +199,7 @@ async def extract_figures(
     exam_folder = Path(output_folder) / subject
     if exam_folder.exists():
         shutil.rmtree(exam_folder)
-        log(f"[INFO] Rydder tidligere bilder i {exam_folder}")
+        log(f"Rydder tidligere bilder i {exam_folder}")
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
     save = _make_saver(output_folder, subject, version, counts)
