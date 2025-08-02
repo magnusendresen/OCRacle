@@ -70,6 +70,15 @@
       height: auto;
       object-fit: contain;
     }
+    .filter-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-row .filter {
+      display: flex;
+      flex-direction: column;
+    }
   </style>
 </head>
 <body>
@@ -78,8 +87,16 @@
   <label for="subject">Velg emne:</label>
   <select id="subject"></select>
 
-  <label for="topic">Velg tema:</label>
-  <select id="topic"></select>
+  <div class="filter-row">
+    <div class="filter">
+      <label for="topic">Velg tema:</label>
+      <select id="topic"></select>
+    </div>
+    <div class="filter">
+      <label for="exam">Velg eksamen:</label>
+      <select id="exam"></select>
+    </div>
+  </div>
 
   <label for="task">Velg oppgave:</label>
   <select id="task"></select>
@@ -89,6 +106,7 @@
   <script>
   const subjectSelect = document.getElementById("subject");
   const topicSelect = document.getElementById("topic");
+  const examSelect = document.getElementById("exam");
   const taskSelect = document.getElementById("task");
   const taskTextDiv = document.getElementById("task_text");
 
@@ -107,11 +125,13 @@
     })
     .then(data => {
       const subjects = {};
+      const subjectExams = {};
 
       for (const [subj, subjectData] of Object.entries(data)) {
         if (!subjects[subj]) subjects[subj] = {};
 
         const exams = subjectData.exams || {};
+        subjectExams[subj] = Object.keys(exams);
         for (const [ver, exam] of Object.entries(exams)) {
           const tasks = exam.oppgaver || exam.tasks || [];
           tasks.forEach(entry => {
@@ -129,20 +149,37 @@
         subjectSelect.appendChild(opt);
       }
 
-      function updateTopicOptions() {
+      function updateFilters() {
         topicSelect.innerHTML = "";
+        examSelect.innerHTML = "";
         taskSelect.innerHTML = "";
         taskTextDiv.innerHTML = "Velg en oppgave for å vise innholdet.";
 
         const selectedSubject = subjectSelect.value;
         const topics = subjects[selectedSubject] || {};
+        const exams = subjectExams[selectedSubject] || [];
 
+        const blankTopic = document.createElement("option");
+        blankTopic.value = "";
+        blankTopic.textContent = "";
+        topicSelect.appendChild(blankTopic);
         for (const top of Object.keys(topics)) {
           const opt = document.createElement("option");
           opt.value = top;
           opt.textContent = top;
           topicSelect.appendChild(opt);
         }
+
+        const blankExam = document.createElement("option");
+        blankExam.value = "";
+        blankExam.textContent = "";
+        examSelect.appendChild(blankExam);
+        exams.forEach(ex => {
+          const opt = document.createElement("option");
+          opt.value = ex;
+          opt.textContent = ex;
+          examSelect.appendChild(opt);
+        });
 
         updateTaskOptions();
       }
@@ -153,14 +190,35 @@
 
         const selectedSubject = subjectSelect.value;
         const selectedTopic = topicSelect.value;
-        const tasks = subjects[selectedSubject]?.[selectedTopic] || [];
+        const selectedExam = examSelect.value;
 
-        tasks.sort((a, b) => a.task_number.localeCompare(b.task_number, undefined, { numeric: true }));
+        const subjectTopics = subjects[selectedSubject] || {};
+        let tasks = [];
+
+        if (selectedTopic) {
+          tasks = subjectTopics[selectedTopic] || [];
+        } else {
+          for (const arr of Object.values(subjectTopics)) {
+            tasks = tasks.concat(arr);
+          }
+        }
+
+        if (selectedExam) {
+          tasks = tasks.filter(entry => entry.exam_version === selectedExam);
+        }
+
+        tasks.sort((a, b) => {
+          if (!selectedExam) {
+            const examCompare = a.exam_version.localeCompare(b.exam_version);
+            if (examCompare !== 0) return examCompare;
+          }
+          return a.task_number.localeCompare(b.task_number, undefined, { numeric: true });
+        });
 
         tasks.forEach(entry => {
           const opt = document.createElement("option");
           opt.value = entry.task_number;
-          opt.textContent = `Oppgave ${entry.task_number}`;
+          opt.textContent = selectedExam ? `Oppgave ${entry.task_number}` : `${entry.exam_version} Oppgave ${entry.task_number}`;
           opt.dataset.text = entry.task_text;
           opt.dataset.exam = entry.exam_version;
           taskSelect.appendChild(opt);
@@ -226,11 +284,12 @@
         }
       }
 
-      subjectSelect.addEventListener("change", updateTopicOptions);
-      topicSelect.addEventListener("change", updateTaskOptions);
-      taskSelect.addEventListener("change", updateTaskText);
+        subjectSelect.addEventListener("change", updateFilters);
+        topicSelect.addEventListener("change", updateTaskOptions);
+        examSelect.addEventListener("change", updateTaskOptions);
+        taskSelect.addEventListener("change", updateTaskText);
 
-      updateTopicOptions();
+        updateFilters();
     })
     .catch(error => {
       taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";
