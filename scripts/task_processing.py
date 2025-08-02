@@ -30,6 +30,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 # Paths and global state
 task_status = defaultdict(lambda: 0)
 total_task_count = 0
+OCR_TASKS: Dict[int, str] = {}
 
 def load_emnekart_from_json(json_path: Path):
     """
@@ -67,7 +68,6 @@ class Exam:
     # Code snippets are embedded directly in the task text
     exam_topics: List[str] = field(default_factory=list)
     task_numbers: List[str] = field(default_factory=list)
-    ocr_tasks: Dict[str, str] = field(default_factory=dict)
 
 
 def get_topics_from_json(emnekode: str) -> Enum:
@@ -146,9 +146,15 @@ async def get_exam_info() -> Exam:
     header_text = ocr_results[0] if extra_cropped else ""
     task_results = ocr_results[1:] if extra_cropped else ocr_results
     ocr_text = " ".join([header_text] + task_results)
-    exam.ocr_tasks = {}
+    global OCR_TASKS
+    OCR_TASKS = {}
     for (task_num, _), text in zip(cropped, task_results):
-        exam.ocr_tasks[task_num] = exam.ocr_tasks.get(task_num, "") + text
+        try:
+            num = int(task_num)
+        except (TypeError, ValueError):
+            num = task_num
+        OCR_TASKS[num] = OCR_TASKS.get(num, "") + text
+    log(f"OCR tasks created: {len(OCR_TASKS)}")
     exam.task_numbers = assigned_tasks
     total_task_count = len(assigned_tasks)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
@@ -228,6 +234,7 @@ async def get_exam_info() -> Exam:
     return exam
 
 async def process_task(task_number: str, exam: Exam) -> Exam:
+    global OCR_TASKS
     start_time = perf_counter()
     log(f"Task {task_number}: extracting raw text")
     task_exam = deepcopy(exam)
@@ -238,7 +245,10 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
     task_number_str = task_number.zfill(2)
 
-    task_output = str(exam.ocr_tasks.get(task_number, ""))
+    task_output = OCR_TASKS.get(task_number, "")
+    if not isinstance(task_output, str):
+        task_output = str(task_output)
+    log(f"Task {task_number}: OCR input -> {task_output}")
 
     valid = 0
 
