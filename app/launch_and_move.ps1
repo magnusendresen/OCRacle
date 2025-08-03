@@ -7,7 +7,7 @@ param(
 
 # Hent konsoll-HWND
 $ps = Get-Process -Id $PID
-Start-Sleep -Milliseconds 200
+Start-Sleep -Milliseconds 20
 $hwnd = $ps.MainWindowHandle
 
 # Definer MoveWindow

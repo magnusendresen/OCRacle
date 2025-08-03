@@ -2,6 +2,7 @@
 
 This repository does not currently include automated tests.
 
+- Do not attempt to install the libraries listes in requirements.txt
 - Begin each session by checking for `AGENTS.md` files in the repository root and
   within any subdirectory related to files you modify.
 - For Python changes, run a basic syntax check using:

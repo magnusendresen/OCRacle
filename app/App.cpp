@@ -28,7 +28,7 @@ App::App(const std::string& windowName)
         // Beregn senterposisjon
         100,
         100,
-        WINDOW_WIDTH + 400,
+        WINDOW_WIDTH + 500,
         WINDOW_HEIGHT,
         windowName
     }
@@ -302,10 +302,10 @@ void App::startProcessing() {
         // Start Python-script i en bakgrunnstråd
         std::filesystem::path psScript = rootDir / "app" / "launch_and_move.ps1";
         std::thread([psScript]() {
-            int pw_x = 100 + WINDOW_WIDTH;
-            int pw_y = 100 + WINDOW_HEIGHT;
-            int pw_w = 400;
-            int pw_h = 600;
+            int pw_x = WINDOW_WIDTH - 100;
+            int pw_y = 100;
+            int pw_w = 700;
+            int pw_h = WINDOW_HEIGHT;
 
             int charW = pw_w / 8;
             int charH = pw_h / 16;
