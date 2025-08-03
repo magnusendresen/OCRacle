@@ -7,8 +7,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ICP_DATA_DIR = PROJECT_ROOT / "icp_data"
 PROGRESS_FILE = ICP_DATA_DIR / "progress.json"
 DIR_FILE = ICP_DATA_DIR / "dir.json"
-SUBJECT_FILE = ICP_DATA_DIR / "subject.txt"
-IGNORED_FILE = ICP_DATA_DIR / "ignored.txt"
+SUBJECT_FILE = ICP_DATA_DIR / "subject.json"
+IGNORED_FILE = ICP_DATA_DIR / "ignored.json"
 
 
 EXAMS_JSON = PROJECT_ROOT / "exams.json"
