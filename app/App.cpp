@@ -271,19 +271,6 @@ void App::startProcessing() {
 
         std::filesystem::create_directories(dataDir);
 
-        std::ofstream subjectFile(dataDir / "subject.txt", std::ios::binary);
-        std::string userinp1;
-        if (examSubjectInput->getText() != "Subject: ") {
-            userinp1 = examSubjectInput->getText().substr(9);
-        } else {
-            add(*examSubject);
-            userinp1 = "";
-            examSubjectInput->setVisible(0);
-        }
-        subjectFile << userinp1;
-
-        std::filesystem::current_path(scriptDir);
-
         auto escape_json = [](const std::string& in) {
             std::string out;
             for (char c : in) {
@@ -292,6 +279,28 @@ void App::startProcessing() {
             }
             return out;
         };
+
+        std::string userinp1;
+        if (examSubjectInput->getText() != "Subject: ") {
+            userinp1 = examSubjectInput->getText().substr(9);
+        } else {
+            add(*examSubject);
+            userinp1 = "";
+            examSubjectInput->setVisible(0);
+        }
+        std::ofstream subjectFile(dataDir / "subject.json", std::ios::trunc);
+        subjectFile << "{\"subject\":\"" << escape_json(userinp1) << "\"}";
+
+        std::string ignoredInput;
+        if (ignoredTopics->getText() != "Ignored topics: ") {
+            ignoredInput = ignoredTopics->getText().substr(16);
+        } else {
+            ignoredInput = "";
+        }
+        std::ofstream ignoredFile(dataDir / "ignored.json", std::ios::trunc);
+        ignoredFile << "{\"ignored\":\"" << escape_json(ignoredInput) << "\"}";
+
+        std::filesystem::current_path(scriptDir);
 
         std::ofstream dirFile(dataDir / "dir.json", std::ios::trunc);
         dirFile << "{";

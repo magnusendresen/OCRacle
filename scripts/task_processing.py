@@ -68,6 +68,7 @@ class Exam:
     exam_topics: List[str] = field(default_factory=list)
     task_numbers: List[str] = field(default_factory=list)
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
+    ignored_topics: List[str] = field(default_factory=list)
 
 
 def get_topics_from_json(emnekode: str) -> Enum:
@@ -156,20 +157,27 @@ async def get_exam_info() -> Exam:
     write_progress(progress, LLM_STEPS, {8: str(LLM_STEPS)})
 
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
-        first_line = f.readline().strip()
-        if len(first_line) > 4:
-            exam.subject = first_line.strip().upper()
-            log("Subject code read from file")
-        else:
-            log("Prompting subject code")
-            exam.subject = (
-                await prompt_to_text.async_prompt_to_text(
-                    PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
-                    max_tokens=1000,
-                    is_num=False,
-                    max_len=50,
-                )
-            ).strip().upper()
+        data = json.load(f)
+        exam.subject = data.get("subject", "").strip().upper()
+    if exam.subject:
+        log("Subject code read from file")
+    else:
+        log("Prompting subject code")
+        exam.subject = (
+            await prompt_to_text.async_prompt_to_text(
+                PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
+                max_tokens=1000,
+                is_num=False,
+                max_len=50,
+            )
+        ).strip().upper()
+
+    try:
+        with IGNORED_FILE.open("r", encoding="utf-8") as f:
+            ignored_raw = json.load(f).get("ignored", "")
+        exam.ignored_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
+    except Exception as e:
+        log(f"Could not read ignored topics: {e}")
     log(f"Subject code: {exam.subject}")
     object_handling.add_subject(exam.subject)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
