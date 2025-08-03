@@ -15,3 +15,5 @@ Fikse cropping av grafer.
 Legge til maks poeng i html.
 
 Spesifisere at det ikke nødvendigvis trenger å være et unikt tema for hver eneste oppgave i eksamnene.
+
+Vurdere å legge til en errorhåndtering ved LLM som gjør at hvis resultatet fra deepseek starter med feks [ERROR] (instruert ved prompting), så lagres svaret eller erroren til deepseek for feilsøking. 

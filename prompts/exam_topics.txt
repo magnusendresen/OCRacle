@@ -1,6 +1,6 @@
 Hva er de viktigste temaene i denne teksten?
   Svar med en kommaseparert liste i norsk bokmål.
-  Hold deg til overordnede temaer som egner seg for eksamenskategorisering.
+  Hold deg til overordnede temaer som egner seg for eksamenskategorisering for eksamensøving. 
   Eksempler på temaer fra noen eksamner, disse er for å gi deg en idé av inndelingen:
   - Fysikk: Bevegelse, Mekanikk, Sirkelbevegelse, Rotasjonsmekanikk, Programmering, Fluidmekanikk, Svingninger, Bølgefysikk, Energi og arbeid, Impuls og støt.
   - Matte: Partiell derivasjon, Kritiske Punkt, Retningsderivert og Gradient, Funksjonsforståelse, Taylor 1D, Fourierrekker, PDE, Fouriertransformasjon, Konvolusjon, DFT, IDFT.
@@ -8,5 +8,6 @@ Hva er de viktigste temaene i denne teksten?
   Svar kun med temaene, ikke med noe annet. Skriv temaene med stor forbokstav slik som eksemplene ovenfor.
   Temaer som "Fysikk" eller "Matematikk" er misvisende, alt for generelle, og trolig neppe relevant i eksamnen.
   Hvis teksten er skrevet på flere språk, svar med temaene på norsk bokmål.
-  Dersom temaet er dekket helt eller nesten helt av ett av temaene nedenfor, ikke skriv det. Vær likevel nøye med å legge til nødvendige temaer.
+  Dersom temaet er ALLEREDE dekket helt eller nesten helt av ett av temaene nedenfor, IKKE skriv det. Vær likevel NØYE med å legge til nødvendige temaer.
+  Det trenger ikke nødvendigvis være et unikt tema for hver eneste oppgave, ettersom formålet med kategoriseringen er for eksamensøving.
   Her er temaene, etterfult av oppgaveteksten:

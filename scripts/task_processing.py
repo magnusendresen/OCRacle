@@ -203,9 +203,9 @@ async def get_exam_info() -> Exam:
         topics = enum_to_str(get_topics_from_json(exam.subject))
         if not topics:
             raise ValueError("No topics found for subject")
-        cur_topics = "The topics found in previous exams are: " + topics 
+        cur_topics = "Temaene funnet i tidligere eksamner for dette emnet er: " + topics 
     except ValueError:
-        cur_topics = "There are no added topics for this subject yet. Topics will be extracted from exam."
+        cur_topics = "Det er ingen temaer registrert enda i dette emnet. "
 
     log(cur_topics)
     
@@ -247,7 +247,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             PROMPT_CONFIG + load_prompt("extract_task_text").format(task_number=task_number) + task_output,
             max_tokens=1000,
             is_num=False,
-            max_len=4000,
+            max_len=5000,
         )
     )
     task_status[task_idx] = 1
@@ -278,8 +278,6 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     if exam.exam_topics:
         cur_topic_enum_str = enum_to_str(Enum('Temaer', exam.exam_topics))
 
-        # print(f"\n\n\n cur_topic_enum_str: {cur_topic_enum_str}\n\n\n")
-
         identify_topic = int(
             await prompt_to_text.async_prompt_to_text(
                 PROMPT_CONFIG + load_prompt("identify_topic") + cur_topic_enum_str + task_output,
@@ -295,14 +293,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         if identify_topic != 0:
             task_exam.topic = get_topic_from_enum(Enum('Temaer', exam.exam_topics), identify_topic)
         else:
-            task_exam.topic = str(
-                await prompt_to_text.async_prompt_to_text(
-                    PROMPT_CONFIG + load_prompt("extract_topic") + task_output,
-                    max_tokens=1000,
-                    is_num=False,
-                    max_len=100,
-                )
-            )
+            task_exam.topic = "Unknown Topic"
     
     log(f"Task {task_number_str}: topic identified -> {task_exam.topic}")
     task_status[task_idx] = 4
@@ -311,7 +302,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
     for step_idx, instruction in enumerate([
         "remove_exam_admin",
-        "format_html_output_nor",
+        "format_html_output",
         "translate_to_bokmaal"
     ], start=5):
         task_output = str(
@@ -319,14 +310,14 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
                 PROMPT_CONFIG + load_prompt(instruction) + task_output,
                 max_tokens=1000,
                 is_num=False,
-                max_len=4000,
+                max_len=5000,
             )
         )
         if instruction == "translate_to_bokmaal":
             log(f"Task {task_number_str}: translated to Bokmål")
         elif instruction == "remove_exam_admin":
             pass
-        elif instruction == "format_html_output_nor":
+        elif instruction == "format_html_output":
             log(f"Task {task_number_str}: HTML formatted")
         task_status[task_idx] = step_idx
         progress = [task_status[t] for t in range(1, total_task_count + 1)]

@@ -1,4 +1,5 @@
 Oversett den følgende teksten til norsk bokmål.
-  Ikke endre på noe annet.
+  Ikke endre på noe annet. Behold all formattering.
+  Skriv med nøyaktig samme format og struktur som før, bare at det skal oversettes til norsk bokmål. 
   Hvis teksten allerede er på norsk bokmål, svar med nøyaktig samme teksten.
   Her er teksten:

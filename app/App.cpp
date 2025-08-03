@@ -28,7 +28,7 @@ App::App(const std::string& windowName)
         // Beregn senterposisjon
         100,
         100,
-        WINDOW_WIDTH,
+        WINDOW_WIDTH + 400,
         WINDOW_HEIGHT,
         windowName
     }
@@ -301,7 +301,7 @@ void App::startProcessing() {
 
         // Start Python-script i en bakgrunnstråd
         std::thread([]() {
-            std::system("start /min powershell -Command \"python main.py; pause\"");
+            std::system("start powershell -Command \"python main.py; pause\"");
         }).detach();
 
         startTimer();
