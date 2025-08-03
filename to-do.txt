@@ -1,5 +1,3 @@
-Endre tekst som "se figuren under" til nøytralt ved prompting. Eventuelt finne ut om vi vil ha bildet før eller etter oppgaveteksten eller et annet sted underveis - kanskje legge til et kjenningesymbolfor bilde?
-
 Prompte 'Does this task require the Moody diagram?' eller liknende og få med en search engine til å finne den.
 
 Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.'
@@ -17,3 +15,11 @@ Legge til maks poeng i html.
 Spesifisere at det ikke nødvendigvis trenger å være et unikt tema for hver eneste oppgave i eksamnene.
 
 Vurdere å legge til en errorhåndtering ved LLM som gjør at hvis resultatet fra deepseek starter med feks [ERROR] (instruert ved prompting), så lagres svaret eller erroren til deepseek for feilsøking. 
+
+Undersøke om at hvis et bilde fyller hele pdf-siden, så skal det croppes umiddelbart.
+
+Prompte at det absolutt er trivielt at latexformattering av symboler ikke gjøres inni programmeringsbokser (eks. $\mu_k).
+
+Forklare at det er lov å gjøre antakelser om symboler som lambda i bølgeoppgaver (eks. lambda/2 ikke 1/2) grunnet ocr-feil.
+
+Legge til gammel emnekode i parentes, så promptingen av emnekode gjøres uansett, bare at den ikke brukes til noe annet enn "real_emnekode" ellerno.

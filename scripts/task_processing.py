@@ -250,6 +250,10 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
     valid = 0
 
+    task_status[task_idx] = 1
+    progress = [task_status[t] for t in range(1, total_task_count + 1)]
+    write_progress(progress, LLM_STEPS)
+
     task_output = str(
         await prompt_to_text.async_prompt_to_text(
             PROMPT_CONFIG + load_prompt("extract_task_text").format(task_number=task_number) + task_output,
@@ -258,13 +262,34 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             max_len=5000,
         )
     )
-    task_status[task_idx] = 1
-    progress = [task_status[t] for t in range(1, total_task_count + 1)]
-    write_progress(progress, LLM_STEPS)
 
     task_status[task_idx] = 2
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS)
+
+
+
+    remove_topic = int(
+        await prompt_to_text.async_prompt_to_text(
+            (
+                PROMPT_CONFIG +
+                "Is this task about any of the following topics?: " + ", ".join([ignored for ignored in task_exam.ignored_topics]) + "\n" +
+                "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! " +
+                "If it is, answer with a 1, otherwise answer with a 0. Here is the task text: " +
+                task_output
+            ),
+            max_tokens=1000,
+            is_num=True,
+            max_len=2,
+        )
+    )
+
+    if remove_topic:
+        log(f"Task {task_number_str}: ignored due to topic")
+        task_status[task_idx] = 8
+        progress = [task_status[t] for t in range(1, total_task_count + 1)]
+        write_progress(progress, LLM_STEPS)
+        return
 
     points_str = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("extract_points") + task_output,
@@ -349,7 +374,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
     if valid == 0:
         log(f"Task {task_number_str}: not approved")
-        result = task_exam
+        return
     else:
         log(f"Task {task_number_str}: approved")
         result = task_exam
@@ -370,8 +395,9 @@ async def main_async():
     ]
     results = await asyncio.gather(*tasks)
 
-    failed = [res.task_number for res in results if res.task_text is None]
-    points = [res.points for res in results if res.task_text is not None]
+    valid_results = [res for res in results if res is not None]
+    failed = [res.task_number for res in valid_results if res.task_text is None]
+    points = [res.points for res in valid_results if res.task_text is not None]
 
     # Bilder beholdes for fremtidig bruk og slettes ikke automatisk
 
