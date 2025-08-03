@@ -65,7 +65,7 @@ class Exam:
     task_text: Optional[str] = None
     # Images are handled automatically in the HTML layer
     # Code snippets are embedded directly in the task text
-    exam_topics: List[str] = field(default_factory=list)
+    exam_topics: Enum = field(default_factory=lambda: Enum('Temaer', []))
     task_numbers: List[str] = field(default_factory=list)
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
     ignored_topics: List[str] = field(default_factory=list)
@@ -217,19 +217,23 @@ async def get_exam_info() -> Exam:
 
     log(cur_topics)
     
-    exam.exam_topics = await prompt_to_text.async_prompt_to_text(
+    new_topics = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("exam_topics") + cur_topics + ocr_text,
         max_tokens=1000,
         is_num=False,
         max_len=4000,
     )
-    if exam.exam_topics:
-        exam.exam_topics = [t.strip() for t in str(exam.exam_topics).split(',')]
+    if new_topics not in [None, "", "0", 0]:
+        print(f"New topics identified: {new_topics}")
+        new_topics = [t.strip() for t in str(new_topics).split(',')]
+        object_handling.add_topics(exam.subject, exam.exam_version, new_topics)
     else:
-        exam.exam_topics = []
-    log(f"Topics extracted: {len(exam.exam_topics)}")
-    object_handling.add_topics(exam.subject, exam.exam_version, exam.exam_topics)
+        print("No new topics identified.")
 
+    exam.exam_topics = get_topics_from_json(exam.subject)
+    log(f"Total in subject is now: {len(list(exam.exam_topics))}")
+
+    
     total_task_count = len(exam.task_numbers)
     log(f"Tasks for processing: {total_task_count}")
 
@@ -309,7 +313,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
 
 
     if exam.exam_topics:
-        cur_topic_enum_str = enum_to_str(Enum('Temaer', exam.exam_topics))
+        cur_topic_enum_str = enum_to_str(exam.exam_topics)
 
         identify_topic = int(
             await prompt_to_text.async_prompt_to_text(
@@ -324,7 +328,7 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             identify_topic = 0
 
         if identify_topic != 0:
-            task_exam.topic = get_topic_from_enum(Enum('Temaer', exam.exam_topics), identify_topic)
+            task_exam.topic = get_topic_from_enum(exam.exam_topics, identify_topic)
         else:
             task_exam.topic = "Unknown Topic"
     
@@ -398,12 +402,6 @@ async def main_async():
     valid_results = [res for res in results if res is not None]
     failed = [res.task_number for res in valid_results if res.task_text is None]
     points = [res.points for res in valid_results if res.task_text is not None]
-
-    # Bilder beholdes for fremtidig bruk og slettes ikke automatisk
-
-    for res in results:
-        if res.task_text is not None:
-            pass
 
     log(f"Failed tasks: {failed}")
     log(f"Points for tasks: {points}")

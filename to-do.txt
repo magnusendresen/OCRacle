@@ -22,4 +22,6 @@ Prompte at det absolutt er trivielt at latexformattering av symboler ikke gjøre
 
 Forklare at det er lov å gjøre antakelser om symboler som lambda i bølgeoppgaver (eks. lambda/2 ikke 1/2) grunnet ocr-feil.
 
-Legge til gammel emnekode i parentes, så promptingen av emnekode gjøres uansett, bare at den ikke brukes til noe annet enn "real_emnekode" ellerno.
+Legge til gammel emnekode i parentes, så promptingen av emnekode gjøres uansett, bare at den ikke brukes til noe annet enn "real_emnekode" ellerno. Vil dekke både MEKT1101//TKT4116 og IFYT1000//IFYKJ1000.
+
+Fikse at nye temaer faktisk kan bli lagt til etter første kjøring for emnet.

@@ -9,5 +9,7 @@ Hva er de viktigste temaene i denne teksten?
   Temaer som "Fysikk" eller "Matematikk" er misvisende, alt for generelle, og trolig neppe relevant i eksamnen.
   Hvis teksten er skrevet på flere språk, svar med temaene på norsk bokmål.
   Dersom temaet er ALLEREDE dekket helt eller nesten helt av ett av temaene nedenfor, IKKE skriv det. Vær likevel NØYE med å legge til nødvendige temaer.
+  Skriv altså bare NYE temaer som ikke allerede er dekket. 
   Det trenger ikke nødvendigvis være et unikt tema for hver eneste oppgave, ettersom formålet med kategoriseringen er for eksamensøving.
-  Her er temaene, etterfult av oppgaveteksten:
+  HVIS DET ER INGEN NYE TEMAER SKAL DU KUN SVARE MED TALLET NULL: 0.
+  Her er temaene som allerede er er knyttet til emnet, og derfor IKKE skal skrives, etterfult av oppgaveteksten:
