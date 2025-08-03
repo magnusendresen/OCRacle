@@ -7,7 +7,8 @@ Format og struktur:
 - Ikke legg til annen tekst eller forklaring.
 - Ikke legg til andre HTML-tagger enn <p>...</p> og <h3>...</h3>.
 - Sørg for å inkludere mellomrom og linjeskift der det er passende, formateringen skal se pen ut.
-
+- Endre formuleringer som "Se figuren under." til "Se figuren over." ettersom bildene alltid kommer før oppgaveteksten.
+- ALDRI UNDER NOEN OMSTENDIGHETER SKRIV "```html" og "```" rundt all teksten, ettersom koden behandles av javascript og legges rett inn i html.
 Matematisk innhold:
 - Bruk LaTeX som er kompatibel med MathJax.
 - Bruk $$...$$ for display-matematikk.
@@ -35,10 +36,11 @@ Flervalg:
   - Presenter alternativene som en nummerert liste med <ol><li>.
   - Foran hvert alternativ: bruk bokstavetiketten inni <b>-tagger (A, B, C, ...).
   - Selve oppgaveteksten skal stå utenfor listen i vanlige <p>-tagger.
+  - Om valgalternativene er programmeringslinjer skal disse formatteres i henhold til instruksjonene for kodeformattering over.
 
 Oppgaver som krever utregning, bevis eller forklaring:
 - For vanlige oppgaver som krever bevis, utregning eller forklaring, følg også disse reglene:
-  - Hold avsnitt korte og bruk flere <p>-elementer i stedet for én lang blokk.
+  - Hold avsnitt korte og bruk flere <p>-elementer i stedet for én lang blokk. LAG MANGE AVSNITT JEG VIL IKKE HA ÉN GIGANTISK TEKSTBLOKK.
   - Innled hver deloppgave med etiketten <h3>a)</h3>, <h3>b)</h3> og så videre.
 
 OCR-feil og tolkning:

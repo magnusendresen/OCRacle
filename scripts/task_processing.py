@@ -310,9 +310,9 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     write_progress(progress, LLM_STEPS)
 
     for step_idx, instruction in enumerate([
-        "translate_to_bokmaal",
         "remove_exam_admin",
         "format_html_output_nor",
+        "translate_to_bokmaal"
     ], start=5):
         task_output = str(
             await prompt_to_text.async_prompt_to_text(
@@ -326,19 +326,21 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
             log(f"Task {task_number_str}: translated to Bokmål")
         elif instruction == "remove_exam_admin":
             pass
-        elif instruction == "format_html_output":
+        elif instruction == "format_html_output_nor":
             log(f"Task {task_number_str}: HTML formatted")
         task_status[task_idx] = step_idx
         progress = [task_status[t] for t in range(1, total_task_count + 1)]
         write_progress(progress, LLM_STEPS)
 
     valid = int(
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG + load_prompt("validate_task") + task_output,
-            max_tokens=1000,
-            is_num=True,
-            max_len=2,
-        )
+        (
+            await prompt_to_text.async_prompt_to_text(
+                PROMPT_CONFIG + load_prompt("validate_task") + task_output,
+                max_tokens=1000,
+                is_num=False,
+                max_len=4,
+            )
+        ).strip()[0]
     )
     task_status[task_idx] = 8
     progress = [task_status[t] for t in range(1, total_task_count + 1)]

@@ -9,7 +9,18 @@
             "Svingninger",
             "Bølgefysikk",
             "Energi og arbeid",
-            "Impuls og støt"
+            "Impuls og støt",
+            "Numeriske metoder",
+            "Differensialligning",
+            "Integrasjon",
+            "Newtons metode",
+            "Fikspunktiterasjon",
+            "Absolutt og relativ feil",
+            "Hookes lov",
+            "Treghetsmoment",
+            "Dempede svingninger",
+            "Stående bølger",
+            "Bølgefart"
         ],
         "exams": {
             "V24": {
@@ -18,530 +29,97 @@
                         "topic": "Mekanikk",
                         "task_number": "1",
                         "points": 2,
-                        "task_text": "<p>Hvor mange m/s² tilsvarer en akselerasjon på $1,0$ km/h²?</p><ol><li><b>A</b> $5,8$ m/s²</li><li><b>B</b> $0,28$ m/s²</li><li><b>C</b> $1,3 \\times 10^4$ m/s²</li><li><b>D</b> $2,8$ m/s²</li><li><b>E</b> $7,7 \\times 10^{-5}$ m/s²</li></ol>"
+                        "task_text": "Hvor mange $m/s^2$ tilsvarer en akselerasjon på $1,0 km/h^2$?\n<ol>\n<li><b>A:</b> $5,8 m/s^2$</li>\n<li><b>B:</b> $0,28 m/s^2$</li>\n<li><b>C:</b> $1,3 \\cdot 10^4 m/s^2$</li>\n<li><b>D:</b> $2,8 m/s^2$</li>\n<li><b>E:</b> $7,7 \\cdot 10^{-5} m/s^2$</li>\n</ol>"
                     },
                     {
                         "topic": "Bevegelse",
                         "task_number": "2",
                         "points": 2,
-                        "task_text": "<p>Figuren under viser akselerasjonsgrafen $a(t)$ for en som løper $100$ m. Hvilken påstand om løperens bevegelse er riktig?</p><ol><li><b>A</b> Løperen løper med jevnt økende fart fra start til mål.</li><li><b>B</b> Løperen holder tilnærmet konstant fart gjennom hele løpet.</li><li><b>C</b> Løperen akselererer opp til en maksimal fart, som holdes konstant til målstreken.</li><li><b>D</b> Løperen akselererer opp til en maksimal fart, men farten dabber av mot målstreken.</li><li><b>E</b> Løperen starter med en viss maksimal fart, som så avtar mot mål.</li></ol>"
+                        "task_text": "Figuren over viser akselerasjonsgrafen a(t) for en som løper 100 m. Hvilken påstand om løperens bevegelse er riktig?\n\n<ol>\n<li><b>A</b> Løperen løper med jevnt økende fart fra start til mål.</li>\n<li><b>B</b> Løperen holder tilnærmet konstant fart gjennom hele løpet.</li>\n<li><b>C</b> Løperen akselererer opp til en maksimal fart, som holdes konstant til målstreken.</li>\n<li><b>D</b> Løperen akselererer opp til en maksimal fart, men farten dabber av mot målstreken.</li>\n<li><b>E</b> Løperen starter med en viss maksimal fart, som så avtar mot mål.</li>\n</ol>"
                     },
                     {
-                        "topic": "Mekanikk",
+                        "topic": "Bevegelse",
                         "task_number": "3",
                         "points": 2,
-                        "task_text": "<p>A pil is shot with initial horizontal velocity $v_1 = 90$ m/s towards a wall at a horizontal distance $x = 50$ m from the shooter. Determine the vertical distance $\\Delta y$ between the line of sight (initial velocity) and the point where the arrow hits the wall, if the arrow is treated as a point particle and air resistance is neglected.</p><ol><li><b>A</b> $\\Delta y = 0.050$ m</li><li><b>B</b> $\\Delta y = 0.56$ m</li><li><b>C</b> $\\Delta y = 1.5$ m</li><li><b>D</b> $\\Delta y = 0.20$ m</li><li><b>E</b> $\\Delta y = 1.8$ m</li></ol>"
+                        "task_text": "En pil skytes med horisontal startfart $v_o = 90$ m/s mot en vegg i horisontal avstand $x = 50$ m fra skytteren. Se figuren over.\n\n<ol>\n<li><b>A)</b> $\\Delta y = 0,050$ m</li>\n<li><b>B)</b> $\\Delta y = 0,56$ m</li>\n<li><b>C)</b> $\\Delta y = 1,5$ m</li>\n<li><b>D)</b> $\\Delta y = 0,20$ m</li>\n<li><b>E)</b> $\\Delta y = 1,8$ m</li>\n</ol>"
                     },
                     {
                         "topic": "Mekanikk",
                         "task_number": "4",
                         "points": 2,
-                        "task_text": "<p>A kloss med masse $m$ glir med konstant fart nedover et skr&aring;plan med helningsvinkel $\\theta = 30^\\circ$. Klossens fart er s&aring;pass liten at luftmotstand kan neglisjeres. Hva er glidefriksjonstallet $\\mu$ mellom klossen og underlaget?</p><ol><li><b>A</b> $\\mu = 0,50$</li><li><b>B</b> $\\mu = 0,58$</li><li><b>C</b> $\\mu = 0,87$</li><li><b>D</b> $\\mu = 1,0$</li><li><b>E</b> Avhenger av tallverdien til massen $m$</li></ol>"
+                        "task_text": "En kloss med masse $m$ glir med konstant fart nedover et skråplan med helningsvinkel $\\theta = 30^\\circ$. Klossens fart er såpass liten at luftmotstand kan neglisjeres. Se figuren over.\n\nHva er glidefriksjonstallet $\\mu_k$ mellom klossen og underlaget?\n\n<ol>\n<li><b>A:</b> $\\mu_k = 0,50$</li>\n<li><b>B:</b> $\\mu_k = 0,58$</li>\n<li><b>C:</b> $\\mu_k = 0,87$</li>\n<li><b>D:</b> $\\mu_k = 1,0$</li>\n<li><b>E:</b> Avhenger av tallverdien til massen $m$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Bevegelse",
+                        "task_number": "5",
+                        "points": 2,
+                        "task_text": "En ball kastes loddrett oppover med en viss startfart $v_0$ i punkt A, kommer til et høyeste punkt C og faller ned igjen til utgangspunktet. Luftmotstanden på ballen er proporsjonal med kvadratet av ballens fart. Tyngdeakselerasjonen $g$ kan antas konstant under ballens bevegelse. Figuren over viser ballen i 5 ulike punkter A-E i banen.\n\nI hvilket punkt er absoluttverdien av ballens akselerasjon størst?\n\n<ol>\n<li><b>A</b> (like etter at ballen er kastet)</li>\n<li><b>B</b> (midtveis til toppen, på vei opp)</li>\n<li><b>C</b> (toppunktet)</li>\n<li><b>D</b> (midtveis til toppen, på vei ned)</li>\n<li><b>E</b> (like før ballen er tilbake til utgangspunktet)</li>\n</ol>"
                     },
                     {
                         "topic": "Sirkelbevegelse",
-                        "task_number": "5",
-                        "points": 15,
-                        "task_text": "<p>A wagon with mass $m$ in a roller coaster starts with zero initial velocity from a height $h = 3R$ above the lowest point $A$ in a circular loop with radius $R$. The wagon is not attached to the track and can slide frictionlessly on the rails. Friction and air resistance are negligible, and the wagon can be treated as a point mass.</p>\n\n<h3>a)</h3>\n<p>Find the speed of the wagon at the lowest point in the loop (point $A$).</p>\n\n<h3>b)</h3>\n<p>Draw the forces acting on the wagon at the highest point in the loop (point $C$) and determine the magnitude of the normal force from the track on the wagon, expressed in terms of the wagon's weight $G$.</p>\n\n<h3>c)</h3>\n<p>At which point(s) $A$-$D$ in the loop is the magnitude of the wagon's tangential acceleration greatest? Briefly justify your answer with an illustrative figure.</p>\n\n<h3>d)</h3>\n<p>After passing the loop, the wagon continues uphill to a peak at $E$. Draw a figure showing the forces on the wagon at $E$ for two different scenarios:</p>\n<p>i) The wagon maintains contact with the track at the peak.</p>\n<p>ii) The wagon just loses contact with the track at point $E$.</p>"
-                    },
-                    {
-                        "topic": "Bevegelse",
                         "task_number": "6",
-                        "points": 2,
-                        "task_text": "<p>I hvilket punkt er absoluttverdien av hopperens fart maksimal?</p><ol><li><b>A</b></li><li><b>B</b></li><li><b>C</b></li><li><b>D</b></li><li><b>E</b></li></ol>"
+                        "points": 15,
+                        "task_text": "En vogn med masse m i en berg-og-dal-bane starter med null starthastighet fra en høyde h = 3R over det laveste punktet A i en sirkulær loop med radius R. Vognen er ikke festet til sporet og kan gli friksjonsfritt på skinnene. Vi neglisjerer friksjon og luftmotstand gjennom hele, og vognen kan behandles som en punktmasse.\n\na)\n\nVis at hastigheten til vognen ved det laveste punktet i loopen (punkt A) er v = √(6gR).\n\nb)\n\nTegn kreftene som virker på vognen ved det høyeste punktet i loopen (punkt C) og bestem størrelsen på normalkraften fra sporet på vognen, uttrykt i form av vognens vekt G. For full uttelling må figuren vise rimelige relative størrelser på kreftene, og alle krefter må være merket.\n\nc)\n\nVed hvilke punkt(er) A-D i loopen er størrelsen på vognens tangentielle akselerasjon a|| størst? Svaret må kort begrunnes med en illustrerende figur.\n\nd)\n\nEtter å ha passert loopen fortsetter vognen oppover til en topp ved E, som vist i figuren. Tegn en figur som viser kreftene på vognen ved E for to forskjellige scenarioer—for full uttelling må figuren vise rimelige relative størrelser på kreftene, og alle krefter må være merket.\n\ni) Vognen holder kontakten med sporet over toppen.\n\nii) Vognen mister nettopp kontakten med sporet ved punkt E."
                     },
                     {
-                        "topic": "Rotasjonsmekanikk",
+                        "topic": "Svingninger",
                         "task_number": "7",
                         "points": 2,
-                        "task_text": "<p>Et kvadratisk legeme består av $4$ tynne, homogene stenger, hver med masse $m$ og lengde $L$. Legemet kan rotere om en akse gjennom legemets massesenter som står vinkelrett på legemet, indikert på figuren under (stiplede linjer er hjelpelinjer). Bestem legemets treghetsmoment $I$ om aksen.</p>"
+                        "task_text": "I hvilket punkt er absoluttverdien av hopperens fart maksimal?\nA\nB\nC\nD\nE"
+                    },
+                    {
+                        "topic": "Treghetsmoment",
+                        "task_number": "8",
+                        "points": 2,
+                        "task_text": "Et kvadratisk legeme består av 4 tynne, homogene stenger, hver med masse $m$ og lengde $L$. Legemet kan rotere om en akse gjennom legemets massesenter som står vinkelrett på legemet, indikert på figuren over (stiplede linjer er hjelpelinjer). Bestem legemets treghetsmoment $I$ om aksen.\n\n<h3>a)</h3>\n\n<p>Treghetsmomentet for en tynn stav med masse $m$ og lengde $L$ om en akse gjennom dens massesenter og vinkelrett på staven er gitt ved:</p>\n\n<div class=\"math\">$$I_{\\text{stav}} = \\frac{1}{12}mL^2$$</div>\n\n<h3>b)</h3>\n\n<p>For en stav som roterer om en akse parallell med en akse gjennom massesenteret, men med en avstand $d$ fra massesenteret, blir treghetsmomentet:</p>\n\n<div class=\"math\">$$I = I_{\\text{stav}} + md^2$$</div>\n\n<h3>c)</h3>\n\n<p>For hver av de 4 stavene i kvadratet er avstanden $d$ fra massesenteret til rotasjonsaksen lik halve diagonalen av kvadratet:</p>\n\n<div class=\"math\">$$d = \\frac{L\\sqrt{2}}{2}$$</div>\n\n<h3>d)</h3>\n\n<p>Treghetsmomentet for hver stav om rotasjonsaksen blir da:</p>\n\n<div class=\"math\">$$I_{\\text{stav}} = \\frac{1}{12}mL^2 + m\\left(\\frac{L\\sqrt{2}}{2}\\right)^2 = \\frac{1}{12}mL^2 + \\frac{1}{2}mL^2 = \\frac{7}{12}mL^2$$</div>\n\n<h3>e)</h3>\n\n<p>Det totale treghetsmomentet for legemet er summen av treghetsmomentene for de 4 stavene:</p>\n\n<div class=\"math\">$$I_{\\text{tot}} = 4 \\times \\frac{7}{12}mL^2 = \\frac{7}{3}mL^2$$</div>"
                     },
                     {
                         "topic": "Mekanikk",
-                        "task_number": "8",
-                        "points": 4,
-                        "task_text": "<p>a) Hva skal stå i kodelinja KODE MANGLER for at Pyton-funksjonen Fd(v) skal returnere luftmotstanden FD i newton på legemet, når funksjonsargumentet v (farten v) angis i kilometer per time (km/h)?</p>\n<pre class=\"code-box\"><code>def Fd(v):\n    rho=1.2\n    A=0.70\n    Cd=1.0\n    return KODE MANGLER</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*(v/3.6)**2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*(v*3.6)**2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*(v*3.6)^2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*v^2</code></pre>\n<pre class=\"code-box\"><code>0.5*rho*A*Cd*v**2</code></pre>\n\n<p>b) Hva skal stå i kodelinja KODE MANGLER for å beregne farten v etter det neste tidssteget, dvs. v(t + dt)?</p>\n<pre class=\"code-box\"><code>g=9.81\nt=0\nv=0 #fart i m/s\nwhile (t<t_maks):\n    KODE MANGLER\n    t=t+dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g+Fd(v)/m)*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g-Fd/m)*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+g*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g+Fd/m)*dt</code></pre>\n<pre class=\"code-box\"><code>v=v+(g-Fd(v)/m)*dt</code></pre>"
-                    },
-                    {
-                        "topic": "Rotasjonsmekanikk",
                         "task_number": "9",
-                        "points": 15,
-                        "task_text": "<p>A homogeneous, solid cylinder with mass $M$ and radius $R$ rolls straight down an inclined plane with an angle $\\theta = 30^\\circ$ without slipping. The speed is low enough that air resistance can be neglected.</p>\n\n<h3>a)</h3>\n<p>Draw the forces acting on the cylinder as it rolls down the inclined plane. For full credit, the forces must have reasonable relative magnitudes and all forces must be labeled.</p>\n\n<h3>b)</h3>\n<p>Show that the acceleration of the cylinder down the inclined plane is $a = \\frac{2}{3}g \\sin \\theta$.</p>\n\n<h3>c)</h3>\n<p>How long does it take for the cylinder to roll down the inclined plane if the length of the plane is $\\Delta x = 1.0$ m and the cylinder starts from rest?</p>\n\n<h3>d)</h3>\n<p>The cylinder starts at $x = 0$ at $t = 0$. Sketch the cylinder's position graph $x(t)$, velocity graph $v(t)$, and acceleration graph $a(t)$. For full credit, the shape of the graphs must be clearly shown. All three graphs can be sketched in the same diagram, without units on the axes.</p>\n\n<h3>e)</h3>\n<p>The cylinder then participates in a \"race\" with a thin-walled cylinder (ring) of the same mass $M$ and radius $R$ as the solid cylinder. The two objects are released simultaneously from rest at the same starting point, and both roll the length $\\Delta x = 1.0$ m to the end of the inclined plane.</p>\n\n<p>Which object reaches the \"finish line\" first? The answer must be briefly justified (either with a qualitative argument or by calculation).</p>\n\n<h3>f)</h3>\n<p>What is the time difference $\\Delta t$ between the two objects at the \"finish line\"?</p>"
+                        "points": 0,
+                        "task_text": "Formater denne eksamensoppgaven som en gyldig HTML-streng for bruk i en JavaScript-variabel.\n\n<h3>a)</h3>\n<pre class=\"code-box\"><code>def Fd(v):\n    rho=1.2\n    A=0.70\n    Cd=1.0\n    return 0.5*rho*A*Cd*(v/3.6)**2</code></pre>\n\n<h3>b)</h3>\n<pre class=\"code-box\"><code>g=9.81\nt=0\nv=0 #fart i m/s\nwhile (t<t_maks):\n    v=v+(g-Fd(v)/m)*dt\n    t=t+dt</code></pre>"
                     },
                     {
-                        "topic": "Fluidmekanikk",
+                        "topic": "Mekanikk",
                         "task_number": "10",
-                        "points": 2,
-                        "task_text": "<p>En homogen terning med sidekant $h$ flyter i utgangspunktet i ro i et kar med vann som har dybde $2h$. I utgangspunktet flyter terningen slik at $h$ ligger under vannoverflaten. Terningen presses deretter nedover i vannet, helt til den nederste sidekanten er i kontakt med bunnen av karet. Hvilken av grafene A-E viser oppdriften $F_B$ på terningen som funksjon av dybden til den nederste sidekant? Enhetene på aksene i figuren er ikke tegnet i riktig skala.</p>\n\n<ol>\n<li><b>A</b></li>\n<li><b>B</b></li>\n<li><b>C</b></li>\n<li><b>D</b></li>\n<li><b>E</b></li>\n</ol>"
+                        "points": 15,
+                        "task_text": "En homogen, massiv sylinder med masse M og radius R ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel θ = 30°. Se figuren over.\n\nFarten er såpass liten at luftmotstanden kan neglisjeres.\n\na)\n\nTegn kreftene på sylinderen mens den ruller nedover skråplanet. For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn.\n\nb)\n\nVis at akselerasjonen til sylinderen nedover skråplanet er a = (2/3)g sin θ.\n\nc)\n\nHvor lang tid bruker sylinderen på å rulle ned skråplanet dersom lengden av skråplanet er Δx = 1,0 m og sylinderen starter fra ro?\n\nd)\n\nSylinderen starter i x = 0 ved t = 0. Skisser sylinderens posisjonsgraf x(t), fartsgraf v(t) og akselerasjonsgraf a(t). For full uttelling må grafens form framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.\n\ne)\n\nSylinderen deltar deretter i et \"kappløp\" med en tynnvegget sylinder (ring) med samme masse M og radius R som sylinderen. De to legemene slippes samtidig med null startfart fra samme startpunkt, og begge ruller lengden Δx = 1,0 m til enden av skråplanet.\n\nHvilket legeme kommer først i \"mål\"? Svaret må begrunnes kort (enten med et kvalitativt argument, eller ved utregning).\n\nf)\n\nHva blir tidsdifferansen Δt for \"målgang\" mellom de to legemene?"
                     },
                     {
                         "topic": "Fluidmekanikk",
                         "task_number": "11",
-                        "points": 15,
-                        "task_text": "<p>Olje med massetetthet $\\rho = 9,0 \\cdot 10^2$ kg/m$^3$ skal tappes fra et reservoar på havbunnen gjennom et vertikalt rør med lengde $L = 1,1$ km og diameter $D = 0,20$ m. Trykket i reservoaret i det tappingen starter er $P_1 = 1,0 \\cdot 10^7$ Pa, og oljen er tilnærmet i ro idet den kommer inn i røret. På overflaten kommer oljen ut i luft der lufttrykket er $p_0 = 1,0 \\cdot 10^5$ Pa.</p>\n\n<h3>a)</h3>\n<p>Vis at væskefarten ut av røret ved overflaten er $v = 20$ m/s når vi neglisjerer alle former for tap.</p>\n\n<h3>b)</h3>\n<p>Bestem volumstrømmen i røret.</p>\n\n<h3>c)</h3>\n<p>Trykket i reservoaret vil reduseres etter hvert som olje tappes ut. Hva er trykket i reservoaret når oljestrømmen stopper opp?</p>\n\n<h3>d)</h3>\n<p>Røret har ruhet $\\epsilon = 0,040$ mm, og oljen har dynamisk viskositet $\\eta = 2,5 \\cdot 10^{-3}$ Pa s. På grunn av rørfriksjon måles væskefarten i røret til $v = 10$ m/s. Bestem friksjonsfaktoren $f$ for væskestrømmen i røret.</p>\n\n<h3>e)</h3>\n<p>Beregn tapshøyden $h_f$ på grunn av rørfriksjon under samme forutsetninger som i oppgave d).</p>\n\n<h3>f)</h3>\n<p>Forklar kort hva tapshøyden representerer.</p>"
+                        "points": 0,
+                        "task_text": "En homogen terning med sidekant h flyter i utgangspunktet i ro i et kar med vann som har dybde 2h. I utgangspunktet flyter terningen slik at h ligger under vannoverflaten. Terningen presses deretter nedover i vannet, helt til den nederste sidekanten er i kontakt med bunnen av karet. Se figuren over.\n\nHvilken av grafene A-E viser oppdriften FB på terningen som funksjon av dybden til den nederste sidekant? Enhetene på aksene i figuren er ikke tegnet i riktig skala.\n\n<ol>\n<li><b>A</b></li>\n<li><b>B</b></li>\n<li><b>C</b></li>\n<li><b>D</b></li>\n<li><b>E</b></li>\n</ol>"
                     },
                     {
-                        "topic": "Svingninger",
+                        "topic": "Fluidmekanikk",
                         "task_number": "12",
-                        "points": 0,
-                        "task_text": "<p>Figuren under viser en tynnvegget sylinder (ring) med masse $M$ og radius $R$ som svinger friksjonsfritt med små vinkelutslag $\\theta$ om en akse gjennom periferien. Aksen står normalt på figuren.</p>\n<ol>\n<li><b>A</b> $T=2\\pi \\sqrt{\\frac{R}{g}}$</li>\n<li><b>B</b> $T = 2\\pi \\sqrt{\\frac{3R}{2g}}$</li>\n<li><b>C</b> $T = 2\\pi \\sqrt{\\frac{2R}{g}}$</li>\n<li><b>D</b> $T = 2\\pi \\sqrt{\\frac{3R}{g}}$</li>\n<li><b>E</b> $T = 2\\pi \\sqrt{\\frac{R}{2g}}$</li>\n</ol>"
+                        "points": 15,
+                        "task_text": "Olje med massetetthet $9,0 \\cdot 10^2$ kg/m$^3$ skal tappes fra et reservoar på havbunnen gjennom eit vertikalt rør med lengd $L = 1,1$ km og diameter $D = 0,20$ m. Trykket i reservoaret i det tappingen startar er $P_1 = 1,0 \\cdot 10^7$ Pa, og olja er tilnærma i ro idet ho kjem inn i røret. På overflata kjem olja ut i luft der lufttrykket er $p_0 = 1,0 \\cdot 10^5$ Pa. Sjå figuren over.\n\n<h3>a)</h3>\n\nVis at væskefarten ut av røret ved overflata er $v = 20$ m/s når vi neglisjerer alle former for tap.\n\n<h3>b)</h3>\n\nBestem volumstraumen i røret.\n\n<h3>c)</h3>\n\nTrykket i reservoaret vil reduserast etter kvart som olje tappes ut. Kva er trykket i reservoaret når oljestraumen stoppar opp?\n\n<h3>d)</h3>\n\nRøret har ruhet $\\epsilon = 0,040$ mm, og olja har dynamisk viskositet $\\eta = 2,5 \\cdot 10^{-3}$ Pa s. På grunn av rørfriksjon målest væskefarten i røret til $v = 10$ m/s. Bestem friksjonsfaktoren $\\lambda$ for væskestraumen i røret.\n\n<h3>e)</h3>\n\nRekn ut tapshøgda $h_f$ på grunn av rørfriksjon under same føresetnader som i oppgåve d). Forklar kort kva tapshøgda representerer."
                     },
                     {
                         "topic": "Svingninger",
                         "task_number": "13",
                         "points": 2,
-                        "task_text": "<p>The figure shows a block with mass $m$ attached to a spring with spring constant $k$, oscillating horizontally ($x$-direction in the figure). The block is submerged in a fluid that produces a frictional force $F_D = -bv$ opposing the direction of motion, where $v$ is the block's velocity. The damping constant $b$ is such that the block undergoes weakly/underdamped oscillations. The block is pulled to an initial amplitude $A$ and released. At which of the specified points is the block's acceleration greatest?</p><ol><li><b>A:</b> $x = 3$</li><li><b>B:</b> $x = 4$</li><li><b>C:</b> $x = A$</li><li><b>D:</b> $x = 0$</li></ol>"
+                        "task_text": "En tynnvegget sylinder (ring) med masse M og radius R svinger friksjonsfritt med små vinkelutslag θ om en akse gjennom periferien. Aksen står vinkelrett på figuren. Hva er svingeperioden T?\n\nA: T = 2π√R/g\nB: T = 2π√3R/2g\nC: T = 2π√2R/g\nD: T = 2π√3R/g\nE: T = 2π√2R/3g"
                     },
                     {
-                        "topic": "Bølgefysikk",
+                        "topic": "Svingninger",
                         "task_number": "14",
-                        "points": 4,
-                        "task_text": "<p>a) Følgende to sinusformede tversbølger møtes: $Y_1(x,t) = (1,0 \\text{ m}) \\sin(1,0 \\text{ m}^{-1} \\cdot x+1,0 \\text{ s}^{-1} \\cdot t)$ $Y_2(x,t) = (1,0 \\text{ m}) \\sin(1,0 \\text{ m}^{-1} \\cdot x - 1,0 \\text{ s}^{-1} \\cdot t)$ Hvilken påstand om den resulterende bølgen er riktig?</p><ol><li><b>A</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 1,0 \\text{ m}$</li><li><b>B</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 2,0 \\text{ m}$</li><li><b>C</b> Resulterende bølge blir null; bølgene utslokker hverandre</li><li><b>D</b> Resulterende bølge beveger seg mot høyre med fart $v = 1,0 \\text{ m/s}$</li><li><b>E</b> Resulterende bølge beveger seg mot venstre med fart $v = 1,0 \\text{ m/s}$</li></ol><h3>b)</h3><p>En stående bølge er gitt ved uttrykket $y(x,t) = 2A \\sin(kx) \\cos(\\omega t)$. Hva er den maksimale vertikale farten $v_{\\text{max}}$ til et punkt på bølgen?</p><ol><li><b>A</b> $v_{\\text{max}} = 2A\\omega$</li><li><b>B</b> $v_{\\text{max}} = A\\omega$</li><li><b>C</b> $v_{\\text{max}} = A\\omega$</li><li><b>D</b> $v_{\\text{max}} = A\\omega$</li><li><b>E</b> $v_{\\text{max}} = A\\omega$</li></ol>"
-                    },
-                    {
-                        "topic": "Bølgefysikk",
-                        "task_number": "15",
                         "points": 2,
-                        "task_text": "<p>a) En streng med lengde $L = 1,0$ m er spent fast i begge ender. Når strengen settes i vibrasjon, er den laveste frekvensen som gir en stående bølge, lik $f = 40$ Hz. Bestem bølgefarten på strengen.</p><ol><li><b>A</b> $10$ m/s</li><li><b>B</b> $20$ m/s</li><li><b>C</b> $40$ m/s</li><li><b>D</b> $60$ m/s</li><li><b>E</b> $80$ m/s</li></ol><p>b) En bestemt streng med lengde $L$, lineær massetetthet $\\mu$ og snorstramming $F_T$ som er spent opp i begge ender, vibrerer med grunnfrekvensen $f$. Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært $2L$, massetettheten $2\\mu$ og snorstrammingen $2F_T$?</p><ol><li><b>A</b> $\\frac{1}{2} f$</li><li><b>B</b> $\\frac{1}{4} f$</li><li><b>C</b> $2f$</li><li><b>D</b> $4f$</li></ol>"
-                    }
-                ]
-            }
-        }
-    },
-    "IMAX1002": {
-        "topics": [
-            "Lineære likningssystemer",
-            "Determinanter",
-            "Lineære transformasjoner",
-            "Underrom",
-            "Basis",
-            "Inversmatrise",
-            "Komplekse tall",
-            "Integraler",
-            "Differensiallikninger",
-            "Initialverdiproblemer",
-            "Systemer av differensiallikninger"
-        ],
-        "exams": {
-            "H24": {
-                "tasks": [
-                    {
-                        "topic": "Lineære likningssystemer",
-                        "task_number": "1",
-                        "points": 8,
-                        "task_text": "<p>You are given three electrical components $A$, $B$ and $C$ with resistances $x$, $y$ and $z$ respectively. You cannot measure each component's resistance directly but have access to three circuits with known resistances.</p>\n\n<p>Circuit $1$ has a resistance of $212$ and contains $2$ of component $A$, $3$ of component $B$ and $4$ of component $C$, giving the equation $2x + 3y + 4z = 212$.</p>\n\n<p>Circuit $2$ has a resistance of $101$ and contains $1$ of component $A$, $5$ of component $B$ and $0$ of component $C$, giving the equation $x + 5y = 101$.</p>\n\n<p>Circuit $3$ has a resistance of $158$ and contains $8$ of component $A$, $0$ of component $B$ and $4$ of component $C$, giving the equation $8x + 4z = 158$.</p>\n\n<p>Solve the system of equations to find the resistances $x$, $y$ and $z$ of the three components.</p>"
+                        "task_text": "Figuren over viser en kloss med masse $m$ som er festet til en fjær med fjærkonstant $k$, og som kan svinge horisontalt ($x$-retningen på figuren). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft $F_D = -bv$ rettet mot fartsretningen, der $v$ er farten til klossen. Dempingskonstanten $b$ er slik at klossen utfører svakt/underkritisk dempede svingninger.\n\nKlossen dras ut til startamplitude $A$ og slippes. I hvilket av de angitte punktene er klossens akselerasjon størst?\n\n<ol>\n<li><b>A</b> $x = A$</li>\n<li><b>B</b> $x = \\frac{A}{2}$</li>\n<li><b>C</b> $x = 0$</li>\n<li><b>D</b> $x = -\\frac{A}{2}$</li>\n<li><b>E</b> $x = -A$</li>\n</ol>"
                     },
                     {
-                        "topic": "Determinanter",
-                        "task_number": "2",
-                        "points": 6,
-                        "task_text": "<p>La $A = \\begin{pmatrix} 1 & 20 \\\\ 380 & 00 \\end{pmatrix}$</p><p>Hva er determinanten til matrisen $A$? $\\det(A) = $</p><p>Rund av svaret til nærmeste heltall.</p>"
-                    },
-                    {
-                        "topic": "Lineære transformasjoner",
-                        "task_number": "3",
-                        "points": 6,
-                        "task_text": "<p>La $T: \\mathbb{R}^3 \\rightarrow \\mathbb{R}^2$ være lineærtransformasjonen gitt ved $T(x, y, z) = [2x - 3z \\quad 2y+4z]$. Finn en matrise $A$ slik at $T(x, y, z) = A \\cdot \\begin{bmatrix} x \\\\ y \\\\ z \\end{bmatrix}$.</p>  \n<p>$A = \\begin{bmatrix} 2 & 0 & -3 \\\\ 0 & 2 & 4 \\end{bmatrix}$</p>"
-                    },
-                    {
-                        "topic": "Underrom",
-                        "task_number": "4",
-                        "points": 6,
-                        "task_text": "<p>La</p>\n<pre class=\"code-box\"><code>1 2\nv1 = 8 og v2 = c\n5 1</code></pre>\n<p>Finn konstanten $c$ slik at vektoren $3$ ligg i underrommet $\\text{span}(v1, v2)$.</p>\n<p>$c =$</p>"
-                    },
-                    {
-                        "topic": "Basis",
-                        "task_number": "5",
-                        "points": 4,
-                        "task_text": "<p>Which of the following is a basis for $R^3$?</p><ol><li><b>A</b> $\\{(-1,0,0), (-1, 1, 1)\\}$</li><li><b>B</b> $\\{(1,1,0), (0,0,2), (1, 1, 2), (1, 1, 1)\\}$</li><li><b>C</b> $\\{(1,1,0), (0,0,2), (1,1,2)\\}$</li><li><b>D</b> $\\{(1, 1,0), (0, 1,0), (1,0,0)\\}$</li><li><b>E</b> $\\{(1,0,0), (1,1,0), (1, 1, 1)\\}$</li><li><b>F</b> $\\{(1,0,0), (0,1,0), (0,0,1), (1,0,1)\\}$</li><li><b>G</b> $\\{(1,0,0), (1,1,2)\\}$</li></ol><p>Note that in this task we use the notation $(x, y, z) = x y z$</p>"
-                    },
-                    {
-                        "topic": "Inversmatrise",
-                        "task_number": "6",
-                        "points": 8,
-                        "task_text": "<p>La $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{bmatrix}$. Finn inversmatrisen $A^{-1}$.</p>"
-                    },
-                    {
-                        "topic": "Komplekse tall",
-                        "task_number": "7",
-                        "points": 7,
-                        "task_text": "<p>Se på det komplekse tallet $z = 4 - 2i$. Rund av til $2$ desimalers nøyaktighet.</p>\n<h3>a)</h3>\n<p>Hva er realdelen og hva er imaginærdelen til $z$? Re$(z) =$ Im$(z) =$</p>\n<h3>b)</h3>\n<p>Skriv $z$ på polarform. Vinklene skal være i radianer og ligge i intervallet $[-\\pi,\\pi)$. $x = ($cos$($ $+ i$ sin$($</p>\n<h3>c)</h3>\n<p>Skriv $z$ på eksponentialform. Vinklene skal være i radianer og ligge i intervallet $Z = $exp$(i$ $-\\pi, \\pi)$.</p>"
-                    },
-                    {
-                        "topic": "Komplekse tall",
-                        "task_number": "8",
-                        "points": 8,
-                        "task_text": "<p>Let $z_1 = 2 + i$ and $z_2 = 5 + 5i$. Find the Cartesian form of the following complex numbers.</p>\n\n<h3>1.</h3>\n<p>$z_1 z_2$</p>\n\n<h3>2.</h3>\n<p>$z_1 / z_2$</p>\n\n<h3>3.</h3>\n<p>$|z_1 z_2|$</p>\n\n<p>Round to one decimal place.</p>"
-                    },
-                    {
-                        "topic": "Komplekse tall",
-                        "task_number": "9",
-                        "points": 8,
-                        "task_text": "<p>Finn alle løsningene til ligningen $z^3 = 8i$.</p>"
-                    },
-                    {
-                        "topic": "Integraler",
-                        "task_number": "10",
-                        "points": 5,
-                        "task_text": "<p>Finn verdien til integralet</p>\n<p>$$ \\int x^2 e^{\\frac{x^3}{3}} \\, dx $$</p>\n<p>Rund av til nærmeste heltall.</p>"
-                    },
-                    {
-                        "topic": "Differensiallikninger",
-                        "task_number": "11",
-                        "points": 10,
-                        "task_text": "<p>La $f(t) = t^3e^t$.</p>\n\n<h3>a)</h3>\n<p>Hvilket av følgende uttrykk er $f'(t)$?</p>\n<ol>\n<li><b>A)</b> $f'(t) = 3t^3 e^2 + t^2 e^t$</li>\n<li><b>B)</b> $f'(t) = (3t^2 + t^3)e^t$</li>\n<li><b>C)</b> $f'(t) = 2t^2e^t + t^3 e^t$</li>\n<li><b>D)</b> $f'(t) = 2t^2 e^t$</li>\n<li><b>E)</b> $f'(t) = 3t^2 e^t$</li>\n<li><b>F)</b> $f'(t) = t^3 e^t$</li>\n</ol>\n\n<h3>b)</h3>\n<p>Hvilken av følgende differensiallikninger har funksjonen $f$ som en løsning?</p>\n<ol>\n<li><b>A)</b> $tf'(t) - 2f(t) = 0$</li>\n<li><b>B)</b> $tf'(t) - e^t f(t) = 0$</li>\n<li><b>C)</b> $tf'(t) - e^t f(t) = 0$</li>\n<li><b>D)</b> $f'(t) - \\frac{3f(t)}{t} - f(t) = 0$</li>\n<li><b>E)</b> $f'(t) - (t^2 - e^t) f(t) = 0$</li>\n<li><b>F)</b> $f'(t) - \\frac{3f(t)}{t} = 0$</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Initialverdiproblemer",
-                        "task_number": "12",
-                        "points": 6,
-                        "task_text": "<p>Finn løsningen på initialverdiproblemet $y(x)y'(x) = e^{3x}$, $y(0) = 1$.</p>\n\n<ol>\n<li><b>A</b> $y(x) = e^{6x} + 1$</li>\n<li><b>B</b> $y(x) = e^{3x}$</li>\n<li><b>C</b> $y(x) = e^{-3x}$</li>\n<li><b>D</b> $y(x) = \\sqrt{\\frac{3}{2} e^{3x} + 1}$</li>\n<li><b>E</b> $y(x) = \\frac{1}{3} e^{3x} + \\frac{1}{3}$</li>\n<li><b>F</b> $y(x) = e^{-3x}$</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Differensiallikninger",
-                        "task_number": "13",
-                        "points": 8,
-                        "task_text": "<p>Differensiallikningen $4y''(x) - 4y'(x) + y(x) = \\cos(2x)$ har en partikulær løsning på formen $y(x) = A \\cos(2x) + B \\sin(2x)$. Finn konstantene $A$ og $B$. Rund av til to desimaler etter komma.</p>"
-                    },
-                    {
-                        "topic": "Systemer av differensiallikninger",
-                        "task_number": "14",
-                        "points": 10,
-                        "task_text": "<p>Consider the following system of first-order differential equations $x_1'(t) = 3x_1(t) + x_2(t)$, $x_2'(t) = x_1(t) + x_2(t)$.</p>\n\n<h3>1.</h3>\n<p>Write the system in matrix form, i.e. in the form $\\mathbf{x}'(t) = A \\cdot \\mathbf{x}(t)$ where $A$ is a matrix and $\\mathbf{x}(t) = \\begin{bmatrix} x_1(t) \\\\ x_2(t) \\end{bmatrix}$.</p>\n\n<h3>2.</h3>\n<p>Find the eigenvalues and eigenvectors of the matrix $A$.</p>\n\n<h3>3.</h3>\n<p>Find the general solution to the system of differential equations.</p>\n\n<h3>4.</h3>\n<p>Find the solution of the system that satisfies the initial conditions $x_1(0) = 2$ and $x_2(0) = \\sqrt{2}$.</p>"
-                    }
-                ]
-            }
-        }
-    },
-    "IMAX20Y2": {
-        "topics": [
-            "Partiell derivasjon",
-            "Kritiske punkt",
-            "Retningsderivert",
-            "Graf-forståelse",
-            "Taylor 1D",
-            "Fourieranalyse",
-            "Varmeligning",
-            "Fouriertransformasjon",
-            "Konvolusjon",
-            "Diskret Fouriertransformasjon",
-            "Signalbehandling",
-            "Funksjonsforståelse"
-        ],
-        "exams": {
-            "V24": {
-                "tasks": [
-                    {
-                        "topic": "Partiell derivasjon",
-                        "task_number": "1",
-                        "points": 10,
-                        "task_text": "<p>Gitt funksjonen $f(x, y) = 3x^2 + 2y - 4$. Finn verdiene til de partiellderiverte i punktet $(1, 1)$.</p>  \n\n<p>Gitt funksjonen $g(x, y) = x^4 + 2x^2y + 2xy^2 + 3$, $x \\geq 0$, $y \\geq 0$. Finn verdiene til de partiellderiverte i punktet $(1, 2)$. Angi svarene med $2$ desimaler.</p>"
-                    },
-                    {
-                        "topic": "Kritiske punkt",
-                        "task_number": "2",
-                        "points": 10,
-                        "task_text": "<p>La $f(x, y) = 8xy - 2x^2 - y^2$. Finn de kritiske punktene til funksjonen $f$.</p><p>Klassifiser de kritiske punktene til funksjonen $f$. Avgjør om de kritiske punktene er sadelpunkter, lokale maksimumspunkter, lokale minimumspunkter, eller ingen av delene.</p>"
-                    },
-                    {
-                        "topic": "Retningsderivert",
-                        "task_number": "3",
-                        "points": 10,
-                        "task_text": "<p>We have the function $f(x, y) = 3x^2 - 2xy + 2y^2$. Find the gradient at the point $(x, y) = (1,1)$.</p>\n\n<h3>a)</h3>\n<p>Starting at the point $(1, 1)$, we move in the direction $\\bar{u} = \\frac{3}{5}\\mathbf{i} + \\frac{4}{5}\\mathbf{j}$. Find the directional derivative.</p>\n\n<h3>b)</h3>\n<p>The figure below shows level curves for the function $f$. In addition, the figure shows a tangent line to the level curve at a chosen point. Which direction will the gradient vector have at the point?</p>\n\n<ol>\n<li><b>A</b> The gradient vector at the point will be parallel to the tangent line.</li>\n<li><b>B</b> The gradient vector at the point will be perpendicular to the tangent line.</li>\n<li><b>C</b> The direction of the gradient vector at the point is neither parallel nor perpendicular to the tangent line.</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Graf-forståelse",
-                        "task_number": "4",
-                        "points": 10,
-                        "task_text": "<p>Hvilken funksjon hører sammen med hvilken graf? Figur A Figur B Figur C Figur D Figur E</p>\n\n<ol>\n<li><b>A</b> Funksjonen $f(x, y) = \\cos(xy)$ og figuren hører sammen.</li>\n<li><b>B</b> Funksjonen $f(x, y) = y^2 - x^2$ og figuren hører sammen.</li>\n<li><b>C</b> Funksjonen $f(x, y) = \\frac{1}{1 + x^2y^2}$ og figuren hører sammen.</li>\n<li><b>D</b> Funksjonen $f(x, y) = x^2 - y^2$ og figuren hører sammen.</li>\n<li><b>E</b> Funksjonen $f(x, y) = x e^{-x^2-y^2}$ og figuren hører sammen.</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Taylor 1D",
-                        "task_number": "5",
-                        "points": 10,
-                        "task_text": "<p>La $f(x) = \\tan x$, $-1 < x < 1$.</p>\n\n<p>Finn verdiene til $f'$ og $f''$ i punktet $x = \\frac{1}{4}$. Angi svaret korrekt avrundet til $3$ desimaler. $f'(\\frac{1}{4}) =$ $f''(\\frac{1}{4}) =$</p>\n\n<p>Lag det $2$. ordens taylorpolynomet $P_2(x)$ om punktet $x = \\frac{1}{4}$ for funksjonen $f$. Bruk polynomet $P_2(x)$ til å finne en tilnærming til verdien $\\tan(\\frac{1}{4} + 0.1)$. Angi svaret korrekt avrundet til $3$ desimaler. $\\tan(\\frac{1}{4} +0.1) \\approx P_2(\\frac{1}{4} +0.1) =$</p>"
-                    }
-                ]
-            },
-            "V25": {
-                "tasks": [
-                    {
-                        "topic": "Funksjonsforståelse",
-                        "task_number": "1",
-                        "points": 7,
-                        "task_text": "<p>Given the function $f(x) = x - \\sin(2x)$ for $x = [-\\pi,\\pi]$.</p>\n\n<h3>Which statement is true about the function $f$:</h3>\n<ol>\n<li><b>A</b> $f$ is even.</li>\n<li><b>B</b> $f$ is odd.</li>\n<li><b>C</b> $f$ is neither odd nor even.</li>\n</ol>\n\n<h3>What is the period $L$ of the periodic extension of $f$:</h3>\n<ol>\n<li><b>A</b> $L = 1$</li>\n<li><b>B</b> $L = 2$</li>\n<li><b>C</b> $L = \\pi$</li>\n<li><b>D</b> $L = 2\\pi$</li>\n<li><b>E</b> $L = 0$</li>\n</ol>\n\n<h3>What are the Fourier coefficients $a_o$, $a_1$ and $b_1$ of the periodic extension:</h3>\n<p>$a_o = ?$</p>\n<ol>\n<li><b>A</b> $a_o = 0$</li>\n<li><b>B</b> $a_o = \\pi/2$</li>\n<li><b>C</b> $a_o = \\pi$</li>\n<li><b>D</b> $a_o = 1$</li>\n<li><b>E</b> $a_o = 2$</li>\n</ol>\n\n<p>$a_1 = ?$</p>\n<ol>\n<li><b>A</b> $a_1 = 0$</li>\n<li><b>B</b> $a_1 = 10/(3\\pi)$</li>\n<li><b>C</b> $a_1 = 3$</li>\n<li><b>D</b> $a_1 = 3\\pi/10$</li>\n<li><b>E</b> $a_1 = 10/(3\\pi)$</li>\n</ol>\n\n<p>$b_1 = ?$</p>\n<ol>\n<li><b>A</b> $b_1 = 0$</li>\n<li><b>B</b> $b_1 = 2\\pi$</li>\n<li><b>C</b> $b_1 = \\pi$</li>\n<li><b>D</b> $b_1 = -2\\pi$</li>\n<li><b>E</b> $b_1 = 2$</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Varmeligning",
-                        "task_number": "2",
-                        "points": 7,
-                        "task_text": "<p>La $f(x, t)$ være løsningen på varmeligningen i en stang hvor temperaturen er målt i celsius $f_{xx}(x,t) - f_t(x,t) = 0$, $f(0,t) = f(1,t) = 0$, $0 < x < 1$, $0 < t$, $f(x, 0) = 20 \\sin(\\pi x) - 10 \\sin(2\\pi x)$, $0 < x < 1$. Hva er koeffisientene $b_1$ og $b_2$ i løsningen $f(x,t)$? I hvilket tidspunkt $T$ er temperaturen i midten av stangen $0.1$ celsius?</p>\n\n<h3>a)</h3>\n<p>Finn koeffisientene $b_1$ og $b_2$ i løsningen $f(x,t)$.</p>\n\n<h3>b)</h3>\n<p>Finn tidspunktet $T$ hvor temperaturen i midten av stangen er $0.1$ celsius.</p>"
-                    },
-                    {
-                        "topic": "Fouriertransformasjon",
-                        "task_number": "3",
-                        "points": 8,
-                        "task_text": "<p>a) La funksjonen $f$ være definert for alle $t \\in \\mathbb{R}$ og være gitt ved</p>\n<p>$$f(t) = \\begin{cases} 2 & \\text{for } -1 < t < 0, \\\\ 0 & \\text{ellers.} \\end{cases}$$</p>\n<p>La $F(\\omega) = \\mathcal{F}\\{f(t)\\}(\\omega)$ være Fouriertransformasjonen til $f$. Hva er $F(\\pi) = a + jb$?</p>\n\n<h3>b)</h3>\n<p>Fouriertransformasjonen til funksjonen $g(t)$ er</p>\n<p>$$\\mathcal{F}\\{g(t)\\}(\\omega) = \\frac{e^{-j\\omega}}{1 + j\\omega}.$$</p>\n<p>Hva er $g(2)$?</p>"
-                    },
-                    {
-                        "topic": "Fouriertransformasjon",
-                        "task_number": "4",
-                        "points": 5,
-                        "task_text": "<p>Hvilket av de følgende bildene viser spektrogrammet til funksjonen $f(t) = e^{|t|} + e^{3jt} e^{-|t|}$?</p>\n\n<ol>\n<li><b>A)</b></li>\n<li><b>B)</b></li>\n<li><b>C)</b></li>\n<li><b>D)</b></li>\n<li><b>E)</b></li>\n</ol>"
-                    },
-                    {
-                        "topic": "Konvolusjon",
-                        "task_number": "5",
-                        "points": 8,
-                        "task_text": "<p>Let $f(t) = 0$ for $t \\leq \\frac{1}{2}$, $f(t) = 1$ for $\\frac{1}{2} < t < 1$, and $f(t) = 0$ for $1 < t$. Let $g(t) = t^2$. What is $f*g(0)$? What is $f*g(2)$?</p>\n\n<h3>a)</h3>\n<p>Compute $f*g(0)$.</p>\n\n<h3>b)</h3>\n<p>Compute $f*g(2)$.</p>"
-                    },
-                    {
-                        "topic": "Diskret Fouriertransformasjon",
-                        "task_number": "6",
-                        "points": 9,
-                        "task_text": "```html\n<p>La $F[O] f = ƒ[1] F[2]$ være punktprøvene til signalet og la $FO] F = F[1] F[2]$ være den diskrete Fouriertransformasjonen (DFT) til $ƒ$. Finn $3 \\times 3$-matrisa $A$ slik at $F = Af$, der $Af$ betyr matrisemultiplikasjon mellom $A$ og søylevektoren $f$. La $N = 3$. Da har vi at $W = e^{-2j/3}$ og matrisa skal ha forma</p>\n<div class=\"math\">$$ A = \\begin{bmatrix} W^0 & W^0 & W^0 \\\\ W^0 & W^1 & W^2 \\\\ W^0 & W^2 & W^4 \\end{bmatrix} $$</div>\n<p>Rekner vi ut hva som skal stå i matrisa får vi at</p>\n<div class=\"math\">$$ W^0 = 1, $$</div>\n<div class=\"math\">$$ W^1 = W = e^{-2\\pi j/3} = -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}j, $$</div>\n<div class=\"math\">$$ W^2 = e^{-4\\pi j/3} = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}j, $$</div>\n<div class=\"math\">$$ W^4 = e^{-8\\pi j/3} = e^{-2\\pi j/3} = W^1. $$</div>\n<p>Dermed får vi at</p>\n<div class=\"math\">$$ A = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}j & -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}j \\\\ 1 & -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}j & -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}j \\end{bmatrix} $$</div>\n\n<h3>a)</h3>\n<p>Finn vektoren $F$ når $f = (1, -2,2)$. Skal vi finne DFT av vektoren $f = (1, -2,2)$ kan vi nå bruke matrisa å få at</p>\n<div class=\"math\">$$ F = Af = \\begin{bmatrix} 1 & 1 & 1 \\\\ 1 & -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}j & -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}j \\\\ 1 & -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}j & -\\frac{1}{2} - \\frac{\\sqrt{3}}{2}j \\end{bmatrix} \\begin{bmatrix} 1 \\\\ -2 \\\\ 2 \\end{bmatrix} = \\begin{bmatrix} 1 \\\\ 1 + \\sqrt{3}j \\\\ 1 - \\sqrt{3}j \\end{bmatrix} $$</div>\n```"
-                    },
-                    {
-                        "topic": "Signalbehandling",
-                        "task_number": "7",
-                        "points": 0,
-                        "task_text": "<p>a) Utifra figuren, hvilken type filter er brukt?</p><ol><li><b>A</b> Høy-pass filter (high-pass filter)</li><li><b>B</b> Lav-pass filter (low-pass filter)</li><li><b>C</b> Hverken et lav- eller høy-pass filter.</li></ol><h3>b)</h3><p>Spektrogrammet over tilhører en lydfil. Hvordan vil det du hører sammenlignes før og etter filteret?</p><ol><li><b>A</b> Vi vil bare høre toner (dvs. frekvenser) over $100$. Ellers vil lyden høres rimelig lik ut.</li><li><b>B</b> Vi vil bare høre toner (dvs. frekvenser) under $100$. Ellers vil lyden høres rimelig lik ut.</li><li><b>C</b> Alle toner (dvs. frekvenser) utenom $100$ vil bli lavere. Ellers vil lyden høres rimelig lik ut.</li><li><b>D</b> Tonen (dvs. frekvensen) rundt $100$ blir fjernet. Ellers vil lyden høres rimelig lik ut.</li><li><b>E</b> Lyden vil høres identisk ut før og etter filteret.</li></ol><h3>c)</h3><p>Hvilken av følgende kodesnuttene vil utføre filteret beskrevet i oppgaven? Linje $1$-$5$ er som følger i alle svaralternativene:</p><pre class=\"code-box\"><code>1 import numpy as np\n2 from numpy import fft\n3\n4 sampling_interval = 1/22050\n5 sound_file = np.load(\"sound.npy\")</code></pre><ol><li><b>A</b><pre class=\"code-box\"><code>6 f_dft = fft.fft(sound_file)\n7 omega = fft.fftfreq(sound_file.size, sampling_interval)\n8\n9 f_dft[np.abs(omega) < 100] = 0\n10 filtered_sound = fft.ifft(f_dft)</code></pre></li><li><b>B</b><pre class=\"code-box\"><code>6 f_dft = fft.fft(sound_file)\n7 omega = fft.fftfreq(sound_file.size, sampling_interval)\n8\n9 f_dft[np.abs(omega) > 100] = 0\n10 filtered_sound = fft.ifft(f_dft)</code></pre></li><li><b>C</b><pre class=\"code-box\"><code>6 f_dft = fft.ifft(sound_file)\n7 omega = fft.fftfreq(sound_file.size, sampling_interval)\n8\n9 f_dft[np.abs(omega) < 100] = 0\n10 filtered_sound = fft.fft(f_dft)</code></pre></li><li><b>D</b><pre class=\"code-box\"><code>6 f_dft = fft.ifft(sound_file)\n7 omega = fft.fftfreq(sound_file.size, sampling_interval)\n8\n9 f_dft[np.abs(omega) > 100] = 0\n10 filtered_sound = fft.fft(f_dft)</code></pre></li></ol>"
-                    }
-                ]
-            }
-        }
-    },
-    "MEKX1101": {
-        "topics": [
-            "Legeringer",
-            "fasediagrammer",
-            "korrosjon",
-            "mikrostruktur",
-            "diffusjon",
-            "bruddmekanismer",
-            "materialvalg",
-            "krystallstruktur",
-            "mekaniske egenskaper",
-            "termiske egenskaper",
-            "polymerer",
-            "legeringer"
-        ],
-        "exams": {
-            "V24": {
-                "tasks": [
-                    {
-                        "topic": "Legeringer",
-                        "task_number": "1",
-                        "points": 13,
-                        "task_text": "<p>Hva kalles en legering som hovedsakelig inneholder kobber og tinn?</p>\n\n<p>Hva er vanlig navn for legeringer som hovedsakelig inneholder kobber og sink?</p>\n\n<h3>a)</h3>\n<p>Likevektsstrukturen til en blanding av kobber og nikkel beskrives ved et isomorft fasediagram. Forklar hvorfor.</p>\n\n<h3>b)</h3>\n<p>Hva er maksimal løselighet av kobber i aluminium?</p>\n\n<h3>c)</h3>\n<p>Aluminiumslegeringar i 2000-serien har kobber som det primære legeringselementet. Forklar korleis og kvifor desse legeringane kan oppnå høg flytestyrke.</p>\n\n<h3>d)</h3>\n<p>Kan kobber nyttast som katodisk vern av stål? Gi ei kort forklaring på det du kjem fram til.</p>\n\n<h3>e)</h3>\n<p>Gi ei kort forklaring på kva som hindrar korrosjon i rustfrie stål, både med omsyn til stålet sitt innhald og mekanismen som verkar.</p>"
-                    },
-                    {
-                        "topic": "Legeringer",
-                        "task_number": "2",
-                        "points": 3,
-                        "task_text": "<p>En legering består av kun kobber og tinn. Forholdet mellom antall kobberatomer og antall tinnatomer er $25:1$. Hva er vektprosenten av tinn i legeringen? Oppgi svaret avrundet til nærmeste hele tall.</p>\n\n<h3>a)</h3>\n<p>Finn molmassen til kobber og tinn.</p>\n\n<h3>b)</h3>\n<p>Beregn total masse av kobber og tinn basert på forholdet $25:1$.</p>\n\n<h3>c)</h3>\n<p>Regn ut vektprosenten av tinn i legeringen.</p>"
-                    },
-                    {
-                        "topic": "fysikk",
-                        "task_number": "3",
-                        "points": 3,
-                        "task_text": "<p>Et stykke aluminiumsfolie har bredde lik $44$ cm, lengde lik $10$ m og den veier $180$ g. Hva er tykkelsen til denne folien?</p>\n<ol>\n<li><b>A</b> $< 10$ μm</li>\n<li><b>B</b> $15$ μm</li>\n<li><b>C</b> $25$ μm</li>\n<li><b>D</b> $35$ μm</li>\n<li><b>E</b> $45$ μm</li>\n<li><b>F</b> $55$ μm</li>\n<li><b>G</b> $65$ μm</li>\n<li><b>H</b> $> 75$ μm</li>\n</ol>"
-                    },
-                    {
-                        "topic": "korrosjon",
-                        "task_number": "4",
-                        "points": 3,
-                        "task_text": "<p>Aluminium reagerer raskt med oksygen i luft og danner et belegg av aluminiumoksid, $Al_2O_3$ på overflatene. Dette belegget er $4$ nanometer tykt. Hvor mye oksygen er i så fall bundet til aluminiumsfolien i forrige oppgave? Tettheten til aluminiumoksid er $3980$ kg/m$^3$ og du kan anta at alle flater har blitt eksponert for oksygen.</p>\n\n<ol>\n<li><b>A</b> $10$ $\\mu$g</li>\n<li><b>B</b> $15$ $\\mu$g</li>\n<li><b>C</b> $25$ $\\mu$g</li>\n<li><b>D</b> $35$ $\\mu$g</li>\n<li><b>E</b> $45$ $\\mu$g</li>\n<li><b>F</b> $55$ $\\mu$g</li>\n<li><b>G</b> $65$ $\\mu$g</li>\n<li><b>H</b> $70$ $\\mu$g</li>\n</ol>"
-                    },
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "5",
-                        "points": 3,
-                        "task_text": "<p>Kobber, som har tetthet lik $8935$ kg/m$^3$, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten $a$ for enhetscellen til kobber.</p><ol><li><b>A:</b> $180$ pm</li><li><b>B:</b> $216$ pm</li><li><b>C:</b> $240$ pm</li><li><b>D:</b> $288$ pm</li><li><b>E:</b> $360$ pm</li><li><b>F:</b> $405$ pm</li><li><b>G:</b> $450$ pm</li><li><b>H:</b> $480$ pm</li></ol>"
-                    },
-                    {
-                        "topic": "Legeringer",
-                        "task_number": "6",
-                        "points": 3,
-                        "task_text": "<p>80 g of a copper-silver alloy containing 30 weight percent silver is slowly heated from room temperature to 900$^\\circ$C and held at this temperature until the system is in complete equilibrium. The melt is then poured out of the mixture. How much solid remains?</p>\n\n<p>The solid remaining from the previous task is slowly cooled to 700$^\\circ$C. What is the weight percent of the $\\beta$-phase in the mixture of $\\alpha$ and $\\beta$ at this temperature?</p>"
-                    },
-                    {
-                        "topic": "fasediagrammer",
-                        "task_number": "7",
-                        "points": 3,
-                        "task_text": "<p>A legering of copper and silver contains $4$ mol copper and $6$ mol silver. The alloy is heated slowly from room temperature. At what temperature will the entire mixture become a melt? The relevant phase diagram is provided in an appendix. Choose one:</p><ol><li><b>A</b> $780^\\circ$C</li><li><b>B</b> $800^\\circ$C</li><li><b>C</b> $820^\\circ$C</li><li><b>D</b> $840^\\circ$C</li><li><b>E</b> $860^\\circ$C</li><li><b>F</b> $880^\\circ$C</li><li><b>G</b> $900^\\circ$C</li><li><b>H</b> $920^\\circ$C</li></ol>"
-                    },
-                    {
-                        "topic": "diffusjon",
-                        "task_number": "8",
-                        "points": 15,
-                        "task_text": "<p>Forklar kort og presist hva som menes med en semi-uendelig plate.</p>\n\n<p>Hva er diffusjonskoeffisienten for karbon i stål ved disse betingelsene?</p>\n\n<p>Hvor lang tid må platen holdes ved disse betingelsene for at konsentrasjonen av karbon ved en posisjon $1.0$ mm inn i platen blir $1.0$ wt%?</p>\n\n<p>Vis at betingelser for en semi-uendelig plate er oppfylt for tiden du har beregnet i forrige spørsmål.</p>\n\n<p>Hvordan forventer du at konsentrasjonen av karbon varierer gjennom platen når juleferien er over?</p>\n\n<p>Hva vil skje med materialet i platen nå?</p>"
-                    },
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "9",
-                        "points": 4,
-                        "task_text": "<p>Karbonstål med eutektoid sammensetning har $0,76$ vektprosent karbon. Hvor mange karbonatom har et slikt stål per $1000$ jernatom?</p>\n\n<h3>a)</h3>\n<p>Finn massen av karbon og jern i $100$ gram stål.</p>\n\n<h3>b)</h3>\n<p>Finn antall mol karbon og jern.</p>\n\n<h3>c)</h3>\n<p>Finn antall karbonatom per $1000$ jernatom.</p>"
-                    },
-                    {
-                        "topic": "fasediagrammer",
-                        "task_number": "10",
-                        "points": 4,
-                        "task_text": "<p>Karbonstål med $1.5$ wt% karbon er i likevekt som austenitt, og kjøles deretter langsomt ned til en temperatur lik $750^\\circ$C. Hvor stor del av materialet er sementitt ved denne temperaturen? Relevant diagram finner du i et vedlegg.</p>\n\n<h3>a)</h3>\n<p>Bruk fase"
-                    },
-                    {
-                        "topic": "mikrostruktur",
-                        "task_number": "11",
-                        "points": 4,
-                        "task_text": "<p>Karbonstålet består nå av $\\alpha$-jern (ferritt) og 0 wt% kjøles videre ned til romtemperatur. Hvor stor del av materialet (i vektprosent) er ferritt ved romtemperatur.</p>"
-                    },
-                    {
-                        "topic": "bruddmekanismer",
-                        "task_number": "12",
-                        "points": 14,
-                        "task_text": "<p>Gjør rede for forskjellen mellom sprøbrudd og duktilt brudd.</p>\n\n<p>Gjør kort rede for hva støpejern er.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til grått støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til hvitt støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til kulegrafittjern.</p>\n\n<p>Forklar kvifor grått og hvitt støpejern har liten eller ingen duktilitet, medan kulegrafittjern kan ha relativt høg duktilitet.</p>"
-                    },
-                    {
-                        "topic": "bruddmekanismer",
-                        "task_number": "13",
-                        "points": 4,
-                        "task_text": "<p>I en komponent er det laget en overflatesprekk med lengde $a = 2$ mm. Komponenten utsettes så for en strekkspenning, og det oppstår et sprøbrudd når denne spenningen er $126$ MPa. Materialets bruddseighet samt geometriparameteren til systemet er ukjent, men det kan antas at geometriparameteren ikke er avhengig av sprekkens lengde. En identisk komponent med kun naturlige overflatesprekker utsettes så for en strekklast, og sprøbrudd oppstår ved en spenning lik $325$ MPa. Hva er lengden $a$ på overflatesprekken som førte til brudd i denne komponenten? Anta at sprekken er lokalisert og orientert på samme måte som den kunstige sprekken i den første komponenten.</p>\n\n<ol>\n<li><b>A</b> $0.5$ mm</li>\n<li><b>B</b> $0.6$ mm</li>\n<li><b>C</b> $0.7$ mm</li>\n<li><b>D</b> $0.8$ mm</li>\n<li><b>E</b> $0.9$ mm</li>\n<li><b>F</b> $1.0$ mm</li>\n<li><b>G</b> $1.1$ mm</li>\n<li><b>H</b> $1.2$ mm</li>\n</ol>"
-                    },
-                    {
-                        "topic": "bruddmekanismer",
-                        "task_number": "14",
-                        "points": 5,
-                        "task_text": "<p>En fritt opplagret bjelke er utsatt for en senterlast $F$ (tilsvarende som for en tre-punkts bøyetest). Lengde mellom opplagringer er $L = 180$ mm, bredden til bjelken er $10$ mm og høyden er $8$ mm. Ved en last $F = 1212$ N, blir det et sprøbrudd $43$ mm til venstre for midten av bjelken. Hva var maksimal bøyespenning i bjelken ved bruddets posisjon?</p>\n\n<ol>\n<li><b>A</b> $43$ MPa</li>\n<li><b>B</b> $89$ MPa</li>\n<li><b>C</b> $146$ MPa</li>\n<li><b>D</b> $212$ MPa</li>\n<li><b>E</b> $267$ MPa</li>\n<li><b>F</b> $332$ MPa</li>\n<li><b>G</b> $425$ MPa</li>\n<li><b>H</b> $510$ MPa</li>\n<li><b>I</b> $600$ MPa</li>\n<li><b>J</b> $800$ MPa</li>\n<li><b>K</b> $999$ MPa</li>\n</ol>"
-                    },
-                    {
-                        "topic": "materialvalg",
+                        "topic": "Stående bølger",
                         "task_number": "15",
                         "points": 0,
-                        "task_text": "<p>En søyle med lengde $L = 6$ m skal ha et sirkulært tverrsnitt. Søylen skal være så lett som mulig, og du må ta hensyn til knekkingslasten, som for det konkrete tilfellet er gitt ved:</p>\n<div class=\"math\">$$F_r = \\frac{\\pi^2 EI}{L^2}$$</div>\n<p>Søylen må akkurat tåle $50$ kN i trykk uten å knekke. Du trenger ikke ta hensyn til materialets trykkstyrke, siden det er antatt at knekking er den begrensende faktoren. Data for materialer med ID-nummer $1...9$ er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m³ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene. Diameteren til søylen er i utgangspunktet en fri variabel (for de tre første spørsmålene som følger)</p>\n\n<h3>a)</h3>\n<p>Hvilket material er mest optimalt?</p>\n\n<h3>b)</h3>\n<p>Hvilket material er minst optimalt?</p>\n\n<h3>c)</h3>\n<p>Hvor mange materialer er bedre enn materialet med ID-nummer $7$?</p>\n\n<h3>d)</h3>\n<p>Nå er det bestemt at søylens diameter må være mindre enn $100$ mm. Hvor mange av materialene vil tilfredsstille dette kravet?</p>"
+                        "task_text": "a) Følgende to sinusformede tversbølger møtes:\nY1(x,t) = (1,0 m) sin(1,0 m−1 · x + 1,0 s−1 · t)\nY2(x,t) = (1,0 m) sin(1,0 m−1 · x − 1,0 s−1 · t)\nHvilken påstand om den resulterende bølgen er riktig?\n1. A Resulterende bølge blir en stående bølge med maksimal amplitude A = 1,0 m\n2. B Resulterende bølge blir en stående bølge med maksimal amplitude A = 2,0 m\n3. C Resulterende bølge blir null; bølgene utslokker hverandre\n4. D Resulterende bølge beveger seg mot høyre med fart v = 1,0 m/s\n5. E Resulterende bølge beveger seg mot venstre med fart v = 1,0 m/s\n\nb)\nEn stående bølge er gitt ved uttrykket\ny(x,t) = 2A sin(kx) cos(ωt)\nHva er den maksimale vertikale farten vmax til et punkt på bølgen?\n1. A vmax = 2Aω\n2. B vmax = Aω\n3. C vmax = Aω\n4. D vmax = 1/2 Aω\n5. E vmax = Aω"
                     },
                     {
-                        "topic": "materialvalg",
+                        "topic": "Stående bølger",
                         "task_number": "16",
                         "points": 2,
-                        "task_text": "<p>Data for materialer med ID-nummer 1...9 er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m³ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene. Av de 9 materialene, er fem av materialene fiktive, mens de fire andre materialene representerer vanlige konstruksjonsmetall.</p>\n\n<h3>a)</h3>\n<p>Hvilket materiale er en stållegering? SVAR: (heltall, ID-nummer)</p>\n\n<h3>b)</h3>\n<p>Hvilket materiale er en aluminiumslegering? SVAR: (heltall, ID-nummer)</p>\n\n<h3>c)</h3>\n<p>Hvilket materiale er en titanlegering? SVAR: (heltall, ID-nummer)</p>\n\n<h3>d)</h3>\n<p>Hvilket materiale er en magnesiumlegering? SVAR: (heltall, ID-nummer)</p>"
-                    },
-                    {
-                        "topic": "mekaniske egenskaper",
-                        "task_number": "17",
-                        "points": 2,
-                        "task_text": "<p>Hvilken påstand er korrekt?</p><ol><li><b>A</b> Elastisitetsmodulen (E-modulen) til de fleste metaller er lite påvirket av temperaturen så lenge temperaturen er under smeltepunktet.</li><li><b>B</b> Temperert martensitt oppnås ved å varme martensitt til en temperatur over den eutektoide temperaturen, for så å holde denne temperaturen for en definert tid.</li><li><b>C</b> Austenittiske stål er særlig utsatt for en brå omvandling fra duktil til sprø oppførsel ved lave temperaturer.</li><li><b>D</b> Elektrisk resistivitet i metaller er generelt økende med økende temperatur.</li></ol>"
-                    },
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "18",
-                        "points": 2,
-                        "task_text": "<p>Hvilken påstand er korrekt?</p><ol><li><b>A</b> For metaller med BCC krystallstruktur, er siging (creep) relevant ved temperaturer over ca. 0.4 ganger smeltetemperaturen, mens dette ikke er tilfelle for metaller med FCC krystallstruktur.</li><li><b>B</b> Smeltetemperaturen til metaller gir en viss indikasjon på den potensielle øvre brukstemperaturen til materialet.</li><li><b>C</b> Krystallinske metaller blir sprø når temperaturen er under glasstransisjonstemperaturen.</li><li><b>D</b> Aluminium som er plastisk bearbeidet og dermed deformasjonsherdet, vil rekrystallisere og danne HCP-aluminium etter en gitt tid.</li></ol>"
-                    },
-                    {
-                        "topic": "polymerer",
-                        "task_number": "19",
-                        "points": 2,
-                        "task_text": "<p>Hvilken påstand er korrekt?</p>\n<ol>\n<li><b>A:</b> PTFE (polytetrafluoretylen) som vi finner i teflon, har spesielt høyt smeltepunkt på grunn av sterke hydrogenbindinger.</li>\n<li><b>B:</b> PE (polyetylen) har høyere smeltetemperatur enn PP (polypropylen) siden enklere molekyl pakkes lettere enn molekyl med sidegrupper.</li>\n<li><b>C:</b> Plastiserer (plasticizer) kan tilsettes f.eks. PVC (polyvinylklorid) for å øke glasstransisjonstemperaturen.</li>\n<li><b>D:</b> PVC (polyvinylklorid) har høyere smeltetemperatur enn PP (polypropylen) på grunn av sterkere dipolkrefter mellom molekylene.</li>\n</ol>"
-                    }
-                ]
-            },
-            "K24": {
-                "tasks": [
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "1",
-                        "points": 5,
-                        "task_text": "<p>Li$_2$O har kubisk krystallstruktur der litiumatom (Li) er plassert i følgende krystallografiske punkt:</p>\n<p>$\\frac{1}{4} \\frac{1}{4} \\frac{1}{4}$, $\\frac{3}{4} \\frac{3}{4} \\frac{1}{4}$, $\\frac{1}{4} \\frac{3}{4} \\frac{3}{4}$, $\\frac{3}{4} \\frac{1}{4} \\frac{3}{4}$</p>\n<p>Oksygenatom (O) er plassert i følgende krystallografiske punkt:</p>\n<p>$\\frac{1}{2} \\frac{1}{2} \\frac{1}{2}$, $0 0 0$</p>\n<p>Tettheten til Li$_2$O er $2.0$ g/cm$^3$. Hva er verdien til gitterkonstanten $a$ for enhetscellen til Li$_2$O?</p>"
-                    },
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "2",
-                        "points": 5,
-                        "task_text": "<p>Velg alle krystallografiske punkt som representerer posisjoner til atomer i en FCC-krystallstruktur:</p><ol><li><b>A</b> 1 1 1</li><li><b>B</b> 1 2 2</li><li><b>C</b> 2 1 1 0</li><li><b>D</b> 0 1 1 1 2</li><li><b>E</b> 1 1 3</li><li><b>F</b> 1 0 1</li><li><b>G</b> 1/1/1</li><li><b>H</b> 1/1 0</li><li><b>I</b> 1/1 3</li><li><b>J</b> 1 0 1 0</li><li><b>K</b> 1/1/1</li></ol>"
-                    },
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "3",
-                        "points": 5,
-                        "task_text": "<p>Velg alle krystallografiske punkter som representerer en oktaedral posisjon i en FCC-krystallstruktur.</p><ol><li><b>A</b> 1 0 0</li><li><b>B</b> 0 1 0</li><li><b>C</b> 0 0 1</li><li><b>D</b> 1/2 1/2 0</li><li><b>E</b> 1/2 0 1/2</li><li><b>F</b> 0 1/2 1/2</li><li><b>G</b> 1/2 1/2 1/2</li></ol>"
-                    },
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "4",
-                        "points": 10,
-                        "task_text": "<p>Lag illustrasjoner som viser følgende krystallografiske plan i kubiske krystallstrukturer:</p>\n\n<h3>a)</h3>\n<p>(112)</p>\n\n<h3>b)</h3>\n<p>(041)</p>\n\n<h3>c)</h3>\n<p>(012)</p>\n\n<p>Planet (110) er et plan med spesiell interesse i en BCC krystallstruktur. Gjør rede for denne påstanden.</p>\n\n<p>Krav til illustrasjoner: Aksene er definert/vist på figurene. Hensiktsmessig perspektiv og lett å tolke uten å måtte bruke magiske briller.</p>"
-                    },
-                    {
-                        "topic": "mekaniske egenskaper",
-                        "task_number": "5",
-                        "points": 5,
-                        "task_text": "<p>Finn utløst skjærspenning i dette planet langs retningen s når det virker en spenning $\\sigma = 50$ MPa i retningen [110].</p><ol><li><b>A</b> $0$ MPa</li><li><b>B</b> $2$ MPa</li><li><b>C</b> $4$ MPa</li><li><b>D</b> $6$ MPa</li><li><b>E</b> $8$ MPa</li><li><b>F</b> $10$ MPa</li><li><b>G</b> $12$ MPa</li><li><b>H</b> $14$ MPa</li><li><b>I</b> $16$ MPa</li><li><b>J</b> $18$ MPa</li><li><b>K</b> $20$ MPa</li></ol>"
-                    },
-                    {
-                        "topic": "krystallstruktur",
-                        "task_number": "6",
-                        "points": 5,
-                        "task_text": "<p>Tettheten til krystallinsk polypropylen (PP) er $945$ kg/m$^3$. Krystallsystemet til krystallinsk PP er monoklinsk med følgende parameter: $a = 666$ pm, $b = 2078$ pm, $c = 650$ pm, $\\alpha = \\gamma = 90^\\circ$, $\\beta = 99.62^\\circ$ ($\\beta$ er vinkelen mellom x-aksen og z-aksen). Hvor mange repeterende enheter av PP er innenfor en enhetscelle?</p>\n\n<ol>\n<li><b>A</b> 1</li>\n<li><b>B</b> 2</li>\n<li><b>C</b> 4</li>\n<li><b>D</b> 6</li>\n<li><b>E</b> 8</li>\n<li><b>F</b> 10</li>\n<li><b>G</b> 12</li>\n</ol>"
-                    },
-                    {
-                        "topic": "polymerer",
-                        "task_number": "7",
-                        "points": 5,
-                        "task_text": "<p>En PP-PE kopolymer er polymerisert fra en blanding av etylen og propylen og inneholder 1000 kg med repeterende enheter av PP og 200 kg med repeterende enheter av PE. Regn ut forholdet mellom antall repeterende enheter av PE ($N_{PE}$) og antall repeterende enheter av PP ($N_{PP}$).</p>\n\n<h3>a)</h3>\n<p>Massen til repeterende enheter av PP er 1000 kg.</p>\n\n<h3>b)</h3>\n<p>Massen til repeterende enheter av PE er 200 kg.</p>\n\n<h3>c)</h3>\n<p>Molar masse av PP ($M_{PP}$) er $42.08$ g/mol.</p>\n\n<h3>d)</h3>\n<p>Molar masse av PE ($M_{PE}$) er $28.05$ g/mol.</p>\n\n<h3>e)</h3>\n<p>Antall repeterende enheter av PP ($N_{PP}$):</p>\n<p>$$N_{PP} = \\frac{1000 \\times 1000}{42.08}$$</p>\n\n<h3>f)</h3>\n<p>Antall repeterende enheter av PE ($N_{PE}$):</p>\n<p>$$N_{PE} = \\frac{200 \\times 1000}{28.05}$$</p>\n\n<h3>g)</h3>\n<p>Forholdet mellom $N_{PE}$ og $N_{PP}$:</p>\n<p>$$\\frac{N_{PE}}{N_{PP}} = \\frac{\\frac{200 \\times 1000}{28.05}}{\\frac{1000 \\times 1000}{42.08}}$$</p>"
-                    },
-                    {
-                        "topic": "termiske egenskaper",
-                        "task_number": "8",
-                        "points": 5,
-                        "task_text": "<p>The figure shows stress as a function of time for a relaxation test of a viscoelastic material.</p>\n\n<p>The material is immediately subjected to a strain of 0.01 at time $t = 0$, and the material behaves perfectly according to the 3-parameter model.</p>\n\n<h3>a)</h3>\n<p>Estimate the value of $E_x$.</p>\n<p>Answer: $[MPa]$. Tolerance: $\\pm5\\%$</p>\n\n<h3>b)</h3>\n<p>Estimate the value of $E_0$.</p>\n<p>Answer: $[MPa]$. Tolerance: $\\pm5\\%$</p>\n\n<h3>c)</h3>\n<p>Estimate the value of the time constant $T_r$.</p>\n<p>Answer: $[s]$. Tolerance $\\pm10\\%$</p>"
-                    },
-                    {
-                        "topic": "polymerer",
-                        "task_number": "9",
-                        "points": 10,
-                        "task_text": "<p>Formater denne eksamensoppgaven som en gyldig HTML-streng for bruk i en JavaScript-variabel.</p>\n\n<h3>a)</h3>\n<p>Thermoplastic: Polymers that can be melted and reshaped multiple times upon heating due to weak intermolecular forces.</p>\n\n<h3>b)</h3>\n<p>Crosslinking: The formation of covalent bonds between polymer chains, increasing rigidity and thermal stability.</p>\n\n<h3>c)</h3>\n<p>Melting temperature $T_m$: The temperature at which a crystalline polymer transitions from solid to liquid.</p>\n\n<h3>d)</h3>\n<p>Glass transition temperature $T_g$: The temperature at which an amorphous polymer transitions from hard to rubbery.</p>\n\n<h3>e)</h3>\n<p>Condensation polymerization: A step-growth polymerization where monomers react to form polymers with the release of small molecules like water.</p>"
-                    },
-                    {
-                        "topic": "polymerer",
-                        "task_number": "10",
-                        "points": 6,
-                        "task_text": "<p>11.8 kg glassfiber som har tetthet $2550$ kg/m$^3$ blandes med $5$ kg av en polymer som har tetthet $1150$ kg/m$^3$. Hva blir tettheten til komposittmaterialet? Hva blir fibervolumfraksjonen til komposittmaterialet?</p>\n\n<h3>a)</h3>\n<p>Hva blir tettheten til komposittmaterialet?</p>\n\n<h3>b)</h3>\n<p>Hva blir fibervolumfraksjonen til komposittmaterialet?</p>"
-                    },
-                    {
-                        "topic": "mekaniske egenskaper",
-                        "task_number": "11",
-                        "points": 4,
-                        "task_text": "<p>Et laminat består av 3 lag. Hvert lag består av ensrettet karbonfiber i en epoxymatrise der E-modul i fiberretning er $150$ GPa og E-modul på tvers av fiberretning er $10$ GPa. Hvert lag har tykkelse $0,5$ mm, og orienteringer på lag er $[0/90/0]$ der $0$-retning og $x$-retning sammenfaller. Laminatet har dimensjoner $L = 1000$ mm og $b = 100$ mm. Hva må kraften $F_x$ være for at laminatet skal forlenge seg med $2$ mm (altså få en deformert lengde lik $1002$ mm)? Velg alternativet som representerer et realistisk estimat.</p>  \n<ol>  \n<li><b>A:</b> $O \\leq 15$ kN</li>  \n<li><b>B:</b> $30$ kN</li>  \n<li><b>C:</b> $50$ kN</li>  \n<li><b>D:</b> $75$ kN</li>  \n<li><b>E:</b> $100$ kN</li>  \n<li><b>F:</b> $150$ kN</li>  \n<li><b>G:</b> $175$ kN</li>  \n<li><b>H:</b> $\\geq 300$ kN</li>  \n</ol>"
-                    },
-                    {
-                        "topic": "fasediagrammer",
-                        "task_number": "12",
-                        "points": 3,
-                        "task_text": "<p>Estimer maksimal løselighet av karbon i austenitt ved $850^\\circ$C og velg det mest presise alternativet. Legg merke til enheter i alternativene.</p><ol><li><b>A</b> $<1$ at%</li><li><b>B</b> $\\approx2$ at%</li><li><b>C</b> $\\approx3$ at%</li><li><b>D</b> $\\approx4$ at%</li><li><b>E</b> $\\approx5$ at%</li><li><b>F</b> $\\approx6$ at%</li><li><b>G</b> $\\approx7$ at%</li><li><b>H</b> $>8$ at%</li></ol>"
-                    },
-                    {
-                        "topic": "fasediagrammer",
-                        "task_number": "13",
-                        "points": 3,
-                        "task_text": "<p>Fasediagrammet for systemet jern-karbon er vist under. En likevektsstruktur av karbonstål med 1.75 wt% karbon består av austenitt og 12 wt% Fe3C. Hva er temperaturen? Velg intervallet som inneholder svaret.</p><ol><li><b>A</b> 400°C<T<500°C</li><li><b>B</b> 500°C<T<600°C</li><li><b>C</b> 600°C<T<700°C</li><li><b>D</b> 700°C<T<800°C</li><li><b>E</b> 800°C<T<900°C</li><li><b>F</b> 900°C<T<1000°C</li><li><b>G</b> 1000°C<T<1100°C</li><li><b>H</b> 1100°C<T<1200°C</li></ol>"
-                    },
-                    {
-                        "topic": "fasediagrammer",
-                        "task_number": "14",
-                        "points": 4,
-                        "task_text": "<p>En likevektsstruktur av karbonstål består av 90 vekt% perlitt og 10% proeutektisk sementitt ved romtemperatur. Hva er sammensetningen?</p>\n\n<h3>a)</h3>\n<p>Beregn karboninnholdet i stålet.</p>\n\n<h3>b)</h3>\n<p>Bruk fase-diagrammet for jern-karbon for å bestemme sammensetningen.</p>"
-                    },
-                    {
-                        "topic": "mekaniske egenskaper",
-                        "task_number": "15",
-                        "points": 10,
-                        "task_text": "<p>Gjør rede for følgende konsept/begrep som brukes for å beskrive mekaniske egenskaper og/eller oppførsel til materialer:</p>\n\n<h3>a)</h3>\n<p>Elastisk deformasjon er en midlertidig endring i materialets form eller størrelse under påvirkning av en kraft, der materialet går tilbake til sin opprinnelige form når kraften fjernes. Dette skjer innenfor materialets elastiske grense.</p>\n\n<h3>b)</h3>\n<p>Resiliens er materialets evne til å absorbere energi under elastisk deformasjon og frigjøre denne energien når belastningen fjernes. Det er et mål på hvor mye energi materialet kan lagre uten å bli permanent deformert.</p>\n\n<h3>c)</h3>\n<p>Fasthet er materialets motstandsevne mot plastisk deformasjon eller hardhet. Det beskriver hvor vanskelig det er å lage permanente inngrep eller deformasjoner i materialet.</p>\n\n<h3>d)</h3>\n<p>Seighet er materialets evne til å absorbere energi og deformere plastisk før det bryter sammen. Et seigt materiale tåler store deformasjoner og absorberer mye energi før brudd.</p>\n\n<h3>e)</h3>\n<p>Duktilitet er materialets evne til å deformere plastisk under strekkbelastning uten å briste. Et duktilt materiale kan trekkes ut til en tråd eller rulles ut til en tynn plate uten å gå i stykker.</p>"
-                    },
-                    {
-                        "topic": "mekaniske egenskaper",
-                        "task_number": "16",
-                        "points": 10,
-                        "task_text": "<p>a) Hvorfor regnes aluminium som generelt mer duktilt enn titan?</p>\n\n<h3>b)</h3>\n<p>En karbonfiber er anisotrop mens en glassfiber er isotrop. Gi en kort forklaring på hva dette betyr og hva som er årsaken til denne forskjellen.</p>\n\n<h3>c)</h3>\n<p>PVC (polyvinylklorid) har mye høyere smeltepunkt enn PP (polypropylen). Gi en kort forklaring på årsaken til dette.</p>\n\n<h3>d)</h3>\n<p>Noen materialer har en utmattingsgrense. Hva betyr det?</p>\n\n<h3>e)</h3>\n<p>Hva er prinsippforskjellen mellom en ionisk forbindelse og en polar kovalent forbindelse?</p>"
+                        "task_text": "a) En streng med lengde L = 1,0 m er spent fast i begge ender. Når strengen settes i vibrasjon, er den laveste frekvensen som gir en stående bølge, lik f 40 Hz. Bestem bølgefarten på strengen.\n\n<ol>\n<li><b>A</b> 10 m/s</li>\n<li><b>B</b> 20 m/s</li>\n<li><b>C</b> 40 m/s</li>\n<li><b>D</b> 60 m/s</li>\n<li><b>E</b> 80 m/s</li>\n</ol>\n\nb) En bestemt streng med lengde L, lineær massetetthet $\\mu$ og snorstramming $F_T$ som er spent opp i begge ender, vibrerer med grunnfrekvensen f. Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært 2L, massetettheten 2$\\mu$ og snorstrammingen 2$F_T$?\n\n<ol>\n<li><b>A</b> f</li>\n<li><b>B</b> 2f</li>\n<li><b>C</b> 4f</li>\n</ol>"
                     }
                 ]
             }

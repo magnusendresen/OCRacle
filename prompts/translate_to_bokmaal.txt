@@ -1,4 +1,4 @@
-Oversett den følgende teksten fra nynorsk eller engelsk til norsk bokmål,
-  ikke endre på noe annet.
+Oversett den følgende teksten til norsk bokmål.
+  Ikke endre på noe annet.
   Hvis teksten allerede er på norsk bokmål, svar med nøyaktig samme teksten.
   Her er teksten:

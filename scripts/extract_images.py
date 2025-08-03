@@ -114,8 +114,9 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     color_bool = len(np.unique(img[::max(1,img.shape[0]//100),::max(1,img.shape[1]//100)], axis=0)) < 10
 
     code_bool = int(await prompt_to_text.async_prompt_to_text(
+        "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! "
         "Does this text contain code? Answer with a 1 if it does, or a 0 if it does not. "
-        "Just because comparison operators are used, does not mean it necessarily has code. "
+        "Just because comparison operators are used (e.g. x=0, kx<mg, kx=mg, kx>mg), does not mean it necessarily has code, and it is probably just normal text. "
         "Here is the text: " + text,
         max_tokens=1000,
         is_num=False,
@@ -123,10 +124,16 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     ))
 
     if code_bool:
-        log(f"\n\n\n[WARNING] Detected code in task {task_num}. Cropping/skipping image.\n\n\n")
+        log(f"[WARNING] Detected code in task {task_num}. Skipping the image. ")
+        return
+    elif color_bool:
+        log(f"[WARNING] Detected very few colors in task {task_num}. Skipping the image.")
+        return
+    elif size_bool:
+        log(f"[WARNING] Detected small image size in task {task_num}. Skipping the image.")
         return
 
-    should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool or size_bool or color_bool
+    should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool
     if not should_attempt_crop:
         save_func(img, task_num)
         return
@@ -196,7 +203,7 @@ async def extract_figures(
     num_imgs = sum(1 for c in containers if c.get("type") == "image")
     log(f"Figures extracted: {num_imgs}")
     output_folder = output_folder or str(IMG_DIR)
-    exam_folder = Path(output_folder) / subject
+    exam_folder = Path(output_folder) / subject / version
     if exam_folder.exists():
         shutil.rmtree(exam_folder)
         log(f"Rydder tidligere bilder i {exam_folder}")

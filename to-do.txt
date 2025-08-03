@@ -9,3 +9,9 @@ Implementere prompting og formattering for programmeringsbokser.
 Hvis temaet til oppgaven er programmering, så kan(skal?) temaet til oppgaven være både programmering ogdet opprinnelige temaet.
 
 Legge til ytterligere start/stop/restart funksjoner for cpp UI.
+
+Fikse cropping av grafer.
+
+Legge til maks poeng i html.
+
+Spesifisere at det ikke nødvendigvis trenger å være et unikt tema for hver eneste oppgave i eksamnene.
