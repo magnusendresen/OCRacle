@@ -300,8 +300,22 @@ void App::startProcessing() {
         dirFile << "\"formula\":\"" << escape_json(selectedFormulaSheet->getText()) << "\"}";
 
         // Start Python-script i en bakgrunnstråd
-        std::thread([]() {
-            std::system("start powershell -Command \"python main.py; pause\"");
+        std::filesystem::path psScript = rootDir / "app" / "launch_and_move.ps1";
+        std::thread([psScript]() {
+            int pw_x = 100 + WINDOW_WIDTH;
+            int pw_y = 100 + WINDOW_HEIGHT;
+            int pw_w = 400;
+            int pw_h = 600;
+
+            int charW = pw_w / 8;
+            int charH = pw_h / 16;
+
+            std::string cmd = "start powershell -NoExit -File \"" + psScript.string() +
+                              "\" -X " + std::to_string(pw_x) +
+                              " -Y " + std::to_string(pw_y) +
+                              " -W " + std::to_string(charW) +
+                              " -H " + std::to_string(charH);
+            std::system(cmd.c_str());
         }).detach();
 
         startTimer();
