@@ -28,7 +28,7 @@ def add_subject(subject: str) -> None:
     """Ensure that a subject exists in exams.json."""
     data = _load_json()
     subject = subject.strip().upper()
-    data.setdefault(subject, {"topics": [], "exams": {}})
+    data.setdefault(subject, {"topics": [], "ignored_topics": [], "exams": {}})
     _save_json(data)
 
 
@@ -37,7 +37,7 @@ def add_exam(subject: str, exam_version: str) -> None:
     data = _load_json()
     subject = subject.strip().upper()
     exam_version = exam_version.strip()
-    subj = data.setdefault(subject, {"topics": [], "exams": {}})
+    subj = data.setdefault(subject, {"topics": [], "ignored_topics": [], "exams": {}})
     subj["exams"].setdefault(exam_version, {"tasks": []})
     _save_json(data)
 
@@ -54,8 +54,7 @@ def add_topics(
     data = _load_json()
     subject = subject.strip().upper()
     exam_version = exam_version.strip()
-    subj = data.setdefault(subject, {"topics": [], "exams": {}})
-    subj.setdefault("ignored_topics", [])
+    subj = data.setdefault(subject, {"topics": [], "ignored_topics": [], "exams": {}})
     subj["exams"].setdefault(exam_version, {"tasks": []})
     existing = [t.name if isinstance(t, Enum) else t for t in subj.get("topics", [])]
     for topic in topics:
@@ -64,10 +63,17 @@ def add_topics(
             existing.append(topic_name)
     subj["topics"] = existing
     if ignored_topics:
-        existing_ignored = subj.setdefault("ignored_topics", [])
+        existing_ignored = subj.get("ignored_topics", [])
         for topic in ignored_topics:
             if topic not in existing_ignored:
                 existing_ignored.append(topic)
+        subj["ignored_topics"] = existing_ignored
+    subj = {
+        "topics": subj.get("topics", []),
+        "ignored_topics": subj.get("ignored_topics", []),
+        "exams": subj.get("exams", {}),
+    }
+    data[subject] = subj
     _save_json(data)
 
 
@@ -80,7 +86,7 @@ def add_task(task: Any) -> None:
         return
 
     data = _load_json()
-    subj = data.setdefault(subject, {"topics": [], "exams": {}})
+    subj = data.setdefault(subject, {"topics": [], "ignored_topics": [], "exams": {}})
     exam_data = subj["exams"].setdefault(exam, {"tasks": []})
 
     if task_dict.get("exam_topics"):
@@ -102,6 +108,7 @@ def add_task(task: Any) -> None:
             "task_numbers",
             "ocr_tasks",
             "total_tasks",
+            "ignored_topics",
         }
     }
 
