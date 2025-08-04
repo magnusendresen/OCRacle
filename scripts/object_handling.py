@@ -1,7 +1,7 @@
 import json
 import re
 from dataclasses import asdict
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from enum import Enum
 from project_config import EXAMS_JSON
 from utils import *
@@ -42,14 +42,20 @@ def add_exam(subject: str, exam_version: str) -> None:
     _save_json(data)
 
 
-def add_topics(subject: str, exam_version: str, topics: List[Any]) -> None:
-    """Add topics to a subject if they are not already present."""
-    if not topics:
+def add_topics(
+    subject: str,
+    exam_version: str,
+    topics: List[Any],
+    ignored_topics: Optional[List[str]] = None,
+) -> None:
+    """Add topics to a subject and optionally store ignored topics."""
+    if not topics and not ignored_topics:
         return
     data = _load_json()
     subject = subject.strip().upper()
     exam_version = exam_version.strip()
     subj = data.setdefault(subject, {"topics": [], "exams": {}})
+    subj.setdefault("ignored_topics", [])
     subj["exams"].setdefault(exam_version, {"tasks": []})
     existing = [t.name if isinstance(t, Enum) else t for t in subj.get("topics", [])]
     for topic in topics:
@@ -57,6 +63,11 @@ def add_topics(subject: str, exam_version: str, topics: List[Any]) -> None:
         if topic_name not in existing:
             existing.append(topic_name)
     subj["topics"] = existing
+    if ignored_topics:
+        existing_ignored = subj.setdefault("ignored_topics", [])
+        for topic in ignored_topics:
+            if topic not in existing_ignored:
+                existing_ignored.append(topic)
     _save_json(data)
 
 
