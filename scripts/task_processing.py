@@ -188,13 +188,13 @@ async def get_exam_info() -> Exam:
         PROMPT_CONFIG + load_prompt("get_exam_version") + ocr_text,
         max_tokens=1000,
         is_num=False,
-        max_len=12,
+        max_len=20,
     )
-    exam_raw_version = str(exam_raw_version).strip()
-    if len(exam_raw_version) >= 3:
+    exam_raw_version = str(exam_raw_version).strip().upper()
+    if exam_raw_version[0] in ["V", "H", "K"]:
         version_abbr = exam_raw_version[0].upper() + exam_raw_version[-2:]
     else:
-        version_abbr = exam_raw_version.upper()
+        version_abbr = exam_raw_version[8:]
     exam.exam_version = version_abbr
     object_handling.add_exam(exam.subject, exam.exam_version)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
