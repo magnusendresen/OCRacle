@@ -65,7 +65,7 @@ class Exam:
     task_text: Optional[str] = None
     # Images are handled automatically in the HTML layer
     # Code snippets are embedded directly in the task text
-    exam_topics: Enum = field(default_factory=lambda: Enum('Temaer', []))
+    exam_topics: Enum = field(default_factory=lambda: Enum('Topics', []))
     task_numbers: List[str] = field(default_factory=list)
     ocr_tasks: Dict[str, str] = field(default_factory=dict)
     ignored_topics: List[str] = field(default_factory=list)
@@ -78,7 +78,7 @@ def get_topics_from_json(emnekode: str) -> Enum:
 
     entry = data.get(emnekode.upper().strip(), {})
     topics = [t for t in entry.get("topics", []) if t is not None]
-    return Enum('Temaer', topics)
+    return Enum('Topics', topics)
 
 
 def enum_to_str(enum: Enum) -> str:

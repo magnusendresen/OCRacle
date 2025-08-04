@@ -2,6 +2,7 @@ import json
 import re
 from dataclasses import asdict
 from typing import Any, Dict, List
+from enum import Enum
 from project_config import EXAMS_JSON
 from utils import *
 
@@ -41,7 +42,7 @@ def add_exam(subject: str, exam_version: str) -> None:
     _save_json(data)
 
 
-def add_topics(subject: str, exam_version: str, topics: List[str]) -> None:
+def add_topics(subject: str, exam_version: str, topics: List[Any]) -> None:
     """Add topics to a subject if they are not already present."""
     if not topics:
         return
@@ -50,10 +51,11 @@ def add_topics(subject: str, exam_version: str, topics: List[str]) -> None:
     exam_version = exam_version.strip()
     subj = data.setdefault(subject, {"topics": [], "exams": {}})
     subj["exams"].setdefault(exam_version, {"tasks": []})
-    existing = subj.get("topics", [])
+    existing = [t.name if isinstance(t, Enum) else t for t in subj.get("topics", [])]
     for topic in topics:
-        if topic not in existing:
-            existing.append(topic)
+        topic_name = topic.name if isinstance(topic, Enum) else topic
+        if topic_name not in existing:
+            existing.append(topic_name)
     subj["topics"] = existing
     _save_json(data)
 
@@ -71,10 +73,11 @@ def add_task(task: Any) -> None:
     exam_data = subj["exams"].setdefault(exam, {"tasks": []})
 
     if task_dict.get("exam_topics"):
-        existing_topics = subj.get("topics", [])
+        existing_topics = [t.name if isinstance(t, Enum) else t for t in subj.get("topics", [])]
         for t in task_dict["exam_topics"]:
-            if t not in existing_topics:
-                existing_topics.append(t)
+            topic_name = t.name if isinstance(t, Enum) else t
+            if topic_name not in existing_topics:
+                existing_topics.append(topic_name)
         subj["topics"] = existing_topics
 
     task_copy = {
