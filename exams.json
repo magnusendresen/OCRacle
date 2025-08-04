@@ -1,6 +1,7 @@
 {
     "IFYXKJX1000": {
         "topics": [],
+        "ignored_topics": [],
         "exams": {
             "H22": {
                 "tasks": []
@@ -24,6 +25,7 @@
             "Harmonisk bevegelse",
             "Grunnfrekvens"
         ],
+        "ignored_topics": [],
         "exams": {
             "K24": {
                 "tasks": [
@@ -31,71 +33,61 @@
                         "topic": "Bevegelse",
                         "task_number": "1",
                         "points": 1,
-                        "task_text": "<p>Verdensrekorden for menn på $400$ m er $43,03$ s. Hvor mange km/t (kilometer per time) tilsvarer dette?</p>\n<ol>\n<li><b>A</b> $30,1$ km/t</li>\n<li><b>B</b> $2,58$ km/t</li>\n<li><b>C</b> $39,9$ km/t</li>\n<li><b>D</b> $33,5$ km/t</li>\n<li><b>E</b> $28,5$ km/t</li>\n</ol>\n\n<p>Jorda går i en sirkelbane rundt Sola med radius $R = 150 000 000$ km ($150$ millioner kilometer), og bruker $365$ dager på én runde. Bestem banefarten til Jorda.</p>\n<ol>\n<li><b>A</b> $50$ km/s</li>\n<li><b>B</b> $10$ km/s</li>\n<li><b>C</b> $30$ km/s</li>\n<li><b>D</b> $40$ km/s</li>\n<li><b>E</b> $20$ km/s</li>\n</ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>Verdensrekorden for menn på $400$ m er $43,03$ s. Hvor mange km/t (kilometer per time) tilsvarer dette?</p>\n<ol>\n<li><b>A</b> $30,1$ km/t</li>\n<li><b>B</b> $2,58$ km/t</li>\n<li><b>C</b> $39,9$ km/t</li>\n<li><b>D</b> $33,5$ km/t</li>\n<li><b>E</b> $28,5$ km/t</li>\n</ol>\n\n<p>Jorda går i en sirkelbane rundt Sola med radius $R = 150 000 000$ km ($150$ millioner kilometer), og bruker $365$ dager på én runde. Bestem banefarten til Jorda.</p>\n<ol>\n<li><b>A</b> $50$ km/s</li>\n<li><b>B</b> $10$ km/s</li>\n<li><b>C</b> $30$ km/s</li>\n<li><b>D</b> $40$ km/s</li>\n<li><b>E</b> $20$ km/s</li>\n</ol>"
                     },
                     {
                         "topic": "Bevegelse",
                         "task_number": "2",
                         "points": 0,
-                        "task_text": "<p>Et legeme som i utgangspunktet henger i ro, faller ved $t = 0$ vertikalt nedover under påvirkning av tyngdekraften, uten luftmotstand. Vi legger inn et koordinatsystem slik at positiv $y$-retning er loddrett nedover. Hvilken av grafene A-E viser posisjonen $y(t)$ for det fallende legemet?</p>\n\n<ol>\n<li><b>A:</b> Lineær graf som starter i origo og øker med konstant stigning.</li>\n<li><b>B:</b> Parabel som starter i origo og åpner oppover.</li>\n<li><b>C:</b> Konstant graf som starter i origo og forblir horisontal.</li>\n<li><b>D:</b> Lineær graf som starter i origo og synker med konstant stigning.</li>\n<li><b>E:</b> Parabel som starter i origo og åpner nedover.</li>\n</ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>Et legeme som i utgangspunktet henger i ro, faller ved $t = 0$ vertikalt nedover under påvirkning av tyngdekraften, uten luftmotstand. Vi legger inn et koordinatsystem slik at positiv $y$-retning er loddrett nedover. Hvilken av grafene A-E viser posisjonen $y(t)$ for det fallende legemet?</p>\n\n<ol>\n<li><b>A:</b> Lineær graf som starter i origo og øker med konstant stigning.</li>\n<li><b>B:</b> Parabel som starter i origo og åpner oppover.</li>\n<li><b>C:</b> Konstant graf som starter i origo og forblir horisontal.</li>\n<li><b>D:</b> Lineær graf som starter i origo og synker med konstant stigning.</li>\n<li><b>E:</b> Parabel som starter i origo og åpner nedover.</li>\n</ol>"
                     },
                     {
                         "topic": "Mekanikk",
                         "task_number": "3",
                         "points": 2,
-                        "task_text": "<p>En badevekt er en kraftmåler som viser kraften som til enhver tid presser normalt ned på badevekten. Badevekten er imidlertid kalibrert til å vise kraften i \"kg\", slik at $1$ kg $= 9,81$ N. En kasse er plassert på badevekten i de to situasjonene på figuren under.</p>\n\n<p>Når badevekten og kassen står på horisontalt underlag, viser badevekten $1,0$ kg. Så plasseres badevekten, med kassen oppå, på et skrått underlag med helningsvinkel $\\theta = 30^\\circ$, slik at kassen står i ro oppå vekten.</p>\n\n<p>Hva viser badevekten i denne situasjonen?</p>\n\n<ol>\n<li><b>A</b> $0,58$ kg</li>\n<li><b>B</b> $1,0$ kg</li>\n<li><b>C</b> $0,87$ kg</li>\n<li><b>D</b> $0,50$ kg</li>\n<li><b>E</b> $1,2$ kg</li>\n</ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>En badevekt er en kraftmåler som viser kraften som til enhver tid presser normalt ned på badevekten. Badevekten er imidlertid kalibrert til å vise kraften i \"kg\", slik at $1$ kg $= 9,81$ N. En kasse er plassert på badevekten i de to situasjonene på figuren under.</p>\n\n<p>Når badevekten og kassen står på horisontalt underlag, viser badevekten $1,0$ kg. Så plasseres badevekten, med kassen oppå, på et skrått underlag med helningsvinkel $\\theta = 30^\\circ$, slik at kassen står i ro oppå vekten.</p>\n\n<p>Hva viser badevekten i denne situasjonen?</p>\n\n<ol>\n<li><b>A</b> $0,58$ kg</li>\n<li><b>B</b> $1,0$ kg</li>\n<li><b>C</b> $0,87$ kg</li>\n<li><b>D</b> $0,50$ kg</li>\n<li><b>E</b> $1,2$ kg</li>\n</ol>"
                     },
                     {
                         "topic": "Sirkelbevegelse",
                         "task_number": "4",
                         "points": 2,
-                        "task_text": "<p>En vogn med masse $m$ i en berg-og-dalbane har en viss hastighet $v > 0$ når den passerer over en bakketopp formet som en del av en sirkel med radius $R$. Vogna beholder hele tiden kontakten med underlaget. Hvilken påstand om normalkraften $N$ fra underlaget på vogna vil alltid gjelde når vogna passerer toppen?</p>\n\n<ol>\n<li><b>A</b> $N = mg$</li>\n<li><b>B</b> $N > mg$</li>\n<li><b>C</b> $N = \\frac{mv^2}{R}$</li>\n<li><b>D</b> $N < mg$</li>\n<li><b>E</b> $N = 0$</li>\n</ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>En vogn med masse $m$ i en berg-og-dalbane har en viss hastighet $v > 0$ når den passerer over en bakketopp formet som en del av en sirkel med radius $R$. Vogna beholder hele tiden kontakten med underlaget. Hvilken påstand om normalkraften $N$ fra underlaget på vogna vil alltid gjelde når vogna passerer toppen?</p>\n\n<ol>\n<li><b>A</b> $N = mg$</li>\n<li><b>B</b> $N > mg$</li>\n<li><b>C</b> $N = \\frac{mv^2}{R}$</li>\n<li><b>D</b> $N < mg$</li>\n<li><b>E</b> $N = 0$</li>\n</ol>"
                     },
                     {
                         "topic": "Hookes lov",
                         "task_number": "5",
                         "points": 2,
-                        "task_text": "<p>I hvilket av punktene A-E er hopperens fart maksimal på vei oppover?</p><ol><li><b>A</b></li><li><b>B</b></li><li><b>C</b></li><li><b>D</b></li><li><b>E</b></li></ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>I hvilket av punktene A-E er hopperens fart maksimal på vei oppover?</p><ol><li><b>A</b></li><li><b>B</b></li><li><b>C</b></li><li><b>D</b></li><li><b>E</b></li></ol>"
                     },
                     {
                         "topic": "Mekanikk",
                         "task_number": "7",
                         "points": 2,
-                        "task_text": "<p>En syklist sykler med konstant fart $v$ opp en oppoverbakke med helningsvinkel $\\theta$. En enkel sykkelcomputer fungerer slik at brukeren taster inn informasjon om den totale massen $m$ av sykkel + syklist, og så bruker computeren sensorer som måler syklistens fart $v$ samt vinkelen $\\theta$ til å beregne effekten $P$ som syklisten produserer. Denne enkle computeren tar ikke med luftmotstand i beregningen. Se figuren over.</p>\n\n<h3>a)</h3>\n\n<p>Hva må stå i kodelinja KODE MANGLER for at funksjonen $P(v,\\theta)$ skal gi effekten som syklisten produserer, som funksjon av farten $v$ målt i $m/s$ og helningsvinkelen $\\theta$ målt i grader?</p>\n\n<pre class=\"code-box\"><code>import math\ndef P(v,theta):\n    m=80\n    g=9.81\n    return KODE MANGLER</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v**3</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.cos(math.radians(theta)))*v**2</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.cos(math.radians(theta)))*v</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v**2</code></pre>",
-                        "ignored_topics": []
+                        "task_text": "<p>En syklist sykler med konstant fart $v$ opp en oppoverbakke med helningsvinkel $\\theta$. En enkel sykkelcomputer fungerer slik at brukeren taster inn informasjon om den totale massen $m$ av sykkel + syklist, og så bruker computeren sensorer som måler syklistens fart $v$ samt vinkelen $\\theta$ til å beregne effekten $P$ som syklisten produserer. Denne enkle computeren tar ikke med luftmotstand i beregningen. Se figuren over.</p>\n\n<h3>a)</h3>\n\n<p>Hva må stå i kodelinja KODE MANGLER for at funksjonen $P(v,\\theta)$ skal gi effekten som syklisten produserer, som funksjon av farten $v$ målt i $m/s$ og helningsvinkelen $\\theta$ målt i grader?</p>\n\n<pre class=\"code-box\"><code>import math\ndef P(v,theta):\n    m=80\n    g=9.81\n    return KODE MANGLER</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v**3</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.cos(math.radians(theta)))*v**2</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.cos(math.radians(theta)))*v</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v**2</code></pre>"
                     },
                     {
                         "topic": "Treghetsmoment",
                         "task_number": "8",
                         "points": 2,
-                        "task_text": "<p>Et kulelager består av en hylse i form av en tynnvegget sylinder med masse $M$ og radius $R$, og $8$ stk. massive kuler med masse $m$ og radius $r$.</p>\n\n<p>Massesenteret til kulene ligger på en sirkel med radius $R$, i forhold til sentrum i kulelageret.</p>\n\n<p>Hylsen og de $8$ massive kulene kan rotere om en akse gjennom sentrum av kulelageret som står normalt på figurplanet, mens den indre kanten av kulelageret (med radius $R_s - r$) ikke roterer.</p>\n\n<p>Bestem treghetsmomentet til kulelageret om denne aksen.</p>\n\n<h3>a)</h3>\n\n<p>Treghetsmomentet for hylsen (tynnvegget sylinder) om aksen er gitt ved:</p>\n\n<div class=\"math\">$$I_{\\text{hylse}} = M R^2$$</div>\n\n<h3>b)</h3>\n\n<p>Treghetsmomentet for en kule om en akse gjennom massesenteret er:</p>\n\n<div class=\"math\">$$I_{\\text{kule, cm}} = \\frac{2}{5} m r^2$$</div>\n\n<h3>c)</h3>\n\n<p>Ved å bruke parallellakseteoremet finner vi treghetsmomentet for en kule om rotasjonsaksen:</p>\n\n<div class=\"math\">$$I_{\\text{kule}} = I_{\\text{kule, cm}} + m R^2 = \\frac{2}{5} m r^2 + m R^2$$</div>\n\n<h3>d)</h3>\n\n<p>Total treghetsmoment for alle $8$ kulene er:</p>\n\n<div class=\"math\">$$I_{\\text{total kuler}} = 8 \\left( \\frac{2}{5} m r^2 + m R^2 \\right)$$</div>\n\n<h3>e)</h3>\n\n<p>Total treghetsmoment for kulelageret er summen av treghetsmomentene for hylsen og kulene:</p>\n\n<div class=\"math\">$$I_{\\text{total}} = I_{\\text{hylse}} + I_{\\text{total kuler}} = M R^2 + 8 \\left( \\frac{2}{5} m r^2 + m R^2 \\right)$$</div>",
-                        "ignored_topics": []
+                        "task_text": "<p>Et kulelager består av en hylse i form av en tynnvegget sylinder med masse $M$ og radius $R$, og $8$ stk. massive kuler med masse $m$ og radius $r$.</p>\n\n<p>Massesenteret til kulene ligger på en sirkel med radius $R$, i forhold til sentrum i kulelageret.</p>\n\n<p>Hylsen og de $8$ massive kulene kan rotere om en akse gjennom sentrum av kulelageret som står normalt på figurplanet, mens den indre kanten av kulelageret (med radius $R_s - r$) ikke roterer.</p>\n\n<p>Bestem treghetsmomentet til kulelageret om denne aksen.</p>\n\n<h3>a)</h3>\n\n<p>Treghetsmomentet for hylsen (tynnvegget sylinder) om aksen er gitt ved:</p>\n\n<div class=\"math\">$$I_{\\text{hylse}} = M R^2$$</div>\n\n<h3>b)</h3>\n\n<p>Treghetsmomentet for en kule om en akse gjennom massesenteret er:</p>\n\n<div class=\"math\">$$I_{\\text{kule, cm}} = \\frac{2}{5} m r^2$$</div>\n\n<h3>c)</h3>\n\n<p>Ved å bruke parallellakseteoremet finner vi treghetsmomentet for en kule om rotasjonsaksen:</p>\n\n<div class=\"math\">$$I_{\\text{kule}} = I_{\\text{kule, cm}} + m R^2 = \\frac{2}{5} m r^2 + m R^2$$</div>\n\n<h3>d)</h3>\n\n<p>Total treghetsmoment for alle $8$ kulene er:</p>\n\n<div class=\"math\">$$I_{\\text{total kuler}} = 8 \\left( \\frac{2}{5} m r^2 + m R^2 \\right)$$</div>\n\n<h3>e)</h3>\n\n<p>Total treghetsmoment for kulelageret er summen av treghetsmomentene for hylsen og kulene:</p>\n\n<div class=\"math\">$$I_{\\text{total}} = I_{\\text{hylse}} + I_{\\text{total kuler}} = M R^2 + 8 \\left( \\frac{2}{5} m r^2 + m R^2 \\right)$$</div>"
                     },
                     {
                         "topic": "Trykk",
                         "task_number": "10",
                         "points": 1,
-                        "task_text": "<p>a) I 2023 imploderte undervannsfarkosten \"Titan\" katastrofalt i en dybde på $4,0$ km. Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var $101$ kPa.</p>  \n<ol>  \n<li><b>A</b> $19$ MPa</li>  \n<li><b>B</b> $29$ MPa</li>  \n<li><b>C</b> $39$ MPa</li>  \n<li><b>D</b> $49$ MPa</li>  \n<li><b>E</b> $59$ MPa</li>  \n</ol>  \n\n<h3>b)</h3>  \n<p>En badeball er formet som en kule med radius $R = 0,50$ m. Beregn oppdriften på ballen dersom hele ballen er under vann.</p>  \n<ol>  \n<li><b>A</b> $0,52$ N</li>  \n<li><b>B</b> $0,52$ kN</li>  \n<li><b>C</b> $5,1$ kN</li>  \n<li><b>D</b> Oppdriften avhenger av hvilken dybde badeballen befinner seg i</li>  \n<li><b>E</b> Oppdriften avhenger av massen av badeballen</li>  \n</ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>a) I 2023 imploderte undervannsfarkosten \"Titan\" katastrofalt i en dybde på $4,0$ km. Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var $101$ kPa.</p>  \n<ol>  \n<li><b>A</b> $19$ MPa</li>  \n<li><b>B</b> $29$ MPa</li>  \n<li><b>C</b> $39$ MPa</li>  \n<li><b>D</b> $49$ MPa</li>  \n<li><b>E</b> $59$ MPa</li>  \n</ol>  \n\n<h3>b)</h3>  \n<p>En badeball er formet som en kule med radius $R = 0,50$ m. Beregn oppdriften på ballen dersom hele ballen er under vann.</p>  \n<ol>  \n<li><b>A</b> $0,52$ N</li>  \n<li><b>B</b> $0,52$ kN</li>  \n<li><b>C</b> $5,1$ kN</li>  \n<li><b>D</b> Oppdriften avhenger av hvilken dybde badeballen befinner seg i</li>  \n<li><b>E</b> Oppdriften avhenger av massen av badeballen</li>  \n</ol>"
                     },
                     {
                         "topic": "Harmonisk bevegelse",
                         "task_number": "12",
                         "points": 2,
-                        "task_text": "<p>Tre homogene kuler A, B og C med samme masse $m$ henger i masseløse snorer med lengde $L$. Kulene har radier hhv. $r < L$, $r = 16$ og $r = 1$.</p>\n\n<p>Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene $T_A$, $T_B$ og $T_C$ til de tre pendlene?</p>\n\n<ol>\n<li><b>A)</b> $T_A = T_B = T_C$</li>\n<li><b>B)</b> $T_A > T_B > T_C$</li>\n<li><b>C)</b> $T_C > T_B > T_A$</li>\n<li><b>D)</b> $T_C > T_A > T_B$</li>\n<li><b>E)</b> $T_B > T_C > T_A$</li>\n</ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>Tre homogene kuler A, B og C med samme masse $m$ henger i masseløse snorer med lengde $L$. Kulene har radier hhv. $r < L$, $r = 16$ og $r = 1$.</p>\n\n<p>Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene $T_A$, $T_B$ og $T_C$ til de tre pendlene?</p>\n\n<ol>\n<li><b>A)</b> $T_A = T_B = T_C$</li>\n<li><b>B)</b> $T_A > T_B > T_C$</li>\n<li><b>C)</b> $T_C > T_B > T_A$</li>\n<li><b>D)</b> $T_C > T_A > T_B$</li>\n<li><b>E)</b> $T_B > T_C > T_A$</li>\n</ol>"
                     },
                     {
                         "topic": "Dempede svingninger",
                         "task_number": "13",
                         "points": 2,
-                        "task_text": "<p>En kloss med masse $m = 0,50$ kg er festet til en fjær med fjærkonstant $k = 19$ N/m, og kan svinge horisontalt ($x$-retningen på figuren til venstre). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft $F_D = -bv$ rettet mot fartsretningen, der $v$ er farten til klossen. Se figuren over.</p>\n\n<p>Klossen trekkes ut til siden og slippes. Posisjonen $x(t)$ til klossen er vist i grafen til høyre. Beregn verdien av dempingskonstanten $b$.</p>\n\n<p>[Hint: amplituden for en svakt dempet svingning er $A(t) = A_0 e^{-\\frac{b}{2m}t}$.]</p>\n\n<ol>\n<li><b>A</b> $b \\approx 6$ kg/s</li>\n<li><b>B</b> $b \\approx 5$ kg/s</li>\n<li><b>C</b> $b \\approx 2$ kg/s</li>\n<li><b>D</b> $b \\approx 3$ kg/s</li>\n<li><b>E</b> $b \\approx 0,7$ kg/s</li>\n</ol>",
-                        "ignored_topics": []
+                        "task_text": "<p>En kloss med masse $m = 0,50$ kg er festet til en fjær med fjærkonstant $k = 19$ N/m, og kan svinge horisontalt ($x$-retningen på figuren til venstre). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft $F_D = -bv$ rettet mot fartsretningen, der $v$ er farten til klossen. Se figuren over.</p>\n\n<p>Klossen trekkes ut til siden og slippes. Posisjonen $x(t)$ til klossen er vist i grafen til høyre. Beregn verdien av dempingskonstanten $b$.</p>\n\n<p>[Hint: amplituden for en svakt dempet svingning er $A(t) = A_0 e^{-\\frac{b}{2m}t}$.]</p>\n\n<ol>\n<li><b>A</b> $b \\approx 6$ kg/s</li>\n<li><b>B</b> $b \\approx 5$ kg/s</li>\n<li><b>C</b> $b \\approx 2$ kg/s</li>\n<li><b>D</b> $b \\approx 3$ kg/s</li>\n<li><b>E</b> $b \\approx 0,7$ kg/s</li>\n</ol>"
                     }
                 ]
             }
