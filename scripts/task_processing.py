@@ -3,7 +3,7 @@ import extract_images
 import task_boundaries
 import ocr_pdf
 from project_config import *
-from project_config import load_prompt
+from project_config import load_prompt, emphasize
 from utils import log, write_progress, update_progress_fraction
 import object_handling
 
@@ -175,9 +175,11 @@ async def get_exam_info() -> Exam:
     try:
         with IGNORED_FILE.open("r", encoding="utf-8") as f:
             ignored_raw = json.load(f).get("ignored", "")
-        exam.ignored_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
+        new_ignored_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
     except Exception as e:
         log(f"Could not read ignored topics: {e}")
+
+
     log(f"Subject code: {exam.subject}")
     object_handling.add_subject(exam.subject)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
@@ -209,11 +211,11 @@ async def get_exam_info() -> Exam:
 
     try:
         topics = enum_to_str(get_topics_from_json(exam.subject))
-        if not topics:
+        if len(topics) < 5:
             raise ValueError("No topics found for subject")
         cur_topics = "Temaene funnet i tidligere eksamner for dette emnet er: " + topics 
     except ValueError:
-        cur_topics = "Det er ingen temaer registrert enda i dette emnet. "
+        cur_topics = "Det er ingen temaer registrert enda i dette emnet. Du skal finne temaene i oppgaveteksten. "
 
     log(cur_topics)
     
@@ -223,7 +225,10 @@ async def get_exam_info() -> Exam:
         is_num=False,
         max_len=4000,
     )
-    if new_topics not in [None, "", "0", 0]:
+
+    emphasize(f"New topics identified: {new_topics}")
+
+    if new_topics is not None and len(new_topics) > 3:
         print(f"New topics identified: {new_topics}")
         new_topics = [t.strip() for t in str(new_topics).split(',')]
         object_handling.add_topics(exam.subject, exam.exam_version, new_topics)

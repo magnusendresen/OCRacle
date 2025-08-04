@@ -44,6 +44,10 @@ def load_prompt(name: str) -> str:
             print(f"Warning: Prompt '{name}' is empty.")
         return content
     
+def emphasize(text: str) -> str:
+    """Return the text with emphasis formatting."""
+    return f"\n\n\n**{text}**\n\n\n"
+    
 # def print_config():
 #     for name in __all__:
 #         value = globals()[name]
