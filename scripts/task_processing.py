@@ -80,6 +80,15 @@ def get_topics_from_json(emnekode: str) -> Enum:
     topics = [t for t in entry.get("topics", []) if t is not None]
     return Enum('Topics', topics)
 
+def get_ignored_topics_from_json(emnekode: str) -> str:
+    """Return ignored topics for a subject code."""
+    with EXAMS_JSON.open('r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    entry = data.get(emnekode.upper().strip(), {})
+    ignored = entry.get("ignored_topics", [])
+    return ", ".join(ignored) if ignored else ""
+
 
 def enum_to_str(enum: Enum) -> str:
     return str([f"{e.value}: {e.name}" for e in enum])
@@ -172,17 +181,6 @@ async def get_exam_info() -> Exam:
             )
         ).strip().upper()
 
-    new_ignored_topics: List[str] = []
-    try:
-        with IGNORED_FILE.open("r", encoding="utf-8") as f:
-            ignored_raw = json.load(f).get("ignored", "")
-        new_ignored_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
-    except Exception as e:
-        log(f"Could not read ignored topics: {e}")
-
-    exam.ignored_topics = new_ignored_topics
-
-
     log(f"Subject code: {exam.subject}")
     object_handling.add_subject(exam.subject)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
@@ -212,16 +210,24 @@ async def get_exam_info() -> Exam:
 
     log("Extracting exam topics")
 
+    new_ignored_topics: List[str] = []
     try:
-        topics = enum_to_str(get_topics_from_json(exam.subject))
-        if len(topics) < 5:
-            raise ValueError("No topics found for subject")
-        cur_topics = "Temaene funnet i tidligere eksamner for dette emnet er: " + topics 
-    except ValueError:
-        cur_topics = "Det er ingen temaer registrert enda i dette emnet. Du skal finne temaene i oppgaveteksten. "
+        with IGNORED_FILE.open("r", encoding="utf-8") as f:
+            ignored_raw = json.load(f).get("ignored", "")
+        new_ignored_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
+    except Exception as e:
+        log(f"Could not read ignored topics: {e}")
 
-    log(cur_topics)
-    
+    ign_topics = get_ignored_topics_from_json(exam.subject)
+
+    cur_topics = enum_to_str(get_topics_from_json(exam.subject))
+    if cur_topics is not None and len(cur_topics) > 3:
+        cur_topics = f"Godkjente temaer funnet i tidligere eksamner (som du dermed ikke trenger å skrive) er: {cur_topics}."
+    else:
+        cur_topics = f"Det er forløpig ingen temaer lagt til i {exam.subject} enda. Du SKAL ABSOLUTT DERFOR finne temaer selv i henhold til instruksene ovenfor. "
+
+    emphasize(cur_topics)
+
     new_topics = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("exam_topics") + cur_topics + ocr_text,
         max_tokens=1000,
@@ -229,23 +235,39 @@ async def get_exam_info() -> Exam:
         max_len=4000,
     )
 
-    emphasize(f"New topics identified: {new_topics}")
-
     if new_topics is not None and len(new_topics) > 3:
-        print(f"New topics identified: {new_topics}")
-        new_topics = [t.strip() for t in str(new_topics).split(',')]
+        emphasize(f"New topics identified: {new_topics}")
     else:
-        print("No new topics identified.")
+        print(f"No new topics identified due to new_topics being {new_topics}")
         new_topics = []
 
+    if new_topics is not None and len(new_topics) > 3 and (ign_topics is not None or new_ignored_topics is not None):
+        emphasize(f"Removing ignored topics.")
+        new_topics = await prompt_to_text.async_prompt_to_text(
+            PROMPT_CONFIG + "Fjern alle temaer knyttet til " + ', '.join(new_ignored_topics) + " fra listen." + new_topics + 
+            ". Skriv kun de temaene som er igjen, separert med komma, nøyaktig likt formattert som ovenfor.",
+            max_tokens=1000,
+            is_num=False,
+            max_len=4000,
+        )
+
+    if new_topics is not None and len(new_topics) > 3:
+        emphasize(f"New topics after removal: {new_topics}")
+        new_topics = [t.strip() for t in str(new_topics).split(',')]
+
+
+
     object_handling.add_topics(
-        exam.subject, exam.exam_version, new_topics, new_ignored_topics
+        exam.subject, exam.exam_version, new_topics, exam.ignored_topics
     )
 
     exam.exam_topics = get_topics_from_json(exam.subject)
-    log(f"Total in subject is now: {len(list(exam.exam_topics))}")
+    log(f"Total topics in subject is now: {len(list(exam.exam_topics))}")
 
-    
+    exam.ignored_topics = get_ignored_topics_from_json(exam.subject)
+    log(f"Added ignored topics: {', '.join(exam.ignored_topics)}")
+
+
     total_task_count = len(exam.task_numbers)
     log(f"Tasks for processing: {total_task_count}")
 
@@ -289,7 +311,10 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
         await prompt_to_text.async_prompt_to_text(
             (
                 PROMPT_CONFIG +
-                "Is this task about any of the following topics?: " + ", ".join([ignored for ignored in task_exam.ignored_topics]) + "\n" +
+                "Is this task directly related any of the following topics?: " + ", ".join([ignored for ignored in task_exam.ignored_topics]) + "\n" +
+                "If the task is related to a topic that could be considered within the scope of the above topics, respond with 1, " +
+                "and if the task is related to a topic that could be considered in the same realm as the topics, but not directly related, respond with 0. " +
+                "For example, if kjemi is above, things related to fysikk are not directly related, but reaksjonslikninger and periodesystemet are. "
                 "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! " +
                 "If it is, answer with a 1, otherwise answer with a 0. Here is the task text: " +
                 task_output

@@ -46,7 +46,7 @@ def load_prompt(name: str) -> str:
     
 def emphasize(text: str) -> str:
     """Return the text with emphasis formatting."""
-    return f"\n\n\n**{text}**\n\n\n"
+    return print(f"\n\n\n{text}\n\n\n")
     
 # def print_config():
 #     for name in __all__:

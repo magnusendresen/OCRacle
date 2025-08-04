@@ -10,6 +10,7 @@ Hva er de viktigste temaene i denne teksten?
   Hvis teksten er skrevet på flere språk, svar med temaene på norsk bokmål.
   Dersom temaet er ALLEREDE dekket helt eller nesten helt av ett av temaene nedenfor, IKKE skriv det. Vær likevel NØYE med å legge til nødvendige temaer.
   Skriv altså bare NYE temaer som ikke allerede er dekket. 
+  Kategoriser temaer etter hovedoppgaver, ikke deloppgaver. 
   Det trenger ikke nødvendigvis være et unikt tema for hver eneste oppgave, ettersom formålet med kategoriseringen er for eksamensøving.
-  HVIS DET ER INGEN NYE TEMAER SKAL DU KUN SVARE MED TALLET NULL: 0.
-  Her er temaene som allerede er er knyttet til emnet, og derfor IKKE skal skrives, etterfult av oppgaveteksten:
+  DET ER VELDIG SJELDENT "N" ANTALL OPPGAVER TILSVARER "N" ANTALL TEMAER!!! DET ER TROLIG BETRAKTELIG FERRE TEMAER ENN OPPGAVER. 
+  Hvis  det ikke er nødvendig å legge til noen nye temaer siden de allerede er dekket, skal du svaret med tallet null "0" (uten anførselstegn) ingenting annet.

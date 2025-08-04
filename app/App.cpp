@@ -28,7 +28,7 @@ App::App(const std::string& windowName)
         // Beregn senterposisjon
         100,
         100,
-        WINDOW_WIDTH + 500,
+        WINDOW_WIDTH + 600,
         WINDOW_HEIGHT,
         windowName
     }
@@ -313,7 +313,7 @@ void App::startProcessing() {
         std::thread([psScript]() {
             int pw_x = WINDOW_WIDTH - 100;
             int pw_y = 100;
-            int pw_w = 700;
+            int pw_w = 800;
             int pw_h = WINDOW_HEIGHT;
 
             int charW = pw_w / 8;
