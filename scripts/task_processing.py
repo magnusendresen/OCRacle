@@ -172,12 +172,15 @@ async def get_exam_info() -> Exam:
             )
         ).strip().upper()
 
+    new_ignored_topics: List[str] = []
     try:
         with IGNORED_FILE.open("r", encoding="utf-8") as f:
             ignored_raw = json.load(f).get("ignored", "")
         new_ignored_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
     except Exception as e:
         log(f"Could not read ignored topics: {e}")
+
+    exam.ignored_topics = new_ignored_topics
 
 
     log(f"Subject code: {exam.subject}")
@@ -231,9 +234,13 @@ async def get_exam_info() -> Exam:
     if new_topics is not None and len(new_topics) > 3:
         print(f"New topics identified: {new_topics}")
         new_topics = [t.strip() for t in str(new_topics).split(',')]
-        object_handling.add_topics(exam.subject, exam.exam_version, new_topics)
     else:
         print("No new topics identified.")
+        new_topics = []
+
+    object_handling.add_topics(
+        exam.subject, exam.exam_version, new_topics, new_ignored_topics
+    )
 
     exam.exam_topics = get_topics_from_json(exam.subject)
     log(f"Total in subject is now: {len(list(exam.exam_topics))}")
