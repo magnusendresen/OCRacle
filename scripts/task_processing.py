@@ -272,7 +272,7 @@ async def get_exam_info() -> Exam:
         new_topics = []
 
     object_handling.add_topics(
-        exam.subject, exam.exam_version, new_topics, removed_topics
+        exam.subject, new_topics, removed_topics
     )
 
     exam.exam_topics = get_topics_from_json(exam.subject)
