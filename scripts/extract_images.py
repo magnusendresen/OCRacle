@@ -80,6 +80,15 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
         counts[task_num] = counts.get(task_num, 0) + 1
         seq = counts[task_num]
         fname = f"{subject}_{version}_{task_num}_{seq}.png"
+        # Check if an image with the same content (80% similarity) after resizing already exists
+        for existing in task_folder.glob("*.png"):
+            existing_img = cv2.imread(str(existing))
+            if existing_img is not None:
+                resized_existing = cv2.resize(existing_img, (img.shape[1], img.shape[0]))
+                similarity = cv2.matchTemplate(resized_existing, img, cv2.TM_CCOEFF_NORMED)
+                if np.max(similarity) > 0.8:
+                    log(f"Skipping duplicate image {fname} in {task_folder}")
+                    return
         path = task_folder / fname
         ok, buf = cv2.imencode(".png", img)
         if ok:
@@ -123,29 +132,25 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
         max_len=2,
     ))
 
-    if code_bool:
-        log(f"[WARNING] Detected code in task {task_num}. Skipping the image. ")
-        return
-    elif color_bool:
-        log(f"[WARNING] Detected very few colors in task {task_num}. Skipping the image.")
-        return
-    elif size_bool:
-        log(f"[WARNING] Detected small image size in task {task_num}. Skipping the image.")
-        return
-
     should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool
-    if not should_attempt_crop:
+    should_skip_image = (size_bool or color_bool or code_bool) or attempt >= 2
+
+    if not should_attempt_crop and not should_skip_image:
+        log(f"Saving image for task {task_num}.")
         save_func(img, task_num)
         return
 
-    if attempt >= 2:
+    if should_skip_image:
+        log(f"Skipping image for task {task_num} due to {'size' if size_bool else 'color' if color_bool else 'code' if code_bool else 'attempt limit reached'}.")
         return
 
     subs = _detect_crops(img)
     if not subs:
+        log(f"Skipping image for task {task_num} due to no crops detected.")
         return
 
     for sub in subs:
+        log(f"Cropping image for task {task_num}.")
         await _process_image(sub, task_num, save_func, attempt + 1)
 
 

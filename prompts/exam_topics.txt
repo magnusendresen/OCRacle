@@ -2,7 +2,7 @@ Hva er hovedtemaene i denne teksten?
 Svar med en kommaseparert liste på norsk bokmål. Skriv temaene med stor forbokstav.  
 
 Bruk overordnede temaer egnet for eksamenskategorisering.  
-Kategoriser etter hovedoppgaver, ikke deloppgaver. Det er ofte ca. 2/3 så mange temaer som oppgaver.  
+Kategoriser etter hovedoppgaver, ikke deloppgaver. Det er ofte ca. 2/3 så mange temaer som oppgaver (pluss minus).
 
 Eksempler på gode temaer fra noen tilfeldige eksamner:  
 Kinematikk, Dynamikk, Mekanikk, Sirkelbevegelse, Rotasjonsdynamikk, Programmering, Fluidmekanikk, Svingninger, Bølgefysikk, Energi og arbeid, Impuls og støt,  

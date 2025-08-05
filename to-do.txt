@@ -30,6 +30,6 @@ Ha både studiehjelper OG "guess who answered", "who's the impostor", og flere p
 
 Legge til håndtering av eventuelle 100% like bilder. 
 
-Noen korrigeringer om tema: Bevegelsesanalyse->Bevegelse, Rotasjon&Rullebevegelse->Rotasjonsmekanikk, Harmonisk bevegelse->Harmonisk svingning
+Noen korrigeringer om tema: Bevegelsesanalyse->Bevegelse, Rotasjon&Rullebevegelse->Rotasjonsmekanikk, Harmonisk bevegelse->Harmonisk svingning.
 
-Fjerne exam_version fra add_topics()
+If image is too large: crop!

@@ -1,179 +1,172 @@
 {
-    "IFYXKJX1000": {
+    "IFYX1000": {
         "topics": [
-            "Kinematikk",
-            "Dynamikk",
+            "Bevegelse",
             "Energi",
-            "Rotasjonsdynamikk",
+            "Mekanikk",
+            "Dynamikk",
             "Svingninger",
             "Bølgefysikk",
             "Fluidmekanikk",
-            "Termodynamikk",
-            "Elektromagnetisme"
+            "Rotasjonsdynamikk",
+            "Kjemi",
+            "Likevekt",
+            "Sirkelbevegelse",
+            "Energi og arbeid",
+            "Kinematikk",
+            "Treghetsmoment",
+            "Harmonisk bevegelse"
         ],
         "ignored_topics": [
-            "Kjemisk likevekt",
-            "Reaksjonsligninger",
-            "Løselighet",
-            "Syrekonstant",
-            "Likevekt",
-            "Kjemisk binding",
-            "Støkiometri",
-            "Periodesystemet",
-            "Enhetskonvertering",
-            "Elektronkonfigurasjon",
-            "pH"
+            "Kjemi"
         ],
         "exams": {
-            "V23": {
+            "K24": {
                 "tasks": [
                     {
-                        "topic": "Unknown Topic",
-                        "task_number": "6",
-                        "points": 2,
-                        "task_text": "<p>Hva blir en kroppsmasseindeks på $20$ kg/m$^2$ i gram per kvadratcentimeter?</p>\n<ol>\n<li><b>A</b> $20$ g/cm$^2$</li>\n<li><b>B</b> $2.0$ g/cm$^2$</li>\n<li><b>C</b> $2.0 \\cdot 10^{-2}$ g/cm$^2$</li>\n<li><b>D</b> $0.20$ g/cm$^2$</li>\n<li><b>E</b> $25$ g/cm$^2$</li>\n</ol>"
+                        "topic": "Bevegelse",
+                        "task_number": "1",
+                        "points": 1,
+                        "task_text": "<h3>a)</h3>\n<p>Verdensrekorden for menn på $400$ m er $43,03$ s. Hvor mange km/t tilsvarer dette?</p>\n<ol>\n<li><b>A</b> $30,1$ km/t</li>\n<li><b>B</b> $2,58$ km/t</li>\n<li><b>C</b> $39,9$ km/t</li>\n<li><b>D</b> $33,5$ km/t</li>\n<li><b>E</b> $28,5$ km/t</li>\n</ol>\n\n<h3>b)</h3>\n<p>Jorda går i en sirkelbane rundt Sola med radius $R = 150 000 000$ km, og bruker $365$ dager på én runde. Bestem banefarten til Jorda.</p>\n<ol>\n<li><b>A</b> $50$ km/s</li>\n<li><b>B</b> $10$ km/s</li>\n<li><b>C</b> $30$ km/s</li>\n<li><b>D</b> $40$ km/s</li>\n<li><b>E</b> $20$ km/s</li>\n</ol>"
                     },
                     {
-                        "topic": "Kinematikk",
+                        "topic": "Mekanikk",
+                        "task_number": "2",
+                        "points": 0,
+                        "task_text": "<p>Et legeme som i utgangspunktet henger i ro, faller ved $t = 0$ vertikalt nedover under påvirkning av tyngdekraften, uten luftmotstand. Vi legger inn et koordinatsystem slik at positiv $y$-retning er loddrett nedover. Hvilken av grafene A-E viser posisjonen $y(t)$ for det fallende legemet?</p>\n\n<ol>\n<li><b>A:</b> Lineær graf som starter i origo og øker med konstant stigning.</li>\n<li><b>B:</b> Parabelformet graf som starter i origo og krummer oppover.</li>\n<li><b>C:</b> Lineær graf som starter på $y$-aksen over origo og faller med konstant stigning.</li>\n<li><b>D:</b> Parabelformet graf som starter på $y$-aksen over origo og krummer nedover.</li>\n<li><b>E:</b> Horisontal linje ved $y = 0$.</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Mekanikk",
+                        "task_number": "3",
+                        "points": 2,
+                        "task_text": "<p>En badevekt er en kraftmåler som viser kraften som til enhver tid presser normalt ned på badevekten. Badevekten er imidlertid kalibrert til å vise kraften i \"kg\", slik at $1$ kg $= 9,81$ N. En kasse er plassert på badevekten i de to situasjonene på figuren under.</p>\n\n<p>Når badevekten og kassen står på horisontalt underlag, viser badevekten $1,0$ kg. Så plasseres badevekten, med kassen oppå, på et skrått underlag med helningsvinkel $\\theta = 30^\\circ$, slik at kassen står i ro oppå vekten. Hva viser badevekten i denne situasjonen?</p>\n\n<ol>\n<li><b>A</b> $0,58$ kg</li>\n<li><b>B</b> $1,0$ kg</li>\n<li><b>C</b> $0,87$ kg</li>\n<li><b>D</b> $0,50$ kg</li>\n<li><b>E</b> $1,2$ kg</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Dynamikk",
+                        "task_number": "4",
+                        "points": 2,
+                        "task_text": "<p>En vogn med masse $m$ i en berg-og-dalbane har en viss hastighet $v > 0$ i det den kjører over en bakketopp formet som en del av en sirkel med radius $R$. Vogna beholder hele tiden kontakten med underlaget. Hvilken påstand om normalkraften $N$ fra underlaget på vogna vil alltid gjelde når vogna passerer toppen?</p>\n\n<ol>\n<li><b>A:</b> $N = mg$</li>\n<li><b>B:</b> $N > mg$</li>\n<li><b>C:</b> $N = \\frac{mv^2}{R}$</li>\n<li><b>D:</b> $N < mg$</li>\n<li><b>E:</b> $N = 0$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Mekanikk",
+                        "task_number": "5",
+                        "points": 2,
+                        "task_text": "<p>I hvilket av punktene A-E er hopperens fart maksimal på vei oppover?</p><ol><li><b>A</b></li><li><b>B</b></li><li><b>C</b></li><li><b>D</b></li><li><b>E</b></li></ol>"
+                    },
+                    {
+                        "topic": "Mekanikk",
+                        "task_number": "6",
+                        "points": 15,
+                        "task_text": "<p>En skihopper starter fra ro og glir uten friksjon ned hoppbakken. Høydeforskjellen mellom startpunktet og avsatskanten er $h_1 = 30$ m. Luftmotstand neglisjeres i hele denne oppgaven.</p>\n\n<h3>a)</h3>\n<p>Tegn kreftene som virker på hopperen under nedfarten i hoppbakken og forklar hvorfor hopperens mekaniske energi er bevart.</p>\n\n<h3>b)</h3>\n<p>Vis at hopperen har en hastighet på $v = 24$ m/s ved avsatskanten.</p>\n\n<h3>c)</h3>\n<p>Hopperen forlater avsatskanten med horisontal hastighet. Hvor langt fra avsatskanten i horisontal retning lander hopperen (avstand $x$ i figuren), når hopperen lander på det horisontale underlaget som befinner seg en vertikal avstand $h_2 = 20$ m under avsatskanten?</p>\n\n<h3>d)</h3>\n<p>Beregn følgende ved landingspunktet, der hopperen treffer bakken:</p>\n<p>i) Størrelsen på hastigheten</p>\n<p>ii) Retningen på hastigheten</p>"
+                    },
+                    {
+                        "topic": "Mekanikk",
                         "task_number": "7",
                         "points": 2,
-                        "task_text": "<p>En student bruker mobiltelefonen sin til å måle akselerasjonsgrafen til et tog mens det beveger seg rettlinjet mellom to stasjoner. Toget starter i ro i $t = 0$, og stanser ved $t = t_9$. Akselerasjonsgrafen $a(t)$ er vist på figuren over, med markerte tidspunkt $t_1, \\dots, t_9$.</p>\n\n<p>Hvilken påstand om togets bevegelse er riktig?</p>\n\n<ol>\n<li><b>A</b> Toget har sin største hastighet i tidsrommet $[t_1, t_2]$</li>\n<li><b>B</b> Toget har sin største hastighet i tidsrommet $[t_3, t_4]$</li>\n<li><b>C</b> Toget har sin største hastighet i tidsrommet $[t_5, t_6]$</li>\n<li><b>D</b> Toget bremses i tidsrommet $[t_2, t_3]$</li>\n<li><b>E</b> Toget har sin største hastighet i tidsrommet $[t_7, t_8]$</li>\n</ol>"
+                        "task_text": "<pre class=\"code-box\"><code>import math\n\ndef P(v,theta):\n    m=80\n    g=9.81\n    return (m*g*math.sin(math.radians(theta)))*v</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v**3</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.cos(math.radians(theta)))*v**2</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.cos(math.radians(theta)))*v</code></pre>\n\n<pre class=\"code-box\"><code>(m*g*math.sin(math.radians(theta)))*v**2</code></pre>"
                     },
                     {
-                        "topic": "Dynamikk",
+                        "topic": "Rotasjonsdynamikk",
                         "task_number": "8",
                         "points": 2,
-                        "task_text": "<p>Hva blir glidefriksjonstallet $\\mu_k$ mellom klossen og underlaget, som funksjon av de målte størrelsene $v_o$ og $s$?</p>\n\n<ol>\n<li><b>A:</b> $\\mu_k = \\frac{v_o}{s}$</li>\n<li><b>B:</b> $\\mu_k = \\frac{v_o^2}{2gs}$</li>\n<li><b>C:</b> $\\mu_k = \\frac{2gs}{v_o^2}$</li>\n<li><b>D:</b> $\\mu_k = \\frac{s}{v_o}$</li>\n</ol>"
+                        "task_text": "<p>Et kulelager består av en hylse i form av en tynnvegget sylinder med masse $M$ og radius $R$, og $8$ stk. massive kuler med masse $m$ og radius $r$.</p>\n\n<p>Massesenteret til kulene ligger på en sirkel med radius $R$, i forhold til sentrum i kulelageret.</p>\n\n<p>Hylsen og de $8$ massive kulene kan rotere om en akse gjennom sentrum av kulelageret som står normalt på figurplanet, mens den indre kanten av kulelageret ikke roterer.</p>\n\n<p>Bestem treghetsmomentet til kulelageret om denne aksen.</p>"
                     },
                     {
-                        "topic": "Dynamikk",
+                        "topic": "Mekanikk",
                         "task_number": "9",
-                        "points": 2,
-                        "task_text": "<p>En person står på en badevekt på gulvet i en heis. Badevekta er kalibrert slik at den viser verdier i newton i stedet for kilogram. Tyngdeakselerasjonen på stedet er $g = 9,81$ m/s$^2$. Når heisen er i ro, viser badevekta $670$ N. Idet heisen starter og beveger seg oppover, viser badevekta $700$ N. Bestem heisens akselerasjon oppover på dette tidspunktet.</p>\n\n<ol>\n<li><b>A</b> $0,439$ m/s$^2$</li>\n<li><b>B</b> $1,42$ m/s$^2$</li>\n<li><b>C</b> $10,0$ m/s$^2$</li>\n<li><b>D</b> $0,0448$ m/s$^2$</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Kinematikk",
-                        "task_number": "10",
-                        "points": 2,
-                        "task_text": "Et legeme glir ned en sirkelformet bane uten friksjon. På figuren over er vinkelen mellom legemet og horisontalen etter hvert som det glir nedover banen. Legemet slippes med null startfart i punktet der $\\theta = 0^\\circ$. På figuren er $h$ høydeforskjellen mellom startpunktet og punktet der vinkelen er $\\theta$.\n\nHvilken av grafene A-E viser legemets sentripetalakselerasjon $a$ som funksjon av $\\theta$, for $0^\\circ < \\theta < 90^\\circ$? Høydeforskjellen $h = R \\sin \\theta$ på figuren kan være til hjelp.\n\n<ol>\n<li><b>A:</b> $a$ er konstant for alle $\\theta$.</li>\n<li><b>B:</b> $a$ øker lineært med $\\theta$.</li>\n<li><b>C:</b> $a$ øker proporsjonalt med $\\sin \\theta$.</li>\n<li><b>D:</b> $a$ øker proporsjonalt med $\\cos \\theta$.</li>\n<li><b>E:</b> $a$ øker proporsjonalt med $\\tan \\theta$.</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Dynamikk",
-                        "task_number": "11",
                         "points": 3,
-                        "task_text": "<p>En kloss starter fra ro på et skråplan og glir en avstand s nedover til enden av skråplanet, der den treffer rett mot en kule som henger i ro i en snor. Massen til klossen er $M = 0,20$ kg, massen til kula er $m = 0,10$ kg, og skråplanvinkelen $\\alpha = 30^\\circ$. Etter støtet svinger kula opp og oppnår en maksimal høyde $h = 0,15$ m. Etter støtet fortsetter klossen mot høyre bortover et horisontalt underlag. Vi ser bort fra alle former for friksjon i denne oppgaven.</p>\n\n<h3>a)</h3>\n<p>Vis at farten til kula like etter støtet er $1,7$ m/s mot høyre.</p>\n\n<h3>b)</h3>\n<p>Farten til klossen etter støtet er $1,5$ m/s mot høyre. Vis at farten til klossen like før støtet da blir $2,4$ m/s.</p>\n\n<h3>c)</h3>\n<p>Vis ved regning at støtet ikke er elastisk.</p>\n\n<h3>d)</h3>\n<p>Regn ut avstanden $s$.</p>"
+                        "task_text": "<p>En homogen, massiv kule med masse $M$ og radius $R$ ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel $\\theta = 30^\\circ$. Se figuren under.</p>\n\n<h3>a)</h3>\n<p>Tegn kreftene på kula mens den ruller nedover skråplanet. For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren.</p>\n\n<h3>b)</h3>\n<p>Forklar kort hvorfor den mekaniske energien til kula er bevart under rullingen.</p>\n\n<h3>c)</h3>\n<p>Bestem farten til kula nederst i skråplanet dersom den starter en høyde $h = 0,60$ m over bunnen.</p>\n\n<h3>d)</h3>\n<p>Vis at akselerasjonen til kula nedover skråplanet er $a = \\frac{4}{9}g$.</p>\n\n<h3>e)</h3>\n<p>Kula starter fra ro ved $x = 0$ ved $t = 0$. Skisser kulas posisjonsgraf $x(t)$, fartsgraf $v(t)$ og akselerasjonsgraf $a(t)$. For full uttelling må det være et resonnement som argumenterer for grafens form, og formen må framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.</p>"
                     },
                     {
-                        "topic": "Dynamikk",
+                        "topic": "Fluidmekanikk",
+                        "task_number": "10",
+                        "points": 1,
+                        "task_text": "<p>a) I 2023 imploderte undervannsfartøyet \"Titan\" katastrofalt i en dybde på $4,0$ km. Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var $101$ kPa.</p><ol><li><b>A</b> $19$ MPa</li><li><b>B</b> $29$ MPa</li><li><b>C</b> $39$ MPa</li><li><b>D</b> $49$ MPa</li><li><b>E</b> $59$ MPa</li></ol><p>b) En badeball er formet som en kule med radius $R = 0,50$ m. Beregn oppdriften på ballen dersom hele ballen er under vann.</p><ol><li><b>A</b> $0,52$ N</li><li><b>B</b> $0,52$ kN</li><li><b>C</b> $5,1$ kN</li><li><b>D</b> Oppdriften avhenger av hvilken dybde badeballen befinner seg i</li><li><b>E</b> Oppdriften avhenger av massen av badeballen</li></ol>"
+                    },
+                    {
+                        "topic": "Fluidmekanikk",
+                        "task_number": "11",
+                        "points": 15,
+                        "task_text": "<p>Et åpent, vannfylt basseng har rektangulær bunn med grunnflate $A = 10$ m $\\times 20$ m, og vannspeilet i bassenget ligger i utgangspunktet en høyde $h = 5,0$ m over utløpet til et tapperør med diameter $D = 63$ mm i bunnen av bassenget. Det er lufttrykk $p_0$ over vannspeilet og ved rørutløpet.</p>\n\n<h3>a)</h3>\n<p>Forklar kort hva Bernoullis likning for et ideelt fluid uttrykker, og angi forutsetningene for at likningen skal være gyldig.</p>\n\n<h3>b)</h3>\n<p>Neglisjer alle former for tap og vis at vannspeilet i bassenget synker med en fart på $0,15$ mm/s idet tappingen starter.</p>\n\n<h3>c)</h3>\n<p>Bestem væskefarten og volumstrømmen i røret idet tappingen starter dersom vi neglisjerer alle former for tap.</p>\n\n<h3>d)</h3>\n<p>Tapperøret har en total lengde $L = 10$ m, ruhet $e = 0,13$ mm og har et $90^\\circ$-rørbend med tapskoeffisient $\\zeta = 0,70$. I tillegg har rørinnløpet en tapskoeffisient $\\zeta_1 = 1,0$. Væskefarten i røret måles til $4,0$ m/s. Beregn den totale tapshøyden og det totale trykktapet.</p>\n\n<h3>e)</h3>\n<p>En driftig bassengeier ønsker å utnytte energien fra strømmen i tapperøret. Hvor stor effekt kan hentes ut herifra?</p>"
+                    },
+                    {
+                        "topic": "Svingninger",
                         "task_number": "12",
                         "points": 2,
-                        "task_text": "<p>Et fullastet passasjertog med masse $4,0 \\cdot 10^5$ kg akselereres rettlinjet fra $0$ til $80$ km/h i løpet av $30$ s. Hvor stor gjennomsnittlig effekt må togets motorer produsere mens toget akselereres? Vi neglisjerer luftmotstand og alle former for friksjonstap.</p>\n\n<ol>\n<li><b>A</b> $0,13$ MW</li>\n<li><b>B</b> $3,3$ MW</li>\n<li><b>C</b> $3,9$ MW</li>\n<li><b>D</b> $25$ MW</li>\n<li><b>E</b> $99$ MW</li>\n</ol>"
+                        "task_text": "<p>Tre homogene kuler A, B og C med samme masse $m$ henger i masseløse snorer med lengde $L$. Kulene har radier hhv. $r = \\frac{L}{16}$, $r = \\frac{L}{10}$ og $r = \\frac{L}{2}$.</p>\n\n<p>Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene $T_A$, $T_B$ og $T_C$ til de tre pendlene?</p>\n\n<ol>\n<li><b>A</b> $T_A = T_B = T_C$</li>\n<li><b>B</b> $T_A < T_B < T_C$</li>\n<li><b>C</b> $T_A > T_B > T_C$</li>\n<li><b>D</b> $T_A = T_B < T_C$</li>\n<li><b>E</b> $T_A = T_B > T_C$</li>\n</ol>"
                     },
                     {
-                        "topic": "Rotasjonsdynamikk",
+                        "topic": "Svingninger",
                         "task_number": "13",
-                        "points": 1,
-                        "task_text": "<p>Et legeme består av to tynne, uniforme stenger med lengde $L$ og masse $M$ som er sveist sammen slik at midtpunktet på den ene stanga er festet til endepunktet på den andre. Se figuren under. Hva er treghetsmomentet til legemet om en akse som står normalt på enden av den ene stanga (angitt på figuren)?</p>\n\n<ol>\n<li><b>A</b> $I = \\frac{117}{12} ML^2$</li>\n<li><b>B</b> $I = ML^2$</li>\n<li><b>C</b> $I = 3ML^2$</li>\n<li><b>D</b> $I = ML^2$</li>\n<li><b>E</b> $I = ML^2$</li>\n</ol>\n\n<p>En massiv sylinder med masse $M$ og radius $R$ er sveist sammen med en annen massiv sylinder med masse $m$ og mindre radius $r$. Sylindrene er spent fast slik at de roterer som ett legeme rundt en fast akse i et felles sentrum. Vi kan vikle en tråd festet til et lodd med masse $m_{lodd}$ rundt enten den lille eller den store sylinderen, og når loddet slippes, vil sylindrene rotere uten at snora glir. Sylindrene roterer uten friksjon om rotasjonsaksen. Se figuren under. Hvilken påstand er riktig?</p>\n\n<ol>\n<li><b>A</b> Sylindrene får størst vinkelakselerasjon dersom tråden vikles rundt den minste sylinderen med radius $r$</li>\n<li><b>B</b> Sylindrene får størst vinkelakselerasjon dersom tråden vikles rundt den største sylinderen med radius $R$</li>\n<li><b>C</b> Sylindrene får den samme vinkelakselerasjon uansett hvilken sylinder tråden vikles rundt</li>\n<li><b>D</b> Sylindrene vil ikke rotere dersom $m_{lodd} < M + m$</li>\n<li><b>E</b> Sylindrenes vinkelakselerasjon er uavhengig av sylindrenes masse $M$ og $m$</li>\n</ol>"
+                        "points": 2,
+                        "task_text": "En kloss med masse $m = 0,50$ kg er festet til en fjær med fjærkonstant $k = 19$ N/m, og kan svinge horisontalt ($x$-retningen på figuren til venstre). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft $F_D = -bv$ rettet mot fartsretningen, der $v$ er farten til klossen. Se figuren under.\n\nKlossen trekkes ut til siden og slippes. Posisjonen $x(t)$ til klossen er vist i grafen til høyre. Beregn verdien av dempingskonstanten $b$. [Hint: amplituden for en svakt dempet svingning er $A(t) = A_0 e^{-\\frac{b}{2m}t}$.]\n\n<ol>\n<li><b>A</b> $b \\approx 6$ kg/s</li>\n<li><b>B</b> $b \\approx 5$ kg/s</li>\n<li><b>C</b> $b \\approx 2$ kg/s</li>\n<li><b>D</b> $b \\approx 3$ kg/s</li>\n<li><b>E</b> $b \\approx 0,7$ kg/s</li>\n</ol>"
                     },
                     {
-                        "topic": "Rotasjonsdynamikk",
+                        "topic": "Bølgefysikk",
                         "task_number": "14",
-                        "points": 15,
-                        "task_text": "<p>En massiv, homogen sylinder med masse $M = 0,50$ kg og radius $R = 0,10$ m ligger på et skråplan med helningsvinkel $B = 20^\\circ$. Sylinderen er i ro ved tiden $t = 0$ og begynner deretter å rulle uten å gli nedover skråplanet. Vi legger inn en $x$-akse med retning nedover langs skråplanet, der origo plasseres i kontaktpunktet mellom sylinderen og skråplanet ved tiden $t = 0$. Figuren over viser sylinderens posisjon ved tiden $t = 0$.</p>\n\n<p>Vi ser bort fra luftmotstand i hele denne oppgaven.</p>\n\n<h3>a)</h3>\n\n<p>Tegn kreftene som virker på sylinderen når den ruller nedover skråplanet. For full uttelling må alle krefter ha navn og det må være et rimelig størrelsesforhold mellom kreftene.</p>\n\n<h3>b)</h3>\n\n<p>Vis at akselerasjonen til sylinderens massesenter mens den ruller nedover er $a = 2,2$ m/s$^2$.</p>\n\n<h3>c)</h3>\n\n<p>Hvor lang tid bruker sylinderen på å rulle en strekning $\\Delta x = 0,40$ m nedover skråplanet?</p>\n\n<h3>d)</h3>\n\n<p>Skisser en posisjon-tid-graf, dvs. $x(t)$, for sylinderen når den ruller nedover skråplanet. Det kreves ingen eksakt graf med eksplisitte enheter for $x$ og $t$, men grafens form må framgå tydelig, og må være basert på et resonnement/forklaring/utregning.</p>\n\n<h3>e)</h3>\n\n<p>Vi lar også en massiv, homogen kule og et sylinderskall/ring (\"hoop\"), der begge har samme masse og radius som sylinderen, rulle nedover det samme skråplanet ved siden av den massive sylinderen. Kontaktpunktene mellom disse legemene og skråplanet antas også å være i $x$-aksens origo ved tiden $t = 0$. Hvilket av de tre legemene vil komme først ned til bunnen av skråplanet når de slippes samtidig? Svaret må begrunnes.</p>"
+                        "points": 1,
+                        "task_text": "<p>Gitt følgende to sinusformede tversbølger:</p>\n<p>$y_1(x,t) = (1,0 \\text{ m}) \\sin(1,0 \\text{ m}^{-1} \\cdot x -1,0 \\text{ s}^{-1} \\cdot t)$</p>\n<p>$y_2(x,t) = (1,0 \\text{ m}) \\sin(1,0 \\text{ m}^{-1} \\cdot x - 1,0 \\text{ s}^{-1} \\cdot t + \\frac{1}{7})$</p>\n<p>Hvilken påstand om den resulterende bølgen er riktig?</p>\n<ol>\n<li><b>A</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 1,0 \\text{ m}$</li>\n<li><b>B</b> Resulterende bølge blir en stående bølge med maksimal amplitude $A = 2,0 \\text{ m}$</li>\n<li><b>C</b> Resulterende bølge blir null; bølgene utslokker hverandre</li>\n<li><b>D</b> Resulterende bølge beveger seg mot høyre og har maksimal amplitude $1,4 \\text{ m}$</li>\n<li><b>E</b> Resulterende bølge beveger seg mot høyre og har maksimal amplitude $2,0 \\text{ m}$</li>\n</ol>\n\n<p>En stående bølge er gitt ved uttrykket $y(x,t) = 2A \\sin(kx) \\cos(\\omega t)$. Hva er den absoluttverdien av den maksimale vertikale farten til et punkt på bølgen?</p>\n<ol>\n<li><b>A</b> $v_{\\text{max}} = 2A\\omega$</li>\n<li><b>B</b> $v_{\\text{max}} = A\\omega$</li>\n<li><b>C</b> $v_{\\text{max}} = \\frac{A\\omega}{2}$</li>\n<li><b>D</b> $v_{\\text{max}} = \\frac{1}{2}A\\omega$</li>\n<li><b>E</b> $v_{\\text{max}} = \\frac{1}{4}A\\omega$</li>\n</ol>"
                     },
                     {
                         "topic": "Svingninger",
                         "task_number": "15",
-                        "points": 2,
-                        "task_text": "<p>En kloss er festet i en fjær og kan svinge friksjonsfritt på et horisontalt underlag. Klossen slippes med null startfart fra en startamplitude $x = A$. Punktet $x = 0$ tilsvarer likevektsstillingen (slapp fjær). Se figuren over.</p>\n\n<p>På figuren er det indikert tre punkter: $x_1 = A/2$, $x_2 = 0$ og $x_3 = -A/4$, der absoluttverdien av klossens fart er hhv. $v_1$, $v_2$ og $v_3$. Hvilken påstand om størrelsesforholdet mellom absoluttverdiene av fartene er riktig?</p>\n\n<ol>\n<li><b>A</b> $v_1 > v_2 > v_3$</li>\n<li><b>B</b> $v_2 > v_3 > v_1$</li>\n<li><b>C</b> $v_2 > v_1 > v_3$</li>\n<li><b>D</b> $v_2 = v_3 > v_1$</li>\n<li><b>E</b> $v_2 > v_3 = v_1$</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Svingninger",
-                        "task_number": "16",
-                        "points": 2,
-                        "task_text": "<p>Et barn på en huske kan betraktes som en svakt dempet pendel der pendelutslaget (vinkelen mellom barnets posisjon og vertikalretningen) er gitt ved $\\theta(t) = \\theta_0 e^{-a t} \\cos(\\omega t)$, der $\\theta_0$ er startutslaget ved $t = 0$ og $a$ er en positiv konstant som vi skal bestemme.</p>\n\n<p>Barnet dras ut til en startvinkel $\\theta_0 = 15^\\circ$ og slippes. Vi måler at barnets amplitude (det maksimale vinkelutslaget) er redusert til $5,0^\\circ$ etter $5,5$ s.</p>\n\n<p>Hva blir verdien av konstanten $a$?</p>\n\n<ol>\n<li><b>A:</b> $a = 0,20$ s$^{-1}$</li>\n<li><b>B:</b> $a = 0,30$ s$^{-1}$</li>\n<li><b>C:</b> $a = 0,40$ s$^{-1}$</li>\n<li><b>D:</b> $a = 0,50$ s$^{-1}$</li>\n<li><b>E:</b> $a = 0,60$ s$^{-1}$</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Fluidmekanikk",
-                        "task_number": "17",
-                        "points": 2,
-                        "task_text": "En uniform, massiv terningformet trebit flyter i ro i tre ulike væsker, med massetettheter $P1$, $P2$ og $P3$. Se figuren over.\n\n<p>I væske 1 ligger $30\\%$ av terningen under væskeoverflaten.</p>\n\n<p>I væske 2 ligger $50\\%$ av terningen under væskeoverflaten.</p>\n\n<p>I væske 3 ligger $80\\%$ av terningen under væskeoverflaten.</p>\n\n<p>Hvilken påstand er riktig?</p>\n\n<ol>\n<li><b>A:</b> $P1 > P2 > P3$</li>\n<li><b>B:</b> $P3 > P2 > P1$</li>\n<li><b>C:</b> $P1 > P3 > P2$</li>\n<li><b>D:</b> $P3 > P1 > P2$</li>\n<li><b>E:</b> $P2 > P1 > P3$</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Fluidmekanikk",
-                        "task_number": "18",
-                        "points": 15,
-                        "task_text": "<p>Vann strømmer gjennom et vertikalt nedløpsrør fra en takrenne på et hus. Røret har konstant tverrsnitt med diameter $D = 75$ mm og lengde $L = 10$ m. Det har vært ekstremt mye regn, så vannet fyller hele røret. Vannspeilet øverst i takrenna ligger i ro, og selve takrenna har neglisjerbar høyde. Se figuren over. Både vannspeilet og utløpet ligger mot luft der lufttrykket er $p_0$.</p>\n\n<h3>a)</h3>\n<p>Vis at farten til vannet i røret er $14$ m/s, dersom vi ser bort fra alle former for tap.</p>\n\n<h3>b)</h3>\n<p>Vis at volumstrømmen i røret er $0,062$ m³/s.</p>\n\n<h3>c)</h3>\n<p>En innovativ huseier vurderer å montere en liten turbin ved rørutløpet, som kan brukes til å produsere elektrisk energi. Hvor stor effekt kan man hente ut fra vannstrømmen når røret er helt fylt og vi ser bort fra alle former for tap?</p>\n\n<h3>d)</h3>\n<p>Bestem farten ved rørutløpet dersom vi tar hensyn til rørfriksjon via Darcy-Weisbachs lov, og ser bort fra tap i enkeltmotstander. Rørets ruhet er $\\epsilon = 0,15$ mm. Du behøver ikke å vedlegge bilde av avlesninger i Moodys diagram.</p>"
-                    },
-                    {
-                        "topic": "Bølgefysikk",
-                        "task_number": "19",
                         "points": 1,
-                        "task_text": "<p>a) En sinusformet tversbølge er gitt ved uttrykket $y(x,t) = (10 \\text{ cm}) \\sin(0,50 \\text{ m}^{-1}x - 0,10 \\text{ s}^{-1}t)$. Hvilken påstand er riktig?</p>\n<ol>\n<li><b>A</b> Bølgelengden til bølgen er $0,10 \\text{ m}$.</li>\n<li><b>B</b> Perioden til bølgen er $0,10 \\text{ s}$.</li>\n<li><b>C</b> Bølgefarten til bølgen er $0,20 \\text{ m/s}$.</li>\n<li><b>D</b> Bølgefarten til bølgen er $0,10 \\text{ m/s}$.</li>\n<li><b>E</b> Uttrykket beskriver en stående bølge på en vibrerende streng spent fast i begge ender.</li>\n</ol>\n\n<p>b) En sinusformet tversbølge med amplitude $A = 0,200 \\text{ m}$ og bølgelengde $\\lambda = 0,500 \\text{ m}$ sendes i positiv $x$-retning langs en streng med lineær massetetthet $\\mu = 20,0 \\text{ g/m}$, som er spent opp med en snorstramming $F_T = 1,00 \\text{ N}$. Bølgeutslaget $y(0, 0) = 0$. Bestem uttrykket $y(x, t)$ som beskriver en slik bølge.</p>\n<ol>\n<li><b>A</b> $y(x,t) = (0,200 \\text{ m}) \\sin(12,6 \\text{ m}^{-1} \\cdot x - 88,9 \\text{ s}^{-1} \\cdot t)$.</li>\n<li><b>B</b> $y(x,t) = (0,200 \\text{ m}) \\sin(0,500 \\text{ m}^{-1} \\cdot x - 88,9 \\text{ s}^{-1} \\cdot t)$.</li>\n<li><b>C</b> $y(x,t) = (0,200 \\text{ m}) \\sin(0,500 \\text{ m}^{-1} \\cdot x - 1,00 \\text{ s}^{-1} \\cdot t)$.</li>\n<li><b>D</b> $y(x,t) = (0,200 \\text{ m}) \\sin(12,6 \\text{ m}^{-1} \\cdot x - 1,00 \\text{ s}^{-1} \\cdot t)$.</li>\n<li><b>E</b> $y(x,t) = (0,200 \\text{ m}) \\sin(12,6 \\text{ m}^{-1} \\cdot x - 0,0707 \\text{ s}^{-1} \\cdot t)$.</li>\n</ol>"
-                    },
-                    {
-                        "topic": "Bølgefysikk",
-                        "task_number": "20",
-                        "points": 20,
-                        "task_text": "<p>a) Stående bølger danner seg for visse frekvenser på en vibrerende streng med lengde $L$ som er spent fast i begge ender. Snorstrammingen holdes hele tiden konstant. Hvilken påstand om stående bølger på en slik streng er riktig (en knute er et punkt på strengen som ligger i ro hele tiden)?</p>  \n\n<ol>  \n<li><b>A</b> Avstanden mellom to naboknuter er $\\frac{1}{2}$</li>  \n<li><b>B</b> Avstanden mellom to naboknuter er $>$</li>  \n<li><b>C</b> Avstanden mellom to naboknuter er $2$</li>  \n<li><b>D</b> Bølgefarten øker for økende verdier av ordenstallet $n$</li>  \n<li><b>E</b> Bølgefarten avtar for økende verdier av ordenstallet $n$</li>  \n</ol>  \n\n<h3>b)</h3>  \n<p>Figuren under viser den stående bølgen som oppstår på en streng festet i endepunktene, ved en frekvens på $150$ Hz:</p>  \n\n<ol>  \n<li><b>A</b> $50,0$ Hz</li>  \n<li><b>B</b> $37,5$ Hz</li>  \n<li><b>C</b> $30,0$ Hz</li>  \n<li><b>D</b> $25,0$ Hz</li>  \n<li><b>E</b> $75,0$ Hz</li>  \n</ol>"
+                        "task_text": "<p>a) En vibrerende streng med lengde L spent fast i begge ender. L = $1,0$ m, masse $5,0$ g og snorstramming $F_T = 50$ N er. Bestem grunnfrekvensen til strengen, dvs. den laveste frekvensen som gir en stående bølge.</p><ol><li><b>A</b> $10$ Hz</li><li><b>B</b> $20$ Hz</li><li><b>C</b> $30$ Hz</li><li><b>D</b> $40$ Hz</li><li><b>E</b> $50$ Hz</li></ol><h3>b)</h3><p>En bestemt streng med lengde $L$, lineær massetetthet $\\mu$ og snorstramming $F_T$ som er spent opp i begge ender, vibrerer med grunnfrekvensen $f$ (dvs. frekvensen tilsvarende ordenstall $n = 1$). Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært $L/2$, massetettheten $\\mu/2$ og snorstrammingen $F_T$ (dvs. alle størrelser halveres)?</p><ol><li><b>A</b> $f/2$</li><li><b>B</b> $f$</li><li><b>C</b> $2f$</li><li><b>D</b> $4f$</li></ol>"
                     }
                 ]
             },
             "H22": {
-                "tasks": []
-            },
-            "K22": {
                 "tasks": [
                     {
                         "topic": "Kinematikk",
                         "task_number": "6",
                         "points": 2,
-                        "task_text": "<p>Figuren over viser akselerasjonsgrafen til et tog som kjører rettlinjet mellom to stasjoner. Toget starter ved $t = 0$ med null fart, og stopper ved $t_5$. Hvilken påstand om togets bevegelse er riktig?</p>  \n<ol>  \n<li><b>A</b> Toget har maksimal fart ved $t_3$ og $t_4$</li>  \n<li><b>B</b> Toget har maksimal fart ved $t_3$ (men ikke $t_4$)</li>  \n<li><b>C</b> Toget har maksimal fart ved $t_4$ (men ikke $t_3$)</li>  \n<li><b>D</b> Togets fart avtar jevnt fra $t_1$ til $t_5$</li>  \n<li><b>E</b> Toget har maksimal fart ved $t_2$</li>  \n</ol>"
+                        "task_text": "<p>Figuren over viser akselerasjonsgrafen til et tog som kjører rettlinjet mellom to stasjoner. Toget starter ved $t = 0$ med null fart, og stopper ved $t_5$. Hvilken påstand om togets bevegelse er riktig?</p>\n\n<ol>\n<li><b>A</b> Toget har maksimal fart ved $t_3$ og $t_4$</li>\n<li><b>B</b> Toget har maksimal fart ved $t_3$ (men ikke $t_4$)</li>\n<li><b>C</b> Toget har maksimal fart ved $t_4$ (men ikke $t_3$)</li>\n<li><b>D</b> Togets fart avtar jevnt fra $t_1$ til $t_5$</li>\n<li><b>E</b> Toget har maksimal fart ved $t_2$</li>\n</ol>"
                     },
                     {
                         "topic": "Kinematikk",
                         "task_number": "7",
                         "points": 1,
-                        "task_text": "<h3>a)</h3>\n<p>I forbindelse med en forbikjøring øker en bil farten fra $50$ km/h til $90$ km/h i løpet av $3,0$ s. Bilen beveger seg hele tiden rettlinjet og med konstant akselerasjon. Hvor langt beveger bilen seg under denne fartsøkningen?</p>\n<ol>\n<li><b>A:</b> $1.10^2$ m</li>\n<li><b>B:</b> $58$ m</li>\n<li><b>C:</b> $29$ m</li>\n<li><b>D:</b> $1,2 \\times 10^2$ m</li>\n<li><b>E:</b> $75$ m</li>\n</ol>\n\n<h3>b)</h3>\n<p>En stein kastes loddrett oppover med startfart $10$ m/s et sted på jorda der tyngdeakselerasjonen er $g = 9,81$ m/s$^2$. Hvor høyt over utgangspunktet kommer steinen?</p>\n<ol>\n<li><b>A:</b> $51$ m</li>\n<li><b>B:</b> $1,0 \\times 10^2$ m</li>\n<li><b>C:</b> $1,0$ m</li>\n<li><b>D:</b> $5,1$ m</li>\n<li><b>E:</b> $10$ m</li>\n</ol>"
+                        "task_text": "<h3>a)</h3>\n<p>I forbindelse med en forbikjøring øker en bil farten fra $50$ km/h til $90$ km/h i løpet av $3,0$ s. Bilen beveger seg hele tiden rettlinjet og med konstant akselerasjon. Hvor langt beveger bilen seg under denne fartsøkningen?</p>\n<ol>\n<li><b>A</b> $1.10^2$ m</li>\n<li><b>B</b> $58$ m</li>\n<li><b>C</b> $29$ m</li>\n<li><b>D</b> $1,2 \\times 10^2$ m</li>\n<li><b>E</b> $75$ m</li>\n</ol>\n\n<h3>b)</h3>\n<p>En stein kastes loddrett oppover med startfart $10$ m/s et sted på jorda der tyngdeakselerasjonen er $g = 9,81$ m/s$^2$. Hvor høyt over utgangspunktet kommer steinen?</p>\n<ol>\n<li><b>A</b> $51$ m</li>\n<li><b>B</b> $1,0 \\times 10^2$ m</li>\n<li><b>C</b> $1,0$ m</li>\n<li><b>D</b> $5,1$ m</li>\n<li><b>E</b> $10$ m</li>\n</ol>"
                     },
                     {
                         "topic": "Kinematikk",
                         "task_number": "8",
                         "points": 2,
-                        "task_text": "<p>En ball blir skutt ut fra en helt horisontal flate på jorden med startfart $v_0 = 10$ m/s og utskytingsvinkel $\\alpha = 30^\\circ$. Hvor langt fra startpunktet lander ballen (dvs. bestem størrelsen $x$ i figuren)?</p>\n\n<ol>\n<li><b>A)</b> $x = 4,4$ m</li>\n<li><b>B)</b> $x = 5,1$ m</li>\n<li><b>C)</b> $x = 8,8$ m</li>\n<li><b>D)</b> $x = 18$ m</li>\n<li><b>E)</b> $x = 2,5$ m</li>\n</ol>"
+                        "task_text": "<p>En ball blir skutt ut fra en helt horisontal flate på jorden med startfart $v_0 = 10$ m/s og utskytingsvinkel $\\alpha = 30^\\circ$. Se figuren over. Hvor langt fra startpunktet lander ballen (dvs. bestem størrelsen $x$ i figuren)?</p>\n\n<ol>\n<li><b>A</b> $x = 4,4$ m</li>\n<li><b>B</b> $x = 5,1$ m</li>\n<li><b>C</b> $x = 8,8$ m</li>\n<li><b>D</b> $x = 18$ m</li>\n<li><b>E</b> $x = 2,5$ m</li>\n</ol>"
                     },
                     {
                         "topic": "Dynamikk",
                         "task_number": "9",
                         "points": 2,
-                        "task_text": "En badevekt er kalibrert til å angi krafta som presser ned på vekta, i antall newton. Badevekta stilles på et horisontalt underlag. Når en person står i ro på vekta, viser den 700 N. Den samme personen hopper ned på vekta fra en stol.\n\nHva viser vekta i det korte tidsrommet innen personen kommer til ro oppå vekta, dersom personen er i kontakt med badevekta i hele tidsrommet? Vi antar at vekta viser konstant kraft i dette tidsrommet.\n\n<ol>\n<li><b>A</b> Mer enn 700 N</li>\n<li><b>B</b> 700 N</li>\n<li><b>C</b> Mindre enn 700 N (men mer enn 0 N)</li>\n</ol>"
+                        "task_text": "<p>En badevekt er kalibrert til å angi krafta som presser ned på vekta, i antall newton. Badevekta stilles på et horisontalt underlag. Når en person står i ro på vekta, viser den $700$ N. Den samme personen hopper ned på vekta fra en stol.</p>\n\n<p>Hva viser vekta i det korte tidsrommet innen personen kommer til ro oppå vekta, dersom personen er i kontakt med badevekta i hele tidsrommet? Vi antar at vekta viser konstant kraft i dette tidsrommet.</p>\n\n<ol>\n<li><b>A</b> Mer enn $700$ N</li>\n<li><b>B</b> $700$ N</li>\n<li><b>C</b> Mindre enn $700$ N (men mer enn $0$ N)</li>\n</ol>"
                     },
                     {
-                        "topic": "Rotasjonsdynamikk",
+                        "topic": "Sirkelbevegelse",
                         "task_number": "10",
                         "points": 12,
-                        "task_text": "<p>I et enkelt forsøk skal en kule med masse $m$ festes til en lett snor, og holdes i jevn, horisontal sirkelbevegelse med rundetid $T$. Snora går gjennom en friksjonsfri plastsylinder som en person beveger forsiktig for å opprettholde den horisontale sirkelbevegelsen til kula. Den delen av snora som fører kula i en sirkelbevegelse, har lengde $1$. I den andre enden av snora er det festet et lodd med masse $M$, som henger vertikalt. Snora som kula er festet til, danner vinkelen $\\theta$ med den delen av snora som loddet er festet til. Se figuren over.</p>\n\n<h3>a)</h3>\n<p>Tegn inn kreftene som virker på loddet og kula når kula går i en horisontal sirkel, og loddet henger i ro. For full uttelling må figuren vise et rimelig størrelsesforhold mellom de ulike kreftene.</p>\n\n<h3>b)</h3>\n<p>Vis at dersom kulas omløpstid er $T$, er loddets masse gitt ved $M = \\frac{4\\pi^2 l}{gT^2} m$.</p>\n\n<h3>c)</h3>\n<p>Gitt at kula har massen $m = 0,30$ kg, snorlengden er $l = 2,0$ m og perioden er $T = 2,0$ s. Vis at loddet da har massen $M = 0,60$ kg.</p>\n\n<h3>d)</h3>\n<p>Hva er vinkelen $\\theta$ mellom den loddrette delen av snora, og den delen som kula er festet til? Systemet har verdiene angitt i deloppgave c).</p>"
+                        "task_text": "<p>I et enkelt forsøk skal en kule med masse $m$ festes til en lett snor, og holdes i jevn, horisontal sirkelbevegelse med rundetid $T$. Snora går gjennom en friksjonsfri plastsylinder som en person beveger forsiktig for å opprettholde den horisontale sirkelbevegelsen til kula. Den delen av snora som fører kula i en sirkelbevegelse, har lengde $1$. I den andre enden av snora er det festet et lodd med masse $M$, som henger vertikalt. Snora som kula er festet til, danner vinkelen $0$ med den delen av snora som loddet er festet til. Se figuren under.</p>\n\n<h3>a)</h3>\n<p>Tegn inn kreftene som virker på loddet og kula når kula går i en horisontal sirkel, og loddet henger i ro. For full uttelling må figuren vise et rimelig størrelsesforhold mellom de ulike kreftene.</p>\n\n<h3>b)</h3>\n<p>Vis at dersom kulas omløpstid er $T$, er loddets masse gitt ved $M = \\frac{4\\pi^2 l}{gT^2} m$.</p>\n\n<h3>c)</h3>\n<p>Gitt at kula har massen $m = 0,30$ kg, snorlengden er $l = 2,0$ m og perioden er $T = 2,0$ s. Vis at loddet da har massen $M = 0,60$ kg.</p>\n\n<h3>d)</h3>\n<p>Hva er vinkelen mellom den loddrette delen av snora, og den delen som kula er festet til? Systemet har verdiene angitt i deloppgave c).</p>"
                     },
                     {
-                        "topic": "Dynamikk",
+                        "topic": "Sirkelbevegelse",
                         "task_number": "11",
                         "points": 2,
-                        "task_text": "<p>En syklist skal sykle, med konstant fart $v = 10$ m/s i forhold til bakken, fra $A$ til $B$ og tilbake igjen. Det blåser en konstant vind med retning fra $A$ til $B$, der vindhastigheten i forhold til bakken er konstant lik $v_0 = 5,0$ m/s. Syklisten produserer en konstant effekt $P_1$ fra $A$ til $B$ (i \"medvind\"), og en effekt $P_2$ tilbake fra $B$ til $A$ (i \"motvind\"). Se figuren over.</p>\n\n<p>Hva er forholdet mellom effektene $P_2$ og $P_1$ som syklisten må produsere for å motvirke luftmotstanden $f$? Vi antar at luftmotstanden er proporsjonal med kvadratet av relativfarten til syklisten i forhold til lufta, dvs. $f = k(v \\pm v_0)^2$, der proporsjonalitetskonstanten $k$ er den samme for hele sykkelturen.</p>\n\n<ol>\n<li><b>A</b> $\\frac{P_2}{P_1} = 20$</li>\n<li><b>B</b> $\\frac{P_2}{P_1} = 12$</li>\n<li><b>C</b> $\\frac{P_2}{P_1} = 2$</li>\n<li><b>D</b> $\\frac{P_2}{P_1} = 9$</li>\n<li><b>E</b> $\\frac{P_2}{P_1} = 4$</li>\n</ol>"
+                        "task_text": "<p>En syklist skal sykle, med konstant fart $v = 10$ m/s i forhold til bakken, fra A til B og tilbake igjen. Det blåser en konstant vind med retning fra A til B, der vindhastigheten i forhold til bakken er konstant lik $v_0 = 5,0$ m/s. Syklisten produserer en konstant effekt $P_1$ fra A til B (i \"medvind\"), og en effekt $P_2$ tilbake fra B til A (i \"motvind\"). Hva er forholdet mellom effektene $P_2$ og $P_1$ som syklisten må produsere for å motvirke luftmotstanden $f$? Vi antar at luftmotstanden er proporsjonal med kvadratet av relativfarten til syklisten i forhold til lufta, dvs. $f = k(v \\pm v_0)^2$, der proporsjonalitetskonstanten $k$ er den samme for hele sykkelturen.</p>\n\n<ol>\n<li><b>A</b> $\\frac{P_2}{P_1} = 20$</li>\n<li><b>B</b> $\\frac{P_2}{P_1} = 12$</li>\n<li><b>C</b> $\\frac{P_2}{P_1} = 2$</li>\n<li><b>D</b> $\\frac{P_2}{P_1} = 9$</li>\n<li><b>E</b> $\\frac{P_2}{P_1} = 4$</li>\n</ol>"
                     },
                     {
-                        "topic": "Rotasjonsdynamikk",
+                        "topic": "Treghetsmoment",
                         "task_number": "12",
                         "points": 2,
                         "task_text": "<p>Et legeme er formet som en likesidet trekant der hver side er en tynn, uniform stang med lengde $L$ og masse $M$. Hva er treghetsmomentet til legemet om en akse med retning normalt på figurplanet og som går gjennom det ene hjørnet?</p>\n\n<ol>\n<li><b>A</b> $I = \\frac{3\\sqrt{3}}{2} ML^2$</li>\n<li><b>B</b> $I = \\frac{1}{2}ML^2$</li>\n<li><b>C</b> $I = ML^2$</li>\n<li><b>D</b> $I = ML^2$</li>\n<li><b>E</b> $I = 3ML^2$</li>\n</ol>"
                     },
                     {
-                        "topic": "Dynamikk",
+                        "topic": "Mekanikk",
                         "task_number": "13",
                         "points": 20,
                         "task_text": "<p>I en gammeldags heis er heisvogna med masse $m_1 = 5,0 \\cdot 10^2$ kg forbundet til et lodd (\"motvekt\") med masse $m_2 = 2,0 \\cdot 10^2$ kg, via en kabel med neglisjerbar masse. Kabelen løper over en massiv, skiveformet trinse med masse $M = 1,0 \\cdot 10^2$ kg og radius $R = 1,0$ m. Trinsa er koblet til en elektromotor som roterer trinsa slik at heisen går opp eller ned. Kabelen går over trinsa uten å gli mot trinsa.</p>\n\n<h3>a)</h3>\n<p>Tegn kreftene på heisvogna, loddet, samt snorkreftene fra kabelen på trinsa, når heisen står i ro. Alle krefter må ha navn, og det må være et rimelig størrelsesforhold mellom kreftene.</p>\n\n<h3>b)</h3>\n<p>Forklar kort hvorfor draget i kabelen på heisvogna er forskjellig fra draget i kabelen på loddet når heisvogna går med konstant fart oppover.</p>\n\n<h3>c)</h3>\n<p>Beregn draget i kabelen festet til heisvogna når den går med konstant fart oppover.</p>\n\n<h3>d)</h3>\n<p>Beregn draget i kabelen festet til heisvogna når den går med konstant akselerasjon $1,0$ m/s$^2$ oppover.</p>\n\n<h3>e)</h3>\n<p>Hvor stor effekt må elektromotoren produsere for at heisvogna skal gå oppover med konstant fart $v = 3,0$ m/s?</p>"
                     },
                     {
-                        "topic": "Svingninger",
+                        "topic": "Treghetsmoment",
                         "task_number": "14",
                         "points": 2,
                         "task_text": "<p>En torsjonspendel består av en tynn stang med masse $M = 1,0$ kg og lengde $L = 0,50$ m som henger i en tråd med torsjonskonstant $K$, som er festet midt på stanga. Stanga svinger i horisontalplanet om en vertikal akse som står vinkelrett på stanga. Pendelens svingetid måles til $T = 2,0$ s. Hva blir verdien for torsjonskonstanten $k$?</p>\n\n<ol>\n<li><b>A)</b> $K = 0,75$ Nm/rad</li>\n<li><b>B)</b> $K = 0,26$ Nm/rad</li>\n<li><b>C)</b> $K = 0,21$ Nm/rad</li>\n<li><b>D)</b> $K = 0,065$ Nm/rad</li>\n<li><b>E)</b> $K = 0,82$ Nm/rad</li>\n</ol>"
@@ -182,13 +175,13 @@
                         "topic": "Svingninger",
                         "task_number": "15",
                         "points": 2,
-                        "task_text": "<p>En kloss med masse $0,20$ kg er nedsenket i en væske og er festet til en fjær med fjærkonstant $90$ N/m. Klossen dyttes på av en harmonisk ytre kraft $F(t)$ gitt ved $F(t) = (50$ N$) \\sin(30$ s$^{-1}t)$. I tillegg virker det fra væska på klossen en kraft $f$ rettet mot klossens fartsretning, og med absoluttverdi $f = bv$, der $v$ er klossens fart og dempingskonstanten $b = 2,0$ kg/s. Bestem den resulterende amplituden til svingebevegelsen for klossen.</p>\n\n<ol>\n<li><b>A</b> $A = 1,2 \\times 10^{-3}$ m</li>\n<li><b>B</b> $A = 0,46$ m</li>\n<li><b>C</b> $A = 0,60$ m</li>\n<li><b>D</b> $A = 1,7$ m</li>\n<li><b>E</b> $A = 1,6$ m</li>\n</ol>"
+                        "task_text": "<p>En kloss med masse $0,20$ kg er nedsenket i en væske og er festet til en fjær med fjærkonstant $90$ N/m. Klossen dyttes på av en harmonisk ytre kraft $F(t)$ gitt ved $F(t) = (50$ N$) \\sin(30$ s$^{-1}t)$. I tillegg virker det fra væska på klossen en kraft $f$ rettet mot klossens fartsretning, og med absoluttverdi $f = bv$, der $v$ er klossens fart og dempingskonstanten $b = 2,0$ kg/s. Bestem den resulterende amplituden til svingebevegelsen for klossen.</p>\n\n<ol>\n<li><b>A:</b> $A = 1,2 \\cdot 10^{-3}$ m</li>\n<li><b>B:</b> $A = 0,46$ m</li>\n<li><b>C:</b> $A = 0,60$ m</li>\n<li><b>D:</b> $A = 1,7$ m</li>\n<li><b>E:</b> $A = 1,6$ m</li>\n</ol>"
                     },
                     {
                         "topic": "Fluidmekanikk",
                         "task_number": "17",
                         "points": 12,
-                        "task_text": "<p>Vann strømmer mot høyre gjennom en helt fylt, horisontal vannledning som består av en bred del med diameter $D_1 = 2,0$ m og lengde $L_1 = 30$ m, og en smal del med diameter $D_2 = 0,50$ m og lengde $L_2 = 20$ m. Se figuren over.</p>\n\n<h3>a)</h3>\n<p>Begrunn kort hvorfor trykket i den brede delen av røret er større enn i den smale delen, når trykkmålingen gjøres i samme høyde og vi ser bort fra alle former for tap.</p>\n\n<h3>b)</h3>\n<p>En sensor måler en volumstrøm på $0,60$ m$^3$/s i røret. Bestem trykkdifferansen $P_1 - P_2$ mellom hhv. bred og smal del av røret, dersom vi ser bort fra alle former for tap.</p>\n\n<h3>c)</h3>\n<p>Begge rørdelene har samme ruhet $\\epsilon = 0,10$ mm. Bestem friksjonstallet i Darcy-Weisbachs lov for de to rørdelene.</p>\n\n<h3>d)</h3>\n<p>Bestem tapshøyden for vannledningen, når vi tar hensyn til rørfriksjon samt en tapskoeffisient for overgangen mellom bred og smal del. Væskefarten i den smale delen av røret er bestemmende for tapet i enkeltmotstanden.</p>"
+                        "task_text": "<p>Vann strømmer mot høyre gjennom en helt fylt, horisontal vannledning som består av en bred del med diameter $D_1 = 2,0$ m og lengde $L_1 = 30$ m, og en smal del med diameter $D_2 = 0,50$ m og lengde $L_2 = 20$ m. Se figuren under.</p>\n\n<h3>a)</h3>\n<p>Begrunn kort hvorfor trykket i den brede delen av røret er større enn i den smale delen, når trykkmålingen gjøres i samme høyde og vi ser bort fra alle former for tap.</p>\n\n<h3>b)</h3>\n<p>En sensor måler en volumstrøm på $0,60$ m$^3$/s i røret. Bestem trykkdifferansen $p_1 - p_2$ mellom hhv. bred og smal del av røret, dersom vi ser bort fra alle former for tap.</p>\n\n<h3>c)</h3>\n<p>Begge rørdelene har samme ruhet $\\epsilon = 0,10$ mm. Bestem friksjonstallet i Darcy-Weisbachs lov for de to rørdelene.</p>\n\n<h3>d)</h3>\n<p>Bestem tapshøyden for vannledningen, når vi tar hensyn til rørfriksjon samt en tapskoeffisient $\\zeta$ for overgangen mellom bred og smal del. Væskefarten i den smale delen av røret er bestemmende for tapet i enkeltmotstanden.</p>"
                     },
                     {
                         "topic": "Bølgefysikk",
@@ -197,16 +190,136 @@
                         "task_text": "<h3>a)</h3>\n<p>Hva blir amplituden til den resulterende bølgen?</p>\n<ol>\n<li><b>A</b> $0,50$ m</li>\n<li><b>B</b> $1,0$ m</li>\n<li><b>C</b> $4,0$ m</li>\n<li><b>D</b> $2,0$ m</li>\n<li><b>E</b> $1,5$ m</li>\n</ol>\n\n<h3>b)</h3>\n<p>Hva blir bølgelengden til den resulterende bølgen?</p>\n<ol>\n<li><b>A</b> $0,50$ m</li>\n<li><b>B</b> $6,3$ m</li>\n<li><b>C</b> $1,6$ m</li>\n<li><b>D</b> $3,1$ m</li>\n<li><b>E</b> $1,0$ m</li>\n</ol>"
                     },
                     {
-                        "topic": "Bølgefysikk",
+                        "topic": "Svingninger",
                         "task_number": "19",
                         "points": 1,
-                        "task_text": "<p>a) En pianotråd med lengde $2,0$ m og lineær massetetthet $5,0$ g/m vibrerer med grunnfrekvensen på $65$ Hz. Hva er snorstrammingen i tråden?</p>  \n<ol>  \n<li><b>A</b> $1,3 \\times 10^5$ N</li>  \n<li><b>B</b> $0,34$ kN</li>  \n<li><b>C</b> $1,3$ kN</li>  \n<li><b>D</b> $3,4 \\times 10^5$ N</li>  \n<li><b>E</b> $1,3$ N</li>  \n</ol>  \n\n<p>b) Gitt den samme pianostrengen som i oppgave a). Vi skal nå gradvis øke snorstrammingen, dvs. pianostrengen gjøres strammere, mens alle andre parametre holdes konstante. Hvilken påstand er riktig?</p>  \n<ol>  \n<li><b>A</b> Grunnfrekvensen er uendret</li>  \n<li><b>B</b> Grunnfrekvensen øker</li>  \n<li><b>C</b> Bølgefarten på strengen avtar</li>  \n<li><b>D</b> Bølgefarten på strengen er uendret</li>  \n<li><b>E</b> Grunnfrekvensen avtar</li>  \n</ol>"
+                        "task_text": "<h3>a)</h3>\n<p>En pianostreng med lengde $2.0$ m og lineær massetetthet $5.0$ g/m vibrerer med en grunnfrekvens på $65$ Hz. Hva er spenningen i strengen?</p>\n<ol>\n<li><b>A</b> $1.3 \\times 10^5$ N</li>\n<li><b>B</b> $0.34$ kN</li>\n<li><b>C</b> $1.3$ kN</li>\n<li><b>D</b> $3.4 \\times 10^5$ N</li>\n<li><b>E</b> $1.3$ N</li>\n</ol>\n\n<h3>b)</h3>\n<p>Med samme pianostreng som i del a). Vi øker nå spenningen gradvis, mens alle andre parametere (massetetthet og strenglengde) holdes konstante. Hvilket utsagn er riktig?</p>\n<ol>\n<li><b>A</b> Grunnfrekvensen forblir uendret</li>\n<li><b>B</b> Grunnfrekvensen øker</li>\n<li><b>C</b> Bølgefarten på strengen avtar</li>\n<li><b>D</b> Bølgefarten på strengen forblir uendret</li>\n<li><b>E</b> Grunnfrekvensen avtar</li>\n</ol>"
                     },
                     {
                         "topic": "Bølgefysikk",
                         "task_number": "20",
                         "points": 0,
-                        "task_text": "<p>Figuren over viser et stående bølgemønster på en streng oppspent i begge ender, som oppstår for en frekvens lik $500$ Hz. Hva er grunnfrekvensen til den samme strengen?</p>\n<ol>\n<li><b>A</b> $400$ Hz</li>\n<li><b>B</b> $83,3$ Hz</li>\n<li><b>C</b> $100$ Hz</li>\n<li><b>D</b> $125$ Hz</li>\n<li><b>E</b> $167$ Hz</li>\n</ol>"
+                        "task_text": "<p>Figuren over viser et stående bølgemønster på en streng oppspent i begge ender, som oppstår for en frekvens lik $500$ Hz. Hva er grunnfrekvensen til den samme strengen?</p><ol><li><b>A</b> $400$ Hz</li><li><b>B</b> $83,3$ Hz</li><li><b>C</b> $100$ Hz</li><li><b>D</b> $125$ Hz</li><li><b>E</b> $167$ Hz</li></ol>"
+                    }
+                ]
+            }
+        }
+    },
+    "MAST2200": {
+        "topics": [
+            "Materialteknikk",
+            "Legeringer",
+            "Fasediagrammer",
+            "Korrosjon",
+            "Diffusjon",
+            "Bruddmekanismer",
+            "Materialvalg"
+        ],
+        "ignored_topics": [],
+        "exams": {
+            "V24": {
+                "tasks": [
+                    {
+                        "topic": "Legeringer",
+                        "task_number": "1",
+                        "points": 13,
+                        "task_text": "<p>Hva kalles en legering som hovedsakelig inneholder kobber og tinn?</p>\n\n<p>Hva er vanlig navn for legeringer som hovedsakelig inneholder kobber og sink?</p>\n\n<h3>a)</h3>\n<p>Likevektsstrukturen til en blanding av kobber og nikkel beskrives ved et isomorft fasediagram. Forklar kvifor.</p>\n\n<h3>b)</h3>\n<p>Kva er maksimal løysingsevne av kobber i aluminium? Sj vedlegg Fasediagram.</p>\n\n<h3>c)</h3>\n<p>Aluminiumslegeringar i 2000-serien har kobber som det primære legeringselementet. Forklar korleis og kvifor desse legeringane kan oppnå høg flytestyrke.</p>\n\n<h3>d)</h3>\n<p>Kan kobber nyttast som katodisk vern av stål? Gi ei kort forklaring på det du kjem fram til.</p>\n\n<h3>e)</h3>\n<p>Gi ei kort forklaring på kva som hindrar korrosjon i rustfrie stål, både med omsyn på stålet sitt innhald og mekanismen som verkar.</p>"
+                    },
+                    {
+                        "topic": "Legeringer",
+                        "task_number": "2",
+                        "points": 3,
+                        "task_text": "<p>En legering består av kun kobber og tinn. Forholdet mellom antall kobberatomer og antall tinnatomer er $25:1$. Hva er vektprosenten av tinn i legeringen? Oppgi svaret avrundet til nærmeste hele tall.</p>"
+                    },
+                    {
+                        "topic": "Fasediagrammer",
+                        "task_number": "3",
+                        "points": 3,
+                        "task_text": "<p>Et stykke aluminiumsfolie har bredde lik $44$ cm, lengde lik $10$ m og den veier $180$ g. Hva er tykkelsen til denne folien?</p>\n<ol>\n<li><b>A</b> $< 10$ μm</li>\n<li><b>B</b> $15$ μm</li>\n<li><b>C</b> $25$ μm</li>\n<li><b>D</b> $35$ μm</li>\n<li><b>E</b> $45$ μm</li>\n<li><b>F</b> $55$ μm</li>\n<li><b>G</b> $65$ μm</li>\n<li><b>H</b> $> 75$ μm</li>\n</ol>\n\n<p>Aluminium reagerer raskt med oksygen i luft og danner et belegg av aluminiumoksid, $Al_2O_3$ på overflatene. Dette belegget er $4$ nanometer tykt. Hvor mye oksygen er i så fall bundet til aluminiumsfolien i forrige oppgave? Tettheten til aluminiumoksid er $3980$ kg/m³ og du kan anta at alle flater har blitt eksponert for oksygen.</p>\n<ol>\n<li><b>A</b> $< 10$ µg</li>\n<li><b>B</b> $15$ μg</li>\n<li><b>C</b> $25$ μg</li>\n<li><b>D</b> $35$ μg</li>\n<li><b>E</b> $45$ μg</li>\n<li><b>F</b> $55$ μg</li>\n<li><b>G</b> $65$ μg</li>\n<li><b>H</b> $> 70$ µg</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Materialteknikk",
+                        "task_number": "4",
+                        "points": 3,
+                        "task_text": "<p>Kobber, som har tetthet lik $8935$ kg/m$^3$, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten $a$ for enhetscellen til kobber.</p>\n\n<ol>\n<li><b>A</b> $180$ pm</li>\n<li><b>B</b> $216$ pm</li>\n<li><b>C</b> $240$ pm</li>\n<li><b>D</b> $288$ pm</li>\n<li><b>E</b> $360$ pm</li>\n<li><b>F</b> $405$ pm</li>\n<li><b>G</b> $450$ pm</li>\n<li><b>H</b> $480$ pm</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Fasediagrammer",
+                        "task_number": "5",
+                        "points": 3,
+                        "task_text": "<p>80 g av en legering av kobber og sølv som inneholder 30 vektprosent sølv varmes sakte opp fra romtemperatur til 900°C og holdes ved denne temperaturen til systemet er i fullstendig likevekt. Smeltemassen helles deretter ut av blandingen. Hvor mye fast stoff blir igjen? Det relevante fasediagrammet er gitt i et vedlegg. Velg ett alternativ:</p><ol><li><b>A</b> 0 g</li><li><b>B</b> 5 g</li><li><b>C</b> 10 g</li><li><b>D</b> 15 g</li><li><b>E</b> 20 g</li><li><b>F</b> 25 g</li><li><b>G</b> 30 g</li><li><b>H</b> 35 g</li></ol><p>Det faste stoffet som ble igjen i forrige oppgave avkjøles sakte til 700°C. Hva er vektprosenten av $\\beta$-fasen i blandingen av $\\alpha$ og $\\beta$ ved denne temperaturen? Velg ett alternativ:</p><ol><li><b>A</b> 0 vekt%</li><li><b>B</b> 5 vekt%</li><li><b>C</b> 10 vekt%</li><li><b>D</b> 15 vekt%</li><li><b>E</b> 20 vekt%</li><li><b>F</b> 25 vekt%</li><li><b>G</b> 30 vekt%</li><li><b>H</b> 35 vekt%</li></ol>"
+                    },
+                    {
+                        "topic": "Fasediagrammer",
+                        "task_number": "6",
+                        "points": 3,
+                        "task_text": "<p>En legering av kobber og sølv inneholder $4$ mol kobber og $6$ mol sølv. Legeringen varmes langsomt opp fra romtemperatur. Ved hvilken temperatur vil hele blandingen bli en smelte? Relevant fasediagram finner du i et vedlegg.</p>  \n\n<ol>  \n<li><b>A</b> $780^\\circ C$</li>  \n<li><b>B</b> $800^\\circ C$</li>  \n<li><b>C</b> $820^\\circ C$</li>  \n<li><b>D</b> $840^\\circ C$</li>  \n<li><b>E</b> $860^\\circ C$</li>  \n<li><b>F</b> $880^\\circ C$</li>  \n<li><b>G</b> $900^\\circ C$</li>  \n<li><b>H</b> $920^\\circ C$</li>  \n</ol>"
+                    },
+                    {
+                        "topic": "Fasediagrammer",
+                        "task_number": "7",
+                        "points": 2,
+                        "task_text": "<p>1. Forklar kort og presist hva som menes med en semi-uendelig plate.</p>\n\n<p>2. Hva er diffusjonskoeffisienten for karbon i stål ved disse betingelsene? Se tabellen i denne oppgaven.</p>\n\n<p>3. Hvor lang tid må platen holdes ved disse betingelsene for at konsentrasjonen av karbon ved en posisjon $1.0$ mm inn i platen blir $1.0$ wt%?</p>\n\n<p>4. Vis at betingelser for en semi-uendelig plate er oppfylt for tiden du har beregnet i forrige spørsmål.</p>\n\n<p>5. Platen ble dermed stående til over nyttår under betingelsene som er gitt over. Hvordan forventer du at konsentrasjonen av karbon varierer gjennom platen når juleferien er over?</p>\n\n<p>6. Tilbake etter jul, og passe irritert over tabben, slenger studenten platen rett i kaldt vann. Hva vil skje med materialet i platen nå?</p>\n\n<p>Tabell: Diffusjonsdata.</p>\n\n<p>Diffuserende art Vertmetall Do [m²/s] Qd [kJ/mol]</p>\n\n<p>C Fe (a-jern) $1.1 \\times 10^{-6}$ $87$</p>\n\n<p>C Fe (y-jern) $2.3 \\times 10^{-5}$ $148$</p>\n\n<p>N Fe (a-jern) $5.0 \\times 10^{-7}$ $77$</p>\n\n<p>N Fe (y-jern) $9.1 \\times 10^{-5}$ $168$</p>\n\n<p>Zn Cu $2.4 \\times 10^{-5}$ $189$</p>\n\n<p>Al Ni $6.5 \\times 10^{-5}$ $136$</p>\n\n<p>Cu Cu $1.9 \\times 10^{-4}$ $230$</p>"
+                    },
+                    {
+                        "topic": "Fasediagrammer",
+                        "task_number": "8",
+                        "points": 4,
+                        "task_text": "<p>Karbonstål med eutektoid sammensetning har $0.76$ wt% karbon. Hvor mange karbonatom har et slikt stål per $1000$ jernatom? Velg mellom $3$, $8$, $14$, $20$, $25$, $30$, $36$, $42$.</p>"
+                    },
+                    {
+                        "topic": "Fasediagrammer",
+                        "task_number": "9",
+                        "points": 4,
+                        "task_text": "<p>Karbonstål med $1.5$ wt% karbon er i likevekt som austenitt, og kjøles deretter langsomt ned til en temperatur lik $750^\\circ$C. Hvor stor del av materialet er sementitt ved denne temperaturen? Relevant diagram finner du i et vedlegg.</p><ol><li><b>O</b> $< 5$ wt%</li><li><b>O</b> $= 7$ wt%</li><li><b>O</b> $= 9$ wt%</li><li><b>O</b> $=11$ wt%</li><li><b>O</b> $=13$ wt%</li><li><b>O</b> $=15$ wt%</li><li><b>O</b> $=17$ wt%</li><li><b>O</b> $=19$ wt%</li><li><b>O</b> $=21$ wt%</li><li><b>O</b> $=23$ wt%</li><li><b>O</b> $> 25$ wt%</li></ol><p>Karbonstålet i forrige oppgave består nå av $\\alpha$-jern (ferritt) og kjøles videre ned til romtemperatur. Hvor stor del av materialet (i vektprosent)</p><ol><li><b>о</b> $= 10$ wt%</li><li><b>о</b> $= 20$ wt%</li><li><b>о</b> $= 30$ wt%</li><li><b>о</b> $= 40$ wt%</li><li><b>о</b> $= 50$ wt%</li><li><b>о</b> $= 60$ wt%</li><li><b>о</b> $= 70$ wt%</li><li><b>о</b> $= 80$ wt%</li><li><b>о</b> $= 90$ wt%</li><li><b>о</b> $= 100$ wt%</li></ol>"
+                    },
+                    {
+                        "topic": "Bruddmekanismer",
+                        "task_number": "10",
+                        "points": 14,
+                        "task_text": "<p>Gjør rede for forskjellen mellom sprøbrudd og duktilt brudd.</p>\n\n<p>Gjør kort rede for hva støpejern er.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til grått støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til hvitt støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til kulegrafittjern.</p>\n\n<p>Forklar kvifor grått og hvitt støpejern har liten eller ingen duktilitet, medan kulegrafittjern kan ha relativt høg duktilitet.</p>"
+                    },
+                    {
+                        "topic": "Bruddmekanismer",
+                        "task_number": "11",
+                        "points": 4,
+                        "task_text": "<p>I en komponent er det laget en overflatesprekk med lengde $a = 2$ mm. Komponenten utsettes så for en strekkspenning, og det oppstår et sprøbrudd når denne spenningen er $126$ MPa.</p>\n\n<p>Materialets bruddseighet samt geometriparameteren til systemet er ukjent, men det kan antas at geometriparameteren ikke er avhengig av sprekkens lengde.</p>\n\n<p>En identisk komponent med kun naturlige overflatesprekker utsettes så for en strekklast, og sprøbrudd oppstår ved en spenning lik $325$ MPa.</p>\n\n<p>Hva er lengden $a$ på overflatesprekken som førte til brudd i denne komponenten? Anta at sprekken er lokalisert og orientert på samme måte som den kunstige sprekken i den første komponenten.</p>\n\n<ol>\n<li><b>A</b> $<0.5$ mm</li>\n<li><b>B</b> $=0.6$ mm</li>\n<li><b>C</b> $=0.7$ mm</li>\n<li><b>D</b> $=0.8$ mm</li>\n<li><b>E</b> $=0.9$ mm</li>\n<li><b>F</b> $=1.0$ mm</li>\n<li><b>G</b> $=1.1$ mm</li>\n<li><b>H</b> $>1.2$ mm</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Bruddmekanismer",
+                        "task_number": "12",
+                        "points": 5,
+                        "task_text": "<p>En fritt opplagret bjelke er utsatt for en senterlast $F$ (tilsvarende som for en tre-punkts bøyetest). Lengde mellom opplagringer er $L = 180$ mm, bredden til bjelken er $10$ mm og høyden er $8$ mm. Ved en last $F = 1212$ N, blir det et sprøbrudd $43$ mm til venstre for midten av bjelken. Hva var maksimal bøyespenning i bjelken ved bruddets posisjon? Velg alternativet som er nærmest korrekt svar.</p>\n\n<ol>\n<li><b>A</b> $43$ MPa</li>\n<li><b>B</b> $89$ MPa</li>\n<li><b>C</b> $146$ MPa</li>\n<li><b>D</b> $212$ MPa</li>\n<li><b>E</b> $267$ MPa</li>\n<li><b>F</b> $332$ MPa</li>\n<li><b>G</b> $425$ MPa</li>\n<li><b>H</b> $510$ MPa</li>\n<li><b>I</b> $600$ MPa</li>\n<li><b>J</b> $800$ MPa</li>\n<li><b>K</b> $999$ MPa</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Materialvalg",
+                        "task_number": "13",
+                        "points": 0,
+                        "task_text": "<p>En søyle med lengde $L = 6$ m skal ha et sirkulært tverrsnitt. Søylen skal være så lett som mulig, og du må ta hensyn til knekkingslasten, som for det konkrete tilfellet er gitt ved:</p>\n\n<p>$$F_r = \\frac{\\pi^2 EI}{L^2}$$</p>\n\n<p>Søylen må akkurat tåle $50$ kN i trykk uten å knekke. Du trenger ikke ta hensyn til materialets trykkstyrke, siden det er antatt at knekking er den begrensende faktoren. Data for materialer med ID-nummer $1...9$ er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m³ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene. Diameteren til søylen er i utgangspunktet en fri variabel (for de tre første spørsmålene som følger).</p>\n\n<h3>a)</h3>\n\n<p>Hvilket materiale er mest optimalt? SVAR: (heltall, ID-nummer)</p>\n\n<h3>b)</h3>\n\n<p>Hvilket materiale er minst optimalt? SVAR: (heltall, ID-nummer)</p>\n\n<h3>c)</h3>\n\n<p>Hvor mange materialer er bedre enn materialet med ID-nummer $7$? SVAR: (antall)</p>\n\n<h3>d)</h3>\n\n<p>Nå er det bestemt at søylens diameter må være mindre enn $100$ mm. Hvor mange av materialene vil tilfredsstille dette kravet? SVAR: (antall)</p>"
+                    },
+                    {
+                        "topic": "Materialvalg",
+                        "task_number": "14",
+                        "points": 2,
+                        "task_text": "<p>Data for materialer med ID-nummer $1...9$ er gitt i vedlegget Materialvalg, der det er brukt enheter $Pa$ og $kg/m^3$ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene.</p>\n\n<p>Av de $9$ materialene, er fem av materialene fiktive, mens de fire andre materialene representerer vanlige konstruksjonsmetall.</p>\n\n<h3>a)</h3>\n<p>Hvilket materiale er en stållegering?</p>\n\n<h3>b)</h3>\n<p>Hvilket materiale er en aluminiumslegering?</p>\n\n<h3>c)</h3>\n<p>Hvilket materiale er en titanlegering?</p>\n\n<h3>d)</h3>\n<p>Hvilket materiale er en magnesiumlegering?</p>"
+                    },
+                    {
+                        "topic": "Materialteknikk",
+                        "task_number": "15",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt? Merk: i tilfelle der det kan argumenteres for at flere alternativer er delvis korrekte, skal du velge det alternativet som fremstår som gjennomgående korrekt og konsistent for alle med materialteknisk kompetanse.</p>\n\n<ol>\n<li><b>A</b> Elastisitetsmodulen (E-modulen) til de fleste metaller er lite påvirket av temperaturen så lenge temperaturen er under smeltepunktet.</li>\n<li><b>B</b> Temperert martensitt oppnås ved å varme martensitt til en temperatur over den eutektoide temperaturen, for så å holde denne temperaturen for en definert tid.</li>\n<li><b>C</b> Austenittiske stål er særlig utsatt for en brå omvandling fra duktil til sprø oppførsel ved lave temperaturer.</li>\n<li><b>D</b> Elektrisk resistivitet i metaller er generelt økende med økende temperatur.</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Materialteknikk",
+                        "task_number": "16",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt? Merk: i tilfelle der det kan argumenteres for at flere alternativer er delvis korrekte, skal du velge det alternativet som fremstår som gjennomgående korrekt og konsistent for alle med materialteknisk kompetanse.</p>\n\n<ol>\n<li><b>A:</b> For metaller med BCC krystallstruktur, er siging (creep) relevant ved temperaturer over ca. $0.4$ ganger smeltetemperaturen, mens dette ikke er tilfelle for metaller med FCC krystallstruktur.</li>\n<li><b>B:</b> Smeltetemperaturen til metaller gir en viss indikasjon på den potensielle øvre brukstemperaturen til materialet.</li>\n<li><b>C:</b> Krystallinske metaller blir sprø når temperaturen er under glasstransisjonstemperaturen.</li>\n<li><b>D:</b> Aluminium som er plastisk bearbeidet og dermed deformasjonsherdet, vil rekrystallisere og danne HCP-aluminium etter en gitt tid.</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Materialteknikk",
+                        "task_number": "17",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt? Merk: i tilfelle der det kan argumenteres for at flere alternativer er delvis korrekte, skal du velge det alternativet som fremstår som gjennomgående korrekt og konsistent for alle med materialteknisk kompetanse.</p>\n\n<ol>\n<li><b>A:</b> PTFE (polytetrafluoretylen) som vi finner i teflon, har spesielt høyt smeltepunkt på grunn av sterke hydrogenbindinger.</li>\n<li><b>B:</b> PE (polyetylen) har høyere smeltetemperatur enn PP (polypropylen) siden enklere molekyl pakkes lettere enn molekyl med sidegrupper.</li>\n<li><b>C:</b> Plastiserer (plasticizer) kan tilsettes f.eks. PVC (polyvinylklorid) for å øke glasstransisjonstemperaturen.</li>\n<li><b>D:</b> PVC (polyvinylklorid) har høyere smeltetemperatur enn PP (polypropylen) på grunn av sterkere dipolkrefter mellom molekylene.</li>\n</ol>"
                     }
                 ]
             }

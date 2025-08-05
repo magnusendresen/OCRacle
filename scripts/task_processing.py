@@ -223,8 +223,14 @@ async def get_exam_info() -> Exam:
     json_enum_topics = enum_to_str(get_topics_from_json(exam.subject))
 
     prev_topics = ""
-    if json_enum_topics is not None and len(json_enum_topics) > 3:
-        prev_topics = f"Følgende temaer er funnet i tidligere eksamner, som du dermed ikke trenger å skrive er: {json_enum_topics}, {json_ign_topics}. Om det ikke er noen temaer som mangler, svar kun med tallet null '0' (uten anførselstegn). "
+    if json_enum_topics is not None and len(json_enum_topics) > 1:
+        prev_topics = str(
+            f"Følgende temaer er funnet i tidligere eksamner, som du dermed ikke trenger å skrive er: {json_enum_topics}, {json_ign_topics}. " +
+            "Om det ikke er noen temaer som mangler, svar kun med tallet null '0' (uten anførselstegn). " +
+            "Dette betyr ikke nødvendigvis at de dekker hele denne eksamen, så du må da fortsatt finne de temaene som er relevante for denne eksamen. " +
+            "Hver eneste oppgave må ha et tema det passer til, ikke nødvendigvis et tema per oppgave, men hver oppgave må ha et tema. " +
+            "Hvis det er temaer som mangler, skriv alle temaene som mangler, separert med komma, nøyaktig likt formattert som ovenfor. "
+        )
         log(f"Previous topics found: {json_enum_topics}")
     else:
         log("No previous topics found.")
@@ -239,10 +245,13 @@ async def get_exam_info() -> Exam:
     )
 
     removed_topics = set()
-    if new_topics is not None and len(new_topics) > 3:
+
+    emphasize(input_ign_topics)
+
+    if new_topics is not None and len(new_topics) > 1:
         emphasize(f"New topics identified: {new_topics}")
 
-        if json_ign_topics is not None or input_ign_topics is not None:
+        if (json_ign_topics is not None and len(json_ign_topics) > 1) or (input_ign_topics is not None and len(input_ign_topics) > 0):        
             emphasize(f"Removing ignored topics.")
 
             new_topics_list_0 = [t.strip() for t in str(new_topics).split(',') if t.strip()]
@@ -262,8 +271,6 @@ async def get_exam_info() -> Exam:
             emphasize(f"Removed topics: {', '.join(removed_topics)}")
 
             emphasize(f"New topics after removal: {new_topics}")
-        else:
-            emphasize(f"No ignored topics to remove, keeping all topics. ")
 
         new_topics = [t.strip() for t in str(new_topics).split(',')]
 
@@ -320,31 +327,30 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     write_progress(progress, LLM_STEPS)
 
 
-
-    remove_topic = int(
-        await prompt_to_text.async_prompt_to_text(
-            (
-                PROMPT_CONFIG +
-                "Is this task directly related any of the following topics?: " + ", ".join([ignored for ignored in task_exam.ignored_topics]) + "\n" +
-                "If the task is related to a topic that could be considered within the scope of the above topics, respond with 1, " +
-                "and if the task is related to a topic that could be considered in the same realm as the topics, but not directly related, respond with 0. " +
-                "For example, if kjemi is above, things related to fysikk are not directly related, but reaksjonslikninger and periodesystemet are. "
-                "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! " +
-                "If it is, answer with a 1, otherwise answer with a 0. Here is the task text: " +
-                task_output
-            ),
-            max_tokens=1000,
-            is_num=True,
-            max_len=2,
+    if task_exam.ignored_topics is not None and len(task_exam.ignored_topics) > 1:
+        remove_topic = int(
+            await prompt_to_text.async_prompt_to_text(
+                (
+                    PROMPT_CONFIG +
+                    "Is this task directly related any of the following topics?: " + task_exam.ignored_topics + "\n" +
+                    "If the task is related to a topic that could be considered within the scope (e.g. likevekt i kjemi) of the above topics, respond with 1, " +
+                    "and if the task is related to a topic that could be considered in the same realm (e.g. fysikk og kjemi) as the topics, but not directly related, respond with 0. " +
+                    "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! " +
+                    "If it is, answer with a 1, otherwise answer with a 0. Here is the task text: " +
+                    task_output
+                ),
+                max_tokens=1000,
+                is_num=True,
+                max_len=2,
+            )
         )
-    )
 
-    if remove_topic:
-        log(f"Task {task_number_str}: ignored due to topic")
-        task_status[task_idx] = 8
-        progress = [task_status[t] for t in range(1, total_task_count + 1)]
-        write_progress(progress, LLM_STEPS)
-        return
+        if remove_topic:
+            log(f"Task {task_number_str}: ignored due to topic")
+            task_status[task_idx] = 8
+            progress = [task_status[t] for t in range(1, total_task_count + 1)]
+            write_progress(progress, LLM_STEPS)
+            return
 
     points_str = await prompt_to_text.async_prompt_to_text(
         PROMPT_CONFIG + load_prompt("extract_points") + task_output,
