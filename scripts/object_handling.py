@@ -44,7 +44,6 @@ def add_exam(subject: str, exam_version: str) -> None:
 
 def add_topics(
     subject: str,
-    exam_version: str,
     topics: List[Any],
     ignored_topics: Optional[List[str]] = None,
 ) -> None:
@@ -53,9 +52,7 @@ def add_topics(
         return
     data = _load_json()
     subject = subject.strip().upper()
-    exam_version = exam_version.strip()
     subj = data.setdefault(subject, {"topics": [], "ignored_topics": [], "exams": {}})
-    subj["exams"].setdefault(exam_version, {"tasks": []})
     existing = [t.name if isinstance(t, Enum) else t for t in subj.get("topics", [])]
     for topic in topics:
         topic_name = topic.name if isinstance(topic, Enum) else topic
