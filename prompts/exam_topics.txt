@@ -1,16 +1,17 @@
-Hva er de viktigste temaene i denne teksten?
-  Svar med en kommaseparert liste i norsk bokmål.
-  Hold deg til overordnede temaer som egner seg for eksamenskategorisering for eksamensøving. 
-  Eksempler på temaer fra noen eksamner, disse er for å gi deg en idé av inndelingen:
-  - Fysikk: Bevegelse, Mekanikk, Sirkelbevegelse, Rotasjonsmekanikk, Programmering, Fluidmekanikk, Svingninger, Bølgefysikk, Energi og arbeid, Impuls og støt.
-  - Matte: Partiell derivasjon, Kritiske Punkt, Retningsderivert og Gradient, Funksjonsforståelse, Taylor 1D, Fourierrekker, PDE, Fouriertransformasjon, Konvolusjon, DFT, IDFT.
-  - Programmering og numerikk: Matematiske operasjoner, Funksjoner, Sammenligningsoperatorer, Lister og indekser, Numpy og matriser, Analyse av listedata, Numerisk derivasjon, Numeriske metoder, Newtons metode, Differensialligning, Konvergensrate, Integrasjon, Numerisk derivasjon, Numerisk Integrasjon med Trapesmetoden, Eulers metode, Fikspunktiterasjon, Absolutt og relativ feil.
-  Svar kun med temaene, ikke med noe annet. Skriv temaene med stor forbokstav slik som eksemplene ovenfor.
-  Temaer som "Fysikk" eller "Matematikk" er misvisende, alt for generelle, og trolig neppe relevant i eksamnen.
-  Hvis teksten er skrevet på flere språk, svar med temaene på norsk bokmål.
-  Dersom temaet er ALLEREDE dekket helt eller nesten helt av ett av temaene nedenfor, IKKE skriv det. Vær likevel NØYE med å legge til nødvendige temaer.
-  Skriv altså bare NYE temaer som ikke allerede er dekket. 
-  Kategoriser temaer etter hovedoppgaver, ikke deloppgaver. 
-  Det trenger ikke nødvendigvis være et unikt tema for hver eneste oppgave, ettersom formålet med kategoriseringen er for eksamensøving.
-  DET ER VELDIG SJELDENT "N" ANTALL OPPGAVER TILSVARER "N" ANTALL TEMAER!!! DET ER TROLIG BETRAKTELIG FERRE TEMAER ENN OPPGAVER. 
-  Hvis  det ikke er nødvendig å legge til noen nye temaer siden de allerede er dekket, skal du svaret med tallet null "0" (uten anførselstegn) ingenting annet.
+Hva er hovedtemaene i denne teksten?  
+Svar med en kommaseparert liste på norsk bokmål. Skriv temaene med stor forbokstav.  
+
+Bruk overordnede temaer egnet for eksamenskategorisering.  
+Kategoriser etter hovedoppgaver, ikke deloppgaver. Det er ofte ca. 2/3 så mange temaer som oppgaver.  
+
+Eksempler på gode temaer fra noen tilfeldige eksamner:  
+Kinematikk, Dynamikk, Mekanikk, Sirkelbevegelse, Rotasjonsdynamikk, Programmering, Fluidmekanikk, Svingninger, Bølgefysikk, Energi og arbeid, Impuls og støt,  
+Partiell derivasjon, Kritiske Punkt, Retningsderivert og Gradient, Funksjonsforståelse, Taylor 1D, Fourierrekker, PDE, Fouriertransformasjon,  
+Konvolusjon, DFT, IDFT, Matematiske operasjoner, Funksjoner, Sammenligningsoperatorer, Lister og indekser, Numpy og matriser, Analyse av listedata,  
+Numerisk derivasjon, Newtons metode, Differensialligning, Konvergensrate, Numerisk Integrasjon med Trapesmetoden, Eulers metode, Fikspunktiterasjon,  
+Absolutt og relativ feil, Enhetsanalyse. 
+
+Eksempler på elendig dårlige temaer fra noen tilfeldige eksamner:  
+Fysikk, Kjemi, Matematikk, Værskemekanikk, Bevegelsesanalyse, Analyseteknikk, BMI, Akselerasjonsanalyse, Newtons lover.
+
+Hvis teksten er flerspråklig, bruk norsk bokmål i svaret.

@@ -210,62 +210,76 @@ async def get_exam_info() -> Exam:
 
     log("Extracting exam topics")
 
-    new_ignored_topics: List[str] = []
+    input_ign_topics: List[str] = []
     try:
         with IGNORED_FILE.open("r", encoding="utf-8") as f:
             ignored_raw = json.load(f).get("ignored", "")
-        new_ignored_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
+        input_ign_topics = [t.strip() for t in ignored_raw.split(",") if t.strip()]
     except Exception as e:
         log(f"Could not read ignored topics: {e}")
+    
+    json_ign_topics = get_ignored_topics_from_json(exam.subject)
 
-    ign_topics = get_ignored_topics_from_json(exam.subject)
+    json_enum_topics = enum_to_str(get_topics_from_json(exam.subject))
 
-    cur_topics = enum_to_str(get_topics_from_json(exam.subject))
-    if cur_topics is not None and len(cur_topics) > 3:
-        cur_topics = f"Godkjente temaer funnet i tidligere eksamner (som du dermed ikke trenger å skrive) er: {cur_topics}."
+    prev_topics = ""
+    if json_enum_topics is not None and len(json_enum_topics) > 3:
+        prev_topics = f"Følgende temaer er funnet i tidligere eksamner, som du dermed ikke trenger å skrive er: {json_enum_topics}, {json_ign_topics}. Om det ikke er noen temaer som mangler, svar kun med tallet null '0' (uten anførselstegn). "
+        log(f"Previous topics found: {json_enum_topics}")
     else:
-        cur_topics = f"Det er forløpig ingen temaer lagt til i {exam.subject} enda. Du SKAL ABSOLUTT DERFOR finne temaer selv i henhold til instruksene ovenfor. "
+        log("No previous topics found.")
 
-    emphasize(cur_topics)
+    emphasize(prev_topics)
 
     new_topics = await prompt_to_text.async_prompt_to_text(
-        PROMPT_CONFIG + load_prompt("exam_topics") + cur_topics + ocr_text,
+        PROMPT_CONFIG + load_prompt("exam_topics") + prev_topics + ocr_text,
         max_tokens=1000,
         is_num=False,
         max_len=4000,
     )
 
+    removed_topics = set()
     if new_topics is not None and len(new_topics) > 3:
         emphasize(f"New topics identified: {new_topics}")
-    else:
-        print(f"No new topics identified due to new_topics being {new_topics}")
-        new_topics = []
 
-    if new_topics is not None and len(new_topics) > 3 and (ign_topics is not None or new_ignored_topics is not None):
-        emphasize(f"Removing ignored topics.")
-        new_topics = await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG + "Fjern alle temaer knyttet til " + ', '.join(new_ignored_topics) + " fra listen." + new_topics + 
-            ". Skriv kun de temaene som er igjen, separert med komma, nøyaktig likt formattert som ovenfor.",
-            max_tokens=1000,
-            is_num=False,
-            max_len=4000,
-        )
+        if json_ign_topics is not None or input_ign_topics is not None:
+            emphasize(f"Removing ignored topics.")
 
-    if new_topics is not None and len(new_topics) > 3:
-        emphasize(f"New topics after removal: {new_topics}")
+            new_topics_list_0 = [t.strip() for t in str(new_topics).split(',') if t.strip()]
+
+            new_topics = await prompt_to_text.async_prompt_to_text(
+                PROMPT_CONFIG + "Fjern alle temaer direkte knyttet til " + ', '.join(input_ign_topics) + json_ign_topics + " fra listen." + new_topics + 
+                ". Skriv kun de temaene som er igjen, separert med komma, nøyaktig likt formattert som ovenfor. ",
+                max_tokens=1000,
+                is_num=False,
+                max_len=4000,
+            )
+
+            new_topics_list_1 = [t.strip() for t in str(new_topics).split(',') if t.strip()]
+
+            removed_topics = set(new_topics_list_0) - set(new_topics_list_1)
+
+            emphasize(f"Removed topics: {', '.join(removed_topics)}")
+
+            emphasize(f"New topics after removal: {new_topics}")
+        else:
+            emphasize(f"No ignored topics to remove, keeping all topics. ")
+
         new_topics = [t.strip() for t in str(new_topics).split(',')]
 
-
+    else:
+        print(f"No new topics identified due to response being {new_topics}")
+        new_topics = []
 
     object_handling.add_topics(
-        exam.subject, exam.exam_version, new_topics, exam.ignored_topics
+        exam.subject, exam.exam_version, new_topics, removed_topics
     )
 
     exam.exam_topics = get_topics_from_json(exam.subject)
     log(f"Total topics in subject is now: {len(list(exam.exam_topics))}")
 
     exam.ignored_topics = get_ignored_topics_from_json(exam.subject)
-    log(f"Added ignored topics: {', '.join(exam.ignored_topics)}")
+    log(f"Ignored topics is now: {exam.ignored_topics}")
 
 
     total_task_count = len(exam.task_numbers)

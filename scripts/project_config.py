@@ -40,8 +40,8 @@ __all__ = [
 def load_prompt(name: str) -> str:
     with open(PROMPT_DIR / f"{name}.txt", "r", encoding="utf-8") as f:
         content = f.read()
-        if len(content.strip()) == 0:
-            print(f"Warning: Prompt '{name}' is empty.")
+        if len(content.strip()) < 10:
+            emphasize(f"Warning: Prompt '{name}' is empty.")
         return content
     
 def emphasize(text: str) -> str:
