@@ -32,6 +32,15 @@ CANNY_LOW, CANNY_HIGH = 50, 150
 DILATE_KERNEL_SIZE = 5
 DILATE_ITER = 2
 
+# Expansion and detection parameters
+STEP_PIXELS = 2
+MAX_EXPANSION_PIXELS = 200
+TYPE_SAMPLE_COUNT = 10
+TYPE_TOLERANCE_RATIO = 0.05
+COLOR_CHANGE_LIMIT = 20
+OPEN_AREA_CONTRAST_THRESHOLD = 2
+OPEN_AREA_PIXEL_STREAK = 30
+
 
 def _bbox_iou(b1, b2):
     x1, y1, w1, h1 = b1
@@ -52,10 +61,23 @@ async def _get_text(img: np.ndarray) -> str:
     return await asyncio.to_thread(pytesseract.image_to_string, pil_img, lang="eng+nor")
 
 
-def _edge_match(a: np.ndarray, b: np.ndarray) -> float:
-    if a.size == 0 or b.size == 0:
-        return 0.0
-    return np.mean(np.all(a == b, axis=2))
+def _contrast_value(region: np.ndarray) -> int:
+    reshaped = region.reshape(-1, 3)
+    unique = np.unique(reshaped, axis=0)
+    return 0 if len(unique) <= 1 else len(unique)
+
+
+def _average_color_value(region: np.ndarray) -> float:
+    return np.mean(region.reshape(-1, 3), axis=0).mean()
+
+
+def _most_common_color(values: List[float]) -> float:
+    arr = np.array(values, dtype=int)
+    tolerance = max(1, int(255 * TYPE_TOLERANCE_RATIO))
+    hist = np.bincount(arr, minlength=256)
+    window = np.ones(tolerance * 2 + 1, dtype=int)
+    grouped = np.convolve(hist, window, mode="same")
+    return float(np.argmax(grouped))
 
 
 def _expand_direction(
@@ -63,96 +85,62 @@ def _expand_direction(
 ) -> Tuple[int, int, int, int]:
     orig = (x0, y0, x1, y1)
     cur = orig
-    triggered = False
-    high_streak = 0
-    pre_streak = orig
     h, w = img.shape[:2]
-    for i in range(2, 200, 2):
+    color_samples: List[float] = []
+    prev_type: Optional[float] = None
+    open_streak = 0
+    pre_open = orig
+    for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS, STEP_PIXELS):
+        prev_cur = cur
         if direction == "left":
             nx0 = max(0, orig[0] - i)
             if nx0 == cur[0]:
                 break
-            band_new = img[y0:y1, nx0:nx0 + 2]
-            band_prev = img[y0:y1, nx0 + 2:nx0 + 4]
-            match = _edge_match(band_new, band_prev)
-            if match < 0.05:
-                triggered = True
-                break
-            if match >= 0.95:
-                if high_streak == 0:
-                    pre_streak = cur
-                high_streak += 1
-                if high_streak >= 25:
-                    cur = pre_streak
-                    triggered = True
-                    break
-            else:
-                high_streak = 0
+            band = img[y0:y1, nx0:nx0 + STEP_PIXELS]
             cur = (nx0, y0, x1, y1)
         elif direction == "right":
             nx1 = min(w, orig[2] + i)
             if nx1 == cur[2]:
                 break
-            band_new = img[y0:y1, nx1 - 2:nx1]
-            band_prev = img[y0:y1, nx1 - 4:nx1 - 2]
-            match = _edge_match(band_new, band_prev)
-            if match < 0.05:
-                triggered = True
-                break
-            if match >= 0.95:
-                if high_streak == 0:
-                    pre_streak = cur
-                high_streak += 1
-                if high_streak >= 25:
-                    cur = pre_streak
-                    triggered = True
-                    break
-            else:
-                high_streak = 0
+            band = img[y0:y1, nx1 - STEP_PIXELS:nx1]
             cur = (x0, y0, nx1, y1)
         elif direction == "top":
             ny0 = max(0, orig[1] - i)
             if ny0 == cur[1]:
                 break
-            band_new = img[ny0:ny0 + 2, x0:x1]
-            band_prev = img[ny0 + 2:ny0 + 4, x0:x1]
-            match = _edge_match(band_new, band_prev)
-            if match < 0.05:
-                triggered = True
-                break
-            if match >= 0.95:
-                if high_streak == 0:
-                    pre_streak = cur
-                high_streak += 1
-                if high_streak >= 25:
-                    cur = pre_streak
-                    triggered = True
-                    break
-            else:
-                high_streak = 0
+            band = img[ny0:ny0 + STEP_PIXELS, x0:x1]
             cur = (x0, ny0, x1, y1)
         else:  # bottom
             ny1 = min(h, orig[3] + i)
             if ny1 == cur[3]:
                 break
-            band_new = img[ny1 - 2:ny1, x0:x1]
-            band_prev = img[ny1 - 4:ny1 - 2, x0:x1]
-            match = _edge_match(band_new, band_prev)
-            if match < 0.05:
-                triggered = True
-                break
-            if match >= 0.95:
-                if high_streak == 0:
-                    pre_streak = cur
-                high_streak += 1
-                if high_streak >= 25:
-                    cur = pre_streak
-                    triggered = True
-                    break
-            else:
-                high_streak = 0
+            band = img[ny1 - STEP_PIXELS:ny1, x0:x1]
             cur = (x0, y0, x1, ny1)
-    ret = cur if triggered else orig
+
+        contrast = _contrast_value(band)
+        avg_color = _average_color_value(band)
+
+        if contrast < OPEN_AREA_CONTRAST_THRESHOLD:
+            if open_streak == 0:
+                pre_open = prev_cur
+            open_streak += STEP_PIXELS
+            if open_streak >= OPEN_AREA_PIXEL_STREAK:
+                cur = pre_open
+                break
+        else:
+            open_streak = 0
+
+        color_samples.append(avg_color)
+        if len(color_samples) > TYPE_SAMPLE_COUNT:
+            color_samples.pop(0)
+        if len(color_samples) == TYPE_SAMPLE_COUNT:
+            type_value = _most_common_color(color_samples)
+            if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
+                cur = prev_cur
+                break
+            prev_type = type_value
+
+    ret = cur
     log_dir = Path("img/log")
     log_dir.mkdir(parents=True, exist_ok=True)
     annotated = img.copy()
