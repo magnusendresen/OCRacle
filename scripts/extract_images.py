@@ -67,6 +67,8 @@ def _expand_direction(
     high_streak = 0
     pre_streak = orig
     h, w = img.shape[:2]
+    edge_match = 0.1
+    clean_match = 0.9
     for i in range(2, 200, 2):
         if direction == "left":
             nx0 = max(0, orig[0] - i)
@@ -75,10 +77,10 @@ def _expand_direction(
             band_new = img[y0:y1, nx0:nx0 + 2]
             band_prev = img[y0:y1, nx0 + 2:nx0 + 4]
             match = _edge_match(band_new, band_prev)
-            if match < 0.05:
+            if match < edge_match:
                 triggered = True
                 break
-            if match >= 0.95:
+            if match >= clean_match:
                 if high_streak == 0:
                     pre_streak = cur
                 high_streak += 1
@@ -96,10 +98,10 @@ def _expand_direction(
             band_new = img[y0:y1, nx1 - 2:nx1]
             band_prev = img[y0:y1, nx1 - 4:nx1 - 2]
             match = _edge_match(band_new, band_prev)
-            if match < 0.05:
+            if match < edge_match:
                 triggered = True
                 break
-            if match >= 0.95:
+            if match >= clean_match:
                 if high_streak == 0:
                     pre_streak = cur
                 high_streak += 1
@@ -117,10 +119,10 @@ def _expand_direction(
             band_new = img[ny0:ny0 + 2, x0:x1]
             band_prev = img[ny0 + 2:ny0 + 4, x0:x1]
             match = _edge_match(band_new, band_prev)
-            if match < 0.05:
+            if match < edge_match:
                 triggered = True
                 break
-            if match >= 0.95:
+            if match >= clean_match:
                 if high_streak == 0:
                     pre_streak = cur
                 high_streak += 1
@@ -138,10 +140,10 @@ def _expand_direction(
             band_new = img[ny1 - 2:ny1, x0:x1]
             band_prev = img[ny1 - 4:ny1 - 2, x0:x1]
             match = _edge_match(band_new, band_prev)
-            if match < 0.05:
+            if match < edge_match:
                 triggered = True
                 break
-            if match >= 0.95:
+            if match >= clean_match:
                 if high_streak == 0:
                     pre_streak = cur
                 high_streak += 1
