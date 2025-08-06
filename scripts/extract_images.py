@@ -52,6 +52,79 @@ async def _get_text(img: np.ndarray) -> str:
     return await asyncio.to_thread(pytesseract.image_to_string, pil_img, lang="eng+nor")
 
 
+def _edge_match(a: np.ndarray, b: np.ndarray) -> float:
+    if a.size == 0 or b.size == 0:
+        return 0.0
+    return np.mean(np.all(a == b, axis=2))
+
+
+def _expand_direction(
+    img: np.ndarray, x0: int, y0: int, x1: int, y1: int, direction: str
+) -> Tuple[int, int, int, int]:
+    orig = (x0, y0, x1, y1)
+    cur = orig
+    triggered = False
+    h, w = img.shape[:2]
+    for i in range(2, 200, 2):
+        if direction == "left":
+            nx0 = max(0, orig[0] - i)
+            if nx0 == cur[0]:
+                break
+            band_new = img[y0:y1, nx0:nx0 + 2]
+            band_prev = img[y0:y1, nx0 + 2:nx0 + 4]
+            match = _edge_match(band_new, band_prev)
+            if match < 0.05:
+                triggered = True
+                break
+            cur = (nx0, y0, x1, y1)
+        elif direction == "right":
+            nx1 = min(w, orig[2] + i)
+            if nx1 == cur[2]:
+                break
+            band_new = img[y0:y1, nx1 - 2:nx1]
+            band_prev = img[y0:y1, nx1 - 4:nx1 - 2]
+            match = _edge_match(band_new, band_prev)
+            if match < 0.05:
+                triggered = True
+                break
+            cur = (x0, y0, nx1, y1)
+        elif direction == "top":
+            ny0 = max(0, orig[1] - i)
+            if ny0 == cur[1]:
+                break
+            band_new = img[ny0:ny0 + 2, x0:x1]
+            band_prev = img[ny0 + 2:ny0 + 4, x0:x1]
+            match = _edge_match(band_new, band_prev)
+            if match < 0.05:
+                triggered = True
+                break
+            cur = (x0, ny0, x1, y1)
+        else:  # bottom
+            ny1 = min(h, orig[3] + i)
+            if ny1 == cur[3]:
+                break
+            band_new = img[ny1 - 2:ny1, x0:x1]
+            band_prev = img[ny1 - 4:ny1 - 2, x0:x1]
+            match = _edge_match(band_new, band_prev)
+            if match < 0.05:
+                triggered = True
+                break
+            cur = (x0, y0, x1, ny1)
+    if not triggered:
+        return orig
+    return cur
+
+
+def _expand_bbox(img: np.ndarray, bbox: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+    x, y, w, h = bbox
+    x0, y0, x1, y1 = x, y, x + w, y + h
+    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "left")
+    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "right")
+    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "top")
+    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "bottom")
+    return x0, y0, x1 - x0, y1 - y0
+
+
 def _detect_crops(img: np.ndarray) -> List[Tuple[np.ndarray, Tuple[int, int, int, int]]]:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -68,7 +141,11 @@ def _detect_crops(img: np.ndarray) -> List[Tuple[np.ndarray, Tuple[int, int, int
         if any(_bbox_iou(b, fb) > OVERLAP_IOU_THRESHOLD for fb in filtered):
             continue
         filtered.append(b)
-    return [(img[y : y + h, x : x + w], (x, y, w, h)) for x, y, w, h in filtered]
+    results = []
+    for x, y, w, h in filtered:
+        x, y, w, h = _expand_bbox(img, (x, y, w, h))
+        results.append((img[y:y + h, x:x + w], (x, y, w, h)))
+    return results
 
 
 def _log_crops(
