@@ -60,7 +60,7 @@ def _edge_match(a: np.ndarray, b: np.ndarray) -> float:
 
 def _expand_direction(
     img: np.ndarray, x0: int, y0: int, x1: int, y1: int, direction: str
-) -> Tuple[int, int, int, int]:
+) -> Tuple[int, int, int, int, Optional[str]]:
     orig = (x0, y0, x1, y1)
     cur = orig
     triggered = False
@@ -69,6 +69,7 @@ def _expand_direction(
     h, w = img.shape[:2]
     edge_match = 0.1
     clean_match = 0.9
+    reason: Optional[str] = None
     for i in range(2, 200, 2):
         if direction == "left":
             nx0 = max(0, orig[0] - i)
@@ -79,6 +80,7 @@ def _expand_direction(
             match = _edge_match(band_new, band_prev)
             if match < edge_match:
                 triggered = True
+                reason = "edge"
                 break
             if match >= clean_match:
                 if high_streak == 0:
@@ -87,6 +89,7 @@ def _expand_direction(
                 if high_streak >= 25:
                     cur = pre_streak
                     triggered = True
+                    reason = "streak"
                     break
             else:
                 high_streak = 0
@@ -100,6 +103,7 @@ def _expand_direction(
             match = _edge_match(band_new, band_prev)
             if match < edge_match:
                 triggered = True
+                reason = "edge"
                 break
             if match >= clean_match:
                 if high_streak == 0:
@@ -108,6 +112,7 @@ def _expand_direction(
                 if high_streak >= 25:
                     cur = pre_streak
                     triggered = True
+                    reason = "streak"
                     break
             else:
                 high_streak = 0
@@ -121,6 +126,7 @@ def _expand_direction(
             match = _edge_match(band_new, band_prev)
             if match < edge_match:
                 triggered = True
+                reason = "edge"
                 break
             if match >= clean_match:
                 if high_streak == 0:
@@ -129,6 +135,7 @@ def _expand_direction(
                 if high_streak >= 25:
                     cur = pre_streak
                     triggered = True
+                    reason = "streak"
                     break
             else:
                 high_streak = 0
@@ -142,6 +149,7 @@ def _expand_direction(
             match = _edge_match(band_new, band_prev)
             if match < edge_match:
                 triggered = True
+                reason = "edge"
                 break
             if match >= clean_match:
                 if high_streak == 0:
@@ -150,42 +158,46 @@ def _expand_direction(
                 if high_streak >= 25:
                     cur = pre_streak
                     triggered = True
+                    reason = "streak"
                     break
             else:
                 high_streak = 0
             cur = (x0, y0, x1, ny1)
     ret = cur if triggered else orig
-    log_dir = Path("img/log")
-    log_dir.mkdir(parents=True, exist_ok=True)
-    annotated = img.copy()
-    cv2.rectangle(annotated, (orig[0], orig[1]), (orig[2], orig[3]), (0, 255, 0), 2)
-    cv2.rectangle(annotated, (ret[0], ret[1]), (ret[2], ret[3]), (255, 0, 255), 2)
-    cv2.imwrite(str(log_dir / f"expand_{direction}_{uuid.uuid4().hex}.png"), annotated)
-    return ret
+    return (*ret, reason if triggered else None)
 
 
 def _expand_bbox(
     img: np.ndarray,
     bbox: Tuple[int, int, int, int],
     task_num: Optional[str] = None,
-) -> Tuple[int, int, int, int]:
+) -> Tuple[Tuple[int, int, int, int], List[Tuple[str, str]]]:
     x, y, w, h = bbox
     x0, y0, x1, y1 = x, y, x + w, y + h
     ox0, oy0, ox1, oy1 = x0, y0, x1, y1
-    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "left")
-    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "right")
-    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "top")
-    x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "bottom")
+    changes: List[Tuple[str, str]] = []
+    x0, y0, x1, y1, reason = _expand_direction(img, x0, y0, x1, y1, "left")
+    if reason:
+        changes.append(("left", reason))
+    x0, y0, x1, y1, reason = _expand_direction(img, x0, y0, x1, y1, "right")
+    if reason:
+        changes.append(("right", reason))
+    x0, y0, x1, y1, reason = _expand_direction(img, x0, y0, x1, y1, "top")
+    if reason:
+        changes.append(("top", reason))
+    x0, y0, x1, y1, reason = _expand_direction(img, x0, y0, x1, y1, "bottom")
+    if reason:
+        changes.append(("bottom", reason))
     if task_num is not None:
         log(
             f"Image for task {task_num} expanded: {ox0 - x0}px left, {x1 - ox1}px right, {oy0 - y0}px up, {y1 - oy1}px down"
         )
-    return x0, y0, x1 - x0, y1 - y0
+    return (x0, y0, x1 - x0, y1 - y0), changes
 
 
 def _detect_crops(
     img: np.ndarray, task_num: Optional[str] = None
-) -> List[Tuple[np.ndarray, Tuple[int, int, int, int]]]:
+) -> List[Tuple[np.ndarray, Tuple[int, int, int, int], List[Tuple[str, str]]]]:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     edges = cv2.Canny(blurred, CANNY_LOW, CANNY_HIGH)
@@ -203,14 +215,14 @@ def _detect_crops(
         filtered.append(b)
     results = []
     for x, y, w, h in filtered:
-        x, y, w, h = _expand_bbox(img, (x, y, w, h), task_num)
-        results.append((img[y:y + h, x:x + w], (x, y, w, h)))
+        (x, y, w, h), changes = _expand_bbox(img, (x, y, w, h), task_num)
+        results.append((img[y:y + h, x:x + w], (x, y, w, h), changes))
     return results
 
 
 def _log_crops(
     original: np.ndarray,
-    results: List[Tuple[Tuple[int, int, int, int], bool]],
+    results: List[Tuple[Tuple[int, int, int, int], bool, List[Tuple[str, str]]]],
     name: str,
     level: int = 0,
 ) -> None:
@@ -223,11 +235,21 @@ def _log_crops(
     log_dir = Path("img/log")
     log_dir.mkdir(parents=True, exist_ok=True)
     annotated = original.copy()
-    for (x, y, w, h), success in results:
+    for (x, y, w, h), success, changes in results:
         # Draw candidate in blue first
         cv2.rectangle(annotated, (x, y), (x + w, y + h), (255, 0, 0), 2)
         color = (0, 255, 0) if success else (0, 0, 255)
         cv2.rectangle(annotated, (x, y), (x + w, y + h), color, 2)
+        for side, reason in changes:
+            col = (0, 165, 255) if reason == "streak" else (255, 0, 255)
+            if side == "left":
+                cv2.line(annotated, (x, y), (x, y + h), col, 2)
+            elif side == "right":
+                cv2.line(annotated, (x + w, y), (x + w, y + h), col, 2)
+            elif side == "top":
+                cv2.line(annotated, (x, y), (x + w, y), col, 2)
+            else:  # bottom
+                cv2.line(annotated, (x, y + h), (x + w, y + h), col, 2)
     cv2.imwrite(str(log_dir / f"{name}_debug.png"), annotated)
 
 
@@ -310,7 +332,7 @@ async def _process_image(
         if attempt == 0:  # Only log for the root invocation
             _log_crops(
                 img,
-                [((0, 0, img.shape[1], img.shape[0]), success)],
+                [((0, 0, img.shape[1], img.shape[0]), success, [])],
                 img_name,
                 level=attempt,
             )
@@ -327,18 +349,18 @@ async def _process_image(
         log(f"Skipping image for task {task_num} due to no crops detected.")
         return False
 
-    results: List[Tuple[Tuple[int, int, int, int], bool]] = []
-    for i, (sub, bbox) in enumerate(subs):
+    results: List[Tuple[Tuple[int, int, int, int], bool, List[Tuple[str, str]]]] = []
+    for i, (sub, bbox, changes) in enumerate(subs):
         log(
             f"Cropping image for task {task_num} due to {'text contents' if avg_bool and (len_bool or ratio_bool) else 'admin text' if admin_bool else 'large size'}."
         )
         success = await _process_image(
             sub, task_num, save_func, attempt + 1, f"{img_name}_{i}"
         )
-        results.append((bbox, success))
+        results.append((bbox, success, changes))
     if attempt == 0:  # Only log for the root invocation
         _log_crops(img, results, img_name, level=attempt)
-    return any(success for _, success in results)
+    return any(success for _, success, _ in results)
 
 
 """
