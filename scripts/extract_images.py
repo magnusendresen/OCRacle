@@ -64,6 +64,8 @@ def _expand_direction(
     orig = (x0, y0, x1, y1)
     cur = orig
     triggered = False
+    high_streak = 0
+    pre_streak = orig
     h, w = img.shape[:2]
     for i in range(2, 200, 2):
         if direction == "left":
@@ -76,6 +78,16 @@ def _expand_direction(
             if match < 0.05:
                 triggered = True
                 break
+            if match >= 0.95:
+                if high_streak == 0:
+                    pre_streak = cur
+                high_streak += 1
+                if high_streak >= 25:
+                    cur = pre_streak
+                    triggered = True
+                    break
+            else:
+                high_streak = 0
             cur = (nx0, y0, x1, y1)
         elif direction == "right":
             nx1 = min(w, orig[2] + i)
@@ -87,6 +99,16 @@ def _expand_direction(
             if match < 0.05:
                 triggered = True
                 break
+            if match >= 0.95:
+                if high_streak == 0:
+                    pre_streak = cur
+                high_streak += 1
+                if high_streak >= 25:
+                    cur = pre_streak
+                    triggered = True
+                    break
+            else:
+                high_streak = 0
             cur = (x0, y0, nx1, y1)
         elif direction == "top":
             ny0 = max(0, orig[1] - i)
@@ -98,6 +120,16 @@ def _expand_direction(
             if match < 0.05:
                 triggered = True
                 break
+            if match >= 0.95:
+                if high_streak == 0:
+                    pre_streak = cur
+                high_streak += 1
+                if high_streak >= 25:
+                    cur = pre_streak
+                    triggered = True
+                    break
+            else:
+                high_streak = 0
             cur = (x0, ny0, x1, y1)
         else:  # bottom
             ny1 = min(h, orig[3] + i)
@@ -109,10 +141,25 @@ def _expand_direction(
             if match < 0.05:
                 triggered = True
                 break
+            if match >= 0.95:
+                if high_streak == 0:
+                    pre_streak = cur
+                high_streak += 1
+                if high_streak >= 25:
+                    cur = pre_streak
+                    triggered = True
+                    break
+            else:
+                high_streak = 0
             cur = (x0, y0, x1, ny1)
-    if not triggered:
-        return orig
-    return cur
+    ret = cur if triggered else orig
+    log_dir = Path("img/log")
+    log_dir.mkdir(parents=True, exist_ok=True)
+    annotated = img.copy()
+    cv2.rectangle(annotated, (orig[0], orig[1]), (orig[2], orig[3]), (0, 255, 0), 2)
+    cv2.rectangle(annotated, (ret[0], ret[1]), (ret[2], ret[3]), (255, 0, 255), 2)
+    cv2.imwrite(str(log_dir / f"expand_{direction}_{uuid.uuid4().hex}.png"), annotated)
+    return ret
 
 
 def _expand_bbox(
