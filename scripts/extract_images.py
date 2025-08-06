@@ -75,8 +75,14 @@ def _log_crops(
     original: np.ndarray,
     results: List[Tuple[Tuple[int, int, int, int], bool]],
     name: str,
+    level: int = 0,
 ) -> None:
-    """Save a copy of the image with crop annotations."""
+    """Save a copy of the image with crop annotations.
+
+    Only the root invocation (``level == 0``) performs logging.
+    """
+    if level > 0:
+        return
     log_dir = Path("img/log")
     log_dir.mkdir(parents=True, exist_ok=True)
     annotated = original.copy()
@@ -164,11 +170,13 @@ async def _process_image(
     if not should_attempt_crop and not should_skip_image:
         log(f"Saving image for task {task_num}.")
         success = save_func(img, task_num)
-        _log_crops(
-            img,
-            [((0, 0, img.shape[1], img.shape[0]), success)],
-            img_name,
-        )
+        if attempt == 0:  # Only log for the root invocation
+            _log_crops(
+                img,
+                [((0, 0, img.shape[1], img.shape[0]), success)],
+                img_name,
+                level=attempt,
+            )
         return success
 
     if should_skip_image:
@@ -191,7 +199,8 @@ async def _process_image(
             sub, task_num, save_func, attempt + 1, f"{img_name}_{i}"
         )
         results.append((bbox, success))
-    _log_crops(img, results, img_name)
+    if attempt == 0:  # Only log for the root invocation
+        _log_crops(img, results, img_name, level=attempt)
     return any(success for _, success in results)
 
 
