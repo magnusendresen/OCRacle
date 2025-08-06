@@ -33,12 +33,16 @@ DILATE_KERNEL_SIZE = 5
 DILATE_ITER = 2
 
 # Expansion and detection parameters
-STEP_PIXELS = 2
+STEP_PIXELS = 1
 MAX_EXPANSION_PIXELS = 400
-TYPE_SAMPLE_COUNT = 10
+
+# For detecting edge
+TYPE_SAMPLE_COUNT = 6
 TYPE_TOLERANCE_RATIO = 0.05
-COLOR_CHANGE_LIMIT = 20
-OPEN_AREA_CONTRAST_THRESHOLD = 2
+COLOR_CHANGE_LIMIT = 16
+
+# For detecting open area
+OPEN_AREA_CONTRAST_THRESHOLD = 1
 OPEN_AREA_PIXEL_STREAK = 30
 
 
@@ -281,6 +285,7 @@ async def _process_image(
         "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! "
         "Does this text contain code? Answer with a 1 if it does, or a 0 if it does not. "
         "Just because comparison operators are used (e.g. x=0, kx<mg, kx=mg, kx>mg), does not mean it necessarily has code, and it is probably just normal text. "
+        "It needs to have actual cohesive programming for it to be code. "
         "Here is the text: " + text,
         max_tokens=1000,
         is_num=False,

@@ -546,7 +546,7 @@
                         "topic": "Komposittmaterialer",
                         "task_number": "9",
                         "points": 6,
-                        "task_text": "<p>11,8 kg glassfiber som har tetthet $2550$ kg/m$^3$ blandes med $5$ kg av en polymer som har tetthet $1150$ kg/m$^3$.</p>\n\n<h3>a)</h3>\n<p>Hva blir tettheten til komposittmaterialet? Svar: [kg/m$^3$]. Toleranse: $\\pm 1\\%$</p>\n\n<h3>b)</h3>\n<p>Hva blir fibervolumfraksjonen til komposittmaterialet? Svar: [tall mellom $0$ og $1$]. Toleranse: $\\pm 1\\%$</p>"
+                        "task_text": "<p>11,8 kg glassfiber som har tetthet $2550$ kg/m³ blandes med $5$ kg av en polymer som har tetthet $1150$ kg/m³.</p>\n\n<h3>a)</h3>\n<p>Hva blir tettheten til komposittmaterialet? Svar: [kg/m³]. Toleranse: ± 1%</p>\n\n<h3>b)</h3>\n<p>Hva blir fibervolumfraksjonen til komposittmaterialet? Svar: [tall mellom $0$ og $1$]. Toleranse: ± 1%</p>"
                     },
                     {
                         "topic": "Komposittmaterialer",
