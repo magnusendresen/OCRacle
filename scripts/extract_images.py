@@ -115,17 +115,28 @@ def _expand_direction(
     return cur
 
 
-def _expand_bbox(img: np.ndarray, bbox: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+def _expand_bbox(
+    img: np.ndarray,
+    bbox: Tuple[int, int, int, int],
+    task_num: Optional[str] = None,
+) -> Tuple[int, int, int, int]:
     x, y, w, h = bbox
     x0, y0, x1, y1 = x, y, x + w, y + h
+    ox0, oy0, ox1, oy1 = x0, y0, x1, y1
     x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "left")
     x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "right")
     x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "top")
     x0, y0, x1, y1 = _expand_direction(img, x0, y0, x1, y1, "bottom")
+    if task_num is not None:
+        log(
+            f"Image for task {task_num} expanded: {ox0 - x0}px left, {x1 - ox1}px right, {oy0 - y0}px up, {y1 - oy1}px down"
+        )
     return x0, y0, x1 - x0, y1 - y0
 
 
-def _detect_crops(img: np.ndarray) -> List[Tuple[np.ndarray, Tuple[int, int, int, int]]]:
+def _detect_crops(
+    img: np.ndarray, task_num: Optional[str] = None
+) -> List[Tuple[np.ndarray, Tuple[int, int, int, int]]]:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     edges = cv2.Canny(blurred, CANNY_LOW, CANNY_HIGH)
@@ -143,7 +154,7 @@ def _detect_crops(img: np.ndarray) -> List[Tuple[np.ndarray, Tuple[int, int, int
         filtered.append(b)
     results = []
     for x, y, w, h in filtered:
-        x, y, w, h = _expand_bbox(img, (x, y, w, h))
+        x, y, w, h = _expand_bbox(img, (x, y, w, h), task_num)
         results.append((img[y:y + h, x:x + w], (x, y, w, h)))
     return results
 
@@ -262,7 +273,7 @@ async def _process_image(
         )
         return False
 
-    subs = _detect_crops(img)
+    subs = _detect_crops(img, task_num)
     if not subs:
         log(f"Skipping image for task {task_num} due to no crops detected.")
         return False
