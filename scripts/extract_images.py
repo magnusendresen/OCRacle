@@ -88,10 +88,10 @@ def _expand_direction(
     img: np.ndarray, x0: int, y0: int, x1: int, y1: int, direction: str
 ) -> Tuple[int, int, int, int]:
     orig = (x0, y0, x1, y1)
-    cur = orig
     h, w = img.shape[:2]
-    color_samples: List[float] = []
-    prev_type: Optional[float] = None
+
+    # First pass: detect open areas and determine maximum expansion.
+    cur = orig
     open_streak = 0
     pre_open = orig
     for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS, STEP_PIXELS):
@@ -122,8 +122,6 @@ def _expand_direction(
             cur = (x0, y0, x1, ny1)
 
         contrast = _contrast_value(band)
-        avg_color = _average_color_value(band)
-
         if contrast < OPEN_AREA_CONTRAST_THRESHOLD:
             if open_streak == 0:
                 pre_open = prev_cur
@@ -134,6 +132,49 @@ def _expand_direction(
         else:
             open_streak = 0
 
+    open_cur = cur
+
+    if direction == "left":
+        limit_pixels = orig[0] - open_cur[0]
+    elif direction == "right":
+        limit_pixels = open_cur[2] - orig[2]
+    elif direction == "top":
+        limit_pixels = orig[1] - open_cur[1]
+    else:
+        limit_pixels = open_cur[3] - orig[3]
+
+    # Second pass: detect color changes up to the open area limit.
+    cur = orig
+    color_samples: List[float] = []
+    prev_type: Optional[float] = None
+    for i in range(STEP_PIXELS, limit_pixels + STEP_PIXELS, STEP_PIXELS):
+        prev_cur = cur
+        if direction == "left":
+            nx0 = max(0, orig[0] - i)
+            if nx0 == cur[0]:
+                break
+            band = img[y0:y1, nx0:nx0 + STEP_PIXELS]
+            cur = (nx0, y0, x1, y1)
+        elif direction == "right":
+            nx1 = min(w, orig[2] + i)
+            if nx1 == cur[2]:
+                break
+            band = img[y0:y1, nx1 - STEP_PIXELS:nx1]
+            cur = (x0, y0, nx1, y1)
+        elif direction == "top":
+            ny0 = max(0, orig[1] - i)
+            if ny0 == cur[1]:
+                break
+            band = img[ny0:ny0 + STEP_PIXELS, x0:x1]
+            cur = (x0, ny0, x1, y1)
+        else:  # bottom
+            ny1 = min(h, orig[3] + i)
+            if ny1 == cur[3]:
+                break
+            band = img[ny1 - STEP_PIXELS:ny1, x0:x1]
+            cur = (x0, y0, x1, ny1)
+
+        avg_color = _average_color_value(band)
         color_samples.append(avg_color)
         if len(color_samples) > TYPE_SAMPLE_COUNT:
             color_samples.pop(0)
