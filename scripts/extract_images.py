@@ -34,7 +34,7 @@ DILATE_ITER = 2
 
 # Expansion and detection parameters
 STEP_PIXELS = 1
-MAX_EXPANSION_PIXELS = 300
+MAX_EXPANSION_PIXELS = 320
 
 # For detecting edge
 TYPE_SAMPLE_COUNT = 6
@@ -84,98 +84,103 @@ def _most_common_color(values: List[float]) -> float:
     return float(np.argmax(grouped))
 
 
-def _expand_direction(
-    img: np.ndarray, x0: int, y0: int, x1: int, y1: int, direction: str
-) -> Tuple[int, int, int, int]:
-    orig = (x0, y0, x1, y1)
+def _advance(
+    img: np.ndarray, cur: Tuple[int, int, int, int], direction: str
+) -> Tuple[Tuple[int, int, int, int], Optional[np.ndarray]]:
+    """Expand ``cur`` by one pixel in ``direction`` and return the new band."""
+    x0, y0, x1, y1 = cur
     h, w = img.shape[:2]
+    if direction == "left":
+        nx0 = max(0, x0 - STEP_PIXELS)
+        if nx0 == x0:
+            return cur, None
+        band = img[y0:y1, nx0:x0]
+        return (nx0, y0, x1, y1), band
+    if direction == "right":
+        nx1 = min(w, x1 + STEP_PIXELS)
+        if nx1 == x1:
+            return cur, None
+        band = img[y0:y1, x1:nx1]
+        return (x0, y0, nx1, y1), band
+    if direction == "top":
+        ny0 = max(0, y0 - STEP_PIXELS)
+        if ny0 == y0:
+            return cur, None
+        band = img[ny0:y0, x0:x1]
+        return (x0, ny0, x1, y1), band
+    ny1 = min(h, y1 + STEP_PIXELS)
+    if ny1 == y1:
+        return cur, None
+    band = img[y1:ny1, x0:x1]
+    return (x0, y0, x1, ny1), band
 
-    # First pass: detect open areas.
-    cur = orig
+
+def _expand_with_open_area(
+    img: np.ndarray, cur: Tuple[int, int, int, int], direction: str, limit: int
+) -> Tuple[Tuple[int, int, int, int], bool]:
+    """Expand using open area detection up to ``limit`` pixels."""
     open_streak = 0
-    pre_open = orig
-    found_open = False
-    for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS, STEP_PIXELS):
+    pre_open = cur
+    for _ in range(0, limit, STEP_PIXELS):
         prev_cur = cur
-        if direction == "left":
-            nx0 = max(0, orig[0] - i)
-            if nx0 == cur[0]:
-                break
-            band = img[y0:y1, nx0:nx0 + STEP_PIXELS]
-            cur = (nx0, y0, x1, y1)
-        elif direction == "right":
-            nx1 = min(w, orig[2] + i)
-            if nx1 == cur[2]:
-                break
-            band = img[y0:y1, nx1 - STEP_PIXELS:nx1]
-            cur = (x0, y0, nx1, y1)
-        elif direction == "top":
-            ny0 = max(0, orig[1] - i)
-            if ny0 == cur[1]:
-                break
-            band = img[ny0:ny0 + STEP_PIXELS, x0:x1]
-            cur = (x0, ny0, x1, y1)
-        else:  # bottom
-            ny1 = min(h, orig[3] + i)
-            if ny1 == cur[3]:
-                break
-            band = img[ny1 - STEP_PIXELS:ny1, x0:x1]
-            cur = (x0, y0, x1, ny1)
-
+        cur, band = _advance(img, cur, direction)
+        if band is None:
+            return cur, False
         contrast = _contrast_value(band)
         if contrast < OPEN_AREA_CONTRAST_THRESHOLD:
             if open_streak == 0:
                 pre_open = prev_cur
             open_streak += STEP_PIXELS
             if open_streak >= OPEN_AREA_PIXEL_STREAK:
-                cur = pre_open
-                found_open = True
-                break
+                return pre_open, True
         else:
             open_streak = 0
+    return cur, False
 
-    if not found_open:
-        # Second pass: detect color changes across the full range.
-        cur = orig
-        color_samples: List[float] = []
-        prev_type: Optional[float] = None
-        for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS, STEP_PIXELS):
-            prev_cur = cur
-            if direction == "left":
-                nx0 = max(0, orig[0] - i)
-                if nx0 == cur[0]:
-                    break
-                band = img[y0:y1, nx0:nx0 + STEP_PIXELS]
-                cur = (nx0, y0, x1, y1)
-            elif direction == "right":
-                nx1 = min(w, orig[2] + i)
-                if nx1 == cur[2]:
-                    break
-                band = img[y0:y1, nx1 - STEP_PIXELS:nx1]
-                cur = (x0, y0, nx1, y1)
-            elif direction == "top":
-                ny0 = max(0, orig[1] - i)
-                if ny0 == cur[1]:
-                    break
-                band = img[ny0:ny0 + STEP_PIXELS, x0:x1]
-                cur = (x0, ny0, x1, y1)
-            else:  # bottom
-                ny1 = min(h, orig[3] + i)
-                if ny1 == cur[3]:
-                    break
-                band = img[ny1 - STEP_PIXELS:ny1, x0:x1]
-                cur = (x0, y0, x1, ny1)
 
-            avg_color = _average_color_value(band)
-            color_samples.append(avg_color)
-            if len(color_samples) > TYPE_SAMPLE_COUNT:
-                color_samples.pop(0)
-            if len(color_samples) == TYPE_SAMPLE_COUNT:
-                type_value = _most_common_color(color_samples)
-                if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
-                    cur = prev_cur
-                    break
-                prev_type = type_value
+def _expand_with_color_change(
+    img: np.ndarray,
+    cur: Tuple[int, int, int, int],
+    direction: str,
+    limit: int,
+    samples: List[float],
+    prev_type: Optional[float],
+) -> Tuple[Tuple[int, int, int, int], bool, List[float], Optional[float]]:
+    """Expand using color change detection up to ``limit`` pixels."""
+    for _ in range(0, limit, STEP_PIXELS):
+        prev_cur = cur
+        cur, band = _advance(img, cur, direction)
+        if band is None:
+            return cur, False, samples, prev_type
+        avg_color = _average_color_value(band)
+        samples.append(avg_color)
+        if len(samples) > TYPE_SAMPLE_COUNT:
+            samples.pop(0)
+        if len(samples) == TYPE_SAMPLE_COUNT:
+            type_value = _most_common_color(samples)
+            if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
+                return prev_cur, True, samples, type_value
+            prev_type = type_value
+    return cur, False, samples, prev_type
+
+
+def _expand_direction(
+    img: np.ndarray, x0: int, y0: int, x1: int, y1: int, direction: str
+) -> Tuple[int, int, int, int]:
+    orig = (x0, y0, x1, y1)
+    cur = orig
+    color_samples: List[float] = []
+    prev_type: Optional[float] = None
+    segments = [(120, 100), (100, 100), (100, 120)]
+    for open_len, color_len in segments:
+        cur, found = _expand_with_open_area(img, cur, direction, open_len)
+        if found:
+            break
+        cur, found, color_samples, prev_type = _expand_with_color_change(
+            img, cur, direction, color_len, color_samples, prev_type
+        )
+        if found:
+            break
 
     ret = cur
     log_dir = Path("img/log")
