@@ -481,7 +481,14 @@
             "Komposittmaterialer",
             "Fasediagram",
             "Mekaniske Egenskaper",
-            "Materialegenskaper"
+            "Materialegenskaper",
+            "Legeringer",
+            "Fasediagrammer",
+            "Korrosjon",
+            "Mikrostruktur",
+            "Diffusjon",
+            "Bruddmekanismer",
+            "Materialvalg"
         ],
         "ignored_topics": [],
         "exams": {
@@ -491,13 +498,13 @@
                         "topic": "Krystallstruktur",
                         "task_number": "1",
                         "points": 5,
-                        "task_text": "<p>Li$_2$O har kubisk krystallstruktur der litiumatom (Li) er plassert i følgende krystallografiske punkt:</p>\n<p>$\\frac{1}{4}\\frac{1}{4}\\frac{1}{4}$, $\\frac{1}{4}\\frac{3}{4}\\frac{3}{4}$, $\\frac{3}{4}\\frac{1}{4}\\frac{3}{4}$, $\\frac{3}{4}\\frac{3}{4}\\frac{1}{4}$</p>\n<p>Tettheten til Li$_2$O er $2.0$ g/cm$^3$. Hva er verdien til gitterkonstanten $a$ for enhetscellen til Li$_2$O?</p>\n\n<h3>a)</h3>\n<p>CaF$_2$ har tilsvarende krystallstruktur som Li$_2$O, men der de krystallografiske posisjonene til fluor (F) i CaF$_2$ er lik krystallografiske posisjoner til litium (Li) i Li$_2$O. Gitterkonstant for CaF$_2$ er $a = 546$ pm. Regn ut bindingslengden (senteravstand) mellom et Ca$^{2+}$ ion og et F$^-$ ion i CaF$_2$.</p>"
+                        "task_text": "<p>Li$_2$O har kubisk krystallstruktur der litiumatom (Li) er plassert i følgende krystallografiske punkt:</p>  \n<p>$\\frac{1}{4} \\frac{1}{4} \\frac{1}{4}$, $\\frac{1}{4} \\frac{3}{4} \\frac{3}{4}$, $\\frac{3}{4} \\frac{1}{4} \\frac{3}{4}$, $\\frac{3}{4} \\frac{3}{4} \\frac{1}{4}$</p>  \n<p>Tettheten til Li$_2$O er $2.0$ g/cm$^3$. Hva er verdien til gitterkonstanten $a$ for enhetscellen til Li$_2$O?</p>  \n\n<h3>a)</h3>  \n<p>CaF$_2$ har tilsvarende krystallstruktur som Li$_2$O, men der de krystallografiske posisjonene til fluor (F) i CaF$_2$ er lik krystallografiske posisjoner til litium (Li) i Li$_2$O.</p>  \n<p>Gitterkonstant for CaF$_2$ er $a = 546$ pm. Regn ut bindingslengden (senteravstand) mellom et Ca$^{2+}$ ion og et F$^-$ ion i CaF$_2$.</p>"
                     },
                     {
                         "topic": "Krystallografisk Posisjon",
                         "task_number": "2",
                         "points": 5,
-                        "task_text": "<p>Velg alle krystallografiske punkt som representerer posisjoner til atomer i en FCC-krystallstruktur:</p>\n<ol>\n<li><b>A</b> $1\\ 1\\ 1$</li>\n<li><b>B</b> $\\frac{1}{2}\\ \\frac{1}{2}\\ \\frac{1}{2}$</li>\n<li><b>C</b> $1\\ 1\\ 0$</li>\n<li><b>D</b> $0\\ 1\\ 1$</li>\n<li><b>E</b> $1\\ 1\\ 2$</li>\n<li><b>F</b> $1\\ 1\\ 3$</li>\n<li><b>G</b> $1\\ 0\\ 1$</li>\n<li><b>H</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ \\frac{1}{1}$</li>\n<li><b>I</b> $\\frac{1}{1}\\ 0$</li>\n<li><b>J</b> $\\frac{1}{1}\\ 3$</li>\n<li><b>K</b> $1\\ 0$</li>\n<li><b>L</b> $1\\ 0$</li>\n<li><b>M</b> $\\frac{1}{1}\\ \\frac{1}{1}$</li>\n</ol>\n\n<p>Velg alle krystallografiske punkt som representerer en oktaedral (octahedral) posisjon i en FCC-krystallstruktur.</p>\n<ol>\n<li><b>A</b> $1\\ 1\\ 0$</li>\n<li><b>B</b> $0\\ 1\\ 1$</li>\n<li><b>C</b> $\\frac{1}{1}\\ \\frac{1}{1}$</li>\n<li><b>D</b> $1\\ 1$</li>\n<li><b>E</b> $1\\ 0\\ 0$</li>\n<li><b>F</b> $1\\ \\frac{1}{1}\\ 0$</li>\n<li><b>G</b> $\\frac{1}{1}\\ 0$</li>\n<li><b>H</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ 0$</li>\n<li><b>I</b> $2\\ 2\\ 2$</li>\n<li><b>J</b> $1\\ 0$</li>\n<li><b>K</b> $1\\ 1$</li>\n<li><b>L</b> $1\\ 1\\ 0$</li>\n<li><b>M</b> $0\\ 1\\ 0$</li>\n<li><b>N</b> $\\frac{1}{1}\\ \\frac{1}{1}$</li>\n</ol>"
+                        "task_text": "<p>Velg alle krystallografiske punkt som representerer posisjoner til atomer i en FCC-krystallstruktur:</p>\n<ol>\n<li><b>A</b> $1\\ 1\\ 1$</li>\n<li><b>B</b> $\\frac{1}{2}\\ \\frac{1}{2}\\ \\frac{1}{2}$</li>\n<li><b>C</b> $1\\ 1\\ 0$</li>\n<li><b>D</b> $0\\ 1\\ 1$</li>\n<li><b>E</b> $\\frac{1}{2}\\ 1\\ \\frac{1}{2}$</li>\n<li><b>F</b> $1\\ \\frac{1}{3}\\ \\frac{1}{3}$</li>\n<li><b>G</b> $\\frac{1}{2}\\ 0\\ \\frac{1}{2}$</li>\n<li><b>H</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ \\frac{1}{1}$</li>\n<li><b>I</b> $\\frac{1}{2}\\ \\frac{1}{0}\\ \\frac{1}{2}$</li>\n<li><b>J</b> $\\frac{1}{1}\\ \\frac{1}{3}\\ \\frac{1}{3}$</li>\n<li><b>K</b> $1\\ 0\\ 1$</li>\n<li><b>L</b> $1\\ 0\\ 0$</li>\n<li><b>M</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ \\frac{1}{0}$</li>\n<li><b>N</b> $2\\ 2\\ 2$</li>\n<li><b>O</b> $1\\ 0\\ 1$</li>\n<li><b>P</b> $1\\ 1\\ 0$</li>\n</ol>\n\n<p>Velg alle krystallografiske punkt som representerer en oktaedral (octahedral) posisjon i en FCC-krystallstruktur:</p>\n<ol>\n<li><b>A</b> $1\\ 1\\ 0$</li>\n<li><b>B</b> $0\\ 1\\ 1$</li>\n<li><b>C</b> $\\frac{1}{2}\\ \\frac{1}{2}\\ \\frac{1}{2}$</li>\n<li><b>D</b> $1\\ 1\\ 1$</li>\n<li><b>E</b> $1\\ 0\\ 0$</li>\n<li><b>F</b> $\\frac{1}{2}\\ 0\\ \\frac{1}{2}$</li>\n<li><b>G</b> $\\frac{1}{2}\\ \\frac{1}{0}\\ \\frac{1}{2}$</li>\n<li><b>H</b> $\\frac{1}{1}\\ \\frac{1}{0}\\ \\frac{1}{1}$</li>\n<li><b>I</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ \\frac{1}{0}$</li>\n<li><b>J</b> $2\\ 2\\ 2$</li>\n<li><b>K</b> $1\\ 0\\ 1$</li>\n<li><b>L</b> $1\\ 1\\ 0$</li>\n</ol>"
                     },
                     {
                         "topic": "Krystallstruktur",
@@ -509,7 +516,7 @@
                         "topic": "Skjærspenning",
                         "task_number": "4",
                         "points": 5,
-                        "task_text": "<p>Finn utløst skjærspenning (resolved shear stress) i dette planet langs retningen s når det virker en spenning $\\sigma = 50$ MPa i retningen [110].</p>\n\n<ol>\n<li><b>A)</b> $0$ MPa</li>\n<li><b>B)</b> $2$ MPa</li>\n<li><b>C)</b> $4$ MPa</li>\n<li><b>D)</b> $6$ MPa</li>\n<li><b>E)</b> $8$ MPa</li>\n<li><b>F)</b> $10$ MPa</li>\n<li><b>G)</b> $12$ MPa</li>\n<li><b>H)</b> $14$ MPa</li>\n<li><b>I)</b> $16$ MPa</li>\n<li><b>J)</b> $18$ MPa</li>\n<li><b>K)</b> $20$ MPa</li>\n</ol>"
+                        "task_text": "<p>Finn den utløste skjærspenningen (resolved shear stress) i dette planet langs retningen s når det virker en spenning $\\sigma = 50$ MPa i retningen [110].</p>\n\n<ol>\n<li><b>A)</b> $0$ MPa</li>\n<li><b>B)</b> $2$ MPa</li>\n<li><b>C)</b> $4$ MPa</li>\n<li><b>D)</b> $6$ MPa</li>\n<li><b>E)</b> $8$ MPa</li>\n<li><b>F)</b> $10$ MPa</li>\n<li><b>G)</b> $12$ MPa</li>\n<li><b>H)</b> $14$ MPa</li>\n<li><b>I)</b> $16$ MPa</li>\n<li><b>J)</b> $18$ MPa</li>\n<li><b>K)</b> $20$ MPa</li>\n</ol>"
                     },
                     {
                         "topic": "Krystallstruktur",
@@ -527,13 +534,13 @@
                         "topic": "Mekaniske Egenskaper",
                         "task_number": "7",
                         "points": 5,
-                        "task_text": "<p>Figuren viser spenning som funksjon av tid for en relaksasjonstest av et viskoelastisk materiale.</p>\n\n<p>Materialet blir umiddelbart utsatt for en tøyning lik $0.01$ ved tid $t = 0$, og materialet oppfører seg perfekt i henhold til 3-parameter modellen.</p>\n\n<h3>a)</h3>\n<p>Estimer verdien av $E_x$.</p>\n\n<h3>b)</h3>\n<p>Estimer verdien av $E_0$.</p>\n\n<h3>c)</h3>\n<p>Estimer verdien av tidskonstanten $T_r$.</p>"
+                        "task_text": "<p>Figuren viser spenning som funksjon av tid for en relaksasjonstest av et viskoelastisk materiale.</p>\n\n<p>Materialet blir umiddelbart utsatt for en tøyning lik $0.01$ ved tid $t = 0$, og materialet oppfører seg perfekt i henhold til 3-parameter modellen.</p>\n\n<h3>a)</h3>\n<p>Estimer verdien av $E_x$.</p>\n<p>Svar: $[MPa]$. Toleranse: $\\pm5\\%$</p>\n\n<h3>b)</h3>\n<p>Estimer verdien av $E_0$.</p>\n<p>Svar: $[MPa]$. Toleranse: $\\pm5\\%$</p>\n\n<h3>c)</h3>\n<p>Estimer verdien av tidskonstanten $T_r$.</p>\n<p>Svar: $[s]$. Toleranse $\\pm10\\%$</p>"
                     },
                     {
                         "topic": "Polymerteknologi",
                         "task_number": "8",
                         "points": 10,
-                        "task_text": "<p>Gjør rede for følgende konsept/begrep i polymerteknologi:</p>\n\n<h3>a)</h3>\n<p>Termoplast er en type polymer som blir myk og formbar når den varmes opp, og som stivner igjen når den avkjøles. Denne prosessen kan gjentas flere ganger.</p>\n\n<h3>b)</h3>\n<p>Kryssbinding refererer til dannelsen av kjemiske bindinger mellom polymerkjeder, noe som gir polymeret økt styrke og termisk stabilitet. Dette er vanlig i termohardere.</p>\n\n<h3>c)</h3>\n<p>Smeltetemperaturen er temperaturen der en krystallinsk polymer går fra fast til flytende tilstand. Den avhenger av polymerens struktur og molekylvekt.</p>\n\n<h3>d)</h3>\n<p>Glasstransisjonstemperaturen er temperaturen der en amorfe polymer går fra en hard og sprø tilstand til en myk og seig tilstand. Den er viktig for å forstå polymerens egenskaper.</p>\n\n<h3>e)</h3>\n<p>Kondensasjonspolymerisasjon er en prosess der monomerer reagerer og danner polymerer samtidig som små molekyler som vann eller metanol frigjøres som biprodukter.</p>"
+                        "task_text": "<p>Gjør rede for følgende konsept/begrep i polymerteknologi:</p>\n\n<h3>a)</h3>\n<p>Termoplast er en type polymer som kan smeltes og formes om igjen ved oppvarming. Den består av lineære eller forgrenede polymerkjeder uten kryssbindinger, noe som gjør den resirkulerbar.</p>\n\n<h3>b)</h3>\n<p>Kryssbinding er en kjemisk forbindelse som kobler polymerkjeder sammen til et nettverk. Dette øker styrken og termisk stabilitet, men reduserer smeltbarhet, slik som i herdet epoxy eller vulkanisert gummi.</p>\n\n<h3>c)</h3>\n<p>Smeltetemperatur er temperaturen der en krystallinsk polymer overgår fra fast til flytende tilstand. Den avhenger av polymerens struktur og molekylvekt.</p>\n\n<h3>d)</h3>\n<p>Glasstransisjonstemperatur $T_g$ er temperaturen der en amorfe polymer overgår fra en hard, glassaktig tilstand til en myk, seig tilstand. Under $T_g$ er polymerkjeder lite mobile.</p>\n\n<h3>e)</h3>\n<p>Kondensasjonspolymerisasjon er en prosess der monomerer reagerer med frigjøring av små molekyler som vann. Eksempler inkluderer dannelsen av polyester eller polyamider.</p>"
                     },
                     {
                         "topic": "Komposittmaterialer",
@@ -545,13 +552,13 @@
                         "topic": "Komposittmaterialer",
                         "task_number": "10",
                         "points": 4,
-                        "task_text": "<p>Et laminat består av 3 lag. Hvert lag består av ensrettet karbonfiber i en epoxymatrise der E-modul i fiberretning er $150$ GPa og E-modul på tvers av fiberretning er $10$ GPa. Hvert lag har tykkelse $0.5$ mm, og orienteringer på lag er $[0/90/0]$ der $0$-retning og $x$-retning sammenfaller. Laminatet har dimensjoner $L = 1000$ mm og $b = 100$ mm. Hva må kraften $F_x$ være for at laminatet skal forlenge seg med $2$ mm (altså få en deformert lengde lik $1002$ mm)? Velg alternativet som representerer et realistisk estimat.</p>\n\n<ol>\n<li><b>A:</b> $F_x = 150$ kN</li>\n<li><b>B:</b> $F_x = 300$ kN</li>\n<li><b>C:</b> $F_x = 450$ kN</li>\n<li><b>D:</b> $F_x = 600$ kN</li>\n</ol>"
+                        "task_text": "<p>Et laminat består av 3 lag. Hvert lag består av ensrettet karbonfiber i en epoxymatrise der E-modul i fiberretning er $150$ GPa og E-modul på tvers av fiberretning er $10$ GPa. Hvert lag har tykkelse $0.5$ mm, og orienteringer på lag er $[0/90/0]$ der $0$-retning og $x$-retning sammenfaller. Laminatet har dimensjoner $L = 1000$ mm og $b = 100$ mm.</p>\n\n<p>Hva må kraften $F_x$ være for at laminatet skal forlenge seg med $2$ mm (altså få en deformert lengde lik $1002$ mm)? Velg alternativet som representerer et realistisk estimat.</p>\n\n<ol>\n<li><b>A:</b> $\\leq 15$ kN</li>\n<li><b>B:</b> $30$ kN</li>\n<li><b>C:</b> $50$ kN</li>\n<li><b>D:</b> $75$ kN</li>\n<li><b>E:</b> $100$ kN</li>\n<li><b>F:</b> $150$ kN</li>\n<li><b>G:</b> $175$ kN</li>\n<li><b>H:</b> $\\geq 300$ kN</li>\n</ol>"
                     },
                     {
                         "topic": "Fasediagram",
                         "task_number": "11",
                         "points": 3,
-                        "task_text": "Fasediagrammet for systemet jern-karbon er vist over. Estimer maksimal løselighet av karbon i austenitt ved $850^\\circ$C og velg det mest presise alternativet. Legg merke til enheter i alternativene.\n\n<ol>\n<li><b>A:</b> $1$ at%</li>\n<li><b>B:</b> $2$ at%</li>\n<li><b>C:</b> $3$ at%</li>\n<li><b>D:</b> $4$ at%</li>\n<li><b>E:</b> $5$ at%</li>\n<li><b>F:</b> $6$ at%</li>\n<li><b>G:</b> $7$ at%</li>\n<li><b>H:</b> $8$ at%</li>\n</ol>"
+                        "task_text": "Fasediagrammet for systemet jern-karbon er vist over. Estimer maksimal løselighet av karbon i austenitt ved $850^\\circ C$ og velg det mest presise alternativet. Legg merke til enheter i alternativene.\n\n<ol>\n<li><b>A:</b> $1$ at$\\%$</li>\n<li><b>B:</b> $2$ at$\\%$</li>\n<li><b>C:</b> $3$ at$\\%$</li>\n<li><b>D:</b> $4$ at$\\%$</li>\n<li><b>E:</b> $5$ at$\\%$</li>\n<li><b>F:</b> $6$ at$\\%$</li>\n<li><b>G:</b> $7$ at$\\%$</li>\n<li><b>H:</b> $8$ at$\\%$</li>\n</ol>"
                     },
                     {
                         "topic": "Fasediagram",
@@ -563,19 +570,47 @@
                         "topic": "Fasediagram",
                         "task_number": "13",
                         "points": 4,
-                        "task_text": "<p>En likevektsstruktur av karbonstål består av 90 vekt% perlitt og 10% proeutektoid sementitt ved romtemperatur. Hva er sammensetningen?</p>\n<ol>\n<li><b>A</b> ≈0.30 vekt% C</li>\n<li><b>B</b> ≈0.45 vekt% C</li>\n<li><b>C</b> ≈0.60 vekt% C</li>\n<li><b>D</b> ≈0.75 vekt% C</li>\n<li><b>E</b> ≈0.90 vekt% C</li>\n<li><b>F</b> ≈1.05 vekt% C</li>\n<li><b>G</b> ≈1.35 vekt% C</li>\n<li><b>H</b> ≈1.50 vekt% C</li>\n</ol>"
+                        "task_text": "<p>En stålstruktur ved romtemperatur består av $90$ vekt% perlit og $10$% proeutektoid sementitt. Hva er sammensetningen?</p>\n\n<ol>\n<li><b>A</b> $\\approx 0.30$ vekt% C</li>\n<li><b>B</b> $\\approx 0.45$ vekt% C</li>\n<li><b>C</b> $\\approx 0.60$ vekt% C</li>\n<li><b>D</b> $\\approx 0.75$ vekt% C</li>\n<li><b>E</b> $\\approx 0.90$ vekt% C</li>\n<li><b>F</b> $\\approx 1.05$ vekt% C</li>\n<li><b>G</b> $\\approx 1.35$ vekt% C</li>\n<li><b>H</b> $\\approx 1.50$ vekt% C</li>\n</ol>"
                     },
                     {
                         "topic": "Mekaniske Egenskaper",
                         "task_number": "14",
                         "points": 10,
-                        "task_text": "<p>Gjør rede for følgende konsept/begrep som anvendes for å beskrive mekaniske egenskaper og/eller oppførsel til materialer:</p>\n\n<h3>a) Elastisk deformasjon</h3>\n<p>Elastisk deformasjon er en midlertidig formendring av et materiale når det utsettes for en belastning. Materialet returnerer til sin opprinnelige form når belastningen fjernes.</p>\n\n<h3>b) Resiliens</h3>\n<p>Resiliens er materialets evne til å absorbere energi under elastisk deformasjon og frigjøre denne energien når belastningen fjernes. Det er relatert til området under den elastiske delen av spennings-tøyning-kurven.</p>\n\n<h3>c) Fastning</h3>\n<p>Fastning er en prosess der et materiale blir hardere og mindre duktilt på grunn av plastisk deformasjon. Dette skjer ofte ved kaldforming eller ved at dislokasjoner beveger seg gjennom materialets krystallstruktur.</p>\n\n<h3>d) Seighet</h3>\n<p>Seighet er materialets evne til å absorbere energi før det går i stykker, inkludert både elastisk og plastisk deformasjon. Det er relatert til det totale området under spennings-tøyning-kurven.</p>\n\n<h3>e) Duktilitet</h3>\n<p>Duktilitet er et mål på hvor mye et materiale kan deformeres plastisk før det bryter sammen. Duktile materialer kan strekkes eller formes betydelig uten å gå i stykker.</p>"
+                        "task_text": "<p>Gjør rede for følgende konsept/begrep som anvendes for å beskrive mekaniske egenskaper og/eller oppførsel til materialer:</p>\n\n<h3>a)</h3>\n<p>Elastisk deformasjon er en midlertidig formendring av et materiale under påvirkning av en ytre kraft. Når kraften fjernes, går materialet tilbake til sin opprinnelige form.</p>\n\n<h3>b)</h3>\n<p>Resiliens er et materials evne til å absorbere energi under elastisk deformasjon og deretter frigjøre denne energien når belastningen fjernes.</p>\n\n<h3>c)</h3>\n<p>Fasthet er et materials motstandsevne mot plastisk deformasjon eller brudd under belastning. Det beskrives ofte som materialets flytegrense eller bruddstyrke.</p>\n\n<h3>d)</h3>\n<p>Seighet er et materials evne til å absorbere energi og deformere plastisk før det går i brudd. Det er et mål på materialets motstand mot sprekkvekst under belastning.</p>\n\n<h3>e)</h3>\n<p>Duktilitet er et materials evne til å deformere plastisk uten å gå i brudd. Duktile materialer kan strekkes eller formes betydelig før de bryter sammen.</p>"
                     },
                     {
                         "topic": "Materialegenskaper",
                         "task_number": "15",
                         "points": 10,
                         "task_text": "<h3>a)</h3>  \n<p>Hvorfor regnes aluminium som generelt mer duktilt enn titan?</p>  \n\n<h3>b)</h3>  \n<p>En karbonfiber er anisotrop mens en glassfiber er isotrop. Gi en kort forklaring på hva dette betyr og hva som er årsaken til denne forskjellen.</p>  \n\n<h3>c)</h3>  \n<p>PVC (polyvinylklorid) har mye høyere smeltetemperatur enn PP (polypropylen). Gi en kort forklaring på årsaken(e) til dette.</p>  \n\n<h3>d)</h3>  \n<p>Noen materialer har en utmattingsgrense. Hva betyr det?</p>  \n\n<h3>e)</h3>  \n<p>Hva er prinsipiell forskjell på en ionisk forbindelse og en polar kovalent forbindelse?</p>"
+                    }
+                ]
+            },
+            "V24": {
+                "tasks": [
+                    {
+                        "topic": "Legeringer",
+                        "task_number": "2",
+                        "points": 3,
+                        "task_text": "<p>En legering består av kun kobber og tinn. Forholdet mellom antall kobberatomer og antall tinnatomer er $25:1$. Hva er vektprosenten av tinn i legeringen? Oppgi svaret avrundet til nærmeste hele tall.</p>"
+                    },
+                    {
+                        "topic": "Krystallstruktur",
+                        "task_number": "4",
+                        "points": 3,
+                        "task_text": "<p>Kobber, som har tetthet lik $8935$ kg/m$^3$, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten $a$ for enhetscellen til kobber.</p>\n\n<ol>\n<li><b>A</b> $180$ pm</li>\n<li><b>B</b> $216$ pm</li>\n<li><b>C</b> $240$ pm</li>\n<li><b>D</b> $288$ pm</li>\n<li><b>E</b> $360$ pm</li>\n<li><b>F</b> $405$ pm</li>\n<li><b>G</b> $450$ pm</li>\n<li><b>H</b> $480$ pm</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Fasediagram",
+                        "task_number": "6",
+                        "points": 3,
+                        "task_text": "<p>En legering av kobber og sølv inneholder $4$ mol kobber og $6$ mol sølv. Legeringen varmes langsomt opp fra romtemperatur. Ved hvilken temperatur vil hele blandingen bli en smelte? Relevant fasediagram finner du i et vedlegg.</p>\n\n<ol>\n<li><b>A</b> $780^\\circ C$</li>\n<li><b>B</b> $800^\\circ C$</li>\n<li><b>C</b> $820^\\circ C$</li>\n<li><b>D</b> $840^\\circ C$</li>\n<li><b>E</b> $860^\\circ C$</li>\n<li><b>F</b> $880^\\circ C$</li>\n<li><b>G</b> $900^\\circ C$</li>\n<li><b>H</b> $920^\\circ C$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Legeringer",
+                        "task_number": "8",
+                        "points": 4,
+                        "task_text": "<p>Karbonstål med eutektoid sammensetning har 0.76 wt% karbon. Hvor mange karbonatom har et slikt stål per 1000 jernatom? Velg mellom 3, 8, 14, 20, 25, 30, 36, 42.</p>"
                     }
                 ]
             }
