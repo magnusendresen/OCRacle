@@ -90,10 +90,11 @@ def _expand_direction(
     orig = (x0, y0, x1, y1)
     h, w = img.shape[:2]
 
-    # First pass: detect open areas and determine maximum expansion.
+    # First pass: detect open areas.
     cur = orig
     open_streak = 0
     pre_open = orig
+    found_open = False
     for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS, STEP_PIXELS):
         prev_cur = cur
         if direction == "left":
@@ -128,62 +129,53 @@ def _expand_direction(
             open_streak += STEP_PIXELS
             if open_streak >= OPEN_AREA_PIXEL_STREAK:
                 cur = pre_open
+                found_open = True
                 break
         else:
             open_streak = 0
 
-    open_cur = cur
+    if not found_open:
+        # Second pass: detect color changes across the full range.
+        cur = orig
+        color_samples: List[float] = []
+        prev_type: Optional[float] = None
+        for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS, STEP_PIXELS):
+            prev_cur = cur
+            if direction == "left":
+                nx0 = max(0, orig[0] - i)
+                if nx0 == cur[0]:
+                    break
+                band = img[y0:y1, nx0:nx0 + STEP_PIXELS]
+                cur = (nx0, y0, x1, y1)
+            elif direction == "right":
+                nx1 = min(w, orig[2] + i)
+                if nx1 == cur[2]:
+                    break
+                band = img[y0:y1, nx1 - STEP_PIXELS:nx1]
+                cur = (x0, y0, nx1, y1)
+            elif direction == "top":
+                ny0 = max(0, orig[1] - i)
+                if ny0 == cur[1]:
+                    break
+                band = img[ny0:ny0 + STEP_PIXELS, x0:x1]
+                cur = (x0, ny0, x1, y1)
+            else:  # bottom
+                ny1 = min(h, orig[3] + i)
+                if ny1 == cur[3]:
+                    break
+                band = img[ny1 - STEP_PIXELS:ny1, x0:x1]
+                cur = (x0, y0, x1, ny1)
 
-    if direction == "left":
-        limit_pixels = orig[0] - open_cur[0]
-    elif direction == "right":
-        limit_pixels = open_cur[2] - orig[2]
-    elif direction == "top":
-        limit_pixels = orig[1] - open_cur[1]
-    else:
-        limit_pixels = open_cur[3] - orig[3]
-
-    # Second pass: detect color changes up to the open area limit.
-    cur = orig
-    color_samples: List[float] = []
-    prev_type: Optional[float] = None
-    for i in range(STEP_PIXELS, limit_pixels + STEP_PIXELS, STEP_PIXELS):
-        prev_cur = cur
-        if direction == "left":
-            nx0 = max(0, orig[0] - i)
-            if nx0 == cur[0]:
-                break
-            band = img[y0:y1, nx0:nx0 + STEP_PIXELS]
-            cur = (nx0, y0, x1, y1)
-        elif direction == "right":
-            nx1 = min(w, orig[2] + i)
-            if nx1 == cur[2]:
-                break
-            band = img[y0:y1, nx1 - STEP_PIXELS:nx1]
-            cur = (x0, y0, nx1, y1)
-        elif direction == "top":
-            ny0 = max(0, orig[1] - i)
-            if ny0 == cur[1]:
-                break
-            band = img[ny0:ny0 + STEP_PIXELS, x0:x1]
-            cur = (x0, ny0, x1, y1)
-        else:  # bottom
-            ny1 = min(h, orig[3] + i)
-            if ny1 == cur[3]:
-                break
-            band = img[ny1 - STEP_PIXELS:ny1, x0:x1]
-            cur = (x0, y0, x1, ny1)
-
-        avg_color = _average_color_value(band)
-        color_samples.append(avg_color)
-        if len(color_samples) > TYPE_SAMPLE_COUNT:
-            color_samples.pop(0)
-        if len(color_samples) == TYPE_SAMPLE_COUNT:
-            type_value = _most_common_color(color_samples)
-            if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
-                cur = prev_cur
-                break
-            prev_type = type_value
+            avg_color = _average_color_value(band)
+            color_samples.append(avg_color)
+            if len(color_samples) > TYPE_SAMPLE_COUNT:
+                color_samples.pop(0)
+            if len(color_samples) == TYPE_SAMPLE_COUNT:
+                type_value = _most_common_color(color_samples)
+                if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
+                    cur = prev_cur
+                    break
+                prev_type = type_value
 
     ret = cur
     log_dir = Path("img/log")
