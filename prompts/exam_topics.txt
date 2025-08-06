@@ -14,4 +14,6 @@ Absolutt og relativ feil, Enhetsanalyse.
 Eksempler på elendig dårlige temaer fra noen tilfeldige eksamner:  
 Fysikk, Kjemi, Matematikk, Værskemekanikk, Bevegelsesanalyse, Analyseteknikk, BMI, Akselerasjonsanalyse, Newtons lover.
 
+Et tema har som regel ikke det samme navnet som navnet på et emne (e.g. materialteknikk-materialteknikk, matte-matte, kjemi-kjemi, osv.). 
+
 Hvis teksten er flerspråklig, bruk norsk bokmål i svaret.

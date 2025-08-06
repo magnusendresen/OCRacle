@@ -119,7 +119,8 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
     ratio_bool = ratio > ratio_max
     avg_bool = avg_word_len > avg_word_len_max
     admin_bool = any(word in text.lower() for word in ["format", "words:", "maks poeng:"])
-    size_bool = img.shape[0] < 200 or img.shape[1] < 200
+    small_size_bool = img.shape[0] < 200 or img.shape[1] < 200
+    large_size_bool = img.shape[0] > 2500 or img.shape[1] > 2500
     color_bool = len(np.unique(img[::max(1,img.shape[0]//100),::max(1,img.shape[1]//100)], axis=0)) < 10
 
     code_bool = int(await prompt_to_text.async_prompt_to_text(
@@ -132,8 +133,8 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
         max_len=2,
     ))
 
-    should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool
-    should_skip_image = (size_bool or color_bool or code_bool) or attempt >= 2
+    should_attempt_crop = (avg_bool and (len_bool or ratio_bool)) or admin_bool or large_size_bool
+    should_skip_image = (small_size_bool or color_bool or code_bool) or attempt >= 5
 
     if not should_attempt_crop and not should_skip_image:
         log(f"Saving image for task {task_num}.")
@@ -141,7 +142,7 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
         return
 
     if should_skip_image:
-        log(f"Skipping image for task {task_num} due to {'size' if size_bool else 'color' if color_bool else 'code' if code_bool else 'attempt limit reached'}.")
+        log(f"Skipping image for task {task_num} due to {'small size' if small_size_bool else 'color' if color_bool else 'code' if code_bool else 'attempt limit reached'}.")
         return
 
     subs = _detect_crops(img)
@@ -150,7 +151,7 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
         return
 
     for sub in subs:
-        log(f"Cropping image for task {task_num}.")
+        log(f"Cropping image for task {task_num} due to {'text contents' if avg_bool and (len_bool or ratio_bool) else 'admin text' if admin_bool else 'large size'}.")
         await _process_image(sub, task_num, save_func, attempt + 1)
 
 
