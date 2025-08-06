@@ -34,7 +34,7 @@ DILATE_ITER = 2
 
 # Expansion and detection parameters
 STEP_PIXELS = 1
-MAX_EXPANSION_PIXELS = 400
+MAX_EXPANSION_PIXELS = 300
 
 # For detecting edge
 TYPE_SAMPLE_COUNT = 6

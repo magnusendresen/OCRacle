@@ -501,10 +501,10 @@
                         "task_text": "<p>Li$_2$O har kubisk krystallstruktur der litiumatom (Li) er plassert i følgende krystallografiske punkt:</p>  \n<p>$\\frac{1}{4} \\frac{1}{4} \\frac{1}{4}$, $\\frac{3}{4} \\frac{3}{4} \\frac{1}{4}$, $\\frac{3}{4} \\frac{1}{4} \\frac{3}{4}$, $\\frac{1}{4} \\frac{3}{4} \\frac{3}{4}$.</p>  \n<p>Tettheten til Li$_2$O er $2.0$ g/cm$^3$. Hva er verdien til gitterkonstanten $a$ for enhetscellen til Li$_2$O?</p>  \n\n<h3>a)</h3>  \n<p>CaF$_2$ har tilsvarende krystallstruktur som Li$_2$O, men der de krystallografiske posisjonene til fluor (F) i CaF$_2$ er lik krystallografiske posisjoner til litium (Li) i Li$_2$O.</p>  \n<p>Gitterkonstant for CaF$_2$ er $a = 546$ pm. Regn ut bindingslengden (senteravstand) mellom et Ca$^{2+}$ ion og et F$^-$ ion i CaF$_2$.</p>"
                     },
                     {
-                        "topic": "Krystallografisk Posisjon",
+                        "topic": "Bindingslengde",
                         "task_number": "2",
                         "points": 5,
-                        "task_text": "<p>Velg alle krystallografiske punkt som representerer posisjoner til atomer i en FCC-krystallstruktur:</p>\n<ol>\n<li><b>A</b> $1\\ 1\\ 1$</li>\n<li><b>B</b> $\\frac{1}{2}\\ \\frac{1}{2}\\ \\frac{1}{2}$</li>\n<li><b>C</b> $1\\ 1\\ 0$</li>\n<li><b>D</b> $0\\ 1\\ 1$</li>\n<li><b>E</b> $\\frac{1}{2}\\ 1\\ \\frac{1}{2}$</li>\n<li><b>F</b> $1\\ \\frac{1}{3}\\ \\frac{1}{3}$</li>\n<li><b>G</b> $\\frac{1}{2}\\ 0\\ \\frac{1}{2}$</li>\n<li><b>H</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ \\frac{1}{1}$</li>\n<li><b>I</b> $\\frac{1}{2}\\ \\frac{1}{0}\\ \\frac{1}{2}$</li>\n<li><b>J</b> $\\frac{1}{1}\\ \\frac{1}{3}\\ \\frac{1}{3}$</li>\n<li><b>K</b> $1\\ 0\\ 1$</li>\n<li><b>L</b> $1\\ 0\\ 0$</li>\n<li><b>M</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ \\frac{1}{0}$</li>\n<li><b>N</b> $2\\ 2\\ 2$</li>\n<li><b>O</b> $1\\ 0\\ 1$</li>\n<li><b>P</b> $1\\ 1\\ 0$</li>\n</ol>\n\n<p>Velg alle krystallografiske punkt som representerer en oktaedral (octahedral) posisjon i en FCC-krystallstruktur:</p>\n<ol>\n<li><b>A</b> $1\\ 1\\ 0$</li>\n<li><b>B</b> $0\\ 1\\ 1$</li>\n<li><b>C</b> $\\frac{1}{2}\\ \\frac{1}{2}\\ \\frac{1}{2}$</li>\n<li><b>D</b> $1\\ 1\\ 1$</li>\n<li><b>E</b> $1\\ 0\\ 0$</li>\n<li><b>F</b> $\\frac{1}{2}\\ 0\\ \\frac{1}{2}$</li>\n<li><b>G</b> $\\frac{1}{2}\\ \\frac{1}{0}\\ \\frac{1}{2}$</li>\n<li><b>H</b> $\\frac{1}{1}\\ \\frac{1}{0}\\ \\frac{1}{1}$</li>\n<li><b>I</b> $\\frac{1}{1}\\ \\frac{1}{1}\\ \\frac{1}{0}$</li>\n<li><b>J</b> $2\\ 2\\ 2$</li>\n<li><b>K</b> $1\\ 0\\ 1$</li>\n<li><b>L</b> $1\\ 1\\ 0$</li>\n</ol>"
+                        "task_text": "<p>Gitterkonstanten for $CaF_2$ er $a = 546$ pm. Regn ut bindingslengden (senteravstand) mellom et $Ca^{2+}$-ion og et $F^-$-ion i $CaF_2$.</p>"
                     },
                     {
                         "topic": "Krystallstruktur",
@@ -521,14 +521,14 @@
                     {
                         "topic": "Krystallstruktur",
                         "task_number": "5",
-                        "points": 5,
-                        "task_text": "<p>Tettheten til krystallinsk polypropylen (PP) er $945$ kg/m$^3$. Krystallsystemet til krystallinsk PP er monoklint (monoclinic) med følgende parameter: $a = 666$ pm, $b = 2078$ pm, $c = 650$ pm, $\\alpha = \\gamma = 90^\\circ$, $\\beta = 99.62^\\circ$ ($\\beta$ er vinkelen mellom x-aksen og z-aksen).</p>\n\n<p>Hvor mange repeterende enheter av PP er innenfor en enhetscelle? Velg ett alternativ:</p>\n\n<ol>\n<li><b>A</b> $1$</li>\n<li><b>B</b> $2$</li>\n<li><b>C</b> $4$</li>\n<li><b>D</b> $6$</li>\n<li><b>E</b> $8$</li>\n<li><b>F</b> $10$</li>\n<li><b>G</b> $12$</li>\n</ol>"
+                        "points": 10,
+                        "task_text": "<p>Lag illustrasjoner som viser følgende krystallografiske plan i kubiske krystallstrukturer:</p>\n\n<h3>a)</h3>\n<p>Planet $(112)$</p>\n\n<h3>b)</h3>\n<p>Planet $(041)$</p>\n\n<h3>c)</h3>\n<p>Planet $(012)$</p>\n\n<p>Planet $(110)$ er et plan med spesiell interesse i en BCC krystallstruktur. Gjør rede for denne påstanden.</p>\n\n<p>Krav til illustrasjoner: Aksene er definert/vist på figurene. Hensiktsmessig perspektiv og lett å tolke uten å måtte bruke magiske briller.</p>"
                     },
                     {
-                        "topic": "Polymerteknologi",
+                        "topic": "Skjærspenning",
                         "task_number": "6",
                         "points": 5,
-                        "task_text": "<p>En PP-PE kopolymer er polymerisert fra en blanding av etylen og propylen og inneholder $1000$ kg med repeterende enheter av PP og $200$ kg med repeterende enheter av PE. Regn ut forholdet mellom antall repeterende enheter av PE ($N_{PE}$) og antall repeterende enheter av PP ($n_{PP}$).</p>\n\n<ol>\n<li><b>A)</b> $N_{PE}/n_{PP} = 0.1$</li>\n<li><b>B)</b> $N_{PE}/n_{PP} = 0.2$</li>\n<li><b>C)</b> $N_{PE}/n_{PP} = 0.3$</li>\n<li><b>D)</b> $N_{PE}/n_{PP} = 0.4$</li>\n<li><b>E)</b> $N_{PE}/n_{PP} = 0.5$</li>\n<li><b>F)</b> $N_{PE}/n_{PP} = 0.6$</li>\n<li><b>G)</b> $N_{PE}/n_{PP} = 0.7$</li>\n<li><b>H)</b> $N_{PE}/n_{PP} = 0.8$</li>\n<li><b>I)</b> $N_{PE}/n_{PP} = 0.9$</li>\n</ol>"
+                        "task_text": "<p>Finn utløst skjærspenning i dette planet langs retningen s når det virker en spenning $\\sigma = 50$ MPa i retningen [110].</p><ol><li><b>A)</b> 0 MPa</li><li><b>B)</b> 2 MPa</li><li><b>C)</b> 4 MPa</li><li><b>D)</b> 6 MPa</li><li><b>E)</b> 8 MPa</li><li><b>F)</b> 10 MPa</li><li><b>G)</b> 12 MPa</li><li><b>H)</b> 14 MPa</li><li><b>I)</b> 16 MPa</li><li><b>J)</b> 18 MPa</li><li><b>K)</b> 20 MPa</li></ol>"
                     },
                     {
                         "topic": "Mekaniske Egenskaper",
