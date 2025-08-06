@@ -17,8 +17,9 @@ def select_images():
     return file_paths
 
 # Dummy funksjon for lagring
-async def dummy_save_func(img, task_num):
+def dummy_save_func(img, task_num):
     print(f"[DUMMY SAVE] Task {task_num} - bilde behandlet")
+    return True
 
 # Last inn og behandle bilder
 async def main():

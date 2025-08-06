@@ -1,6 +1,7 @@
 import asyncio
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
+import uuid
 
 import cv2
 import fitz
@@ -51,7 +52,7 @@ async def _get_text(img: np.ndarray) -> str:
     return await asyncio.to_thread(pytesseract.image_to_string, pil_img, lang="eng+nor")
 
 
-def _detect_crops(img: np.ndarray) -> List[np.ndarray]:
+def _detect_crops(img: np.ndarray) -> List[Tuple[np.ndarray, Tuple[int, int, int, int]]]:
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     edges = cv2.Canny(blurred, CANNY_LOW, CANNY_HIGH)
@@ -67,14 +68,31 @@ def _detect_crops(img: np.ndarray) -> List[np.ndarray]:
         if any(_bbox_iou(b, fb) > OVERLAP_IOU_THRESHOLD for fb in filtered):
             continue
         filtered.append(b)
-    return [img[y : y + h, x : x + w] for x, y, w, h in filtered]
+    return [(img[y : y + h, x : x + w], (x, y, w, h)) for x, y, w, h in filtered]
+
+
+def _log_crops(
+    original: np.ndarray,
+    results: List[Tuple[Tuple[int, int, int, int], bool]],
+    name: str,
+) -> None:
+    """Save a copy of the image with crop annotations."""
+    log_dir = Path("img/log")
+    log_dir.mkdir(parents=True, exist_ok=True)
+    annotated = original.copy()
+    for (x, y, w, h), success in results:
+        # Draw candidate in blue first
+        cv2.rectangle(annotated, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        color = (0, 255, 0) if success else (0, 0, 255)
+        cv2.rectangle(annotated, (x, y), (x + w, y + h), color, 2)
+    cv2.imwrite(str(log_dir / f"{name}_debug.png"), annotated)
 
 
 def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str, int]):
     exam_folder = Path(output_folder) / subject / version
     exam_folder.mkdir(parents=True, exist_ok=True)
 
-    def _save(img: np.ndarray, task_num: str):
+    def _save(img: np.ndarray, task_num: str) -> bool:
         task_folder = exam_folder / task_num
         task_folder.mkdir(parents=True, exist_ok=True)
         counts[task_num] = counts.get(task_num, 0) + 1
@@ -88,21 +106,28 @@ def _make_saver(output_folder: str, subject: str, version: str, counts: Dict[str
                 similarity = cv2.matchTemplate(resized_existing, img, cv2.TM_CCOEFF_NORMED)
                 if np.max(similarity) > 0.8:
                     log(f"Skipping duplicate image {fname} in {task_folder}")
-                    return
+                    return False
         path = task_folder / fname
         ok, buf = cv2.imencode(".png", img)
         if ok:
             with open(path, "wb") as f:
                 f.write(buf.tobytes())
-            # Uncomment for debugging
-            # log(f"Saved {path}")
-        else:
-            log(f"[ERROR] Could not encode image for {path}")
+            return True
+        log(f"[ERROR] Could not encode image for {path}")
+        return False
 
     return _save
 
 
-async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int = 0):
+async def _process_image(
+    img: np.ndarray,
+    task_num: str,
+    save_func,
+    attempt: int = 0,
+    img_name: Optional[str] = None,
+) -> bool:
+    if img_name is None:
+        img_name = uuid.uuid4().hex
     text = await _get_text(img)
     ratio = len(text) / (text.count("\n") + 1)
 
@@ -138,21 +163,36 @@ async def _process_image(img: np.ndarray, task_num: str, save_func, attempt: int
 
     if not should_attempt_crop and not should_skip_image:
         log(f"Saving image for task {task_num}.")
-        save_func(img, task_num)
-        return
+        success = save_func(img, task_num)
+        _log_crops(
+            img,
+            [((0, 0, img.shape[1], img.shape[0]), success)],
+            img_name,
+        )
+        return success
 
     if should_skip_image:
-        log(f"Skipping image for task {task_num} due to {'small size' if small_size_bool else 'color' if color_bool else 'code' if code_bool else 'attempt limit reached'}.")
-        return
+        log(
+            f"Skipping image for task {task_num} due to {'small size' if small_size_bool else 'color' if color_bool else 'code' if code_bool else 'attempt limit reached'}."
+        )
+        return False
 
     subs = _detect_crops(img)
     if not subs:
         log(f"Skipping image for task {task_num} due to no crops detected.")
-        return
+        return False
 
-    for sub in subs:
-        log(f"Cropping image for task {task_num} due to {'text contents' if avg_bool and (len_bool or ratio_bool) else 'admin text' if admin_bool else 'large size'}.")
-        await _process_image(sub, task_num, save_func, attempt + 1)
+    results: List[Tuple[Tuple[int, int, int, int], bool]] = []
+    for i, (sub, bbox) in enumerate(subs):
+        log(
+            f"Cropping image for task {task_num} due to {'text contents' if avg_bool and (len_bool or ratio_bool) else 'admin text' if admin_bool else 'large size'}."
+        )
+        success = await _process_image(
+            sub, task_num, save_func, attempt + 1, f"{img_name}_{i}"
+        )
+        results.append((bbox, success))
+    _log_crops(img, results, img_name)
+    return any(success for _, success in results)
 
 
 """
@@ -213,6 +253,10 @@ async def extract_figures(
     if exam_folder.exists():
         shutil.rmtree(exam_folder)
         log(f"Rydder tidligere bilder i {exam_folder}")
+    log_dir = Path("img/log")
+    if log_dir.exists():
+        shutil.rmtree(log_dir)
+        log(f"Tømmer logg-mappen {log_dir}")
     doc = fitz.open(pdf_path)
     counts: Dict[str, int] = {}
     save = _make_saver(output_folder, subject, version, counts)
@@ -228,7 +272,9 @@ async def extract_figures(
         arr = np.frombuffer(pix.samples, np.uint8).reshape(pix.height, pix.width, pix.n)
         img = cv2.cvtColor(arr, cv2.COLOR_RGBA2BGR if pix.alpha else cv2.COLOR_RGB2BGR)
         task_num = task_map.get(idx, "0")
-        task = asyncio.create_task(_process_image(img, task_num, save))
+        task = asyncio.create_task(
+            _process_image(img, task_num, save, img_name=f"{idx}")
+        )
         tasks.append(task)
     await asyncio.gather(*tasks)
     doc.close()
