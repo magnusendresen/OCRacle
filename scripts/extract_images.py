@@ -34,7 +34,7 @@ DILATE_ITER = 2
 
 # Expansion and detection parameters
 STEP_PIXELS = 2
-MAX_EXPANSION_PIXELS = 200
+MAX_EXPANSION_PIXELS = 400
 TYPE_SAMPLE_COUNT = 10
 TYPE_TOLERANCE_RATIO = 0.05
 COLOR_CHANGE_LIMIT = 20
@@ -146,7 +146,7 @@ def _expand_direction(
     annotated = img.copy()
     cv2.rectangle(annotated, (orig[0], orig[1]), (orig[2], orig[3]), (0, 255, 0), 2)
     cv2.rectangle(annotated, (ret[0], ret[1]), (ret[2], ret[3]), (255, 0, 255), 2)
-    cv2.imwrite(str(log_dir / f"expand_{direction}_{uuid.uuid4().hex}.png"), annotated)
+    # cv2.imwrite(str(log_dir / f"expand_{direction}_{uuid.uuid4().hex}.png"), annotated)
     return ret
 
 
@@ -273,8 +273,8 @@ async def _process_image(
     ratio_bool = ratio > ratio_max
     avg_bool = avg_word_len > avg_word_len_max
     admin_bool = any(word in text.lower() for word in ["format", "words:", "maks poeng:"])
-    small_size_bool = img.shape[0] < 200 or img.shape[1] < 200
-    large_size_bool = img.shape[0] > 2500 or img.shape[1] > 2500
+    small_size_bool = img.shape[0] + img.shape[1] < 750 or img.shape[0] < 280 or img.shape[1] < 280
+    large_size_bool = img.shape[0] > 2800 or img.shape[1] > 2800
     color_bool = len(np.unique(img[::max(1,img.shape[0]//100),::max(1,img.shape[1]//100)], axis=0)) < 10
 
     code_bool = int(await prompt_to_text.async_prompt_to_text(
