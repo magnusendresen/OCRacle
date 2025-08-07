@@ -34,12 +34,12 @@ DILATE_ITER = 2
 
 # Expansion and detection parameters
 STEP_PIXELS = 2
-MAX_EXPANSION_PIXELS = 320
+MAX_EXPANSION_PIXELS = 400
 TYPE_SAMPLE_COUNT = 10
 TYPE_TOLERANCE_RATIO = 0.05
 COLOR_CHANGE_LIMIT = 20
 OPEN_AREA_CONTRAST_THRESHOLD = 2
-OPEN_AREA_PIXEL_STREAK = 30
+OPEN_AREA_PIXEL_STREAK = 60
 
 
 def _bbox_iou(b1, b2):
@@ -135,8 +135,9 @@ def _expand_direction(
         else:
             open_streak = 0
 
-        if i > 20:
-            offset = i - 20
+        delta = 50
+        if i > delta:
+            offset = i - delta
             prev_contrast = cur_contrast
             if direction == "left":
                 nx0_c = max(0, orig[0] - offset)
@@ -163,7 +164,15 @@ def _expand_direction(
                 type_value = _most_common_color(color_samples)
                 if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
                     cur_contrast = prev_contrast
-                    ret = cur_contrast
+                    back = 25
+                    if direction == "left":
+                        ret = (cur_contrast[0] + back, cur_contrast[1], cur_contrast[2], cur_contrast[3])
+                    elif direction == "right":
+                        ret = (cur_contrast[0], cur_contrast[1], cur_contrast[2] - back, cur_contrast[3])
+                    elif direction == "top":
+                        ret = (cur_contrast[0], cur_contrast[1] + back, cur_contrast[2], cur_contrast[3])
+                    else: # bottom
+                        ret = (cur_contrast[0], cur_contrast[1], cur_contrast[2], cur_contrast[3] - back)
                     break
                 prev_type = type_value
     else:
@@ -300,7 +309,7 @@ async def _process_image(
     ratio_bool = ratio > ratio_max
     avg_bool = avg_word_len > avg_word_len_max
     admin_bool = any(word in text.lower() for word in ["format", "words:", "maks poeng:"])
-    small_size_bool = img.shape[0] + img.shape[1] < 750 or img.shape[0] < 280 or img.shape[1] < 280
+    small_size_bool = img.shape[0] + img.shape[1] < 800 or img.shape[0] < 280 or img.shape[1] < 280
     large_size_bool = img.shape[0] > 2800 or img.shape[1] > 2800
     color_bool = len(np.unique(img[::max(1,img.shape[0]//100),::max(1,img.shape[1]//100)], axis=0)) < 10
 
