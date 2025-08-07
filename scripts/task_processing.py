@@ -165,6 +165,46 @@ async def get_exam_info() -> Exam:
     write_progress(progress, LLM_STEPS, {6: str(total_task_count)})
     write_progress(progress, LLM_STEPS, {8: str(LLM_STEPS)})
 
+
+    # FULLFØR IMPLEMENTERING AV CONTAINERKONTROLL
+    ocr_total_tasks = (
+        await prompt_to_text.async_prompt_to_text(
+            PROMPT_CONFIG + load_prompt("get_total_tasks") + ocr_text,
+            max_tokens=1000,
+            is_num=True,
+            max_len=3,
+        )
+    )
+
+    should_check_containers = False
+    if abs(int(ocr_total_tasks) - total_task_count) > 0:
+        log(f"Warning: OCR detected {ocr_total_tasks} tasks, but {total_task_count} tasks were extracted from container batches.")
+        should_check_containers = True
+
+    if should_check_containers:
+        log("Checking the text length and the pixel height of the container batches.")
+        for task_num, text in exam.ocr_tasks.items():
+            if len(text) < 50:
+                log(f"Task {task_num} has very short text, does likely not contain a task.")
+                continue
+            container = containers.get(task_num)
+            if container is None:
+                log(f"Container for task {task_num} not found, skipping.")
+                continue
+            if container[1] - container[0] < 100:
+                log(f"Container for task {task_num} is too small, skipping.")
+                continue
+
+        exam.task_numbers = [task for task in exam.task_numbers if len(exam.ocr_tasks.get(task, "")) > 50]
+        total_task_count = len(exam.task_numbers)
+
+        # Use the new containers to update the task_map
+        exam.ocr_tasks = {
+            task: exam.ocr_tasks[task] for task in exam.task_numbers if task in exam.ocr_tasks
+        }
+    # FULLFØR IMPLEMENTERING AV CONTAINERKONTROLL        
+
+
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
         data = json.load(f)
         exam.subject = data.get("subject", "").strip().upper()

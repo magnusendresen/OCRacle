@@ -590,27 +590,117 @@
                 "tasks": [
                     {
                         "topic": "Legeringer",
+                        "task_number": "1",
+                        "points": 13,
+                        "task_text": "<p>Hva kalles en legering som hovedsakelig inneholder kobber og tinn?</p>\n\n<p>Hva er vanlig navn for legeringer som hovedsakelig inneholder kobber og sink?</p>\n\n<p>Likevektsstrukturen til en blanding av kobber og nikkel beskrives ved et isomorft fasediagram. Forklar hvorfor.</p>\n\n<p>Hva er maksimal løselighet av kobber i aluminium?</p>\n\n<p>Aluminiumslegeringer i 2000-serien har kobber som det primære legeringselementet. Forklar hvordan og hvorfor disse legeringene kan oppnå høy flytestyrke.</p>\n\n<p>Kan kobber benyttes som katodisk beskyttelse av stål? Gi en kort forklaring på det du kommer frem til.</p>\n\n<p>Gi en kort forklaring på hva som hindrer korrosjon i rustfrie stål, både med hensyn på stålets innhold og mekanismen som virker.</p>"
+                    },
+                    {
+                        "topic": "Legeringer",
                         "task_number": "2",
                         "points": 3,
                         "task_text": "<p>En legering består av kun kobber og tinn. Forholdet mellom antall kobberatomer og antall tinnatomer er $25:1$. Hva er vektprosenten av tinn i legeringen? Oppgi svaret avrundet til nærmeste hele tall.</p>"
                     },
                     {
-                        "topic": "Krystallstruktur",
+                        "topic": "Materialegenskaper",
+                        "task_number": "3",
+                        "points": 3,
+                        "task_text": "<p>Et stykke aluminiumsfolie har en bredde på $44$ cm, en lengde på $10$ m og veier $180$ g. Hva er tykkelsen på denne folien? Velg ett alternativ:</p><ol><li><b>A</b> $< 10$ $\\mu$m</li><li><b>B</b> $15$ $\\mu$m</li><li><b>C</b> $25$ $\\mu$m</li><li><b>D</b> $35$ $\\mu$m</li><li><b>E</b> $45$ $\\mu$m</li><li><b>F</b> $55$ $\\mu$m</li><li><b>G</b> $65$ $\\mu$m</li><li><b>H</b> $> 75$ $\\mu$m</li></ol>"
+                    },
+                    {
+                        "topic": "Korrosjon",
                         "task_number": "4",
                         "points": 3,
-                        "task_text": "<p>Kobber, som har tetthet lik $8935$ kg/m$^3$, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten $a$ for enhetscellen til kobber.</p>\n\n<ol>\n<li><b>A</b> $180$ pm</li>\n<li><b>B</b> $216$ pm</li>\n<li><b>C</b> $240$ pm</li>\n<li><b>D</b> $288$ pm</li>\n<li><b>E</b> $360$ pm</li>\n<li><b>F</b> $405$ pm</li>\n<li><b>G</b> $450$ pm</li>\n<li><b>H</b> $480$ pm</li>\n</ol>"
+                        "task_text": "<p>Aluminium reagerer raskt med oksygen i luft og danner et belegg av aluminiumoksid, $Al_2O_3$ på overflatene. Dette belegget er $4$ nanometer tykt. Hvor mye oksygen er i så fall bundet til aluminiumsfolien i forrige oppgave? Tettheten til aluminiumoksid er $3980$ kg/m³ og du kan anta at alle flater har blitt eksponert for oksygen.</p>\n\n<ol>\n<li><b>A</b> $< 10 \\mu g$</li>\n<li><b>B</b> $15 \\mu g$</li>\n<li><b>C</b> $25 \\mu g$</li>\n<li><b>D</b> $35 \\mu g$</li>\n<li><b>E</b> $45 \\mu g$</li>\n<li><b>F</b> $55 \\mu g$</li>\n<li><b>G</b> $65 \\mu g$</li>\n<li><b>H</b> $> 70 \\mu g$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Krystallstruktur",
+                        "task_number": "5",
+                        "points": 3,
+                        "task_text": "<p>Kobber, som har tetthet lik $8935$ kg/m$^3$, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten $a$ for enhetscellen til kobber.</p>\n\n<ol>\n<li><b>A:</b> $180$ pm</li>\n<li><b>B:</b> $216$ pm</li>\n<li><b>C:</b> $240$ pm</li>\n<li><b>D:</b> $288$ pm</li>\n<li><b>E:</b> $360$ pm</li>\n<li><b>F:</b> $405$ pm</li>\n<li><b>G:</b> $450$ pm</li>\n<li><b>H:</b> $480$ pm</li>\n</ol>"
                     },
                     {
                         "topic": "Fasediagram",
                         "task_number": "6",
                         "points": 3,
-                        "task_text": "<p>En legering av kobber og sølv inneholder $4$ mol kobber og $6$ mol sølv. Legeringen varmes langsomt opp fra romtemperatur. Ved hvilken temperatur vil hele blandingen bli en smelte? Relevant fasediagram finner du i et vedlegg.</p>\n\n<ol>\n<li><b>A</b> $780^\\circ C$</li>\n<li><b>B</b> $800^\\circ C$</li>\n<li><b>C</b> $820^\\circ C$</li>\n<li><b>D</b> $840^\\circ C$</li>\n<li><b>E</b> $860^\\circ C$</li>\n<li><b>F</b> $880^\\circ C$</li>\n<li><b>G</b> $900^\\circ C$</li>\n<li><b>H</b> $920^\\circ C$</li>\n</ol>"
+                        "task_text": "<p>80 g av en legering av kobber og sølv som inneholder 30 vektprosent sølv varmes sakte opp fra romtemperatur til 900°C og holdes ved denne temperaturen til systemet er i fullstendig likevekt. Smeltemassen helles deretter ut av blandingen. Hvor mye fast stoff blir igjen? Den relevante fasediagrammet finnes i et vedlegg.</p>\n\n<h3>a)</h3>\n\n<p>Det faste stoffet som ble igjen i forrige oppgave kjøles sakte ned til 700°C. Hvor mange vektprosent av β-fasen er i blandingen av α og β ved denne temperaturen?</p>"
                     },
                     {
-                        "topic": "Legeringer",
+                        "topic": "Fasediagram",
+                        "task_number": "7",
+                        "points": 3,
+                        "task_text": "<p>En legering av kobber og sølv inneholder $4$ mol kobber og $6$ mol sølv. Legeringen varmes langsomt opp fra romtemperatur. Ved hvilken temperatur vil hele blandingen bli en smelte? Relevant fasediagram finner du i et vedlegg.</p>\n\n<ol>\n  <li><b>A</b> $780^\\circ C$</li>\n  <li><b>B</b> $800^\\circ C$</li>\n  <li><b>C</b> $820^\\circ C$</li>\n  <li><b>D</b> $840^\\circ C$</li>\n  <li><b>E</b> $860^\\circ C$</li>\n  <li><b>F</b> $880^\\circ C$</li>\n  <li><b>G</b> $900^\\circ C$</li>\n  <li><b>H</b> $920^\\circ C$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Diffusjon",
                         "task_number": "8",
+                        "points": 2,
+                        "task_text": "<p>1. Forklar kort og presist hva som menes med en semi-uendelig plate.</p>\n\n<p>2. Hva er diffusjonskoeffisienten for karbon i stål ved disse betingelsene? Se tabellen i denne oppgaven.</p>\n\n<p>3. Hvor lang tid må platen holdes ved disse betingelsene for at konsentrasjonen av karbon ved en posisjon $1.0$ mm inn i platen blir $1.0$ wt%?</p>\n\n<p>4. Vis at betingelser for en semi-uendelig plate er oppfylt for tiden du har beregnet i forrige spørsmål.</p>\n\n<p>5. Den stakkars studenten som egentlig bare skulle øke karboninnholdet ytterst i platen på den ene siden, glemte hele greia og tok juleferie. Platen ble dermed stående til over nyttår under betingelsene som er gitt over. Hvordan forventer du at konsentrasjonen av karbon varierer gjennom platen når juleferien er over?</p>\n\n<p>6. Tilbake etter jul, og passe irritert over tabben, slenger studenten platen rett i kaldt vann. Hva vil skje med materialet i platen nå?</p>"
+                    },
+                    {
+                        "topic": "Fasediagram",
+                        "task_number": "9",
                         "points": 4,
-                        "task_text": "<p>Karbonstål med eutektoid sammensetning har 0.76 wt% karbon. Hvor mange karbonatom har et slikt stål per 1000 jernatom? Velg mellom 3, 8, 14, 20, 25, 30, 36, 42.</p>"
+                        "task_text": "<p>Karbonstål med eutektoid sammensetning har $0.76$ wt% karbon. Hvor mange karbonatom har et slikt stål per $1000$ jernatom? Velg ett alternativ:</p><ol><li><b>A</b> $3$</li><li><b>B</b> $8$</li><li><b>C</b> $14$</li><li><b>D</b> $20$</li><li><b>E</b> $25$</li><li><b>F</b> $30$</li><li><b>G</b> $36$</li><li><b>H</b> $42$</li></ol>"
+                    },
+                    {
+                        "topic": "Fasediagram",
+                        "task_number": "10",
+                        "points": 4,
+                        "task_text": "<p>Karbonstål med $1.5$ wt% karbon er i likevekt som austenitt, og kjøles deretter langsomt ned til en temperatur lik $750^\\circ$C. Hvor stor del av materialet er sementitt ved denne temperaturen? Relevant diagram finner du i et vedlegg. Velg ett alternativ:</p><ol><li><b>A</b> $< 5$ wt%</li><li><b>B</b> $= 7$ wt%</li><li><b>C</b> $= 9$ wt%</li><li><b>D</b> $=11$ wt%</li><li><b>E</b> $=13$ wt%</li><li><b>F</b> $=15$ wt%</li><li><b>G</b> $=17$ wt%</li><li><b>H</b> $=19$ wt%</li><li><b>I</b> $=21$ wt%</li><li><b>J</b> $=23$ wt%</li><li><b>K</b> $> 25$ wt%</li></ol>"
+                    },
+                    {
+                        "topic": "Fasediagram",
+                        "task_number": "11",
+                        "points": 4,
+                        "task_text": "<p>Karbonstålet består nå av α-jern (ferritt) og kjøles videre ned til romtemperatur. Hvor stor del av materialet (i vektprosent) er ferritt ved romtemperatur?</p>\n<ol>\n<li><b>A</b> 0 wt%</li>\n<li><b>B</b> 10 wt%</li>\n<li><b>C</b> 20 wt%</li>\n<li><b>D</b> 30 wt%</li>\n<li><b>E</b> 40 wt%</li>\n<li><b>F</b> 50 wt%</li>\n<li><b>G</b> 60 wt%</li>\n<li><b>H</b> 70 wt%</li>\n<li><b>I</b> 80 wt%</li>\n<li><b>J</b> 90 wt%</li>\n<li><b>K</b> 100 wt%</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Bruddmekanismer",
+                        "task_number": "12",
+                        "points": 14,
+                        "task_text": "<p>Gjør rede for forskjellen mellom sprøbrudd og duktilt brudd.</p>\n\n<p>Gjør kort rede for hva støpejern er.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til grått støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til kvitt støpejern.</p>\n\n<p>Gjør kort rede for sammensetning og mikrostruktur til kulegrafittjern.</p>\n\n<p>Forklar kvifor grått og kvitt støpejern har liten eller ingen duktilitet, medan kulegrafittjern kan ha relativt høg duktilitet.</p>"
+                    },
+                    {
+                        "topic": "Bruddmekanismer",
+                        "task_number": "13",
+                        "points": 4,
+                        "task_text": "<p>I en komponent er det laget en overflatesprekk med lengde $a = 2$ mm. Komponenten utsettes så for en strekkspenning, og det oppstår et sprøbrudd når denne spenningen er $126$ MPa.</p>\n\n<p>Materialets bruddseighet samt geometriparameteren til systemet er ukjent, men det kan antas at geometriparameteren ikke er avhengig av sprekkens lengde.</p>\n\n<p>En identisk komponent med kun naturlige overflatesprekker utsettes så for en strekklast, og sprøbrudd oppstår ved en spenning lik $325$ MPa.</p>\n\n<p>Hva er lengden $a$ på overflatesprekken som førte til brudd i denne komponenten? Anta at sprekken er lokalisert og orientert på samme måte som den kunstige sprekken i den første komponenten.</p>\n\n<ol>\n<li><b>A:</b> $<0.5$ mm</li>\n<li><b>B:</b> $0.6$ mm</li>\n<li><b>C:</b> $0.7$ mm</li>\n<li><b>D:</b> $0.8$ mm</li>\n<li><b>E:</b> $0.9$ mm</li>\n<li><b>F:</b> $1.0$ mm</li>\n<li><b>G:</b> $1.1$ mm</li>\n<li><b>H:</b> $>1.2$ mm</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Mekaniske Egenskaper",
+                        "task_number": "14",
+                        "points": 5,
+                        "task_text": "<p>En fritt opplagret bjelke er utsatt for en senterlast $F$ (tilsvarende som for en tre-punkts bøyetest). Lengde mellom opplagringer er $L = 180$ mm, bredden til bjelken er $10$ mm og høyden er $8$ mm.</p>\n\n<p>Ved en last $F = 1212$ N, blir det et sprøbrudd $43$ mm til venstre for midten av bjelken. Hva var maksimal bøyespenning i bjelken ved bruddets posisjon?</p>\n\n<ol>\n<li><b>A</b> $43$ MPa</li>\n<li><b>B</b> $89$ MPa</li>\n<li><b>C</b> $146$ MPa</li>\n<li><b>D</b> $212$ MPa</li>\n<li><b>E</b> $267$ MPa</li>\n<li><b>F</b> $332$ MPa</li>\n<li><b>G</b> $425$ MPa</li>\n<li><b>H</b> $510$ MPa</li>\n<li><b>I</b> $600$ MPa</li>\n<li><b>J</b> $800$ MPa</li>\n<li><b>K</b> $999$ MPa</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Materialvalg",
+                        "task_number": "15",
+                        "points": 0,
+                        "task_text": "<p>En søyle med lengde $L = 6$ m skal ha et sirkulært tverrsnitt. Søylen skal være så lett som mulig, og du må ta hensyn til knekkingslasten, som for det konkrete tilfellet er gitt ved:</p>  \n<p>$$F_r = \\frac{\\pi^2 EI}{L^2}$$</p>  \n<p>Søylen må akkurat tåle $50$ kN i trykk uten å knekke. Du trenger ikke ta hensyn til materialets trykkstyrke, siden det er antatt at knekking er den begrensende faktoren.</p>  \n<p>Data for materialer med ID-nummer $1...9$ er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m³ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene.</p>  \n<p>Diameteren til søylen er i utgangspunktet en fri variabel (for de tre første spørsmålene som følger).</p>  \n\n<h3>a)</h3>  \n<p>Hvilket materiale er mest optimalt?</p>  \n\n<h3>b)</h3>  \n<p>Hvilket materiale er minst optimalt?</p>  \n\n<h3>c)</h3>  \n<p>Hvor mange materialer er bedre enn materialet med ID-nummer $7$?</p>  \n\n<h3>d)</h3>  \n<p>Nå er det bestemt at søylens diameter må være mindre enn $100$ mm. Hvor mange av materialene vil tilfredsstille dette kravet?</p>"
+                    },
+                    {
+                        "topic": "Materialvalg",
+                        "task_number": "16",
+                        "points": 2,
+                        "task_text": "<p>Data for materialer med ID-nummer 1...9 er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m³ for E-modul og tetthet. Alle spørsmål som følger, henviser til disse materialene.</p>\n\n<p>Av de 9 materialene, er fem av materialene fiktive, mens de fire andre materialene representerer vanlige konstruksjonsmetaller.</p>\n\n<h3>a)</h3>\n<p>Hvilket materiale er en stållegering?</p>\n\n<h3>b)</h3>\n<p>Hvilket materiale er en aluminiumslegering?</p>\n\n<h3>c)</h3>\n<p>Hvilket materiale er en titanlegering?</p>\n\n<h3>d)</h3>\n<p>Hvilket materiale er en magnesiumlegering?</p>"
+                    },
+                    {
+                        "topic": "Mekaniske Egenskaper",
+                        "task_number": "17",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt? Merk: i tilfelle der det kan argumenteres for at flere alternativer er delvis korrekte, skal du velge det alternativet som fremstår som gjennomgående korrekt og konsistent for alle med materialteknisk kompetanse.</p>\n\n<ol>\n<li><b>A</b> Elastisitetsmodulen (E-modulen) til de fleste metaller er lite påvirket av temperaturen så lenge temperaturen er under smeltepunktet.</li>\n<li><b>B</b> Temperert martensitt oppnås ved å varme martensitt til en temperatur over den eutektoide temperaturen, for så å holde denne temperaturen for en definert tid.</li>\n<li><b>C</b> Austenittiske stål er særlig utsatt for en brå omvandling fra duktil til sprø oppførsel ved lave temperaturer.</li>\n<li><b>D</b> Elektrisk resistivitet i metaller er generelt økende med økende temperatur.</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Krystallstruktur",
+                        "task_number": "18",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt? Merk: i tilfelle der det kan argumenteres for at flere alternativer er delvis korrekte, skal du velge det alternativet som fremstår som gjennomgående korrekt og konsistent for alle med materialteknisk kompetanse.</p>\n\n<ol>\n<li><b>A:</b> For metaller med BCC krystallstruktur, er siging (creep) relevant ved temperaturer over ca. $0.4$ ganger smeltetemperaturen, mens dette ikke er tilfelle for metaller med FCC krystallstruktur.</li>\n<li><b>B:</b> Smeltetemperaturen til metaller gir en viss indikasjon på den potensielle øvre brukstemperaturen til materialet.</li>\n<li><b>C:</b> Krystallinske metaller blir sprø når temperaturen er under glasstransisjonstemperaturen.</li>\n<li><b>D:</b> Aluminium som er plastisk bearbeidet og dermed deformasjonsherdet, vil rekrystallisere og danne HCP-aluminium etter en gitt tid.</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Polymerteknologi",
+                        "task_number": "19",
+                        "points": 2,
+                        "task_text": "<p>Hvilken påstand er korrekt? Merk: i tilfelle der det kan argumenteres for at flere alternativer er delvis korrekte, skal du velge det alternativet som fremstår som gjennomgående korrekt og konsistent for alle med materialteknisk kompetanse.</p>\n\n<ol>\n<li><b>A:</b> PTFE (polytetrafluoretylen) som vi finner i teflon, har spesielt høyt smeltepunkt på grunn av sterke hydrogenbindinger.</li>\n<li><b>B:</b> PE (polyetylen) har høyere smeltetemperatur enn PP (polypropylen) siden enklere molekyl pakkes lettere enn molekyl med sidegrupper.</li>\n<li><b>C:</b> Plastiserer (plasticizer) kan tilsettes f.eks. PVC (polyvinylklorid) for å øke glasstransisjonstemperaturen.</li>\n<li><b>D:</b> PVC (polyvinylklorid) har høyere smeltetemperatur enn PP (polypropylen) på grunn av sterkere dipolkrefter mellom molekylene.</li>\n</ol>"
                     }
                 ]
             }

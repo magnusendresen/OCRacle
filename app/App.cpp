@@ -41,7 +41,7 @@ App::App(const std::string& windowName)
     char exePathBuffer[MAX_PATH];
     if (GetModuleFileNameA(nullptr, exePathBuffer, MAX_PATH)) {
         std::filesystem::path exePath = exePathBuffer;
-        std::filesystem::path iconPath = exePath.parent_path().parent_path() / "myicon.ico";
+        std::filesystem::path iconPath = "myicon.ico";
         HICON hIcon = static_cast<HICON>(LoadImageA(
             nullptr,
             iconPath.string().c_str(),
