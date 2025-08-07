@@ -34,7 +34,7 @@ DILATE_ITER = 2
 
 # Expansion and detection parameters
 STEP_PIXELS = 2
-MAX_EXPANSION_PIXELS = 400
+MAX_EXPANSION_PIXELS = 320
 TYPE_SAMPLE_COUNT = 10
 TYPE_TOLERANCE_RATIO = 0.05
 COLOR_CHANGE_LIMIT = 20
@@ -84,63 +84,90 @@ def _expand_direction(
     img: np.ndarray, x0: int, y0: int, x1: int, y1: int, direction: str
 ) -> Tuple[int, int, int, int]:
     orig = (x0, y0, x1, y1)
-    cur = orig
+    cur_open = orig
+    cur_contrast = orig
     h, w = img.shape[:2]
     color_samples: List[float] = []
     prev_type: Optional[float] = None
     open_streak = 0
-    pre_open = orig
-    for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS, STEP_PIXELS):
-        prev_cur = cur
+    last_open = orig
+
+    for i in range(STEP_PIXELS, MAX_EXPANSION_PIXELS + STEP_PIXELS, STEP_PIXELS):
+        prev_open = cur_open
         if direction == "left":
             nx0 = max(0, orig[0] - i)
-            if nx0 == cur[0]:
+            if nx0 == cur_open[0]:
+                ret = cur_open
                 break
-            band = img[y0:y1, nx0:nx0 + STEP_PIXELS]
-            cur = (nx0, y0, x1, y1)
+            band_open = img[y0:y1, nx0:nx0 + STEP_PIXELS]
+            cur_open = (nx0, y0, x1, y1)
         elif direction == "right":
             nx1 = min(w, orig[2] + i)
-            if nx1 == cur[2]:
+            if nx1 == cur_open[2]:
+                ret = cur_open
                 break
-            band = img[y0:y1, nx1 - STEP_PIXELS:nx1]
-            cur = (x0, y0, nx1, y1)
+            band_open = img[y0:y1, nx1 - STEP_PIXELS:nx1]
+            cur_open = (x0, y0, nx1, y1)
         elif direction == "top":
             ny0 = max(0, orig[1] - i)
-            if ny0 == cur[1]:
+            if ny0 == cur_open[1]:
+                ret = cur_open
                 break
-            band = img[ny0:ny0 + STEP_PIXELS, x0:x1]
-            cur = (x0, ny0, x1, y1)
+            band_open = img[ny0:ny0 + STEP_PIXELS, x0:x1]
+            cur_open = (x0, ny0, x1, y1)
         else:  # bottom
             ny1 = min(h, orig[3] + i)
-            if ny1 == cur[3]:
+            if ny1 == cur_open[3]:
+                ret = cur_open
                 break
-            band = img[ny1 - STEP_PIXELS:ny1, x0:x1]
-            cur = (x0, y0, x1, ny1)
+            band_open = img[ny1 - STEP_PIXELS:ny1, x0:x1]
+            cur_open = (x0, y0, x1, ny1)
 
-        contrast = _contrast_value(band)
-        avg_color = _average_color_value(band)
-
+        contrast = _contrast_value(band_open)
         if contrast < OPEN_AREA_CONTRAST_THRESHOLD:
             if open_streak == 0:
-                pre_open = prev_cur
+                last_open = prev_open
             open_streak += STEP_PIXELS
             if open_streak >= OPEN_AREA_PIXEL_STREAK:
-                cur = pre_open
+                cur_open = last_open
+                ret = cur_open
                 break
         else:
             open_streak = 0
 
-        color_samples.append(avg_color)
-        if len(color_samples) > TYPE_SAMPLE_COUNT:
-            color_samples.pop(0)
-        if len(color_samples) == TYPE_SAMPLE_COUNT:
-            type_value = _most_common_color(color_samples)
-            if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
-                cur = prev_cur
-                break
-            prev_type = type_value
+        if i > 20:
+            offset = i - 20
+            prev_contrast = cur_contrast
+            if direction == "left":
+                nx0_c = max(0, orig[0] - offset)
+                band_contrast = img[y0:y1, nx0_c:nx0_c + STEP_PIXELS]
+                cur_contrast = (nx0_c, y0, x1, y1)
+            elif direction == "right":
+                nx1_c = min(w, orig[2] + offset)
+                band_contrast = img[y0:y1, nx1_c - STEP_PIXELS:nx1_c]
+                cur_contrast = (x0, y0, nx1_c, y1)
+            elif direction == "top":
+                ny0_c = max(0, orig[1] - offset)
+                band_contrast = img[ny0_c:ny0_c + STEP_PIXELS, x0:x1]
+                cur_contrast = (x0, ny0_c, x1, y1)
+            else:  # bottom
+                ny1_c = min(h, orig[3] + offset)
+                band_contrast = img[ny1_c - STEP_PIXELS:ny1_c, x0:x1]
+                cur_contrast = (x0, y0, x1, ny1_c)
 
-    ret = cur
+            avg_color = _average_color_value(band_contrast)
+            color_samples.append(avg_color)
+            if len(color_samples) > TYPE_SAMPLE_COUNT:
+                color_samples.pop(0)
+            if len(color_samples) == TYPE_SAMPLE_COUNT:
+                type_value = _most_common_color(color_samples)
+                if prev_type is not None and abs(type_value - prev_type) > COLOR_CHANGE_LIMIT:
+                    cur_contrast = prev_contrast
+                    ret = cur_contrast
+                    break
+                prev_type = type_value
+    else:
+        ret = cur_open
     log_dir = Path("img/log")
     log_dir.mkdir(parents=True, exist_ok=True)
     annotated = img.copy()
