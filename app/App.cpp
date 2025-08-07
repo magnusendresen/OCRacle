@@ -35,6 +35,29 @@ App::App(const std::string& windowName)
 {
     setBackgroundColor(TDT4102::Color::light_gray);
     GUI();
+
+#ifdef _WIN32
+    // Set application icon from repository root
+    char exePathBuffer[MAX_PATH];
+    if (GetModuleFileNameA(nullptr, exePathBuffer, MAX_PATH)) {
+        std::filesystem::path exePath = exePathBuffer;
+        std::filesystem::path iconPath = exePath.parent_path().parent_path() / "myicon.ico";
+        HICON hIcon = static_cast<HICON>(LoadImageA(
+            nullptr,
+            iconPath.string().c_str(),
+            IMAGE_ICON,
+            0,
+            0,
+            LR_LOADFROMFILE));
+        if (hIcon) {
+            HWND hwnd = FindWindowA(nullptr, windowName.c_str());
+            if (hwnd) {
+                SendMessage(hwnd, WM_SETICON, ICON_SMALL, reinterpret_cast<LPARAM>(hIcon));
+                SendMessage(hwnd, WM_SETICON, ICON_BIG, reinterpret_cast<LPARAM>(hIcon));
+            }
+        }
+    }
+#endif
 }
 
 void App::GUI() {
