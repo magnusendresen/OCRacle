@@ -200,6 +200,12 @@ async def _query_markers(prompt: str) -> List[int]:
 async def query_start_markers(containers: List[Dict]) -> List[int]:
     """Ask the language model for indices that look like task starts."""
 
+    temp_output_file = "temp_output.txt"
+
+    with open(temp_output_file, "w", encoding="utf-8") as f:
+        f.write(build_container_string_with_identifier(containers))
+
+    if abs(ocr_total_tasks - len(containers)) > 3: # Så lager vi en annen prompt enn nedenfor som forklarer bedre ettersom hver side antakelig er fylt med et helt bilde grunnet konvertering til pdf.
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "

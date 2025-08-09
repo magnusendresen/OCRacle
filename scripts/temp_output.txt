@@ -1,0 +1,507 @@
+
+
+=== CONTAINER 0 (image) ===
+Li2O har kubisk krystallstruktur der litiumatom (Li) er plassert I falgende krystallografiske punkt
+
+e] —
+] —
+Æ]
+|
+H] c
+e| bt
+e| es
+|
+| mt
+e] Go
+e| es
+|]
+|] —
+=| -
+e] Co
+e]
+| OO
+| oo
+e| es
+] —
+e| OD
+e| Oo
+| Co
+| Go
+
+Tettheten til Li».O er 2.0 g/cm?.
+Hva er verdien til gitterkonstanten a for enhetscellen til Lis0?
+
+Velg ett alternativ:
+© < 100 pm
+© = 146 pm
+© = 183 pm
+© = 231 pm
+© = 291 pm
+© = 367 pm
+©) = 462 pm
+© = 582 pm
+© = 733 pm
+
+© = 800 pm
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 1 (image) ===
+CaF har tilsvarende krystallstruktur som LizQ, men der de krystallografiske posisjonene til fluor (F) i CaF er lik
+krystallografiske posisjoner til litium (Li) i LisO.
+
+Gitterkonstant for CaF> er a = 546 pm.
+
+Regn ut bindingslengden (senteravstand) mellom et Ca2* ion og et F ion i CaF.
+
+Velg ett alternativ:
+
+© < 100 pm
+© = 110 pm
+© = 131 pm
+© = 152 pm
+© = 173 pm
+© = 194 pm
+© = 215 pm
+© = 236 pm
+© = 257 pm
+
+© > 275 pm
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 2 (image) ===
+3
+
+Velg alle krystallografiske punkt som representerer posisjoner til atomer i en FCC-krystallstruktur:
+Velg ett eller flere alternativer
+
+OF,11
+
+bo bet
+
+[
+ta]
+bole
+n|-
+
+(1110
+
+oft C æ
+boat be - nå
+
+|- - bole bai] nt
+bale bal bo] -| bole
+
+å
+ta]
+j
+=
+
+0105
+
+Prinsipp for poenggiving:
+- 5 poeng for alt korrekt, som ogsa er maksimal poengsum
+
+- Delvis poeng for korrekte alternativ enkeltvis, og tilsvarende fratrekk ved valg av ikke-korrekt alternativ
+- Minste poengsum er null.
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 3 (image) ===
+4
+
+Velg alle krystallografiske punkt som representerer en oktaedral (octahedral) posisjon I en FCC-krystallstruktur.
+Velg ett eller flere alternativer
+
+1
+at
+
+bole
+
+410
+
+) D
+b| re fd
+boi] j
+
+jt
+
+be
+
+E
+boat
+æ
+bale
+
+Prinsipp for poenggiving:
+- 5 poeng for alt korrekt, som ogsa er maksimal poengsum
+
+- Delvis poeng for korrekte alternativ enkeltvis, og tilsvarende fratrekk ved valg av ikke-korrekt alternativ
+- Minste poengsum er null.
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 4 (image) ===
+5
+
+1. Lag illustrasjoner som viser felgende krystallografiske plan in kubiske krystallstrukturer (6p):
+
+a) (112)
+b) (041)
+c) (012)
+
+2. Planet ( 1 1 0 ) er et plan med spesiell interesse i en BCC krystallstruktur. Gjar rede for denne pastanden (4p)
+
+Krav til illustrasjoner:
+- Aksene er definert/vist pa figurene
+= Hensiktsmessig perspektiv og lett a tolke uten a matte bruke magiske briller.
+
+Skriv ditt svar pa papir Hjelp
+
+Words: 0
+
+Maks poeng: 10 Sjekk svar
+
+
+=== CONTAINER 5 (image) ===
+Figuren viser et ett plan in en kubisk krystallstruktur samt en retning & som ligger I dette planet.
+
+Finn utlest skjzerspenning (resolved shear stress) i dette planet langs retningen s nar det virker en spenning o =
+50 MPa i retningen[ 110].
+
+Velg ett alternativ:
+© =0 MPa
+© = 2 MPa
+0 =4MPa
+0 = 6 MPa
+0 =8 MPa
+© = 10 MPa
+© = 12 MPa
+© =14MPa
+© = 16 MPa
+© = 18 MPa
+
+0 = 20 MPa
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 6 (image) ===
+Tettheten til krystallinsk polypropylen (PP) er 945 kg/m?.
+Krystallsystemet til krystallinsk PP er monoklinsk (monoclinic) med falgende parameter.
+
+a= 666 pm,
+
+b= 2078 pm,
+
+c = 650 pm,
+
+aq=y=90°,
+
+B = 99.62° (6 er vinkelen mellom x-aksen og z-aksen)
+
+Hvor mange repeterende enheter av PP er innenfor en enhetscelle?
+Velg ett alternativ:
+
+O1
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 7 (image) ===
+En PP-PE kopolymer er polymerisert fra en blanding av etylen og propylen og inneholder 1000 kg med
+repeterende enheter av PP og 200 kg med repeterende enheter av PE.
+
+Regn ut forholdet mellom antall repeterende enheter av PE (np) og antall repeterende enheter av PP (npp)
+Velg ett alternativ:
+
+© Npe/ Npp = 0.1
+
+© Npe/ Npp = 0.2
+© npe/ Npp = 0.3
+© npe/ Npp = 0.4
+© npe/ Npp = 0.5
+O npe/ Npp = 0.6
+O Npe/ Npp = 0.7
+
+© fpe/ Npp = 0.8
+
+© Npe/ Npp = 0.9
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 8 (image) ===
+Figuren viser spenning som funksjon av tid for en relaksasjonstest av et viskoelastisk material.
+Materialet blir umiddelbart utsatt for en tayning lik 0.01 ved tid t = 0, og materialet oppfarer seg perfekt i henhold til
+
+3-parameter modellen.
+
+25
+
+20
+
+15
+
+ø [MPa]
+
+10
+
+Ö 200 400 600 800 1000
+
+Estimer verdien av E.. Svar: | | [MPa]. Toleranse: +5%
+Estimer verdien av Eo. Svar: | | [MPa]. Toleranse: +5%
+
+Estimer verdien av tidskonstanten 1. Svar: | | [s]. Toleranse +10%
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 9 (image) ===
+10
+
+Gjer rede for falaende konsept/begrep I polymerteknologi:
+
+a) Termoplast (2p)
+
+b) Kryssbinding (2p)
+
+c) Smeltetemperatur (2p)
+
+d) Glasstransisjonstemperatur (2p)
+
+e) Kondensasjonspolymernisasjon (2p)
+
+Skriv ditt svar her eller pa papir
+
+Format
+
+Å
+
+Hjelp
+
+Words: 0
+
+Maks poeng: 10 Sjekk svar
+
+
+=== CONTAINER 10 (image) ===
+11
+
+8 kg glassfiber som har tetthet 2550 kg/m? blandes med 5 kg av en polymer som har tetthet 1150 kg/m?.
+
+Hva blir tettheten til Komposittmaterialet? Svar: | | [kg/m?]. Toleranse: + 1%
+
+Hva blir fibervolumfraksjonen til komposittmaterialet? Svar: | {tall mellom 0 og 1]. Toleranse: + 1%
+
+Maks poeng: 6 Sjekk svar
+
+
+=== CONTAINER 11 (image) ===
+12
+
+Et laminat bestar av 3 lag. Hvert lag bestar av ensrettet karbonfiber i en epoxymatrise der E-modul i fiberretning er
+150 GPa og E-modul pa tvers av fiberretning er 10 GPa.
+
+Hvert lag har tykkelse 0.5 mm, og orienteringer pa lag er [0/90/0] der O-retning og x-retning sammenfaller.
+
+Laminatet har dimensjoner L = 1000 mm og b = 100 mm, se figur:
+
+Hva ma kraften F, være for at laminatet skal forlenge seg med 2 mm (altsa fa en deformert lengde lik 1002 mm)?
+Velg alternativet som representerer et realistisk estimat.
+Velg ett alternativ:
+
+© < 15 kN
+
+© = 30 KN
+
+© = 50 KN
+
+© = 75 KN
+
+© = 100 KN
+
+© = 150 KN
+
+© = 175 KN
+
+© = 300 KN
+
+Maks poeng: 4 Sjekk svar
+
+A
+
+
+=== CONTAINER 12 (image) ===
+13 Fasediagrammet for systemet jern-karbon er vist under. Estimer maksimal laselighet av karbon I austenitt ved
+300°C og velg det mest presise alternativet. Legg merke til enheter I alternativene.
+
+F M Ree ee
+j / K cs
+1400 =< —
+p å l
+xx —1
+—
+A SS oe in
+1200 E s = aa
+_———_ SE SE ————E—>———E ES =
+a)
+@ 7
+= yf
+9 1000 ;
+å /
+E
+og
+—_
+‘af
+800 L
+600
+400
+D 1 2 3 4 5 6 6.70
+(Fe) Composition (wt% C)
+Velg ett alternativ
+O<1lat%
+Ox 2at%
+Ox 3at%
+Or 4at%
+Ox 5at%
+O x= b6at%
+Ow Tat%
+O> 8at%
+
+Maks poeng: 3 Sjekk svar
+
+
+=== CONTAINER 13 (image) ===
+14
+
+Fasediagrammet for systemet jern-karbon er vist under. En likevekts-struktur av karbonstal med 1.75 wt% karbon
+bestar av austenitt og 12 wt% Fe3C. Hva er temperaturen? Velg intervallet som inneholder svaret.
+
+1200
+
+1000
+
+Temperature (°C)
+
+600
+
+400
+0 1 2 3 4 5 6 6.70
+
+(Fe) Composition (wt% C)
+Velg ett alternativ
+
+© 400°C < T < 500°C
+
+© 500°C < T < 600°C
+
+© 600°C < T < 700°C
+
+© 700°C < T < 800°C
+
+© 800°C < T = 900°C
+
+© 900°C < T < 1000°C
+
+© 1000°C < T < 1100°C
+
+© 1100°C < T < 1200°C
+
+Maks poeng: 3 Sjekk svar
+
+
+=== CONTAINER 14 (image) ===
+15
+
+Fasediagrammet for systemet jern-karbon er vist under. En likevekts-struktur av karbonstal bestar av 90 wt%
+perlitt og 10% proeutektisk sementitt ved romtemperatur. Hva er sammensetningen?
+
+F S] L
+/ xx io
+1400 Se —
+p a l
+ie ~~!
+—
+a eS
+1200 — = oad
+_———_ SE SE ————E—>———E ES =
+|]
+= A
+© 1000 !
+å /
+E
+M
+r—
+k i
+800 Va
+600
+400
+a] 1 2 3 4 5 6 6.70
+(Fe) Composition (wt% C)
+
+Velg ett alternativ
+
+O = 0.30 wt% C
+O = 0.45 wt% C
+O = 0.60 wt% C
+O = 0.75 wt% C
+O = 0.90 wt% C
+O = 1.05 wt% C
+O = 1.35 wt% C
+
+O>150wt%C
+
+Maks poeng: 4 Sjekk svar
+
+
+=== CONTAINER 15 (image) ===
+16
+
+Gjør rede for falgende konsept/begrep som anvendes for å beskrive mekaniske egenskaper og/eller oppfarsel til
+materialer:
+
+a) Elastisk deformasjon (2p)
+b) Resiliens (2p)
+
+c) Fastning (2p)
+
+d) Seighet (2p)
+
+e) Duktilitet (2p)
+
+Skriv ditt svar her eller pa papir Hjelp
+
+Format
+
+X
+
+Words: 0
+
+Maks poeng: 10 Sjekk svar
+
+
+=== CONTAINER 16 (image) ===
+17
+
+a) Hvorfor regnes aluminium som generelt mer duktilt enn titan? (2p)
+
+b) En karbonfiber er anisotrop mens en glassfiber er isotrop. Gi en kort forklaring pa hva dette betyr og hva som
+er arsaken til denne forskjellen (2p)
+
+c) PVC (polyvinylklorid) har mye hayere smeltetemperatur enn PP (polypropylen). Gi en kort forklaring pa
+arsaken(e) til dette. (2p)
+
+d) Noen materialer har en utmattingsgrense. Hva betyr det? (2p)
+e) Hva er prinsipiell forskjell pa en ionisk forbindelse og en polar kovalent forbindelse? (2p)
+
+Skriv ditt svar her eller pa papir Hjelp
+
+Words: 0
+
+Maks poeng: 10 Sjekk svar
