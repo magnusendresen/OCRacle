@@ -15,7 +15,7 @@ import pytesseract
 from PIL import Image
 
 import prompt_to_text
-from project_config import PROMPT_CONFIG
+from project_config import PROMPT_CONFIG, load_prompt
 from utils import log
 
 CHECKED_TASKS = 5
@@ -205,7 +205,6 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     with open(temp_output_file, "w", encoding="utf-8") as f:
         f.write(build_container_string_with_identifier(containers))
 
-    if abs(ocr_total_tasks - len(containers)) > 3: # Så lager vi en annen prompt enn nedenfor som forklarer bedre ettersom hver side antakelig er fylt med et helt bilde grunnet konvertering til pdf.
     prompt = (
         PROMPT_CONFIG
         + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
@@ -366,3 +365,78 @@ def crop_tasks(
 
     log(f"crop_tasks finished in {perf_counter() - start_time:.2f}s")
     return output
+
+
+async def validate_containers(
+    containers: List[Dict],
+    task_map: Dict[int, str],
+    ocr_text: str,
+    ocr_tasks: Dict[str, str],
+    task_numbers: List[str],
+) -> Tuple[List[Dict], Dict[int, str], List[str], Dict[str, str]]:
+    """Check container consistency against OCR results and filter invalid tasks."""
+
+    prompt = PROMPT_CONFIG + load_prompt("get_total_tasks") + ocr_text
+    ocr_total_tasks = await prompt_to_text.async_prompt_to_text(
+        prompt, max_tokens=1000, is_num=True, max_len=3
+    )
+
+    try:
+        expected = int(ocr_total_tasks)
+    except Exception:
+        log(f"Could not parse total tasks from OCR: {ocr_total_tasks}")
+        expected = len(task_numbers)
+
+    if abs(expected - len(task_numbers)) == 0:
+        return containers, task_map, task_numbers, ocr_tasks
+
+    log(
+        f"Warning: OCR detected {expected} tasks, but {len(task_numbers)} tasks were extracted from container batches."
+    )
+    log("Checking the text length and the pixel height of the container batches.")
+
+    task_ranges: Dict[str, Tuple[float, float]] = {}
+    for idx, c in enumerate(containers):
+        task_id = task_map.get(idx)
+        if not task_id:
+            continue
+        y0, y1 = c.get("bbox", (0, 0, 0, 0))[1], c.get("bbox", (0, 0, 0, 0))[3]
+        if task_id in task_ranges:
+            min_y, max_y = task_ranges[task_id]
+            task_ranges[task_id] = (min(min_y, y0), max(max_y, y1))
+        else:
+            task_ranges[task_id] = (y0, y1)
+
+    invalid_tasks = set()
+    for task_num, text in ocr_tasks.items():
+        if len(text) < 50:
+            log(
+                f"Task {task_num} has very short text, does likely not contain a task."
+            )
+            invalid_tasks.add(task_num)
+            continue
+        container = task_ranges.get(task_num)
+        if container is None:
+            log(f"Container for task {task_num} not found, skipping.")
+            invalid_tasks.add(task_num)
+            continue
+        if container[1] - container[0] < 100:
+            log(f"Container for task {task_num} is too small, skipping.")
+            invalid_tasks.add(task_num)
+            continue
+
+    task_numbers = [t for t in task_numbers if t not in invalid_tasks]
+    ocr_tasks = {t: ocr_tasks[t] for t in task_numbers if t in ocr_tasks}
+
+    new_containers = []
+    new_task_map: Dict[int, str] = {}
+    for idx, c in enumerate(containers):
+        task_id = task_map.get(idx)
+        if task_id in invalid_tasks:
+            continue
+        new_idx = len(new_containers)
+        new_containers.append(c)
+        if task_id is not None:
+            new_task_map[new_idx] = task_id
+
+    return new_containers, new_task_map, task_numbers, ocr_tasks

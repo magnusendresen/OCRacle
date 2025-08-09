@@ -14,7 +14,7 @@ import re
 import difflib
 from pathlib import Path
 from dataclasses import dataclass, field
-from typing import Optional, List, Dict, Tuple
+from typing import Optional, List, Dict
 from copy import deepcopy
 from collections import defaultdict
 from time import perf_counter
@@ -166,77 +166,10 @@ async def get_exam_info() -> Exam:
     write_progress(progress, LLM_STEPS, {8: str(LLM_STEPS)})
 
 
-    # FULLFØR IMPLEMENTERING AV CONTAINERKONTROLL
-    ocr_total_tasks = (
-        await prompt_to_text.async_prompt_to_text(
-            PROMPT_CONFIG + load_prompt("get_total_tasks") + ocr_text,
-            max_tokens=1000,
-            is_num=True,
-            max_len=3,
-        )
+    containers, task_map, exam.task_numbers, exam.ocr_tasks = await task_boundaries.validate_containers(
+        containers, task_map, ocr_text, exam.ocr_tasks, exam.task_numbers
     )
-
-    should_check_containers = False
-    if abs(int(ocr_total_tasks) - total_task_count) > 0:
-        log(
-            f"Warning: OCR detected {ocr_total_tasks} tasks, but {total_task_count} tasks were extracted from container batches."
-        )
-        should_check_containers = True
-
-    if should_check_containers:
-        log("Checking the text length and the pixel height of the container batches.")
-        task_ranges: Dict[str, Tuple[float, float]] = {}
-        for idx, c in enumerate(containers):
-            task_id = task_map.get(idx)
-            if not task_id:
-                continue
-            y0, y1 = c.get("bbox", (0, 0, 0, 0))[1], c.get("bbox", (0, 0, 0, 0))[3]
-            if task_id in task_ranges:
-                min_y, max_y = task_ranges[task_id]
-                task_ranges[task_id] = (min(min_y, y0), max(max_y, y1))
-            else:
-                task_ranges[task_id] = (y0, y1)
-
-        invalid_tasks = set()
-        for task_num, text in exam.ocr_tasks.items():
-            if len(text) < 50:
-                log(
-                    f"Task {task_num} has very short text, does likely not contain a task."
-                )
-                invalid_tasks.add(task_num)
-                continue
-            container = task_ranges.get(task_num)
-            if container is None:
-                log(f"Container for task {task_num} not found, skipping.")
-                invalid_tasks.add(task_num)
-                continue
-            if container[1] - container[0] < 100:
-                log(f"Container for task {task_num} is too small, skipping.")
-                invalid_tasks.add(task_num)
-                continue
-
-        exam.task_numbers = [
-            task for task in exam.task_numbers if task not in invalid_tasks
-        ]
-        total_task_count = len(exam.task_numbers)
-
-        exam.ocr_tasks = {
-            task: exam.ocr_tasks[task] for task in exam.task_numbers if task in exam.ocr_tasks
-        }
-
-        new_containers = []
-        new_task_map: Dict[int, str] = {}
-        for idx, c in enumerate(containers):
-            task_id = task_map.get(idx)
-            if task_id in invalid_tasks:
-                continue
-            new_idx = len(new_containers)
-            new_containers.append(c)
-            if task_id is not None:
-                new_task_map[new_idx] = task_id
-        containers = new_containers
-        task_map = new_task_map
-    # FULLFØR IMPLEMENTERING AV CONTAINERKONTROLL        
+    total_task_count = len(exam.task_numbers)
 
 
     with SUBJECT_FILE.open("r", encoding="utf-8") as f:
