@@ -284,12 +284,53 @@
         }
       }
 
-        subjectSelect.addEventListener("change", updateFilters);
-        topicSelect.addEventListener("change", updateTaskOptions);
-        examSelect.addEventListener("change", updateTaskOptions);
-        taskSelect.addEventListener("change", updateTaskText);
+      function updateHash() {
+        const params = new URLSearchParams();
+        if (subjectSelect.value) params.set("subject", subjectSelect.value);
+        if (topicSelect.value) params.set("topic", topicSelect.value);
+        if (examSelect.value) params.set("exam", examSelect.value);
+        if (taskSelect.value) params.set("task", taskSelect.value);
+        location.hash = params.toString();
+      }
 
+      function applyHash() {
+        const hash = location.hash.slice(1);
+        const params = new URLSearchParams(hash);
+        const subj = params.get("subject");
+        if (subj && [...subjectSelect.options].some(o => o.value === subj)) {
+          subjectSelect.value = subj;
+        }
         updateFilters();
+
+        const top = params.get("topic");
+        if (top && [...topicSelect.options].some(o => o.value === top)) {
+          topicSelect.value = top;
+        }
+        const ex = params.get("exam");
+        if (ex && [...examSelect.options].some(o => o.value === ex)) {
+          examSelect.value = ex;
+        }
+        updateTaskOptions();
+
+        const tsk = params.get("task");
+        if (tsk && [...taskSelect.options].some(o => o.value === tsk)) {
+          taskSelect.value = tsk;
+        }
+        updateTaskText();
+      }
+
+        subjectSelect.addEventListener("change", () => { updateFilters(); updateHash(); });
+        topicSelect.addEventListener("change", () => { updateTaskOptions(); updateHash(); });
+        examSelect.addEventListener("change", () => { updateTaskOptions(); updateHash(); });
+        taskSelect.addEventListener("change", () => { updateTaskText(); updateHash(); });
+
+        window.addEventListener("hashchange", applyHash);
+
+        if (location.hash) {
+          applyHash();
+        } else {
+          updateFilters();
+        }
     })
     .catch(error => {
       taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";
