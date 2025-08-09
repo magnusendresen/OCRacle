@@ -79,6 +79,12 @@
       display: flex;
       flex-direction: column;
     }
+    #task_nav {
+      margin-top: 10px;
+    }
+    #task_nav button {
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -101,6 +107,11 @@
   <label for="task">Velg oppgave:</label>
   <select id="task"></select>
 
+  <div id="task_nav">
+    <button id="prev_task">Forrige oppgave</button>
+    <button id="next_task">Neste oppgave</button>
+  </div>
+
   <div id="task_text" class="mathjax-process">Velg en oppgave for å vise innholdet.</div>
 
   <script>
@@ -109,6 +120,8 @@
   const examSelect = document.getElementById("exam");
   const taskSelect = document.getElementById("task");
   const taskTextDiv = document.getElementById("task_text");
+  const prevBtn = document.getElementById("prev_task");
+  const nextBtn = document.getElementById("next_task");
 
   function formatExamVersion(ver) {
     const year = ver.slice(1);
@@ -225,6 +238,7 @@
         });
 
         updateTaskText();
+        updateNavButtons();
       }
 
       function updateTaskText() {
@@ -282,6 +296,14 @@
             .then(() => console.log("MathJax-rendering fullført."))
             .catch(err => console.error("MathJax-feil:", err));
         }
+        updateNavButtons();
+      }
+
+      function updateNavButtons() {
+        prevBtn.disabled = taskSelect.selectedIndex <= 0;
+        nextBtn.disabled =
+          taskSelect.selectedIndex >= taskSelect.options.length - 1 ||
+          taskSelect.options.length === 0;
       }
 
       function updateHash() {
@@ -317,20 +339,38 @@
           taskSelect.value = tsk;
         }
         updateTaskText();
+        updateNavButtons();
       }
 
         subjectSelect.addEventListener("change", () => { updateFilters(); updateHash(); });
         topicSelect.addEventListener("change", () => { updateTaskOptions(); updateHash(); });
         examSelect.addEventListener("change", () => { updateTaskOptions(); updateHash(); });
-        taskSelect.addEventListener("change", () => { updateTaskText(); updateHash(); });
+        taskSelect.addEventListener("change", () => { updateTaskText(); updateHash(); updateNavButtons(); });
 
         window.addEventListener("hashchange", applyHash);
+
+        prevBtn.addEventListener("click", () => {
+          if (taskSelect.selectedIndex > 0) {
+            taskSelect.selectedIndex -= 1;
+            updateTaskText();
+            updateHash();
+          }
+        });
+
+        nextBtn.addEventListener("click", () => {
+          if (taskSelect.selectedIndex < taskSelect.options.length - 1) {
+            taskSelect.selectedIndex += 1;
+            updateTaskText();
+            updateHash();
+          }
+        });
 
         if (location.hash) {
           applyHash();
         } else {
           updateFilters();
         }
+        updateNavButtons();
     })
     .catch(error => {
       taskTextDiv.textContent = "Klarte ikke å laste oppgaver.";
