@@ -101,10 +101,25 @@ async def list_pdf_containers(
 
 
 def build_container_string_with_identifier(containers: List[Dict]) -> str:
-    return "".join(
-        f"\n\n=== CONTAINER {idx} ({c.get('type', 'unknown')}) ===\n{c.get('text', '')}"
-        for idx, c in enumerate(containers)
-    )
+    page_extents: Dict[int, Tuple[float, float]] = {}
+    for c in containers:
+        p = c.get("page")
+        x0, y0, x1, y1 = c.get("bbox", (0, 0, 0, 0))
+        pw, ph = page_extents.get(p, (0.0, 0.0))
+        page_extents[p] = (max(pw, x1), max(ph, y1))
+
+    parts: List[str] = []
+    for idx, c in enumerate(containers):
+        typ = c.get("type", "unknown")
+        if typ == "image":
+            x0, y0, x1, y1 = c.get("bbox", (0, 0, 0, 0))
+            pw, ph = page_extents.get(c.get("page"), (0.0, 0.0))
+            if pw > 0 and ph > 0:
+                if (x1 - x0) >= pw * 0.95 and (y1 - y0) >= ph * 0.95:
+                    typ = "text"
+        parts.append(f"\n\n=== CONTAINER {idx} ({typ}) ===\n{c.get('text', '')}")
+    return "".join(parts)
+
 
 
 def build_container_string(containers: List[Dict]) -> str:
@@ -205,15 +220,24 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     with open(temp_output_file, "w", encoding="utf-8") as f:
         f.write(build_container_string_with_identifier(containers))
 
+    llm_task_amount = await prompt_to_text.async_prompt_to_text(
+        PROMPT_CONFIG + load_prompt("get_total_tasks") + build_container_string(containers),
+        max_tokens=1000, is_num=True, max_len=3
+    )
+
+    print(f"\n\n\n LLM task amount: {llm_task_amount}\n\n\n")
+
     prompt = (
         PROMPT_CONFIG
-        + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
-        "Identify the number of every container that clearly marks the start of a new task. "
-        "It will not likely be consistent to just look for the word 'task' or 'oppgave' or a number in the text, "
-        "so you will have to look at the text as a whole to understand where tasks are found. "
+        + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1} that represent a total of {llm_task_amount} tasks. "
+        f"Identify the number of every container that clearly marks the start of a new task. Since there are {llm_task_amount} tasks, there should be a total of {llm_task_amount} markers. "
+        "It may not always be consistent to just look for the word 'task' or 'oppgave' or a number in the text, "
+        "so be sure to look at the text as a whole to understand where tasks are found. Although a rising number at the start of each container may be a good indicator. "
         "If it seems a container indicates the start of a task, make sure it is not related to the previous task, because then it should not be marked. "
         "Be careful to not make markers where the text following text is clearly not a task, even though it may have a number or task phrase. "
-        "If a container only includes the text 'Maks poeng' or similar, it is not a task. "
+        "If a container ONLY includes the text 'Maks poeng' or similar, and nothing else, it is not a task. "
+        "There may be just one container per task, or up to multiple containers per task, depending on how the PDF is structured. "
+        "Look for patterns, e.g. if "
         "Respond only with the numbers separated by commas. "
         "Here is the text: "
         + build_container_string_with_identifier(containers)
@@ -376,23 +400,6 @@ async def validate_containers(
 ) -> Tuple[List[Dict], Dict[int, str], List[str], Dict[str, str]]:
     """Check container consistency against OCR results and filter invalid tasks."""
 
-    prompt = PROMPT_CONFIG + load_prompt("get_total_tasks") + ocr_text
-    ocr_total_tasks = await prompt_to_text.async_prompt_to_text(
-        prompt, max_tokens=1000, is_num=True, max_len=3
-    )
-
-    try:
-        expected = int(ocr_total_tasks)
-    except Exception:
-        log(f"Could not parse total tasks from OCR: {ocr_total_tasks}")
-        expected = len(task_numbers)
-
-    if abs(expected - len(task_numbers)) == 0:
-        return containers, task_map, task_numbers, ocr_tasks
-
-    log(
-        f"Warning: OCR detected {expected} tasks, but {len(task_numbers)} tasks were extracted from container batches."
-    )
     log("Checking the text length and the pixel height of the container batches.")
 
     task_ranges: Dict[str, Tuple[float, float]] = {}

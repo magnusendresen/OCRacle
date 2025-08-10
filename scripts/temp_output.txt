@@ -1,507 +1,631 @@
 
 
-=== CONTAINER 0 (image) ===
-Li2O har kubisk krystallstruktur der litiumatom (Li) er plassert I falgende krystallografiske punkt
+=== CONTAINER 0 (text) ===
+1 For denne oppagaven forventes korte og presise svar.
 
-e] —
-] —
-Æ]
-|
-H] c
-e| bt
-e| es
-|
-| mt
-e] Go
-e| es
-|]
-|] —
-=| -
-e] Co
-e]
-| OO
-| oo
-e| es
-] —
-e| OD
-e| Oo
-| Co
-| Go
+1. Hva kalles en legering som hovedsakelig inneholder kobber og tinn? (1p)
 
-Tettheten til Li».O er 2.0 g/cm?.
-Hva er verdien til gitterkonstanten a for enhetscellen til Lis0?
+2. Hva er vanlig navn for legeringer som hovedsakelig inneholder kobber og sink? (1p)
 
-Velg ett alternativ:
-© < 100 pm
-© = 146 pm
-© = 183 pm
-© = 231 pm
-© = 291 pm
-© = 367 pm
-©) = 462 pm
-© = 582 pm
-© = 733 pm
+3. Likevektsstrukturen til en blanding av kobber og nikkel beskrives ved et isomortt fasediagram. Forklar
+hvorfor. (3p)
 
-© = 800 pm
+4 Hva er maksimal loselighet av kobber | aluminium? Se vedlegg Fasediagram (1p)
 
-Maks poeng: 5 Sjekk svar
+5. Aluminiumslegeringer i 2000-serien har kobber som det primære legeringselementet. Forklar hvordan og
+hvorfor disse legeringene kan oppna hey flytestyrke. (3p)
 
+6. Kan kobber benyttes som katodisk beskyttelse av stal? Gi en kort forklaring pa det du kommer frem til. (2p)
 
-=== CONTAINER 1 (image) ===
-CaF har tilsvarende krystallstruktur som LizQ, men der de krystallografiske posisjonene til fluor (F) i CaF er lik
-krystallografiske posisjoner til litium (Li) i LisO.
+7. Gi en kort forklaring pa hva som hindrer korrosjon i rustfrie stal, bade med hensyn pa stalets innhold og
+mekanismen som virker. (2p)
 
-Gitterkonstant for CaF> er a = 546 pm.
+Pa denne oppgaven kan du levere svaret pa ark. Hjelp
 
-Regn ut bindingslengden (senteravstand) mellom et Ca2* ion og et F ion i CaF.
-
-Velg ett alternativ:
-
-© < 100 pm
-© = 110 pm
-© = 131 pm
-© = 152 pm
-© = 173 pm
-© = 194 pm
-© = 215 pm
-© = 236 pm
-© = 257 pm
-
-© > 275 pm
-
-Maks poeng: 5 Sjekk svar
-
-
-=== CONTAINER 2 (image) ===
-3
-
-Velg alle krystallografiske punkt som representerer posisjoner til atomer i en FCC-krystallstruktur:
-Velg ett eller flere alternativer
-
-OF,11
-
-bo bet
-
-[
-ta]
-bole
-n|-
-
-(1110
-
-oft C æ
-boat be - nå
-
-|- - bole bai] nt
-bale bal bo] -| bole
-
-å
-ta]
-j
-=
-
-0105
-
-Prinsipp for poenggiving:
-- 5 poeng for alt korrekt, som ogsa er maksimal poengsum
-
-- Delvis poeng for korrekte alternativ enkeltvis, og tilsvarende fratrekk ved valg av ikke-korrekt alternativ
-- Minste poengsum er null.
-
-Maks poeng: 5 Sjekk svar
-
-
-=== CONTAINER 3 (image) ===
-4
-
-Velg alle krystallografiske punkt som representerer en oktaedral (octahedral) posisjon I en FCC-krystallstruktur.
-Velg ett eller flere alternativer
-
-1
-at
-
-bole
-
-410
-
-) D
-b| re fd
-boi] j
-
-jt
-
-be
-
-E
-boat
-æ
-bale
-
-Prinsipp for poenggiving:
-- 5 poeng for alt korrekt, som ogsa er maksimal poengsum
-
-- Delvis poeng for korrekte alternativ enkeltvis, og tilsvarende fratrekk ved valg av ikke-korrekt alternativ
-- Minste poengsum er null.
-
-Maks poeng: 5 Sjekk svar
-
-
-=== CONTAINER 4 (image) ===
-5
-
-1. Lag illustrasjoner som viser felgende krystallografiske plan in kubiske krystallstrukturer (6p):
-
-a) (112)
-b) (041)
-c) (012)
-
-2. Planet ( 1 1 0 ) er et plan med spesiell interesse i en BCC krystallstruktur. Gjar rede for denne pastanden (4p)
-
-Krav til illustrasjoner:
-- Aksene er definert/vist pa figurene
-= Hensiktsmessig perspektiv og lett a tolke uten a matte bruke magiske briller.
-
-Skriv ditt svar pa papir Hjelp
+~ Bru x x
 
 Words: 0
 
-Maks poeng: 10 Sjekk svar
+Maks poeng: 13 Sjekk svar
 
 
-=== CONTAINER 5 (image) ===
-Figuren viser et ett plan in en kubisk krystallstruktur samt en retning & som ligger I dette planet.
+=== CONTAINER 1 (text) ===
+2 En legering bestar av kun kobber og tinn. Forholdet mellom antall kobberatom og antall tinnatom er 25:1. Hva er
+vekiprosenten av tinn I legeringen? Oppai svaret avrundet til nærmeste hele tall
 
-Finn utlest skjzerspenning (resolved shear stress) i dette planet langs retningen s nar det virker en spenning o =
-50 MPa i retningen[ 110].
+Svar. | [wt%] (heltall)
+
+Maks poeng: 3 Sjekk svar
+
+
+=== CONTAINER 2 (text) ===
+3 Et stykke aluminiumsfolie har bredde lik 44 cm, lengde lik 10 m og den veier 180 g. Hva er tykkelsen til denne
+folien?
 
 Velg ett alternativ:
-© =0 MPa
-© = 2 MPa
-0 =4MPa
-0 = 6 MPa
-0 =8 MPa
-© = 10 MPa
-© = 12 MPa
-© =14MPa
-© = 16 MPa
-© = 18 MPa
+© <10 um
+© =15 um
+© = 25 um
+O=35 um
+0 = 45 um
+0 = 55 ym
+© = 65 ym
 
-0 = 20 MPa
+0 > 75 pm
 
-Maks poeng: 5 Sjekk svar
+Maks poeng: 3 Sjekk svar
 
 
-=== CONTAINER 6 (image) ===
-Tettheten til krystallinsk polypropylen (PP) er 945 kg/m?.
-Krystallsystemet til krystallinsk PP er monoklinsk (monoclinic) med falgende parameter.
-
-a= 666 pm,
-
-b= 2078 pm,
-
-c = 650 pm,
-
-aq=y=90°,
-
-B = 99.62° (6 er vinkelen mellom x-aksen og z-aksen)
-
-Hvor mange repeterende enheter av PP er innenfor en enhetscelle?
-Velg ett alternativ:
-
-O1
-
-Maks poeng: 5 Sjekk svar
-
-
-=== CONTAINER 7 (image) ===
-En PP-PE kopolymer er polymerisert fra en blanding av etylen og propylen og inneholder 1000 kg med
-repeterende enheter av PP og 200 kg med repeterende enheter av PE.
-
-Regn ut forholdet mellom antall repeterende enheter av PE (np) og antall repeterende enheter av PP (npp)
-Velg ett alternativ:
-
-© Npe/ Npp = 0.1
-
-© Npe/ Npp = 0.2
-© npe/ Npp = 0.3
-© npe/ Npp = 0.4
-© npe/ Npp = 0.5
-O npe/ Npp = 0.6
-O Npe/ Npp = 0.7
-
-© fpe/ Npp = 0.8
-
-© Npe/ Npp = 0.9
-
-Maks poeng: 5 Sjekk svar
-
-
-=== CONTAINER 8 (image) ===
-Figuren viser spenning som funksjon av tid for en relaksasjonstest av et viskoelastisk material.
-Materialet blir umiddelbart utsatt for en tayning lik 0.01 ved tid t = 0, og materialet oppfarer seg perfekt i henhold til
-
-3-parameter modellen.
-
-25
-
-20
-
-15
-
-ø [MPa]
-
-10
-
-Ö 200 400 600 800 1000
-
-Estimer verdien av E.. Svar: | | [MPa]. Toleranse: +5%
-Estimer verdien av Eo. Svar: | | [MPa]. Toleranse: +5%
-
-Estimer verdien av tidskonstanten 1. Svar: | | [s]. Toleranse +10%
-
-Maks poeng: 5 Sjekk svar
-
-
-=== CONTAINER 9 (image) ===
-10
-
-Gjer rede for falaende konsept/begrep I polymerteknologi:
-
-a) Termoplast (2p)
-
-b) Kryssbinding (2p)
-
-c) Smeltetemperatur (2p)
-
-d) Glasstransisjonstemperatur (2p)
-
-e) Kondensasjonspolymernisasjon (2p)
-
-Skriv ditt svar her eller pa papir
-
-Format
-
-Å
-
-Hjelp
-
-Words: 0
-
-Maks poeng: 10 Sjekk svar
-
-
-=== CONTAINER 10 (image) ===
-11
-
-8 kg glassfiber som har tetthet 2550 kg/m? blandes med 5 kg av en polymer som har tetthet 1150 kg/m?.
-
-Hva blir tettheten til Komposittmaterialet? Svar: | | [kg/m?]. Toleranse: + 1%
-
-Hva blir fibervolumfraksjonen til komposittmaterialet? Svar: | {tall mellom 0 og 1]. Toleranse: + 1%
-
-Maks poeng: 6 Sjekk svar
-
-
-=== CONTAINER 11 (image) ===
-12
-
-Et laminat bestar av 3 lag. Hvert lag bestar av ensrettet karbonfiber i en epoxymatrise der E-modul i fiberretning er
-150 GPa og E-modul pa tvers av fiberretning er 10 GPa.
-
-Hvert lag har tykkelse 0.5 mm, og orienteringer pa lag er [0/90/0] der O-retning og x-retning sammenfaller.
-
-Laminatet har dimensjoner L = 1000 mm og b = 100 mm, se figur:
-
-Hva ma kraften F, være for at laminatet skal forlenge seg med 2 mm (altsa fa en deformert lengde lik 1002 mm)?
-Velg alternativet som representerer et realistisk estimat.
-Velg ett alternativ:
-
-© < 15 kN
-
-© = 30 KN
-
-© = 50 KN
-
-© = 75 KN
-
-© = 100 KN
-
-© = 150 KN
-
-© = 175 KN
-
-© = 300 KN
-
-Maks poeng: 4 Sjekk svar
-
+=== CONTAINER 3 (text) ===
 A
 
+Aluminium reagerer hurtig med oksygen I luft og danner et belegg av aluminiumoksid, Al+O04 pa overflatene. Dette
+belegget er 4 nanometer tykt. Hvor mye oksygen er I sa fall bundet til aluminiumsfolien i forrige oppgave?
+Tettheten til aluminiumoksid er 3980 kg/m? og du kan anta at alle flater har blitt eksponert for oksygen.
 
-=== CONTAINER 12 (image) ===
-13 Fasediagrammet for systemet jern-karbon er vist under. Estimer maksimal laselighet av karbon I austenitt ved
-300°C og velg det mest presise alternativet. Legg merke til enheter I alternativene.
+Velg ett alternativ:
+O <10 pug
+© = 15 ug
+O = 25 ug
+© = 35 ug
+© = 45 ug
+0 = 55 pg
+©) = 65 ug
 
-F M Ree ee
-j / K cs
-1400 =< —
-p å l
-xx —1
-—
-A SS oe in
-1200 E s = aa
-_———_ SE SE ————E—>———E ES =
-a)
-@ 7
-= yf
-9 1000 ;
-å /
-E
-og
-—_
-‘af
-800 L
-600
-400
-D 1 2 3 4 5 6 6.70
-(Fe) Composition (wt% C)
-Velg ett alternativ
-O<1lat%
-Ox 2at%
-Ox 3at%
-Or 4at%
-Ox 5at%
-O x= b6at%
-Ow Tat%
-O> 8at%
+© > 70 ug
 
 Maks poeng: 3 Sjekk svar
 
 
-=== CONTAINER 13 (image) ===
-14
+=== CONTAINER 4 (text) ===
+A
 
-Fasediagrammet for systemet jern-karbon er vist under. En likevekts-struktur av karbonstal med 1.75 wt% karbon
-bestar av austenitt og 12 wt% Fe3C. Hva er temperaturen? Velg intervallet som inneholder svaret.
+5 Kobber, som har tetthet lik 8935 kg/m*, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten a for
+enhetscellen til kobber.
 
-1200
+Velg ett alternativ:
+© = 180 pm
+© = 216 pm
+© = 240 pm
+© = 288 pm
+© = 360 pm
+© = 405 pm
+© = 450 pm
 
-1000
-
-Temperature (°C)
-
-600
-
-400
-0 1 2 3 4 5 6 6.70
-
-(Fe) Composition (wt% C)
-Velg ett alternativ
-
-© 400°C < T < 500°C
-
-© 500°C < T < 600°C
-
-© 600°C < T < 700°C
-
-© 700°C < T < 800°C
-
-© 800°C < T = 900°C
-
-© 900°C < T < 1000°C
-
-© 1000°C < T < 1100°C
-
-© 1100°C < T < 1200°C
+© = 480 pm
 
 Maks poeng: 3 Sjekk svar
 
 
-=== CONTAINER 14 (image) ===
-15
+=== CONTAINER 5 (text) ===
+80 g av en legering av kobber og selv som inneholder 30 vektprosent selv, varmes langsomt opp fra
+romtemperatur til 900°C og holdes ved denne temperaturen til systemet er fullstendig | likevekt.
+Smelten helles deretter ut av blandingen. Hvor mye faststoff er igjen?
 
-Fasediagrammet for systemet jern-karbon er vist under. En likevekts-struktur av karbonstal bestar av 90 wt%
-perlitt og 10% proeutektisk sementitt ved romtemperatur. Hva er sammensetningen?
+Relevant fasediagram finner du I et vedlegg.
 
-F S] L
-/ xx io
-1400 Se —
-p a l
-ie ~~!
-—
-a eS
-1200 — = oad
-_———_ SE SE ————E—>———E ES =
-|]
-= A
-© 1000 !
-å /
-E
-M
-r—
-k i
-800 Va
-600
-400
-a] 1 2 3 4 5 6 6.70
-(Fe) Composition (wt% C)
+Velg ett alternativ:
 
-Velg ett alternativ
+O#0g
 
-O = 0.30 wt% C
-O = 0.45 wt% C
-O = 0.60 wt% C
-O = 0.75 wt% C
-O = 0.90 wt% C
-O = 1.05 wt% C
-O = 1.35 wt% C
+O=10g
+O= 159
+© =209q
+O#=25g
+O = 309
 
-O>150wt%C
+O=35q
+
+Maks poeng: 3 Sjekk svar
+
+
+=== CONTAINER 6 (text) ===
+7
+
+Faststoffet som ble igjen I forrige oppgave kjøles langsomt ned til 700°C. Hva er vektprosenten av B-fasen |
+blandingen av a og 6 ved denne temperaturen?
+
+Velg ett alternativ:
+
+© = 0 wt%
+
+O = 3 wt
+
+© = 10 wt%
+© = 15 wt%
+© = 20 wt%
+© = 25 wt%
+© = 30 wt%
+
+©O = 35 wt%
+
+Maks poeng: 3 Sjekk svar
+
+
+=== CONTAINER 7 (text) ===
+En legering av kobber og selv inneholder 4 mol kobber og 6 mol sølv. Legeringen varmes langsomt opp fra
+romtemperatur. Ved hvilken temperatur vil hele blandingen bli en smelte?
+
+Relevant fasediagram finner du I et vedlegg.
+Velg ett alternativ:
+
+© = 780°C
+© = 800°C
+O = 820°C
+© = 840°C
+© = 860°C
+© = 880°C
+© = 900°C
+
+© = 920°C
+
+Maks poeng: 3 Sjekk svar
+
+
+=== CONTAINER 8 (text) ===
+En plate av rent jern varmes opp til 950°C og holdes ved denne temperaturen til likevekt er oppnadd. Den ene
+siden av platen utsettes sa for en karbonrik gass, slik at overflaten pa denne siden (ved x=0) umiddelbart far en
+konsentrasjon av karbon lik 1.2 wt%, og denne overflatekonsentrasjonen samt temperaturen pa 950°C holdes
+deretter konstant. Overflaten pa motstaende side av platen holdes pa en karbonkonsentrasjon lik null. Platens
+tykkelse er 30 mm, og du skal i ferste del av oppgaven anta at betingelsene for en semi-uendelig plate er gyldige.
+Fasediagrammet for jern-karbon finner du | et vedlegg.
+
+. Forklar Kort og presist hva som menes med en semi-uendelig plate. (2p)
+
+. Hva er diffusjonskoeffisienten for karbon i stal ved disse betingelsene? Se tabellen i denne oppgaven. (2p)
+
+. Hvor lang tid ma platen holdes ved disse betingelsene for at Konsentrasjonen av Karbon ved en posisjon 1.0
+
+mm inn I platen blir 1.0 wt%? (4p)
+
+Vis at betingelser for en semi-uendelig plate er oppfylt for tiden du har beregnet i forrige spersmal (2p)
+
+. Den stakkars studenten som egentlig bare skulle eke Karboninnholdet ytterst i platen pa den ene siden,
+glemte hele greia og tok juleferie. Platen ble dermed staende til over nyttar under betingelsene som er gitt
+over. Hvordan forventer du at konsentrasjonen av karbon varierer gjennom platen nar juleferien er over?
+(2p)
+
+6. Tilbake etter jul, og passe irritert over tabben, slenger studenten platen rett I kaldt vann. Hva vil skje med
+
+materialet i platen na? (3p)
+
+Ome whe
+
+Tabell: Diffusjonsdata.
+
+Diffusing Species Host Metal Do [m2/s] Qy [kJ/mol]
+p Fe (a-iron) 11 x 10% 87
+E Fe (y-iron) 73519" 148
+N Fe (a-iron) 5.0 x 107 77
+N Fe (y-iron) 91x10° 168
+Zn Cu 24x 10° 189
+Cu Al 65 x 10° 136
+Ni Cu 1.9 104 230
+Pa denne oppgaven kan du levere svaret pa ark. Hjelp
+
+Format ~|B F U x ]F
+
+<
+
+Words: D
+
+
+
+=== CONTAINER 9 (text) ===
+10 Karbonstal med eutektoid sammensetning har 0.76 wt% karbon. Hvor mange karbonatom har et slikt stal per
+1000 jernatom?
+
+Velg ett alternativ:
 
 Maks poeng: 4 Sjekk svar
 
 
-=== CONTAINER 15 (image) ===
-16
+=== CONTAINER 10 (text) ===
+11
 
-Gjør rede for falgende konsept/begrep som anvendes for å beskrive mekaniske egenskaper og/eller oppfarsel til
-materialer:
+Karbonstal med 1.5 wt% karbon er i likevekt som austenitt, og kjøles deretter langsom ned til en temperatur lik
+750°C. Hvor stor del av materialet er sementitt ved denne temperaturen?
 
-a) Elastisk deformasjon (2p)
-b) Resiliens (2p)
+Relevant diagram finner du I et vedlegg.
+Velg ett alternativ:
 
-c) Fastning (2p)
+O <5 wt%
 
-d) Seighet (2p)
+O= Ff wt
 
-e) Duktilitet (2p)
+© = 9 wt
 
-Skriv ditt svar her eller pa papir Hjelp
+© = 11 wt%
+O = 13 wt%
+© = 15 wt%
+OC = 17 wt%
+O = 19 wt%
+OC = 21 wt%
+© = 23 wt
 
-Format
+© > 25 wt%
+
+Maks poeng: 4 Sjekk svar
+
+
+=== CONTAINER 11 (text) ===
+12 Karbonstalet i forrige oppgave kjeles videre ned til romtemperatur. Hvor stor del av materialet (i vektprosent)
+bestar na av a-jern (ferritt)?
+Velg ett alternativ:
+
+O = 0 wt%
+
+© = 10 wt%
+O = 20 wt%
+© = 30 wt%
+© = 40 wt%
+© = 50 wt%
+© = 60 wt%
+O = 70 wt%
+© = 80 wt%
+© = 90 wt%
+
+© = 100 wt%
+
+Maks poeng: 4 Sjekk svar
+
+
+=== CONTAINER 12 (text) ===
+13
+
+1. Gjor rede for forskjellen mellom sprebrudd og duktilt brudd (3p)
+
+2. Gjor kort rede for hva stapejern er (1p)
+
+3. Gjer kort rede for sammensetning og mikrostruktur til gratt stapejern (2p)
+
+4. Gjor kort rede for sammensetning og mikrostruktur til hvitt stapejern (2p)
+
+5. Gjar kort rede for semmensetning og mikrostruktur til kulegrafittjern (ogsa kalt seigjern) (2p)
+
+6. Forklar hvorfor gratt og hvitt stapejern har liten eller ingen duktilitet, mens Kulegrafittjern kan ha relativt
+hey duktilitet (4p)
+
+Pa denne oppgaven kan du levere svaret pa ark. Hjelp
+
+Format ~|B I U Me | 5
 
 X
 
 Words: 0
 
-Maks poeng: 10 Sjekk svar
+Maks poeng: 14 Sjekk svar
 
 
-=== CONTAINER 16 (image) ===
+=== CONTAINER 13 (text) ===
+14
+
+| en komponent er det laget en overflatesprekk med lengde a = 2 mm. Komponenten utsettes sa for en
+strekkspenning, og det oppstar et sprebrudd nar denne spenningen er 126 MPa.
+
+Materialets bruddseighet samt geometrparameteren til systemet er ukjent, men det kan antas at
+geometriparameteren ikke er avhengig av sprekkens lengde.
+
+En identisk komponent med kun naturlige overflatesprekker utsettes sa for en strekklast, og sprabrudd oppstar
+ved en spenning lik 325 MPa.
+
+Hva er lengden a pa overflatesprekken som forte til brudd i denne Komponenten? Anta at sprekken er lokalisert og
+orientert pa samme mate som den kunstige sprekken i den forste Komponenten.
+
+Velg ett alternativ:
+
+O<05mm
+© =0.6 mm
+O=07 mm
+O=08mm
+O=0.9 mm
+O=1.0 mm
+O= 1.1mm
+
+O>1.2mm
+
+Maks poeng: 4 Sjekk svar
+
+
+=== CONTAINER 14 (text) ===
+15
+
+En fritt opplagret bjelke er utsatt for en senterlast F (tilsvarende som for en tre-punkts beyetest).
+
+180
+
+Lengde mellom opplagringer er L = 180 mm, bredden til bjelken er 10 mm og heyden er 8 mm.
+Ved en last F= 1212 N, blir det et sprabrudd 43 mm til venstre for midten av bjelken.
+Hva var maksimal beyespenning I bjelken ved bruddets posisjon’?
+Velg alternativet som er nzermest kKorrekt svar.
+Velg ett alternativ:
+
+© 43 MPa
+
+© 89 MPa
+
+© 146 MPa
+
+© 212 MPa
+
+© 267 MPa
+
+© 332 MPa
+
+© 425 MPa
+
+© 510 MPa
+
+© 600 MPa
+
+© 800 MPa
+
+© 999 MPa
+
+Maks poeng: 5 Sjekk svar
+
+
+=== CONTAINER 15 (text) ===
+16
+
+En soyle med lengde L = 6 m skal ha et sirkulgert tverrsnitt. Soylen skal veere sa lett om mulig, og du mata
+hensyn til knekkingslasten, som for det konkrete tilfellet er gitt ved:
+
+wEI
+_—
+
+Seylen ma akkurat tale 50 KN i trykk uten å knekke. Du trenger ikke ta hensyn til materialets trykkstyrke, siden det
+er antatt at knekking er den begrensende faktoren.
+
+Data for materialer med |D-nummer 1...9 er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m? for
+E-modul og tetthet. Alle sparsmal som felger, henviser til disse materialene.
+
+Diameteren til seylen er i utgangspunktet en fri variabel (for de tre første sparsmalene som falger)
+
+Hvilket material er mest optimalt? SVAR: | (heltall, |D-nummer)
+Hvilket material er minst optimalt’?? SVAR: | | (heltall, |D-nummer)
+Hvor mange matenaler er bedre enn materialet med |D-nummer 7? SVAR: | | (antall)
+
+Na er det bestemt at soylens diameter ma vaere mindre enn 100 mm.
+
+Hvor mange av materialene vil tilfredsstille dette kravet? SVAR: | (antall)
+
+Maks poeng: 6 Sjekk svar
+
+
+=== CONTAINER 16 (text) ===
 17
 
-a) Hvorfor regnes aluminium som generelt mer duktilt enn titan? (2p)
+Data for materialer med |D-nummer 1...9 er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m? for
+E-modul og tetthet. Alle sparsmal som felger, henviser til disse materialene.
 
-b) En karbonfiber er anisotrop mens en glassfiber er isotrop. Gi en kort forklaring pa hva dette betyr og hva som
-er arsaken til denne forskjellen (2p)
+Av de 9 materialene, er fem av materialer fiktive, mens de fire andre materialene representerer vanlige
+konstruksjonsmetall.
 
-c) PVC (polyvinylklorid) har mye hayere smeltetemperatur enn PP (polypropylen). Gi en kort forklaring pa
-arsaken(e) til dette. (2p)
+Hvilket material er en stallegering? SVAR: | | (heltall, |D-nummer)
+Hvilket material er en aluminiumslegering? SVAR: | | (heltall, |D-nummer)
+Hvilket material er en titanlegering? SVAR: | ] (heltall. |D-nummer)
+Hvliket material er en magnesiumlegering? SVAR: | | (heltall, |D-nummer)
 
-d) Noen materialer har en utmattingsgrense. Hva betyr det? (2p)
-e) Hva er prinsipiell forskjell pa en ionisk forbindelse og en polar kovalent forbindelse? (2p)
+Maks poeng: 2 Sjekk svar
 
-Skriv ditt svar her eller pa papir Hjelp
 
-Words: 0
+=== CONTAINER 17 (text) ===
+18
 
-Maks poeng: 10 Sjekk svar
+Hvilken pastand er korrekt? Merk: I tilfelle der det kan argumenteres for at flere alternativer er delvis Korrekte, skal
+du velge det alternativet som fremstar som gjennomgaende korrekt og konsistent for alle med materialteknisk
+kompetanse.
+
+Velg ett alternativ:
+
+— Elastisitetsmodulen (E-modulen) til de fleste metall er lite pavirket av temperaturen sa lenge temperaturen er
+- under smeltepunktet.
+
+— Temperert martensitt oppnas ved a varme martensitt til en temperatur over den eutektoide temperaturen, for
+- sa a holde denne temperaturen for en definert tid.
+
+© Austenittiske stal er szerlig utsatt for en bra omvandling fra duktil til sprø oppfarsel ved lave temperaturer.
+
+© Elektrisk resistivitet i metaller er generelt akende med ekende temperatur
+
+Maks poeng: 2 Sjekk svar
+
+A
+
+
+=== CONTAINER 18 (text) ===
+19
+
+Hvilken pastand er korrekt? Merk: I tilfelle der det kan argumenteres for at flere alternativer er delvis Korrekte, skal
+du velge det alternativet som fremstar som gjennomgaende korrekt og konsistent for alle med materialteknisk
+kompetanse.
+
+Velg ett alternativ:
+
+— For metaller med BCC krystallstruktur, er siging (creep) relevant ved temperaturer over ca. 0.4 ganger
+- smeltetemperaturen, mens dette ikke er tilfelle for metaller med FCC krystallstruktur.
+
+-, Smeltetemperaturen til metaller gir en viss indikasjon pa den potensielle ovre brukstemperaturen til
+~ materialet.
+
+© Krystallinske metaller blir spre nar temperaturen er under glasstransisjonstemperaturen.
+
+— Aluminium som er plastisk bearbeidet og dermed deformasjonsherdet, vil rekrystallisere og danne HCP-
+~ aluminium etter en gitt tid.
+
+Maks poeng: 2 Sjekk svar
+
+A
+
+
+=== CONTAINER 19 (text) ===
+20
+
+Hvilken pastand er korrekt? Merk: I tilfelle der det kan argumenteres for at flere alternativer er delvis Korrekte, skal
+du velge det alternativet som fremstar som gjennomgaende korrekt og konsistent for alle med materialteknisk
+kompetanse.
+
+Velg ett alternativ:
+
+— PTFE (polytetrafluoretylen) som vi finner i teflon, har spesielt hayt smeltepunkt pa grunn av sterke
+- hydrogenbindinger.
+
+—» PE (polyetylen) har høyere smeltetemperatur enn PP (polypropylen) siden enklere molekyl pakkes lettere
+~ enn molekyl med sidegrupper.
+
+© Plastiserer (plasticizer) kan tilsettes f.eks. PVC (polyvinylklorid) for å eke glasstransisjonstemperaturen.
+
+-, PVC (polyvinylklorid) har hayere smeltetemperatur enn PP (polypropylen) pa grunn av sterkere dipolkrefter
+~ mellom molekylene
+
+Maks poeng: 2 Sjekk svar
+
+
+=== CONTAINER 20 (text) ===
+Vedlege: Fasediagram
+
+Temperature (°C)
+
+Composition (at% Ag)
+
+FIC (Tg)
+
+40 60
+
+Composition (wt Ag)
+
+100
+
+(Ag)
+
+1000
+
+Temperature (°C)
+
+800
+
+600
+
+400
+(Fe)
+
+3 4
+Composition (wt% C)
+
+6.70
+
+
+=== CONTAINER 21 (text) ===
+(Fe) Composition (wt% C)
+
+Vedlege: Fasediagram
+
+700 p
+660 }
+
+600 AT max=96.6%C
+
+TE=548°C
+500
+
+Temperature, T °C
+
+Al 10 20 30 40 50
+wt % Cu
+
+
+=== CONTAINER 22 (text) ===
+Vedlegg: Materialvalg
+
+ce Sere. Se eee Peete EE
+
+ssn jp
+
+] '
+| PPEEE ER |
+
+sninpow sbunax
+
+te eee
+
+at
+|
+
+Density
+
+sninpow sbuna
+
+Density
+
+
+=== CONTAINER 23 (text) ===
+Vedlegg: Materialvalg
+
+|
+$
+|
+:J”...u.-
+=
+|
+]
+|
+|
+>
+1
+
+sninpow sbuna,
+
++
+
+Densi
+
+
+=== CONTAINER 24 (text) ===
+Vedlegge: Galvanisk serie
+
+e Platinum
+
+* Gold
+
+e Graphite
+
+e Titanium
+
+e Silver
+
+e 316 Stainless steel (passive)
+e Inconel (passive)
+
+e Nickel (passive)
+
+- Monel
+
+- Copper-nickel alloys
+
+* Bronzes
+e Copper
+* Brasses
+
+e Inconel (active)
+
+* Nickel (active)
+
+* Tin
+
+* Lead
+
+* 316 Stainless steel (active)
+
+e Castiron
+
+e ron and steel
+
+e Aluminum alloys
+
+* Cadmium
+
++ Commercially pure aluminum
+e Zinc
+
++ Magnesium and magnesium alloys
