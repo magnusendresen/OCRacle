@@ -1,52 +1,45 @@
-Prompte 'Does this task require the Moody diagram?' eller liknende og få med en search engine til å finne den.
-    Legg til figurer på slutten av dokumentet fra "Vedlegg" i en samling til eksamnen som man kan vise ved se vedlegg knapp.
-    Kan godt bruke ocr på disse for å forstå hva slags diagram det er og prompte for oppgaver hvilke figurer som eventuelt er revelante senere. 
+Sette opp nettsidehost fra laptopen  
 
-Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.'
+Implementere prompting og formattering for programmeringsbokser  
 
-Implementere prompting og formattering for programmeringsbokser.
+Legge til ytterligere start/stop/restart funksjoner for cpp UI  
 
-Hvis temaet til oppgaven er programmering, så kan(skal?) temaet til oppgaven være både programmering ogdet opprinnelige temaet.
+Fikse cropping av grafer  
 
-Legge til ytterligere start/stop/restart funksjoner for cpp UI.
+Undersøke om at hvis et bilde fyller hele pdf-siden, så skal det croppes umiddelbart  
 
-Fikse cropping av grafer.
+Legge til håndtering av eventuelle 100% like bilder. FIKS DETTE <-  
 
-Legge til maks poeng i html.
+Prompte 'Does this task require the Moody diagram?' eller liknende og få med en search engine til å finne den  
 
-Spesifisere at det ikke nødvendigvis trenger å være et unikt tema for hver eneste oppgave i eksamnene.
+Legg til figurer på slutten av dokumentet fra "Vedlegg" i en samling til eksamnen som man kan vise ved se vedlegg knapp  
 
-Vurdere å legge til en errorhåndtering ved LLM som gjør at hvis resultatet fra deepseek starter med feks [ERROR] (instruert ved prompting), så lagres svaret eller erroren til deepseek for feilsøking. 
+Kan godt bruke ocr på disse for å forstå hva slags diagram det er og prompte for oppgaver hvilke figurer som eventuelt er revelante senere  
 
-Undersøke om at hvis et bilde fyller hele pdf-siden, så skal det croppes umiddelbart.
+Vurdere å legge til en errorhåndtering ved LLM som gjør at hvis resultatet fra deepseek starter med feks [ERROR] (instruert ved prompting), så lagres svaret eller erroren til deepseek for feilsøking  
 
-Prompte at det absolutt er trivielt at latexformattering av symboler ikke gjøres inni programmeringsbokser (eks. $\mu_k).
+Ta med poeng i selve html js stringen  
 
-Forklare at det er lov å gjøre antakelser om symboler som lambda i bølgeoppgaver (eks. lambda/2 ikke 1/2) grunnet ocr-feil.
+Legge til maks poeng i html  
 
-Legge til gammel emnekode i parentes, så promptingen av emnekode gjøres uansett, bare at den ikke brukes til noe annet enn "real_emnekode" ellerno. Vil dekke både MEKT1101//TKT4116 og IFYT1000//IFYKJ1000.
+Ryddiggjøre html-formattering, trenger ikke både tall OG bokstav  
 
-Ha både studiehjelper OG "guess who answered", "who's the impostor", og flere party games på nettsiden. 
+Ordne formattering av tabeller (se TMM4100 v24 oppgave 9)  
 
-Legge til håndtering av eventuelle 100% like bilder. FIKS DETTE <-
+Godt formulert til prompting: 'Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.'  
 
-If image is too large: crop!
+Spesifisere at det ikke nødvendigvis trenger å være et unikt tema for hver eneste oppgave i eksamnene  
 
-Ta med poeng i selve html js stringen fordi:
-    Gjør rede for forskjellen mellom sprøbrudd og duktilt brudd. (2p)
-    Gjør kort rede for hva støpejern er. (2p)
-    Gjør kort rede for sammensetning og mikrostruktur til grått støpejern. (2p)
-    Gjør kort rede for sammensetning og mikrostruktur til hvitt støpejern. (2p)
-    Gjør kort rede for sammensetning og mikrostruktur til kulegrafittjern. (2p)
-    Forklar kvifor grått og hvitt støpejern har liten eller ingen duktilitet, medan kulegrafittjern kan ha relativt høg duktilitet. (4p)
+Hvis temaet til oppgaven er programmering, så kan(skal?) temaet til oppgaven være både programmering og det opprinnelige temaet  
 
-Ryddiggjøre html-formattering, trenger ikke både tall OG bokstav:
-    1. A 0 wt%
-    2. B 10 wt%
-    3. C 20 wt%
+Forklare at det er lov å gjøre antakelser om symboler som lambda i bølgeoppgaver (eks. lambda/2 ikke 1/2) grunnet ocr-feil  
 
-Ordne formattering av tabeller (se TMM4100 v24 oppgave 9)
+Prompte at det absolutt er trivielt at latexformattering av symboler ikke gjøres inni programmeringsbokser (eks. $\mu_k)  
 
-Forbedre generaliteter som "... i forrige oppgave" sånn at..? blir kanskje vanskelig
+Legge til gammel emnekode i parentes … (MEKT1101//TKT4116 og IFYT1000//IFYKJ1000)  
 
-Kan godt beholde formuleringer som "I denne oppgaven forventes korte og presise svar
+Forbedre generaliteter som "... i forrige oppgave" sånn at..? blir kanskje vanskelig  
+
+Kan godt beholde formuleringer som "I denne oppgaven forventes korte og presise svar"  
+
+Ha både studiehjelper OG "guess who answered", "who's the impostor", og flere party games på nettsiden  
