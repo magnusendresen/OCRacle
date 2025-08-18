@@ -9,6 +9,11 @@ Format and structure:
 - Be sure to include spaces and line breaks where appropriate—the formatting should look clean and readable.
 - Change wording such as "See the figure below." to "See the figure above." since images always come before the task text.
 
+Task points:
+- If there is one single task, end the text with a separate line stating the maximum points exactly as Maks poeng: X (replace X with the number).
+- If there are multiple tasks and each task has its own amount of points, write the points per task exactly as Xp. (replace X with the number) directly at the end of each subtask title.
+- If the task in its entirety gives a total of e.g. 5 points, do not write 5p at the end of each subtask, only if each task is specified to have its own amount of points.
+
 DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
 DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
 DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
@@ -36,11 +41,12 @@ Code and programming:
 - Preserve all syntax and line breaks exactly as they appear in the original text. Remember that Python is extremely indentation-sensitive, so format accordingly.
 
 Multiple choice:
-- For multiple-choice questions with text or image options, also follow these rules:
-  - Present the options as an ordered list using <ol><li>.
-  - Prefix each option with the corresponding letter label inside <b> tags (A, B, C, ...).
+- For multiple-choice questions with text or image options, follow these rules:
+  - Present the options as an ordered list using <ol type="A"><li>...</li></ol>.
+  - Do not include any extra number or letter inside the option text itself—the list marker provides the label.
   - The task statement itself should be outside the list in a regular <p> tag.
-  - If the choices are lines of code, format them according to the code formatting instructions above.
+  - If the choices are lines of code, place each one inside <pre class="code-box"><code>...</code></pre> within its <li>.
+
 
 Tasks requiring calculation, proof, or explanation:
 - For regular tasks that require proving, calculating, or explaining, also follow these rules:

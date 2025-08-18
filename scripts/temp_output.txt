@@ -1,631 +1,320 @@
 
 
 === CONTAINER 0 (text) ===
-1 For denne oppagaven forventes korte og presise svar.
-
-1. Hva kalles en legering som hovedsakelig inneholder kobber og tinn? (1p)
-
-2. Hva er vanlig navn for legeringer som hovedsakelig inneholder kobber og sink? (1p)
-
-3. Likevektsstrukturen til en blanding av kobber og nikkel beskrives ved et isomortt fasediagram. Forklar
-hvorfor. (3p)
-
-4 Hva er maksimal loselighet av kobber | aluminium? Se vedlegg Fasediagram (1p)
-
-5. Aluminiumslegeringer i 2000-serien har kobber som det primære legeringselementet. Forklar hvordan og
-hvorfor disse legeringene kan oppna hey flytestyrke. (3p)
-
-6. Kan kobber benyttes som katodisk beskyttelse av stal? Gi en kort forklaring pa det du kommer frem til. (2p)
-
-7. Gi en kort forklaring pa hva som hindrer korrosjon i rustfrie stal, bade med hensyn pa stalets innhold og
-mekanismen som virker. (2p)
-
-Pa denne oppgaven kan du levere svaret pa ark. Hjelp
-
-~ Bru x x
-
-Words: 0
-
-Maks poeng: 13 Sjekk svar
-
+1 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   a) Verdensrekorden for menn på   er  . Hvor mange   (kilometer per time) tilsvarer dette? Velg ett alternativ:
 
 === CONTAINER 1 (text) ===
-2 En legering bestar av kun kobber og tinn. Forholdet mellom antall kobberatom og antall tinnatom er 25:1. Hva er
-vekiprosenten av tinn I legeringen? Oppai svaret avrundet til nærmeste hele tall
-
-Svar. | [wt%] (heltall)
-
-Maks poeng: 3 Sjekk svar
-
+b) Jorda går i en sirkelbane rundt Sola med radius   (150 millioner kilometer), og bruker 365 dager på én runde.  Bestem banefarten til Jorda.   Velg ett alternativ
 
 === CONTAINER 2 (text) ===
-3 Et stykke aluminiumsfolie har bredde lik 44 cm, lengde lik 10 m og den veier 180 g. Hva er tykkelsen til denne
-folien?
-
-Velg ett alternativ:
-© <10 um
-© =15 um
-© = 25 um
-O=35 um
-0 = 45 um
-0 = 55 ym
-© = 65 ym
-
-0 > 75 pm
-
-Maks poeng: 3 Sjekk svar
-
+Maks poeng: 4
 
 === CONTAINER 3 (text) ===
-A
+2 Et legeme som i utgangspunktet henger i ro, faller ved   vertikalt nedover under påvirkning av tyngdekraften,  uten  luftmotstand. Vi legger inn et koordinatsystem slik at positiv  -retning er loddrett nedover, som vist på figuren.
 
-Aluminium reagerer hurtig med oksygen I luft og danner et belegg av aluminiumoksid, Al+O04 pa overflatene. Dette
-belegget er 4 nanometer tykt. Hvor mye oksygen er I sa fall bundet til aluminiumsfolien i forrige oppgave?
-Tettheten til aluminiumoksid er 3980 kg/m? og du kan anta at alle flater har blitt eksponert for oksygen.
+=== CONTAINER 4 (image) ===
+@:t=0
 
-Velg ett alternativ:
-O <10 pug
-© = 15 ug
-O = 25 ug
-© = 35 ug
-© = 45 ug
-0 = 55 pg
-©) = 65 ug
+0
 
-© > 70 ug
-
-Maks poeng: 3 Sjekk svar
-
-
-=== CONTAINER 4 (text) ===
-A
-
-5 Kobber, som har tetthet lik 8935 kg/m*, har samme krystallstruktur som aluminium. Regn ut gitterkonstanten a for
-enhetscellen til kobber.
-
-Velg ett alternativ:
-© = 180 pm
-© = 216 pm
-© = 240 pm
-© = 288 pm
-© = 360 pm
-© = 405 pm
-© = 450 pm
-
-© = 480 pm
-
-Maks poeng: 3 Sjekk svar
+y
 
 
 === CONTAINER 5 (text) ===
-80 g av en legering av kobber og selv som inneholder 30 vektprosent selv, varmes langsomt opp fra
-romtemperatur til 900°C og holdes ved denne temperaturen til systemet er fullstendig | likevekt.
-Smelten helles deretter ut av blandingen. Hvor mye faststoff er igjen?
-
-Relevant fasediagram finner du I et vedlegg.
-
-Velg ett alternativ:
-
-O#0g
-
-O=10g
-O= 159
-© =209q
-O#=25g
-O = 309
-
-O=35q
-
-Maks poeng: 3 Sjekk svar
-
+Hvilken av grafene A-E til høyre viser posisjonen   for det fallende legemet? Velg ett alternativ
 
 === CONTAINER 6 (text) ===
-7
-
-Faststoffet som ble igjen I forrige oppgave kjøles langsomt ned til 700°C. Hva er vektprosenten av B-fasen |
-blandingen av a og 6 ved denne temperaturen?
-
-Velg ett alternativ:
-
-© = 0 wt%
-
-O = 3 wt
-
-© = 10 wt%
-© = 15 wt%
-© = 20 wt%
-© = 25 wt%
-© = 30 wt%
-
-©O = 35 wt%
-
-Maks poeng: 3 Sjekk svar
-
+Maks poeng: 2
 
 === CONTAINER 7 (text) ===
-En legering av kobber og selv inneholder 4 mol kobber og 6 mol sølv. Legeringen varmes langsomt opp fra
-romtemperatur. Ved hvilken temperatur vil hele blandingen bli en smelte?
+3 En badevekt er en kraftmåler som viser krafta som til enhver tid presser normalt ned på badevekta. Badevekta er imidlertid kalibrert til å vise krafta i "kg", slik at  .   En kasse er plassert på badevekta i de to situasjonene på figuren under. Når badevekta og kassa står på horisontalt underlag, viser badevekta   (til venstre).
 
-Relevant fasediagram finner du I et vedlegg.
-Velg ett alternativ:
+=== CONTAINER 8 (image) ===
+oe
 
-© = 780°C
-© = 800°C
-O = 820°C
-© = 840°C
-© = 860°C
-© = 880°C
-© = 900°C
-
-© = 920°C
-
-Maks poeng: 3 Sjekk svar
-
-
-=== CONTAINER 8 (text) ===
-En plate av rent jern varmes opp til 950°C og holdes ved denne temperaturen til likevekt er oppnadd. Den ene
-siden av platen utsettes sa for en karbonrik gass, slik at overflaten pa denne siden (ved x=0) umiddelbart far en
-konsentrasjon av karbon lik 1.2 wt%, og denne overflatekonsentrasjonen samt temperaturen pa 950°C holdes
-deretter konstant. Overflaten pa motstaende side av platen holdes pa en karbonkonsentrasjon lik null. Platens
-tykkelse er 30 mm, og du skal i ferste del av oppgaven anta at betingelsene for en semi-uendelig plate er gyldige.
-Fasediagrammet for jern-karbon finner du | et vedlegg.
-
-. Forklar Kort og presist hva som menes med en semi-uendelig plate. (2p)
-
-. Hva er diffusjonskoeffisienten for karbon i stal ved disse betingelsene? Se tabellen i denne oppgaven. (2p)
-
-. Hvor lang tid ma platen holdes ved disse betingelsene for at Konsentrasjonen av Karbon ved en posisjon 1.0
-
-mm inn I platen blir 1.0 wt%? (4p)
-
-Vis at betingelser for en semi-uendelig plate er oppfylt for tiden du har beregnet i forrige spersmal (2p)
-
-. Den stakkars studenten som egentlig bare skulle eke Karboninnholdet ytterst i platen pa den ene siden,
-glemte hele greia og tok juleferie. Platen ble dermed staende til over nyttar under betingelsene som er gitt
-over. Hvordan forventer du at konsentrasjonen av karbon varierer gjennom platen nar juleferien er over?
-(2p)
-
-6. Tilbake etter jul, og passe irritert over tabben, slenger studenten platen rett I kaldt vann. Hva vil skje med
-
-materialet i platen na? (3p)
-
-Ome whe
-
-Tabell: Diffusjonsdata.
-
-Diffusing Species Host Metal Do [m2/s] Qy [kJ/mol]
-p Fe (a-iron) 11 x 10% 87
-E Fe (y-iron) 73519" 148
-N Fe (a-iron) 5.0 x 107 77
-N Fe (y-iron) 91x10° 168
-Zn Cu 24x 10° 189
-Cu Al 65 x 10° 136
-Ni Cu 1.9 104 230
-Pa denne oppgaven kan du levere svaret pa ark. Hjelp
-
-Format ~|B F U x ]F
-
-<
-
-Words: D
-
+Horisontalt Skratt
+underlag underlag
 
 
 === CONTAINER 9 (text) ===
-10 Karbonstal med eutektoid sammensetning har 0.76 wt% karbon. Hvor mange karbonatom har et slikt stal per
-1000 jernatom?
-
-Velg ett alternativ:
-
-Maks poeng: 4 Sjekk svar
-
+Så plasseres badevekta, med kassa oppå, på et skrått underlag med helningsvinkel  , slik at kassa står i ro oppå vekta. Hva viser badevekta i denne situasjonen (til høyre)? Velg ett alternativ:
 
 === CONTAINER 10 (text) ===
-11
-
-Karbonstal med 1.5 wt% karbon er i likevekt som austenitt, og kjøles deretter langsom ned til en temperatur lik
-750°C. Hvor stor del av materialet er sementitt ved denne temperaturen?
-
-Relevant diagram finner du I et vedlegg.
-Velg ett alternativ:
-
-O <5 wt%
-
-O= Ff wt
-
-© = 9 wt
-
-© = 11 wt%
-O = 13 wt%
-© = 15 wt%
-OC = 17 wt%
-O = 19 wt%
-OC = 21 wt%
-© = 23 wt
-
-© > 25 wt%
-
-Maks poeng: 4 Sjekk svar
-
+Maks poeng: 2
 
 === CONTAINER 11 (text) ===
-12 Karbonstalet i forrige oppgave kjeles videre ned til romtemperatur. Hvor stor del av materialet (i vektprosent)
-bestar na av a-jern (ferritt)?
-Velg ett alternativ:
+4 En vogn med masse   i en berg-og-dalbane har en viss banefart   i det den kjører over en bakketopp formet som del av en sirkel med radius  . Vogna beholder hele tiden kontakten med underlaget. Se figuren under.
 
-O = 0 wt%
-
-© = 10 wt%
-O = 20 wt%
-© = 30 wt%
-© = 40 wt%
-© = 50 wt%
-© = 60 wt%
-O = 70 wt%
-© = 80 wt%
-© = 90 wt%
-
-© = 100 wt%
-
-Maks poeng: 4 Sjekk svar
-
-
-=== CONTAINER 12 (text) ===
-13
-
-1. Gjor rede for forskjellen mellom sprebrudd og duktilt brudd (3p)
-
-2. Gjor kort rede for hva stapejern er (1p)
-
-3. Gjer kort rede for sammensetning og mikrostruktur til gratt stapejern (2p)
-
-4. Gjor kort rede for sammensetning og mikrostruktur til hvitt stapejern (2p)
-
-5. Gjar kort rede for semmensetning og mikrostruktur til kulegrafittjern (ogsa kalt seigjern) (2p)
-
-6. Forklar hvorfor gratt og hvitt stapejern har liten eller ingen duktilitet, mens Kulegrafittjern kan ha relativt
-hey duktilitet (4p)
-
-Pa denne oppgaven kan du levere svaret pa ark. Hjelp
-
-Format ~|B I U Me | 5
-
-X
-
-Words: 0
-
-Maks poeng: 14 Sjekk svar
+=== CONTAINER 12 (image) ===
 
 
 === CONTAINER 13 (text) ===
-14
-
-| en komponent er det laget en overflatesprekk med lengde a = 2 mm. Komponenten utsettes sa for en
-strekkspenning, og det oppstar et sprebrudd nar denne spenningen er 126 MPa.
-
-Materialets bruddseighet samt geometrparameteren til systemet er ukjent, men det kan antas at
-geometriparameteren ikke er avhengig av sprekkens lengde.
-
-En identisk komponent med kun naturlige overflatesprekker utsettes sa for en strekklast, og sprabrudd oppstar
-ved en spenning lik 325 MPa.
-
-Hva er lengden a pa overflatesprekken som forte til brudd i denne Komponenten? Anta at sprekken er lokalisert og
-orientert pa samme mate som den kunstige sprekken i den forste Komponenten.
-
-Velg ett alternativ:
-
-O<05mm
-© =0.6 mm
-O=07 mm
-O=08mm
-O=0.9 mm
-O=1.0 mm
-O= 1.1mm
-
-O>1.2mm
-
-Maks poeng: 4 Sjekk svar
-
+Hvilken påstand om normalkrafta   fra underlaget på vogna vil alltid gjelde i det vogna passerer toppen (situasjonen vist på figuren)?   Velg ett alternativ:
 
 === CONTAINER 14 (text) ===
-15
-
-En fritt opplagret bjelke er utsatt for en senterlast F (tilsvarende som for en tre-punkts beyetest).
-
-180
-
-Lengde mellom opplagringer er L = 180 mm, bredden til bjelken er 10 mm og heyden er 8 mm.
-Ved en last F= 1212 N, blir det et sprabrudd 43 mm til venstre for midten av bjelken.
-Hva var maksimal beyespenning I bjelken ved bruddets posisjon’?
-Velg alternativet som er nzermest kKorrekt svar.
-Velg ett alternativ:
-
-© 43 MPa
-
-© 89 MPa
-
-© 146 MPa
-
-© 212 MPa
-
-© 267 MPa
-
-© 332 MPa
-
-© 425 MPa
-
-© 510 MPa
-
-© 600 MPa
-
-© 800 MPa
-
-© 999 MPa
-
-Maks poeng: 5 Sjekk svar
-
+Maks poeng: 2
 
 === CONTAINER 15 (text) ===
-16
+5 En person med masse   som i utgangspunktet står på bakkenivå, har på seg en sele som er festet til en stram strikk. Den andre enden av strikken er festet til en høy kran. På et gitt signal utløses strikken, slik at personen spretter til værs. Strikken kan antas å være masseløs samt følge Hookes lov med fjærkonstant  , og har lengden   i ustrukket/slapp tilstand. Forlengelsen av strikken er  . Se figuren under.
 
-En soyle med lengde L = 6 m skal ha et sirkulgert tverrsnitt. Soylen skal veere sa lett om mulig, og du mata
-hensyn til knekkingslasten, som for det konkrete tilfellet er gitt ved:
+=== CONTAINER 16 (image) ===
+_------~ ac -. (toppunktet)
 
-wEI
-_—
+— D (nivå med krana)
 
-Seylen ma akkurat tale 50 KN i trykk uten å knekke. Du trenger ikke ta hensyn til materialets trykkstyrke, siden det
-er antatt at knekking er den begrensende faktoren.
-
-Data for materialer med |D-nummer 1...9 er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m? for
-E-modul og tetthet. Alle sparsmal som felger, henviser til disse materialene.
-
-Diameteren til seylen er i utgangspunktet en fri variabel (for de tre første sparsmalene som falger)
-
-Hvilket material er mest optimalt? SVAR: | (heltall, |D-nummer)
-Hvilket material er minst optimalt’?? SVAR: | | (heltall, |D-nummer)
-Hvor mange matenaler er bedre enn materialet med |D-nummer 7? SVAR: | | (antall)
-
-Na er det bestemt at soylens diameter ma vaere mindre enn 100 mm.
-
-Hvor mange av materialene vil tilfredsstille dette kravet? SVAR: | (antall)
-
-Maks poeng: 6 Sjekk svar
-
-
-=== CONTAINER 16 (text) ===
-17
-
-Data for materialer med |D-nummer 1...9 er gitt i vedlegget Materialvalg, der det er brukt enheter Pa og kg/m? for
-E-modul og tetthet. Alle sparsmal som felger, henviser til disse materialene.
-
-Av de 9 materialene, er fem av materialer fiktive, mens de fire andre materialene representerer vanlige
-konstruksjonsmetall.
-
-Hvilket material er en stallegering? SVAR: | | (heltall, |D-nummer)
-Hvilket material er en aluminiumslegering? SVAR: | | (heltall, |D-nummer)
-Hvilket material er en titanlegering? SVAR: | ] (heltall. |D-nummer)
-Hvliket material er en magnesiumlegering? SVAR: | | (heltall, |D-nummer)
-
-Maks poeng: 2 Sjekk svar
 
 
 === CONTAINER 17 (text) ===
-18
-
-Hvilken pastand er korrekt? Merk: I tilfelle der det kan argumenteres for at flere alternativer er delvis Korrekte, skal
-du velge det alternativet som fremstar som gjennomgaende korrekt og konsistent for alle med materialteknisk
-kompetanse.
-
-Velg ett alternativ:
-
-— Elastisitetsmodulen (E-modulen) til de fleste metall er lite pavirket av temperaturen sa lenge temperaturen er
-- under smeltepunktet.
-
-— Temperert martensitt oppnas ved a varme martensitt til en temperatur over den eutektoide temperaturen, for
-- sa a holde denne temperaturen for en definert tid.
-
-© Austenittiske stal er szerlig utsatt for en bra omvandling fra duktil til sprø oppfarsel ved lave temperaturer.
-
-© Elektrisk resistivitet i metaller er generelt akende med ekende temperatur
-
-Maks poeng: 2 Sjekk svar
-
-A
-
+I hvilket av punktene A-E er hopperens fart maksimal på vei  oppover ?
 
 === CONTAINER 18 (text) ===
-19
-
-Hvilken pastand er korrekt? Merk: I tilfelle der det kan argumenteres for at flere alternativer er delvis Korrekte, skal
-du velge det alternativet som fremstar som gjennomgaende korrekt og konsistent for alle med materialteknisk
-kompetanse.
-
 Velg ett alternativ:
-
-— For metaller med BCC krystallstruktur, er siging (creep) relevant ved temperaturer over ca. 0.4 ganger
-- smeltetemperaturen, mens dette ikke er tilfelle for metaller med FCC krystallstruktur.
-
--, Smeltetemperaturen til metaller gir en viss indikasjon pa den potensielle ovre brukstemperaturen til
-~ materialet.
-
-© Krystallinske metaller blir spre nar temperaturen er under glasstransisjonstemperaturen.
-
-— Aluminium som er plastisk bearbeidet og dermed deformasjonsherdet, vil rekrystallisere og danne HCP-
-~ aluminium etter en gitt tid.
-
-Maks poeng: 2 Sjekk svar
-
-A
-
 
 === CONTAINER 19 (text) ===
-20
-
-Hvilken pastand er korrekt? Merk: I tilfelle der det kan argumenteres for at flere alternativer er delvis Korrekte, skal
-du velge det alternativet som fremstar som gjennomgaende korrekt og konsistent for alle med materialteknisk
-kompetanse.
-
-Velg ett alternativ:
-
-— PTFE (polytetrafluoretylen) som vi finner i teflon, har spesielt hayt smeltepunkt pa grunn av sterke
-- hydrogenbindinger.
-
-—» PE (polyetylen) har høyere smeltetemperatur enn PP (polypropylen) siden enklere molekyl pakkes lettere
-~ enn molekyl med sidegrupper.
-
-© Plastiserer (plasticizer) kan tilsettes f.eks. PVC (polyvinylklorid) for å eke glasstransisjonstemperaturen.
-
--, PVC (polyvinylklorid) har hayere smeltetemperatur enn PP (polypropylen) pa grunn av sterkere dipolkrefter
-~ mellom molekylene
-
-Maks poeng: 2 Sjekk svar
-
+Maks poeng: 2
 
 === CONTAINER 20 (text) ===
-Vedlege: Fasediagram
+6 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En skihopper starter fra ro og sklir uten friksjon ned overrennet i en hoppbakke. Høydeforskjellen mellom startpunktet og hoppkanten er  . Vi ser bort fra luftmotstand i hele denne oppgaven.
 
-Temperature (°C)
-
-Composition (at% Ag)
-
-FIC (Tg)
-
-40 60
-
-Composition (wt Ag)
-
-100
-
-(Ag)
-
-1000
-
-Temperature (°C)
-
-800
-
-600
-
-400
-(Fe)
-
-3 4
-Composition (wt% C)
-
-6.70
-
-
-=== CONTAINER 21 (text) ===
-(Fe) Composition (wt% C)
-
-Vedlege: Fasediagram
-
-700 p
-660 }
-
-600 AT max=96.6%C
-
-TE=548°C
-500
-
-Temperature, T °C
-
-Al 10 20 30 40 50
-wt % Cu
+=== CONTAINER 21 (image) ===
 
 
 === CONTAINER 22 (text) ===
-Vedlegg: Materialvalg
-
-ce Sere. Se eee Peete EE
-
-ssn jp
-
-] '
-| PPEEE ER |
-
-sninpow sbunax
-
-te eee
-
-at
-|
-
-Density
-
-sninpow sbuna
-
-Density
-
+a) Tegn kreftene som virker på hopperen på vei ned overrennet, og forklar hvorfor hopperens mekaniske energi er bevart. (4 poeng)   b) Vis at hopperen har farten   ved hoppkanten. (3 poeng)
 
 === CONTAINER 23 (text) ===
-Vedlegg: Materialvalg
-
-|
-$
-|
-:J”...u.-
-=
-|
-]
-|
-|
->
-1
-
-sninpow sbuna,
-
-+
-
-Densi
-
+c) Hopperen forlater hoppkanten med horisontal fart. Hvor langt unna hoppkanten i horisontal retning lander hopperen (avstanden   på figuren), når hopperen lander på den horisontale bakken som ligger en vertikal avstand   under hoppkanten? (4 poeng)
 
 === CONTAINER 24 (text) ===
-Vedlegge: Galvanisk serie
+d) Beregn følgende i nedslagspunktet, dvs. der hopperen treffer bakken: i) Absoluttverdien av farten (2 poeng) ii) Fartens retning (2 poeng)
 
-e Platinum
+=== CONTAINER 25 (text) ===
+Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark.
 
-* Gold
+=== CONTAINER 26 (text) ===
+Skriv ditt svar her
 
-e Graphite
+=== CONTAINER 27 (text) ===
+Format
 
-e Titanium
+=== CONTAINER 28 (text) ===
+
 
-e Silver
+=== CONTAINER 29 (text) ===
+   Σ   
 
-e 316 Stainless steel (passive)
-e Inconel (passive)
+=== CONTAINER 30 (text) ===
+Words: 0
 
-e Nickel (passive)
+=== CONTAINER 31 (text) ===
+Maks poeng: 15
 
-- Monel
+=== CONTAINER 32 (text) ===
+7 En syklist sykler med konstant fart  opp en oppoverbakke med helningsvinkel . En enkel sykkelcomputer fungerer slik at brukeren taster inn informasjon om den totale massen   av sykkel + syklist, og så bruker computeren sensorer som måler syklistens fart   samt vinkelen   til å beregne effekten P som syklisten produserer. Denne enkle computeren tar ikke med luftmotstand i beregningen. Se figuren under.
 
-- Copper-nickel alloys
+=== CONTAINER 33 (image) ===
 
-* Bronzes
-e Copper
-* Brasses
 
-e Inconel (active)
+=== CONTAINER 34 (text) ===
+Hva må stå i kodelinja KODE MANGLER for at funksjonen P(v,theta) skal gi effekten som syklisten produserer, som funksjon av farten   målt i m/s og helningsvinkelen   målt i grader?
 
-* Nickel (active)
+=== CONTAINER 35 (text) ===
+import math   def P(v,theta):
 
-* Tin
+=== CONTAINER 36 (text) ===
+m=80     g=9.81    return KODE MANGLER Velg ett alternativ:
 
-* Lead
+=== CONTAINER 37 (text) ===
+(m*g*math.sin(math.radians(theta)))*v**3
 
-* 316 Stainless steel (active)
+=== CONTAINER 38 (text) ===
+(m*g*math.cos(math.radians(theta)))*v**2
 
-e Castiron
+=== CONTAINER 39 (text) ===
+(m*g*math.sin(math.radians(theta)))*v
 
-e ron and steel
+=== CONTAINER 40 (text) ===
+(m*g*math.cos(math.radians(theta)))*v
 
-e Aluminum alloys
+=== CONTAINER 41 (text) ===
+(m*g*math.sin(math.radians(theta)))*v**2
 
-* Cadmium
+=== CONTAINER 42 (text) ===
+Maks poeng: 2
 
-+ Commercially pure aluminum
-e Zinc
+=== CONTAINER 43 (text) ===
+8 Et kulelager består av en hylse i form av en tynnvegget sylinder ("hoop") med masse   og radius  , og 8 stk. massive kuler med masse   og radius  . Massesenteret til kulene ligger på en sirkel med radius   i forhold til sentrum i kulelageret. Se figuren under.
 
-+ Magnesium and magnesium alloys
+=== CONTAINER 44 (image) ===
+
+
+=== CONTAINER 45 (text) ===
+Hylsen og de 8 massive kulene kan rotere om en akse gjennom sentrum av kulelageret som står normalt på figurplanet (aksen er inntegnet på figuren), mens den indre kanten av kulelageret (med radius  ) ikke roterer. Bestem treghetsmomentet til kulelageret om denne aksen.
+
+=== CONTAINER 46 (text) ===
+Velg ett alternativ:
+
+=== CONTAINER 47 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 48 (text) ===
+9 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En homogen, massiv kule med masse   og radius   ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel  . Se figuren under.
+
+=== CONTAINER 49 (image) ===
+
+
+=== CONTAINER 50 (text) ===
+Farten er såpass liten at luftmotstanden kan neglisjeres.
+
+=== CONTAINER 51 (text) ===
+a) Tegn kreftene på kula mens den ruller nedover skråplanet.  For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren . (3 poeng)
+
+=== CONTAINER 52 (text) ===
+b) Forklar kort (maks. 5 linjer) hvorfor den mekaniske energien til kula er bevart under rullingen. (3 poeng)   c) Bestem farten til kula nederst i skråplanet dersom den starter en høyde   over bunnen. (3 poeng)   d) Vis at akselerasjonen til kula nedover skråplanet er  . (3 poeng)
+
+=== CONTAINER 53 (text) ===
+e) Kula starter fra ro i   ved  . Skisser kulas posisjonsgraf  , fartsgraf   og akselerasjonsgraf  .  For full uttelling må det være et  resonnement  som argumenterer for grafens  form , og formen må framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.  (3 poeng)   Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark. Skriv ditt svar her
+
+=== CONTAINER 54 (text) ===
+Format
+
+=== CONTAINER 55 (text) ===
+
+
+=== CONTAINER 56 (text) ===
+   Σ   
+
+=== CONTAINER 57 (text) ===
+Words: 0
+
+=== CONTAINER 58 (text) ===
+Maks poeng: 15
+
+=== CONTAINER 59 (text) ===
+10 a) I 2023 imploderte undervannsfartøyet "Titan" katastrofalt i en dybde av  . Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var  . Velg ett alternativ
+
+=== CONTAINER 60 (text) ===
+b) En badeball er formet som en kule med radius  . Beregn oppdrifta på ballen dersom hele ballen er under vann. Velg ett alternativ
+
+=== CONTAINER 61 (text) ===
+Oppdriften avhenger av hvilken dybde badeballen befinner seg i
+
+=== CONTAINER 62 (text) ===
+Oppdriften avhenger av massen av badeballen
+
+=== CONTAINER 63 (text) ===
+Maks poeng: 4
+
+=== CONTAINER 64 (text) ===
+11 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   Et åpent, vannfylt basseng har rektangulær bunn med grunnflate  , og vannspeilet i bassenget ligger i utgangspunktet en høyde   over utløpet til et tapperør med diameter  i bunnen av bassenget. Det er lufttrykk   over vannspeilet og ved rørutløpet. Se figuren under.
+
+=== CONTAINER 65 (image) ===
+Po
+
+Po
+
+
+=== CONTAINER 66 (text) ===
+a) Forklar kort hva Bernoullis likning for et ideelt fluid uttrykker, og angi forutsetningene for at likningen skal være gyldig (til sammen maks. 5 linjer). (3 poeng) b) Neglisjer alle former for tap og vis at vannspeilet i bassenget synker med en fart på   idet tappingen starter. (3 poeng) c) Bestem væskefarten og volumstrømmen i røret idet tappingen starter dersom vi neglisjerer alle former for tap. (3 poeng) d) Tapperøret har en total lengde  , ruhet   og har et  -rørbend med tapskoeffisient . I tillegg har rørinnløpet en tapskoeffisient   (se figuren over).  Væskefarten i røret måles til  . Beregn i) Den totale tapshøyden (2 poeng)
+
+=== CONTAINER 67 (text) ===
+ii) Det totale trykktapet  (1 poeng) e) En driftig bassengeier ønsker å utnytte energien fra strømmen i tapperøret. Hvor stor effekt kan hentes ut herifra?  (3 poeng)
+
+=== CONTAINER 68 (text) ===
+Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark . Skriv ditt svar her
+
+=== CONTAINER 69 (text) ===
+Format
+
+=== CONTAINER 70 (text) ===
+
+
+=== CONTAINER 71 (text) ===
+   Σ   
+
+=== CONTAINER 72 (text) ===
+Words: 0
+
+=== CONTAINER 73 (text) ===
+Maks poeng: 15
+
+=== CONTAINER 74 (text) ===
+12 Tre homogene kuler A, B og C  med samme masse   henger i masseløse snorer med lengde . Kulene har radier hhv.  ,   og  . Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Se figuren under.
+
+=== CONTAINER 75 (image) ===
+
+
+=== CONTAINER 76 (text) ===
+Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene  ,   og   til de tre pendlene? Velg ett alternativ:
+
+=== CONTAINER 77 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 78 (text) ===
+13 En kloss med masse   er festet til en fjær med fjærkonstant  , og kan svinge horisontalt ( -retningen på figuren til venstre). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft   rettet mot fartsretningen, der   er farten til klossen. Se figuren under.
+
+=== CONTAINER 79 (image) ===
+
+
+=== CONTAINER 80 (text) ===
+Klossen trekkes ut til siden og slippes. Posisjonen   til klossen er vist i grafen til høyre. Beregn verdien av
+
+=== CONTAINER 81 (text) ===
+dempingskonstanten  . [Hint: amplituden for en svakt dempet svingning er  .] Velg ett alternativ:
+
+=== CONTAINER 82 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 83 (text) ===
+14 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) Gitt følgende to sinusformede tversbølger:
+
+=== CONTAINER 84 (text) ===
+Hvilken påstand om den resulterende bølgen er riktig?
+
+=== CONTAINER 85 (text) ===
+Velg ett alternativ:
+
+=== CONTAINER 86 (text) ===
+b) En stående bølge er gitt ved uttrykket
+
+=== CONTAINER 87 (text) ===
+.   Hva er den absoluttverdien av den maksimale vertikale farten   til et punkt på bølgen?
+
+=== CONTAINER 88 (text) ===
+Velg ett alternativ
+
+=== CONTAINER 89 (text) ===
+Resulterende bølge blir en stående bølge med maksimal amplitude
+
+=== CONTAINER 90 (text) ===
+Resulterende bølge blir en stående bølge med maksimal amplitude
+
+=== CONTAINER 91 (text) ===
+Resulterende bølge blir null; bølgene utslokker hverandre
+
+=== CONTAINER 92 (text) ===
+Resulterende bølge beveger seg mot høyre og har maksimal amplitude
+
+=== CONTAINER 93 (text) ===
+Resulterende bølge beveger seg mot høyre og har maksimal amplitude
+
+=== CONTAINER 94 (text) ===
+Maks poeng: 4
+
+=== CONTAINER 95 (text) ===
+15 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) En vibrerende streng med lengde  , masse   og snorstramming ("tension")   er spent fast i begge ender.
+
+=== CONTAINER 96 (text) ===
+Bestem grunnfrekvensen til strengen, dvs. den laveste frekvensen som gir en stående bølge. Velg ett alternativ:
+
+=== CONTAINER 97 (text) ===
+b) En bestemt streng med lengde  , lineær massetetthet   og snorstramming   som er spent opp i begge ender, vibrerer med grunnfrekvensen   (dvs. frekvensen tilsvarende ordenstall  ).
+
+=== CONTAINER 98 (text) ===
+Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært  , massetettheten   og snorstrammingen   (dvs. alle størrelser halveres)?
+
+=== CONTAINER 99 (text) ===
+Velg ett alternativ
+
+=== CONTAINER 100 (text) ===
+Maks poeng: 2

@@ -4,5 +4,5 @@ What is task {task_number}?
   If there is any code in the task related to it make sure to keep it.
   Do not include the solution to the task.
   If the text is written in multiple languages, respond with the task in norwegian bokmål.
-  If the task has subtasks, include ALL subtasks, not just the top. 
+  If the task has subtasks, include ALL subtasks, not just the top one. (e.g. 5a, 5b, 5c for task 5)
   Do not ONLY include the question(s), e.g. "Hva blir amplituden?", include the entire task.

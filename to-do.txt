@@ -1,12 +1,6 @@
-Sette opp nettsidehost fra laptopen  
-
-Implementere prompting og formattering for programmeringsbokser  
-
 Legge til ytterligere start/stop/restart funksjoner for cpp UI  
 
 Fikse cropping av grafer  
-
-Undersøke om at hvis et bilde fyller hele pdf-siden, så skal det croppes umiddelbart  
 
 Legge til håndtering av eventuelle 100% like bilder. FIKS DETTE <-  
 
@@ -18,9 +12,7 @@ Kan godt bruke ocr på disse for å forstå hva slags diagram det er og prompte 
 
 Vurdere å legge til en errorhåndtering ved LLM som gjør at hvis resultatet fra deepseek starter med feks [ERROR] (instruert ved prompting), så lagres svaret eller erroren til deepseek for feilsøking  
 
-Ta med poeng i selve html js stringen  
-
-Legge til maks poeng i html  
+Forbedre poeng i html betraktelig
 
 Ryddiggjøre html-formattering, trenger ikke både tall OG bokstav  
 
