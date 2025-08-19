@@ -3,21 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 
-
-def get_semester(d: date = None) -> tuple[int, int]:
-    """
-    Returnerer (årstall, semester) hvor semester er:
-      1 = vårsemester (jan–jun)
-      2 = høstsemester (jul–des)
-    Hvis ingen dato oppgis, brukes dagens dato.
-    """
-    if d is None:
-        d = date.today()
-    
-    year = d.year
-    semester = 1 if d.month <= 6 else 2
-    return year, semester
-
 def get_web_text(url: str) -> str:
     try:
         # Hent HTML
@@ -43,16 +28,16 @@ def get_web_text(url: str) -> str:
     except Exception as e:
         return f"Feil ved henting av {url}: {e}"
 
-web_prefix = "https://www.ntnu.no/studier/emner/"
-subject = "ingt1002"
-web_suffix = "#tab=omEmnet"
+def get_web_result_from_subject_code(subject_code):
+    subject_code = str(subject_code.upper())
+    year = str(date.today().year)
+    web_prefix = "https://www.ntnu.no/studier/emner/"
+    web_suffix = f"/{year}#tab=omEmnet"
 
-web_link = web_prefix + subject.upper() + f"/{get_semester()[0]}" + web_suffix
+    web_url = web_prefix + subject_code + web_suffix
 
-if len(get_web_text(web_link)) < 2000:
-    print(f"{web_link} now has {len(get_web_text(web_link))} symbols.")
-    web_suffix = f"/{get_semester()[0]-1}#tab=omEmnet"
-    print("Requested suffix.")
+    return get_web_text(web_url)
 
-web_link = web_prefix + subject.upper() + web_suffix
-print(f"{web_link} now has {len(get_web_text(web_link))} symbols.")
+
+print(len(get_web_result_from_subject_code("ifyt1000")))
+
