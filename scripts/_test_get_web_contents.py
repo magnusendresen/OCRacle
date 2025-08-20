@@ -2,33 +2,24 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 
-def get_web_text(url: str) -> None:
+def get_learning_goals(subject_code: str) -> str:
     try:
-        response = requests.get(url, timeout=10)
+        subject_code = subject_code.upper()
+        year = str(date.today().year)
+        web_url = f"https://www.ntnu.no/studier/emner/{subject_code}/{year}#tab=omEmnet"
+
+        response = requests.get(web_url, timeout=10)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, "html.parser")
 
-        for element in soup(["script", "style"]):
-            element.decompose()
+        div = soup.find("div", id="learning-goal-toggler")
+        if not div:
+            return ""
 
-        # Iterer over alle divs med id
-        for div in soup.find_all("div", id=True):
-            text = div.get_text(separator=" ", strip=True)
-            if not text:  # hopp over tomme divs
-                continue
-            print(f"Div id='{div.get('id')}': len={len(text)}")
+        return div.get_text(separator=" ", strip=True)
 
     except Exception as e:
-        print(f"Feil ved henting av {url}: {e}")
-
-def get_web_result_from_subject_code(subject_code):
-    subject_code = str(subject_code.upper())
-    year = str(date.today().year)
-    web_prefix = "https://www.ntnu.no/studier/emner/"
-    web_suffix = f"/{year}#tab=omEmnet"
-
-    web_url = web_prefix + subject_code + web_suffix
-    return get_web_text(web_url)
+        return f"Feil ved henting av {subject_code}: {e}"
 
 
-get_web_result_from_subject_code("ifyt1000")
+print(get_learning_goals("imat1002"))
