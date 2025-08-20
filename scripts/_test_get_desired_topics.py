@@ -4,6 +4,7 @@ from datetime import date
 from project_config import *
 
 
+import asyncio
 import prompt_to_text
 
 
@@ -27,23 +28,26 @@ def get_learning_goals(subject_code: str) -> str:
         return f"Feil ved henting av {subject_code}: {e}"
     
 
-def get_desired_topics_from_text(text: str) -> str:
+def get_desired_topics_from_text(text: str) -> list[str]:
     if not text:
-        return ""
+        return []
 
-    # Use the prompt_to_text module to process the text and extract topics
     try:
-        response = (
+        response = asyncio.run(
             prompt_to_text.async_prompt_to_text(
-                PROMPT_CONFIG + "Del inn temaene fra denne teksten i en liste med temaer som er separert med et komma: " + text,
+                PROMPT_CONFIG
+                + "Del inn temaene fra denne teksten i en liste med temaer som er separert med et komma: "
+                + text,
                 max_tokens=1000,
                 is_num=False,
                 max_len=1000,
             )
-        ).strip().upper()
-        return response
+        )
+        if not response:
+            return []
+        return [t.strip().upper() for t in response.split(",") if t.strip()]
     except Exception as e:
-        return f"Feil ved behandling av tekst: {e}"
+        return [f"Feil ved behandling av tekst: {e}"]
 
 
 def main():
