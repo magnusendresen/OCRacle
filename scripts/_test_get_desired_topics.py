@@ -40,8 +40,6 @@ def get_desired_topics_from_text(text: str, prompt: str) -> list[str]:
     if not text:
         return []
 
-    print(f"Processing text for desired topics: {text}")
-
     try:
         response = asyncio.run(
             prompt_to_text.async_prompt_to_text(
@@ -68,6 +66,8 @@ def refine_prompt(current_prompt: str, input_text: str, output_topics: list[str]
         + f"Svaret ble: '{', '.join(output_topics)}'. "
         + f"Målet er: '{', '.join(desired_topics)}'. "
         + "Oppdater prompten slik at neste forsøk kommer nærmere målet. "
+        + "Gjerne gjør drastiske endringer for å forbedre resultatet. "
+        + "Du har ikke lov  til å fortelle i prompten nøyaktig hvilke temaer som er ønsket. "
         + "Svar kun med selve prompten."
     )
     suggestion = asyncio.run(
@@ -89,7 +89,9 @@ def tune_topic_prompt(initial_prompt: str, text: str, desired_topics: list[str],
     for i in range(iterations):
         actual_topics = get_desired_topics_from_text(text, current_prompt)
         match = check_match_percentage(desired_topics, actual_topics)
-        print(f"Iterasjon {i + 1}: match {match:.2f}% med prompten: {current_prompt}")
+        print(f"Iterasjon {i + 1}: match {match:.2f}%")
+        print(f"Desired topics: {desired_topics}")
+        print(f"Actual topics: {actual_topics}")
 
         if match > best_match:
             best_match = match
@@ -107,15 +109,16 @@ def tune_topic_prompt(initial_prompt: str, text: str, desired_topics: list[str],
 
 
 def main():
-    subject_code = "ifyt1000"
+    subject_code = "imat2022"
     learning_goals = get_learning_goals(subject_code)
     desired_topics = [
-        "Mekanikk",
-        "Fluiddynamikk",
-        "Bølgefysikk",
-        "Kinematikk",
-        "Dynamikk",
-        "Rotasjonsmekanikk",
+        "Funksjoner av flere variabler",
+        "Taylorrekker",
+        "Partielle deriverte",
+        "Fourierrekker",
+        "Konvolusjon",
+        "DFT",
+        "IDFT"
     ]
 
     if learning_goals:
