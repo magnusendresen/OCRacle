@@ -22,4 +22,4 @@ def get_learning_goals(subject_code: str) -> str:
         return f"Feil ved henting av {subject_code}: {e}"
 
 
-print(get_learning_goals("imat1002"))
+print(get_learning_goals("tdt4102"))
