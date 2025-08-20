@@ -30,23 +30,22 @@ def get_learning_goals(subject_code: str) -> str:
         return f"Feil ved henting av {subject_code}: {e}"
     
 
-def get_desired_topics_from_text(text: str) -> list[str]:
+def get_desired_topics_from_text(text: str, prompt: str) -> list[str]:
+    """Return topics produced by the current prompt.
+
+    `prompt` contains the instruction segment that will be appended to
+    `PROMPT_CONFIG` together with the input text. This allows iterative
+    refinement of the instruction while always enforcing `PROMPT_CONFIG`.
+    """
     if not text:
         return []
-    
+
     print(f"Processing text for desired topics: {text}")
 
     try:
         response = asyncio.run(
             prompt_to_text.async_prompt_to_text(
-                PROMPT_CONFIG
-                + "Hva er de FAGLIGE temaene til dette emnet? "
-                + "Husk at temaene skal være relevante for emnet, og ikke inneholde irrelevante eller generelle temaer. "
-                + "Utelukkende faglige temaer, og ikke personlige eller urelaterte emner. "
-                + "Det er som regel ikke så mange som 10 temaer i et emne, så vær presis, selv om det også varierer. "
-                + "Labarbeid eller faglig kommunikasjon er absolutt ikke temaer. "
-                + "Del inn temaene fra emnebeskrivelsen i en liste med temaer som er separert med et komma: "
-                + text,
+                PROMPT_CONFIG + prompt + text,
                 max_tokens=1000,
                 is_num=False,
                 max_len=1000,
@@ -59,17 +58,83 @@ def get_desired_topics_from_text(text: str) -> list[str]:
         return [f"Feil ved behandling av tekst: {e}"]
 
 
+def refine_prompt(current_prompt: str, input_text: str, output_topics: list[str], desired_topics: list[str]) -> str:
+    """Ask the LLM to suggest a better prompt based on current results."""
+
+    instruction = (
+        PROMPT_CONFIG
+        + "Vi prøver å finne faglige temaer fra teksten. "
+        + f"Den gjeldende prompten er: '{current_prompt}'. "
+        + f"Svaret ble: '{', '.join(output_topics)}'. "
+        + f"Målet er: '{', '.join(desired_topics)}'. "
+        + "Oppdater prompten slik at neste forsøk kommer nærmere målet. "
+        + "Svar kun med selve prompten."
+    )
+    suggestion = asyncio.run(
+        prompt_to_text.async_prompt_to_text(
+            instruction, max_tokens=200, is_num=False, max_len=1500
+        )
+    )
+    return suggestion if suggestion else current_prompt
+
+
+def tune_topic_prompt(initial_prompt: str, text: str, desired_topics: list[str], iterations: int = 5):
+    """Iteratively refine the prompt to maximise topic match percentage."""
+
+    current_prompt = initial_prompt
+    best_prompt = initial_prompt
+    best_topics: list[str] = []
+    best_match = 0.0
+
+    for i in range(iterations):
+        actual_topics = get_desired_topics_from_text(text, current_prompt)
+        match = check_match_percentage(desired_topics, actual_topics)
+        print(f"Iterasjon {i + 1}: match {match:.2f}% med prompten: {current_prompt}")
+
+        if match > best_match:
+            best_match = match
+            best_prompt = current_prompt
+            best_topics = actual_topics
+        else:
+            current_prompt = best_prompt
+
+        if match >= 98:
+            break
+
+        current_prompt = refine_prompt(current_prompt, text, actual_topics, desired_topics)
+
+    return best_prompt, best_topics, best_match
+
+
 def main():
     subject_code = "ifyt1000"
     learning_goals = get_learning_goals(subject_code)
+    desired_topics = [
+        "Mekanikk",
+        "Fluiddynamikk",
+        "Bølgefysikk",
+        "Kinematikk",
+        "Dynamikk",
+        "Rotasjonsmekanikk",
+    ]
+
     if learning_goals:
-        actual_topics = get_desired_topics_from_text(learning_goals)
+        initial_prompt = (
+            "Hva er de FAGLIGE temaene til dette emnet? "
+            "Husk at temaene skal være relevante for emnet, og ikke inneholde irrelevante eller generelle temaer. "
+            "Utelukkende faglige temaer, og ikke personlige eller urelaterte emner. "
+            "Det er som regel ikke så mange som 10 temaer i et emne, så vær presis, selv om det også varierer. "
+            "Labarbeid eller faglig kommunikasjon er absolutt ikke temaer. "
+            "Del inn temaene fra emnebeskrivelsen i en liste med temaer som er separert med et komma: "
+        )
+        best_prompt, actual_topics, best_match = tune_topic_prompt(
+            initial_prompt, learning_goals, desired_topics
+        )
         print(f"LLM found the following topics for {subject_code}: {actual_topics}")
+        print(f"Best prompt: {best_prompt}")
+        print(f"Match percentage: {best_match}%")
     else:
         print(f"No learning goals found for {subject_code}")
-
-    desired_topics = ["Mekanikk", "Fluiddynamikk", "Bølgefysikk", "Kinematikk", "Dynamikk", "Rotasjonsmekanikk"]
-    print(f"Match percentage: {check_match_percentage(desired_topics, actual_topics)}%")
 
 def check_match_percentage(desired_topics: list[str], actual_topics: list[str]) -> float:
     if not desired_topics or not actual_topics:
