@@ -15,7 +15,8 @@
             "Energi og arbeid",
             "Kinematikk",
             "Treghetsmoment",
-            "Harmonisk bevegelse"
+            "Harmonisk bevegelse",
+            "Newtons lover"
         ],
         "ignored_topics": [
             "Kjemi"
@@ -200,6 +201,46 @@
                         "task_number": "20",
                         "points": 0,
                         "task_text": "<p>Figuren over viser et stående bølgemønster på en streng oppspent i begge ender, som oppstår for en frekvens lik $500$ Hz. Hva er grunnfrekvensen til den samme strengen?</p><ol><li><b>A</b> $400$ Hz</li><li><b>B</b> $83,3$ Hz</li><li><b>C</b> $100$ Hz</li><li><b>D</b> $125$ Hz</li><li><b>E</b> $167$ Hz</li></ol>"
+                    }
+                ]
+            },
+            "H24": {
+                "tasks": [
+                    {
+                        "topic": "Kinematikk",
+                        "task_number": "1",
+                        "points": 33,
+                        "task_text": "<p>a) Verdensrekorden for menn på 400 m er 43,03 s. Hvor mange km/h (kilometer per time) tilsvarer dette? Velg ett alternativ:</p><ol type=\"A\"><li>30,1 km/h</li><li>2,58 km/h</li><li>39,9 km/h</li><li>33,5 km/h</li><li>28,5 km/h</li></ol><p>b) Jorda går i en sirkelbane rundt Sola med radius R = 150 000 000 km (150 millioner kilometer), og bruker 365 dager på én runde. Bestem banefarten til Jorda. Velg ett alternativ:</p><ol type=\"A\"><li>50 km/s</li><li>10 km/s</li><li>30 km/s</li><li>40 km/s</li><li>20 km/s</li></ol>"
+                    },
+                    {
+                        "topic": "Kinematikk",
+                        "task_number": "2",
+                        "points": 2,
+                        "task_text": "<p>Hvilken graf viser posisjonen $y(t)$ for et legeme som faller vertikalt nedover fra ro, med positiv $y$-retning nedover, og uten luftmotstand?</p>\n<ol type=\"A\">\n<li><p>En rett linje gjennom origo</p></li>\n<li><p>En horisontal linje</p></li>\n<li><p>En parabel som åpner oppover</p></li>\n<li><p>En parabel som åpner nedover</p></li>\n</ol>"
+                    },
+                    {
+                        "topic": "Kinematikk",
+                        "task_number": "5",
+                        "points": 2,
+                        "task_text": "<p>En person med masse $m$ som i utgangspunktet står på bakkenivå, har på seg en sele som er festet til en stram strikk. Den andre enden av strikken er festet til en høy kran. På et gitt signal utløses strikken, slik at personen spretter til værs. Strikken kan antas å være masseløs samt følge Hookes lov med fjærkonstant $k$, og har lengden $L$ i ustrukket/slapp tilstand. Forlengelsen av strikken er $x$. I hvilket av punktene A-E er hopperens fart maksimal på vei oppover?</p>"
+                    },
+                    {
+                        "topic": "Fluidmekanikk",
+                        "task_number": "10",
+                        "points": 4,
+                        "task_text": "<p>a) I 2023 imploderte undervannsfartøyet \"Titan\" katastrofalt i en dybde på $4,0$ km. Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var $101$ kPa.</p><p>Maks poeng: 2</p><p>b) En badeball er formet som en kule med radius $R = 0,50$ m. Beregn oppdriften på ballen dersom hele ballen er under vann.</p><p>Maks poeng: 2</p>"
+                    },
+                    {
+                        "topic": "Svingninger",
+                        "task_number": "12",
+                        "points": 0,
+                        "task_text": "<p>Tre homogene kuler A, B og C med samme masse m henger i masseløse snorer med lengde L. Kulene har radier hhv. $r < L$, $r = L/10$ og $r = L/2$. Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene $T_A$, $T_B$ og $T_C$ til de tre pendlene?</p>\n<ol type=\"A\">\n<li>$T_A = T_B = T_C$</li>\n<li>$T_A < T_B < T_C$</li>\n<li>$T_A > T_B > T_C$</li>\n<li>$T_A = T_B < T_C$</li>\n<li>$T_A = T_B > T_C$</li>\n</ol>"
+                    },
+                    {
+                        "topic": "Bølgefysikk",
+                        "task_number": "14",
+                        "points": 4,
+                        "task_text": "<p>Gitt følgende to sinusformede tversbølger: $y_1(x,t) = (1,0  \\text{m}) \\sin(1,0  \\text{m}^{-1} \\cdot x - 1,0  \\text{s}^{-1} \\cdot t)$ og $y_2(x,t) = (1,0  \\text{m}) \\sin(1,0  \\text{m}^{-1} \\cdot x - 1,0  \\text{s}^{-1} \\cdot t + \\pi/2)$.</p>\n<p>Hvilken påstand om den resulterende bølgen er riktig?</p>\n<ol type=\"A\">\n<li>Resulterende bølge blir en stående bølge med maksimal amplitude $A = 1,0  \\text{m}$</li>\n<li>Resulterende bølge blir en stående bølge med maksimal amplitude $A = 2,0  \\text{m}$</li>\n<li>Resulterende bølge blir null; bølgene utslokker hverandre</li>\n<li>Resulterende bølge beveger seg mot høyre og har maksimal amplitude $1,4  \\text{m}$</li>\n<li>Resulterende bølge beveger seg mot høyre og har maksimal amplitude $2,0  \\text{m}$</li>\n</ol>\n<p>En stående bølge er gitt ved uttrykket $y(x,t) = 2A \\sin(kx) \\cos(\\omega t)$.</p>\n<p>Hva er den absoluttverdien av den maksimale vertikale farten $v_{y,\\text{max}}$ til et punkt på bølgen?</p>\n<ol type=\"A\">\n<li>$v_{y,\\text{max}} = 2 A\\omega$</li>\n<li>$v_{y,\\text{max}} = A\\omega$</li>\n<li>$v_{y,\\text{max}} = \\frac{1}{2} A\\omega$</li>\n<li>$v_{y,\\text{max}} = A\\omega$</li>\n<li>$v_{y,\\text{max}} = \\frac{1}{4} A\\omega$</li>\n</ol>"
                     }
                 ]
             }
@@ -709,6 +750,16 @@
                         "task_text": "<p>Hvilken påstand er korrekt? Merk: i tilfelle der det kan argumenteres for at flere alternativer er delvis korrekte, skal du velge det alternativet som fremstår som gjennomgående korrekt og konsistent for alle med materialteknisk kompetanse.</p>\n\n<ol>\n<li><b>A:</b> PTFE (polytetrafluoretylen) som vi finner i teflon, har spesielt høyt smeltepunkt på grunn av sterke hydrogenbindinger.</li>\n<li><b>B:</b> PE (polyetylen) har høyere smeltetemperatur enn PP (polypropylen) siden enklere molekyl pakkes lettere enn molekyl med sidegrupper.</li>\n<li><b>C:</b> Plastiserer (plasticizer) kan tilsettes f.eks. PVC (polyvinylklorid) for å øke glasstransisjonstemperaturen.</li>\n<li><b>D:</b> PVC (polyvinylklorid) har høyere smeltetemperatur enn PP (polypropylen) på grunn av sterkere dipolkrefter mellom molekylene.</li>\n</ol>"
                     }
                 ]
+            }
+        }
+    },
+    "INGX1002": {
+        "topics": [
+        ],
+        "ignored_topics": [],
+        "exams": {
+            "H24": {
+                "tasks": []
             }
         }
     }

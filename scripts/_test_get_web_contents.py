@@ -5,6 +5,8 @@ from datetime import date
 def get_learning_goals(subject_code: str) -> str:
     try:
         subject_code = subject_code.upper()
+        if subject_code[-5].upper() == 'X':
+            subject_code = subject_code[: -5] + 'T' + subject_code[-4:]
         year = str(date.today().year)
         web_url = f"https://www.ntnu.no/studier/emner/{subject_code}/{year}#tab=omEmnet"
 
@@ -22,4 +24,4 @@ def get_learning_goals(subject_code: str) -> str:
         return f"Feil ved henting av {subject_code}: {e}"
 
 
-print(get_learning_goals("tdt4102"))
+print(get_learning_goals("ifyx1000"))

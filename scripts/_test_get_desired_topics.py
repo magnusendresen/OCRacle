@@ -109,7 +109,7 @@ def tune_topic_prompt(initial_prompt: str, text: str, desired_topics: list[str],
 
 
 def main():
-    subject_code = "imat2022"
+    subject_code = "ingt1002"
     learning_goals = get_learning_goals(subject_code)
     desired_topics = [
         "Funksjoner av flere variabler",

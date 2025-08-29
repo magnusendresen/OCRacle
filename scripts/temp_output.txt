@@ -1,320 +1,618 @@
 
 
 === CONTAINER 0 (text) ===
-1 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   a) Verdensrekorden for menn på   er  . Hvor mange   (kilometer per time) tilsvarer dette? Velg ett alternativ:
+1  Matematiske operasjoner
 
 === CONTAINER 1 (text) ===
-b) Jorda går i en sirkelbane rundt Sola med radius   (150 millioner kilometer), og bruker 365 dager på én runde.  Bestem banefarten til Jorda.   Velg ett alternativ
+Gitt variabeldefinisjonen
 
 === CONTAINER 2 (text) ===
-Maks poeng: 4
+c = 7   Hva blir verdien til  c  etter at vi utfører følgende operasjoner?
 
 === CONTAINER 3 (text) ===
-2 Et legeme som i utgangspunktet henger i ro, faller ved   vertikalt nedover under påvirkning av tyngdekraften,  uten  luftmotstand. Vi legger inn et koordinatsystem slik at positiv  -retning er loddrett nedover, som vist på figuren.
+c = c ** 2
 
-=== CONTAINER 4 (image) ===
-@:t=0
-
-0
-
-y
-
+=== CONTAINER 4 (text) ===
+c %= 5 Velg ett alternativ:
 
 === CONTAINER 5 (text) ===
-Hvilken av grafene A-E til høyre viser posisjonen   for det fallende legemet? Velg ett alternativ
+Gitt variabeldefinisjonen z = 8
 
 === CONTAINER 6 (text) ===
-Maks poeng: 2
+Hva blir verdien til  z  etter at vi utfører følgende operasjoner?
 
 === CONTAINER 7 (text) ===
-3 En badevekt er en kraftmåler som viser krafta som til enhver tid presser normalt ned på badevekta. Badevekta er imidlertid kalibrert til å vise krafta i "kg", slik at  .   En kasse er plassert på badevekta i de to situasjonene på figuren under. Når badevekta og kassa står på horisontalt underlag, viser badevekta   (til venstre).
+z += 10 z /= 3
 
-=== CONTAINER 8 (image) ===
-oe
-
-Horisontalt Skratt
-underlag underlag
-
+=== CONTAINER 8 (text) ===
+Velg ett alternativ
 
 === CONTAINER 9 (text) ===
-Så plasseres badevekta, med kassa oppå, på et skrått underlag med helningsvinkel  , slik at kassa står i ro oppå vekta. Hva viser badevekta i denne situasjonen (til høyre)? Velg ett alternativ:
+Maks poeng: 4
 
 === CONTAINER 10 (text) ===
-Maks poeng: 2
+2  Funksjoner
 
 === CONTAINER 11 (text) ===
-4 En vogn med masse   i en berg-og-dalbane har en viss banefart   i det den kjører over en bakketopp formet som del av en sirkel med radius  . Vogna beholder hele tiden kontakten med underlaget. Se figuren under.
+Denne koden definerer en funksjon  is_prime(n)  som sjekker om et gitt tall  n  er et primtall.
 
-=== CONTAINER 12 (image) ===
-
+=== CONTAINER 12 (text) ===
+Test av funksjonen gir disse resultatene:
 
 === CONTAINER 13 (text) ===
-Hvilken påstand om normalkrafta   fra underlaget på vogna vil alltid gjelde i det vogna passerer toppen (situasjonen vist på figuren)?   Velg ett alternativ:
+is_prime(10) # returnerer False is_prime(11) # returnerer True is_prime(1) # returnerer False is_prime(13) # returnerer True
 
 === CONTAINER 14 (text) ===
-Maks poeng: 2
+Lag funksjonen  is_prime  ved å plassere kodefragment i rett rekkefølge. Noen av fragmentene skal  IKKE  brukes.
 
 === CONTAINER 15 (text) ===
-5 En person med masse   som i utgangspunktet står på bakkenivå, har på seg en sele som er festet til en stram strikk. Den andre enden av strikken er festet til en høy kran. På et gitt signal utløses strikken, slik at personen spretter til værs. Strikken kan antas å være masseløs samt følge Hookes lov med fjærkonstant  , og har lengden   i ustrukket/slapp tilstand. Forlengelsen av strikken er  . Se figuren under.
+Pass på å plassere draområdene slik at de "snapper" til ønsket rute. Se bort fra innrykk
 
-=== CONTAINER 16 (image) ===
-_------~ ac -. (toppunktet)
-
-— D (nivå med krana)
-
-
+=== CONTAINER 16 (text) ===
+Maks poeng: 7
 
 === CONTAINER 17 (text) ===
-I hvilket av punktene A-E er hopperens fart maksimal på vei  oppover ?
+def is_prime(n):
 
 === CONTAINER 18 (text) ===
-Velg ett alternativ:
+if n <= 1:
 
 === CONTAINER 19 (text) ===
-Maks poeng: 2
+return False
 
 === CONTAINER 20 (text) ===
-6 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En skihopper starter fra ro og sklir uten friksjon ned overrennet i en hoppbakke. Høydeforskjellen mellom startpunktet og hoppkanten er  . Vi ser bort fra luftmotstand i hele denne oppgaven.
+for j in range(2, n):
 
-=== CONTAINER 21 (image) ===
-
+=== CONTAINER 21 (text) ===
+if n % j == 0:
 
 === CONTAINER 22 (text) ===
-a) Tegn kreftene som virker på hopperen på vei ned overrennet, og forklar hvorfor hopperens mekaniske energi er bevart. (4 poeng)   b) Vis at hopperen har farten   ved hoppkanten. (3 poeng)
+return False
 
 === CONTAINER 23 (text) ===
-c) Hopperen forlater hoppkanten med horisontal fart. Hvor langt unna hoppkanten i horisontal retning lander hopperen (avstanden   på figuren), når hopperen lander på den horisontale bakken som ligger en vertikal avstand   under hoppkanten? (4 poeng)
+return True
 
 === CONTAINER 24 (text) ===
-d) Beregn følgende i nedslagspunktet, dvs. der hopperen treffer bakken: i) Absoluttverdien av farten (2 poeng) ii) Fartens retning (2 poeng)
+from math import sqrt
 
 === CONTAINER 25 (text) ===
-Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark.
+if n // j == 0:
 
 === CONTAINER 26 (text) ===
-Skriv ditt svar her
+3  Sammenligningsoperatorer
 
 === CONTAINER 27 (text) ===
-Format
+Gitt følgende kode:     a = 5
 
 === CONTAINER 28 (text) ===
-
+b = 5.0 c = "5" d = True e = False
 
 === CONTAINER 29 (text) ===
-   Σ   
+Nedenfor står en rekke uttrykk. For hvert uttrykk, kryss av for  True  hvis uttrykket er sant, eller False  hvis det er usant, eller kryss av for  Error  hvis uttrykket vil gi syntaksfeil. Finn de som passer sammen:
 
 === CONTAINER 30 (text) ===
-Words: 0
+False True Error
 
 === CONTAINER 31 (text) ===
-Maks poeng: 15
+b > a
 
 === CONTAINER 32 (text) ===
-7 En syklist sykler med konstant fart  opp en oppoverbakke med helningsvinkel . En enkel sykkelcomputer fungerer slik at brukeren taster inn informasjon om den totale massen   av sykkel + syklist, og så bruker computeren sensorer som måler syklistens fart   samt vinkelen   til å beregne effekten P som syklisten produserer. Denne enkle computeren tar ikke med luftmotstand i beregningen. Se figuren under.
+a >= b
 
-=== CONTAINER 33 (image) ===
-
+=== CONTAINER 33 (text) ===
+d = = 1
 
 === CONTAINER 34 (text) ===
-Hva må stå i kodelinja KODE MANGLER for at funksjonen P(v,theta) skal gi effekten som syklisten produserer, som funksjon av farten   målt i m/s og helningsvinkelen   målt i grader?
+a != c
 
 === CONTAINER 35 (text) ===
-import math   def P(v,theta):
+e < = 0
 
 === CONTAINER 36 (text) ===
-m=80     g=9.81    return KODE MANGLER Velg ett alternativ:
+a == b
 
 === CONTAINER 37 (text) ===
-(m*g*math.sin(math.radians(theta)))*v**3
+d < e
 
 === CONTAINER 38 (text) ===
-(m*g*math.cos(math.radians(theta)))*v**2
+Maks poeng: 7
 
 === CONTAINER 39 (text) ===
-(m*g*math.sin(math.radians(theta)))*v
+4  Lister og indekser
 
 === CONTAINER 40 (text) ===
-(m*g*math.cos(math.radians(theta)))*v
+Gitt følgende programkode:
 
-=== CONTAINER 41 (text) ===
-(m*g*math.sin(math.radians(theta)))*v**2
+=== CONTAINER 41 (image) ===
+temperatures = [15.5, 17.2, 16.8, 14.9, 18.3, 19.0, 16.5]
+
+def fi(temps):
+return sum(temps) / len(temps)
+
+def f2(temps):
+return sum(temps[:3]) / len(temps[:3])
+
+def f3(temps):
+return sum(temps[-4:]) / len(temps|[ -4:])
+
+def f4(temps):
+return max(temps )
+
+def f5(temps):
+return temps[::-1]
+
+def f6(temps):
+result = []
+for temp in temps:
+if temp > 17:
+result.append(temp)
+return result
+
 
 === CONTAINER 42 (text) ===
-Maks poeng: 2
+Hver rad nedenfor har et kall til funksjonene ovenfor. Skriv i tekstfeltet hva svaret blir. Flyttall avrundes til en desimal.
 
 === CONTAINER 43 (text) ===
-8 Et kulelager består av en hylse i form av en tynnvegget sylinder ("hoop") med masse   og radius  , og 8 stk. massive kuler med masse   og radius  . Massesenteret til kulene ligger på en sirkel med radius   i forhold til sentrum i kulelageret. Se figuren under.
+print(f"{f1(temperatures):.1f}") skriver ut
 
-=== CONTAINER 44 (image) ===
-
+=== CONTAINER 44 (text) ===
+print(f"{f2(temperatures):.1f}") skriver ut
 
 === CONTAINER 45 (text) ===
-Hylsen og de 8 massive kulene kan rotere om en akse gjennom sentrum av kulelageret som står normalt på figurplanet (aksen er inntegnet på figuren), mens den indre kanten av kulelageret (med radius  ) ikke roterer. Bestem treghetsmomentet til kulelageret om denne aksen.
+print(f"{f3(temperatures):.1f}") skriver ut
 
 === CONTAINER 46 (text) ===
-Velg ett alternativ:
+print(f"{f4(temperatures):.1f}") skriver ut
 
 === CONTAINER 47 (text) ===
-Maks poeng: 2
+print(f"{f5(temperatures)}") skriver ut
 
 === CONTAINER 48 (text) ===
-9 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En homogen, massiv kule med masse   og radius   ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel  . Se figuren under.
+print(f"{f6(temperatures)}") skriver ut
 
-=== CONTAINER 49 (image) ===
-
+=== CONTAINER 49 (text) ===
+Maks poeng: 6
 
 === CONTAINER 50 (text) ===
-Farten er såpass liten at luftmotstanden kan neglisjeres.
+5  Numpy og matriser
 
 === CONTAINER 51 (text) ===
-a) Tegn kreftene på kula mens den ruller nedover skråplanet.  For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren . (3 poeng)
+Skriv ferdig funksjonen  get_diagonal  (velg kode fra nedtrekksmeny) som tar inn en matrise  A , og returnerer en ny matrise  A_diag  der det  kun  er diagonalelementene fra  A  som er med (resten av matriseelementene er lik  0 ).   For eksempel, dersom input til funksjonen er matrisen  A  nedenfor, så skal output være matrisen D .
 
 === CONTAINER 52 (text) ===
-b) Forklar kort (maks. 5 linjer) hvorfor den mekaniske energien til kula er bevart under rullingen. (3 poeng)   c) Bestem farten til kula nederst i skråplanet dersom den starter en høyde   over bunnen. (3 poeng)   d) Vis at akselerasjonen til kula nedover skråplanet er  . (3 poeng)
+Et matriseelement ligger langs diagonalen dersom i = j. Eksempel:
 
 === CONTAINER 53 (text) ===
-e) Kula starter fra ro i   ved  . Skisser kulas posisjonsgraf  , fartsgraf   og akselerasjonsgraf  .  For full uttelling må det være et  resonnement  som argumenterer for grafens  form , og formen må framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.  (3 poeng)   Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark. Skriv ditt svar her
+import numpy as np
 
 === CONTAINER 54 (text) ===
-Format
+def get_diagonal(A):     rows, cols = np.shape(A)     A_diag = np.zeros([rows, cols])
 
 === CONTAINER 55 (text) ===
-
+for i in range(rows):         for j in range(cols):             if i==j:
 
 === CONTAINER 56 (text) ===
-   Σ   
+(A_diag[i, j] = A[i, j], A_diag[i, j] = A[rows, cols], A_diag[j, j] = A_diag[i,
 
 === CONTAINER 57 (text) ===
-Words: 0
+i], A[i, j] = A_dialg[i, j])     return A_diag
 
 === CONTAINER 58 (text) ===
-Maks poeng: 15
+Maks poeng: 4
 
 === CONTAINER 59 (text) ===
-10 a) I 2023 imploderte undervannsfartøyet "Titan" katastrofalt i en dybde av  . Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var  . Velg ett alternativ
+Velg alternativ
 
 === CONTAINER 60 (text) ===
-b) En badeball er formet som en kule med radius  . Beregn oppdrifta på ballen dersom hele ballen er under vann. Velg ett alternativ
+6  Analyse av listedata
 
 === CONTAINER 61 (text) ===
-Oppdriften avhenger av hvilken dybde badeballen befinner seg i
+Lag en funksjon  bmi_statistikk  som kan ta inn en liste med persondata (høyde og vekt), og returnerer andelen av personene som har en kroppsmasseindeks (BMI) som er over en viss terskel i prosent.   Formel for utregning av BMI (høyde er gitt i meter):
 
 === CONTAINER 62 (text) ===
-Oppdriften avhenger av massen av badeballen
+Eksempel på data:
 
 === CONTAINER 63 (text) ===
-Maks poeng: 4
+bmi_data= [[180, 90],                       [195, 92],                       [165, 66]] terskel = 25
 
 === CONTAINER 64 (text) ===
-11 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   Et åpent, vannfylt basseng har rektangulær bunn med grunnflate  , og vannspeilet i bassenget ligger i utgangspunktet en høyde   over utløpet til et tapperør med diameter  i bunnen av bassenget. Det er lufttrykk   over vannspeilet og ved rørutløpet. Se figuren under.
+I tabellen representerer hver rad en person, der første kolonne er høyde målt i centimeter (cm) og andre kolonne er vekt målt i Kg.
 
-=== CONTAINER 65 (image) ===
-Po
-
-Po
-
+=== CONTAINER 65 (text) ===
+Eksempel på funksjonskall (gitt at variabelen  bmi_data  og  terskel  er definert som ovenfor):
 
 === CONTAINER 66 (text) ===
-a) Forklar kort hva Bernoullis likning for et ideelt fluid uttrykker, og angi forutsetningene for at likningen skal være gyldig (til sammen maks. 5 linjer). (3 poeng) b) Neglisjer alle former for tap og vis at vannspeilet i bassenget synker med en fart på   idet tappingen starter. (3 poeng) c) Bestem væskefarten og volumstrømmen i røret idet tappingen starter dersom vi neglisjerer alle former for tap. (3 poeng) d) Tapperøret har en total lengde  , ruhet   og har et  -rørbend med tapskoeffisient . I tillegg har rørinnløpet en tapskoeffisient   (se figuren over).  Væskefarten i røret måles til  . Beregn i) Den totale tapshøyden (2 poeng)
+andel = bmi_statistikk(bmi_data, terskel)
 
 === CONTAINER 67 (text) ===
-ii) Det totale trykktapet  (1 poeng) e) En driftig bassengeier ønsker å utnytte energien fra strømmen i tapperøret. Hvor stor effekt kan hentes ut herifra?  (3 poeng)
+print(f"Andel av personene med BMI over {terskel}: {andel:.2f}%")   Skriver ut:  Andel av personene med BMI over 25: 33.33%
 
 === CONTAINER 68 (text) ===
-Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark . Skriv ditt svar her
+Skriv ditt svar her
 
 === CONTAINER 69 (text) ===
-Format
+Maks poeng: 5
 
 === CONTAINER 70 (text) ===
-
+7  Numerisk derivasjon
 
 === CONTAINER 71 (text) ===
-   Σ   
+Vi måler følgende verdier for høyden til en drone:
 
 === CONTAINER 72 (text) ===
-Words: 0
+Målingene er gjort ved følgende tidspunkt:
 
 === CONTAINER 73 (text) ===
-Maks poeng: 15
+Vi ser bort fra enhetene til   og  .
 
 === CONTAINER 74 (text) ===
-12 Tre homogene kuler A, B og C  med samme masse   henger i masseløse snorer med lengde . Kulene har radier hhv.  ,   og  . Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Se figuren under.
+Vi antar at dronen kun beveger seg i høyderetningen. Hva gir forroverdifferanse som en tilnærming til den tidsderiverte av høyden?
 
-=== CONTAINER 75 (image) ===
-
+=== CONTAINER 75 (text) ===
+:
 
 === CONTAINER 76 (text) ===
-Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene  ,   og   til de tre pendlene? Velg ett alternativ:
+Hva gir bakoverdifferanse?
 
 === CONTAINER 77 (text) ===
-Maks poeng: 2
+Hva gir sentraldifferanse?
 
 === CONTAINER 78 (text) ===
-13 En kloss med masse   er festet til en fjær med fjærkonstant  , og kan svinge horisontalt ( -retningen på figuren til venstre). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft   rettet mot fartsretningen, der   er farten til klossen. Se figuren under.
+Maks poeng: 6
 
-=== CONTAINER 79 (image) ===
-
+=== CONTAINER 79 (text) ===
+8  Hvilken metode?
 
 === CONTAINER 80 (text) ===
-Klossen trekkes ut til siden og slippes. Posisjonen   til klossen er vist i grafen til høyre. Beregn verdien av
+Finn hvilken numerisk metode som kan brukes til å løse hvilken oppgave.   Hvert svaralternativ passer til nøyaktig en oppgave.
 
 === CONTAINER 81 (text) ===
-dempingskonstanten  . [Hint: amplituden for en svakt dempet svingning er  .] Velg ett alternativ:
+A : Vi har målt hastigheten   og startposisjonen   til en drone, og er interesserte i å vite posisjonen. Det vil si: Vi kjenner    for tiden   i  , og vil finne   for  i samme tidsrommet  B : Vi har målt posisjonen til en drone, og er interesserte i å finne hastigheten. Det vil si: Vi kjenner
 
 === CONTAINER 82 (text) ===
-Maks poeng: 2
+for tiden i  , og vil finne   for tidsrommet  .
 
 === CONTAINER 83 (text) ===
-14 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) Gitt følgende to sinusformede tversbølger:
+C : En drone mister motorkraften, og faller fritt. Vi vet at  . Vi er interesserte i å finne  . (  og   er konstante tall vi vet.)
 
 === CONTAINER 84 (text) ===
-Hvilken påstand om den resulterende bølgen er riktig?
+D : Vi er gitt at en drone har følgende høyde målt fra hustaket ved tiden  :
 
 === CONTAINER 85 (text) ===
-Velg ett alternativ:
+. Vi er interesserte i ved hvilket tidspunkt høyden blir null, altså for hvilket tidpunkt    man får  .
 
 === CONTAINER 86 (text) ===
-b) En stående bølge er gitt ved uttrykket
+Finn de som passer sammen:
 
 === CONTAINER 87 (text) ===
-.   Hva er den absoluttverdien av den maksimale vertikale farten   til et punkt på bølgen?
+C A D B
 
 === CONTAINER 88 (text) ===
-Velg ett alternativ
+Newtons metode
 
 === CONTAINER 89 (text) ===
-Resulterende bølge blir en stående bølge med maksimal amplitude
+Foroverdifferanse
 
 === CONTAINER 90 (text) ===
-Resulterende bølge blir en stående bølge med maksimal amplitude
+Simpsons metode eller Eulers metode
 
 === CONTAINER 91 (text) ===
-Resulterende bølge blir null; bølgene utslokker hverandre
+Vi har ikke nok informasjon
 
 === CONTAINER 92 (text) ===
-Resulterende bølge beveger seg mot høyre og har maksimal amplitude
-
-=== CONTAINER 93 (text) ===
-Resulterende bølge beveger seg mot høyre og har maksimal amplitude
-
-=== CONTAINER 94 (text) ===
 Maks poeng: 4
 
+=== CONTAINER 93 (text) ===
+9  Newtons metode
+
+=== CONTAINER 94 (text) ===
+Bruk to iterasjoner av Newtons metode til å løse ligningen
+
 === CONTAINER 95 (text) ===
-15 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) En vibrerende streng med lengde  , masse   og snorstramming ("tension")   er spent fast i begge ender.
+Det kan være nyttig at       .
 
 === CONTAINER 96 (text) ===
-Bestem grunnfrekvensen til strengen, dvs. den laveste frekvensen som gir en stående bølge. Velg ett alternativ:
+Bruk startgjetning
 
 === CONTAINER 97 (text) ===
-b) En bestemt streng med lengde  , lineær massetetthet   og snorstramming   som er spent opp i begge ender, vibrerer med grunnfrekvensen   (dvs. frekvensen tilsvarende ordenstall  ).
+Ett steg av Newtons metode gir :
 
 === CONTAINER 98 (text) ===
-Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært  , massetettheten   og snorstrammingen   (dvs. alle størrelser halveres)?
+To steg av Newtons metode gir:
 
 === CONTAINER 99 (text) ===
-Velg ett alternativ
+Maks poeng: 6
 
 === CONTAINER 100 (text) ===
-Maks poeng: 2
+10  Differensialligning
+
+=== CONTAINER 101 (text) ===
+En sten faller med hastigheten  , der   følger differensialligningen:
+
+=== CONTAINER 102 (text) ===
+Vi ser bort fra enheter og går ut fra   og  . Ved   er hastigheten 3.0 det vil si  . I numerikkurset har dere lært en metode for å løse differensialligninger numerisk. Denne metoden står på formelarket. Bruk ett eller flere steg i denne metoden til å beregne en tilnærming for hastigheten ett tidels sekund senere. Det vi si, finn en tilnærming til
+
+=== CONTAINER 103 (text) ===
+
+
+=== CONTAINER 104 (text) ===
+Maks poeng: 5
+
+=== CONTAINER 105 (text) ===
+11  Konvergensrate
+
+=== CONTAINER 106 (image) ===
+10!
+
+10"
+
+10°?
+
+Feil som funksjon av steglengde
+
+107? 10°
+
+
+=== CONTAINER 107 (text) ===
+Over ser dere et logaritmisk plot av feilen   som en funksjon av steglengden   for en numerisk metode. Vi ser at   , der   og  er konstanter. Det er oppgitt at   er et heltall.
+
+=== CONTAINER 108 (text) ===
+Dere skal bestemme   ut fra grafen.
+
+=== CONTAINER 109 (text) ===
+
+
+=== CONTAINER 110 (text) ===
+Dersom vi bruker steglengde   får vi feilen  . Hvilken steglengde   må vi velge for at feilen skal bli  ?
+
+=== CONTAINER 111 (text) ===
+Maks poeng: 5
+
+=== CONTAINER 112 (text) ===
+12  Integrasjon
+
+=== CONTAINER 113 (text) ===
+Vi ser på funksjonen:
+
+=== CONTAINER 114 (text) ===
+Bruk Trapesmetoden med to delintervaller (tre punkter) til å finne en tilnærming til
+
+=== CONTAINER 115 (text) ===
+Bruk så Simpsons metode med to delintervaller (tre punkter) til å tilnærme  . Hva er avviket fra eksakt verdi? (Eksakt verdi er  .) Hvilken metode er den mest nøyaktige?
+
+=== CONTAINER 116 (text) ===
+Vi ser så på
+
+=== CONTAINER 117 (text) ===
+Dersom du skal beregne   med tre punkter, vil trapesmetoden eller Simpsons metode gi minst feil? Trenger du å regne ut integralet for å svare på spørsmålet? Begrunn svaret. Skriv ditt svar her
+
+=== CONTAINER 118 (text) ===
+Format                       
+
+=== CONTAINER 119 (text) ===
+   Σ   
+
+=== CONTAINER 120 (text) ===
+Words: 0
+
+=== CONTAINER 121 (text) ===
+Maks poeng: 7
+
+=== CONTAINER 122 (text) ===
+13  Numerisk derivasjon
+
+=== CONTAINER 123 (text) ===
+Gitt en matematisk funksjon
+
+=== CONTAINER 124 (text) ===
+Fullfør programmet nedenfor slik at det regner ut en tilnærming til funksjonens deriverte for intervallet
+
+=== CONTAINER 125 (text) ===
+t.o.m   med bruk av senterdifferanse med skrittlengde  , og plotter    som funksjon av  i intervallet  .
+
+=== CONTAINER 126 (text) ===
+import numpy as np import matplotlib.pyplot as plt   def f(x):
+
+=== CONTAINER 127 (text) ===
+((x + 3.5)**3 + 2*x**2 - 10, y = (x + 3.5)**3 + 2*x**2 -
+
+=== CONTAINER 128 (text) ===
+10, f(x) = (x + 3.5)**3 + 2*x**2 - 10, y_der = (x + 3.5)**3 + 2*x**2 - 10)
+
+=== CONTAINER 129 (text) ===
+return y   h = 0.02
+
+=== CONTAINER 130 (text) ===
+x =  (np.linspace(0, 4 + h, h), np.arange(0, 4, h),
+
+=== CONTAINER 131 (text) ===
+np.linspace(0, 4, h), np.arange(0, 4 + h, h))
+
+=== CONTAINER 132 (text) ===
+f_der =  ((f(x+h)-f(x))/h*2, f(x+h) - f(x-h)/(h+h), (f(x+h)-f(x-
+
+=== CONTAINER 133 (text) ===
+h))/2*h, (f(x+h)-f(x-h))/(2*h))
+
+=== CONTAINER 134 (text) ===
+(plt.plot(f_der), plt.plot(f_der, x), plt.plot(f, f_der),
+
+=== CONTAINER 135 (text) ===
+plt.plot(x, f_der))
+
+=== CONTAINER 136 (text) ===
+Maks poeng: 6
+
+=== CONTAINER 137 (text) ===
+Velg alternativ
+
+=== CONTAINER 138 (text) ===
+Velg alternativ
+
+=== CONTAINER 139 (text) ===
+Velg alternativ
+
+=== CONTAINER 140 (text) ===
+Velg alternativ
+
+=== CONTAINER 141 (text) ===
+14  Numerisk Integrasjon med Trapesmetoden
+
+=== CONTAINER 142 (text) ===
+Fullfør koden nedenfor slik at den bruker trapesmetoden til å beregne integralet av:
+
+=== CONTAINER 143 (text) ===
+fra 0 til 1 med   delintervall.
+
+=== CONTAINER 144 (text) ===
+import numpy as np def f(x):
+
+=== CONTAINER 145 (text) ===
+(y = 2*x, y = x**2, y = 2*x**2, y = f(x))
+
+=== CONTAINER 146 (text) ===
+return y   a = 0
+
+=== CONTAINER 147 (text) ===
+b = 1 n = 10 h = (b - a) / n
+
+=== CONTAINER 148 (text) ===
+x =  (linspace(n+h/2, n-h/2), linspace(a, b, n),
+
+=== CONTAINER 149 (text) ===
+np.linspace(a + h/2, b - h/2), np.linspace(a, b, n + 1)) y = f(x)
+
+=== CONTAINER 150 (text) ===
+integral =  ((h / 2) * (y[0] + sum(y[1:-1]) + y[-1]),
+
+=== CONTAINER 151 (text) ===
+sum(y[1:-1]), (h / 2) * (y[0] + 2 * sum(y[1:-1]), (h / 2) * (y[0] + 2 * sum(y[1:-1]) + y[-1]))
+
+=== CONTAINER 152 (text) ===
+Maks poeng: 6
+
+=== CONTAINER 153 (text) ===
+Velg alternativ
+
+=== CONTAINER 154 (text) ===
+Velg alternativ
+
+=== CONTAINER 155 (text) ===
+Velg alternativ
+
+=== CONTAINER 156 (text) ===
+15  Eulers metode
+
+=== CONTAINER 157 (text) ===
+Fullfør koden nedenfor slik at den bruker Eulers metode til å løse differensialligningen
+
+=== CONTAINER 158 (text) ===
+med initialverdien    og skrittlengde   for x  fra 0 til 1.
+
+=== CONTAINER 159 (text) ===
+import numpy as np
+
+=== CONTAINER 160 (text) ===
+def f(x, y):
+
+=== CONTAINER 161 (text) ===
+(return y' + x**2 - 1, return y - x*2 + 1, return y - x**2 +
+
+=== CONTAINER 162 (text) ===
+1, y - x**2 + 1)
+
+=== CONTAINER 163 (text) ===
+h = 0.5
+
+=== CONTAINER 164 (text) ===
+x =  (np.arange(0, 1 + h, h), np.arange(h, 1 + h, h),
+
+=== CONTAINER 165 (text) ===
+arange(0, 1 + h, h), np.arange(0, 1, h)) y = np.zeros(len(x)) y[0] = 0.5
+
+=== CONTAINER 166 (text) ===
+for i in range(1, len(x)):
+
+=== CONTAINER 167 (text) ===
+y[i] =  (h * f(x[i-1], y[i-1]) - y[i-1], y[i+1] + h * f(x[i-1],
+
+=== CONTAINER 168 (text) ===
+y[i+1]), y[i-1] + f(x[i-1], y[i-1])/h, y[i-1] + h * f(x[i-1], y[i-1]))
+
+=== CONTAINER 169 (text) ===
+Maks poeng: 7.5
+
+=== CONTAINER 170 (text) ===
+Velg alternativ
+
+=== CONTAINER 171 (text) ===
+Velg alternativ
+
+=== CONTAINER 172 (text) ===
+Velg alternativ
+
+=== CONTAINER 173 (text) ===
+16  Fikspunktiterasjon
+
+=== CONTAINER 174 (text) ===
+Gitt ligningen
+
+=== CONTAINER 175 (text) ===
+Fullfør programkoden nedenfor slik at den bruker  fikspunktiterasjon  med initialverdi  til å finne en løsning til ligningen med maksimalt avvik på  .   ----------------------------------------------------------------------------------------------------------------------------   def g(x):
+
+=== CONTAINER 176 (text) ===
+return  ((x**2+12)/8, (x**2+12), (x**2+8)/12, (x**2+16))
+
+=== CONTAINER 177 (text) ===
+x = 0
+
+=== CONTAINER 178 (text) ===
+while  (abs(g(x)) > 1e-6, abs(g(x)-x) > 1e-6, abs(x) < 1e-6, abs(g(x)-x) < 1e-
+
+=== CONTAINER 179 (text) ===
+(x = g(x), x = x - g(x)/g_deriv(x), x += g(x), x += 1e-6)
+
+=== CONTAINER 180 (text) ===
+print(f"Tilnærmet løsning funnet: x = {x}")
+
+=== CONTAINER 181 (text) ===
+Maks poeng: 7.5
+
+=== CONTAINER 182 (text) ===
+Velg alternativ
+
+=== CONTAINER 183 (text) ===
+Velg alternativ
+
+=== CONTAINER 184 (text) ===
+Velg alternativ
+
+=== CONTAINER 185 (text) ===
+17  Absolutt og relativ feil
+
+=== CONTAINER 186 (text) ===
+I numerikk bruker vi ofte  absolutt feil   og  relativ feil  til å evaluere nøyaktigheten til en numerisk beregning. Gitt en eksakt tallverdi y og en tilnærmet tallverdi x, vil den matematiske definisjonen på absolutt og relativ feil være:
+
+=== CONTAINER 187 (text) ===
+Funksjonen nedenfor har som oppgave å sjekke om to tall  x  og  y  er tilnærmet like gitt en absolutt toleranse  atol  og relativ toleranse  rtol . Funksjonen skal returnere  True  dersom
+
+=== CONTAINER 188 (text) ===
+eller  dersom  , og returnere  False  for alle andre tilfeller.
+
+=== CONTAINER 189 (text) ===
+Fullfør koden til funksjonen  is_approx_equal  slik at den fungerer som beskrevet over, samtidig som den unngår "ulovlige" matematiske regneoperasjoner (dvs. regneoperasjoner som gir feilmelding i Python).
+
+=== CONTAINER 190 (text) ===
+def is_approx_equal(x, y, rtol, atol):
+
+=== CONTAINER 191 (text) ===
+if  (abs(x - y) <= max(atol, abs(y)*rtol), abs((x - y)/y) <= rtol and abs(x -
+
+=== CONTAINER 192 (text) ===
+y) <= atol, [(x - y)/y] >= rtol and [x - y] >= atol, abs(x - y) <= min(atol, abs(y)*rtol)):         return True     else:         return False
+
+=== CONTAINER 193 (text) ===
+Maks poeng: 7
+
+=== CONTAINER 194 (text) ===
+Velg alternativ

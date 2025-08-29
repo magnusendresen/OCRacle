@@ -19,6 +19,9 @@ from copy import deepcopy
 from collections import defaultdict
 from time import perf_counter
 from enum import Enum
+import requests
+from bs4 import BeautifulSoup
+from datetime import date
 
 
 # Number of processing steps for each task in the LLM pipeline
@@ -99,6 +102,27 @@ def get_topic_from_enum(topic_enum: Enum, num: int) -> str:
         if topic.value == num:
             return topic.name
     return "Unknown Topic"
+
+def get_learning_goals(subject_code: str) -> str:
+    try:
+        subject_code = subject_code.upper()
+        if subject_code[-5].upper() == 'X':
+            subject_code = subject_code[: -5] + 'T' + subject_code[-4:]
+        year = str(date.today().year)
+        web_url = f"https://www.ntnu.no/studier/emner/{subject_code}/{year}#tab=omEmnet"
+
+        response = requests.get(web_url, timeout=10)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        div = soup.find("div", id="learning-goal-toggler")
+        if not div:
+            return ""
+
+        return div.get_text(separator=" ", strip=True)
+
+    except Exception as e:
+        return f"Feil ved henting av {subject_code}: {e}"
 
 async def get_exam_info() -> Exam:
     log("Processing PDF contents")
@@ -242,10 +266,16 @@ async def get_exam_info() -> Exam:
     else:
         log("No previous topics found.")
 
-    emphasize(prev_topics)
+    learning_goals = get_learning_goals(exam.subject)
+    log(f"Fetched learning goals from NTNU website for {str(exam.subject)} with {len(learning_goals)} characters.")
+
 
     new_topics = await prompt_to_text.async_prompt_to_text(
-        PROMPT_CONFIG + load_prompt("exam_topics") + prev_topics + ocr_text,
+        PROMPT_CONFIG + load_prompt("exam_topics") + prev_topics +
+        "Her er beskrivelsen av emnet fra NTNU sine nettsider: " + learning_goals +
+        "Det er derimot viktigst at du baserer deg på teksten knyttet til hver enkelt oppgave fra eksamen, så ikke stol blindt på beskrivelsen av emnet. " +
+        "Det er trolig et forhold på omtrent 0.7-1.0 temaer per oppgave i denne eksamen. " +
+        "Her er teksten fra eksamen: " + ocr_text,
         max_tokens=1000,
         is_num=False,
         max_len=4000,
@@ -253,13 +283,11 @@ async def get_exam_info() -> Exam:
 
     removed_topics = set()
 
-    emphasize(input_ign_topics)
-
     if new_topics is not None and len(new_topics) > 1:
-        emphasize(f"New topics identified: {new_topics}")
+        log(f"New topics identified: {new_topics}")
 
         if (json_ign_topics is not None and len(json_ign_topics) > 1) or (input_ign_topics is not None and len(input_ign_topics) > 0):        
-            emphasize(f"Removing ignored topics.")
+            log(f"Removing ignored topics.")
 
             new_topics_list_0 = [t.strip() for t in str(new_topics).split(',') if t.strip()]
 
@@ -337,18 +365,18 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     if task_exam.ignored_topics is not None and len(task_exam.ignored_topics) > 1:
         remove_topic = int(
             await prompt_to_text.async_prompt_to_text(
-                (
-                    PROMPT_CONFIG +
-                    "Is this task directly related any of the following topics?: " + task_exam.ignored_topics + "\n" +
-                    "If the task is related to a topic that could be considered within the scope (e.g. likevekt i kjemi) of the above topics, respond with 1, " +
-                    "and if the task is related to a topic that could be considered in the same realm (e.g. fysikk og kjemi) as the topics, but not directly related, respond with 0. " +
-                    "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! " +
-                    "If it is, answer with a 1, otherwise answer with a 0. Here is the task text: " +
-                    task_output
-                ),
-                max_tokens=1000,
-                is_num=True,
-                max_len=2,
+            (
+                PROMPT_CONFIG +
+                "Is this task related to any of the following ignored topics?: " + str(task_exam.ignored_topics) + "\n" +
+                "If the task is related to any ignored topic, respond with 1. " +
+                "If the task is related to any allowed topic from this list: " + str(task_exam.exam_topics) + ", respond with 0. " +
+                "ONLY RESPOND WITH A 1 OR 0. NOTHING ELSE!!!! " +
+                "Here is the task text: " +
+                task_output
+            ),
+            max_tokens=1000,
+            is_num=True,
+            max_len=2,
             )
         )
 
