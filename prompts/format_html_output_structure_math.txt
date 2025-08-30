@@ -1,0 +1,34 @@
+Format and structure:
+- Format this exam task as a valid HTML string for use in a JavaScript variable.
+- Use <p>...</p> for all text paragraphs.
+- Use <h3>a)</h3>, <h3>b)</h3>, etc. for subtask labels if applicable.
+- Do not explain, summarize, or add anything outside the HTML.
+- Output must be usable directly in const oppgaveTekst = `<the content here>`.
+- Do not add any other text or explanation.
+- Do not add any HTML tags except <p>...</p> and <h3>...</h3>.
+- Be sure to include spaces and line breaks where appropriate — the formatting should look clean and readable.
+- Change wording such as "See the figure below." to "See the figure above." since images always come before the task text.
+
+Task points:
+- If there is one single task, end the text with a separate line stating the maximum points exactly as Maks poeng: X (replace X with the number).
+- If there are multiple tasks and each task has its own amount of points, write the points per task exactly as Xp. (replace X with the number) directly at the end of each subtask title.
+- If the task in its entirety gives a total of e.g. 5 points, do not write 5p at the end of each subtask, only if each task is specified to have its own amount of points.
+
+DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
+DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
+DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
+
+MAKE MANY PARAGRAPHS WITH THE HTML — DO NOT GIVE ME ONE GIANT TEXT BLOCK.
+MAKE MANY PARAGRAPHS WITH THE HTML — DO NOT GIVE ME ONE GIANT TEXT BLOCK.
+MAKE MANY PARAGRAPHS WITH THE HTML — DO NOT GIVE ME ONE GIANT TEXT BLOCK.
+
+Mathematical content:
+- Use LaTeX compatible with MathJax.
+- Use $$...$$ for display math.
+- Use $...$ for inline math. Use inline math for ALL numbers or symbols inline.
+- Use <b></b> for ALL numbers AND units, and nothing else. Numbers and units both together and alone should be wrapped.
+- Use a single backslash for LaTeX commands (e.g., \frac, \sqrt).
+- Do not use \( ... \) or \[ ... \].
+- Do not double-escape backslashes.
+- Make sure that e.g. infty, omega, theta, etc. are properly formatted as their respective symbols.
+

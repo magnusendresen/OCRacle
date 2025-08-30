@@ -1,0 +1,44 @@
+Code and programming:
+- If the task text contains code, preserve it exactly inside <pre class="code-box"><code>...</code></pre>.
+- If the code contains multiple-choice logic, write e.g. "X = ?" or "return ?" directly in the code. Then list each alternative in a separate code box.
+- If the code is a single line (e.g., in multiple-choice), wrap that line in <pre class="code-box"><code>...</code></pre> as well — do not show it as plain text.
+- If the code contains mathematical expressions (e.g., f(x), $f(x + h)$, etc.), do not try to blend it into the code. Instead:
+  - Place code inside <pre class="code-box"><code>...</code></pre>
+  - Place math inside <div class="math">...</div> using MathJax-compatible LaTeX (e.g., inline $f(x)$ or block $$f(x + h) - f(x)$$)
+- If the task has subquestions (e.g., a), b), c)) and each contains code or math, format each as:
+  <h3>a)</h3>
+  <pre class="code-box"><code>...</code></pre>
+  <div class="math">...</div> (if applicable)
+- Preserve all syntax and line breaks exactly as they appear in the original text. Remember that Python is extremely indentation-sensitive, so format accordingly.
+- Only use code formatting if the task actually has code in it, not for regular math tasks that have nothing to do with programming.
+
+Multiple choice:
+- Present the options as an ordered list using <ol type="A"><li>...</li></ol>.
+- Do not include any extra number or letter inside the option text itself — the list marker provides the label. Remember that <li></li> automatically adds letters, so do not place numbering letters inside of the list as well.
+- The task statement itself should be outside the list in a regular <p> tag.
+- If the choices are lines of code, place each one inside <pre class="code-box"><code>...</code></pre> within its <li>.
+
+Tasks requiring calculation, proof, or explanation:
+- For regular tasks that require proving, calculating, or explaining, also follow these rules:
+  - Keep paragraphs short and use multiple <p> elements rather than a single long block. 
+  - Introduce each subtask with the label <h3>a)</h3>, <h3>b)</h3>, and so on.
+
+OCR errors and interpretation:
+- You are allowed to make certain assumptions about OCR artifacts in the text, such as interpreting \sqrt{\sqrt{\sqrt as a likely error for a single square root.
+
+Summary (read carefully before output):
+- Output must be valid HTML with only <p>, <h3>, <pre class="code-box"><code>, <div class="math">, <ol type="A">, <li>.
+- Never include ``` fences or const oppgaveTekst=....
+- Use many short <p> paragraphs, not one block.
+- Math: $...$ for inline, $$...$$ for display, <b> around all numbers and units. No \( or \[. No double-escaped backslashes.
+- Code: preserve exactly, wrap in <pre class="code-box"><code>...</code></pre>. Math stays outside code.
+- Multiple choice: <ol type="A"><li>...</li></ol>. No extra letters inside <li>.
+- Points: "Maks poeng: <b>X</b>" at end if single task, or <h3>a)</h3> ... Xp. style if multiple.
+- Replace "figure below" → "figure above".
+- Allow fixing trivial OCR errors (e.g. sqrt duplication).
+
+Final reminder:
+DO NOT output anything except the clean HTML body.
+MAKE MANY PARAGRAPHS WITH THE HTML.
+DO NOT include wrappers or explanations.
+
