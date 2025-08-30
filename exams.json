@@ -754,12 +754,160 @@
         }
     },
     "INGX1002": {
-        "topics": [
-        ],
+        "topics": [],
         "ignored_topics": [],
         "exams": {
             "H24": {
                 "tasks": []
+            }
+        }
+    },
+    "IMAX1002": {
+        "topics": [
+            "Lineære Likningssystemer",
+            "Determinanter",
+            "Lineære Transformasjoner",
+            "Underrom",
+            "Basis",
+            "Inversmatrise",
+            "Komplekse Tall",
+            "Integraler",
+            "Derivasjon",
+            "Differensiallikninger"
+        ],
+        "ignored_topics": [],
+        "exams": {
+            "H24": {
+                "tasks": [
+                    {
+                        "topic": "Lineære Likningssystemer",
+                        "task_number": "1",
+                        "points": 8,
+                        "task_text": "<p>Løys likningssettet for å finne motstanden x, y og z til kvar av dei tre komponentane.</p>\n<p>Likningssettet er:</p>\n<p>$2x + 3y + 4z = 212$</p>\n<p>$x + 5y = 101$</p>\n<p>$8x + 4z = 158$</p>\n<p>Maks poeng: 5</p>"
+                    },
+                    {
+                        "topic": "Lineære Transformasjoner",
+                        "task_number": "3",
+                        "points": 6,
+                        "task_text": "<p>Finn en matrise $A$ slik at $T(x, y, z) = A \\cdot [x, y, z]^T$ for den lineære transformasjonen $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ gitt ved $T(x, y, z) = [2x - 3z, 2y + 4z]$.</p>\n<p>Maks poeng: 2</p>"
+                    },
+                    {
+                        "topic": "Lineære Likningssystemer",
+                        "task_number": "4",
+                        "points": 6,
+                        "task_text": "<p>Finn konstanten $c$ slik at vektoren $[3, 3, 3]$ ligger i underrommet $\\text{span}(\\mathbf{v}_1, \\mathbf{v}_2)$.</p>\n<p>La $\\mathbf{v}_1 = [1, 2, 8]$ og $\\mathbf{v}_2 = [c, 5, 1]$.</p>\n<p>Rund av til nærmeste heltall.</p>"
+                    },
+                    {
+                        "topic": "Basis",
+                        "task_number": "5",
+                        "points": 0,
+                        "task_text": "<p>Hvilken av følgende er en basis for $\\mathbb{R}^3$? Velg ett alternativ.</p>\n<ol type=\"A\">\n<li><pre class=\"code-box\"><code>{(-1,0,0), (-1,1,1)}</code></pre></li>\n<li><pre class=\"code-box\"><code>{(1,1,0), (0,0,2), (1,1,2), (1,1,1)}</code></pre></li>\n<li><pre class=\"code-box\"><code>{(1,1,0), (0,0,2), (1,1,2)}</code></pre></li>\n<li><pre class=\"code-box\"><code>{(1,1,0), (0,1,0), (1,0,0)}</code></pre></li>\n<li><pre class=\"code-box\"><code>{(1,0,0), (1,1,0), (1,1,1)}</code></pre></li>\n<li><pre class=\"code-box\"><code>{(1,0,0), (0,1,0), (0,0,1), (1,0,1)}</code></pre></li>\n<li><pre class=\"code-box\"><code>{(1,0,0), (1,1,2)}</code></pre></li>\n</ol>\n<p>Merk: I denne oppgaven bruker vi notasjonen $(x, y, z) = [x, y, z]^T$.</p>"
+                    },
+                    {
+                        "topic": "Inversmatrise",
+                        "task_number": "6",
+                        "points": 8,
+                        "task_text": "<p>La $A = \\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 5 & 6 & 0 \\end{bmatrix}$.</p>\n<p>Finn inversmatrisen $A^{-1}$.</p>\n<p>Maks poeng: 5</p>"
+                    },
+                    {
+                        "topic": "Komplekse Tall",
+                        "task_number": "7",
+                        "points": 0,
+                        "task_text": "<p>Realdelen er $4$ og imaginærdelen er $-2$.</p>\n<p>Polarform: $2\\sqrt{5} (\\cos(-0.46) + i \\sin(-0.46))$</p>\n<p>Eksponentialform: $2\\sqrt{5} \\exp(i (-0.46))$</p>"
+                    },
+                    {
+                        "topic": "Komplekse Tall",
+                        "task_number": "8",
+                        "points": 0,
+                        "task_text": "<p>La $z_1 = 2 + i$ og $z_2 = 5 + 5i$. Finn den kartesiske forma til de følgende komplekse tallene.</p>\n<h3>1. $z_1 \\cdot z_2$</h3>\n<h3>2. $\\frac{z_1}{z_2}$</h3>\n<h3>3. $\\left|\\frac{z_1}{z_2}\\right|$</h3>\n<p>Rund av til ett desimal etter komma.</p>\n<p>Maks poeng: 5</p>"
+                    },
+                    {
+                        "topic": "Komplekse Tall",
+                        "task_number": "9",
+                        "points": 8,
+                        "task_text": "<p>Finn alle løsningene til likningen $z^3 = 8i$.</p>\n<p>Maks poeng: 5</p>"
+                    },
+                    {
+                        "topic": "Integraler",
+                        "task_number": "10",
+                        "points": 5,
+                        "task_text": "<p>Finn verdien til integralet $\\int x^2 e^{x^3/3}  dx$. Rund av til nærmeste heltall.</p>\n<h3>a)</h3>\n<p>La $f(t) = t^3 e^t$.</p>\n<p>Hvilket av følgende uttrykk er $f'(t)$?</p>\n<ol type=\"A\">\n<li><pre class=\"code-box\"><code>$f'(t) = 3t^3 e^t + t^2 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = (3t^2 + t^3) e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = 2t^2 e^t + t^3 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = 2t^2 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = 3t^2 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = t^3 e^t$</code></pre></li>\n</ol>\n<h3>b)</h3>\n<p>Hvilken av følgende differensiallikninger har funksjonen $f$ som en løsning?</p>\n<ol type=\"A\">\n<li><pre class=\"code-box\"><code>$t f'(t) - 2f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$t f' (t) - e^t f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$t f'(t) - e^t f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) - \\frac{3f(t)}{t} - f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) - (t^2 - e^2)f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) - \\frac{3f(t)}{t} = 0$</code></pre></li>\n</ol>"
+                    },
+                    {
+                        "topic": "Derivasjon",
+                        "task_number": "11",
+                        "points": 0,
+                        "task_text": "<p>La $f(t) = t^3 e^t$.</p>\n<h3>a)</h3>\n<p>Hvilket av følgende uttrykk er $f'(t)$?</p>\n<ol type=\"A\">\n<li><pre class=\"code-box\"><code>$f'(t) = 3t^3 e^t + t^2 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = (3t^2 + t^3)e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = 2t^2e^t + t^3 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = 2t^2 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = 3t^2 e^t$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) = t^3 e^t$</code></pre></li>\n</ol>\n<h3>b)</h3>\n<p>Hvilken av følgende differensiallikninger har funksjonen $f$ som en løsning?</p>\n<ol type=\"A\">\n<li><pre class=\"code-box\"><code>$t f'(t) - 2 f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$t f'(t) - e^t f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$t f'(t) - e^t f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) - \\frac{3 f(t)}{t} - f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) - (t^2 - e^t) f(t) = 0$</code></pre></li>\n<li><pre class=\"code-box\"><code>$f'(t) - \\frac{3 f(t)}{t} = 0$</code></pre></li>\n</ol>"
+                    },
+                    {
+                        "topic": "Differensiallikninger",
+                        "task_number": "12",
+                        "points": 6,
+                        "task_text": "<p>Finn løsningen på initialverdiproblemet $y(x)y'(x) = e^{3x}$, $y(0) = 1$.</p>\n<p>Maks poeng: 5</p>"
+                    },
+                    {
+                        "topic": "Differensiallikninger",
+                        "task_number": "13",
+                        "points": 0,
+                        "task_text": "<p>Finn konstantene A og B slik at $y(x) = A \\cos(2x) + B \\sin(2x)$ er en spesiell løsning til differensiallikningen $4y''(x) - 4y'(x) + y(x) = \\cos(2x)$.</p><p>Rund av til to desimaler.</p><p>A =</p><p>B =</p>"
+                    }
+                ]
+            }
+        }
+    },
+    "ELET1001": {
+        "topics": [
+            "Grunnleggende Kretsanalyse",
+            "Elektrisk Effekt",
+            "Elektrisk Ladning",
+            "Elektrisk Strøm",
+            "Elektrisk Spenning",
+            "Måleinstrumenter"
+        ],
+        "ignored_topics": [],
+        "exams": {
+            "Unknown": {
+                "tasks": []
+            },
+            "ØVING 1": {
+                "tasks": [
+                    {
+                        "topic": "Elektrisk Spenning",
+                        "task_number": "1",
+                        "points": 0,
+                        "task_text": "<p>a) Hva er de engelske uttrykkene for elektrisk spenning, effekt, energi, strøm, ladning og motstand.</p><p>b) Gi enheten for hver av størrelsene. Spenning måles i ? Energi måles i ? Elektrisk strøm måles i ? Ladning måles i ?</p><p>c) Hva menes med \"jord\" i forbindelse med elektriske kretser? Forklar forskjellen mellom elektrisk potensial og elektrisk spenning.</p><p>d) Potensialet i to noder A og B er $V_A = +6,0$ V og $V_B = -18,0$ V. Hva er spenningen mellom node B og A, $V_{BA}$? Svar med fortegn.</p><p>e) Hva menes med «passiv fortegnskonvensjon»?</p>"
+                    },
+                    {
+                        "topic": "Elektrisk Strøm",
+                        "task_number": "3",
+                        "points": 0,
+                        "task_text": "<p>Netto positiv ladning som strømmer gjennom en leder er gitt som en funksjon av tiden. Hvordan ser strømmen gjennom lederen ut for samme tidsperiode? Lag en skisse med strøm (i ampere) langs y-aksen og tid langs x-aksen.</p>\n<p>Maks poeng: 2</p>"
+                    },
+                    {
+                        "topic": "Elektrisk Effekt",
+                        "task_number": "4",
+                        "points": 20,
+                        "task_text": "<p>Finn effekten forbrukt i/levert av hvert element. Forklar om effekten forbrukes i eller leveres av elementet. Bruk effektbalanse i kretsen for å kontrollere at du har regnet riktig.</p>\n<p>Maks poeng: 5</p>"
+                    },
+                    {
+                        "topic": "Elektrisk Ladning",
+                        "task_number": "5",
+                        "points": 10,
+                        "task_text": "<p>Strømmen som går inn i et element er vist i figuren over. Finn total ladning som går inn i elementet i tidsintervallet $0 < t < 20$ s.</p>\n<p>Maks poeng: 3</p>"
+                    },
+                    {
+                        "topic": "Elektrisk Ladning",
+                        "task_number": "6",
+                        "points": 0,
+                        "task_text": "<p>En generator produserer en elektromotorisk spenning på $12 \\mathrm{~V}$ og leverer en strøm på $2.0 \\mathrm{~A}$ i $5.0$ minutter.</p><h3>a)</h3><p>Hvor mye ladning er levert?</p><h3>b)</h3><p>Hvor mye energi er produsert?</p>"
+                    },
+                    {
+                        "topic": "Grunnleggende Kretsanalyse",
+                        "task_number": "8",
+                        "points": 0,
+                        "task_text": "<p>Voltmeteret er koblet til ulike batterier i forskjellige konfigurasjoner. Se figuren over.</p><h3>a)</h3><p>Voltmeteret er koblet til et $9$ V batteri og et $6$ V batteri som er koblet i serie med motsatt polaritet. Hva er måleverdien?</p><h3>b)</h3><p>Voltmeteret er koblet til et $9$ V batteri og et $6$ V batteri som er koblet i serie med samme polaritet. Hva er måleverdien?</p><h3>c)</h3><p>Voltmeteret er koblet til et $5$ V batteri, et $3$ V batteri og et $9$ V batteri som er koblet i serie. Hva er måleverdien?</p><h3>d)</h3><p>Voltmeteret er koblet til et $6$ V batteri. Hva er måleverdien?</p>"
+                    }
+                ]
             }
         }
     }

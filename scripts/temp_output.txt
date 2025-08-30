@@ -1,618 +1,147 @@
 
 
 === CONTAINER 0 (text) ===
-1  Matematiske operasjoner
+Oppgave 1
 
 === CONTAINER 1 (text) ===
-Gitt variabeldefinisjonen
+a) Hva er de engelske uttrykkene for  elektrisk spenning,   effekt, energi, strøm, ladning  og  motstand .
 
 === CONTAINER 2 (text) ===
-c = 7   Hva blir verdien til  c  etter at vi utfører følgende operasjoner?
+b) Gi enheten for hver av størrelsene.       Spenning måles i ?        Energi måles i ?        Elektrisk strøm måles i ?        Ladning måles i ?
 
 === CONTAINER 3 (text) ===
-c = c ** 2
+c) Hva menes med ”jord” i forbindelse med elektriske kretser?       Forklar forskjellen mellom elektrisk potensial og elektrisk spenning.
 
 === CONTAINER 4 (text) ===
-c %= 5 Velg ett alternativ:
+d) Potensialet i to noder A og B er  𝑉 𝐴 = +6,0 V  og  𝑉 𝐵 = −18,0 V . Hva er spenningen mellom node  B og A, V BA ?  Svar med fortegn.
 
 === CONTAINER 5 (text) ===
-Gitt variabeldefinisjonen z = 8
+e) Hva menes med «passiv fortegnskonvensjon»?
 
 === CONTAINER 6 (text) ===
-Hva blir verdien til  z  etter at vi utfører følgende operasjoner?
+Oppgave 2
 
 === CONTAINER 7 (text) ===
-z += 10 z /= 3
+En elektrisk ladning på  10.0 C  passerer gjennom et ledningstverrsnitt.
 
 === CONTAINER 8 (text) ===
-Velg ett alternativ
+a)   Hvor mange elementærladninger passerer gjennom tverrsnittet?  b)   Ladningen passerer i et tidsrom på  20.0 s . Hvor stor er strømmen?  c)   Potensialdifferansen mellom to punkt er  48.0 V . Hvor stort arbeid må utføres for å flytte
 
 === CONTAINER 9 (text) ===
-Maks poeng: 4
+en ladning på  9.0 C  fra det ene punktet til det andre?   d)   Effekt er definert som arbeid utført per tidsenhet
 
 === CONTAINER 10 (text) ===
-2  Funksjoner
+𝑃=
 
 === CONTAINER 11 (text) ===
-Denne koden definerer en funksjon  is_prime(n)  som sjekker om et gitt tall  n  er et primtall.
+𝑠  [W]   (0.1)
 
 === CONTAINER 12 (text) ===
-Test av funksjonen gir disse resultatene:
+Hvor stor er effekten dersom tiden det tar å flytte ladningen i c) er  0.6 s ?   Regn ut strømmen. Vis at effekten alternativt kan finnes som strøm multiplisert med  spenning.
 
 === CONTAINER 13 (text) ===
-is_prime(10) # returnerer False is_prime(11) # returnerer True is_prime(1) # returnerer False is_prime(13) # returnerer True
+ELEX1001    Page 2 of 5
 
 === CONTAINER 14 (text) ===
-Lag funksjonen  is_prime  ved å plassere kodefragment i rett rekkefølge. Noen av fragmentene skal  IKKE  brukes.
+Oppgave 3
 
 === CONTAINER 15 (text) ===
-Pass på å plassere draområdene slik at de "snapper" til ønsket rute. Se bort fra innrykk
+Grafen viser netto positiv ladning som strømmer gjennom en leder som funksjon av tiden. Grafen viser  ladning langs y-aksen og tid langs x-aksen.
 
 === CONTAINER 16 (text) ===
-Maks poeng: 7
+Hvordan ser strømmen gjennom lederen ut for samme tidsperiode? Lag en skisse med strøm (i Ampere)  langs y-aksen og tid langs x-aksen.
 
 === CONTAINER 17 (text) ===
-def is_prime(n):
+Oppgave 4
 
 === CONTAINER 18 (text) ===
-if n <= 1:
+Figuren viser en elektrisk krets med strøm- og spenningsvariabler over hvert kretselement.  Strømmene gjennom og spenningene over hvert kretselement er gitt i tabellen nedenfor.
 
 === CONTAINER 19 (text) ===
-return False
+E le ment  Spenning,  v  [V]   Strøm  i  [A]  1  15  -1  2   5   1  3  10   2  4  -10  -1  5  20  -3  6  20   2
 
 === CONTAINER 20 (text) ===
-for j in range(2, n):
+Finn effekten forbrukt i/levert av hvert element. Husk å forklare om effekten  forbrukes i  eller  leveres av  elementet. Bruk effektbalanse i kretsen for å kontrollere at du har regnet riktig.
 
 === CONTAINER 21 (text) ===
-if n % j == 0:
+0 1 2 3 4 5 6 -20
 
-=== CONTAINER 22 (text) ===
-return False
+=== CONTAINER 22 (image) ===
+
 
 === CONTAINER 23 (text) ===
-return True
+ELEX1001    Page 3 of 5
 
 === CONTAINER 24 (text) ===
-from math import sqrt
+Oppgave 5
 
 === CONTAINER 25 (text) ===
-if n // j == 0:
+Strømmen som går inn i et element er vist i figuren under. Finn total ladning som går inn i  elementet i tidsintervallet  0 < 𝑡< 20 s .
 
 === CONTAINER 26 (text) ===
-3  Sammenligningsoperatorer
+Oppgave 6
 
 === CONTAINER 27 (text) ===
-Gitt følgende kode:     a = 5
+Hvis et  12 V -batteri leverer  100 J  i 5 sekunder, finn
 
 === CONTAINER 28 (text) ===
-b = 5.0 c = "5" d = True e = False
+(a) mengden ladning levert, og
 
 === CONTAINER 29 (text) ===
-Nedenfor står en rekke uttrykk. For hvert uttrykk, kryss av for  True  hvis uttrykket er sant, eller False  hvis det er usant, eller kryss av for  Error  hvis uttrykket vil gi syntaksfeil. Finn de som passer sammen:
+(b) produsert strøm.
 
 === CONTAINER 30 (text) ===
-False True Error
+Oppgave 7
 
 === CONTAINER 31 (text) ===
-b > a
+Finn den leverte eller forbrukte effekten fra element 2 i figuren under.
 
-=== CONTAINER 32 (text) ===
-a >= b
+=== CONTAINER 32 (image) ===
 
-=== CONTAINER 33 (text) ===
-d = = 1
 
-=== CONTAINER 34 (text) ===
-a != c
+=== CONTAINER 33 (image) ===
+
+
+=== CONTAINER 34 (image) ===
+10
+
 
 === CONTAINER 35 (text) ===
-e < = 0
+ELEX1001    Page 4 of 5
 
 === CONTAINER 36 (text) ===
-a == b
+Oppgave 8
 
 === CONTAINER 37 (text) ===
-d < e
+Et voltmeter er koblet til ulike batteri som vist i figuren under. Finn måleverdiene som kan leses av  på voltmeteret i de fire tilfellene (husk fortegn).
 
 === CONTAINER 38 (text) ===
-Maks poeng: 7
 
-=== CONTAINER 39 (text) ===
-4  Lister og indekser
+
+=== CONTAINER 39 (image) ===
+
 
 === CONTAINER 40 (text) ===
-Gitt følgende programkode:
+ELEX1001    Page 5 of 5
 
-=== CONTAINER 41 (image) ===
-temperatures = [15.5, 17.2, 16.8, 14.9, 18.3, 19.0, 16.5]
-
-def fi(temps):
-return sum(temps) / len(temps)
-
-def f2(temps):
-return sum(temps[:3]) / len(temps[:3])
-
-def f3(temps):
-return sum(temps[-4:]) / len(temps|[ -4:])
-
-def f4(temps):
-return max(temps )
-
-def f5(temps):
-return temps[::-1]
-
-def f6(temps):
-result = []
-for temp in temps:
-if temp > 17:
-result.append(temp)
-return result
-
+=== CONTAINER 41 (text) ===
+Oppgave 9
 
 === CONTAINER 42 (text) ===
-Hver rad nedenfor har et kall til funksjonene ovenfor. Skriv i tekstfeltet hva svaret blir. Flyttall avrundes til en desimal.
+a)   Vis ved hjelp av en skisse hvordan du ville koblet amperemeteret for å måle den positive
 
 === CONTAINER 43 (text) ===
-print(f"{f1(temperatures):.1f}") skriver ut
+strømmen i sløyfa.
 
 === CONTAINER 44 (text) ===
-print(f"{f2(temperatures):.1f}") skriver ut
+b)   Hvorfor er det en dårlig ide å koble et amperemeter direkte over et batteri som vist i
 
 === CONTAINER 45 (text) ===
-print(f"{f3(temperatures):.1f}") skriver ut
+figuren under?
 
-=== CONTAINER 46 (text) ===
-print(f"{f4(temperatures):.1f}") skriver ut
+=== CONTAINER 46 (image) ===
+Light bulb
 
-=== CONTAINER 47 (text) ===
-print(f"{f5(temperatures)}") skriver ut
 
-=== CONTAINER 48 (text) ===
-print(f"{f6(temperatures)}") skriver ut
 
-=== CONTAINER 49 (text) ===
-Maks poeng: 6
-
-=== CONTAINER 50 (text) ===
-5  Numpy og matriser
-
-=== CONTAINER 51 (text) ===
-Skriv ferdig funksjonen  get_diagonal  (velg kode fra nedtrekksmeny) som tar inn en matrise  A , og returnerer en ny matrise  A_diag  der det  kun  er diagonalelementene fra  A  som er med (resten av matriseelementene er lik  0 ).   For eksempel, dersom input til funksjonen er matrisen  A  nedenfor, så skal output være matrisen D .
-
-=== CONTAINER 52 (text) ===
-Et matriseelement ligger langs diagonalen dersom i = j. Eksempel:
-
-=== CONTAINER 53 (text) ===
-import numpy as np
-
-=== CONTAINER 54 (text) ===
-def get_diagonal(A):     rows, cols = np.shape(A)     A_diag = np.zeros([rows, cols])
-
-=== CONTAINER 55 (text) ===
-for i in range(rows):         for j in range(cols):             if i==j:
-
-=== CONTAINER 56 (text) ===
-(A_diag[i, j] = A[i, j], A_diag[i, j] = A[rows, cols], A_diag[j, j] = A_diag[i,
-
-=== CONTAINER 57 (text) ===
-i], A[i, j] = A_dialg[i, j])     return A_diag
-
-=== CONTAINER 58 (text) ===
-Maks poeng: 4
-
-=== CONTAINER 59 (text) ===
-Velg alternativ
-
-=== CONTAINER 60 (text) ===
-6  Analyse av listedata
-
-=== CONTAINER 61 (text) ===
-Lag en funksjon  bmi_statistikk  som kan ta inn en liste med persondata (høyde og vekt), og returnerer andelen av personene som har en kroppsmasseindeks (BMI) som er over en viss terskel i prosent.   Formel for utregning av BMI (høyde er gitt i meter):
-
-=== CONTAINER 62 (text) ===
-Eksempel på data:
-
-=== CONTAINER 63 (text) ===
-bmi_data= [[180, 90],                       [195, 92],                       [165, 66]] terskel = 25
-
-=== CONTAINER 64 (text) ===
-I tabellen representerer hver rad en person, der første kolonne er høyde målt i centimeter (cm) og andre kolonne er vekt målt i Kg.
-
-=== CONTAINER 65 (text) ===
-Eksempel på funksjonskall (gitt at variabelen  bmi_data  og  terskel  er definert som ovenfor):
-
-=== CONTAINER 66 (text) ===
-andel = bmi_statistikk(bmi_data, terskel)
-
-=== CONTAINER 67 (text) ===
-print(f"Andel av personene med BMI over {terskel}: {andel:.2f}%")   Skriver ut:  Andel av personene med BMI over 25: 33.33%
-
-=== CONTAINER 68 (text) ===
-Skriv ditt svar her
-
-=== CONTAINER 69 (text) ===
-Maks poeng: 5
-
-=== CONTAINER 70 (text) ===
-7  Numerisk derivasjon
-
-=== CONTAINER 71 (text) ===
-Vi måler følgende verdier for høyden til en drone:
-
-=== CONTAINER 72 (text) ===
-Målingene er gjort ved følgende tidspunkt:
-
-=== CONTAINER 73 (text) ===
-Vi ser bort fra enhetene til   og  .
-
-=== CONTAINER 74 (text) ===
-Vi antar at dronen kun beveger seg i høyderetningen. Hva gir forroverdifferanse som en tilnærming til den tidsderiverte av høyden?
-
-=== CONTAINER 75 (text) ===
-:
-
-=== CONTAINER 76 (text) ===
-Hva gir bakoverdifferanse?
-
-=== CONTAINER 77 (text) ===
-Hva gir sentraldifferanse?
-
-=== CONTAINER 78 (text) ===
-Maks poeng: 6
-
-=== CONTAINER 79 (text) ===
-8  Hvilken metode?
-
-=== CONTAINER 80 (text) ===
-Finn hvilken numerisk metode som kan brukes til å løse hvilken oppgave.   Hvert svaralternativ passer til nøyaktig en oppgave.
-
-=== CONTAINER 81 (text) ===
-A : Vi har målt hastigheten   og startposisjonen   til en drone, og er interesserte i å vite posisjonen. Det vil si: Vi kjenner    for tiden   i  , og vil finne   for  i samme tidsrommet  B : Vi har målt posisjonen til en drone, og er interesserte i å finne hastigheten. Det vil si: Vi kjenner
-
-=== CONTAINER 82 (text) ===
-for tiden i  , og vil finne   for tidsrommet  .
-
-=== CONTAINER 83 (text) ===
-C : En drone mister motorkraften, og faller fritt. Vi vet at  . Vi er interesserte i å finne  . (  og   er konstante tall vi vet.)
-
-=== CONTAINER 84 (text) ===
-D : Vi er gitt at en drone har følgende høyde målt fra hustaket ved tiden  :
-
-=== CONTAINER 85 (text) ===
-. Vi er interesserte i ved hvilket tidspunkt høyden blir null, altså for hvilket tidpunkt    man får  .
-
-=== CONTAINER 86 (text) ===
-Finn de som passer sammen:
-
-=== CONTAINER 87 (text) ===
-C A D B
-
-=== CONTAINER 88 (text) ===
-Newtons metode
-
-=== CONTAINER 89 (text) ===
-Foroverdifferanse
-
-=== CONTAINER 90 (text) ===
-Simpsons metode eller Eulers metode
-
-=== CONTAINER 91 (text) ===
-Vi har ikke nok informasjon
-
-=== CONTAINER 92 (text) ===
-Maks poeng: 4
-
-=== CONTAINER 93 (text) ===
-9  Newtons metode
-
-=== CONTAINER 94 (text) ===
-Bruk to iterasjoner av Newtons metode til å løse ligningen
-
-=== CONTAINER 95 (text) ===
-Det kan være nyttig at       .
-
-=== CONTAINER 96 (text) ===
-Bruk startgjetning
-
-=== CONTAINER 97 (text) ===
-Ett steg av Newtons metode gir :
-
-=== CONTAINER 98 (text) ===
-To steg av Newtons metode gir:
-
-=== CONTAINER 99 (text) ===
-Maks poeng: 6
-
-=== CONTAINER 100 (text) ===
-10  Differensialligning
-
-=== CONTAINER 101 (text) ===
-En sten faller med hastigheten  , der   følger differensialligningen:
-
-=== CONTAINER 102 (text) ===
-Vi ser bort fra enheter og går ut fra   og  . Ved   er hastigheten 3.0 det vil si  . I numerikkurset har dere lært en metode for å løse differensialligninger numerisk. Denne metoden står på formelarket. Bruk ett eller flere steg i denne metoden til å beregne en tilnærming for hastigheten ett tidels sekund senere. Det vi si, finn en tilnærming til
-
-=== CONTAINER 103 (text) ===
-
-
-=== CONTAINER 104 (text) ===
-Maks poeng: 5
-
-=== CONTAINER 105 (text) ===
-11  Konvergensrate
-
-=== CONTAINER 106 (image) ===
-10!
-
-10"
-
-10°?
-
-Feil som funksjon av steglengde
-
-107? 10°
-
-
-=== CONTAINER 107 (text) ===
-Over ser dere et logaritmisk plot av feilen   som en funksjon av steglengden   for en numerisk metode. Vi ser at   , der   og  er konstanter. Det er oppgitt at   er et heltall.
-
-=== CONTAINER 108 (text) ===
-Dere skal bestemme   ut fra grafen.
-
-=== CONTAINER 109 (text) ===
-
-
-=== CONTAINER 110 (text) ===
-Dersom vi bruker steglengde   får vi feilen  . Hvilken steglengde   må vi velge for at feilen skal bli  ?
-
-=== CONTAINER 111 (text) ===
-Maks poeng: 5
-
-=== CONTAINER 112 (text) ===
-12  Integrasjon
-
-=== CONTAINER 113 (text) ===
-Vi ser på funksjonen:
-
-=== CONTAINER 114 (text) ===
-Bruk Trapesmetoden med to delintervaller (tre punkter) til å finne en tilnærming til
-
-=== CONTAINER 115 (text) ===
-Bruk så Simpsons metode med to delintervaller (tre punkter) til å tilnærme  . Hva er avviket fra eksakt verdi? (Eksakt verdi er  .) Hvilken metode er den mest nøyaktige?
-
-=== CONTAINER 116 (text) ===
-Vi ser så på
-
-=== CONTAINER 117 (text) ===
-Dersom du skal beregne   med tre punkter, vil trapesmetoden eller Simpsons metode gi minst feil? Trenger du å regne ut integralet for å svare på spørsmålet? Begrunn svaret. Skriv ditt svar her
-
-=== CONTAINER 118 (text) ===
-Format                       
-
-=== CONTAINER 119 (text) ===
-   Σ   
-
-=== CONTAINER 120 (text) ===
-Words: 0
-
-=== CONTAINER 121 (text) ===
-Maks poeng: 7
-
-=== CONTAINER 122 (text) ===
-13  Numerisk derivasjon
-
-=== CONTAINER 123 (text) ===
-Gitt en matematisk funksjon
-
-=== CONTAINER 124 (text) ===
-Fullfør programmet nedenfor slik at det regner ut en tilnærming til funksjonens deriverte for intervallet
-
-=== CONTAINER 125 (text) ===
-t.o.m   med bruk av senterdifferanse med skrittlengde  , og plotter    som funksjon av  i intervallet  .
-
-=== CONTAINER 126 (text) ===
-import numpy as np import matplotlib.pyplot as plt   def f(x):
-
-=== CONTAINER 127 (text) ===
-((x + 3.5)**3 + 2*x**2 - 10, y = (x + 3.5)**3 + 2*x**2 -
-
-=== CONTAINER 128 (text) ===
-10, f(x) = (x + 3.5)**3 + 2*x**2 - 10, y_der = (x + 3.5)**3 + 2*x**2 - 10)
-
-=== CONTAINER 129 (text) ===
-return y   h = 0.02
-
-=== CONTAINER 130 (text) ===
-x =  (np.linspace(0, 4 + h, h), np.arange(0, 4, h),
-
-=== CONTAINER 131 (text) ===
-np.linspace(0, 4, h), np.arange(0, 4 + h, h))
-
-=== CONTAINER 132 (text) ===
-f_der =  ((f(x+h)-f(x))/h*2, f(x+h) - f(x-h)/(h+h), (f(x+h)-f(x-
-
-=== CONTAINER 133 (text) ===
-h))/2*h, (f(x+h)-f(x-h))/(2*h))
-
-=== CONTAINER 134 (text) ===
-(plt.plot(f_der), plt.plot(f_der, x), plt.plot(f, f_der),
-
-=== CONTAINER 135 (text) ===
-plt.plot(x, f_der))
-
-=== CONTAINER 136 (text) ===
-Maks poeng: 6
-
-=== CONTAINER 137 (text) ===
-Velg alternativ
-
-=== CONTAINER 138 (text) ===
-Velg alternativ
-
-=== CONTAINER 139 (text) ===
-Velg alternativ
-
-=== CONTAINER 140 (text) ===
-Velg alternativ
-
-=== CONTAINER 141 (text) ===
-14  Numerisk Integrasjon med Trapesmetoden
-
-=== CONTAINER 142 (text) ===
-Fullfør koden nedenfor slik at den bruker trapesmetoden til å beregne integralet av:
-
-=== CONTAINER 143 (text) ===
-fra 0 til 1 med   delintervall.
-
-=== CONTAINER 144 (text) ===
-import numpy as np def f(x):
-
-=== CONTAINER 145 (text) ===
-(y = 2*x, y = x**2, y = 2*x**2, y = f(x))
-
-=== CONTAINER 146 (text) ===
-return y   a = 0
-
-=== CONTAINER 147 (text) ===
-b = 1 n = 10 h = (b - a) / n
-
-=== CONTAINER 148 (text) ===
-x =  (linspace(n+h/2, n-h/2), linspace(a, b, n),
-
-=== CONTAINER 149 (text) ===
-np.linspace(a + h/2, b - h/2), np.linspace(a, b, n + 1)) y = f(x)
-
-=== CONTAINER 150 (text) ===
-integral =  ((h / 2) * (y[0] + sum(y[1:-1]) + y[-1]),
-
-=== CONTAINER 151 (text) ===
-sum(y[1:-1]), (h / 2) * (y[0] + 2 * sum(y[1:-1]), (h / 2) * (y[0] + 2 * sum(y[1:-1]) + y[-1]))
-
-=== CONTAINER 152 (text) ===
-Maks poeng: 6
-
-=== CONTAINER 153 (text) ===
-Velg alternativ
-
-=== CONTAINER 154 (text) ===
-Velg alternativ
-
-=== CONTAINER 155 (text) ===
-Velg alternativ
-
-=== CONTAINER 156 (text) ===
-15  Eulers metode
-
-=== CONTAINER 157 (text) ===
-Fullfør koden nedenfor slik at den bruker Eulers metode til å løse differensialligningen
-
-=== CONTAINER 158 (text) ===
-med initialverdien    og skrittlengde   for x  fra 0 til 1.
-
-=== CONTAINER 159 (text) ===
-import numpy as np
-
-=== CONTAINER 160 (text) ===
-def f(x, y):
-
-=== CONTAINER 161 (text) ===
-(return y' + x**2 - 1, return y - x*2 + 1, return y - x**2 +
-
-=== CONTAINER 162 (text) ===
-1, y - x**2 + 1)
-
-=== CONTAINER 163 (text) ===
-h = 0.5
-
-=== CONTAINER 164 (text) ===
-x =  (np.arange(0, 1 + h, h), np.arange(h, 1 + h, h),
-
-=== CONTAINER 165 (text) ===
-arange(0, 1 + h, h), np.arange(0, 1, h)) y = np.zeros(len(x)) y[0] = 0.5
-
-=== CONTAINER 166 (text) ===
-for i in range(1, len(x)):
-
-=== CONTAINER 167 (text) ===
-y[i] =  (h * f(x[i-1], y[i-1]) - y[i-1], y[i+1] + h * f(x[i-1],
-
-=== CONTAINER 168 (text) ===
-y[i+1]), y[i-1] + f(x[i-1], y[i-1])/h, y[i-1] + h * f(x[i-1], y[i-1]))
-
-=== CONTAINER 169 (text) ===
-Maks poeng: 7.5
-
-=== CONTAINER 170 (text) ===
-Velg alternativ
-
-=== CONTAINER 171 (text) ===
-Velg alternativ
-
-=== CONTAINER 172 (text) ===
-Velg alternativ
-
-=== CONTAINER 173 (text) ===
-16  Fikspunktiterasjon
-
-=== CONTAINER 174 (text) ===
-Gitt ligningen
-
-=== CONTAINER 175 (text) ===
-Fullfør programkoden nedenfor slik at den bruker  fikspunktiterasjon  med initialverdi  til å finne en løsning til ligningen med maksimalt avvik på  .   ----------------------------------------------------------------------------------------------------------------------------   def g(x):
-
-=== CONTAINER 176 (text) ===
-return  ((x**2+12)/8, (x**2+12), (x**2+8)/12, (x**2+16))
-
-=== CONTAINER 177 (text) ===
-x = 0
-
-=== CONTAINER 178 (text) ===
-while  (abs(g(x)) > 1e-6, abs(g(x)-x) > 1e-6, abs(x) < 1e-6, abs(g(x)-x) < 1e-
-
-=== CONTAINER 179 (text) ===
-(x = g(x), x = x - g(x)/g_deriv(x), x += g(x), x += 1e-6)
-
-=== CONTAINER 180 (text) ===
-print(f"Tilnærmet løsning funnet: x = {x}")
-
-=== CONTAINER 181 (text) ===
-Maks poeng: 7.5
-
-=== CONTAINER 182 (text) ===
-Velg alternativ
-
-=== CONTAINER 183 (text) ===
-Velg alternativ
-
-=== CONTAINER 184 (text) ===
-Velg alternativ
-
-=== CONTAINER 185 (text) ===
-17  Absolutt og relativ feil
-
-=== CONTAINER 186 (text) ===
-I numerikk bruker vi ofte  absolutt feil   og  relativ feil  til å evaluere nøyaktigheten til en numerisk beregning. Gitt en eksakt tallverdi y og en tilnærmet tallverdi x, vil den matematiske definisjonen på absolutt og relativ feil være:
-
-=== CONTAINER 187 (text) ===
-Funksjonen nedenfor har som oppgave å sjekke om to tall  x  og  y  er tilnærmet like gitt en absolutt toleranse  atol  og relativ toleranse  rtol . Funksjonen skal returnere  True  dersom
-
-=== CONTAINER 188 (text) ===
-eller  dersom  , og returnere  False  for alle andre tilfeller.
-
-=== CONTAINER 189 (text) ===
-Fullfør koden til funksjonen  is_approx_equal  slik at den fungerer som beskrevet over, samtidig som den unngår "ulovlige" matematiske regneoperasjoner (dvs. regneoperasjoner som gir feilmelding i Python).
-
-=== CONTAINER 190 (text) ===
-def is_approx_equal(x, y, rtol, atol):
-
-=== CONTAINER 191 (text) ===
-if  (abs(x - y) <= max(atol, abs(y)*rtol), abs((x - y)/y) <= rtol and abs(x -
-
-=== CONTAINER 192 (text) ===
-y) <= atol, [(x - y)/y] >= rtol and [x - y] >= atol, abs(x - y) <= min(atol, abs(y)*rtol)):         return True     else:         return False
-
-=== CONTAINER 193 (text) ===
-Maks poeng: 7
-
-=== CONTAINER 194 (text) ===
-Velg alternativ
+=== CONTAINER 47 (image) ===

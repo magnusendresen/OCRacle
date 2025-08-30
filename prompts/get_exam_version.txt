@@ -5,7 +5,7 @@ What exam edition is this exam?
   If the exam is in the late summer or early autumn, it should be titled Kont 20XX.
   Of course 20XX is just an example here, write the actual year.
 
-  If the collection of tasks is part of an "Øving" (CAPQuiz), just respond with "CAPQuiz Øving X" (without quotation marks and the number replacing the X).
+  If the collection of tasks is part of an "Øving" or "Arbeidskrav", just respond with "Øving X" (without quotation marks and the number replacing the X).
 
 
   The title of the pdf is {pdf_dir} which might help you, or not.

@@ -39,6 +39,7 @@ Code and programming:
   <pre class="code-box"><code>...</code></pre>
   <div class="math">...</div> (if applicable)
 - Preserve all syntax and line breaks exactly as they appear in the original text. Remember that Python is extremely indentation-sensitive, so format accordingly.
+- Only use code formatting if the task actually has code in it, not for regular math tasks that have nothing to do with programming.
 
 Multiple choice:
 - For multiple-choice questions with text or image options, follow these rules:

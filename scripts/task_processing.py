@@ -4,7 +4,8 @@ import task_boundaries
 import ocr_pdf
 from project_config import *
 from project_config import load_prompt, emphasize
-from utils import log, write_progress, update_progress_fraction
+from utils import log, write_progress, update_progress_fraction, timer
+
 import object_handling
 
 import asyncio
@@ -145,7 +146,6 @@ async def get_exam_info() -> Exam:
         print(f"[WARNING] PDF file not found: {pdf_path}")
     pdf_dir = str(pdf_path)
 
-    from utils import timer, update_progress_fraction
 
     def _det_cb(current: int, total: int):
         update_progress_fraction(8, current, total)
@@ -224,11 +224,15 @@ async def get_exam_info() -> Exam:
         is_num=False,
         max_len=20,
     )
+    log(f"Raw exam version response: {exam_raw_version}")    
+    
     exam_raw_version = str(exam_raw_version).strip().upper()
     if exam_raw_version[0] in ["V", "H", "K"]:
         version_abbr = exam_raw_version[0].upper() + exam_raw_version[-2:]
+        log(f"Detected this pdf to be an exam from {version_abbr}.")
     else:
-        version_abbr = exam_raw_version[8:]
+        version_abbr = exam_raw_version
+
     exam.exam_version = version_abbr
     object_handling.add_exam(exam.subject, exam.exam_version)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
@@ -255,7 +259,7 @@ async def get_exam_info() -> Exam:
 
     prev_topics = ""
     if json_enum_topics is not None and len(json_enum_topics) > 1:
-        prev_topics = str(
+        prev_topics = (
             f"Følgende temaer er funnet i tidligere eksamner, som du dermed ikke trenger å skrive er: {json_enum_topics}, {json_ign_topics}. " +
             "Om det ikke er noen temaer som mangler, svar kun med tallet null '0' (uten anførselstegn). " +
             "Dette betyr ikke nødvendigvis at de dekker hele denne eksamen, så du må da fortsatt finne de temaene som er relevante for denne eksamen. " +
@@ -268,13 +272,25 @@ async def get_exam_info() -> Exam:
 
     learning_goals = get_learning_goals(exam.subject)
     log(f"Fetched learning goals from NTNU website for {str(exam.subject)} with {len(learning_goals)} characters.")
+    Learning_goals_str = ""
+    if learning_goals and len(learning_goals) > 2000:
+        Learning_goals_str = (
+            "Her er beskrivelsen av emnet fra NTNU sine nettsider: " + learning_goals +
+            "Det er derimot viktigst at du baserer deg på teksten knyttet til hver enkelt oppgave fra eksamen, så ikke stol blindt på beskrivelsen av emnet. "
+            "Det er trolig et forhold på omtrent 0.7-1.0 temaer per oppgave i denne eksamen. "
+        )
+        log(f"Learning goals extracted from NTNU website.")
+    else:
+        log("No learning goals found on NTNU website.")
 
+
+    # Making a test to see if all contents of the upcoming prompt is has contents
+    for content in [PROMPT_CONFIG, load_prompt("exam_topics"), prev_topics, Learning_goals_str, ocr_text]:
+        if content is None or len(content) < 5:
+            log(f"[WARNING] One of the contents for the exam topics prompt is very short or empty: {content}")
 
     new_topics = await prompt_to_text.async_prompt_to_text(
-        PROMPT_CONFIG + load_prompt("exam_topics") + prev_topics +
-        "Her er beskrivelsen av emnet fra NTNU sine nettsider: " + learning_goals +
-        "Det er derimot viktigst at du baserer deg på teksten knyttet til hver enkelt oppgave fra eksamen, så ikke stol blindt på beskrivelsen av emnet. " +
-        "Det er trolig et forhold på omtrent 0.7-1.0 temaer per oppgave i denne eksamen. " +
+        PROMPT_CONFIG + load_prompt("exam_topics") + prev_topics + Learning_goals_str +
         "Her er teksten fra eksamen: " + ocr_text,
         max_tokens=1000,
         is_num=False,

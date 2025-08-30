@@ -427,7 +427,7 @@ async def validate_containers(
             log(f"Container for task {task_num} not found, skipping.")
             invalid_tasks.add(task_num)
             continue
-        if container[1] - container[0] < 100:
+        if container[1] - container[0] < 10:
             log(f"Container for task {task_num} is too small, skipping.")
             invalid_tasks.add(task_num)
             continue
