@@ -5,6 +5,8 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <vector>
+#include <filesystem>
 
 #include "subprojects/animationwindow/include/Widget.h"
 #include "widgets/TextBox.h"
@@ -20,11 +22,14 @@ public:
 
     void GUI();
     void pdfHandling(TDT4102::TextBox* chosenFile);
+    void dirHandling();
     void startProcessing();
     void calculateProgress();
     void startTimer();
     void stopTimer();
     void update();
+    void onBatchItemComplete();
+    void launchCurrentPdf();
     
     static constexpr int buttonWidth = 200;
     static constexpr int buttonHeight = 100;
@@ -41,6 +46,8 @@ public:
     TDT4102::TextBox *selectedSolution;
     TDT4102::Button *formulaSheetUpload;
     TDT4102::TextBox *selectedFormulaSheet;
+    TDT4102::Button *examFolderUpload;
+    TDT4102::TextBox *pdfBatchCounter;
 
     TDT4102::TextBox *examSubject;
     TDT4102::TextInput *examSubjectInput;
@@ -60,6 +67,13 @@ public:
     std::thread timerThread;
     std::chrono::time_point<std::chrono::steady_clock> startTime;
     bool timerRunning = false;
+    
+    // Batch processing state
+    bool batchMode = false;
+    std::vector<std::filesystem::path> batchPdfList;
+    size_t batchIndex = 0;
+    bool completionHandled = false;
+    
 private:
 
 };

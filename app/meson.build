@@ -25,12 +25,15 @@ endif
 
 src = []
 
+cc = meson.get_compiler('cpp')
+ole32_dep = cc.find_library('ole32', required: host_machine.system() == 'windows')
+
 exe = executable(
   'program',
   src,
 'App.cpp',
 'ProgressBar.cpp',
 'main.cpp',
-  dependencies : [animationwindow_dep, sdl2_dep, std_lib_facilities_dep],
+  dependencies : [animationwindow_dep, sdl2_dep, std_lib_facilities_dep, ole32_dep],
   cpp_args : compiler_flags
 )

@@ -225,7 +225,7 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
         max_tokens=1000, is_num=True, max_len=3
     )
 
-    print(f"\n\n\n LLM task amount: {llm_task_amount}\n\n\n")
+    log(f"LLM estimated {llm_task_amount} tasks.")
 
     prompt = (
         PROMPT_CONFIG

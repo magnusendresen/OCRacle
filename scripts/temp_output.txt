@@ -1,320 +1,391 @@
 
 
 === CONTAINER 0 (text) ===
-1 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   a) Verdensrekorden for menn på   er  . Hvor mange   (kilometer per time) tilsvarer dette? Velg ett alternativ:
+1 Hvor mange   tilsvarer en akselerasjon på  ? Velg ett alternativ:
 
 === CONTAINER 1 (text) ===
-b) Jorda går i en sirkelbane rundt Sola med radius   (150 millioner kilometer), og bruker 365 dager på én runde.  Bestem banefarten til Jorda.   Velg ett alternativ
-
-=== CONTAINER 2 (text) ===
-Maks poeng: 4
-
-=== CONTAINER 3 (text) ===
-2 Et legeme som i utgangspunktet henger i ro, faller ved   vertikalt nedover under påvirkning av tyngdekraften,  uten  luftmotstand. Vi legger inn et koordinatsystem slik at positiv  -retning er loddrett nedover, som vist på figuren.
-
-=== CONTAINER 4 (image) ===
-@:t=0
-
-0
-
-y
-
-
-=== CONTAINER 5 (text) ===
-Hvilken av grafene A-E til høyre viser posisjonen   for det fallende legemet? Velg ett alternativ
-
-=== CONTAINER 6 (text) ===
 Maks poeng: 2
 
+=== CONTAINER 2 (text) ===
+2 Figuren under viser akselerasjonsgrafen   for en som løper 100 m.
+
+=== CONTAINER 3 (image) ===
+Start
+
+
+=== CONTAINER 4 (text) ===
+Hvilken påstand om løperens bevegelse er riktig? Velg ett alternativ:
+
+=== CONTAINER 5 (text) ===
+Løperen løper med jevnt økende fart fra start til mål.
+
+=== CONTAINER 6 (text) ===
+Løperen holder tilnærmet konstant fart gjennom hele løpet.
+
 === CONTAINER 7 (text) ===
-3 En badevekt er en kraftmåler som viser krafta som til enhver tid presser normalt ned på badevekta. Badevekta er imidlertid kalibrert til å vise krafta i "kg", slik at  .   En kasse er plassert på badevekta i de to situasjonene på figuren under. Når badevekta og kassa står på horisontalt underlag, viser badevekta   (til venstre).
+Løperen akselererer opp til en maksimal fart, som holdes konstant til målstreken.
 
-=== CONTAINER 8 (image) ===
-oe
-
-Horisontalt Skratt
-underlag underlag
-
+=== CONTAINER 8 (text) ===
+Løperen akselererer opp til en maksimal fart, men farten dabber av mot målstreken.
 
 === CONTAINER 9 (text) ===
-Så plasseres badevekta, med kassa oppå, på et skrått underlag med helningsvinkel  , slik at kassa står i ro oppå vekta. Hva viser badevekta i denne situasjonen (til høyre)? Velg ett alternativ:
+Løperen starter med en viss maksimal fart, som så avtar mot mål.
 
 === CONTAINER 10 (text) ===
 Maks poeng: 2
 
 === CONTAINER 11 (text) ===
-4 En vogn med masse   i en berg-og-dalbane har en viss banefart   i det den kjører over en bakketopp formet som del av en sirkel med radius  . Vogna beholder hele tiden kontakten med underlaget. Se figuren under.
+3 En pil skytes med horisontal startfart   mot en vegg i horisontal avstand   fra skytteren. Se figuren under.
 
 === CONTAINER 12 (image) ===
 
 
 === CONTAINER 13 (text) ===
-Hvilken påstand om normalkrafta   fra underlaget på vogna vil alltid gjelde i det vogna passerer toppen (situasjonen vist på figuren)?   Velg ett alternativ:
+Bestem den vertikale avstanden   mellom siktelinja (startfarten) og punktet der pilen treffer veggen, dersom pilen betraktes som en punktpartikkel og vi neglisjerer luftmotstand. Velg ett alternativ:
 
 === CONTAINER 14 (text) ===
 Maks poeng: 2
 
 === CONTAINER 15 (text) ===
-5 En person med masse   som i utgangspunktet står på bakkenivå, har på seg en sele som er festet til en stram strikk. Den andre enden av strikken er festet til en høy kran. På et gitt signal utløses strikken, slik at personen spretter til værs. Strikken kan antas å være masseløs samt følge Hookes lov med fjærkonstant  , og har lengden   i ustrukket/slapp tilstand. Forlengelsen av strikken er  . Se figuren under.
+4 En kloss med masse   glir med konstant fart nedover et skråplan med helningsvinkel  . Klossens fart er såpass liten at luftmotstand kan neglisjeres. Se figuren under.
 
 === CONTAINER 16 (image) ===
-_------~ ac -. (toppunktet)
+"= Konstant
 
-— D (nivå med krana)
+Lk
 
 
 
 === CONTAINER 17 (text) ===
-I hvilket av punktene A-E er hopperens fart maksimal på vei  oppover ?
+Hva er glidefriksjonstallet   mellom klossen og underlaget? Velg ett alternativ:
 
 === CONTAINER 18 (text) ===
-Velg ett alternativ:
+Avhenger av tallverdien til massen
 
 === CONTAINER 19 (text) ===
 Maks poeng: 2
 
 === CONTAINER 20 (text) ===
-6 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En skihopper starter fra ro og sklir uten friksjon ned overrennet i en hoppbakke. Høydeforskjellen mellom startpunktet og hoppkanten er  . Vi ser bort fra luftmotstand i hele denne oppgaven.
+5 En ball kastes loddrett oppover med en viss startfart   i punkt A, kommer til et høyeste punkt C og faller ned igjen til utgangspunktet. Luftmotstanden på ballen er proporsjonal med kvadratet av ballens fart. Tyngdeakselerasjonen    kan antas konstant under ballens bevegelse.
 
-=== CONTAINER 21 (image) ===
+=== CONTAINER 21 (text) ===
+Figuren under viser ballen i 5 ulike punkter A-E i banen (bevegelsen er rettlinjet, men banen er tegnet svakt parabelformet for å lettere identifisere ulike punkt i banen).
 
+=== CONTAINER 22 (image) ===
+——— —— —
 
-=== CONTAINER 22 (text) ===
-a) Tegn kreftene som virker på hopperen på vei ned overrennet, og forklar hvorfor hopperens mekaniske energi er bevart. (4 poeng)   b) Vis at hopperen har farten   ved hoppkanten. (3 poeng)
 
 === CONTAINER 23 (text) ===
-c) Hopperen forlater hoppkanten med horisontal fart. Hvor langt unna hoppkanten i horisontal retning lander hopperen (avstanden   på figuren), når hopperen lander på den horisontale bakken som ligger en vertikal avstand   under hoppkanten? (4 poeng)
+I hvilket punkt er absoluttverdien av ballens akselerasjon størst?
 
 === CONTAINER 24 (text) ===
-d) Beregn følgende i nedslagspunktet, dvs. der hopperen treffer bakken: i) Absoluttverdien av farten (2 poeng) ii) Fartens retning (2 poeng)
-
-=== CONTAINER 25 (text) ===
-Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark.
-
-=== CONTAINER 26 (text) ===
-Skriv ditt svar her
-
-=== CONTAINER 27 (text) ===
-Format
-
-=== CONTAINER 28 (text) ===
-
-
-=== CONTAINER 29 (text) ===
-   Σ   
-
-=== CONTAINER 30 (text) ===
-Words: 0
-
-=== CONTAINER 31 (text) ===
-Maks poeng: 15
-
-=== CONTAINER 32 (text) ===
-7 En syklist sykler med konstant fart  opp en oppoverbakke med helningsvinkel . En enkel sykkelcomputer fungerer slik at brukeren taster inn informasjon om den totale massen   av sykkel + syklist, og så bruker computeren sensorer som måler syklistens fart   samt vinkelen   til å beregne effekten P som syklisten produserer. Denne enkle computeren tar ikke med luftmotstand i beregningen. Se figuren under.
-
-=== CONTAINER 33 (image) ===
-
-
-=== CONTAINER 34 (text) ===
-Hva må stå i kodelinja KODE MANGLER for at funksjonen P(v,theta) skal gi effekten som syklisten produserer, som funksjon av farten   målt i m/s og helningsvinkelen   målt i grader?
-
-=== CONTAINER 35 (text) ===
-import math   def P(v,theta):
-
-=== CONTAINER 36 (text) ===
-m=80     g=9.81    return KODE MANGLER Velg ett alternativ:
-
-=== CONTAINER 37 (text) ===
-(m*g*math.sin(math.radians(theta)))*v**3
-
-=== CONTAINER 38 (text) ===
-(m*g*math.cos(math.radians(theta)))*v**2
-
-=== CONTAINER 39 (text) ===
-(m*g*math.sin(math.radians(theta)))*v
-
-=== CONTAINER 40 (text) ===
-(m*g*math.cos(math.radians(theta)))*v
-
-=== CONTAINER 41 (text) ===
-(m*g*math.sin(math.radians(theta)))*v**2
-
-=== CONTAINER 42 (text) ===
-Maks poeng: 2
-
-=== CONTAINER 43 (text) ===
-8 Et kulelager består av en hylse i form av en tynnvegget sylinder ("hoop") med masse   og radius  , og 8 stk. massive kuler med masse   og radius  . Massesenteret til kulene ligger på en sirkel med radius   i forhold til sentrum i kulelageret. Se figuren under.
-
-=== CONTAINER 44 (image) ===
-
-
-=== CONTAINER 45 (text) ===
-Hylsen og de 8 massive kulene kan rotere om en akse gjennom sentrum av kulelageret som står normalt på figurplanet (aksen er inntegnet på figuren), mens den indre kanten av kulelageret (med radius  ) ikke roterer. Bestem treghetsmomentet til kulelageret om denne aksen.
-
-=== CONTAINER 46 (text) ===
 Velg ett alternativ:
 
-=== CONTAINER 47 (text) ===
+=== CONTAINER 25 (text) ===
+A (like etter at ballen er kastet)
+
+=== CONTAINER 26 (text) ===
+B (midtveis til toppen, på vei opp)
+
+=== CONTAINER 27 (text) ===
+C (toppunktet)
+
+=== CONTAINER 28 (text) ===
+D (midtveis til toppen, på vei ned)
+
+=== CONTAINER 29 (text) ===
+E (like før ballen er tilbake til utgangspunktet)
+
+=== CONTAINER 30 (text) ===
 Maks poeng: 2
+
+=== CONTAINER 31 (text) ===
+6 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En vogn med masse   i en berg-og-dalbane starter med null startfart fra en høyde   over det laveste punktet A i en sirkulær loop med radius  . Vogna er ikke festet til underlaget, og kan gli friksjonsfritt på skinnene i banen. Se figuren under.
+
+=== CONTAINER 32 (image) ===
+
+
+=== CONTAINER 33 (text) ===
+Vi ser bort fra friksjon og luftmotstand i hele denne oppgaven, og vogna kan betraktes som et punktlegeme.
+
+=== CONTAINER 34 (text) ===
+a) Vis at farten til vogna i det laveste punktet i loopen (punkt A) er  . (3 poeng)
+
+=== CONTAINER 35 (text) ===
+b) Tegn kreftene som virker på vogna i det øverste punktet i loopen (punkt C) og bestem absoluttverdien av normalkrafta fra underlaget på vogna, uttrykt ved vognas tyngde  .  For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn . (3 poeng)   c) I hvilke(t) punkt A-D i loopen er absoluttverdien av vognas bane-/tangentielle akselerasjon    størst ? Svaret må begrunnes kort i form av en illustrerende figur. (3 poeng)
+
+=== CONTAINER 36 (text) ===
+d) Etter å ha passert loopen fortsetter vogna i oppoverbakke med toppunkt i E, som vist på figuren over. Tegn en figur som viser kreftene på vogna i E, for to ulike scenarier - f or full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn.
+
+=== CONTAINER 37 (text) ===
+i) Vogna har kontakt med underlaget over bakketoppen (3 poeng) ii) Vogna mister akkurat kontakten med underlaget i punkt E (3 poeng)   Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark. Skriv ditt svar her
+
+=== CONTAINER 38 (text) ===
+Maks poeng: 15
+
+=== CONTAINER 39 (text) ===
+7 Figuren viser fem ulike punkter i et strikkhopp, der en person med masse   slipper seg fra ro og faller loddrett nedover. Strikken kan antas å følge Hookes lov med fjærkonstant  , og har lengden   i ustrukket/slapp tilstand. Forlengelsen av strikken er  . Vi ser bort fra luftmotstand.
+
+=== CONTAINER 40 (image) ===
+Slipper seg heritra
+
+———————————————————————————————— A (x = 0)
+———————————————————————————————————— -B (kx < mg)
+————————————————————————————————————— C (kx = mg)
+————————————————————————————————— ----+ D (kx > mg)
+——————————————————————————————————————— -E (laveste punkt)
+
+
+=== CONTAINER 41 (text) ===
+I hvilket punkt er absoluttverdien av hopperens fart maksimal?
+
+=== CONTAINER 42 (text) ===
+Velg ett alternativ:
+
+=== CONTAINER 43 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 44 (text) ===
+8 Et kvadratisk legeme består av 4 tynne, homogene stenger, hver med masse   og lengde . Legemet kan rotere om en akse gjennom legemets massesenter som står vinkelrett på legemet, indikert på figuren under (stiplede linjer er hjelpelinjer).
+
+=== CONTAINER 45 (image) ===
+
+
+=== CONTAINER 46 (text) ===
+
+
+=== CONTAINER 47 (text) ===
+Bestem legemets treghetsmoment  om aksen. Velg ett alternativ:
 
 === CONTAINER 48 (text) ===
-9 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En homogen, massiv kule med masse   og radius   ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel  . Se figuren under.
-
-=== CONTAINER 49 (image) ===
-
-
-=== CONTAINER 50 (text) ===
-Farten er såpass liten at luftmotstanden kan neglisjeres.
-
-=== CONTAINER 51 (text) ===
-a) Tegn kreftene på kula mens den ruller nedover skråplanet.  For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren . (3 poeng)
-
-=== CONTAINER 52 (text) ===
-b) Forklar kort (maks. 5 linjer) hvorfor den mekaniske energien til kula er bevart under rullingen. (3 poeng)   c) Bestem farten til kula nederst i skråplanet dersom den starter en høyde   over bunnen. (3 poeng)   d) Vis at akselerasjonen til kula nedover skråplanet er  . (3 poeng)
-
-=== CONTAINER 53 (text) ===
-e) Kula starter fra ro i   ved  . Skisser kulas posisjonsgraf  , fartsgraf   og akselerasjonsgraf  .  For full uttelling må det være et  resonnement  som argumenterer for grafens  form , og formen må framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.  (3 poeng)   Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark. Skriv ditt svar her
-
-=== CONTAINER 54 (text) ===
-Format
-
-=== CONTAINER 55 (text) ===
-
-
-=== CONTAINER 56 (text) ===
-   Σ   
-
-=== CONTAINER 57 (text) ===
-Words: 0
-
-=== CONTAINER 58 (text) ===
-Maks poeng: 15
-
-=== CONTAINER 59 (text) ===
-10 a) I 2023 imploderte undervannsfartøyet "Titan" katastrofalt i en dybde av  . Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var  . Velg ett alternativ
-
-=== CONTAINER 60 (text) ===
-b) En badeball er formet som en kule med radius  . Beregn oppdrifta på ballen dersom hele ballen er under vann. Velg ett alternativ
-
-=== CONTAINER 61 (text) ===
-Oppdriften avhenger av hvilken dybde badeballen befinner seg i
-
-=== CONTAINER 62 (text) ===
-Oppdriften avhenger av massen av badeballen
-
-=== CONTAINER 63 (text) ===
-Maks poeng: 4
-
-=== CONTAINER 64 (text) ===
-11 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   Et åpent, vannfylt basseng har rektangulær bunn med grunnflate  , og vannspeilet i bassenget ligger i utgangspunktet en høyde   over utløpet til et tapperør med diameter  i bunnen av bassenget. Det er lufttrykk   over vannspeilet og ved rørutløpet. Se figuren under.
-
-=== CONTAINER 65 (image) ===
-Po
-
-Po
-
-
-=== CONTAINER 66 (text) ===
-a) Forklar kort hva Bernoullis likning for et ideelt fluid uttrykker, og angi forutsetningene for at likningen skal være gyldig (til sammen maks. 5 linjer). (3 poeng) b) Neglisjer alle former for tap og vis at vannspeilet i bassenget synker med en fart på   idet tappingen starter. (3 poeng) c) Bestem væskefarten og volumstrømmen i røret idet tappingen starter dersom vi neglisjerer alle former for tap. (3 poeng) d) Tapperøret har en total lengde  , ruhet   og har et  -rørbend med tapskoeffisient . I tillegg har rørinnløpet en tapskoeffisient   (se figuren over).  Væskefarten i røret måles til  . Beregn i) Den totale tapshøyden (2 poeng)
-
-=== CONTAINER 67 (text) ===
-ii) Det totale trykktapet  (1 poeng) e) En driftig bassengeier ønsker å utnytte energien fra strømmen i tapperøret. Hvor stor effekt kan hentes ut herifra?  (3 poeng)
-
-=== CONTAINER 68 (text) ===
-Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark . Skriv ditt svar her
-
-=== CONTAINER 69 (text) ===
-Format
-
-=== CONTAINER 70 (text) ===
-
-
-=== CONTAINER 71 (text) ===
-   Σ   
-
-=== CONTAINER 72 (text) ===
-Words: 0
-
-=== CONTAINER 73 (text) ===
-Maks poeng: 15
-
-=== CONTAINER 74 (text) ===
-12 Tre homogene kuler A, B og C  med samme masse   henger i masseløse snorer med lengde . Kulene har radier hhv.  ,   og  . Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Se figuren under.
-
-=== CONTAINER 75 (image) ===
-
-
-=== CONTAINER 76 (text) ===
-Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene  ,   og   til de tre pendlene? Velg ett alternativ:
-
-=== CONTAINER 77 (text) ===
 Maks poeng: 2
 
+=== CONTAINER 49 (text) ===
+9 Et legeme slippes fra ro og faller vertikalt under påvirkning av den konstante tyngdekraften   og luftmotstanden  .
+
+=== CONTAINER 50 (text) ===
+a) Vi skal skrive en Python-funksjon som beregner  , for gitte verdier av   (gitt i  ),   og   (gitt i  ).   Hva skal stå i kodelinja KODE MANGLER for at Pyton-funksjonen Fd(v) skal returnere luftmotstanden   i newton på legemet, når funksjonsargumentet v (farten  ) angis i kilometer per time (km/h)?   def Fd(v):
+
+=== CONTAINER 51 (text) ===
+rho=1.2     A=0.70      Cd=1.0      return KODE MANGLER
+
+=== CONTAINER 52 (text) ===
+Velg ett alternativ:
+
+=== CONTAINER 53 (text) ===
+b) Vi skal numerisk bestemme farten   for det fallende legemet ved å anta akselerasjonen som konstant over et lite tidssteg  , for  . Funksjonen for luftmotstanden   fra oppgave a) har nå blitt re- definert, slik at Fd(v) gir luftmotstanden i newton når funksjonsargumentet v (farten  ) angis i meter per sekund (m/s).   Hva skal stå i kodelinja KODE MANGLER for å beregne farten   etter det neste tidssteget, dvs.  ?
+
+=== CONTAINER 54 (text) ===
+g=9.81 t=0 v=0 #fart i m/s
+
+=== CONTAINER 55 (text) ===
+while (t < t_maks):        KODE MANGLER         t=t+dt Velg ett alternativ
+
+=== CONTAINER 56 (text) ===
+0.5*rho*A*Cd*(v/3.6)**2
+
+=== CONTAINER 57 (text) ===
+0.5*rho*A*Cd*(v*3.6)**2
+
+=== CONTAINER 58 (text) ===
+0.5*rho*A*Cd*(v*3.6)^2
+
+=== CONTAINER 59 (text) ===
+0.5*rho*A*Cd*v^2
+
+=== CONTAINER 60 (text) ===
+0.5*rho*A*Cd*v**2
+
+=== CONTAINER 61 (text) ===
+v=v+(g+Fd(v)/m)*dt
+
+=== CONTAINER 62 (text) ===
+v=v+(g-Fd/m)*dt
+
+=== CONTAINER 63 (text) ===
+v=v+g*dt
+
+=== CONTAINER 64 (text) ===
+v=v+(g+Fd/m)*dt
+
+=== CONTAINER 65 (text) ===
+v=v+(g-Fd(v)/m)*dt
+
+=== CONTAINER 66 (text) ===
+Maks poeng: 4
+
+=== CONTAINER 67 (text) ===
+10 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En homogen, massiv sylinder med masse   og radius   ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel  . Se figuren under.
+
+=== CONTAINER 68 (image) ===
+
+
+=== CONTAINER 69 (text) ===
+Farten er såpass liten at luftmotstanden kan neglisjeres.
+
+=== CONTAINER 70 (text) ===
+a) Tegn kreftene på sylinderen mens den ruller nedover skråplanet.  For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren, og alle kreftene må ha navn . (3 poeng)
+
+=== CONTAINER 71 (text) ===
+b) Vis at akselerasjonen til sylinderen nedover skråplanet er  . (3 poeng)
+
+=== CONTAINER 72 (text) ===
+c) Hvor lang tid bruker sylinderen på å rulle ned skråplanet dersom lengden av skråplanet er   og sylinderen starter fra ro? (3 poeng)
+
+=== CONTAINER 73 (text) ===
+d) Sylinderen starter i   ved  . Skisser sylinderens posisjonsgraf  , fartsgraf   og akselerasjonsgraf  .  For full uttelling må grafens  form  framgå tydelig .  Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.  (3 poeng)
+
+=== CONTAINER 74 (text) ===
+e) Sylinderen deltar deretter i et "kappløp" med en tynnvegget sylinder (ring) med samme masse   og radius   som sylinderen. De to legemene slippes samtidig med null startfart fra samme startpunkt, og begge ruller lengden   til enden av skråplanet. i) Hvilket legeme kommer først i "mål"? Svaret må begrunnes kort (enten med et kvalitativt argument, eller ved utregning). (2 poeng) ii) Hva blir tidsdifferansen   for "målgang" mellom de to legemene? (1 poeng)
+
+=== CONTAINER 75 (text) ===
+Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark.
+
+=== CONTAINER 76 (text) ===
+Skriv ditt svar her
+
+=== CONTAINER 77 (text) ===
+Maks poeng: 15
+
 === CONTAINER 78 (text) ===
-13 En kloss med masse   er festet til en fjær med fjærkonstant  , og kan svinge horisontalt ( -retningen på figuren til venstre). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft   rettet mot fartsretningen, der   er farten til klossen. Se figuren under.
+11 En homogen terning med sidekant   flyter i utgangspunktet i ro i et kar med vann som har dybde  . I utgangspunktet flyter terningen slik at   ligger under vannoverflaten. Terningen presses deretter nedover i vannet, helt til den nederste sidekanten er i kontakt med bunnen av karet. Se figuren under.
 
 === CONTAINER 79 (image) ===
+2h
+
+AI
+
+Startsituasjon
+
+Sluttsituasjon
 
 
 === CONTAINER 80 (text) ===
-Klossen trekkes ut til siden og slippes. Posisjonen   til klossen er vist i grafen til høyre. Beregn verdien av
+Hvilken av grafene A-E viser oppdriften   på terningen som funksjon av dybden til den nederste sidekanten? Enhetene på aksene i figuren er ikke tegnet i riktig skala.
 
-=== CONTAINER 81 (text) ===
-dempingskonstanten  . [Hint: amplituden for en svakt dempet svingning er  .] Velg ett alternativ:
+=== CONTAINER 81 (image) ===
+dybde av
+2h  nedre sidekant
+
+
 
 === CONTAINER 82 (text) ===
-Maks poeng: 2
-
-=== CONTAINER 83 (text) ===
-14 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) Gitt følgende to sinusformede tversbølger:
-
-=== CONTAINER 84 (text) ===
-Hvilken påstand om den resulterende bølgen er riktig?
-
-=== CONTAINER 85 (text) ===
 Velg ett alternativ:
 
+=== CONTAINER 83 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 84 (text) ===
+12 Olje med massetetthet   skal tappes fra et reservoar på havbunnen gjennom et vertikalt rør med lengde   og diameter  . Trykket i reservoaret i det tappingen starter er  , og oljen er tilnærmet i ro idet den kommer inn i røret. På overflata kommer oljen ut i luft der lufttrykket er  . Se figuren under.
+
+=== CONTAINER 85 (image) ===
+Po
+
+
+
 === CONTAINER 86 (text) ===
-b) En stående bølge er gitt ved uttrykket
+a) Vis at væskefarten ut av røret ved overflaten er   når vi neglisjerer alle former for tap. (3 poeng) b) Bestem volumstrømmen i røret. (3 poeng) c) Trykket i reservoaret vil reduseres etter hvert som olje tappes ut. Hva er trykket i reservoaret når oljestrømmen stopper opp? (3 poeng)
 
 === CONTAINER 87 (text) ===
-.   Hva er den absoluttverdien av den maksimale vertikale farten   til et punkt på bølgen?
+I resten av oppgaven skal vi ta hensyn til energitap for fluidstrømmen. d) Røret har ruhet  , og oljen har dynamisk viskositet  . På grunn av rørfriksjon måles væskefarten i røret til  . Bestem friksjonsfaktoren   for væskestrømmen i røret. (3 poeng)
 
 === CONTAINER 88 (text) ===
-Velg ett alternativ
+e) Beregn tapshøyden   på grunn av rørfriksjon under samme forutsetninger som i oppgave d). Forklar kort (maks. 3-4 linjer) hva tapshøyden representerer. (3 poeng)   Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark .
 
 === CONTAINER 89 (text) ===
-Resulterende bølge blir en stående bølge med maksimal amplitude
+Skriv ditt svar her
 
 === CONTAINER 90 (text) ===
-Resulterende bølge blir en stående bølge med maksimal amplitude
+Maks poeng: 15
 
 === CONTAINER 91 (text) ===
-Resulterende bølge blir null; bølgene utslokker hverandre
+13 Figuren under viser en tynnvegget sylinder (ring) med masse   og radius   som svinger friksjonsfritt med små vinkelutslag  om en akse gjennom periferien. Aksen står normalt på figuren.
 
-=== CONTAINER 92 (text) ===
-Resulterende bølge beveger seg mot høyre og har maksimal amplitude
+=== CONTAINER 92 (image) ===
+akse aks E
+
+— —
+
+Henger i ro Svinger om aksen
+
 
 === CONTAINER 93 (text) ===
-Resulterende bølge beveger seg mot høyre og har maksimal amplitude
+Hva blir svingetiden (perioden)   for svingningene? Velg ett alternativ:
 
 === CONTAINER 94 (text) ===
-Maks poeng: 4
+Maks poeng: 2
 
 === CONTAINER 95 (text) ===
-15 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) En vibrerende streng med lengde  , masse   og snorstramming ("tension")   er spent fast i begge ender.
+14 Figuren under viser en kloss med masse   som er festet til en fjær med fjærkonstant  , og som kan svinge horisontalt ( -retningen på figuren). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft
 
 === CONTAINER 96 (text) ===
-Bestem grunnfrekvensen til strengen, dvs. den laveste frekvensen som gir en stående bølge. Velg ett alternativ:
+rettet mot fartsretningen, der   er farten til klossen.
 
 === CONTAINER 97 (text) ===
-b) En bestemt streng med lengde  , lineær massetetthet   og snorstramming   som er spent opp i begge ender, vibrerer med grunnfrekvensen   (dvs. frekvensen tilsvarende ordenstall  ).
+Dempingskonstanten   er slik at klossen utfører svakt/underkritisk dempede svingninger.
 
-=== CONTAINER 98 (text) ===
-Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært  , massetettheten   og snorstrammingen   (dvs. alle størrelser halveres)?
+=== CONTAINER 98 (image) ===
+Veskas dempings-
+konstant b
+
+
 
 === CONTAINER 99 (text) ===
-Velg ett alternativ
+Klossen dras ut til startamplitude   og slippes. I hvilket av de angitte punktene er klossens akselerasjon størst?
 
 === CONTAINER 100 (text) ===
+Velg ett alternativ:
+
+=== CONTAINER 101 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 102 (text) ===
+15 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) Følgende to sinusformede tversbølger møtes:
+
+=== CONTAINER 103 (text) ===
+Hvilken påstand om den resulterende bølgen er riktig? Velg ett alternativ:
+
+=== CONTAINER 104 (text) ===
+b) En stående bølge er gitt ved uttrykket
+
+=== CONTAINER 105 (text) ===
+.   Hva er den maksimale vertikale farten   til et punkt på bølgen?
+
+=== CONTAINER 106 (text) ===
+Velg ett alternativ
+
+=== CONTAINER 107 (text) ===
+Resulterende bølge blir en stående bølge med maksimal amplitude
+
+=== CONTAINER 108 (text) ===
+Resulterende bølge blir en stående bølge med maksimal amplitude
+
+=== CONTAINER 109 (text) ===
+Resulterende bølge blir null; bølgene utslokker hverandre
+
+=== CONTAINER 110 (text) ===
+Resulterende bølge beveger seg mot høyre med fart
+
+=== CONTAINER 111 (text) ===
+Resulterende bølge beveger seg mot venstre med fart
+
+=== CONTAINER 112 (text) ===
+Maks poeng: 4
+
+=== CONTAINER 113 (text) ===
+16 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) En streng med lengde   er spent fast i begge ender. Når strengen settes i vibrasjon, er den laveste frekvensen som gir en stående bølge, lik  .
+
+=== CONTAINER 114 (text) ===
+Bestem bølgefarten på strengen. Velg ett alternativ:
+
+=== CONTAINER 115 (text) ===
+b) En bestemt streng med lengde  , lineær massetetthet   og snorstramming   som er spent opp i begge ender, vibrerer med grunnfrekvensen   (dvs. frekvensen tilsvarende ordenstall  ).
+
+=== CONTAINER 116 (text) ===
+Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært  , massetettheten   og snorstrammingen   (dvs. alle størrelser er doblet)?
+
+=== CONTAINER 117 (text) ===
+Velg ett alternativ
+
+=== CONTAINER 118 (text) ===
 Maks poeng: 2

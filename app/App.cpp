@@ -13,6 +13,7 @@
 #include <chrono>
 #include <cctype>
 #include <regex>
+#include <shlobj.h>
 
 #include "subprojects/animationwindow/include/Widget.h"
 #include "widgets/TextBox.h"
@@ -69,6 +70,7 @@ void App::GUI() {
     DeepSeekIndicator = new TDT4102::Button({pad, pad * 11}, buttonWidth, buttonHeight, "DeepSeek");
     
     examUpload = new TDT4102::Button({pad * 2 + static_cast<int>(buttonWidth), pad}, buttonWidth, buttonHeight / 2, "Upload Exam");
+    examFolderUpload = new TDT4102::Button({pad * 2 + static_cast<int>(buttonWidth), pad + buttonHeight / 2 + pad / 2}, buttonWidth, buttonHeight / 2, "Select Folder");
     solutionUpload = new TDT4102::Button({pad * 3 + static_cast<int>(buttonWidth) * 2, pad}, buttonWidth, buttonHeight / 2, "Upload Solution");
     formulaSheetUpload = new TDT4102::Button({pad * 4 + static_cast<int>(buttonWidth) * 3, pad}, buttonWidth, buttonHeight / 2, "Upload Formula Sheet");
     
@@ -106,11 +108,20 @@ void App::GUI() {
 
     startButton->setLabelColor(TDT4102::Color::white);
     startButton->setCallback([this]() {
+        if (batchMode && !batchPdfList.empty()) {
+            // Preload first PDF path into selectedExam so the initial dir.json is correct
+            selectedExam->setText(batchPdfList[0].string());
+            batchIndex = 0;
+            pdfBatchCounter->setText("PDF-er: 0/" + std::to_string(batchPdfList.size()) + " ferdig");
+        }
         startProcessing();
     });
 
     examUpload->setCallback([this]() {
         pdfHandling(selectedExam);
+    });
+    examFolderUpload->setCallback([this]() {
+        dirHandling();
     });
     solutionUpload->setCallback([this]() {
         pdfHandling(selectedSolution);
@@ -120,6 +131,7 @@ void App::GUI() {
     });
 
     timerBox = new TDT4102::TextBox({pad * 5 + static_cast<int>(buttonWidth) * 4, pad}, buttonWidth, buttonHeight / 2, "Tid: ");
+    pdfBatchCounter = new TDT4102::TextBox({pad * 5 + static_cast<int>(buttonWidth) * 4, pad * 11}, buttonWidth, buttonHeight / 2, "PDF-er: 0/0 ferdig");
 
     add(*startWidget);
     add(*startButton);
@@ -130,6 +142,7 @@ void App::GUI() {
     add(*DeepSeekIndicator);
 
     add(*examUpload);
+    add(*examFolderUpload);
     add(*solutionUpload);
     add(*formulaSheetUpload);
 
@@ -144,6 +157,7 @@ void App::GUI() {
     add(*ignoredTopics);
 
     add(*timerBox);
+    add(*pdfBatchCounter);
 
 }
 
@@ -177,6 +191,81 @@ void App::stopTimer() {
     timerRunning = false;
     if (timerThread.joinable()) {
         timerThread.join();
+    }
+}
+
+// Folder chooser for batch mode
+void App::dirHandling() {
+    try {
+#ifdef _WIN32
+        CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+        BROWSEINFOW bi = {0};
+        bi.ulFlags = BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE;
+        LPITEMIDLIST pidl = SHBrowseForFolderW(&bi);
+        if (pidl) {
+            wchar_t pathW[MAX_PATH];
+            if (SHGetPathFromIDListW(pidl, pathW)) {
+                int utf8_len = WideCharToMultiByte(CP_UTF8, 0, pathW, -1, nullptr, 0, nullptr, nullptr);
+                std::string folder(static_cast<size_t>(utf8_len), '\0');
+                WideCharToMultiByte(CP_UTF8, 0, pathW, -1, &folder[0], utf8_len, nullptr, nullptr);
+                if (!folder.empty() && folder.back() == '\0') folder.pop_back();
+
+                std::filesystem::path dirPath(folder);
+                if (std::filesystem::exists(dirPath) && std::filesystem::is_directory(dirPath)) {
+                    batchPdfList.clear();
+                    for (auto& entry : std::filesystem::directory_iterator(dirPath)) {
+                        if (entry.is_regular_file()) {
+                            auto p = entry.path();
+                            std::string ext = p.extension().string();
+                            std::transform(ext.begin(), ext.end(), ext.begin(), [](unsigned char c){ return std::tolower(c); });
+                            if (ext == ".pdf") {
+                                batchPdfList.push_back(std::filesystem::absolute(p));
+                            }
+                        }
+                    }
+                    std::sort(batchPdfList.begin(), batchPdfList.end());
+                    batchIndex = 0;
+                    batchMode = true;
+                    completionHandled = false;
+
+                    selectedExam->setText(dirPath.filename().string());
+                    pdfBatchCounter->setText("PDF-er: 0/" + std::to_string(batchPdfList.size()) + " ferdig");
+                    startWidget->setVisible(false);
+                    startButton->setVisible(true);
+                    startButton->setButtonColor(TDT4102::Color::medium_sea_green);
+
+                    // Persist selected folder path to icp_data/dir.json (exam_dir)
+                    char buffer[MAX_PATH];
+                    GetModuleFileNameA(NULL, buffer, MAX_PATH);
+                    std::filesystem::path exePath = buffer;
+                    std::filesystem::path rootDir = exePath.parent_path().parent_path();
+                    std::filesystem::path dataDir = rootDir / "icp_data";
+                    std::filesystem::create_directories(dataDir);
+                    std::filesystem::path dirJson = dataDir / "dir.json";
+
+                    auto escape_json = [](const std::string& in){ std::string out; for(char c: in){ if(c=='\\' || c=='\"') out+='\\'; out+=c;} return out; };
+
+                    std::map<std::string, std::string> data;
+                    if(std::ifstream ifs{dirJson}; ifs.is_open()){
+                        std::string content((std::istreambuf_iterator<char>(ifs)), {});
+                        std::regex re("\"([^\"]+)\"\\s*:\\s*\"([^\"]*)\"");
+                        for(auto it = std::sregex_iterator(content.begin(), content.end(), re); it != std::sregex_iterator(); ++it){
+                            data[(*it)[1].str()] = (*it)[2].str();
+                        }
+                    }
+                    data["exam_dir"] = dirPath.string();
+                    std::ofstream ofs(dirJson, std::ios::trunc);
+                    ofs << "{";
+                    bool first = true; for(const auto& [k,v]: data){ if(!first) ofs << ","; ofs << "\""<<k<<"\":\""<< escape_json(v) <<"\""; first=false; }
+                    ofs << "}";
+                }
+            }
+            CoTaskMemFree(pidl);
+        }
+        CoUninitialize();
+#endif
+    } catch (const std::exception& e) {
+        std::cerr << "[ERROR] Exception i mappevalg: " << e.what() << std::endl;
     }
 }
 
@@ -272,7 +361,7 @@ void App::pdfHandling(TDT4102::TextBox* chosenFile) {
 
 void App::startProcessing() {
     try {
-        if (selectedExam->getText() == "No file selected.") {
+        if (!batchMode && selectedExam->getText() == "No file selected.") {
             std::cout << "[WARN] No exam file selected." << std::endl;
             return;
         }
@@ -481,6 +570,10 @@ void App::calculateProgress() {
                             }
                             if (ProgressBarLLM->progress >= 1.0) {
                                 stopTimer();
+                                if (batchMode && !completionHandled) {
+                                    completionHandled = true;
+                                    onBatchItemComplete();
+                                }
                             }
                         }
                     }
@@ -496,3 +589,83 @@ void App::calculateProgress() {
 }
 
 
+void App::launchCurrentPdf() {
+    try {
+        // Determine paths
+        char buffer[MAX_PATH];
+        GetModuleFileNameA(NULL, buffer, MAX_PATH);
+        std::filesystem::path exePath = buffer;
+        std::filesystem::path exeDir = exePath.parent_path();
+        std::filesystem::path rootDir = exeDir.parent_path().parent_path();
+        std::filesystem::path dataDir = rootDir / "icp_data";
+        std::filesystem::path psScript = rootDir / "app" / "launch_and_move.ps1";
+
+        std::filesystem::create_directories(dataDir);
+
+        auto escape_json = [](const std::string& in) {
+            std::string out; for(char c: in){ if(c=='\\' || c=='\"') out+='\\'; out+=c;} return out; };
+
+        // Update dir.json for current PDF
+        std::filesystem::path dirJson = dataDir / "dir.json";
+        std::map<std::string, std::string> data;
+        if(std::ifstream ifs{dirJson}; ifs.is_open()){
+            std::string content((std::istreambuf_iterator<char>(ifs)), {});
+            std::regex re("\"([^\"]+)\"\\s*:\\s*\"([^\"]*)\"");
+            for(auto it = std::sregex_iterator(content.begin(), content.end(), re); it != std::sregex_iterator(); ++it){
+                data[(*it)[1].str()] = (*it)[2].str();
+            }
+        }
+        std::string examPath;
+        if (batchMode) {
+            if (batchIndex >= batchPdfList.size()) return;
+            examPath = batchPdfList[batchIndex].string();
+        } else {
+            examPath = selectedExam->getText();
+        }
+        data["exam"] = examPath;
+        data["solution"] = selectedSolution->getText();
+        data["formula"] = selectedFormulaSheet->getText();
+        std::ofstream ofs(dirJson, std::ios::trunc);
+        ofs << "{";
+        bool first = true; for(const auto& [k,v]: data){ if(!first) ofs << ","; ofs << "\""<<k<<"\":\""<< escape_json(v) <<"\""; first=false;} ofs << "}";
+
+        // Clear progress for new run
+        std::ofstream ofs2(dataDir / "progress.json", std::ios::trunc); ofs2 << "{}"; ofs2.close();
+
+        // Launch PowerShell window for this PDF
+        std::thread([psScript]() {
+            int pw_x = WINDOW_WIDTH - 100;
+            int pw_y = 100;
+            int pw_w = 800;
+            int pw_h = WINDOW_HEIGHT;
+            int charW = pw_w / 8;
+            int charH = pw_h / 16;
+            std::string cmd = "start powershell -NoExit -File \"" + psScript.string() +
+                              "\" -X " + std::to_string(pw_x) +
+                              " -Y " + std::to_string(pw_y) +
+                              " -W " + std::to_string(charW) +
+                              " -H " + std::to_string(charH);
+            std::system(cmd.c_str());
+        }).detach();
+    } catch (const std::exception& e) {
+        std::cerr << "[ERROR] Exception i launchCurrentPdf: " << e.what() << std::endl;
+    }
+}
+
+void App::onBatchItemComplete() {
+    try {
+        size_t done = batchIndex + 1;
+        size_t total = batchPdfList.size();
+        pdfBatchCounter->setText("PDF-er: " + std::to_string(done) + "/" + std::to_string(total) + " ferdig");
+
+        if (done < total) {
+            batchIndex++;
+            ProgressBarLLM->progress = 0.0;
+            launchCurrentPdf();
+            completionHandled = false;
+            startTimer();
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "[ERROR] Exception i onBatchItemComplete: " << e.what() << std::endl;
+    }
+}

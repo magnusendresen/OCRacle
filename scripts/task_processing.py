@@ -319,14 +319,10 @@ async def get_exam_info() -> Exam:
 
             removed_topics = set(new_topics_list_0) - set(new_topics_list_1)
 
-            emphasize(f"Removed topics: {', '.join(removed_topics)}")
-
-            emphasize(f"New topics after removal: {new_topics}")
-
         new_topics = [t.strip() for t in str(new_topics).split(',')]
 
     else:
-        print(f"No new topics identified due to response being {new_topics}")
+        print(f"No new topics identified due to response being {new_topics}.")
         new_topics = []
 
     object_handling.add_topics(
@@ -334,10 +330,10 @@ async def get_exam_info() -> Exam:
     )
 
     exam.exam_topics = get_topics_from_json(exam.subject)
-    log(f"Total topics in subject is now: {len(list(exam.exam_topics))}")
+    log(f"Total number of topics for subject '{exam.subject}': {len(list(exam.exam_topics))}")
 
     exam.ignored_topics = get_ignored_topics_from_json(exam.subject)
-    log(f"Ignored topics is now: {exam.ignored_topics}")
+    log(f"Number of ignored topics for subject '{exam.subject}': {len(exam.ignored_topics)}")
 
 
     total_task_count = len(exam.task_numbers)
