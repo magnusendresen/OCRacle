@@ -18,14 +18,20 @@ DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;
 DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
 DO NOT DO NOT DO NOT write "```html" and "```" or "const oppgaveTekst=`" and "`;" or similar around the text, since your response is processed as a string by JavaScript and inserted directly into HTML.
 
+MAKE MANY PARAGRAPHS WITH THE HTML — DO NOT GIVE ME ONE GIANT TEXT BLOCK.
+MAKE MANY PARAGRAPHS WITH THE HTML — DO NOT GIVE ME ONE GIANT TEXT BLOCK.
+MAKE MANY PARAGRAPHS WITH THE HTML — DO NOT GIVE ME ONE GIANT TEXT BLOCK.
+
 Mathematical content:
 - Use LaTeX compatible with MathJax.
 - Use $$...$$ for display math.
 - Use $...$ for inline math. Use inline math for ALL numbers or symbols inline.
+- Use <b></b> for ALL numbers AND units, and nothing else. Numbers and units both together and alone should be wrapped.
 - Use a single backslash for LaTeX commands (e.g., \frac, \sqrt).
 - Do not use \( ... \) or \[ ... \].
 - Do not double-escape backslashes.
 - Make sure that e.g. infty, omega, theta, etc. are properly formatted as their respective symbols.
+
 
 Code and programming:
 - If the task text contains code, preserve it exactly inside <pre class="code-box"><code>...</code></pre>.
@@ -42,17 +48,33 @@ Code and programming:
 - Only use code formatting if the task actually has code in it, not for regular math tasks that have nothing to do with programming.
 
 Multiple choice:
-- For multiple-choice questions with text or image options, follow these rules:
-  - Present the options as an ordered list using <ol type="A"><li>...</li></ol>.
-  - Do not include any extra number or letter inside the option text itself—the list marker provides the label.
-  - The task statement itself should be outside the list in a regular <p> tag.
-  - If the choices are lines of code, place each one inside <pre class="code-box"><code>...</code></pre> within its <li>.
+- Present the options as an ordered list using <ol type="A"><li>...</li></ol>.
+- Do not include any extra number or letter inside the option text itself—the list marker provides the label. Remember that <li></li> automatically adds letters, so do not place numering letters inside of the list as well.
+- The task statement itself should be outside the list in a regular <p> tag.
+- If the choices are lines of code, place each one inside <pre class="code-box"><code>...</code></pre> within its <li>.
+
 
 
 Tasks requiring calculation, proof, or explanation:
 - For regular tasks that require proving, calculating, or explaining, also follow these rules:
-  - Keep paragraphs short and use multiple <p> elements rather than a single long block. MAKE MANY PARAGRAPHS — DO NOT GIVE ME ONE GIANT TEXT BLOCK.
+  - Keep paragraphs short and use multiple <p> elements rather than a single long block. 
   - Introduce each subtask with the label <h3>a)</h3>, <h3>b)</h3>, and so on.
 
 OCR errors and interpretation:
 - You are allowed to make certain assumptions about OCR artifacts in the text, such as interpreting \sqrt{\sqrt{\sqrt as a likely error for a single square root.
+
+Summary (read carefully before output):
+- Output must be valid HTML with only <p>, <h3>, <pre class="code-box"><code>, <div class="math">, <ol type="A">, <li>.
+- Never include ``` fences or const oppgaveTekst=....
+- Use many short <p> paragraphs, not one block.
+- Math: $...$ for inline, $$...$$ for display, <b> around all numbers and units. No \( or \[. No double-escaped backslashes.
+- Code: preserve exactly, wrap in <pre class="code-box"><code>...</code></pre>. Math stays outside code.
+- Multiple choice: <ol type="A"><li>...</li></ol>. No extra letters inside <li>.
+- Points: "Maks poeng: <b>X</b>" at end if single task, or <h3>a)</h3> ... Xp. style if multiple.
+- Replace "figure below" → "figure above".
+- Allow fixing trivial OCR errors (e.g. sqrt duplication).
+
+Final reminder:
+DO NOT output anything except the clean HTML body.
+MAKE MANY PARAGRAPHS WITH THE HTML.
+DO NOT include wrappers or explanations.

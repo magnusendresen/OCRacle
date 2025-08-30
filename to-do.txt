@@ -8,6 +8,8 @@ Prompte 'Does this task require the Moody diagram?' eller liknende og få med en
 
 Legg til figurer på slutten av dokumentet fra "Vedlegg" i en samling til eksamnen som man kan vise ved se vedlegg knapp  
 
+Planlegge først, deretter skrive kodeord (f.eks. ===FINAL===) slik at Python kan strippe bort planleggingen og kun lagre slutt-HTML
+
 Kan godt bruke ocr på disse for å forstå hva slags diagram det er og prompte for oppgaver hvilke figurer som eventuelt er revelante senere  
 
 Vurdere å legge til en errorhåndtering ved LLM som gjør at hvis resultatet fra deepseek starter med feks [ERROR] (instruert ved prompting), så lagres svaret eller erroren til deepseek for feilsøking  

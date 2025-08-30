@@ -273,7 +273,7 @@ async def get_exam_info() -> Exam:
     learning_goals = get_learning_goals(exam.subject)
     log(f"Fetched learning goals from NTNU website for {str(exam.subject)} with {len(learning_goals)} characters.")
     Learning_goals_str = ""
-    if learning_goals and len(learning_goals) > 2000:
+    if learning_goals and len(learning_goals) > 1000:
         Learning_goals_str = (
             "Her er beskrivelsen av emnet fra NTNU sine nettsider: " + learning_goals +
             "Det er derimot viktigst at du baserer deg på teksten knyttet til hver enkelt oppgave fra eksamen, så ikke stol blindt på beskrivelsen av emnet. "

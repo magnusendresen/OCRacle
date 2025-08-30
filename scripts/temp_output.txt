@@ -1,147 +1,320 @@
 
 
 === CONTAINER 0 (text) ===
-Oppgave 1
+1 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   a) Verdensrekorden for menn på   er  . Hvor mange   (kilometer per time) tilsvarer dette? Velg ett alternativ:
 
 === CONTAINER 1 (text) ===
-a) Hva er de engelske uttrykkene for  elektrisk spenning,   effekt, energi, strøm, ladning  og  motstand .
+b) Jorda går i en sirkelbane rundt Sola med radius   (150 millioner kilometer), og bruker 365 dager på én runde.  Bestem banefarten til Jorda.   Velg ett alternativ
 
 === CONTAINER 2 (text) ===
-b) Gi enheten for hver av størrelsene.       Spenning måles i ?        Energi måles i ?        Elektrisk strøm måles i ?        Ladning måles i ?
+Maks poeng: 4
 
 === CONTAINER 3 (text) ===
-c) Hva menes med ”jord” i forbindelse med elektriske kretser?       Forklar forskjellen mellom elektrisk potensial og elektrisk spenning.
+2 Et legeme som i utgangspunktet henger i ro, faller ved   vertikalt nedover under påvirkning av tyngdekraften,  uten  luftmotstand. Vi legger inn et koordinatsystem slik at positiv  -retning er loddrett nedover, som vist på figuren.
 
-=== CONTAINER 4 (text) ===
-d) Potensialet i to noder A og B er  𝑉 𝐴 = +6,0 V  og  𝑉 𝐵 = −18,0 V . Hva er spenningen mellom node  B og A, V BA ?  Svar med fortegn.
+=== CONTAINER 4 (image) ===
+@:t=0
+
+0
+
+y
+
 
 === CONTAINER 5 (text) ===
-e) Hva menes med «passiv fortegnskonvensjon»?
+Hvilken av grafene A-E til høyre viser posisjonen   for det fallende legemet? Velg ett alternativ
 
 === CONTAINER 6 (text) ===
-Oppgave 2
+Maks poeng: 2
 
 === CONTAINER 7 (text) ===
-En elektrisk ladning på  10.0 C  passerer gjennom et ledningstverrsnitt.
+3 En badevekt er en kraftmåler som viser krafta som til enhver tid presser normalt ned på badevekta. Badevekta er imidlertid kalibrert til å vise krafta i "kg", slik at  .   En kasse er plassert på badevekta i de to situasjonene på figuren under. Når badevekta og kassa står på horisontalt underlag, viser badevekta   (til venstre).
 
-=== CONTAINER 8 (text) ===
-a)   Hvor mange elementærladninger passerer gjennom tverrsnittet?  b)   Ladningen passerer i et tidsrom på  20.0 s . Hvor stor er strømmen?  c)   Potensialdifferansen mellom to punkt er  48.0 V . Hvor stort arbeid må utføres for å flytte
+=== CONTAINER 8 (image) ===
+oe
+
+Horisontalt Skratt
+underlag underlag
+
 
 === CONTAINER 9 (text) ===
-en ladning på  9.0 C  fra det ene punktet til det andre?   d)   Effekt er definert som arbeid utført per tidsenhet
+Så plasseres badevekta, med kassa oppå, på et skrått underlag med helningsvinkel  , slik at kassa står i ro oppå vekta. Hva viser badevekta i denne situasjonen (til høyre)? Velg ett alternativ:
 
 === CONTAINER 10 (text) ===
-𝑃=
+Maks poeng: 2
 
 === CONTAINER 11 (text) ===
-𝑠  [W]   (0.1)
+4 En vogn med masse   i en berg-og-dalbane har en viss banefart   i det den kjører over en bakketopp formet som del av en sirkel med radius  . Vogna beholder hele tiden kontakten med underlaget. Se figuren under.
 
-=== CONTAINER 12 (text) ===
-Hvor stor er effekten dersom tiden det tar å flytte ladningen i c) er  0.6 s ?   Regn ut strømmen. Vis at effekten alternativt kan finnes som strøm multiplisert med  spenning.
+=== CONTAINER 12 (image) ===
+
 
 === CONTAINER 13 (text) ===
-ELEX1001    Page 2 of 5
+Hvilken påstand om normalkrafta   fra underlaget på vogna vil alltid gjelde i det vogna passerer toppen (situasjonen vist på figuren)?   Velg ett alternativ:
 
 === CONTAINER 14 (text) ===
-Oppgave 3
+Maks poeng: 2
 
 === CONTAINER 15 (text) ===
-Grafen viser netto positiv ladning som strømmer gjennom en leder som funksjon av tiden. Grafen viser  ladning langs y-aksen og tid langs x-aksen.
+5 En person med masse   som i utgangspunktet står på bakkenivå, har på seg en sele som er festet til en stram strikk. Den andre enden av strikken er festet til en høy kran. På et gitt signal utløses strikken, slik at personen spretter til værs. Strikken kan antas å være masseløs samt følge Hookes lov med fjærkonstant  , og har lengden   i ustrukket/slapp tilstand. Forlengelsen av strikken er  . Se figuren under.
 
-=== CONTAINER 16 (text) ===
-Hvordan ser strømmen gjennom lederen ut for samme tidsperiode? Lag en skisse med strøm (i Ampere)  langs y-aksen og tid langs x-aksen.
+=== CONTAINER 16 (image) ===
+_------~ ac -. (toppunktet)
+
+— D (nivå med krana)
+
+
 
 === CONTAINER 17 (text) ===
-Oppgave 4
+I hvilket av punktene A-E er hopperens fart maksimal på vei  oppover ?
 
 === CONTAINER 18 (text) ===
-Figuren viser en elektrisk krets med strøm- og spenningsvariabler over hvert kretselement.  Strømmene gjennom og spenningene over hvert kretselement er gitt i tabellen nedenfor.
+Velg ett alternativ:
 
 === CONTAINER 19 (text) ===
-E le ment  Spenning,  v  [V]   Strøm  i  [A]  1  15  -1  2   5   1  3  10   2  4  -10  -1  5  20  -3  6  20   2
+Maks poeng: 2
 
 === CONTAINER 20 (text) ===
-Finn effekten forbrukt i/levert av hvert element. Husk å forklare om effekten  forbrukes i  eller  leveres av  elementet. Bruk effektbalanse i kretsen for å kontrollere at du har regnet riktig.
+6 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En skihopper starter fra ro og sklir uten friksjon ned overrennet i en hoppbakke. Høydeforskjellen mellom startpunktet og hoppkanten er  . Vi ser bort fra luftmotstand i hele denne oppgaven.
 
-=== CONTAINER 21 (text) ===
-0 1 2 3 4 5 6 -20
+=== CONTAINER 21 (image) ===
 
-=== CONTAINER 22 (image) ===
 
+=== CONTAINER 22 (text) ===
+a) Tegn kreftene som virker på hopperen på vei ned overrennet, og forklar hvorfor hopperens mekaniske energi er bevart. (4 poeng)   b) Vis at hopperen har farten   ved hoppkanten. (3 poeng)
 
 === CONTAINER 23 (text) ===
-ELEX1001    Page 3 of 5
+c) Hopperen forlater hoppkanten med horisontal fart. Hvor langt unna hoppkanten i horisontal retning lander hopperen (avstanden   på figuren), når hopperen lander på den horisontale bakken som ligger en vertikal avstand   under hoppkanten? (4 poeng)
 
 === CONTAINER 24 (text) ===
-Oppgave 5
+d) Beregn følgende i nedslagspunktet, dvs. der hopperen treffer bakken: i) Absoluttverdien av farten (2 poeng) ii) Fartens retning (2 poeng)
 
 === CONTAINER 25 (text) ===
-Strømmen som går inn i et element er vist i figuren under. Finn total ladning som går inn i  elementet i tidsintervallet  0 < 𝑡< 20 s .
+Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark.
 
 === CONTAINER 26 (text) ===
-Oppgave 6
+Skriv ditt svar her
 
 === CONTAINER 27 (text) ===
-Hvis et  12 V -batteri leverer  100 J  i 5 sekunder, finn
+Format
 
 === CONTAINER 28 (text) ===
-(a) mengden ladning levert, og
+
 
 === CONTAINER 29 (text) ===
-(b) produsert strøm.
+   Σ   
 
 === CONTAINER 30 (text) ===
-Oppgave 7
+Words: 0
 
 === CONTAINER 31 (text) ===
-Finn den leverte eller forbrukte effekten fra element 2 i figuren under.
+Maks poeng: 15
 
-=== CONTAINER 32 (image) ===
-
+=== CONTAINER 32 (text) ===
+7 En syklist sykler med konstant fart  opp en oppoverbakke med helningsvinkel . En enkel sykkelcomputer fungerer slik at brukeren taster inn informasjon om den totale massen   av sykkel + syklist, og så bruker computeren sensorer som måler syklistens fart   samt vinkelen   til å beregne effekten P som syklisten produserer. Denne enkle computeren tar ikke med luftmotstand i beregningen. Se figuren under.
 
 === CONTAINER 33 (image) ===
 
 
-=== CONTAINER 34 (image) ===
-10
-
+=== CONTAINER 34 (text) ===
+Hva må stå i kodelinja KODE MANGLER for at funksjonen P(v,theta) skal gi effekten som syklisten produserer, som funksjon av farten   målt i m/s og helningsvinkelen   målt i grader?
 
 === CONTAINER 35 (text) ===
-ELEX1001    Page 4 of 5
+import math   def P(v,theta):
 
 === CONTAINER 36 (text) ===
-Oppgave 8
+m=80     g=9.81    return KODE MANGLER Velg ett alternativ:
 
 === CONTAINER 37 (text) ===
-Et voltmeter er koblet til ulike batteri som vist i figuren under. Finn måleverdiene som kan leses av  på voltmeteret i de fire tilfellene (husk fortegn).
+(m*g*math.sin(math.radians(theta)))*v**3
 
 === CONTAINER 38 (text) ===
+(m*g*math.cos(math.radians(theta)))*v**2
 
-
-=== CONTAINER 39 (image) ===
-
+=== CONTAINER 39 (text) ===
+(m*g*math.sin(math.radians(theta)))*v
 
 === CONTAINER 40 (text) ===
-ELEX1001    Page 5 of 5
+(m*g*math.cos(math.radians(theta)))*v
 
 === CONTAINER 41 (text) ===
-Oppgave 9
+(m*g*math.sin(math.radians(theta)))*v**2
 
 === CONTAINER 42 (text) ===
-a)   Vis ved hjelp av en skisse hvordan du ville koblet amperemeteret for å måle den positive
+Maks poeng: 2
 
 === CONTAINER 43 (text) ===
-strømmen i sløyfa.
+8 Et kulelager består av en hylse i form av en tynnvegget sylinder ("hoop") med masse   og radius  , og 8 stk. massive kuler med masse   og radius  . Massesenteret til kulene ligger på en sirkel med radius   i forhold til sentrum i kulelageret. Se figuren under.
 
-=== CONTAINER 44 (text) ===
-b)   Hvorfor er det en dårlig ide å koble et amperemeter direkte over et batteri som vist i
+=== CONTAINER 44 (image) ===
+
 
 === CONTAINER 45 (text) ===
-figuren under?
+Hylsen og de 8 massive kulene kan rotere om en akse gjennom sentrum av kulelageret som står normalt på figurplanet (aksen er inntegnet på figuren), mens den indre kanten av kulelageret (med radius  ) ikke roterer. Bestem treghetsmomentet til kulelageret om denne aksen.
 
-=== CONTAINER 46 (image) ===
-Light bulb
+=== CONTAINER 46 (text) ===
+Velg ett alternativ:
+
+=== CONTAINER 47 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 48 (text) ===
+9 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   En homogen, massiv kule med masse   og radius   ruller rettlinjet uten å gli nedover et skråplan med helningsvinkel  . Se figuren under.
+
+=== CONTAINER 49 (image) ===
 
 
+=== CONTAINER 50 (text) ===
+Farten er såpass liten at luftmotstanden kan neglisjeres.
 
-=== CONTAINER 47 (image) ===
+=== CONTAINER 51 (text) ===
+a) Tegn kreftene på kula mens den ruller nedover skråplanet.  For full uttelling må det være et rimelig størrelsesforhold mellom kreftene på figuren . (3 poeng)
+
+=== CONTAINER 52 (text) ===
+b) Forklar kort (maks. 5 linjer) hvorfor den mekaniske energien til kula er bevart under rullingen. (3 poeng)   c) Bestem farten til kula nederst i skråplanet dersom den starter en høyde   over bunnen. (3 poeng)   d) Vis at akselerasjonen til kula nedover skråplanet er  . (3 poeng)
+
+=== CONTAINER 53 (text) ===
+e) Kula starter fra ro i   ved  . Skisser kulas posisjonsgraf  , fartsgraf   og akselerasjonsgraf  .  For full uttelling må det være et  resonnement  som argumenterer for grafens  form , og formen må framgå tydelig. Alle tre grafer kan skisseres i samme diagram, uten enheter på aksene.  (3 poeng)   Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark. Skriv ditt svar her
+
+=== CONTAINER 54 (text) ===
+Format
+
+=== CONTAINER 55 (text) ===
+
+
+=== CONTAINER 56 (text) ===
+   Σ   
+
+=== CONTAINER 57 (text) ===
+Words: 0
+
+=== CONTAINER 58 (text) ===
+Maks poeng: 15
+
+=== CONTAINER 59 (text) ===
+10 a) I 2023 imploderte undervannsfartøyet "Titan" katastrofalt i en dybde av  . Hva var trykket mot skroget i en slik dybde? Lufttrykket på overflaten var  . Velg ett alternativ
+
+=== CONTAINER 60 (text) ===
+b) En badeball er formet som en kule med radius  . Beregn oppdrifta på ballen dersom hele ballen er under vann. Velg ett alternativ
+
+=== CONTAINER 61 (text) ===
+Oppdriften avhenger av hvilken dybde badeballen befinner seg i
+
+=== CONTAINER 62 (text) ===
+Oppdriften avhenger av massen av badeballen
+
+=== CONTAINER 63 (text) ===
+Maks poeng: 4
+
+=== CONTAINER 64 (text) ===
+11 Oppgaven består av flere deloppgaver som kan besvares uavhengig av hverandre .   Et åpent, vannfylt basseng har rektangulær bunn med grunnflate  , og vannspeilet i bassenget ligger i utgangspunktet en høyde   over utløpet til et tapperør med diameter  i bunnen av bassenget. Det er lufttrykk   over vannspeilet og ved rørutløpet. Se figuren under.
+
+=== CONTAINER 65 (image) ===
+Po
+
+Po
+
+
+=== CONTAINER 66 (text) ===
+a) Forklar kort hva Bernoullis likning for et ideelt fluid uttrykker, og angi forutsetningene for at likningen skal være gyldig (til sammen maks. 5 linjer). (3 poeng) b) Neglisjer alle former for tap og vis at vannspeilet i bassenget synker med en fart på   idet tappingen starter. (3 poeng) c) Bestem væskefarten og volumstrømmen i røret idet tappingen starter dersom vi neglisjerer alle former for tap. (3 poeng) d) Tapperøret har en total lengde  , ruhet   og har et  -rørbend med tapskoeffisient . I tillegg har rørinnløpet en tapskoeffisient   (se figuren over).  Væskefarten i røret måles til  . Beregn i) Den totale tapshøyden (2 poeng)
+
+=== CONTAINER 67 (text) ===
+ii) Det totale trykktapet  (1 poeng) e) En driftig bassengeier ønsker å utnytte energien fra strømmen i tapperøret. Hvor stor effekt kan hentes ut herifra?  (3 poeng)
+
+=== CONTAINER 68 (text) ===
+Du kan skrive svaret i boksen under, eller skrive på Scantronark som leveres for innskanning. Vi anbefaler bruk av Scantron-ark . Skriv ditt svar her
+
+=== CONTAINER 69 (text) ===
+Format
+
+=== CONTAINER 70 (text) ===
+
+
+=== CONTAINER 71 (text) ===
+   Σ   
+
+=== CONTAINER 72 (text) ===
+Words: 0
+
+=== CONTAINER 73 (text) ===
+Maks poeng: 15
+
+=== CONTAINER 74 (text) ===
+12 Tre homogene kuler A, B og C  med samme masse   henger i masseløse snorer med lengde . Kulene har radier hhv.  ,   og  . Når kulene settes i bevegelse, svinger de i et vertikalt plan med små utslag. Se figuren under.
+
+=== CONTAINER 75 (image) ===
+
+
+=== CONTAINER 76 (text) ===
+Hvilken påstand er riktig om størrelsesforholdet mellom svingetidene  ,   og   til de tre pendlene? Velg ett alternativ:
+
+=== CONTAINER 77 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 78 (text) ===
+13 En kloss med masse   er festet til en fjær med fjærkonstant  , og kan svinge horisontalt ( -retningen på figuren til venstre). Klossen er nedsenket i en væske som gir opphav til en friksjonskraft   rettet mot fartsretningen, der   er farten til klossen. Se figuren under.
+
+=== CONTAINER 79 (image) ===
+
+
+=== CONTAINER 80 (text) ===
+Klossen trekkes ut til siden og slippes. Posisjonen   til klossen er vist i grafen til høyre. Beregn verdien av
+
+=== CONTAINER 81 (text) ===
+dempingskonstanten  . [Hint: amplituden for en svakt dempet svingning er  .] Velg ett alternativ:
+
+=== CONTAINER 82 (text) ===
+Maks poeng: 2
+
+=== CONTAINER 83 (text) ===
+14 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) Gitt følgende to sinusformede tversbølger:
+
+=== CONTAINER 84 (text) ===
+Hvilken påstand om den resulterende bølgen er riktig?
+
+=== CONTAINER 85 (text) ===
+Velg ett alternativ:
+
+=== CONTAINER 86 (text) ===
+b) En stående bølge er gitt ved uttrykket
+
+=== CONTAINER 87 (text) ===
+.   Hva er den absoluttverdien av den maksimale vertikale farten   til et punkt på bølgen?
+
+=== CONTAINER 88 (text) ===
+Velg ett alternativ
+
+=== CONTAINER 89 (text) ===
+Resulterende bølge blir en stående bølge med maksimal amplitude
+
+=== CONTAINER 90 (text) ===
+Resulterende bølge blir en stående bølge med maksimal amplitude
+
+=== CONTAINER 91 (text) ===
+Resulterende bølge blir null; bølgene utslokker hverandre
+
+=== CONTAINER 92 (text) ===
+Resulterende bølge beveger seg mot høyre og har maksimal amplitude
+
+=== CONTAINER 93 (text) ===
+Resulterende bølge beveger seg mot høyre og har maksimal amplitude
+
+=== CONTAINER 94 (text) ===
+Maks poeng: 4
+
+=== CONTAINER 95 (text) ===
+15 Oppgaven består av to deloppgaver som kan besvares uavhengig av hverandre.   a) En vibrerende streng med lengde  , masse   og snorstramming ("tension")   er spent fast i begge ender.
+
+=== CONTAINER 96 (text) ===
+Bestem grunnfrekvensen til strengen, dvs. den laveste frekvensen som gir en stående bølge. Velg ett alternativ:
+
+=== CONTAINER 97 (text) ===
+b) En bestemt streng med lengde  , lineær massetetthet   og snorstramming   som er spent opp i begge ender, vibrerer med grunnfrekvensen   (dvs. frekvensen tilsvarende ordenstall  ).
+
+=== CONTAINER 98 (text) ===
+Hva ville grunnfrekvensen for strengen ha vært dersom lengden hadde vært  , massetettheten   og snorstrammingen   (dvs. alle størrelser halveres)?
+
+=== CONTAINER 99 (text) ===
+Velg ett alternativ
+
+=== CONTAINER 100 (text) ===
+Maks poeng: 2

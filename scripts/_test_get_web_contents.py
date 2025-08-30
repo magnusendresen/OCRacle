@@ -24,4 +24,4 @@ def get_learning_goals(subject_code: str) -> str:
         return f"Feil ved henting av {subject_code}: {e}"
 
 
-print(get_learning_goals("ifyx1000"))
+print(len(get_learning_goals("ifyx1000")))
