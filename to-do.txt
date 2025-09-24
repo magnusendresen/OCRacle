@@ -8,13 +8,13 @@ Prompte 'Does this task require the Moody diagram?' eller liknende og få med en
 
 Legg til figurer på slutten av dokumentet fra "Vedlegg" i en samling til eksamnen som man kan vise ved se vedlegg knapp  
 
-Planlegge først, deretter skrive kodeord (f.eks. ===FINAL===) slik at Python kan strippe bort planleggingen og kun lagre slutt-HTML
+Planlegge først, deretter skrive kodeord (f.eks. ===FINAL===) slik at Python kan strippe bort planleggingen og kun lagre slutt-HTML  
 
 Kan godt bruke ocr på disse for å forstå hva slags diagram det er og prompte for oppgaver hvilke figurer som eventuelt er revelante senere  
 
 Vurdere å legge til en errorhåndtering ved LLM som gjør at hvis resultatet fra deepseek starter med feks [ERROR] (instruert ved prompting), så lagres svaret eller erroren til deepseek for feilsøking  
 
-Forbedre poeng i html betraktelig
+Forbedre poeng i html betraktelig  
 
 Ryddiggjøre html-formattering, trenger ikke både tall OG bokstav  
 
@@ -35,5 +35,19 @@ Legge til gammel emnekode i parentes … (MEKT1101//TKT4116 og IFYT1000//IFYKJ10
 Forbedre generaliteter som "... i forrige oppgave" sånn at..? blir kanskje vanskelig  
 
 Kan godt beholde formuleringer som "I denne oppgaven forventes korte og presise svar"  
+
+Legge til en counter på hvilke oppgaver man har gjort  
+
+Formelark der containeren sitt z-koordinat knytta til oppgaven sin formelhenvisning som redirecter posisjonen på et vindu på siden  
+
+Hvor mye man må teste for å vite hvor mange oppgaver som er feilaktige  
+
+Ha % av forekomne temaer for hvert emne på nettsiden  
+
+Sette opp et system for manuell verifisering x antall av oppgaver for å statistisk finne ut hvor mange som er feilaktige  
+
+Hva om det er flere oppgaver i én container?  
+
+For problemet med å ikke identifisere nye temaer: en enkel løsning er å legge til i prompten hvor mange oppgaver som er i eksamen og hvor mange temaer som er funnet totalt, og bruke differansen til å angi hvor sannsynlig det er at nye temaer må legges til  
 
 Ha både studiehjelper OG "guess who answered", "who's the impostor", og flere party games på nettsiden  
