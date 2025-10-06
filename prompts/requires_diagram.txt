@@ -1,0 +1,3 @@
+Does this task seem to require any diagrams for solving? E.G the moody diagram, iron-carbon phase diagrame, etc.?
+    If it does, respond with the name of the diagram, otherwise respond with a zero "0" (without quotation marks).
+    Think through the process of solving the task to decide. If a diagram would be helpful and necessary reply with it.     

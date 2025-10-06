@@ -3,6 +3,7 @@ from time import perf_counter
 from contextlib import contextmanager
 from typing import List, Dict, Optional
 import json
+import ddgs
 
 from project_config import PROGRESS_FILE
 
@@ -73,3 +74,23 @@ def update_progress_fraction(line: int, current: int, total: int) -> None:
     except Exception as e:
         print(f"[ERROR] Could not update progress file: {e}")
 
+def select_image_from_query(figure: str) -> Optional[str]:
+    # Use ddgs to search for images and return the URL of the first image result
+    try:
+        with ddgs.DDGS() as searcher:
+            results = list(searcher.images(figure + " NTNU", max_results=10))
+        if not results:
+            print(f"No images found for query: {figure}")
+            return None
+        return results[0]['image']  # Return the URL of the first image result
+    except Exception as e:
+        print(f"Error during image search: {e}")
+        return None
+
+
+def get_fig_from_query(query: str) -> Optional[str]:
+    """Backward-compatible alias that returns an image URL for a query.
+
+    This wraps ``select_image_from_query`` so older imports keep working.
+    """
+    return select_image_from_query(query)

@@ -4,7 +4,7 @@ import task_boundaries
 import ocr_pdf
 from project_config import *
 from project_config import load_prompt, emphasize
-from utils import log, write_progress, update_progress_fraction, timer
+from utils import log, write_progress, update_progress_fraction, timer, get_fig_from_query
 
 import object_handling
 
@@ -23,6 +23,7 @@ from enum import Enum
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
+import shutil
 
 
 # Number of processing steps for each task in the LLM pipeline
@@ -414,6 +415,38 @@ async def process_task(task_number: str, exam: Exam) -> Exam:
     write_progress(progress, LLM_STEPS)
     if task_exam.points is not None:
         log(f"Task {task_number_str}: points extracted -> {task_exam.points}p")
+
+
+    required_diagrams = await prompt_to_text.async_prompt_to_text(
+        PROMPT_CONFIG + load_prompt("requires_diagram") + task_output,
+        max_tokens=1000,
+        is_num=False,
+        max_len=50,
+    )
+    required_diagrams = str(required_diagrams).strip().lower()
+    if required_diagrams == "0":
+        log(f"Task {task_number_str}: no diagrams required")
+    else:
+        log(f"Task {task_number_str}: requires diagrams -> {required_diagrams}")
+        diagram_url = get_fig_from_query(required_diagrams)
+        # Save the image to IMG_DIR 
+        output_folder = str(IMG_DIR)
+        exam_folder = Path(output_folder) / exam.subject / exam.exam_version
+        exam_folder.mkdir(parents=True, exist_ok=True)
+        task_folder = exam_folder / task_number_str
+
+        diagram_name = required_diagrams.replace(" ", "-")
+        diagram_path = task_folder / f"{task_number_str}_{diagram_name}.png"
+
+        if diagram_url:
+            response = requests.get(diagram_url, stream=True)
+            if response.status_code == 200:
+                with open(diagram_path, "wb") as f:
+                    for chunk in response.iter_content(1024):
+                        f.write(chunk)
+                log(f"Saved diagram for task {task_number_str} at {diagram_path}")
+            else:
+                log(f"Failed to download diagram for task {task_number_str} from {diagram_url}")
 
 
     if exam.exam_topics:

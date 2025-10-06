@@ -253,13 +253,42 @@ async def query_start_markers(containers: List[Dict]) -> List[int]:
     # return [idx for idx in markers if not _is_summary(containers[idx].get("text", ""))]
 
 
+async def query_final_marker(containers: List[Dict], last_start_idx: int) -> int:
+    """Ask for the first container after ``last_start_idx`` that indicates the exam has ended.
+
+    Returns a container index strictly greater than ``last_start_idx``. If none can be
+    determined, returns ``len(containers)`` as a safe end boundary.
+    """
+    prompt = (
+        PROMPT_CONFIG
+        + f"Below is the text from a PDF split into containers numbered 0-{len(containers) - 1}. "
+          "Identify the first container AFTER the last task that clearly indicates the exam is finished "
+          "(for example, administrative tail text, solution sheets, grading info, or empty/non-task content). "
+          f"The last detected task starts at container {last_start_idx}. "
+          f"Respond ONLY with a single container number strictly greater than {last_start_idx}. "
+          f"If there is no such container, respond with {len(containers)}. "
+          "Here is the text: "
+        + build_container_string_with_identifier(containers)
+    )
+    candidates = await _query_markers(prompt)
+
+    log(f"Final boundary found: {candidates}")
+    log(f"Final boundary found: {candidates}")
+    log(f"Final boundary found: {candidates}")
+    # Choose the smallest candidate that is a valid boundary (> last_start_idx)
+    for c in sorted(candidates):
+        if c > last_start_idx:
+            return min(c, len(containers))
+    return len(containers)
+
+
 async def _assign_tasks(
     containers: List[Dict], expected_tasks: Optional[List[str]] = None
 ) -> Tuple[Dict[int, str], List[Tuple[int, int]], List[str]]:
     """Assign a task number to each container."""
 
-    markers = await query_start_markers(containers)
-    if not markers:
+    start_markers = await query_start_markers(containers)
+    if not start_markers:
         root = tkinter.Tk()
         root.withdraw()
         messagebox.showwarning(
@@ -268,10 +297,17 @@ async def _assign_tasks(
         root.destroy()
         return {}, [], []
 
-    markers = sorted(set([0] + markers))
+    # Determine final end boundary after the last start marker.
+    last_start_idx = max(start_markers)
+    final_marker = await query_final_marker(containers, last_start_idx)
+
+    # Build full marker list including 0 and the final marker boundary.
+    markers = sorted(set([0] + start_markers + [final_marker]))
+    # Build ranges as consecutive pairs of markers: (start_i, start_{i+1})
     ranges: List[Tuple[int, int]] = []
-    for i, start in enumerate(markers):
-        end = markers[i + 1] if i + 1 < len(markers) else len(containers)
+    for i in range(len(markers) - 1):
+        start = markers[i]
+        end = markers[i + 1]
         ranges.append((start, end))
 
     task_map: Dict[int, str] = {}

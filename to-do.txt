@@ -2,6 +2,8 @@ Legge til ytterligere start/stop/restart funksjoner for cpp UI
 
 Fikse cropping av grafer  
 
+Remove "safe area" in A4 from processing to save processing power.
+
 Legge til håndtering av eventuelle 100% like bilder. FIKS DETTE <-  
 
 Prompte 'Does this task require the Moody diagram?' eller liknende og få med en search engine til å finne den  
