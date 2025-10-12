@@ -139,9 +139,14 @@
     .then(data => {
       const subjects = {};
       const subjectExams = {};
+      const subjectAltCodes = {};
 
       for (const [subj, subjectData] of Object.entries(data)) {
         if (!subjects[subj]) subjects[subj] = {};
+        const alternates = Array.isArray(subjectData.alternate_codes)
+          ? subjectData.alternate_codes.filter(code => typeof code === "string" && code.trim() !== "")
+          : [];
+        subjectAltCodes[subj] = alternates;
 
         const exams = subjectData.exams || {};
         subjectExams[subj] = Object.keys(exams);
@@ -150,7 +155,8 @@
           tasks.forEach(entry => {
             const top = entry.topic || "Ukjent tema";
             if (!subjects[subj][top]) subjects[subj][top] = [];
-            subjects[subj][top].push({ ...entry, exam_version: ver });
+            const displaySubject = exam.source_subject_code || subj;
+            subjects[subj][top].push({ ...entry, exam_version: ver, display_subject_code: displaySubject });
           });
         }
       }
@@ -158,7 +164,9 @@
       for (const subj of Object.keys(subjects)) {
         const opt = document.createElement("option");
         opt.value = subj;
-        opt.textContent = subj;
+        const alternates = subjectAltCodes[subj] || [];
+        opt.textContent = alternates.length ? `${subj} (${alternates.join(", ")})` : subj;
+        opt.dataset.altCodes = alternates.join(", ");
         subjectSelect.appendChild(opt);
       }
 
@@ -234,6 +242,7 @@
           opt.textContent = selectedExam ? `Oppgave ${entry.task_number}` : `${entry.exam_version} Oppgave ${entry.task_number}`;
           opt.dataset.text = entry.task_text;
           opt.dataset.exam = entry.exam_version;
+          opt.dataset.displaySubject = entry.display_subject_code || selectedSubject;
           taskSelect.appendChild(opt);
         });
 
@@ -250,11 +259,21 @@
         const exam_version = exam;
         const task_number = selectedOption?.value;
         const img_prefix = `${subject_code}_${exam_version}_${task_number}`;
+        const display_subject = selectedOption?.dataset.displaySubject || subject_code;
 
         taskTextDiv.innerHTML = "";
 
         const header = document.createElement("h2");
-        header.textContent = `${subject_code} Eksamen ${formatExamVersion(exam_version)}`;
+        const subjectOption = subjectSelect.options[subjectSelect.selectedIndex];
+        const rawAltCodes = subjectOption?.dataset.altCodes || "";
+        const altCodes = rawAltCodes
+          ? rawAltCodes.split(",").map(code => code.trim()).filter(Boolean)
+          : [];
+        const uniqueCodes = [subject_code, ...altCodes].filter((code, index, arr) => arr.indexOf(code) === index);
+        const parenthetical = uniqueCodes.join(", ");
+        header.textContent = uniqueCodes.length > 1
+          ? `${display_subject} (${parenthetical}) Eksamen ${formatExamVersion(exam_version)}`
+          : `${display_subject} Eksamen ${formatExamVersion(exam_version)}`;
         taskTextDiv.appendChild(header);
 
         const sub = document.createElement("h3");

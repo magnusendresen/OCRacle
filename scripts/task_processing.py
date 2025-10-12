@@ -62,6 +62,8 @@ def load_emnekart_from_json(json_path: Path):
 @dataclass
 class Exam:
     subject: Optional[str] = None
+    source_subject_code: Optional[str] = None
+    alternate_subject_codes: List[str] = field(default_factory=list)
     topic: Optional[str] = None
     exam_version: Optional[str] = None
     task_number: Optional[str] = None
@@ -79,8 +81,8 @@ def get_topics_from_json(emnekode: str) -> Enum:
     """Return available topics for a subject code."""
     with EXAMS_JSON.open('r', encoding='utf-8') as f:
         data = json.load(f)
-
-    entry = data.get(emnekode.upper().strip(), {})
+    canonical = object_handling.resolve_subject_code(emnekode) or object_handling.normalize_subject_code(emnekode)
+    entry = data.get(canonical, {})
     topics = [t for t in entry.get("topics", []) if t is not None]
     return Enum('Topics', topics)
 
@@ -88,8 +90,8 @@ def get_ignored_topics_from_json(emnekode: str) -> str:
     """Return ignored topics for a subject code."""
     with EXAMS_JSON.open('r', encoding='utf-8') as f:
         data = json.load(f)
-
-    entry = data.get(emnekode.upper().strip(), {})
+    canonical = object_handling.resolve_subject_code(emnekode) or object_handling.normalize_subject_code(emnekode)
+    entry = data.get(canonical, {})
     ignored = entry.get("ignored_topics", [])
     return ", ".join(ignored) if ignored else ""
 
@@ -196,24 +198,98 @@ async def get_exam_info() -> Exam:
     total_task_count = len(exam.task_numbers)
 
 
-    with SUBJECT_FILE.open("r", encoding="utf-8") as f:
-        data = json.load(f)
-        exam.subject = data.get("subject", "").strip().upper()
-    if exam.subject:
-        log("Subject code read from file")
-    else:
-        log("Prompting subject code")
-        exam.subject = (
-            await prompt_to_text.async_prompt_to_text(
-                PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
-                max_tokens=1000,
-                is_num=False,
-                max_len=50,
+    def _parse_subject_codes(raw_value: Optional[str]) -> List[str]:
+        if raw_value is None:
+            return []
+        if isinstance(raw_value, list):
+            candidates = raw_value
+        else:
+            text_value = str(raw_value)
+            separators_normalized = (
+                text_value.replace("\n", ",")
+                .replace(";", ",")
+                .replace("|", ",")
             )
-        ).strip().upper()
+            parts = [part.strip() for part in separators_normalized.split(",") if part.strip()]
+            if len(parts) == 1 and " " in parts[0]:
+                parts = [segment.strip() for segment in parts[0].split(" ") if segment.strip()]
+            candidates = parts
+        normalized_codes: List[str] = []
+        seen = set()
+        for candidate in candidates:
+            normalized = object_handling.normalize_subject_code(candidate)
+            if normalized and normalized not in seen:
+                normalized_codes.append(normalized)
+                seen.add(normalized)
+        return normalized_codes
 
-    log(f"Subject code: {exam.subject}")
+    manual_subject_codes: List[str] = []
+    try:
+        with SUBJECT_FILE.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        manual_subject_codes = _parse_subject_codes(data.get("subject", ""))
+    except Exception as e:
+        log(f"Could not read manual subject codes: {e}")
+
+    log("Prompting subject code candidates")
+    ai_subject_raw = await prompt_to_text.async_prompt_to_text(
+        PROMPT_CONFIG + load_prompt("get_subject_code") + ocr_text,
+        max_tokens=1000,
+        is_num=False,
+        max_len=50,
+    )
+    ai_subject_codes = _parse_subject_codes(ai_subject_raw)
+    log(f"Manual subject codes: {manual_subject_codes}")
+    log(f"AI subject codes: {ai_subject_codes}")
+
+    alias_map = object_handling.load_subject_alias_map()
+
+    def _resolve_existing(codes: List[str]) -> Optional[str]:
+        for code in codes:
+            resolved = alias_map.get(code)
+            if resolved:
+                return object_handling.normalize_subject_code(resolved)
+        return None
+
+    exam.subject = _resolve_existing(manual_subject_codes)
+    if exam.subject is None and manual_subject_codes:
+        exam.subject = manual_subject_codes[0]
+    if exam.subject is None:
+        resolved_ai = _resolve_existing(ai_subject_codes)
+        if resolved_ai:
+            exam.subject = resolved_ai
+    if exam.subject is None:
+        preferred_pool = ai_subject_codes.copy()
+        if preferred_pool:
+            non_t = next((code for code in preferred_pool if not code.startswith("T")), None)
+            exam.subject = non_t or preferred_pool[0]
+
+    if exam.subject is None:
+        exam.subject = "UNKNOWN"
+
+    combined_codes: List[str] = []
+    for code in manual_subject_codes + [c for c in ai_subject_codes if c not in manual_subject_codes]:
+        if code and code not in combined_codes:
+            combined_codes.append(code)
+
+    exam.alternate_subject_codes = [code for code in combined_codes if code != exam.subject]
+
+    display_code = next((code for code in ai_subject_codes if code != exam.subject), None)
+    if display_code is None:
+        if ai_subject_codes:
+            display_code = ai_subject_codes[0]
+        elif manual_subject_codes:
+            display_code = manual_subject_codes[0]
+        else:
+            display_code = exam.subject
+    exam.source_subject_code = display_code
+
+    log(f"Canonical subject code: {exam.subject}")
+    log(f"Source subject code: {exam.source_subject_code}")
+    log(f"Alternate subject codes: {exam.alternate_subject_codes}")
+
     object_handling.add_subject(exam.subject)
+    object_handling.update_alternate_codes(exam.subject, exam.alternate_subject_codes)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS, {4: exam.subject or ""})
 
@@ -234,7 +310,7 @@ async def get_exam_info() -> Exam:
         version_abbr = exam_raw_version
 
     exam.exam_version = version_abbr
-    object_handling.add_exam(exam.subject, exam.exam_version)
+    object_handling.add_exam(exam.subject, exam.exam_version, source_subject_code=exam.source_subject_code)
     progress = [task_status[t] for t in range(1, total_task_count + 1)]
     write_progress(progress, LLM_STEPS, {5: exam.exam_version or ""})
 
