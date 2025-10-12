@@ -67,10 +67,10 @@ Summary (read carefully before output):
 - Output must be valid HTML with only <p>, <pre class="code-box"><code>, <div class="math">, <ol type="A">, <li>.
 - Never include ``` fences or const oppgaveTekst=....
 - Use many short <p> paragraphs, not one block.
-- Math: $...$ for inline, $$...$$ for display, <b> around all numbers and units. No \( or \[. No double-escaped backslashes.
+- Math: $...$ for inline, $$...$$ for display, <b> around all numbers and units' declaration. No \( or \[. No double-escaped backslashes.
 - Code: preserve exactly, wrap in <pre class="code-box"><code>...</code></pre>. Math stays outside code.
 - Multiple choice: <ol type="A"><li>...</li></ol>. No extra letters inside <li>.
-- Points: "Maks poeng: <b>X</b>" at end of the text block, or inline for each task if specified. 
+- Points: "Maks poeng: X" at end of the text block, or inline for each task if specified. 
 - Replace "figure below" → "figure above".
 - Allow fixing trivial OCR errors (e.g. sqrt duplication).
 

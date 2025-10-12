@@ -7,9 +7,10 @@ which means that the subject code is for Ålesund, Gjøvik and Trondheim in that
 
   There may also occur variations in the numbers in the subject code like this: IMAA2012, IMAA2022, IMAG2012, IMAG2022, IMAT2012 IMAT2022 - here you will do as instructed above, as well as remove the variating number (in this case the 3rd number) with a Y.
 
-
   Respond only with the singular formatted subject code (e.g. from above: IFYX1000, IMAX20Y2).
 
   Only replace a number or letter with if that symbol clearly has variations.
+
+  If there are multiple subject codes that aren't alike at all (e.g. starting with TMM vs IMAT), respond with all subject codes separated by a comma.
 
   Here is the text from the OCR:
