@@ -1,8 +1,8 @@
-Which of the following topics is in the following task?
-  Respond only with the number associated with the topic.
-  If none of the topics fit very well, respond with a zero.
-  This is used for exam task categorization, so decide accordingly.
-  In some cases, multiple topics may fit the task, so consider all wisely and be sure to select the most fitting one.
-  Think about how you would solve the task — the steps you’d take often reveal which topic it belongs to.
-  Don’t rely only on the words in the question; focus on the process one would use to solve the task.
-  Here is the topics, followed by the task:
+Hvilket av følgende temaer gjelder for oppgaven nedenfor?
+  Svar kun med nummeret som er tilknyttet temaet.
+  Hvis ingen av temaene passer særlig godt, svar med tallet null.
+  Dette brukes til kategorisering av eksamensoppgaver, så avgjør deretter.
+  I noen tilfeller kan flere temaer passe oppgaven, så vurder nøye og velg det mest passende.
+  Tenk på hvordan du ville løst oppgaven — stegene du ville tatt avslører ofte hvilket tema den tilhører.
+  Ikke stol kun på ordene i spørsmålet; fokuser på prosessen man ville brukt for å løse oppgaven. 
+  Her er temaene, etterfulgt av oppgaven:
