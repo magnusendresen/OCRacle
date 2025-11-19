@@ -1,6 +1,10 @@
+Vurdere å skrive om hele dritten.
+
 Hva med å lage en template for oppgaver der de ulike delene heller kan extractes og puttes inn i en template. La HTML ta seg av all formatteringa og deepseek ta seg av inndelinga.
 
 Gi oppgaver muligheten til å ha flere temaer, eksempelvis supernode, maskeanalyse, nodeanalyse, KCL, KVL, osv. - slik at du kan velge konkretiseringen av temaet du jobber med.
+
+Ha testing overalt: gir funksjonen en tom string? sjekk opp % av ord som matcher med ønsket resultat (minus fyll-ord: du, skal, og, vise, oppgave, å, osv osv.).? Samt skikkelig oppsett for mulig AI-håndtering.
 
 Lage en ekstremt ryddig og konkret liste for terminologi for begreper som topic, exam, subject, osv. som er relevant for prosjektet.
 
