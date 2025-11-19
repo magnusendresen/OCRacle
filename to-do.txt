@@ -4,6 +4,8 @@ Hva med å lage en template for oppgaver der de ulike delene heller kan extracte
 
 Gi oppgaver muligheten til å ha flere temaer, eksempelvis supernode, maskeanalyse, nodeanalyse, KCL, KVL, osv. - slik at du kan velge konkretiseringen av temaet du jobber med.
 
+Legge til muligheten til å ha manuell definering av temaer, og dermed skru av at deepseek skal undersøke etter nye temaer, og heller bare finne ut hvilket av de definerte som gjelder.
+
 Ha testing overalt: gir funksjonen en tom string? sjekk opp % av ord som matcher med ønsket resultat (minus fyll-ord: du, skal, og, vise, oppgave, å, osv osv.).? Samt skikkelig oppsett for mulig AI-håndtering.
 
 Istedet for å ha matchende emnekoder, la brukeren selv velge flere emner i html-en som gjør at man kan jobbe med flere emnekoder av gangen.
