@@ -10,7 +10,8 @@ Legge til muligheten til å ha manuell definering av temaer, og dermed skru av a
 
 Ha testing overalt: gir funksjonen en tom string? sjekk opp % av ord som matcher med ønsket resultat (minus fyll-ord: du, skal, og, vise, oppgave, å, osv osv.).? Samt skikkelig oppsett for mulig AI-håndtering.
 
-Istedet for å ha matchende emnekoder, la brukeren selv velge flere emner i html-en som gjør at man kan jobbe med flere emnekoder av gangen.
+Istedet for å ha matchende emnekoder, la brukeren selv velge flere emner i html-en som gjør at man kan jobbe med flere emnekoder av gangen. 
+Vi kan også la brukeren selv skjule temaer i eksamensmodus.
 
 Lage en ekstremt ryddig og konkret liste for terminologi for begreper som topic, exam, subject, osv. som er relevant for prosjektet.
 
