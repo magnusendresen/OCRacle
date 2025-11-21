@@ -15,6 +15,8 @@ Vi kan også la brukeren selv skjule temaer i eksamensmodus.
 
 Lage en ekstremt ryddig og konkret liste for terminologi for begreper som topic, exam, subject, osv. som er relevant for prosjektet.
 
+Sette opp en skikkelig robust funksjon for ekstrahering av poeng per oppgave, som bruker gjerne både ocr av hele dokumentet og utklipp for oppgaven.
+
 Legge til ytterligere start/stop/restart funksjoner for cpp UI  
 
 Fikse cropping av grafer  
