@@ -1,3 +1,5 @@
+Førstepri: få inn automatisk pdf navngivning og lagring av ocr resultat medbildehåndteringa osv.
+
 Vurdere å skrive om hele dritten.
 
 Hva med å lage en template for oppgaver der de ulike delene heller kan extractes og puttes inn i en template. La HTML ta seg av all formatteringa og deepseek ta seg av inndelinga.
