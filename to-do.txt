@@ -6,7 +6,7 @@ Gi oppgaver muligheten til å ha flere temaer, eksempelvis supernode, maskeanaly
 
 For å effektivisere PDF-håndteringa kan jeg lage et script som re-namer og sorterer pdf-er til mapper tilhørende korrekt emne og utgivelse. 
 
-Legge til muligheten til å ha manuell definering av temaer, og dermed skru av at deepseek skal undersøke etter nye temaer, og heller bare finne ut hvilket av de definerte som gjelder.
+Legge til at hver ting som Deepseek skal finne (utgivelse, emnekode, temaer, til og med antall oppgaver) har en bryter som automatisk er valgt, som man kan un-checke for å manuelt legge til disse: Feks til å ha manuell definering av temaer, og dermed skru av at deepseek skal undersøke etter nye temaer, og heller bare finne ut hvilket av de definerte som gjelder.
 
 Ha testing overalt: gir funksjonen en tom string? sjekk opp % av ord som matcher med ønsket resultat (minus fyll-ord: du, skal, og, vise, oppgave, å, osv osv.).? Samt skikkelig oppsett for mulig AI-håndtering.
 
