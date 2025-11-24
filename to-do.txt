@@ -2,6 +2,8 @@ Førstepri: få inn automatisk pdf navngivning og lagring av ocr resultat medbil
 
 Vurdere å skrive om hele dritten.
 
+Numerere temaene i .json for å enkelt kunne endre på temanavn uten brutale konsekvenser.
+
 Hva med å lage en template for oppgaver der de ulike delene heller kan extractes og puttes inn i en template. La HTML ta seg av all formatteringa og deepseek ta seg av inndelinga.
 
 Gi oppgaver muligheten til å ha flere temaer, eksempelvis supernode, maskeanalyse, nodeanalyse, KCL, KVL, osv. - slik at du kan velge konkretiseringen av temaet du jobber med.
