@@ -1,5 +1,7 @@
 Førstepri: få inn automatisk pdf navngivning og lagring av ocr resultat medbildehåndteringa osv.
 
+Først dele inn i antall totale oppgaver fra heltall, deretter undersøke per oppgave om den har deloppgaver og bør deles inn i sub-oppgaver?
+
 Vurdere å skrive om hele dritten.
 
 Numerere temaene i .json for å enkelt kunne endre på temanavn uten brutale konsekvenser.
