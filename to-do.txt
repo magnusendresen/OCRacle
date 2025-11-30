@@ -4,6 +4,8 @@ Først dele inn i antall totale oppgaver fra heltall, deretter undersøke per op
 
 Vurdere å skrive om hele dritten.
 
+Istedet for å finne ut hvir det er bilder, finn ut hvor det ikke er bilder.
+
 Numerere temaene i .json for å enkelt kunne endre på temanavn uten brutale konsekvenser.
 
 La det stå om LF kommer fra AI eller er oppgitt.
